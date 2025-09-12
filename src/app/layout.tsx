@@ -5,7 +5,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "TechEd Pro - Software Testing & Data Science Training Institute",
+  title: "CDPL - Software Testing & Data Science Training Institute",
   description: "Leading EdTech platform offering comprehensive courses in Software Testing, Data Science, AI, and Machine Learning. Transform your career with industry-expert training.",
   keywords: "software testing, data science, AI, machine learning, automation testing, EdTech, training institute",
 };

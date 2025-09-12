@@ -1,7 +1,8 @@
 'use client';
 
 import Link from 'next/link';
-import { BookOpen, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import Image from 'next/image';
+import {Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const Footer = () => {
   return (
@@ -11,10 +12,10 @@ const Footer = () => {
           {/* Company Info */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
-              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-2 rounded-lg">
-                <BookOpen className="h-6 w-6 text-white" />
+              <div className="p-2 rounded-lg">
+                <Image src="/images/cdpl-logo.png" alt="CDPL Logo" width={50} height={50} />
               </div>
-              <span className="text-xl font-bold">TechEd Pro</span>
+              <span className="text-xl font-bold">Cinute Digital</span>
             </div>
             <p className="text-gray-300 text-sm">
               Leading EdTech platform offering comprehensive courses in Software Testing, Data Science, AI, and Machine Learning. Transform your career with industry-expert training.
@@ -40,27 +41,27 @@ const Footer = () => {
             <h3 className="text-lg font-semibold">Quick Links</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/" className="text-gray-300 hover:text-brand transition-colors">
                   Home
                 </Link>
               </li>
               <li>
-                <Link href="/about-us" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/about-us" className="text-gray-300 hover:text-brand transition-colors">
                   About Us
                 </Link>
               </li>
               <li>
-                <Link href="/courses" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/courses" className="text-gray-300 hover:text-brand transition-colors">
                   Courses
                 </Link>
               </li>
               <li>
-                <Link href="/blog" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/blog" className="text-gray-300 hover:text-brand transition-colors">
                   Blog
                 </Link>
               </li>
               <li>
-                <Link href="/careers" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/careers" className="text-gray-300 hover:text-brand transition-colors">
                   Careers
                 </Link>
               </li>
@@ -72,27 +73,27 @@ const Footer = () => {
             <h3 className="text-lg font-semibold">Our Courses</h3>
             <ul className="space-y-2">
               <li>
-                <Link href="/courses/software-testing" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/courses/software-testing" className="text-gray-300 hover:text-brand transition-colors">
                   Software Testing
                 </Link>
               </li>
               <li>
-                <Link href="/courses/automation-testing" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/courses/automation-testing" className="text-gray-300 hover:text-brand transition-colors">
                   Automation Testing
                 </Link>
               </li>
               <li>
-                <Link href="/courses/data-science" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/courses/data-science" className="text-gray-300 hover:text-brand transition-colors">
                   Data Science
                 </Link>
               </li>
               <li>
-                <Link href="/courses/ai-ml" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/courses/ai-ml" className="text-gray-300 hover:text-brand transition-colors">
                   AI & Machine Learning
                 </Link>
               </li>
               <li>
-                <Link href="/courses/python" className="text-gray-300 hover:text-white transition-colors">
+                <Link href="/courses/python" className="text-gray-300 hover:text-brand transition-colors">
                   Python Programming
                 </Link>
               </li>
@@ -104,18 +105,22 @@ const Footer = () => {
             <h3 className="text-lg font-semibold">Contact Us</h3>
             <div className="space-y-3">
               <div className="flex items-center space-x-3">
-                <MapPin className="h-5 w-5 text-blue-400" />
+                <MapPin className="h-20 w-20 text-brand" />
                 <span className="text-gray-300 text-sm">
-                  123 Tech Street, Innovation District, Tech City 12345
+                  Office # 1, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park, Mira Road East, Mira Bhayandar, Maharashtra 401107
                 </span>
               </div>
               <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-blue-400" />
-                <span className="text-gray-300 text-sm">+1 (555) 123-4567</span>
+                <Phone className="h-5 w-5 text-brand" />
+                <span className="text-gray-300 text-sm">+91 788-83-83-788</span>
               </div>
               <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-blue-400" />
-                <span className="text-gray-300 text-sm">info@techedpro.com</span>
+                <Phone className="h-5 w-5 text-brand" />
+              <span className="text-gray-300 text-sm">+91 84-889-889-84</span>
+</div>
+              <div className="flex items-center space-x-3">
+                <Mail className="h-5 w-5 text-brand" />
+                <span className="text-gray-300 text-sm">contact@cinutedigital.com</span>
               </div>
             </div>
           </div>
@@ -125,16 +130,16 @@ const Footer = () => {
         <div className="border-t border-gray-800 mt-8 pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <p className="text-gray-400 text-sm">
-              © 2024 TechEd Pro. All rights reserved.
+              © 2025 Cinute Digital Pvt. Ltd. All rights reserved.
             </p>
             <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="/privacy-policy" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link href="/privacy-policy" className="text-gray-400 hover:text-brand text-sm transition-colors">
                 Privacy Policy
               </Link>
-              <Link href="/terms-of-service" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link href="/terms-of-service" className="text-gray-400 hover:text-brand text-sm transition-colors">
                 Terms of Service
               </Link>
-              <Link href="/cookies-policy" className="text-gray-400 hover:text-white text-sm transition-colors">
+              <Link href="/cookies-policy" className="text-gray-400 hover:text-brand text-sm transition-colors">
                 Cookie Policy
               </Link>
             </div>
