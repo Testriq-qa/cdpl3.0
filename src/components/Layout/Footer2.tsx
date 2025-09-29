@@ -10,6 +10,10 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left Section: Get In Touch */}
           <div className="space-y-4">
+            <div className='flex items-center space-x-3'>
+              <Image src='/images/cdpl-logo.png' alt='cdpl-logo' width={50} height={50}/>
+              <p className='text-2xl font-bold text-gray-300'>Cinute Digital</p>
+            </div>
             <h2 className="text-xl font-semibold text-orange-400">Get In Touch</h2>
             <div className="flex items-start space-x-3">
               <MapPin className="w-5 h-5 text-orange-500 flex-shrink-0 mt-1" />
