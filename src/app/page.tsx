@@ -3,12 +3,12 @@
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { 
-  ArrowRight, 
-  CheckCircle, 
-  Users, 
-  Award, 
-  Clock, 
+import {
+  ArrowRight,
+  CheckCircle,
+  Users,
+  Award,
+  Clock,
   Star,
   Code,
   Database,
@@ -103,8 +103,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-white">
-      <Header />
-      
+
       {/* Hero Section */}
       <section className="relative bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900 text-white overflow-hidden">
         <div className="absolute inset-0 bg-black opacity-20"></div>
@@ -120,7 +119,7 @@ export default function Home() {
                   Master Software Testing, Data Science, and AI/ML with industry-leading courses designed by experts.
                 </p>
               </div>
-              
+
               <div className="flex flex-col sm:flex-row gap-4">
                 <Link
                   href="/courses"
@@ -218,7 +217,7 @@ export default function Home() {
                     </div>
                   </div>
                 </div>
-                
+
                 <div className="p-6">
                   <div className="flex items-center justify-between mb-2">
                     <span className="text-2xl font-bold text-blue-600">{course.price}</span>
@@ -227,10 +226,10 @@ export default function Home() {
                       <span className="ml-1 text-sm text-gray-600">{course.rating}</span>
                     </div>
                   </div>
-                  
+
                   <h3 className="text-xl font-bold text-gray-900 mb-2">{course.title}</h3>
                   <p className="text-gray-600 mb-4">{course.description}</p>
-                  
+
                   <div className="space-y-2 mb-4">
                     <div className="flex items-center text-sm text-gray-500">
                       <Clock className="h-4 w-4 mr-2" />
@@ -374,9 +373,8 @@ export default function Home() {
                 <button
                   key={index}
                   onClick={() => setCurrentTestimonial(index)}
-                  className={`w-3 h-3 rounded-full transition-colors duration-200 ${
-                    index === currentTestimonial ? 'bg-blue-600' : 'bg-gray-300'
-                  }`}
+                  className={`w-3 h-3 rounded-full transition-colors duration-200 ${index === currentTestimonial ? 'bg-blue-600' : 'bg-gray-300'
+                    }`}
                 />
               ))}
             </div>
@@ -410,8 +408,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <Footer />
     </div>
   );
 }

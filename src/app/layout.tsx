@@ -1,8 +1,33 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import dynamic from "next/dynamic";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const Header = dynamic(
+  () => import("@/components/Layout/Header"),
+  {
+    ssr: true,
+    loading: () => (
+      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    ),
+  }
+);
+
+const Footer = dynamic(
+  () => import("@/components/Layout/Footer"),
+  {
+    ssr: true,
+    loading: () => (
+      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+        <p className="text-gray-500">Loading...</p>
+      </div>
+    ),
+  }
+);
 
 export const metadata: Metadata = {
   title: "CDPL - Software Testing & Data Science Training Institute",
@@ -18,7 +43,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${inter.className} antialiased`}>
+        <Header/>
         {children}
+        <Footer/>
       </body>
     </html>
   );
