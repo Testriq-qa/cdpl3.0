@@ -25,43 +25,36 @@ const Footer = () => {
           {/* Data Science, AI - ML & BI Courses */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-orange-400">Data Science, AI - ML & BI Courses</h3>
-            <ul className="space-y-2">
-              <li>
+            <ul>
+              <li className='flex flex-col space-y-2'>
                 <Link href="/courses/data-science-master" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Comprehensive Data Science and AI - Master Program
                 </Link>
-              </li>
-              <li>
+             
                 <Link href="/courses/data-analysis-bi" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Data Analysis with BI & Big Data Engineering
                 </Link>
-              </li>
-              <li>
+             
                 <Link href="/courses/ml-python" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Machine Learning and Data Science with Python
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/deep-learning-nlp" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Deep Learning, NLP and Generative AI
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/business-analyst" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Business Analyst
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/big-data" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Big Data Engineering
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/prompt-engineering" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Prompt Engineering with Gen AI
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/advanced-data-science" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Data Science & Machine Learning Masterclass
                 </Link>
@@ -95,33 +88,28 @@ const Footer = () => {
           {/* Software Testing Courses */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-orange-400">Software Testing Courses</h3>
-            <ul className="space-y-2">
-              <li>
+            <ul>
+              <li className='flex flex-col space-y-2'>
                 <Link href="/courses/manual-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Manual Software Testing
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/api-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   API Testing
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/database-management" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Database Management System
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/advanced-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Software Testing
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/advanced-automation" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Automation Testing
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/courses/manual-automation" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Manual and Automation Testing
                 </Link>
@@ -131,8 +119,8 @@ const Footer = () => {
             {/* Digital Marketing */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-orange-400">Digital Marketing</h3>
-              <ul className="space-y-2">
-                <li>
+              <ul>
+                <li className='flex flex-col space-y-2'>
                   <Link href="/courses/digital-marketing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     Digital Marketing & Analytics
                   </Link>
@@ -143,13 +131,12 @@ const Footer = () => {
             {/* Programming Languages */}
             <div className="space-y-4">
               <h3 className="text-lg font-semibold text-orange-400">Programming Languages</h3>
-              <ul className="space-y-2">
-                <li>
+              <ul>
+                <li className='flex flex-col space-y-2'>
                   <Link href="/courses/python" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     Python Programming
                   </Link>
-                </li>
-                <li>
+                
                   <Link href="/courses/java" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     Java Programming
                   </Link>
@@ -161,48 +148,40 @@ const Footer = () => {
           {/* Institute */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-orange-400">Institute</h3>
-            <ul className="space-y-2">
-              <li>
+            <ul>
+              <li className='flex flex-col space-y-2'>
                 <Link href="/institute/services" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Services
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/institute/job-openings" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Job Openings
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/institute/placements" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Placements
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/institute/placement-news" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Placement News
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/institute/affiliate-program" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Affiliate Program
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/institute/mentors" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Mentors
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/institute/about-us" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   About Us
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/institute/contact-us" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Contact Us
                 </Link>
-              </li>
-              <li>
+              
                 <Link href="/institute/validate-certificate" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Validate your Certificate
                 </Link>
@@ -237,7 +216,7 @@ const Footer = () => {
               <h3 className="text-lg font-semibold text-orange-400">Powered By</h3>
               <ul className="space-y-2">
                 <li>
-                  <Link href="/courses/digital-marketing" className="text-gray-300 hover:text-blue-400 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  <Link href="https://www.testriq.com/" className="text-gray-300 hover:text-blue-400 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     <Image src={'/images/Testriq-Logo-1.webp'} alt='Testriq_logo' width={100} height={100} />
                   </Link>
                 </li>
