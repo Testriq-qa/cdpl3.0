@@ -5,11 +5,11 @@ import Link from 'next/link';
 const PerfectBlogPost: React.FC = () => {
     return (
         <div className="min-h-screen bg-white font-sans text-gray-800 leading-relaxed">
-            <div className="container mx-auto px-4 py-8 max-w-7xl">
-                <div className="grid grid-cols-1 md:grid-cols-4">
-                    <main className="md:col-span-3 w-11/12">
+            <div className="container mx-auto px-6 md:px-16 lg:px-12 py-8 max-w-7xl">
+                <div className="grid grid-cols-1 lg:grid-cols-4">
+                    <main className="md:col-span-3 lg:w-11/12">
                         {/* Title */}
-                        <h1 className="text-5xl font-bold mb-6 text-center md:text-left">The Perfect Blog Post: 20-Step Checklist for SEO Optimization</h1>
+                        <h1 className="text-3xl md:text-5xl font-bold mb-6 ">The Perfect Blog Post: 20-Step Checklist for SEO Optimization</h1>
 
                         {/* Author Bio */}
                         <div className="flex items-center mb-8">
@@ -24,7 +24,7 @@ const PerfectBlogPost: React.FC = () => {
                             <div>
                                 <p className="font-semibold text-lg">Connor Gillivan</p>
                                 <p className="text-sm text-gray-600">
-                                    7x Founder (Exit in 2019), SEO Expert at TrioSEO. Specializing in scaling companies with content marketing and SEO strategies. With over a decade of experience, I've helped numerous businesses achieve top rankings and drive organic traffic.
+                                    7x Founder (Exit in 2019), SEO Expert at TrioSEO. Specializing in scaling companies with content marketing and SEO strategies. With over a decade of experience, I&apos;ve helped numerous businesses achieve top rankings and drive organic traffic.
                                 </p>
                             </div>
                         </div>
@@ -41,10 +41,10 @@ const PerfectBlogPost: React.FC = () => {
 
                         {/* Introduction */}
                         <p className="text-lg mb-6">
-                            In today's digital landscape, creating a blog post isn't just about writing words—it's about crafting an experience that ranks high on search engines, engages readers, and converts visitors into leads or customers. Based on years of experience and the latest SEO trends as of 2025, this guide presents a comprehensive 20-step checklist for the perfect blog post. Whether you're a beginner blogger or a seasoned content marketer, following these steps will ensure your content is optimized for SEO, user-friendly, and designed to perform. We'll dive deep into each step, providing detailed explanations, tips, and examples to help you implement them effectively. By the end, you'll have a blueprint to create blog posts that not only attract traffic but also build authority and drive business growth.
+                            In today&apos;s digital landscape, creating a blog post isn&apos;t just about writing words—it&apos;s about crafting an experience that ranks high on search engines, engages readers, and converts visitors into leads or customers. Based on years of experience and the latest SEO trends as of 2025, this guide presents a comprehensive 20-step checklist for the perfect blog post. Whether you&apos;re a beginner blogger or a seasoned content marketer, following these steps will ensure your content is optimized for SEO, user-friendly, and designed to perform. We&apos;ll dive deep into each step, providing detailed explanations, tips, and examples to help you implement them effectively. By the end, you&apos;ll have a blueprint to create blog posts that not only attract traffic but also build authority and drive business growth.
                         </p>
                         <p className="text-lg mb-8">
-                            Why does this matter? With Google’s algorithms emphasizing E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness), quality content is king. Poorly optimized posts get buried in search results, while well-structured ones can generate passive traffic for years. Let's explore the checklist, inspired by industry best practices, to make your next blog post a success.
+                            Why does this matter? With Google’s algorithms emphasizing E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness), quality content is king. Poorly optimized posts get buried in search results, while well-structured ones can generate passive traffic for years. Let&apos;s explore the checklist, inspired by industry best practices, to make your next blog post a success.
                         </p>
 
                         {/* Table of Contents */}
@@ -75,7 +75,7 @@ const PerfectBlogPost: React.FC = () => {
                         {/* Step 1 */}
                         <h2 id="step1" className="text-3xl font-bold mb-4">1. Title: Include keyword + SERP research</h2>
                         <p className="mb-4">
-                            Your title is the first thing users see in search results, so it must include your primary keyword while being compelling. Start by conducting SERP (Search Engine Results Page) research using tools like Google Keyword Planner or Ahrefs to identify what ranks for your target keyword. Analyze top results for title length (50-60 characters ideal), structure, and emotional hooks. For example, if targeting "SEO blog post checklist," a title like "The Ultimate 20-Step SEO Blog Post Checklist for 2025" incorporates the keyword naturally and promises value.
+                            Your title is the first thing users see in search results, so it must include your primary keyword while being compelling. Start by conducting SERP (Search Engine Results Page) research using tools like Google Keyword Planner or Ahrefs to identify what ranks for your target keyword. Analyze top results for title length (50-60 characters ideal), structure, and emotional hooks. For example, if targeting &quot;SEO blog post checklist,&quot; a title like &quot;The Ultimate 20-Step SEO Blog Post Checklist for 2025&quot; incorporates the keyword naturally and promises value.
                         </p>
                         <p className="mb-4">
                             Avoid clickbait—focus on clarity and relevance to reduce bounce rates. A well-researched title can boost click-through rates by 20-30%. Remember, titles also impact social shares and email opens, so test variations with A/B tools if possible.
@@ -115,10 +115,10 @@ const PerfectBlogPost: React.FC = () => {
                         {/* Step 3 */}
                         <h2 id="step3" className="text-3xl font-bold mb-4">3. Images: 5+ w/ metadata</h2>
                         <p className="mb-4">
-                            Images enhance engagement and break up text, but for SEO, use at least 5 per post with optimized metadata. Compress images for speed using tools like TinyPNG, add descriptive alt text with keywords (e.g., "SEO blog post checklist infographic"), and include file names like "seo-blog-checklist.jpg". This helps with image search traffic and accessibility.
+                            Images enhance engagement and break up text, but for SEO, use at least 5 per post with optimized metadata. Compress images for speed using tools like TinyPNG, add descriptive alt text with keywords (e.g., &quot;SEO blog post checklist infographic&quot;), and include file names like &quot;seo-blog-checklist.jpg&quot;. This helps with image search traffic and accessibility.
                         </p>
                         <p className="mb-4">
-                            Visuals can increase time on page by 100%. Choose relevant, high-quality images or infographics to illustrate points, and ensure they're responsive for mobile.
+                            Visuals can increase time on page by 100%. Choose relevant, high-quality images or infographics to illustrate points, and ensure they&apos;re responsive for mobile.
                         </p>
                         <div className="relative w-full h-[300px] mb-4">
                             <Image
@@ -135,7 +135,7 @@ const PerfectBlogPost: React.FC = () => {
                         {/* Step 4 */}
                         <h2 id="step4" className="text-3xl font-bold mb-4">4. Links: 5+ internal + external</h2>
                         <p className="mb-4">
-                            Links build authority and keep users on your site longer. Include at least 5 internal links to related content (e.g., link to your "SEO Strategy Guide") and 3+ external links to high-authority sites like Moz or Search Engine Journal. Use descriptive anchor text with keywords, but keep it natural to avoid penalties.
+                            Links build authority and keep users on your site longer. Include at least 5 internal links to related content (e.g., link to your &quot;SEO Strategy Guide&quot;) and 3+ external links to high-authority sites like Moz or Search Engine Journal. Use descriptive anchor text with keywords, but keep it natural to avoid penalties.
                         </p>
                         <p className="mb-4">
                             Internal links distribute page authority, while external ones show research depth. Track link performance with Google Analytics to refine your strategy.
@@ -170,10 +170,10 @@ const PerfectBlogPost: React.FC = () => {
                             A table of contents (TOC) is a critical feature for long-form blog posts, especially those exceeding 1500 words like this one. It serves as a navigational roadmap, allowing readers to quickly jump to sections that interest them most, enhancing user experience (UX) and reducing bounce rates. To implement this effectively, place the TOC prominently after the introduction or within the first screen of content, using an HTML element or a styled list with anchor links to each section (e.g., `#step1`, `#step2`). Each entry should mirror the heading structure (H2 for main sections, H3 for subsections) and include concise, keyword-optimized titles that reflect the content below.
                         </p>
                         <p className="mb-4">
-                            From an SEO perspective, a TOC improves crawlability by providing internal linking opportunities, signaling to search engines the hierarchical structure of your content. Studies suggest that posts with TOCs can increase average session duration by up to 15-20% as readers explore multiple sections. Use clear, actionable language in the links—e.g., "How to Optimize Titles" instead of just "Titles"—to entice clicks. Additionally, ensure the TOC is sticky or collapsible on larger screens (via CSS or JavaScript) for mobile optimization, keeping it accessible without overwhelming the layout. Test its visibility across devices to confirm it enhances rather than detracts from readability.
+                            From an SEO perspective, a TOC improves crawlability by providing internal linking opportunities, signaling to search engines the hierarchical structure of your content. Studies suggest that posts with TOCs can increase average session duration by up to 15-20% as readers explore multiple sections. Use clear, actionable language in the links—e.g., &quot;How to Optimize Titles&quot; instead of just &quot;Titles&quot;—to entice clicks. Additionally, ensure the TOC is sticky or collapsible on larger screens (via CSS or JavaScript) for mobile optimization, keeping it accessible without overwhelming the layout. Test its visibility across devices to confirm it enhances rather than detracts from readability.
                         </p>
                         <p className="mb-4">
-                            For design, style the TOC with a distinct background (e.g., light gray or blue) and sufficient padding to stand out, but avoid clutter. Include a "Back to Top" link at the end of each section to encourage continued engagement. This post’s TOC, located earlier, exemplifies this approach with clickable links to all 20 steps, making it a practical model. Regularly update the TOC if you add or revise sections to maintain accuracy and relevance, ensuring it remains a valuable tool for both users and search engines.
+                            For design, style the TOC with a distinct background (e.g., light gray or blue) and sufficient padding to stand out, but avoid clutter. Include a &quot;Back to Top&quot; link at the end of each section to encourage continued engagement. This post’s TOC, located earlier, exemplifies this approach with clickable links to all 20 steps, making it a practical model. Regularly update the TOC if you add or revise sections to maintain accuracy and relevance, ensuring it remains a valuable tool for both users and search engines.
                         </p>
                         <div className="relative w-full h-[300px] mb-4">
                             <Image
@@ -270,7 +270,7 @@ const PerfectBlogPost: React.FC = () => {
                         {/* Step 11 */}
                         <h2 id="step11" className="text-3xl font-bold mb-4">11. URL: Short + includes keyword</h2>
                         <p className="mb-4">
-                            A well-optimized URL boosts SEO by including the primary keyword and keeping it short (under 60 characters). For example, use `https://yourdomain.com/perfect-blog-checklist` instead of `https://yourdomain.com/blog/post123/perfect-blog-post-checklist-2025`. Avoid stop words (e.g., “and,” “the”) and special characters to ensure readability and shareability.
+                            A well-optimized URL boosts SEO by including the primary keyword and keeping it short (under 60 characters).
                         </p>
                         <p className="mb-4">
                             Short URLs are easier for users to remember and type, improving click-through rates from search results. Use hyphens to separate words and maintain consistency with your site’s structure. Update old URLs during content refreshes to align with this standard.
@@ -485,9 +485,10 @@ const PerfectBlogPost: React.FC = () => {
 
                     {/* Sidebar */}
                     <aside className="md:col-span-1">
-                        <div className="sticky top-8 space-y-6">
+                        <div className="lg:sticky lg:top-8 space-y-6 md:space-y-2 md:grid grid-cols-2 md:gap-10 lg:gap-6 lg:flex flex-col py-8">
+
                             {/* Newsletter Subscription Form */}
-                            <div className="bg-gradient-to-br from-blue-100 to-indigo-100 p-6 rounded-lg shadow-md">
+                            <div className="bg-gradient-to-br from-blue-100 to-indigo-100 p-6 rounded-lg shadow-md h-auto">
                                 <h3 className="text-xl font-bold mb-4 text-gray-800">Subscribe to Our Newsletter</h3>
                                 <p className="text-sm text-gray-600 mb-4">Stay updated with the latest SEO tips and tricks!</p>
                                 <form className="space-y-4">
@@ -508,9 +509,9 @@ const PerfectBlogPost: React.FC = () => {
                             </div>
 
                             {/* Social Share Buttons */}
-                            <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+                            <div className="flex flex-col text-center bg-gray-100 p-6 rounded-lg shadow-md md:h-fit">
                                 <h3 className="text-xl font-bold mb-2">Share This Post</h3>
-                                <div className="flex space-x-4">
+                                <div className="flex space-x-4 justify-center">
                                     <Link href="https://twitter.com/intent/tweet?url=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality&text=How Does Validation & Optimization Improve Web Application Quality?" className="text-blue-500 hover:text-blue-700">
                                         {/* Assume SVG for Twitter/X icon */}
                                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" /></svg>
@@ -523,28 +524,33 @@ const PerfectBlogPost: React.FC = () => {
                                         {/* Facebook icon */}
                                         <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z" /></svg>
                                     </Link>
+                                    <Link href="https://www.facebook.com/sharer/sharer.php?u=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality">
+                                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.233.299 2.716.634.537.367.936.862 1.37 1.296.434.434.929.833 1.296 1.37.335.483.572 1.35.634 2.716.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.299 2.233-.634 2.716-.367.537-.862.936-1.296 1.37-.434.434-.833.929-1.37 1.296-.483.335-1.35.572-2.716.634-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.233-.299-2.716-.634-.537-.367-.936-.862-1.37-1.296-.434-.434-.929-.833-1.296-1.37-.335-.483-.572-1.35-.634-2.716-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.299-2.233.634-2.716.367-.537.862-.936 1.296-1.37.434-.434.833-.929 1.37-1.296.483-.335 1.35-.572 2.716-.634 1.266-.058 1.646-.07 4.85-.07zm0 1.837c-3.103 0-3.499.011-4.727.073-1.175.058-1.952.269-2.64.518-.76.272-1.389.628-2.011 1.251-.622.622-.979 1.251-1.251 2.011-.249.688-.46 1.465-.518 2.64-.062 1.228-.073 1.624-.073 4.727s.011 3.499.073 4.727c.058 1.175.269 1.952.518 2.64.272.76.628 1.389 1.251 2.011.622.622 1.251.979 2.011 1.251.688.249 1.465.46 2.64.518 1.228.062 1.624.073 4.727.073s3.499-.011 4.727-.073c1.175-.058 1.952-.269 2.64-.518.76-.272 1.389-.628 2.011-1.251.622-.622.979-1.251 1.251-2.011.249-.688.46-1.465.518-2.64.062-1.228.073-1.624.073-4.727s-.011-3.499-.073-4.727c-.058-1.175-.269-1.952-.518-2.64-.272-.76-.628-1.389-1.251-2.011-.622-.622-1.251-.979-2.011-1.251-.688-.249-1.465-.46-2.64-.518-1.228-.062-1.624-.073-4.727-.073zm0 5.049c-2.501 0-4.528 2.027-4.528 4.528s2.027 4.528 4.528 4.528 4.528-2.027 4.528-4.528-2.027-4.528-4.528-4.528zm0 7.364c-1.646 0-2.836-1.19-2.836-2.836s1.19-2.836 2.836-2.836 2.836 1.19 2.836 2.836-1.19 2.836-2.836 2.836zm5.225-7.364c0 .622-.506 1.128-1.128 1.128s-1.128-.506-1.128-1.128.506-1.128 1.128-1.128 1.128.506 1.128 1.128z" />
+                                        </svg>
+                                    </Link>
                                 </div>
                             </div>
 
                             {/* Related Articles */}
-                            <div className="bg-gray-100 p-6 rounded-lg shadow-md">
+                            <div className="bg-gray-100 p-4 rounded-lg shadow-md">
                                 <h3 className="text-xl font-bold mb-2">Related Articles</h3>
                                 <ul className="space-y-2 text-sm">
                                     <li>
                                         <Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="flex items-center space-x-3 p-2 text-black font-semibold hover:text-blue-600 transition-all ease-in-out duration-200 hover:bg-gray-200 rounded-lg">
-                                            <Image src="/images/automation-testing.webp" alt='blog-post-image' width={60} height={20} className='rounded-lg' />
+                                            <Image src="/images/automation-testing.webp" alt='blog-post-image' width={65} height={20} className='rounded-lg' />
                                             <p>What is Software Testing?</p>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="flex items-center space-x-3 p-2 text-black font-semibold hover:text-blue-600 transition-all ease-in-out duration-200 hover:bg-gray-200 rounded-lg">
-                                            <Image src="/images/automation-testing.webp" alt='blog-post-image' width={60} height={20} className='rounded-lg' />
+                                            <Image src="/images/automation-testing.webp" alt='blog-post-image' width={65} height={20} className='rounded-lg' />
                                             <p>What is Software Testing?</p>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="flex items-center space-x-3 p-2 text-black font-semibold hover:text-blue-600 transition-all ease-in-out duration-200 hover:bg-gray-200 rounded-lg">
-                                            <Image src="/images/automation-testing.webp" alt='blog-post-image' width={60} height={20} className='rounded-lg' />
+                                            <Image src="/images/automation-testing.webp" alt='blog-post-image' width={65} height={20} className='rounded-lg' />
                                             <p>What is Software Testing?</p>
                                         </Link>
                                     </li>
