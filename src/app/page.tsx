@@ -18,8 +18,8 @@ import {
   BookOpen,
   Play
 } from 'lucide-react';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
+import Header from '@/components/Layout/Header';
+import Footer from '@/components/Layout/Footer';
 
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
