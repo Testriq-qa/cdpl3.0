@@ -5,13 +5,13 @@ import Link from 'next/link';
 
 const Footer: React.FC = () => {
   return (
-    <footer className="bg-orange-100 text-gray-700 py-8 px-4 md:px-8">
+    <footer className="bg-gradient-to-tr from-sky-100 via-sky-50 to-sky-100 text-gray-700 py-8 px-4 md:px-8">
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
           {/* Left Section: Get In Touch */}
           <div className="space-y-4">
             <div className='flex items-center space-x-3'>
-              <Image src='/images/cdpl-logo.png' alt='cdpl-logo' width={50} height={50}/>
+              <Image src='/images/cdpl-logo.png' alt='cdpl-logo' width={50} height={50} />
               <p className='text-2xl font-bold text-gray-700'>Cinute Digital</p>
             </div>
             <h2 className="text-xl font-semibold text-orange-400">Get In Touch</h2>

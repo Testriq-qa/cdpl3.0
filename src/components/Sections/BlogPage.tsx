@@ -211,35 +211,45 @@ export default function BlogPage() {
     return (
         <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-100">
             {/* Header/Hero Section */}
-            <header className="relative overflow-hidden bg-gradient-to-br from-orange-600 via-blue-500 to-orange-600 text-white py-20 md:py-32">
+            <header className="relative overflow-hidden bg-gradient-to-br from-gray-950 via-slate-900 to-black text-white py-24 md:py-20">
+                {/* Animated Background with Gradient Overlay */}
                 <motion.div
-                    className="absolute inset-0 bg-[url('/api/placeholder/1920/1080?text=Dynamic+Tech+Patterns')] bg-cover bg-center"
+                    className="absolute inset-0 bg-[url('/api/placeholder/1920/1080?text=Futuristic+Tech+Grid')] bg-cover bg-center opacity-20"
                     variants={backgroundVariants}
                     initial="initial"
                     animate="animate"
                 />
-                <div className="absolute inset-0 bg-black/10" />
+                <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/20 via-indigo-500/10 to-purple-700/20 mix-blend-overlay" />
+                <div className="absolute inset-0 backdrop-blur-sm" />
+
+                {/* Content */}
                 <motion.div
-                    className="relative z-10 container mx-auto px-4"
+                    className="relative z-10 container mx-auto px-6"
                     variants={containerVariants}
                     initial="hidden"
                     animate="visible"
                 >
                     <div className="text-center max-w-7xl mx-auto">
+                        {/* Headline */}
                         <motion.h1
-                            className="text-5xl md:text-5xl xl:text-6xl font-extrabold mb-6 leading-tight"
+                            className="text-5xl md:text-6xl font-extrabold mb-8 leading-tight bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent"
                             variants={itemVariants}
                         >
+
                             Latest Tech Insights with Cinute Digital, Top Ed-Tech, Digital Trends & Innovation
                         </motion.h1>
+
+                        {/* Subtitle */}
                         <motion.p
-                            className="text-xl md:text-2xl mb-10 opacity-90 leading-relaxed"
+                            className="text-lg md:text-xl mb-12 opacity-90 leading-relaxed text-gray-200"
                             variants={itemVariants}
                         >
                             As a leading ed-tech institute, explore expert insights on AI ML training courses, automation testing certification, software testing programs, and software development bootcamp to advance your skills and career.
                         </motion.p>
+
+                        {/* CTAs */}
                         <motion.div
-                            className="flex flex-col sm:flex-row gap-4 justify-center"
+                            className="flex flex-col sm:flex-row gap-6 justify-center"
                             variants={itemVariants}
                         >
                             <motion.div
@@ -249,7 +259,7 @@ export default function BlogPage() {
                             >
                                 <Link
                                     href="#search"
-                                    className="px-10 py-4 bg-white text-teal-600 rounded-full font-bold shadow-2xl transition-all duration-300 hover:bg-teal-50"
+                                    className="px-10 py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-full font-bold shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105"
                                 >
                                     Discover Blogs
                                 </Link>
@@ -261,7 +271,7 @@ export default function BlogPage() {
                             >
                                 <Link
                                     href="#newsletter"
-                                    className="px-10 py-4 border-2 border-white rounded-full font-bold transition-all duration-300 hover:bg-white hover:text-teal-600"
+                                    className="px-10 py-4 border-2 border-teal-400 text-white rounded-full font-bold transition-all duration-300 hover:bg-teal-500 hover:border-teal-500 hover:text-white"
                                 >
                                     Join Our Community
                                 </Link>
@@ -269,8 +279,8 @@ export default function BlogPage() {
                         </motion.div>
                     </div>
                 </motion.div>
-
             </header>
+
 
             <div className="container mx-auto px-4 py-12">
                 {/* Featured Posts */}
@@ -455,7 +465,7 @@ export default function BlogPage() {
                             </ul>
                         </div>
 
-                        <div className="bg-gradient-to-br from-indigo-50 to-blue-50 p-6 rounded-xl">
+                        <div className="bg-white p-6 rounded-xl">
                             <h3 className="text-xl font-bold text-gray-800 mb-4">Stay Updated on AI Training</h3>
                             <p className="text-gray-600 mb-4 text-sm">Subscribe for the latest tips on artificial intelligence training, machine learning courses, automation testing certification, and more.</p>
                             <form id="newsletter" className="space-y-3">
