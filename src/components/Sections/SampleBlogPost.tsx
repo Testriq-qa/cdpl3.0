@@ -1,21 +1,26 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import { FaXTwitter } from "react-icons/fa6";
+import { FaLinkedin } from "react-icons/fa";
+import { FaFacebook } from "react-icons/fa";
+import { FaInstagram } from "react-icons/fa";
+
 
 const PerfectBlogPost: React.FC = () => {
     return (
         <div className="min-h-screen bg-white font-sans text-gray-800 leading-relaxed">
             <div className="container mx-auto px-6 md:px-16 lg:px-12 py-8 max-w-7xl">
-                <div className="grid grid-cols-1 lg:grid-cols-4">
-                    <main className="md:col-span-3 lg:w-11/12">
+                <div className="grid grid-cols-1 lg:grid-cols-2">
+                    <main className="lg:w-3xl">
                         {/* Title */}
                         <h1 className="text-3xl md:text-5xl font-bold mb-6 ">The Perfect Blog Post: 20-Step Checklist for SEO Optimization</h1>
 
                         {/* Author Bio */}
                         <div className="flex items-center mb-8">
-                            <div className="relative w-16 h-16 mr-4">
+                            <div className="relative w-[400px] h-20 md:w-65 md:h-28 mr-4">
                                 <Image
-                                    src="/images/ai-ml-basics.webp"
+                                    src="/images/ami-khambata.png"
                                     alt="Connor Gillivan"
                                     fill
                                     className="rounded-full border-2 border-blue-600 object-cover"
@@ -484,7 +489,7 @@ const PerfectBlogPost: React.FC = () => {
                     </main>
 
                     {/* Sidebar */}
-                    <aside className="md:col-span-1">
+                    <aside className='flex justify-end'>
                         <div className="lg:sticky lg:top-8 space-y-6 md:space-y-2 md:grid grid-cols-2 md:gap-10 lg:gap-6 lg:flex flex-col py-8">
 
                             {/* Newsletter Subscription Form */}
@@ -512,22 +517,20 @@ const PerfectBlogPost: React.FC = () => {
                             <div className="flex flex-col text-center bg-gray-100 p-6 rounded-lg shadow-md md:h-fit">
                                 <h3 className="text-xl font-bold mb-2">Share This Post</h3>
                                 <div className="flex space-x-4 justify-center">
-                                    <Link href="https://twitter.com/intent/tweet?url=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality&text=How Does Validation & Optimization Improve Web Application Quality?" className="text-blue-500 hover:text-blue-700">
+                                    <Link href="https://twitter.com/intent/tweet?url=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality&text=How Does Validation & Optimization Improve Web Application Quality?">
                                         {/* Assume SVG for Twitter/X icon */}
-                                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z" /></svg>
+                                        <FaXTwitter className='w-5 h-5' />
                                     </Link>
-                                    <Link href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality" className="text-blue-700 hover:text-blue-900">
+                                    <Link href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality">
                                         {/* LinkedIn icon */}
-                                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M16.98 0a6.9 6.9 0 00-6.9 6.9A6.9 6.9 0 0017 13.8 6.9 6.9 0 0023.9 6.9 6.9 6.9 0 0016.98 0zm0 11.48a4.58 4.58 0 01-4.58-4.58 4.58 4.58 0 019.16 0 4.58 4.58 0 01-4.58 4.58zM0 24h4.8V8.02H0zM2.4 5.6A3.2 3.2 0 105.6 2.4 3.2 3.2 0 002.4 5.6zM24 24h-4.8v-8.64c0-2.05-.04-4.7-2.86-4.7-2.86 0-3.3 2.24-3.3 4.55V24H8.02V8.02h4.6v2.1h.07a5.04 5.04 0 014.54-2.5c4.86 0 5.76 3.2 5.76 7.37z" /></svg>
-                                    </Link>
-                                    <Link href="https://www.facebook.com/sharer/sharer.php?u=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality" className="text-blue-800 hover:text-blue-900">
-                                        {/* Facebook icon */}
-                                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.732 0 1.325-.593 1.325-1.325V1.325C24 .593 23.407 0 22.675 0z" /></svg>
+                                        <FaLinkedin className='w-5 h-5' />
                                     </Link>
                                     <Link href="https://www.facebook.com/sharer/sharer.php?u=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality">
-                                        <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 1.366.062 2.233.299 2.716.634.537.367.936.862 1.37 1.296.434.434.929.833 1.296 1.37.335.483.572 1.35.634 2.716.058 1.266.07 1.646.07 4.85s-.012 3.584-.07 4.85c-.062 1.366-.299 2.233-.634 2.716-.367.537-.862.936-1.296 1.37-.434.434-.833.929-1.37 1.296-.483.335-1.35.572-2.716.634-1.266.058-1.646.07-4.85.07s-3.584-.012-4.85-.07c-1.366-.062-2.233-.299-2.716-.634-.537-.367-.936-.862-1.37-1.296-.434-.434-.929-.833-1.296-1.37-.335-.483-.572-1.35-.634-2.716-.058-1.266-.07-1.646-.07-4.85s.012-3.584.07-4.85c.062-1.366.299-2.233.634-2.716.367-.537.862-.936 1.296-1.37.434-.434.833-.929 1.37-1.296.483-.335 1.35-.572 2.716-.634 1.266-.058 1.646-.07 4.85-.07zm0 1.837c-3.103 0-3.499.011-4.727.073-1.175.058-1.952.269-2.64.518-.76.272-1.389.628-2.011 1.251-.622.622-.979 1.251-1.251 2.011-.249.688-.46 1.465-.518 2.64-.062 1.228-.073 1.624-.073 4.727s.011 3.499.073 4.727c.058 1.175.269 1.952.518 2.64.272.76.628 1.389 1.251 2.011.622.622 1.251.979 2.011 1.251.688.249 1.465.46 2.64.518 1.228.062 1.624.073 4.727.073s3.499-.011 4.727-.073c1.175-.058 1.952-.269 2.64-.518.76-.272 1.389-.628 2.011-1.251.622-.622.979-1.251 1.251-2.011.249-.688.46-1.465.518-2.64.062-1.228.073-1.624.073-4.727s-.011-3.499-.073-4.727c-.058-1.175-.269-1.952-.518-2.64-.272-.76-.628-1.389-1.251-2.011-.622-.622-1.251-.979-2.011-1.251-.688-.249-1.465-.46-2.64-.518-1.228-.062-1.624-.073-4.727-.073zm0 5.049c-2.501 0-4.528 2.027-4.528 4.528s2.027 4.528 4.528 4.528 4.528-2.027 4.528-4.528-2.027-4.528-4.528-4.528zm0 7.364c-1.646 0-2.836-1.19-2.836-2.836s1.19-2.836 2.836-2.836 2.836 1.19 2.836 2.836-1.19 2.836-2.836 2.836zm5.225-7.364c0 .622-.506 1.128-1.128 1.128s-1.128-.506-1.128-1.128.506-1.128 1.128-1.128 1.128.506 1.128 1.128z" />
-                                        </svg>
+                                        {/* Facebook icon */}
+                                        <FaFacebook className='w-5 h-5' />
+                                    </Link>
+                                    <Link href="https://www.instagram.com/sharer/sharer.php?u=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality">
+                                        <FaInstagram className='w-5 h-5' />
                                     </Link>
                                 </div>
                             </div>
@@ -537,21 +540,42 @@ const PerfectBlogPost: React.FC = () => {
                                 <h3 className="text-xl font-bold mb-2">Related Articles</h3>
                                 <ul className="space-y-2 text-sm">
                                     <li>
-                                        <Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="flex items-center space-x-3 p-2 text-black font-semibold hover:text-blue-600 transition-all ease-in-out duration-200 hover:bg-gray-200 rounded-lg">
+                                        <Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="flex items-center space-x-3 p-2 py-3 text-black font-semibold hover:text-blue-600 transition-all ease-in-out duration-200 hover:bg-gray-200 rounded-lg">
                                             <Image src="/images/automation-testing.webp" alt='blog-post-image' width={65} height={20} className='rounded-lg' />
-                                            <p>What is Software Testing?</p>
+                                            <div>
+                                                <p>What is Software Testing?</p>
+                                                <div className='flex items-center gap-2 text-xs text-gray-500 mt-1'>
+                                                    <span>AI Application Testing</span>
+                                                    <span>.</span>
+                                                    <span>3 min read</span>
+                                                </div>
+                                            </div>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="flex items-center space-x-3 p-2 text-black font-semibold hover:text-blue-600 transition-all ease-in-out duration-200 hover:bg-gray-200 rounded-lg">
                                             <Image src="/images/automation-testing.webp" alt='blog-post-image' width={65} height={20} className='rounded-lg' />
-                                            <p>What is Software Testing?</p>
+                                            <div>
+                                                <p>What is Software Testing?</p>
+                                                <div className='flex items-center gap-2 text-xs text-gray-500 mt-1'>
+                                                    <span>AI Application Testing</span>
+                                                    <span>.</span>
+                                                    <span>3 min read</span>
+                                                </div>
+                                            </div>
                                         </Link>
                                     </li>
                                     <li>
                                         <Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="flex items-center space-x-3 p-2 text-black font-semibold hover:text-blue-600 transition-all ease-in-out duration-200 hover:bg-gray-200 rounded-lg">
                                             <Image src="/images/automation-testing.webp" alt='blog-post-image' width={65} height={20} className='rounded-lg' />
-                                            <p>What is Software Testing?</p>
+                                            <div>
+                                                <p>What is Software Testing?</p>
+                                                <div className='flex items-center gap-2 text-xs text-gray-500 mt-1'>
+                                                    <span>AI Application Testing</span>
+                                                    <span>.</span>
+                                                    <span>3 min read</span>
+                                                </div>
+                                            </div>
                                         </Link>
                                     </li>
 
@@ -561,24 +585,27 @@ const PerfectBlogPost: React.FC = () => {
                             {/* Categories */}
                             <div className="bg-gray-100 p-6 rounded-lg shadow-md">
                                 <h3 className="text-xl font-bold mb-2">Categories</h3>
-                                <ul className="space-y-2 text-sm">
-                                    <li><Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="text-blue-600 hover:underline">How to Test Web Applications</Link></li>
-                                    <li><Link href="https://www.testriq.com/blog/post/what-is-software-testing" className="text-blue-600 hover:underline">What is Software Testing?</Link></li>
-                                    <li><Link href="https://www.testriq.com/blog/post/ai-testing-strategies" className="text-blue-600 hover:underline">AI Testing Strategies</Link></li>
-                                    <li><Link href="https://www.testriq.com/blog/post/automation-testing-best-practices" className="text-blue-600 hover:underline">Automation Testing Best Practices</Link></li>
-                                    <li><Link href="https://www.testriq.com/blog/post/performance-testing-guide" className="text-blue-600 hover:underline">Performance Testing Guide</Link></li>
+                                <ul className="space-y-4 text-sm">
+                                    <li className='flex justify-between'><Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="text-gray-800 hover:text-blue-600 transition-all ease-in-out duration-150">AI Application Testing</Link> <span>52</span></li>
+                                    <li className='flex justify-between'><Link href="https://www.testriq.com/blog/post/what-is-software-testing" className="text-gray-800 hover:text-blue-600 transition-all ease-in-out duration-150">Automation Testing Services</Link> <span>80</span></li>
+                                    <li className='flex justify-between'><Link href="https://www.testriq.com/blog/post/ai-testing-strategies" className="text-gray-800 hover:text-blue-600 transition-all ease-in-out duration-150">API Testing</Link> <span>15</span></li>
+                                    <li className='flex justify-between'><Link href="https://www.testriq.com/blog/post/automation-testing-best-practices" className="text-gray-800 hover:text-blue-600 transition-all ease-in-out duration-150">Best Practices</Link> <span>24</span></li>
+                                    <li className='flex justify-between'><Link href="https://www.testriq.com/blog/post/performance-testing-guide" className="text-gray-800 hover:text-blue-600 transition-all ease-in-out duration-150">Career Advice in Software Testing</Link> <span>2</span></li>
                                 </ul>
                             </div>
 
                             {/* Popular Tags */}
                             <div className="bg-gray-100 p-6 rounded-lg shadow-md">
                                 <h3 className="text-xl font-bold mb-2">Popular Tags</h3>
-                                <ul className="space-y-2 text-sm">
-                                    <li><Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="text-blue-600 hover:underline">How to Test Web Applications</Link></li>
-                                    <li><Link href="https://www.testriq.com/blog/post/what-is-software-testing" className="text-blue-600 hover:underline">What is Software Testing?</Link></li>
-                                    <li><Link href="https://www.testriq.com/blog/post/ai-testing-strategies" className="text-blue-600 hover:underline">AI Testing Strategies</Link></li>
-                                    <li><Link href="https://www.testriq.com/blog/post/automation-testing-best-practices" className="text-blue-600 hover:underline">Automation Testing Best Practices</Link></li>
-                                    <li><Link href="https://www.testriq.com/blog/post/performance-testing-guide" className="text-blue-600 hover:underline">Performance Testing Guide</Link></li>
+                                <ul className="grid grid-cols-2 text-center items-center space-y-2 space-x-2 text-sm">
+                                    <Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="text-gray-800 bg-gray-200 rounded-full hover:bg-blue-600 hover:text-white hover:rounded-full py-1 transition-all ease-in-out duration-200">#Automated Testing</Link>
+                                    <Link href="https://www.testriq.com/blog/post/what-is-software-testing" className="text-gray-800 bg-gray-200 rounded-full hover:bg-blue-600 hover:text-white hover:rounded-full py-1 transition-all ease-in-out duration-200">#appium</Link>
+                                    <Link href="https://www.testriq.com/blog/post/ai-testing-strategies" className="text-gray-800 bg-gray-200 rounded-full hover:bg-blue-600 hover:text-white hover:rounded-full py-1 transition-all ease-in-out duration-200">#Agile Testing</Link>
+                                    <Link href="https://www.testriq.com/blog/post/automation-testing-best-practices" className="text-gray-800 bg-gray-200 rounded-full hover:bg-blue-600 hover:text-white hover:rounded-full py-1 transition-all ease-in-out duration-200">#accessibility testing</Link>
+                                    <Link href="https://www.testriq.com/blog/post/performance-testing-guide" className="text-gray-800 bg-gray-200 rounded-full hover:bg-blue-600 hover:text-white hover:rounded-full py-1 transition-all ease-in-out duration-200">#API Testing Tools</Link>
+                                    <Link href="https://www.testriq.com/blog/post/performance-testing-guide" className="text-gray-800 bg-gray-200 rounded-full hover:bg-blue-600 hover:text-white hover:rounded-full py-1 transition-all ease-in-out duration-200">#ai in testing</Link>
+                                    <Link href="https://www.testriq.com/blog/post/performance-testing-guide" className="text-gray-800 bg-gray-200 rounded-full hover:bg-blue-600 hover:text-white hover:rounded-full py-1 transition-all ease-in-out duration-200">#Agile QA</Link>
+                                    <Link href="https://www.testriq.com/blog/post/performance-testing-guide" className="text-gray-800 bg-gray-200 rounded-full hover:bg-blue-600 hover:text-white hover:rounded-full py-1 transition-all ease-in-out duration-200">#API integration testing</Link>
                                 </ul>
                             </div>
                         </div>
