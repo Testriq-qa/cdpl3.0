@@ -79,10 +79,12 @@ export default function page() {
             {/* <SampleBlogPost /> */}
             {/* <BlogPage /> */}
 
-            <BlogHeroSection />
-            <BlogFeaturedSection />
-            <BlogCategoriesSection />
-            <BlogGridSection />
+            <div className='bg-gray-100'>
+                <BlogHeroSection />
+                <BlogFeaturedSection />
+                <BlogCategoriesSection />
+                <BlogGridSection />
+            </div>
         </>
     )
 }

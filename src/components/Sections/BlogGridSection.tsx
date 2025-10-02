@@ -122,7 +122,7 @@ export default function BlogGridSection() {
     };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 mb-12 sm:mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 pb-16  max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {/* Recent Posts */}
             <section className="lg:col-span-2">
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-800 mb-4 sm:mb-6 text-center sm:text-left">Recent Posts</h2>
