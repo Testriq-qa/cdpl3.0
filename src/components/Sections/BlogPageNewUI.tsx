@@ -141,10 +141,10 @@ const BlogPageNewUI: React.FC = () => {
             <section className="gradient-bg rounded-2xl shadow-lg p-8 md:p-12 mb-12">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
                     <div>
-                        <span className="inline-block px-3 py-1 bg-blue-600 text-white text-xs font-medium rounded-md mb-4">
+                        <span className="inline-block px-3 py-1 bg-orange-200 text-orange-600 text-xs font-medium rounded-md mb-4">
                             AI & Machine Learning
                         </span>
-                        <h1 className="text-4xl md:text-5xl font-bold text-gray-950 mb-4 leading-tight">
+                        <h1 className="text-4xl md:text-4xl font-bold text-gray-950 mb-4 leading-tight">
                             The Future of AI in Web Development: Trends and Predictions for 2025
                         </h1>
                         <p className="text-gray-800 text-base mb-6 leading-relaxed">
@@ -164,9 +164,11 @@ const BlogPageNewUI: React.FC = () => {
                                 <span>8 min read</span>
                             </div>
                         </div>
-                        <Link href="#" className="gradient-btn text-white px-6 py-3 rounded-lg font-medium hover:shadow-lg transition-all duration-200 flex items-center">
+                        <Link href="#">
+                        <button className="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium transition-all disabled:pointer-events-none disabled:opacity-50 [&_svg]:pointer-events-none [&_svg:not([class*='size-'])]:size-4 shrink-0 [&_svg]:shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px] aria-invalid:ring-destructive/20 dark:aria-invalid:ring-destructive/40 aria-invalid:border-destructive text-primary-foreground shadow-xs hover:bg-primary/90 h-9 px-4 py-2 has-[>svg]:px-3 w-fit bg-[theme(color.brand)] hover:bg-orange-600 interactive-scale glow">
                             Read Full Article
                             <i className="fas fa-arrow-right ml-2"></i>
+                        </button>
                         </Link>
                     </div>
                     <div className="flex items-center justify-center">

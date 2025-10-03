@@ -28,7 +28,7 @@ body {
 
 /* Custom styles from design */
 .gradient-bg {
-    background: linear-gradient(135deg, #e0d5f5 0%, #f0e5ff 50%, #e5d5f5 100%);
+    background: linear-gradient(135deg, #f6e5be 0%, #f9e6bc 50%, #eee2c8 100%);
 }
 
 .gradient-btn {
