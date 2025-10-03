@@ -1,3 +1,4 @@
+
 @import "tailwindcss";
 
 @theme {
@@ -21,15 +22,13 @@
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background: #f8fafc; /* Equivalent to bg-gray-50 from reference page */
   font-family: Arial, Helvetica, sans-serif;
 }
 
-
-
 /* Custom styles from design */
 .gradient-bg {
-    background: linear-gradient(135deg, #d1c4e9 0%, #e1d5f9 50%, #d7c9ed 100%); /* Adjusted for better contrast */
+    background: linear-gradient(135deg, #e0d5f5 0%, #f0e5ff 50%, #e5d5f5 100%);
 }
 
 .gradient-btn {
