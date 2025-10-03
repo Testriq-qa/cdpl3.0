@@ -1,8 +1,12 @@
 // app/blog/categories/page.tsx
 import { Metadata } from 'next';
-import CategoriesHeroSection from '@/components/Sections/CategoriesHeroSection';
-import CategoriesGridSection from '@/components/Sections/CategoriesGridSection';
-import CategoriesCTASection from '@/components/Sections/CategoriesCTASection';
+
+import { CategoriesHeroSection } from '@/components/Sections/CategoriesHeroSection';
+import { CategoriesGridSection } from '@/components/Sections/CategoriesGridSection';
+import { CategoriesCTASection } from '@/components/Sections/CategoriesCTASection';
+import { CategoriesNewsletterSection } from '@/components/Sections/CategoriesNewsLetterSection';
+CategoriesNewsletterSection
+
 
 export const metadata: Metadata = {
     title: 'Software Testing Courses & QA Mentorship Programs | Top Automation Testing Certification | Testriq Ed-Tech Institute',
@@ -17,6 +21,7 @@ export default function Categories() {
             <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
                 <CategoriesGridSection />
                 <CategoriesCTASection />
+                <CategoriesNewsletterSection />
             </div>
         </div>
     );

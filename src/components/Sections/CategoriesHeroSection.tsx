@@ -1,144 +1,55 @@
-// components/HeroSection.tsx (Adapted for Categories Page)
 "use client";
-import Link from 'next/link';
-import { motion, Variants, Transition } from 'framer-motion';
+import React, { useState } from 'react';
+import { Search } from 'lucide-react';
 
-const backgroundVariants: Variants = {
-    initial: { scale: 1, opacity: 0.15 },
-    animate: {
-        scale: 1.05,
-        opacity: 0.2,
-        transition: {
-            repeat: Infinity,
-            repeatType: 'reverse',
-            duration: 5,
-            ease: 'easeInOut',
-        } as Transition,
-    },
-};
+interface HeroSectionProps {
+    onSearch?: (query: string) => void;
+}
 
-const containerVariants: Variants = {
-    hidden: { opacity: 0 },
-    visible: {
-        opacity: 1,
-        transition: {
-            staggerChildren: 0.3,
-            delayChildren: 0.2,
-        },
-    },
-};
+export const CategoriesHeroSection: React.FC<HeroSectionProps> = ({ onSearch }) => {
+    const [searchQuery, setSearchQuery] = useState('');
 
-const itemVariants: Variants = {
-    hidden: { opacity: 0, y: 50, scale: 0.95 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        transition: {
-            type: 'spring',
-            stiffness: 120,
-            damping: 15,
-            mass: 0.8,
-        } as Transition,
-    },
-};
+    const handleKeyPress = (e: React.KeyboardEvent) => {
+        if (e.key === 'Enter' && onSearch) {
+            onSearch(searchQuery);
+        }
+    };
 
-const buttonVariants: Variants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        transition: {
-            type: 'spring',
-            stiffness: 100,
-            damping: 10,
-        } as Transition,
-    },
-    hover: {
-        scale: 1.05,
-        boxShadow: '0 12px 24px rgba(0, 0, 0, 0.2)',
-        transition: {
-            duration: 0.3,
-            ease: 'easeOut',
-        } as Transition,
-    },
-    tap: {
-        scale: 0.95,
-        transition: {
-            duration: 0.2,
-        } as Transition,
-    },
-};
-
-export default function CategoriesHeroSection() {
     return (
-        <section className="relative overflow-hidden bg-gradient-to-br from-gray-950 via-slate-900 to-black text-white py-12 sm:py-16 md:py-20 lg:py-24">
-            {/* Animated Background */}
-            <motion.div
-                className="absolute inset-0 bg-[url('/api/placeholder/1920/1080?text=QA+Testing+Grid')] bg-cover bg-center opacity-20"
-                variants={backgroundVariants}
-                initial="initial"
-                animate="animate"
-            />
-            <div className="absolute inset-0 bg-gradient-to-tr from-teal-500/20 via-indigo-500/10 to-purple-700/20 mix-blend-overlay" />
-            <div className="absolute inset-0 backdrop-blur-sm" />
-
-            {/* Content */}
-            <motion.div
-                className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8"
-                variants={containerVariants}
-                initial="hidden"
-                animate="visible"
-            >
-                <div className="text-center max-w-6xl mx-auto">
-                    {/* Headline */}
-                    <motion.h1
-                        className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold mb-6 sm:mb-8 leading-tight bg-gradient-to-r from-orange-500 via-orange-400 to-yellow-400 bg-clip-text text-transparent"
-                        variants={itemVariants}
-                    >
-                        Explore Software Testing Courses & QA Mentorship Categories
-                    </motion.h1>
-
-                    {/* Subtitle */}
-                    <motion.p
-                        className="text-base sm:text-lg mb-10 opacity-90 leading-relaxed text-gray-200"
-                        variants={itemVariants}
-                    >
-                        Dive into our comprehensive QA mentorship programs, automation testing certification, performance testing training, and mobile app testing courses. Unlock expert insights and hands-on learning to elevate your career in software quality assurance at Testriq Ed-Tech Institute.
-                    </motion.p>
-
-                    {/* CTAs */}
-                    <motion.div
-                        className="flex flex-col sm:flex-row gap-10 sm:gap-6 justify-center"
-                        variants={itemVariants}
-                    >
-                        <motion.div
-                            variants={buttonVariants}
-                            whileHover="hover"
-                            whileTap="tap"
-                        >
-                            <Link
-                                href="#categories"
-                                className="px-6 sm:px-8 py-3 sm:py-4 bg-gradient-to-r from-teal-500 to-indigo-500 text-white rounded-full font-bold shadow-xl transition-all duration-300 hover:shadow-2xl hover:scale-105 text-sm sm:text-base"
-                            >
-                                Browse Categories
-                            </Link>
-                        </motion.div>
-                        <motion.div
-                            variants={buttonVariants}
-                            whileHover="hover"
-                            whileTap="tap"
-                        >
-                            <Link
-                                href="/courses"
-                                className="px-6 sm:px-8 py-3 sm:py-4 border-2 border-teal-400 text-white rounded-full font-bold transition-all duration-300 hover:bg-teal-500 hover:border-teal-500 hover:text-white text-sm sm:text-base"
-                            >
-                                Enroll in Mentorship
-                            </Link>
-                        </motion.div>
-                    </motion.div>
+        <section className="relative bg-gradient-to-br from-teal-900 via-emerald-800 to-gray-900 text-white">
+            {/* Hero Content */}
+            <div className="py-16 px-4">
+                <div className="max-w-6xl mx-auto text-center">
+                    <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-4 leading-tight">
+                        <span className='text-brand'>Cinute Digital</span> Learning Hub
+                    </h1>
+                    <p className="text-xl md:text-2xl mb-6 text-blue-100">
+                        Explore Expert Insights on Digital Skills, Technology & Career Growth
+                    </p>
+                    <p className="text-lg text-blue-50 max-w-3xl mx-auto">
+                        Stay ahead with tutorials, industry trends, and professional development resources
+                    </p>
                 </div>
-            </motion.div>
+            </div>
+
+            {/* Search Bar */}
+            <div className="max-w-6xl mx-auto px-4 pb-8">
+                <div className="relative max-w-3xl mx-auto">
+                    <input
+                        type="text"
+                        placeholder="Search articles, tutorials, and guides..."
+                        value={searchQuery}
+                        onChange={(e) => setSearchQuery(e.target.value)}
+                        onKeyPress={handleKeyPress}
+                        className="w-full px-6 py-4 pl-14 rounded-lg shadow-lg border-2 border-transparent focus:border-blue-300 focus:outline-none text-gray-800 bg-white"
+                        aria-label="Search blog posts"
+                    />
+                    <Search
+                        className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400 w-6 h-6 cursor-pointer"
+                        onClick={() => onSearch && onSearch(searchQuery)}
+                    />
+                </div>
+            </div>
         </section>
     );
-}
+};

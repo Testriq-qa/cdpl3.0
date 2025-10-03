@@ -1,205 +1,124 @@
-// components/CategoriesGridSection.tsx
 "use client";
-import Link from 'next/link';
-import { motion, Variants } from 'framer-motion';
+import React from 'react';
+import { Code, TrendingUp, Briefcase, BookOpen, Users, Award, ChevronRight } from 'lucide-react';
+// import { Category } from '@/types/blog.types';
 
-const cardVariants: Variants = {
-    hidden: { opacity: 0, y: 50, rotate: -2 },
-    visible: {
-        opacity: 1,
-        y: 0,
-        rotate: 0,
-        transition: {
-            type: 'spring',
-            stiffness: 120,
-            damping: 15,
-            mass: 0.8,
-        },
-    },
-    hover: {
-        scale: 1.05,
-        rotate: 1,
-        boxShadow: '0 0 30px rgba(59, 130, 246, 0.4)',
-        transition: {
-            duration: 0.4,
-            ease: 'easeOut',
-        },
-    },
+interface BrowseByCategoryProps {
+    onCategoryClick?: (slug: string) => void;
+}
+
+const iconMap: Record<string, React.ReactNode> = {
+    code: <Code className="w-7 h-7 text-white" />,
+    trending: <TrendingUp className="w-7 h-7 text-white" />,
+    briefcase: <Briefcase className="w-7 h-7 text-white" />,
+    book: <BookOpen className="w-7 h-7 text-white" />,
+    users: <Users className="w-7 h-7 text-white" />,
+    award: <Award className="w-7 h-7 text-white" />,
 };
 
-const iconVariants: Variants = {
-    hover: {
-        rotate: [0, -10, 10, -10, 10, 0],
-        transition: {
-            duration: 0.5,
-            repeat: 1,
-            ease: 'easeInOut',
+export const CategoriesGridSection: React.FC<BrowseByCategoryProps> = ({ onCategoryClick }) => {
+    const categories = [
+        {
+            id: '1',
+            title: 'Web Development',
+            description: 'Master frontend, backend, and full-stack development with modern frameworks and best practices',
+            icon: 'code',
+            postCount: 45,
+            slug: 'web-development',
+            color: 'bg-blue-500'
         },
-    },
-};
-
-const textVariants: Variants = {
-    hover: {
-        color: '#FFFFFF',
-        transition: {
-            duration: 0.3,
+        {
+            id: '2',
+            title: 'Digital Marketing',
+            description: 'Learn SEO, social media marketing, content strategy, and digital advertising techniques',
+            icon: 'trending',
+            postCount: 38,
+            slug: 'digital-marketing',
+            color: 'bg-green-500'
         },
-    },
-};
+        {
+            id: '3',
+            title: 'Career Development',
+            description: 'Professional growth strategies, interview tips, resume building, and workplace skills',
+            icon: 'briefcase',
+            postCount: 32,
+            slug: 'career-development',
+            color: 'bg-purple-500'
+        },
+        {
+            id: '4',
+            title: 'Online Learning',
+            description: 'Effective study techniques, course reviews, and tips for successful online education',
+            icon: 'book',
+            postCount: 28,
+            slug: 'online-learning',
+            color: 'bg-orange-500'
+        },
+        {
+            id: '5',
+            title: 'Industry Insights',
+            description: 'Latest tech trends, market analysis, and expert perspectives on digital transformation',
+            icon: 'users',
+            postCount: 25,
+            slug: 'industry-insights',
+            color: 'bg-indigo-500'
+        },
+        {
+            id: '6',
+            title: 'Certifications',
+            description: 'Professional certification guides, exam preparation, and credential recommendations',
+            icon: 'award',
+            postCount: 22,
+            slug: 'certifications',
+            color: 'bg-red-500'
+        }
+    ];
 
-const categories = [
-    {
-        name: 'Automation Testing Certification',
-        slug: 'automation-testing-certification',
-        description: 'Dive into advanced automation testing with Selenium, Appium, and CI/CD. Unlock expert mentorship and earn globally recognized QA certifications to accelerate your career.',
-        count: 25,
-        icon: '⚙️',
-        color: 'from-cyan-600 to-blue-800',
-        seoKeywords: 'automation testing certification, Selenium training, Appium courses, QA mentorship programs',
-    },
-    {
-        name: 'Performance Testing Training',
-        slug: 'performance-testing-training',
-        description: 'Boost app efficiency with JMeter and LoadRunner mastery. Our interactive QA mentorship delivers scalable solutions for high-performance software.',
-        count: 18,
-        icon: '⚡',
-        color: 'from-emerald-600 to-teal-800',
-        seoKeywords: 'performance testing training, JMeter courses, load testing certification, software optimization mentorship',
-    },
-    {
-        name: 'Mobile App Testing Courses',
-        slug: 'mobile-app-testing-courses',
-        description: 'Conquer iOS and Android testing challenges. Hands-on mentorship ensures pixel-perfect user experiences across all devices.',
-        count: 20,
-        icon: '📱',
-        color: 'from-violet-600 to-fuchsia-800',
-        seoKeywords: 'mobile app testing courses, Android QA certification, iOS testing training, cross-device mentorship',
-    },
-    {
-        name: 'AI Application Testing',
-        slug: 'ai-application-testing',
-        description: 'Pioneer ethical AI QA with machine learning model testing. Cutting-edge tools and mentorship for intelligent system validation.',
-        count: 15,
-        icon: '🤖',
-        color: 'from-amber-600 to-rose-800',
-        seoKeywords: 'AI application testing, machine learning QA courses, ethical AI mentorship, intelligent systems certification',
-    },
-    {
-        name: 'Software Testing Tools',
-        slug: 'software-testing-tools',
-        description: 'Master Postman, Jira, and TestRail with practical implementations. Elevate your QA toolkit through expert-guided mentorship.',
-        count: 22,
-        icon: '🛠️',
-        color: 'from-yellow-600 to-orange-800',
-        seoKeywords: 'software testing tools, Postman training, Jira QA certification, tool implementation mentorship',
-    },
-    {
-        name: 'Web App Testing',
-        slug: 'web-app-testing',
-        description: 'Secure and optimize web apps with security and cross-browser testing. Personalized mentorship for building resilient digital experiences.',
-        count: 19,
-        icon: '🌐',
-        color: 'from-indigo-600 to-purple-800',
-        seoKeywords: 'web app testing courses, security testing training, cross-browser QA, web development mentorship',
-    },
-];
-
-export default function CategoriesGridSection() {
     return (
-        <section id="categories" className="mb-16 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <motion.h2
-                className="text-4xl sm:text-5xl font-extrabold text-center mb-16 bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 bg-clip-text text-transparent"
-                initial="hidden"
-                whileInView="visible"
-                variants={cardVariants}
-                viewport={{ once: true }}
-            >
-                Unlock Futuristic QA & Testing Categories
-            </motion.h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
-                {categories.map((category, index) => (
-                    <motion.div
-                        key={category.slug}
-                        className="group relative overflow-hidden"
-                        initial="hidden"
-                        whileInView="visible"
-                        viewport={{ once: true }}
-                        variants={cardVariants}
-                        whileHover="hover"
-                        transition={{ delay: index * 0.15 }}
-                    >
+        <section className="py-8 px-4 bg-gray-50">
+            <div className="max-w-6xl mx-auto">
+                {/* Section Header */}
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+                        Browse by Category
+                    </h2>
+                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Discover articles tailored to your learning journey and career goals
+                    </p>
+                </div>
 
-                        <div className={`p-6 md:p-4 lg:p-6 bg-gradient-to-br ${category.color} rounded-3xl shadow-2xl hover:shadow-[0_0_40px_rgba(59,130,246,0.5)] transition-all duration-500 h-full relative`}>
-                            {/* Holographic Background Effect */}
-                            <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.15),_transparent_60%)] opacity-50 group-hover:opacity-80 transition-opacity duration-300" />
-                            <div className="absolute inset-0 backdrop-blur-sm opacity-20 group-hover:opacity-40 transition-opacity duration-300" />
-
-                            <div className="relative">
-                                <div className="flex items-center mb-6">
-                                    <motion.span
-                                        className="text-4xl mr-4  p-1 md:p-3 rounded-2xl bg-black bg-opacity-30 text-white shadow-xl"
-                                        variants={iconVariants}
-                                        whileHover="hover"
-                                    >
-                                        {category.icon}
-                                    </motion.span>
-                                    <div>
-                                        <motion.h3
-                                            className="text-2xl sm:text-3xl font-bold text-white group-hover:text-cyan-200 transition-colors"
-                                            variants={textVariants}
-                                            whileHover="hover"
-                                        >
-                                            {category.name}
-                                        </motion.h3>
-                                        <p className="text-sm text-cyan-100 font-semibold mt-1">
-                                            {category.count} Interactive Resources
-                                        </p>
-                                    </div>
-                                </div>
-                                <motion.p
-                                    className="text-gray-100 mb-8 leading-relaxed text-base"
-                                    initial={{ opacity: 0.8 }}
-                                    whileHover={{ opacity: 1, scale: 1.02 }}
-                                    transition={{ duration: 0.3 }}
-                                >
-                                    {category.description}
-                                </motion.p>
-                                <div className="flex flex-col items-start gap-6">
-                                    <motion.p
-                                            className="px-3 py-1 bg-gray-700 bg-opacity-30 text-cyan-200 text-lg font-medium rounded-full shadow-md"
-                                            whileHover={{ scale: 1.1, backgroundColor: 'rgba(6, 182, 212, 0.2)' }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            Popular tags
-                                        </motion.p>
-                                    <div className="flex flex-wrap gap-2">
-                                        
-                                        {category.seoKeywords.split(', ').map((keyword) => (
-                                            <motion.span
-                                                key={keyword}
-                                                className="px-3 py-1 bg-black bg-opacity-30 text-cyan-200 text-xs font-medium rounded-full shadow-md"
-                                                whileHover={{ scale: 1.1, backgroundColor: 'rgba(6, 182, 212, 0.2)' }}
-                                                transition={{ duration: 0.2 }}
-                                            >
-                                                #{keyword}
-                                            </motion.span>
-                                        ))}
-                                    </div>
-                                    <Link href={`/blog/category/${category.slug}`}>
-                                        <motion.span
-                                            className="text-cyan-300 font-bold text-lg hover:text-cyan-100 transition-colors"
-                                            whileHover={{ x: 5 }}
-                                            transition={{ duration: 0.2 }}
-                                        >
-                                            Explore & Level Up →
-                                        </motion.span>
-                                    </Link>
-                                </div>
+                {/* Categories Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {categories.map((category) => (
+                        <article
+                            key={category.id}
+                            onClick={() => onCategoryClick && onCategoryClick(category.slug)}
+                            className="bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 p-6 cursor-pointer border border-gray-100 hover:border-blue-300 group"
+                        >
+                            {/* Icon */}
+                            <div className={`w-14 h-14 rounded-lg ${category.color} flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300`}>
+                                {iconMap[category.icon]}
                             </div>
-                        </div>
-                    </motion.div>
-                ))}
+
+                            {/* Content */}
+                            <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-blue-600 transition-colors">
+                                {category.title}
+                            </h3>
+                            <p className="text-gray-600 mb-4 line-clamp-2">
+                                {category.description}
+                            </p>
+
+                            {/* Footer */}
+                            <div className="flex items-center justify-between">
+                                <span className="text-sm text-gray-500 font-medium">
+                                    {category.postCount} Articles
+                                </span>
+                                <ChevronRight className="w-5 h-5 text-blue-600 group-hover:translate-x-1 transition-transform" />
+                            </div>
+                        </article>
+                    ))}
+                </div>
             </div>
         </section>
     );
-}
+};
