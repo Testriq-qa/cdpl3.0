@@ -8,39 +8,34 @@ import Link from "next/link";
 // Course data structure with governing bodies per course and category
 const courseCategories = [
   {
-    id: "agile-scrum",
-    name: "Agile and Scrum",
+    id: "software-testing-courses",
+    name: "Sofware Testing Courses",
     description:
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
     governingBodies: [
       { name: "Scrum Alliance", logo: "/images/scrum-alliance-logo.png" },
-      { name: "Scrum.org", logo: "/images/scrumorg-logo.png" },
-      { name: "Scaled Agile", logo: "/images/scaled-agile-logo.png" },
-      { name: "PMI", logo: "/images/pmi-logo.png" },
-      { name: "ICAgile", logo: "/images/icagile-logo.png" },
+      
     ],
     courses: [
       {
-        name: "Certified Scrum Master",
+        name: "Manual Software Testing",
         description:
           "Learn to facilitate Scrum teams and drive Agile projects effectively.",
         governingBodies: [
-          { name: "Scrum Alliance", logo: "/images/scrum-alliance-logo.png" },
-          { name: "Scrum Alliance", logo: "/images/scrum-alliance-logo.png" },
-          { name: "Scrum Alliance", logo: "/images/scrum-alliance-logo.png" },
-          { name: "Scrum Alliance", logo: "/images/scrum-alliance-logo.png" },
+          { name: "Manual Testing", logo: "/header_images/Manual-Testing.png" },
+
         ],
       },
       {
-        name: "Certified Scrum Product Owner",
+        name: "API Testing using POSTMAN and RestAPIs",
         description:
           "Master product backlog management and stakeholder collaboration.",
         governingBodies: [
-          { name: "Scrum Alliance", logo: "/images/scrum-alliance-logo.png" },
+          { name: "API Testing", logo: "/header_images/API_Testing_Postman.png" },
         ],
       },
       {
-        name: "Professional Scrum Master",
+        name: "Database Management System using MySQL",
         description:
           "Gain advanced Scrum knowledge to lead high-performing teams.",
         governingBodies: [
@@ -48,7 +43,7 @@ const courseCategories = [
         ],
       },
       {
-        name: "Leading SAFe® Agilist",
+        name: "ETL Testing Course",
         description:
           "Learn to lead Agile transformations using the SAFe framework.",
         governingBodies: [
@@ -56,44 +51,30 @@ const courseCategories = [
         ],
       },
       {
-        name: "SAFe Scrum Master",
+        name: "Advanced Software Testing",
         description: "Facilitate SAFe practices for scaled Agile environments.",
         governingBodies: [
           { name: "Scaled Agile", logo: "/images/scaled-agile-logo.png" },
         ],
       },
       {
-        name: "SAFe® Product Owner/Product Manager",
+        name: "Advanced Automation Testing",
         description: "Drive product vision and delivery in SAFe settings.",
         governingBodies: [
           { name: "Scaled Agile", logo: "/images/scaled-agile-logo.png" },
         ],
       },
       {
-        name: "PMI-Agile Certified Practitioner",
+        name: "Advanced Manual and Automation Testing - Master Program",
         description:
           "Blend Agile principles with PMI project management standards.",
         governingBodies: [{ name: "PMI", logo: "/images/pmi-logo.png" }],
       },
-      {
-        name: "AI For Scrum Masters",
-        description: "Leverage AI tools to enhance Scrum practices.",
-        governingBodies: [
-          { name: "ICAgile", logo: "/images/icagile-logo.png" },
-        ],
-      },
-      {
-        name: "Professional Scrum Master (PSM 2)",
-        description: "Deepen your Scrum expertise for complex projects.",
-        governingBodies: [
-          { name: "Scrum.org", logo: "/images/scrumorg-logo.png" },
-        ],
-      },
     ],
   },
   {
-    id: "interview-bootcamp",
-    name: "Interview Bootcamp",
+    id: "data-science",
+    name: "Data Science, AI - ML & BI Courses",
     description:
       "Prepare for job interviews with practical skills and confidence.",
     governingBodies: [
@@ -102,7 +83,7 @@ const courseCategories = [
     ],
     courses: [
       {
-        name: "Interview Preparation",
+        name: "Machine Learning and Data Science with Python - Hero Program",
         description:
           "Build strategies to ace behavioral and technical interviews.",
         governingBodies: [
@@ -110,21 +91,49 @@ const courseCategories = [
         ],
       },
       {
-        name: "Mock Interviews",
+        name: "Deep Learning, NLP and GenerativeAI",
         description: "Practice real-world interview scenarios with feedback.",
         governingBodies: [
           { name: "Career Hub", logo: "/images/career-hub.png" },
         ],
       },
       {
-        name: "Resume Building",
+        name: "Advanced Data Analytics - Hero Program",
         description: "Craft a standout resume to impress recruiters.",
         governingBodies: [
           { name: "Career Hub", logo: "/images/career-hub.png" },
         ],
       },
       {
-        name: "Technical Interview Prep",
+        name: "Big Data Engineering",
+        description: "Master coding challenges and technical questions.",
+        governingBodies: [
+          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+        ],
+      },
+      {
+        name: "Prompt Engneering with Generative AI",
+        description: "Master coding challenges and technical questions.",
+        governingBodies: [
+          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+        ],
+      },
+      {
+        name: "Advanced Data Science and Machine Learning Masterclass",
+        description: "Master coding challenges and technical questions.",
+        governingBodies: [
+          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+        ],
+      },
+      {
+        name: "Comprehensive Data Science and AI - Master Program",
+        description: "Master coding challenges and technical questions.",
+        governingBodies: [
+          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+        ],
+      },
+      {
+        name: "Data Analysis with BI & Big Data Engineering Master Program",
         description: "Master coding challenges and technical questions.",
         governingBodies: [
           { name: "Industry Certified", logo: "/images/industry-cert.png" },
@@ -133,8 +142,8 @@ const courseCategories = [
     ],
   },
   {
-    id: "project-management",
-    name: "Project Management",
+    id: "digital-marketing",
+    name: "Digital Marketing",
     description:
       "Develop skills to manage projects efficiently and effectively.",
     governingBodies: [
@@ -143,33 +152,16 @@ const courseCategories = [
     ],
     courses: [
       {
-        name: "PMP Certification",
+        name: "Digital Marketing and Analytics - Master Program",
         description: "Earn the globally recognized PMP certification.",
         governingBodies: [{ name: "PMI", logo: "/images/pmi-logo.png" }],
       },
-      {
-        name: "PRINCE2",
-        description: "Learn structured project management with PRINCE2.",
-        governingBodies: [{ name: "AXELOS", logo: "/images/axelos-logo.png" }],
-      },
-      {
-        name: "Project Management Basics",
-        description: "Understand core project management principles.",
-        governingBodies: [{ name: "PMI", logo: "/images/pmi-logo.png" }],
-      },
-      {
-        name: "Agile Project Management",
-        description: "Apply Agile techniques to manage projects dynamically.",
-        governingBodies: [
-          { name: "PMI", logo: "/images/pmi-logo.png" },
-          { name: "AXELOS", logo: "/images/axelos-logo.png" },
-        ],
-      },
+
     ],
   },
   {
-    id: "devops",
-    name: "DevOps",
+    id: "programming-courses",
+    name: "Programming Courses",
     description:
       "Streamline software development and operations with DevOps practices.",
     governingBodies: [
@@ -179,44 +171,25 @@ const courseCategories = [
     ],
     courses: [
       {
-        name: "Docker & Kubernetes",
+        name: "Python Programming",
         description: "Master containerization and orchestration technologies.",
         governingBodies: [
           { name: "Linux Foundation", logo: "/images/linux-foundation.png" },
         ],
       },
       {
-        name: "Jenkins",
+        name: "Java Programming",
         description: "Automate CI/CD pipelines with Jenkins.",
         governingBodies: [
           { name: "Linux Foundation", logo: "/images/linux-foundation.png" },
         ],
       },
-      {
-        name: "AWS DevOps",
-        description: "Implement DevOps practices on AWS cloud.",
-        governingBodies: [{ name: "AWS", logo: "/images/aws-logo.png" }],
-      },
-      {
-        name: "Azure DevOps",
-        description: "Leverage Azure tools for DevOps workflows.",
-        governingBodies: [
-          { name: "Microsoft Azure", logo: "/images/azure-logo.png" },
-        ],
-      },
-      {
-        name: "CI/CD Pipeline",
-        description:
-          "Build efficient continuous integration and delivery pipelines.",
-        governingBodies: [
-          { name: "Linux Foundation", logo: "/images/linux-foundation.png" },
-        ],
-      },
+
     ],
   },
   {
-    id: "data-science",
-    name: "Data Science",
+    id: "aaa-accredited",
+    name: "AAA Accredited Courses",
     description:
       "Unlock insights from data with advanced analytics and machine learning.",
     governingBodies: [
@@ -226,14 +199,14 @@ const courseCategories = [
     ],
     courses: [
       {
-        name: "Data Analytics",
+        name: "Advanced Software Testing",
         description: "Analyze data to drive business decisions.",
         governingBodies: [
           { name: "Microsoft", logo: "/images/microsoft-logo.png" },
         ],
       },
       {
-        name: "Machine Learning",
+        name: "Advanced Automation Testing",
         description:
           "Build predictive models with machine learning techniques.",
         governingBodies: [
@@ -241,202 +214,20 @@ const courseCategories = [
         ],
       },
       {
-        name: "Python for Data Science",
+        name: "Advanced Data Science and Machine Learning - Masterclass",
         description: "Use Python for data analysis and visualization.",
         governingBodies: [
           { name: "Python Institute", logo: "/images/python-institute.png" },
         ],
       },
       {
-        name: "Power BI",
+        name: "Data Analysis with BI & Big Data Engineering - Master Program",
         description: "Create interactive data visualizations with Power BI.",
         governingBodies: [
           { name: "Microsoft", logo: "/images/microsoft-logo.png" },
         ],
       },
-      {
-        name: "Tableau",
-        description: "Master data visualization with Tableau.",
-        governingBodies: [
-          { name: "Tableau", logo: "/images/tableau-logo.png" },
-        ],
-      },
-      {
-        name: "SQL for Data Science",
-        description: "Query and manage data using SQL.",
-        governingBodies: [
-          { name: "Microsoft", logo: "/images/microsoft-logo.png" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "software-testing",
-    name: "Software Testing",
-    description:
-      "Ensure software quality with comprehensive testing techniques.",
-    governingBodies: [
-      { name: "ISTQB", logo: "/images/istqb-logo.png" },
-      { name: "ASTQB", logo: "/images/astqb-logo.png" },
-    ],
-    courses: [
-      {
-        name: "Selenium Testing",
-        description: "Automate web testing with Selenium.",
-        governingBodies: [{ name: "ISTQB", logo: "/images/istqb-logo.png" }],
-      },
-      {
-        name: "API Testing",
-        description: "Test APIs for functionality and performance.",
-        governingBodies: [{ name: "ISTQB", logo: "/images/istqb-logo.png" }],
-      },
-      {
-        name: "Performance Testing",
-        description: "Evaluate software performance under load.",
-        governingBodies: [{ name: "ISTQB", logo: "/images/istqb-logo.png" }],
-      },
-      {
-        name: "Manual Testing",
-        description: "Learn manual testing techniques for software quality.",
-        governingBodies: [{ name: "ISTQB", logo: "/images/istqb-logo.png" }],
-      },
-      {
-        name: "Automation Testing",
-        description: "Automate testing processes for efficiency.",
-        governingBodies: [
-          { name: "ISTQB", logo: "/images/istqb-logo.png" },
-          { name: "ASTQB", logo: "/images/astqb-logo.png" },
-        ],
-      },
-      {
-        name: "Mobile Testing",
-        description: "Test mobile applications for usability and performance.",
-        governingBodies: [{ name: "ASTQB", logo: "/images/astqb-logo.png" }],
-      },
-    ],
-  },
-  {
-    id: "marketing",
-    name: "Marketing",
-    description: "Boost your brand with modern digital marketing strategies.",
-    governingBodies: [
-      { name: "Google", logo: "/images/google-logo.png" },
-      { name: "HubSpot", logo: "/images/hubspot-logo.png" },
-      { name: "Meta", logo: "/images/meta-logo.png" },
-    ],
-    courses: [
-      {
-        name: "Digital Marketing",
-        description: "Master online marketing channels and strategies.",
-        governingBodies: [
-          { name: "Google", logo: "/images/google-logo.png" },
-          { name: "HubSpot", logo: "/images/hubspot-logo.png" },
-        ],
-      },
-      {
-        name: "SEO & SEM",
-        description: "Optimize websites for search engines and ads.",
-        governingBodies: [{ name: "Google", logo: "/images/google-logo.png" }],
-      },
-      {
-        name: "Social Media Marketing",
-        description: "Leverage social platforms for brand growth.",
-        governingBodies: [
-          { name: "Meta", logo: "/images/meta-logo.png" },
-          { name: "HubSpot", logo: "/images/hubspot-logo.png" },
-        ],
-      },
-      {
-        name: "Content Marketing",
-        description: "Create compelling content to engage audiences.",
-        governingBodies: [
-          { name: "HubSpot", logo: "/images/hubspot-logo.png" },
-        ],
-      },
-      {
-        name: "Email Marketing",
-        description: "Design effective email campaigns for customer retention.",
-        governingBodies: [
-          { name: "HubSpot", logo: "/images/hubspot-logo.png" },
-        ],
-      },
-    ],
-  },
-  {
-    id: "software-development",
-    name: "Software Development",
-    description: "Build robust applications with cutting-edge technologies.",
-    governingBodies: [
-      { name: "Microsoft", logo: "/images/microsoft-logo.png" },
-      { name: "Meta", logo: "/images/meta-logo.png" },
-      { name: "Linux Foundation", logo: "/images/linux-foundation.png" },
-      { name: "Python Institute", logo: "/images/python-institute.png" },
-      { name: "Oracle", logo: "/images/oracle-logo.png" },
-    ],
-    courses: [
-      {
-        name: "Full Stack Development",
-        description: "Develop end-to-end web applications.",
-        governingBodies: [
-          { name: "Microsoft", logo: "/images/microsoft-logo.png" },
-        ],
-      },
-      {
-        name: "React & Next.js",
-        description: "Build dynamic user interfaces with React and Next.js.",
-        governingBodies: [{ name: "Meta", logo: "/images/meta-logo.png" }],
-      },
-      {
-        name: "Node.js Development",
-        description: "Create scalable backend systems with Node.js.",
-        governingBodies: [
-          { name: "Linux Foundation", logo: "/images/linux-foundation.png" },
-        ],
-      },
-      {
-        name: "Python Programming",
-        description: "Learn versatile Python for various applications.",
-        governingBodies: [
-          { name: "Python Institute", logo: "/images/python-institute.png" },
-        ],
-      },
-      {
-        name: "Java Development",
-        description: "Build enterprise-grade applications with Java.",
-        governingBodies: [{ name: "Oracle", logo: "/images/oracle-logo.png" }],
-      },
-    ],
-  },
-  {
-    id: "quality-management",
-    name: "Quality Management",
-    description: "Ensure excellence with quality management methodologies.",
-    governingBodies: [
-      { name: "ASQ", logo: "/images/asq-logo.png" },
-      { name: "ISO", logo: "/images/iso-logo.png" },
-    ],
-    courses: [
-      {
-        name: "Six Sigma",
-        description: "Improve processes with Six Sigma techniques.",
-        governingBodies: [{ name: "ASQ", logo: "/images/asq-logo.png" }],
-      },
-      {
-        name: "Quality Assurance",
-        description: "Implement QA practices for consistent quality.",
-        governingBodies: [{ name: "ASQ", logo: "/images/asq-logo.png" }],
-      },
-      {
-        name: "ISO Certification",
-        description: "Achieve compliance with ISO standards.",
-        governingBodies: [{ name: "ISO", logo: "/images/iso-logo.png" }],
-      },
-      {
-        name: "TQM",
-        description:
-          "Adopt Total Quality Management for organizational success.",
-        governingBodies: [{ name: "ASQ", logo: "/images/asq-logo.png" }],
-      },
+
     ],
   },
 ];
@@ -559,11 +350,10 @@ const Header = () => {
                                   setHoveredCourse(null);
                                 }}
                                 onClick={() => setSelectedCategory(category.id)}
-                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${
-                                  selectedCategory === category.id
+                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id
                                     ? "bg-blue-50 text-blue-700 font-medium"
                                     : "text-gray-700 hover:bg-gray-50"
-                                }`}
+                                  }`}
                                 aria-current={
                                   selectedCategory === category.id
                                     ? "true"
@@ -572,11 +362,10 @@ const Header = () => {
                               >
                                 <span>{category.name}</span>
                                 <ChevronRight
-                                  className={`h-4 w-4 transition-transform ${
-                                    selectedCategory === category.id
+                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id
                                       ? "text-blue-700"
                                       : "text-gray-400"
-                                  }`}
+                                    }`}
                                 />
                               </button>
                             ))}
@@ -606,19 +395,17 @@ const Header = () => {
                                   onMouseEnter={() =>
                                     setHoveredCourse(course.name)
                                   }
-                                  className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${
-                                    hoveredCourse === course.name
+                                  className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name
                                       ? "bg-blue-50 text-blue-700"
                                       : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
-                                  }`}
+                                    }`}
                                 >
                                   <div className="flex-shrink-0 mt-1">
                                     <div
-                                      className={`w-2 h-2 rounded-full transition-transform ${
-                                        hoveredCourse === course.name
+                                      className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name
                                           ? "bg-blue-700 scale-125"
                                           : "bg-blue-600 group-hover:scale-125"
-                                      }`}
+                                        }`}
                                     />
                                   </div>
                                   <div className="ml-3">
@@ -643,25 +430,30 @@ const Header = () => {
                             {hoveredCourse
                               ? `Certified by leading organizations`
                               : hoveredCategory
-                              ? `Certified by leading organizations`
-                              : "Hover over a category or course to see its certifications"}
+                                ? `Certified by leading organizations`
+                                : "Hover over a category or course to see its certifications"}
                           </p>
-                          <div className="grid grid-cols-2 gap-3 min-h-[120px]">
+                          <div className="py-5 min-h-[120px]">
                             {displayGoverningBodies.length > 0 ? (
                               displayGoverningBodies.map((body, index) => (
                                 <div
                                   key={index}
-                                  className="bg-white rounded-lg p-3 flex items-center justify-center hover:shadow-md transition-all duration-200 group animate-fadeIn"
+                                  className="bg-white rounded-lg p-8 hover:shadow-md transition-all duration-200 group animate-fadeIn flex items-center justify-center"
                                 >
-                                  <div className="relative w-full h-10 sm:h-12">
-                                    <div className="absolute inset-0 flex flex-col items-center justify-center">
-                                      <Award className="h-6 w-6 text-blue-500 group-hover:text-blue-600 transition-colors" />
-                                      <span className="text-[10px] text-gray-700 font-medium mt-1 text-center">
-                                        {body.name}
-                                      </span>
-                                    </div>
+                                  <div className="relative h-32 flex flex-col items-center justify-center">
+                                    <Image
+                                      src={body.logo}
+                                      alt={body.name}
+                                      className="object-contain h-full"
+                                      width={200}
+                                      height={150}
+                                    />
+                                    <span className="text-[10px] text-gray-700 font-medium mt-2 text-center">
+                                      {body.name}
+                                    </span>
                                   </div>
                                 </div>
+
                               ))
                             ) : (
                               <div className="col-span-2 flex flex-col items-center justify-center text-center py-8">
@@ -690,6 +482,12 @@ const Header = () => {
                 </div>
               )}
             </div>
+
+            <Link href='#' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Event</Link>
+
+            <Link href='#' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Mentors</Link>
+
+            <Link href='#' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Jobs</Link>
 
             <a
               href="/about-us"
@@ -759,9 +557,8 @@ const Header = () => {
                 >
                   <span>Courses</span>
                   <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${
-                      expandedMobileCategory !== null ? "rotate-180" : ""
-                    }`}
+                    className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory !== null ? "rotate-180" : ""
+                      }`}
                   />
                 </button>
 
@@ -777,11 +574,10 @@ const Header = () => {
                         >
                           <span>{category.name}</span>
                           <ChevronRight
-                            className={`h-4 w-4 transition-transform duration-200 ${
-                              expandedMobileCategory === category.id
+                            className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === category.id
                                 ? "rotate-90"
                                 : ""
-                            }`}
+                              }`}
                           />
                         </button>
 
