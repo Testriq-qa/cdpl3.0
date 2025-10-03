@@ -14,7 +14,7 @@ const courseCategories = [
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
     governingBodies: [
       { name: "Scrum Alliance", logo: "/images/scrum-alliance-logo.png" },
-      
+
     ],
     courses: [
       {
@@ -39,7 +39,7 @@ const courseCategories = [
         description:
           "Gain advanced Scrum knowledge to lead high-performing teams.",
         governingBodies: [
-          { name: "Scrum.org", logo: "/images/scrumorg-logo.png" },
+          { name: "Database Management", logo: "/header_images/Database_Management_MySQL.png" },
         ],
       },
       {
@@ -47,14 +47,14 @@ const courseCategories = [
         description:
           "Learn to lead Agile transformations using the SAFe framework.",
         governingBodies: [
-          { name: "Scaled Agile", logo: "/images/scaled-agile-logo.png" },
+          { name: "ETL Testing", logo: "/header_images/ETL_Testing.png" },
         ],
       },
       {
         name: "Advanced Software Testing",
         description: "Facilitate SAFe practices for scaled Agile environments.",
         governingBodies: [
-          { name: "Scaled Agile", logo: "/images/scaled-agile-logo.png" },
+          { name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" },
         ],
       },
       {
@@ -351,8 +351,8 @@ const Header = () => {
                                 }}
                                 onClick={() => setSelectedCategory(category.id)}
                                 className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id
-                                    ? "bg-blue-50 text-blue-700 font-medium"
-                                    : "text-gray-700 hover:bg-gray-50"
+                                  ? "bg-blue-50 text-blue-700 font-medium"
+                                  : "text-gray-700 hover:bg-gray-50"
                                   }`}
                                 aria-current={
                                   selectedCategory === category.id
@@ -363,8 +363,8 @@ const Header = () => {
                                 <span>{category.name}</span>
                                 <ChevronRight
                                   className={`h-4 w-4 transition-transform ${selectedCategory === category.id
-                                      ? "text-blue-700"
-                                      : "text-gray-400"
+                                    ? "text-blue-700"
+                                    : "text-gray-400"
                                     }`}
                                 />
                               </button>
@@ -396,15 +396,15 @@ const Header = () => {
                                     setHoveredCourse(course.name)
                                   }
                                   className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name
-                                      ? "bg-blue-50 text-blue-700"
-                                      : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                                    ? "bg-blue-50 text-blue-700"
+                                    : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
                                     }`}
                                 >
                                   <div className="flex-shrink-0 mt-1">
                                     <div
                                       className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name
-                                          ? "bg-blue-700 scale-125"
-                                          : "bg-blue-600 group-hover:scale-125"
+                                        ? "bg-blue-700 scale-125"
+                                        : "bg-blue-600 group-hover:scale-125"
                                         }`}
                                     />
                                   </div>
@@ -438,20 +438,20 @@ const Header = () => {
                               displayGoverningBodies.map((body, index) => (
                                 <div
                                   key={index}
-                                  className="bg-white rounded-lg p-8 hover:shadow-md transition-all duration-200 group animate-fadeIn flex items-center justify-center"
+                                  className="bg-white rounded-lg p-8 hover:shadow-md transition-all duration-200 group animate-fadeIn flex flex-col items-center justify-center"
                                 >
-                                  <div className="relative h-32 flex flex-col items-center justify-center">
-                                    <Image
-                                      src={body.logo}
-                                      alt={body.name}
-                                      className="object-contain h-full"
-                                      width={200}
-                                      height={150}
-                                    />
-                                    <span className="text-[10px] text-gray-700 font-medium mt-2 text-center">
-                                      {body.name}
-                                    </span>
-                                  </div>
+
+                                  <Image
+                                    src={body.logo}
+                                    alt={body.name}
+                                    className="object-contain h-full rounded-2xl"
+                                    width={300}
+                                    height={150}
+                                  />
+                                  <span className="text-[10px] text-gray-700 font-medium mt-2 text-center">
+                                    {body.name}
+                                  </span>
+
                                 </div>
 
                               ))
@@ -575,8 +575,8 @@ const Header = () => {
                           <span>{category.name}</span>
                           <ChevronRight
                             className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === category.id
-                                ? "rotate-90"
-                                : ""
+                              ? "rotate-90"
+                              : ""
                               }`}
                           />
                         </button>
