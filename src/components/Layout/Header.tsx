@@ -13,7 +13,7 @@ const courseCategories = [
     description:
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
     governingBodies: [
-      { name: "Scrum Alliance", logo: "/images/scrum-alliance-logo.png" },
+      { name: "Sofware Testing Courses", logo: "/header_images/Sotware_Testing.png" },
 
     ],
     courses: [
@@ -61,14 +61,14 @@ const courseCategories = [
         name: "Advanced Automation Testing",
         description: "Drive product vision and delivery in SAFe settings.",
         governingBodies: [
-          { name: "Scaled Agile", logo: "/images/scaled-agile-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" },
         ],
       },
       {
         name: "Advanced Manual and Automation Testing - Master Program",
         description:
           "Blend Agile principles with PMI project management standards.",
-        governingBodies: [{ name: "PMI", logo: "/images/pmi-logo.png" }],
+        governingBodies: [{ name: "Advanced Manual and Automation Testing - Master Program", logo: "/header_images/Advanced Manual and Automation Testing - Master Program.png" }],
       },
     ],
   },
@@ -78,8 +78,7 @@ const courseCategories = [
     description:
       "Prepare for job interviews with practical skills and confidence.",
     governingBodies: [
-      { name: "Industry Certified", logo: "/images/industry-cert.png" },
-      { name: "Career Hub", logo: "/images/career-hub.png" },
+      { name: "Data Science, AI - ML & BI Courses", logo: "/header_images/DataScience_AI_ML_BI.png" },
     ],
     courses: [
       {
@@ -87,56 +86,56 @@ const courseCategories = [
         description:
           "Build strategies to ace behavioral and technical interviews.",
         governingBodies: [
-          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+          { name: "Machine Learning and Data Science with Python - Hero Program", logo: "/header_images/ML_and_DS_with_Python.png" },
         ],
       },
       {
         name: "Deep Learning, NLP and GenerativeAI",
         description: "Practice real-world interview scenarios with feedback.",
         governingBodies: [
-          { name: "Career Hub", logo: "/images/career-hub.png" },
+          { name: "Deep Learning, NLP and GenerativeAI", logo: "/header_images/DeepLearning_and_NLP.png" },
         ],
       },
       {
         name: "Advanced Data Analytics - Hero Program",
         description: "Craft a standout resume to impress recruiters.",
         governingBodies: [
-          { name: "Career Hub", logo: "/images/career-hub.png" },
+          { name: "Advanced Data Analytics - Hero Program", logo: "/header_images/Advance_Data_Analytics.png" },
         ],
       },
       {
         name: "Big Data Engineering",
         description: "Master coding challenges and technical questions.",
         governingBodies: [
-          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+          { name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" },
         ],
       },
       {
         name: "Prompt Engneering with Generative AI",
         description: "Master coding challenges and technical questions.",
         governingBodies: [
-          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+          { name: "Prompt Engneering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" },
         ],
       },
       {
         name: "Advanced Data Science and Machine Learning Masterclass",
         description: "Master coding challenges and technical questions.",
         governingBodies: [
-          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+          { name: "Advanced Data Science and Machine Learning Masterclass", logo: "/header_images/Advance_DS_and_ML.png" },
         ],
       },
       {
         name: "Comprehensive Data Science and AI - Master Program",
         description: "Master coding challenges and technical questions.",
         governingBodies: [
-          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+          { name: "Comprehensive Data Science and AI - Master Program", logo: "/header_images/Comprehensive_DS_and_AI.png" },
         ],
       },
       {
         name: "Data Analysis with BI & Big Data Engineering Master Program",
         description: "Master coding challenges and technical questions.",
         governingBodies: [
-          { name: "Industry Certified", logo: "/images/industry-cert.png" },
+          { name: "Data Analysis with BI & Big Data Engineering Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" },
         ],
       },
     ],
@@ -147,14 +146,13 @@ const courseCategories = [
     description:
       "Develop skills to manage projects efficiently and effectively.",
     governingBodies: [
-      { name: "PMI", logo: "/images/pmi-logo.png" },
-      { name: "AXELOS", logo: "/images/axelos-logo.png" },
+      { name: "Digital Marketing", logo: "/header_images/Digital_Marketing.png" },
     ],
     courses: [
       {
         name: "Digital Marketing and Analytics - Master Program",
         description: "Earn the globally recognized PMP certification.",
-        governingBodies: [{ name: "PMI", logo: "/images/pmi-logo.png" }],
+        governingBodies: [{ name: "Digital Marketing and Analytics - Master Program", logo: "/header_images/Digital_Marketing_Analytics.png" }],
       },
 
     ],
@@ -165,23 +163,21 @@ const courseCategories = [
     description:
       "Streamline software development and operations with DevOps practices.",
     governingBodies: [
-      { name: "Linux Foundation", logo: "/images/linux-foundation.png" },
-      { name: "AWS", logo: "/images/aws-logo.png" },
-      { name: "Microsoft Azure", logo: "/images/azure-logo.png" },
+      { name: "Programming Courses", logo: "/header_images/Programming.png" },
     ],
     courses: [
       {
         name: "Python Programming",
         description: "Master containerization and orchestration technologies.",
         governingBodies: [
-          { name: "Linux Foundation", logo: "/images/linux-foundation.png" },
+          { name: "Python Programming", logo: "/header_images/Python_Programming.png" },
         ],
       },
       {
         name: "Java Programming",
         description: "Automate CI/CD pipelines with Jenkins.",
         governingBodies: [
-          { name: "Linux Foundation", logo: "/images/linux-foundation.png" },
+          { name: "Java Programming", logo: "/header_images/Java_Programming.png" },
         ],
       },
 
@@ -193,16 +189,14 @@ const courseCategories = [
     description:
       "Unlock insights from data with advanced analytics and machine learning.",
     governingBodies: [
-      { name: "Microsoft", logo: "/images/microsoft-logo.png" },
-      { name: "Python Institute", logo: "/images/python-institute.png" },
-      { name: "Tableau", logo: "/images/tableau-logo.png" },
+      { name: "AAA Accredited Courses", logo: "/header_images/AAA_Accredited.png" },
     ],
     courses: [
       {
         name: "Advanced Software Testing",
         description: "Analyze data to drive business decisions.",
         governingBodies: [
-          { name: "Microsoft", logo: "/images/microsoft-logo.png" },
+          { name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" },
         ],
       },
       {
@@ -210,21 +204,21 @@ const courseCategories = [
         description:
           "Build predictive models with machine learning techniques.",
         governingBodies: [
-          { name: "Python Institute", logo: "/images/python-institute.png" },
+          { name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" },
         ],
       },
       {
         name: "Advanced Data Science and Machine Learning - Masterclass",
         description: "Use Python for data analysis and visualization.",
         governingBodies: [
-          { name: "Python Institute", logo: "/images/python-institute.png" },
+          { name: "Advanced Data Science and Machine Learning - Masterclass", logo: "/header_images/Advance_DS_and_ML.png" },
         ],
       },
       {
         name: "Data Analysis with BI & Big Data Engineering - Master Program",
         description: "Create interactive data visualizations with Power BI.",
         governingBodies: [
-          { name: "Microsoft", logo: "/images/microsoft-logo.png" },
+          { name: "Data Analysis with BI & Big Data Engineering - Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" },
         ],
       },
 
