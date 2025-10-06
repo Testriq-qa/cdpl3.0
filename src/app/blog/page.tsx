@@ -2,8 +2,10 @@
 import dynamic from 'next/dynamic';
 import React from 'react';
 
-const BlogPageNewUI = dynamic(
-    () => import("@/components/Sections/BlogPageNewUI"),
+
+
+const BlogHeroSection = dynamic(
+    () => import("@/components/Sections/BlogHeroSection"),
     {
         ssr: true,
         loading: () => (
@@ -17,7 +19,13 @@ const BlogPageNewUI = dynamic(
 export default function page() {
     return (
         <>
-            <BlogPageNewUI />
+            
+            <div className='bg-gray-100'>
+                <BlogHeroSection />
+                <BlogFeaturedSection />
+                <BlogCategoriesSection />
+                <BlogGridSection />
+            </div>
         </>
     );
 }
