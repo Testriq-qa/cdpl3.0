@@ -5,7 +5,7 @@ import { CategoriesHeroSection } from '@/components/Sections/CategoriesHeroSecti
 import { CategoriesGridSection } from '@/components/Sections/CategoriesGridSection';
 import { CategoriesCTASection } from '@/components/Sections/CategoriesCTASection';
 import { CategoriesNewsletterSection } from '@/components/Sections/CategoriesNewsLetterSection';
-CategoriesNewsletterSection
+
 
 
 export const metadata: Metadata = {

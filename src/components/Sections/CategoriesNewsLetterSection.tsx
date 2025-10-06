@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from 'react';
-import { Mail, CheckCircle } from 'lucide-react';
+import { CheckCircle } from 'lucide-react';
 import Image from 'next/image';
 
 export const CategoriesNewsletterSection: React.FC = () => {
