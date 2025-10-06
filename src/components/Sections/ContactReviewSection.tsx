@@ -297,7 +297,7 @@ export function ContactReviewSection() {
           </h2>
 
           {/* Tab Switcher */}
-          <div className="mt-8 inline-flex rounded-2xl border border-slate-200 bg-white p-1 shadow-md">
+          <div className="mt-8 inline-flex rounded-2xl border border-slate-200 bg-gray-400 space-x-2 p-2 shadow-md">
             {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p) => (
               <button
                 key={p}
@@ -305,8 +305,8 @@ export function ContactReviewSection() {
                 className={[
                   "px-4 py-2 text-sm font-medium rounded-xl transition",
                   tab === p
-                    ? "bg-gradient-to-r from-sky-500 to-indigo-500 text-white shadow"
-                    : "text-slate-700 hover:bg-slate-50",
+                    ? "bg-slate-600 text-white shadow"
+                    : "text-slate-700 hover:bg-slate-600",
                 ].join(" ")}
                 aria-label={`View ${PLATFORM[p].title} reviews`}
               >
@@ -355,7 +355,7 @@ export function ContactReviewSection() {
             {[...filtered, ...filtered].map((r, idx) => (
               <div
                 key={`${r.source}-${r.name}-${idx}`}
-                className="w-[88vw] sm:w-[40vw] md:w-[33.333vw] lg:w-[28vw] xl:w-[22vw] px-2"
+                className="flex-none px-3 w-[70vw] md:w-[40vw] lg:w-[30vw] xl:w-[20vw]"
                 onMouseEnter={() => setPaused(true)}
                 onMouseLeave={() => setPaused(false)}
               >
