@@ -1,32 +1,14 @@
-'use client';
 
-import dynamic from 'next/dynamic';
 import { Suspense } from 'react';
-
-// Dynamic imports for better performance and code splitting
-const HeroSection = dynamic(() => import('../components/Sections/HeroSection'), {
-  loading: () => <div className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900 animate-pulse" />
-});
-
-const StatsSection = dynamic(() => import('../components/Sections/StatsSection'), {
-  loading: () => <div className="h-96 bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 animate-pulse" />
-});
-
-const FeaturedCoursesSection = dynamic(() => import('../components/Sections/FeaturedCoursesSection'), {
-  loading: () => <div className="h-96 bg-gradient-to-br from-white via-blue-50 to-indigo-100 animate-pulse" />
-});
-
-const WhyChooseUsSection = dynamic(() => import('../components/Sections/WhyChooseUsSection'), {
-  loading: () => <div className="h-96 bg-gradient-to-br from-gray-50 via-white to-blue-50 animate-pulse" />
-});
-
-const TestimonialsSection = dynamic(() => import('../components/Sections/TestimonialsSection'), {
-  loading: () => <div className="h-96 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 animate-pulse" />
-});
-
-const CTASection = dynamic(() => import('../components/Sections/CTASection'), {
-  loading: () => <div className="h-96 bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900 animate-pulse" />
-});
+import {
+  HeroSection,
+  StatsSection,
+  FeaturedCoursesSection,
+  WhyChooseUsSection,
+  TestimonialsSection,
+  FAQSection,
+  CTASection,
+} from '@/components/sections';
 
 // Loading component for better UX
 const SectionLoading = ({ className }: { className?: string }) => (
@@ -45,38 +27,52 @@ const SectionLoading = ({ className }: { className?: string }) => (
   </div>
 );
 
+// export default function HomePage() {
+//   return (
+//     <main className="min-h-screen bg-white overflow-x-hidden">
+//       {/* Hero Section - Above the fold, load immediately */}
+//       <Suspense fallback={<SectionLoading className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900" />}>
+//         <HeroSection />
+//       </Suspense>
+
+//       {/* Stats Section - High priority, load early */}
+//       <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50" />}>
+//         <StatsSection />
+//       </Suspense>
+
+//       {/* Featured Courses Section - Core content, high priority */}
+//       <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-white via-blue-50 to-indigo-100" />}>
+//         <FeaturedCoursesSection />
+//       </Suspense>
+
+//       {/* Why Choose Us Section - Important for conversion */}
+//       <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-gray-50 via-white to-blue-50" />}>
+//         <WhyChooseUsSection />
+//       </Suspense>
+
+//       {/* Testimonials Section - Social proof, can load later */}
+//       <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900" />}>
+//         <TestimonialsSection />
+//       </Suspense>
+
+//       {/* CTA Section - Final conversion point */}
+//       <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900" />}>
+//         <CTASection />
+//       </Suspense>
+//     </main>
+//   );
+// }
+
 export default function HomePage() {
   return (
-    <main className="min-h-screen bg-white overflow-x-hidden">
-      {/* Hero Section - Above the fold, load immediately */}
-      <Suspense fallback={<SectionLoading className="min-h-screen bg-gradient-to-br from-blue-900 via-blue-800 to-purple-900" />}>
-        <HeroSection />
-      </Suspense>
-
-      {/* Stats Section - High priority, load early */}
-      <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50" />}>
-        <StatsSection />
-      </Suspense>
-
-      {/* Featured Courses Section - Core content, high priority */}
-      <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-white via-blue-50 to-indigo-100" />}>
-        <FeaturedCoursesSection />
-      </Suspense>
-
-      {/* Why Choose Us Section - Important for conversion */}
-      <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-gray-50 via-white to-blue-50" />}>
-        <WhyChooseUsSection />
-      </Suspense>
-
-      {/* Testimonials Section - Social proof, can load later */}
-      <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900" />}>
-        <TestimonialsSection />
-      </Suspense>
-
-      {/* CTA Section - Final conversion point */}
-      <Suspense fallback={<SectionLoading className="bg-gradient-to-br from-blue-900 via-purple-900 to-indigo-900" />}>
-        <CTASection />
-      </Suspense>
-    </main>
+    <>
+      <HeroSection />
+      <StatsSection />
+      <FeaturedCoursesSection />
+      <WhyChooseUsSection />
+      <TestimonialsSection />
+      <FAQSection />
+      <CTASection />
+    </>
   );
 }
