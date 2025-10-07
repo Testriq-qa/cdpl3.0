@@ -13,11 +13,7 @@ type FormState = {
 
 export function ContactHeroSection() {
     const [form, setForm] = useState<FormState>({
-        name: "",
-        email: "",
-        phone: "",
-        interest: "",
-        message: "",
+        name: "", email: "", phone: "", interest: "", message: "",
     });
     const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
     const [errors, setErrors] = useState<Partial<FormState>>({});
@@ -46,20 +42,21 @@ export function ContactHeroSection() {
     };
 
     return (
-        <section className="relative overflow-hidden bg-white">
-            {/* themed background */}
+        // isolate creates a new stacking context so z-0 / z-10 behave predictably
+        <section className="relative isolate overflow-hidden bg-white">
+            {/* themed blobs ABOVE the white background */}
             <div
                 aria-hidden
-                className="pointer-events-none absolute inset-0 -z-10"
+                className="pointer-events-none absolute inset-0 z-0"
                 style={{
                     background:
                         "radial-gradient(60% 50% at 10% 10%, rgba(56,189,248,0.18), transparent 60%), radial-gradient(50% 40% at 90% 10%, rgba(167,139,250,0.18), transparent 60%)",
                 }}
             />
-            {/* subtle grid overlay */}
+            {/* subtle grid overlay ABOVE white, BELOW content */}
             <div
                 aria-hidden
-                className="absolute inset-0 -z-10 opacity-[0.06] dark:opacity-[0.12]"
+                className="pointer-events-none absolute inset-0 z-0 opacity-[0.06]"
                 style={{
                     backgroundImage:
                         "linear-gradient(#000 1px, transparent 1px), linear-gradient(90deg, #000 1px, transparent 1px)",
@@ -69,7 +66,8 @@ export function ContactHeroSection() {
                 }}
             />
 
-            <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-14">
+            {/* CONTENT on top */}
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-14">
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
                     {/* Left */}
                     <div className="md:col-span-7 flex flex-col justify-start md:pt-2">
