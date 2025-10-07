@@ -9,7 +9,7 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
-  
+   --card-shadow: 0 2px 18px -10px rgba(0,0,0,.3);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -72,3 +72,8 @@ body {
 .animate-scroll-down { animation: homeTestimonialScrollDown 20s linear infinite; }
 .group:hover .animate-scroll-up,
 .group:hover .animate-scroll-down { animation-play-state: paused; }
+
+
+/* better tap targets on mobile */
+button,[role="button"],a[role="button"]{ -webkit-tap-highlight-color: transparent; }
+

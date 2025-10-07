@@ -3,6 +3,7 @@
 import Image from 'next/image';
 import { Star } from 'lucide-react';
 import { useEffect, useRef, useState } from 'react';
+import Link from 'next/link';
 
 const testimonials = [
   {
@@ -179,9 +180,13 @@ export default function TestimonialSection() {
           <p className="text-zinc-600 mb-6">
             Our dedication to excellence drives us to truly understand and meet the unique needs of each customer.
           </p>
-          <button className="bg-[#ff8c00] text-white px-6 py-3 rounded-full font-semibold hover:opacity-90 transition">
+          <Link
+            href="/testimonials"
+            className="inline-flex items-center rounded-full bg-[var(--color-brand)] px-6 py-3 font-medium text-white transition hover:translate-y-[-1px] hover:shadow"
+          >
             View all testimonials →
-          </button>
+          </Link>
+
         </div>
 
         {/* RIGHT */}
