@@ -106,15 +106,15 @@ export function ContactOfficeMapSection() {
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-3">
-                  <a
+                  <Link
                     href={active.phone}
                     className="rounded-xl border border-slate-200 bg-white p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Call ${active.label} office`}
                   >
                     <div className="font-medium text-slate-900">Admissions Helpline</div>
                     <div className="mt-1 text-slate-700">{active.phoneDisplay}</div>
-                  </a>
-                  <a
+                  </Link>
+                  <Link
                     href={active.email}
                     className="rounded-xl border border-slate-200 bg-white p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Email ${active.label} office`}
@@ -123,9 +123,9 @@ export function ContactOfficeMapSection() {
                     <div className="mt-1 text-slate-700">
                       {active.email.replace("mailto:", "")}
                     </div>
-                  </a>
+                  </Link>
                   {active.whatsapp && (
-                    <a
+                    <Link
                       href={active.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
@@ -134,9 +134,9 @@ export function ContactOfficeMapSection() {
                     >
                       <div className="font-medium text-emerald-800">WhatsApp</div>
                       <div className="mt-1 text-emerald-700">Instant Responses</div>
-                    </a>
+                    </Link>
                   )}
-                  <a
+                  <Link
                     href={active.directions}
                     target="_blank"
                     rel="noopener noreferrer"
@@ -145,7 +145,7 @@ export function ContactOfficeMapSection() {
                   >
                     <div className="font-medium text-sky-800">Get Directions</div>
                     <div className="mt-1 text-sky-700">Open in Google Maps</div>
-                  </a>
+                  </Link>
                 </div>
 
                 <div className="mt-4 flex flex-wrap gap-2">
