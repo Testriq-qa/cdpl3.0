@@ -44,7 +44,7 @@ export function ContactOfficeMapSection() {
   const [active] = useState<Office>(OFFICES[0]);
 
   return (
-    <section className="relative">
+    <section className="relative bg-white dark:[color-scheme:light]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -55,10 +55,10 @@ export function ContactOfficeMapSection() {
       />
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12">
         <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">
             Visit <span className="text-brand">Cinute Digital</span> — Ed-Tech Campuses in India
           </h2>
-          <p className="mt-3 text-slate-600 dark:text-slate-300">
+          <p className="mt-3 text-slate-600">
             Explore our modern training centers for <strong>Software Testing courses</strong>,{" "}
             <strong>Data Science &amp; AI programs</strong>, and <strong>Full-Stack Development</strong>. Get{" "}
             <strong>job-ready training</strong>, hands-on labs, and <strong>placement assistance</strong>.
@@ -72,55 +72,55 @@ export function ContactOfficeMapSection() {
               aria-hidden
               className="absolute inset-0 -m-0.5 rounded-3xl bg-gradient-to-br from-sky-400/40 via-indigo-400/30 to-fuchsia-400/20 blur-[2px]"
             />
-            <div className="relative rounded-3xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 p-6 sm:p-8 shadow-xl">
+            <div className="relative rounded-3xl border border-slate-100 bg-white p-6 sm:p-8 shadow-xl">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900 dark:text-white">{active.label}</h3>
+                  <h3 className="text-xl font-bold text-slate-900">{active.label}</h3>
                   {active.landmark && (
-                    <p className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                    <p className="mt-1 text-sm text-slate-600">
                       Landmark: <span className="font-medium">{active.landmark}</span>
                     </p>
                   )}
                 </div>
-                <span className="rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-3 py-1 text-[11px] text-slate-600 dark:text-slate-300">
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] text-slate-600">
                   Walk-in Friendly
                 </span>
               </div>
 
-              <div className="mt-4 grid gap-3 text-sm text-slate-700 dark:text-slate-300">
-                <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-3">
-                  <div className="font-medium text-slate-900 dark:text-white">Address</div>
+              <div className="mt-4 grid gap-3 text-sm text-slate-700">
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                  <div className="font-medium text-slate-900">Address</div>
                   <div
-                    className="mt-1 text-slate-700 dark:text-slate-300"
+                    className="mt-1 text-slate-700"
                     dangerouslySetInnerHTML={{ __html: active.addressHtml }}
                   />
-                  <div className="text-slate-700 dark:text-slate-300">
+                  <div className="text-slate-700">
                     {active.city}, {active.state}
                     {active.postalCode ? ` — ${active.postalCode}` : ""}
                   </div>
                 </div>
 
-                <div className="rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 p-3">
-                  <div className="font-medium text-slate-900 dark:text-white">Office Hours</div>
+                <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
+                  <div className="font-medium text-slate-900">Office Hours</div>
                   <div className="mt-1">{active.hours}</div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-3">
                   <a
                     href={active.phone}
-                    className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-3 text-sm shadow-sm hover:shadow-md transition"
+                    className="rounded-xl border border-slate-200 bg-white p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Call ${active.label} office`}
                   >
-                    <div className="font-medium text-slate-900 dark:text-white">Admissions Helpline</div>
-                    <div className="mt-1 text-slate-700 dark:text-slate-300">{active.phoneDisplay}</div>
+                    <div className="font-medium text-slate-900">Admissions Helpline</div>
+                    <div className="mt-1 text-slate-700">{active.phoneDisplay}</div>
                   </a>
                   <a
                     href={active.email}
-                    className="rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 p-3 text-sm shadow-sm hover:shadow-md transition"
+                    className="rounded-xl border border-slate-200 bg-white p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Email ${active.label} office`}
                   >
-                    <div className="font-medium text-slate-900 dark:text-white">Email</div>
-                    <div className="mt-1 text-slate-700 dark:text-slate-300">
+                    <div className="font-medium text-slate-900">Email</div>
+                    <div className="mt-1 text-slate-700">
                       {active.email.replace("mailto:", "")}
                     </div>
                   </a>
@@ -129,22 +129,22 @@ export function ContactOfficeMapSection() {
                       href={active.whatsapp}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="rounded-xl border border-emerald-200 dark:border-emerald-800 bg-emerald-50 dark:bg-emerald-900/30 p-3 text-sm shadow-sm hover:shadow-md transition"
+                      className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm shadow-sm hover:shadow-md transition"
                       aria-label={`WhatsApp ${active.label} office`}
                     >
-                      <div className="font-medium text-emerald-800 dark:text-emerald-300">WhatsApp</div>
-                      <div className="mt-1 text-emerald-700 dark:text-emerald-300/90">Instant Responses</div>
+                      <div className="font-medium text-emerald-800">WhatsApp</div>
+                      <div className="mt-1 text-emerald-700">Instant Responses</div>
                     </a>
                   )}
                   <a
                     href={active.directions}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="rounded-xl border border-sky-200 dark:border-sky-800 bg-sky-50 dark:bg-sky-900/30 p-3 text-sm shadow-sm hover:shadow-md transition"
+                    className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Get directions to ${active.label}`}
                   >
-                    <div className="font-medium text-sky-800 dark:text-sky-300">Get Directions</div>
-                    <div className="mt-1 text-sky-700 dark:text-sky-300/90">Open in Google Maps</div>
+                    <div className="font-medium text-sky-800">Get Directions</div>
+                    <div className="mt-1 text-sky-700">Open in Google Maps</div>
                   </a>
                 </div>
 
@@ -158,7 +158,7 @@ export function ContactOfficeMapSection() {
                   ].map((chip) => (
                     <span
                       key={chip}
-                      className="rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300"
+                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700"
                     >
                       {chip}
                     </span>
@@ -170,9 +170,9 @@ export function ContactOfficeMapSection() {
 
           {/* Map */}
           <div className="relative">
-            <div className="relative rounded-3xl border border-slate-100 dark:border-slate-700 bg-white dark:bg-slate-900 shadow-xl overflow-hidden">
+            <div className="relative rounded-3xl border border-slate-100 bg-white shadow-xl overflow-hidden">
               <div className="absolute inset-x-0 top-0 z-10 p-3">
-                <div className="mx-auto w-fit rounded-full border border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/80 px-3 py-1 text-[11px] text-slate-600 dark:text-slate-300 shadow-sm backdrop-blur">
+                <div className="mx-auto w-fit rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] text-slate-600 shadow-sm backdrop-blur">
                   {active.label} • Live Location
                 </div>
               </div>
@@ -186,7 +186,7 @@ export function ContactOfficeMapSection() {
               />
             </div>
 
-            <p className="mt-3 text-xs text-slate-500 dark:text-slate-400">
+            <p className="mt-3 text-xs text-slate-500">
               Tip: For campus tours and lab access, book a slot with our admissions counselor.
             </p>
           </div>

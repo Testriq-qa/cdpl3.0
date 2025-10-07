@@ -102,7 +102,7 @@ export function ContactFAQSection() {
   }), [filtered]);
 
   return (
-    <section className="relative bg-white dark:bg-slate-950">
+    <section className="relative bg-white dark:[color-scheme:light]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -112,22 +112,22 @@ export function ContactFAQSection() {
         }}
       />
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12">
-        <div className="rounded-3xl bg-white/80 dark:bg-slate-900/80 backdrop-blur border border-slate-200 dark:border-slate-800 shadow-xl p-6 sm:p-8">
+        <div className="rounded-3xl bg-white/80 backdrop-blur border border-slate-200 shadow-xl p-6 sm:p-8">
           <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900 dark:text-white">Frequently Asked Questions</h2>
-            <p className="mt-2 text-slate-600 dark:text-slate-300">
+            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
+            <p className="mt-2 text-slate-600">
               Everything you need to know about <strong>admissions</strong>, <strong>live mentor-led learning</strong>,{" "}
               <strong>EMI & scholarships</strong>, and <strong>placement assistance</strong> at Cinute Digital.
             </p>
           </div>
 
-          {/* Optional search (kept state) */}
+          {/* Optional search */}
           <div className="mt-5 max-w-xl mx-auto">
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search FAQs (e.g., EMI, placements, syllabus)"
-              className="w-full rounded-xl border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-2 text-sm text-slate-900 dark:text-slate-100 placeholder:text-slate-400 outline-none focus:border-brand focus:ring-1 focus:ring-brand"
+              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-brand focus:ring-1 focus:ring-brand"
             />
           </div>
 
@@ -141,8 +141,8 @@ export function ContactFAQSection() {
                   className={[
                     "rounded-full border px-3 py-1.5 text-sm transition",
                     activeCat === c
-                      ? "border-indigo-300 dark:border-indigo-700 bg-indigo-50 dark:bg-indigo-900/40 text-indigo-800 dark:text-indigo-200"
-                      : "border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800",
+                      ? "border-indigo-300 bg-indigo-50 text-indigo-800"
+                      : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50",
                   ].join(" ")}
                 >
                   {c}
@@ -156,36 +156,36 @@ export function ContactFAQSection() {
             {filtered.map((item) => (
               <details
                 key={item.q}
-                className="group rounded-2xl border border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-800 p-5 open:bg-white open:dark:bg-slate-900 open:shadow-md transition"
+                className="group rounded-2xl border border-slate-200 bg-slate-50 p-5 open:bg-white open:shadow-md transition"
               >
                 <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
                   <div>
-                    <span className="inline-flex items-center rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-2 py-0.5 text-[10px] font-medium text-slate-600 dark:text-slate-300">
+                    <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[10px] font-medium text-slate-600">
                       {item.cat}
                     </span>
-                    <h3 className="mt-2 text-slate-900 dark:text-white font-semibold">{item.q}</h3>
+                    <h3 className="mt-2 text-slate-900 font-semibold">{item.q}</h3>
                   </div>
                   <span
-                    className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full border border-slate-300 dark:border-slate-700 text-slate-600 dark:text-slate-300 transition group-open:rotate-45"
+                    className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full border border-slate-300 text-slate-600 transition group-open:rotate-45"
                     aria-hidden
                     title="Toggle"
                   >
                     +
                   </span>
                 </summary>
-                <div className="mt-3 text-slate-700 dark:text-slate-300 leading-7">{item.a}</div>
+                <div className="mt-3 text-slate-700 leading-7">{item.a}</div>
               </details>
             ))}
           </div>
 
           {filtered.length === 0 && (
-            <div className="mt-6 rounded-2xl border border-amber-200 dark:border-amber-900 bg-amber-50 dark:bg-amber-900/30 p-5 text-amber-800 dark:text-amber-200">
+            <div className="mt-6 rounded-2xl border border-amber-200 bg-amber-50 p-5 text-amber-800">
               No results. Try searching for <em>EMI</em>, <em>placements</em>, or <em>syllabus</em>.
             </div>
           )}
 
-          <div className="mt-8 rounded-2xl border border-slate-200 dark:border-slate-800 bg-gradient-to-r from-sky-50 to-indigo-50 dark:from-slate-900 dark:to-slate-900 p-5 sm:p-6 text-center">
-            <p className="text-slate-700 dark:text-slate-300">
+          <div className="mt-8 rounded-2xl border border-slate-200 bg-gradient-to-r from-sky-50 to-indigo-50 p-5 sm:p-6 text-center">
+            <p className="text-slate-700">
               Still have questions? Our advisors can help with <strong>course selection</strong>,{" "}
               <strong>career pathways</strong>, and <strong>financing options</strong>.
             </p>
@@ -198,7 +198,7 @@ export function ContactFAQSection() {
               </a>
               <a
                 href="tel:+919999999999"
-                className="inline-flex items-center justify-center rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-5 py-2.5 text-sky-700 dark:text-sky-300 text-sm font-medium shadow-sm transition hover:bg-slate-50 dark:hover:bg-slate-800"
+                className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sky-700 text-sm font-medium shadow-sm transition hover:bg-slate-50"
               >
                 Call Admissions
               </a>

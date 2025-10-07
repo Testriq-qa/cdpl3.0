@@ -5,7 +5,7 @@ import Script from "next/script";
 
 export function ContactBookCallSection() {
   return (
-    <section id="book" className="relative bg-white dark:bg-slate-950">
+    <section id="book" className="relative bg-white dark:[color-scheme:light]">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 -z-10"
@@ -16,7 +16,7 @@ export function ContactBookCallSection() {
       />
 
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12">
-        <div className="rounded-3xl border border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/80 backdrop-blur shadow-lg overflow-hidden">
+        <div className="rounded-3xl border border-slate-200 bg-white/80 backdrop-blur shadow-lg overflow-hidden">
           <div className="relative p-8 md:p-10">
             <div
               aria-hidden
@@ -26,19 +26,11 @@ export function ContactBookCallSection() {
                   "linear-gradient(180deg, rgba(224,242,254,0.7), rgba(237,233,254,0.65))",
               }}
             />
-            <div
-              aria-hidden
-              className="absolute inset-0 -z-10 hidden dark:block"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(12,19,32,0.9), rgba(12,19,32,0.9))",
-              }}
-            />
             <div className="flex flex-col items-center text-center">
-              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">
                 Book a <span className="text-brand">Free 1:1 Career Counseling</span> Session
               </h2>
-              <p className="mt-3 max-w-2xl text-slate-600 dark:text-slate-300">
+              <p className="mt-3 max-w-2xl text-slate-600">
                 Get personalized guidance on <strong>Software Testing</strong>, <strong>Data Science &amp; AI</strong>, and{" "}
                 <strong>Full-Stack Development</strong> programs. Discuss <strong>placements</strong>,{" "}
                 <strong>EMI &amp; scholarships</strong>, and your <strong>job-ready learning roadmap</strong>.
@@ -46,7 +38,7 @@ export function ContactBookCallSection() {
 
               <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
                 {["15–20 mins on Zoom/Phone","Free advisory call","Live mentor-led courses","Placement assistance"].map((t) => (
-                  <span key={t} className="rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 px-3 py-1 text-xs font-medium text-slate-700 dark:text-slate-300 shadow-sm">
+                  <span key={t} className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
                     {t}
                   </span>
                 ))}
@@ -63,13 +55,13 @@ export function ContactBookCallSection() {
                 </Link>
               </div>
 
-              <div className="mt-4 text-xs text-slate-500 dark:text-slate-400">
+              <div className="mt-4 text-xs text-slate-500">
                 No spam. Our advisors reply within 24 hours. Reschedule anytime.
               </div>
             </div>
           </div>
 
-          <div className="border-t border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-900/70">
+          <div className="border-t border-slate-200 bg-white/80">
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
               {[
                 { k: "Personalized Roadmap", v: "Course mapping for your goals & experience" },
@@ -77,16 +69,16 @@ export function ContactBookCallSection() {
                 { k: "Placements", v: "Resume review, mock interviews, hiring drives" },
                 { k: "Financing", v: "Scholarships & flexible EMI options" },
               ].map((item, i) => (
-                <div key={item.k} className={`p-5 text-center ${i < 3 ? "sm:border-r" : ""} border-slate-100 dark:border-slate-800`}>
-                  <div className="text-sm font-semibold text-slate-900 dark:text-white">{item.k}</div>
-                  <div className="mt-1 text-xs text-slate-600 dark:text-slate-300">{item.v}</div>
+                <div key={item.k} className={`p-5 text-center ${i < 3 ? "sm:border-r" : ""} border-slate-100`}>
+                  <div className="text-sm font-semibold text-slate-900">{item.k}</div>
+                  <div className="mt-1 text-xs text-slate-600">{item.v}</div>
                 </div>
               ))}
             </div>
           </div>
         </div>
 
-        <p className="mt-3 text-center text-[12px] text-slate-500 dark:text-slate-400">Available in Mumbai • Online (IST)</p>
+        <p className="mt-3 text-center text-[12px] text-slate-500">Available in Mumbai • Online (IST)</p>
       </div>
 
       <Script id="schedule-jsonld" type="application/ld+json">

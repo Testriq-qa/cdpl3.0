@@ -141,15 +141,13 @@ const REVIEWS: Review[] = [
     logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo" },
   },
 ];
-
-
 export function ContactReviewSection() {
   const [tab, setTab] = useState<keyof typeof PLATFORM>("Google");
   const filtered = useMemo(() => REVIEWS.filter((r) => r.source === tab), [tab]);
   const stat = PLATFORM[tab];
   const statLogo = filtered[0]?.logo ?? stat.logo;
 
-  // marquee state (unchanged)
+  // marquee state
   const containerRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
   const offsetRef = useRef(0); const halfWidthRef = useRef(0); const rafRef = useRef<number | null>(null);
@@ -166,10 +164,12 @@ export function ContactReviewSection() {
   const measure = () => {
     const track = trackRef.current; if (!track) return;
     halfWidthRef.current = track.scrollWidth / 2;
-    if (window.innerWidth >= 1280) setSpeed(110);
-    else if (window.innerWidth >= 1024) setSpeed(95);
-    else if (window.innerWidth >= 640) setSpeed(85);
-    else setSpeed(75);
+    if (typeof window !== "undefined") {
+      if (window.innerWidth >= 1280) setSpeed(110);
+      else if (window.innerWidth >= 1024) setSpeed(95);
+      else if (window.innerWidth >= 640) setSpeed(85);
+      else setSpeed(75);
+    }
   };
   useEffect(() => { measure(); const onResize = () => measure(); window.addEventListener("resize", onResize); return () => window.removeEventListener("resize", onResize); }, [tab, filtered.length]);
   useEffect(() => { offsetRef.current = 0; lastTsRef.current = null; if (trackRef.current) trackRef.current.style.transform = `translateX(0px)`; }, [tab]);
@@ -191,18 +191,18 @@ export function ContactReviewSection() {
   }, [paused, speed, reduced]);
 
   return (
-    <section className="w-full relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
+    <section className="w-full relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:[color-scheme:light]">
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-10">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1 text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-sm">
             ⭐ Explore Our Reviews
           </span>
-          <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+          <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
             What learners say about <span className="text-brand">Cinute Digital</span>
           </h2>
 
           {/* Tabs */}
-          <div className="mt-8 inline-flex rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/70 backdrop-blur p-2 shadow-md">
+          <div className="mt-8 inline-flex rounded-2xl border border-slate-200 bg-white/70 backdrop-blur p-2 shadow-md">
             {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p) => {
               const isActive = tab === p;
               return (
@@ -213,8 +213,8 @@ export function ContactReviewSection() {
                   className={[
                     "group relative mx-1 flex items-center justify-center rounded-xl px-3 py-2 transition ring-1 ring-transparent",
                     isActive
-                      ? "bg-gradient-to-r from-blue-200 to-orange-200 text-white shadow-lg ring-sky-300/40 dark:from-blue-900/40 dark:to-orange-900/40"
-                      : "bg-white/80 dark:bg-slate-800/60 text-slate-700 dark:text-slate-200 hover:bg-slate-200/70 dark:hover:bg-slate-700/60",
+                      ? "bg-gradient-to-r from-blue-200 to-orange-200 text-white shadow-lg ring-sky-300/40"
+                      : "bg-white/80 text-slate-700 hover:bg-slate-200/70",
                   ].join(" ")}
                 >
                   <Image src={PLATFORM[p].logo.src} alt={PLATFORM[p].logo.alt} width={90} height={56} priority={p==="Google"} />
@@ -223,14 +223,14 @@ export function ContactReviewSection() {
             })}
           </div>
 
-          <div className="mt-6 flex items-center justify-center gap-3 text-sm text-slate-600 dark:text-slate-300">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 px-3 py-1 border border-slate-200 dark:border-slate-700 shadow-sm">
+          <div className="mt-6 flex items-center justify-center gap-3 text-sm text-slate-600">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 border border-slate-200 shadow-sm">
               <Image src={statLogo.src} alt={statLogo.alt} width={18} height={18} />
               {stat.overall}
             </span>
             <span className="opacity-60">•</span>
             <span>
-              {stat.statLabel} <strong className="text-slate-900 dark:text-white">{stat.statValue}</strong>
+              {stat.statLabel} <strong className="text-slate-900">{stat.statValue}</strong>
             </span>
           </div>
         </div>
@@ -254,23 +254,23 @@ export function ContactReviewSection() {
                 onMouseEnter={() => setPaused(true)}
                 onMouseLeave={() => setPaused(false)}
               >
-                <article className="group relative h-full overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-lg transition hover:shadow-xl">
+                <article className="group relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition hover:shadow-xl">
                   <div aria-hidden className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-2xl" />
                   <header className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
-                      <h3 className="text-base font-semibold text-slate-900 dark:text-white truncate">{r.name}</h3>
-                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                      <h3 className="text-base font-semibold text-slate-900 truncate">{r.name}</h3>
+                      <p className="text-xs text-slate-500 mt-0.5">
                         {r.city ? `${r.city} • ` : ""}{r.date} • {r.source}
                       </p>
                     </div>
-                    <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-2 py-1 text-[11px] text-slate-600 dark:text-slate-300">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-600">
                       <Image src={r.logo.src} alt={r.logo.alt} width={14} height={14} />
                       Verified
                     </span>
                   </header>
 
-                  <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">{r.text}</p>
-                  <footer className="mt-4 text-xs text-slate-500 dark:text-slate-400">
+                  <p className="mt-3 text-sm leading-6 text-slate-700">{r.text}</p>
+                  <footer className="mt-4 text-xs text-slate-500">
                     Trustindex verifies source on Google / platform verifies identity where applicable.
                   </footer>
                 </article>
@@ -285,13 +285,13 @@ export function ContactReviewSection() {
             { label:"Sulekha Reviews", value:"84", note:"5.0 average", logo:"/slider_logos/sulekha-logo.webp" },
             { label:"Justdial Ratings", value:"210", note:"Verified users", logo:"/slider_logos/justdial-logo.png" },
           ].map((b) => (
-            <div key={b.label} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 text-center shadow-md">
+            <div key={b.label} className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-md">
               <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center">
                 <Image src={b.logo} alt={`${b.label} logo`} width={50} height={50} />
               </div>
-              <div className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">{b.value}</div>
-              <div className="mt-1 text-sm font-medium text-slate-700 dark:text-slate-300">{b.label}</div>
-              {b.note && <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">{b.note}</div>}
+              <div className="text-3xl font-extrabold tracking-tight text-slate-900">{b.value}</div>
+              <div className="mt-1 text-sm font-medium text-slate-700">{b.label}</div>
+              {b.note && <div className="text-xs text-slate-500 mt-1">{b.note}</div>}
             </div>
           ))}
         </div>

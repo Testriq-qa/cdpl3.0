@@ -1,4 +1,4 @@
-//hero section
+// hero section
 "use client";
 
 import React, { useState } from "react";
@@ -46,7 +46,7 @@ export function ContactHeroSection() {
     };
 
     return (
-        <section className="relative overflow-hidden">
+        <section className="relative overflow-hidden bg-white">
             {/* themed background */}
             <div
                 aria-hidden
@@ -70,26 +70,25 @@ export function ContactHeroSection() {
             />
 
             <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-14">
-                {/* fix: removed duplicate grid class */}
                 <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
                     {/* Left */}
                     <div className="md:col-span-7 flex flex-col justify-start md:pt-2">
-                        <span className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200/70 bg-white/70 dark:bg-slate-900/60 dark:border-slate-700 px-3 py-1 text-[11px] font-medium text-sky-700 dark:text-sky-300 shadow-sm backdrop-blur">
+                        <span className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200/70 bg-white/70 px-3 py-1 text-[11px] font-medium text-sky-700 shadow-sm backdrop-blur">
                             🎓 Industry-recognized • ⚡ Fast Response <span className="opacity-70">under 24 hrs</span>
                         </span>
 
-                        <h1 className="mt-4 text-4xl md:text-5xl font-extrabold leading-tight text-slate-700 dark:text-slate-100">
+                        <h1 className="mt-4 text-4xl md:text-5xl font-extrabold leading-tight text-slate-700">
                             Contact <span className="text-brand">Cinute Digital</span>
                         </h1>
 
-                        <p className="mt-4 text-lg text-slate-600 dark:text-slate-300/90 max-w-prose">
+                        <p className="mt-4 text-lg text-slate-600 max-w-prose">
                             Reach India’s leading ed-tech institute for <strong>Software Testing</strong>,{" "}
                             <strong>Data Science &amp; AI</strong>, and <strong>Full-Stack Development</strong>. Get{" "}
                             <strong>job-ready training</strong>, <strong>placement assistance</strong>, and{" "}
                             <strong>industry-recognized certificates</strong> with live mentor-led classes and hands-on capstone projects.
                         </p>
 
-                        <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700 dark:text-slate-300">
+                        <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-slate-700">
                             {[
                                 "Live Online Classes + Recordings",
                                 "Placement Assistance & Mock Interviews",
@@ -100,7 +99,7 @@ export function ContactHeroSection() {
                             ].map((b) => (
                                 <li
                                     key={b}
-                                    className="flex items-center gap-2 rounded-xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 px-3 py-2 shadow-sm backdrop-blur"
+                                    className="flex items-center gap-2 rounded-xl border border-slate-200 bg-white/80 px-3 py-2 shadow-sm backdrop-blur"
                                 >
                                     <span className="inline-block h-2 w-2 rounded-full bg-gradient-to-r from-sky-500 to-indigo-500" />
                                     {b}
@@ -116,21 +115,21 @@ export function ContactHeroSection() {
                             ].map((x) => (
                                 <div
                                     key={x.k}
-                                    className="rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/80 dark:bg-slate-900/60 p-4 shadow-sm backdrop-blur"
+                                    className="rounded-2xl border border-slate-200 bg-white/80 p-4 shadow-sm backdrop-blur"
                                 >
-                                    <div className="text-2xl font-extrabold text-slate-900 dark:text-white">{x.k}</div>
-                                    <div className="mt-0.5 text-xs text-slate-600 dark:text-slate-400">{x.v}</div>
+                                    <div className="text-2xl font-extrabold text-slate-900">{x.k}</div>
+                                    <div className="mt-0.5 text-xs text-slate-600">{x.v}</div>
                                 </div>
                             ))}
                         </div>
 
-                        <p className="mt-5 text-sm text-slate-600 dark:text-slate-400">
+                        <p className="mt-5 text-sm text-slate-600">
                             Serving learners across India — Mumbai, Pune, Bengaluru &amp; beyond. Talk to our{" "}
                             <strong>admissions counselors</strong> for <strong>course fees</strong>, <strong>syllabus &amp; roadmaps</strong>,{" "}
                             <strong>placement support</strong>, or <strong>custom corporate training</strong>.
                         </p>
 
-                        <p className="mt-3 text-[12px] text-slate-500 dark:text-slate-500">
+                        <p className="mt-3 text-[12px] text-slate-500">
                             No spam. Our advisors respond within 24 hours with course advice, career guidance, and next steps.
                         </p>
                     </div>
