@@ -1,43 +1,16 @@
 'use client';
 
-// --- Explore Our Reviews (Light + Futuristic, with Logos + Marquee Slider) ---
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 
-type Review = {
-  name: string;
-  date: string;
-  source: "Google" | "Sulekha" | "Justdial";
-  text: string;
-  city?: string; // for Sulekha
-  logo: { src: string; alt: string };
-};
+type Review = { name: string; date: string; source: "Google"|"Sulekha"|"Justdial"; text: string; city?: string; logo:{src:string;alt:string;} };
 
 const PLATFORM = {
-  Google: {
-    title: "Google",
-    statLabel: "Based on",
-    statValue: "289 reviews",
-    overall: "EXCELLENT",
-    logo: { src: "/slider_logos/google-logo.svg", alt: "Google logo" },
-  },
-  Sulekha: {
-    title: "Sulekha",
-    statLabel: "Rating",
-    statValue: "5.0 · 84 reviews",
-    overall: "EXCELLENT",
-    logo: { src: "/slider_logos/sulekha.svg", alt: "Sulekha logo" },
-  },
-  Justdial: {
-    title: "Justdial",
-    statLabel: "Ratings",
-    statValue: "210 ratings",
-    overall: "GREAT",
-    logo: { src: "/slider_logos/justdial.svg", alt: "Justdial logo" },
-  },
+  Google: { title:"Google", statLabel:"Based on", statValue:"289 reviews", overall:"EXCELLENT", logo:{src:"/slider_logos/google-logo.svg", alt:"Google logo"} },
+  Sulekha:{ title:"Sulekha", statLabel:"Rating", statValue:"5.0 · 84 reviews", overall:"EXCELLENT", logo:{src:"/slider_logos/sulekha.svg", alt:"Sulekha logo"} },
+  Justdial:{ title:"Justdial", statLabel:"Ratings", statValue:"210 ratings", overall:"GREAT", logo:{src:"/slider_logos/justdial.svg", alt:"Justdial logo"} },
 } as const;
 
-// --- your same REVIEWS array here (unchanged) ---
 const REVIEWS: Review[] = [
   // GOOGLE
   {
@@ -169,220 +142,135 @@ const REVIEWS: Review[] = [
   },
 ];
 
+
 export function ContactReviewSection() {
   const [tab, setTab] = useState<keyof typeof PLATFORM>("Google");
-
   const filtered = useMemo(() => REVIEWS.filter((r) => r.source === tab), [tab]);
   const stat = PLATFORM[tab];
   const statLogo = filtered[0]?.logo ?? stat.logo;
 
-  // Marquee ticker state
+  // marquee state (unchanged)
   const containerRef = useRef<HTMLDivElement | null>(null);
   const trackRef = useRef<HTMLDivElement | null>(null);
-  const offsetRef = useRef(0);          // current translateX
-  const halfWidthRef = useRef(0);       // width of one sequence (for seamless loop)
-  const rafRef = useRef<number | null>(null);
+  const offsetRef = useRef(0); const halfWidthRef = useRef(0); const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number | null>(null);
   const [paused, setPaused] = useState(false);
-  const [speed, setSpeed] = useState(80); // px/sec (tweak if you like)
-
-  // Respect prefers-reduced-motion
+  const [speed, setSpeed] = useState(80);
   const [reduced, setReduced] = useState(false);
   useEffect(() => {
     const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const update = () => setReduced(mq.matches);
-    update();
-    mq.addEventListener?.("change", update);
+    update(); mq.addEventListener?.("change", update);
     return () => mq.removeEventListener?.("change", update);
   }, []);
-
-  // Measure half width (one sequence) and adjust speed responsively
   const measure = () => {
-    const track = trackRef.current;
-    if (!track) return;
-    // total content is duplicated; half is one sequence
-    const half = track.scrollWidth / 2;
-    halfWidthRef.current = half;
-
-    // Optional: adjust speed by viewport
+    const track = trackRef.current; if (!track) return;
+    halfWidthRef.current = track.scrollWidth / 2;
     if (window.innerWidth >= 1280) setSpeed(110);
     else if (window.innerWidth >= 1024) setSpeed(95);
     else if (window.innerWidth >= 640) setSpeed(85);
     else setSpeed(75);
   };
-
+  useEffect(() => { measure(); const onResize = () => measure(); window.addEventListener("resize", onResize); return () => window.removeEventListener("resize", onResize); }, [tab, filtered.length]);
+  useEffect(() => { offsetRef.current = 0; lastTsRef.current = null; if (trackRef.current) trackRef.current.style.transform = `translateX(0px)`; }, [tab]);
   useEffect(() => {
-    measure();
-    const onResize = () => {
-      measure();
-    };
-    window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tab, filtered.length]);
-
-  // Reset ticker when tab changes
-  useEffect(() => {
-    offsetRef.current = 0;
-    lastTsRef.current = null;
-    if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(0px)`;
-    }
-  }, [tab]);
-
-  // RAF ticker
-  useEffect(() => {
-    if (reduced) return; // disable animation for reduced motion
-
-    const tick = (ts: number) => {
-      if (!trackRef.current) {
-        rafRef.current = requestAnimationFrame(tick);
-        return;
-      }
-
-      if (paused) {
-        lastTsRef.current = ts; // maintain last timestamp to avoid jump after pause
-        rafRef.current = requestAnimationFrame(tick);
-        return;
-      }
-
+    if (reduced) return;
+    const tick = (ts:number) => {
+      if (!trackRef.current) { rafRef.current = requestAnimationFrame(tick); return; }
+      if (paused) { lastTsRef.current = ts; rafRef.current = requestAnimationFrame(tick); return; }
       if (lastTsRef.current == null) lastTsRef.current = ts;
-      const dt = (ts - lastTsRef.current) / 1000; // seconds
-      lastTsRef.current = ts;
-
-      // move left by speed * dt
+      const dt = (ts - (lastTsRef.current||ts))/1000; lastTsRef.current = ts;
       offsetRef.current -= speed * dt;
-
-      // seamless wrap: when moved further than one sequence, add it back
       const half = halfWidthRef.current || 0;
-      if (half > 0 && Math.abs(offsetRef.current) >= half) {
-        // Keep offset within [-half, 0)
-        offsetRef.current += half;
-      }
-
+      if (half > 0 && Math.abs(offsetRef.current) >= half) offsetRef.current += half;
       trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
       rafRef.current = requestAnimationFrame(tick);
     };
-
     rafRef.current = requestAnimationFrame(tick);
-    return () => {
-      if (rafRef.current) cancelAnimationFrame(rafRef.current);
-    };
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
   }, [paused, speed, reduced]);
 
   return (
-    <section className="relative isolate">
-      {/* soft gradient bg + glow */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-sky-50 via-white to-violet-50" />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -z-10 inset-x-0 top-[-80px] mx-auto h-64 w-[70%] rounded-full blur-3xl"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 50% 40%, rgba(56,189,248,.20), rgba(167,139,250,.12) 60%, transparent 70%)",
-        }}
-      />
-
-      <div className="container mx-auto px-4 py-20">
-        {/* Header */}
+    <section className="w-full relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:from-slate-950 dark:via-slate-950 dark:to-slate-950">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-10">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900 px-3 py-1 text-xs font-medium text-slate-600 dark:text-slate-300 shadow-sm">
             ⭐ Explore Our Reviews
           </span>
-          <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
-            What learners say about{" "}
-            <span className="bg-gradient-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent">
-              Cinute Digital
-            </span>
+          <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white">
+            What learners say about <span className="text-brand">Cinute Digital</span>
           </h2>
 
-          {/* Tab Switcher */}
-          <div className="mt-8 inline-flex rounded-2xl border border-slate-200 bg-gray-400 space-x-2 p-2 shadow-md">
-            {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p) => (
-              <button
-                key={p}
-                onClick={() => setTab(p)}
-                className={[
-                  "px-4 py-2 text-sm font-medium rounded-xl transition",
-                  tab === p
-                    ? "bg-slate-600 text-white shadow"
-                    : "text-slate-700 hover:bg-slate-600",
-                ].join(" ")}
-                aria-label={`View ${PLATFORM[p].title} reviews`}
-              >
-                <span className="inline-flex items-center gap-2">
-                  <Image
-                    src={PLATFORM[p].logo.src}
-                    alt={PLATFORM[p].logo.alt}
-                    width={80}
-                    height={80}
-                    priority={p === "Google"}
-                  />
-                </span>
-              </button>
-            ))}
+          {/* Tabs */}
+          <div className="mt-8 inline-flex rounded-2xl border border-slate-200 dark:border-slate-700 bg-white/70 dark:bg-slate-900/70 backdrop-blur p-2 shadow-md">
+            {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p) => {
+              const isActive = tab === p;
+              return (
+                <button
+                  key={p}
+                  onClick={() => setTab(p)}
+                  aria-label={`View ${PLATFORM[p].title} reviews`}
+                  className={[
+                    "group relative mx-1 flex items-center justify-center rounded-xl px-3 py-2 transition ring-1 ring-transparent",
+                    isActive
+                      ? "bg-gradient-to-r from-blue-200 to-orange-200 text-white shadow-lg ring-sky-300/40 dark:from-blue-900/40 dark:to-orange-900/40"
+                      : "bg-white/80 dark:bg-slate-800/60 text-slate-700 dark:text-slate-200 hover:bg-slate-200/70 dark:hover:bg-slate-700/60",
+                  ].join(" ")}
+                >
+                  <Image src={PLATFORM[p].logo.src} alt={PLATFORM[p].logo.alt} width={90} height={56} priority={p==="Google"} />
+                </button>
+              );
+            })}
           </div>
 
-          {/* Stat bar (uses same logo type as cards) */}
-          <div className="mt-6 flex items-center justify-center gap-3 text-sm text-slate-600">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 border border-slate-200 shadow-sm">
+          <div className="mt-6 flex items-center justify-center gap-3 text-sm text-slate-600 dark:text-slate-300">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white dark:bg-slate-900 px-3 py-1 border border-slate-200 dark:border-slate-700 shadow-sm">
               <Image src={statLogo.src} alt={statLogo.alt} width={18} height={18} />
               {stat.overall}
             </span>
             <span className="opacity-60">•</span>
             <span>
-              {stat.statLabel} <strong className="text-slate-900">{stat.statValue}</strong>
+              {stat.statLabel} <strong className="text-slate-900 dark:text-white">{stat.statValue}</strong>
             </span>
           </div>
         </div>
 
-        {/* MARQUEE */}
+        {/* Marquee */}
         <div
           className="mt-10 overflow-hidden"
           ref={containerRef}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           style={{
-            // soft edge fade (mask). If your Tailwind config supports arbitrary properties, this works nicely.
-            maskImage:
-              "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-            WebkitMaskImage:
-              "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+            maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
           }}
         >
-          {/* We duplicate the sequence for a seamless loop */}
-          <div ref={trackRef} className="flex will-change-transform">
+          <div ref={trackRef} className="flex will-change-transform py-5">
             {[...filtered, ...filtered].map((r, idx) => (
               <div
                 key={`${r.source}-${r.name}-${idx}`}
-                className="flex-none px-3 w-[70vw] md:w-[40vw] lg:w-[30vw] xl:w-[20vw]"
+                className="flex-none px-3 w-[70vw] md:w-[40vw] lg:w-[30vw] xl:w-[25vw] hover:scale-105 transition-all ease-in-out duration-200"
                 onMouseEnter={() => setPaused(true)}
                 onMouseLeave={() => setPaused(false)}
               >
-                <article className="group relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition hover:shadow-xl">
-                  {/* corner glow */}
-                  <div
-                    aria-hidden
-                    className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-2xl"
-                  />
+                <article className="group relative h-full overflow-hidden rounded-3xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-6 shadow-lg transition hover:shadow-xl">
+                  <div aria-hidden className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-2xl" />
                   <header className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
-                      <h3 className="text-base font-semibold text-slate-900 truncate">{r.name}</h3>
-                      <p className="text-xs text-slate-500 mt-0.5">
-                        {r.city ? `${r.city} • ` : ""}
-                        {r.date} • {r.source}
+                      <h3 className="text-base font-semibold text-slate-900 dark:text-white truncate">{r.name}</h3>
+                      <p className="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+                        {r.city ? `${r.city} • ` : ""}{r.date} • {r.source}
                       </p>
                     </div>
-                    {/* source logo badge */}
-                    <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-600">
+                    <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 px-2 py-1 text-[11px] text-slate-600 dark:text-slate-300">
                       <Image src={r.logo.src} alt={r.logo.alt} width={14} height={14} />
                       Verified
                     </span>
                   </header>
 
-                  <p className="mt-3 text-sm leading-6 text-slate-700">{r.text}</p>
-
-                  <footer className="mt-4 text-xs text-slate-500">
+                  <p className="mt-3 text-sm leading-6 text-slate-700 dark:text-slate-300">{r.text}</p>
+                  <footer className="mt-4 text-xs text-slate-500 dark:text-slate-400">
                     Trustindex verifies source on Google / platform verifies identity where applicable.
                   </footer>
                 </article>
@@ -391,36 +279,23 @@ export function ContactReviewSection() {
           </div>
         </div>
 
-        {/* Platform badges row */}
         <div className="mt-12 grid gap-4 sm:grid-cols-3">
-          <BadgeCard label="Google Reviews" value="80+" note="Public reviews" logo="/slider_logos/google.svg" />
-          <BadgeCard label="Sulekha Reviews" value="84" note="5.0 average" logo="/slider_logos/sulekha-logo.webp" />
-          <BadgeCard label="Justdial Ratings" value="210" note="Verified users" logo="/slider_logos/justdial-logo.png" />
+          {[
+            { label:"Google Reviews", value:"80+", note:"Public reviews", logo:"/slider_logos/google.svg" },
+            { label:"Sulekha Reviews", value:"84", note:"5.0 average", logo:"/slider_logos/sulekha-logo.webp" },
+            { label:"Justdial Ratings", value:"210", note:"Verified users", logo:"/slider_logos/justdial-logo.png" },
+          ].map((b) => (
+            <div key={b.label} className="rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 p-5 text-center shadow-md">
+              <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center">
+                <Image src={b.logo} alt={`${b.label} logo`} width={50} height={50} />
+              </div>
+              <div className="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white">{b.value}</div>
+              <div className="mt-1 text-sm font-medium text-slate-700 dark:text-slate-300">{b.label}</div>
+              {b.note && <div className="text-xs text-slate-500 dark:text-slate-400 mt-1">{b.note}</div>}
+            </div>
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function BadgeCard({
-  label,
-  value,
-  note,
-  logo,
-}: {
-  label: string;
-  value: string;
-  note?: string;
-  logo: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-md">
-      <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center">
-        <Image src={logo} alt={`${label} logo`} width={50} height={50} />
-      </div>
-      <div className="text-3xl font-extrabold tracking-tight text-slate-900">{value}</div>
-      <div className="mt-1 text-sm font-medium text-slate-700">{label}</div>
-      {note && <div className="text-xs text-slate-500 mt-1">{note}</div>}
-    </div>
   );
 }
