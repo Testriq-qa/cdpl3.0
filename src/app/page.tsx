@@ -20,17 +20,15 @@ import {
 } from 'lucide-react';
 import dynamic from 'next/dynamic';
 
-const TestimonialSection = dynamic(
-  () => import("@/components/Sections/TestimonialSection").then(m => m.TestimonialSection),
-  {
-    ssr: true,
-    loading: () => (
-      <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-        <p className="text-gray-500">Loading...</p>
-      </div>
-    )
-  }
-)
+const TestimonialSection = dynamic(() => import('@/components/Sections/TestimonialSection'), {
+  ssr: true,
+  loading: () => (
+    <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+      <p className="text-gray-500">Loading...</p>
+    </div>
+  )
+});
+
 
 export default function Home() {
   const [currentTestimonial, setCurrentTestimonial] = useState(0);
