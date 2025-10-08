@@ -83,7 +83,7 @@ export default function TestimonialHeroSection() {
           </div>
 
           {/* CTA — move DOWN even more on large screens */}
-          <div className="mt-32 xl:mt-40 2xl:mt-48 flex justify-center">
+          <div className="mt-32 xl:mt-40 2xl:mt-28 flex justify-center">
             <Link
               href="#all-reviews"
               className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
