@@ -235,7 +235,7 @@ export default function TestimonialFeedbackSection() {
             aria-label="Jump to application call-to-action"
             title="Jump to apply"
           >
-            That's all! — <span className="font-semibold">join 1,000+ successful students</span> →
+            That&apos;s all! — <span className="font-semibold">join 1,000+ successful students</span> →
           </a>
         )}
       </div>

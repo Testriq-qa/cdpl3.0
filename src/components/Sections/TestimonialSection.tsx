@@ -1,11 +1,30 @@
 'use client';
 
 import Image from 'next/image';
-import { Star } from 'lucide-react';
-import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
+import { Star } from 'lucide-react';
+import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 
-const testimonials = [
+/* ----------------------------- Types ----------------------------- */
+type Testimonial = {
+  name: string;
+  role: string;
+  rating: number;
+  content: string;
+  image: string;
+};
+
+type MobileCarouselProps = {
+  items: Testimonial[];
+};
+
+type ColumnMarqueeProps = {
+  direction: 'up' | 'down';
+  children: ReactNode;
+};
+
+/* --------------------------- Mock Data --------------------------- */
+const testimonials: Testimonial[] = [
   {
     name: 'Mia Thompson', role: 'Design Lead', rating: 5,
     content: 'Pagedone, managing my portfolio has never been easier. This powerful tool provides real-time updates.',
@@ -38,35 +57,38 @@ const testimonials = [
   },
 ];
 
-const TestimonialCard = (t: any) => (
-  <div
-    className="
-      bg-white text-[#171717] border border-zinc-200 rounded-xl
-      shadow-[0_1px_4px_rgba(0,0,0,0.06)]
-      transition-all duration-300
-      md:hover:-translate-y-1 md:hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] md:hover:border-zinc-300
-      will-change-transform
-    "
-  >
-    <div className="p-6">
-      <div className="flex items-center mb-2">
-        <Star className="h-4 w-4 text-[#ff8c00] fill-[#ff8c00] mr-1" />
-        <span className="text-sm font-medium">{t.rating}</span>
-      </div>
-      <p className="text-sm mb-4">{t.content}</p>
-      <div className="flex items-center space-x-3">
-        <Image src={t.image} alt={t.name} width={32} height={32} className="rounded-full" />
-        <div className="leading-tight">
-          <p className="text-sm font-semibold">{t.name}</p>
-          <p className="text-xs text-zinc-500">{t.role}</p>
+/* ------------------------ Presentational UI ---------------------- */
+function TestimonialCard({ name, role, rating, content, image }: Testimonial) {
+  return (
+    <div
+      className="
+        bg-white text-[#171717] border border-zinc-200 rounded-xl
+        shadow-[0_1px_4px_rgba(0,0,0,0.06)]
+        transition-all duration-300
+        md:hover:-translate-y-1 md:hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)] md:hover:border-zinc-300
+        will-change-transform
+      "
+    >
+      <div className="p-6">
+        <div className="flex items-center mb-2">
+          <Star className="h-4 w-4 text-[#ff8c00] fill-[#ff8c00] mr-1" />
+          <span className="text-sm font-medium">{rating}</span>
+        </div>
+        <p className="text-sm mb-4">{content}</p>
+        <div className="flex items-center space-x-3">
+          <Image src={image} alt={name} width={32} height={32} className="rounded-full" />
+          <div className="leading-tight">
+            <p className="text-sm font-semibold">{name}</p>
+            <p className="text-xs text-zinc-500">{role}</p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-);
+  );
+}
 
 /* ---------- Mobile swipe carousel with dots (no auto-scroll) ---------- */
-function MobileCarousel({ items }: { items: any[] }) {
+function MobileCarousel({ items }: MobileCarouselProps) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
 
@@ -109,7 +131,7 @@ function MobileCarousel({ items }: { items: any[] }) {
           snap-x snap-mandatory flex
           [touch-action:pan-x] [overscroll-behavior-x:contain]
         "
-        style={{ WebkitOverflowScrolling: 'touch' as any }}
+        style={{ WebkitOverflowScrolling: 'touch' } as CSSProperties}
       >
         {items.map((t, i) => (
           <div
@@ -140,13 +162,7 @@ function MobileCarousel({ items }: { items: any[] }) {
 }
 
 /* ---------- Desktop/Tablet column with reliable hover-pause ---------- */
-function ColumnMarquee({
-  direction,
-  children,
-}: {
-  direction: 'up' | 'down';
-  children: React.ReactNode;
-}) {
+function ColumnMarquee({ direction, children }: ColumnMarqueeProps) {
   const [paused, setPaused] = useState(false);
   return (
     <div
@@ -164,6 +180,7 @@ function ColumnMarquee({
   );
 }
 
+/* ------------------------------ Section ------------------------------ */
 export default function TestimonialSection() {
   const firstColumn = testimonials.slice(0, 3);
   const secondColumn = testimonials.slice(3);
@@ -186,7 +203,6 @@ export default function TestimonialSection() {
           >
             View all testimonials →
           </Link>
-
         </div>
 
         {/* RIGHT */}
