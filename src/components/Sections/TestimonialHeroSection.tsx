@@ -35,7 +35,7 @@ export default function TestimonialHeroSection() {
       <Script id="cdpl-students-hero-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       {/* tighter top padding */}
-      <div className="mx-auto max-w-6xl px-4 pt-8 sm:pt-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
         {/* title + deck (kept tight) */}
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Rating &amp; Reviews</p>

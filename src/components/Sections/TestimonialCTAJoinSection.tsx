@@ -6,7 +6,7 @@ import { Star } from "lucide-react";
 export default function CTAJoinSection() {
   return (
     <section id="cta-join" aria-label="Join CDPL programs" className="relative overflow-hidden bg-white">
-      <div className="mx-auto max-w-6xl px-4 py-8 sm:py-12 lg:py-16"> {/* ↓ tighter */}
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:py-12 lg:py-16 sm:px-6 lg:px-8"> {/* ↓ tighter */}
         <div className="relative isolate overflow-hidden rounded-3xl border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 p-5 sm:p-8 lg:p-12 shadow-[0_24px_80px_-40px_rgba(0,0,0,.35)]">
           <div className="pointer-events-none absolute -top-20 left-1/2 h-72 w-[860px] -translate-x-1/2 rounded-full bg-[var(--color-brand)]/10 blur-3xl" />
 

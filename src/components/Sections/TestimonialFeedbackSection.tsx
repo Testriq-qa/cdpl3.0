@@ -140,7 +140,7 @@ export default function TestimonialFeedbackSection() {
   return (
     <section
       id="all-reviews"
-      className="relative mx-auto w-full max-w-6xl px-4 pb-8 pt-8 sm:pb-12 sm:pt-12 lg:pt-0"
+      className="relative mx-auto w-full max-w-7xl px-4 pb-8 pt-8 sm:pb-12 sm:pt-12 lg:pt-0 sm:px-6 lg:px-8"
       aria-label="Student success stories and testimonials"
     >
 
