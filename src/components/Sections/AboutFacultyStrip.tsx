@@ -177,7 +177,7 @@ export default function AboutFacultyStrip({
           <li key={m.name}>
             <article
               className={clsx(
-                "group relative flex items-center gap-4 rounded-3xl border bg-white p-4 shadow-sm",
+                "group relative flex flex-col lg:flex-row items-center gap-4 rounded-3xl border bg-white p-4 shadow-sm",
                 "transition-transform duration-150 hover:-translate-y-0.5"
               )}
               style={{ borderColor: "rgba(15,23,42,0.12)" }}

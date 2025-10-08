@@ -19,8 +19,8 @@ export default function AboutHeroSection() {
     return (
         <section
             aria-labelledby="about-heading"
-            className="relative mx-auto max-w-7xl px-4 pb-14 py-12 sm:px-6 lg:px-8 isolate overflow-hidden"
-            /* ✅ Fade the edges so inner whites don't show on both sides */
+            className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 isolate overflow-hidden"
+            /* ✅ Fade edges so inner whites don't show on both sides */
             style={{
                 WebkitMaskImage:
                     "linear-gradient(90deg, transparent 0, black 24px, black calc(100% - 24px), transparent 100%)",
@@ -28,10 +28,10 @@ export default function AboutHeroSection() {
                     "linear-gradient(90deg, transparent 0, black 24px, black calc(100% - 24px), transparent 100%)",
             }}
         >
-            {/* Background aura – now constrained to container width */}
+            {/* Background aura – constrained to container width */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 overflow-hidden">
                 <div
-                    className="mx-auto mt-[-6rem] h-64 w-full max-w-7xl rounded-[999px] blur-3xl"
+                    className="mx-auto -mt-24 h-56 w-full max-w-7xl rounded-[999px] blur-3xl sm:h-64"
                     style={{
                         background:
                             "radial-gradient(50% 50% at 50% 50%, rgba(14,165,233,0.10) 0%, rgba(34,197,94,0.10) 50%, rgba(37,99,235,0.10) 100%)",
@@ -39,11 +39,11 @@ export default function AboutHeroSection() {
                 />
             </div>
 
-            <div className="grid items-start gap-10 md:grid-cols-2 ">
-                {/* LEFT */}
-                <div className="order-last md:order-first">
+            <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-2">
+                {/* LEFT — first on all viewports */}
+                <div className="order-1 lg:order-1">
                     <motion.div {...fadeUp}>
-                        <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm backdrop-blur dark:border-slate-200/60 dark:bg-white/85">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur dark:border-slate-200/60 dark:bg-white/85 sm:text-xs">
                             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                             Future-Ready EdTech
                         </span>
@@ -53,7 +53,7 @@ export default function AboutHeroSection() {
                         id="about-heading"
                         {...fadeUp}
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.06 }}
-                        className={`mt-4 text-3xl py-1 font-extrabold tracking-tight sm:text-5xl ${gradientText}`}
+                        className={`mt-4 py-1 text-3xl font-extrabold tracking-tight sm:text-4xl md:text-5xl ${gradientText}`}
                     >
                         About <span className="text-brand">Cinute Digital</span>
                     </motion.h1>
@@ -61,23 +61,22 @@ export default function AboutHeroSection() {
                     <motion.p
                         {...fadeUp}
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.12 }}
-                        className="mt-5 max-w-xl text-base leading-7 text-slate-700 sm:text-lg"
+                        className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg"
                     >
                         Cinute Digital is a premier <strong>EdTech institute</strong> delivering{" "}
-                        <strong>industry-ready training</strong> in{" "}
-                        <strong>Software Testing</strong>, <strong>Automation</strong>,{" "}
-                        <strong>Data Science</strong>, and <strong>AI/ML</strong>. Learn with{" "}
-                        <strong>live projects</strong>, <strong>expert mentorship</strong>, and{" "}
+                        <strong>industry-ready training</strong> in <strong>Software Testing</strong>,{" "}
+                        <strong>Automation</strong>, <strong>Data Science</strong>, and <strong>AI/ML</strong>. Learn
+                        with <strong>live projects</strong>, <strong>expert mentorship</strong>, and{" "}
                         <strong>career &amp; placement support</strong> designed to help you land
-                        <strong> high-growth tech jobs</strong>. Our <strong>job-oriented courses</strong> blend
-                        hands-on labs, interview prep, and real business case studies—built to boost your{" "}
+                        <strong> high-growth tech jobs</strong>. Our <strong>job-oriented courses</strong> blend hands-on
+                        labs, interview prep, and real business case studies—built to boost your{" "}
                         <strong>skills, employability, and salary growth</strong>.
                     </motion.p>
 
                     <motion.ul
                         {...fadeUp}
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.18 }}
-                        className="mt-6 grid gap-3 text-sm text-slate-700 sm:text-base"
+                        className="mt-5 grid gap-2.5 text-sm text-slate-700 sm:text-base"
                     >
                         {[
                             "Live, mentor-led classes with capstones & real client scenarios",
@@ -94,23 +93,23 @@ export default function AboutHeroSection() {
                     <motion.div
                         {...fadeUp}
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.24 }}
-                        className="mt-7 flex flex-wrap items-center gap-3"
+                        className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
                     >
                         <Link
                             href="/courses"
-                            className="inline-flex items-center justify-center rounded-2xl bg-brand text-white px-5 py-3 text-sm font-semibold shadow-sm shadow-slate-900/10 transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+                            className="inline-flex w-full items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 sm:w-auto"
                         >
                             Explore Courses <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                         </Link>
                         <Link
                             href="/contact"
-                            className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300 dark:border-slate-200/70 dark:bg-white/90"
+                            className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
                         >
                             Talk to an Advisor
                         </Link>
                         <button
                             type="button"
-                            className="group inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white/90 px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-200 dark:border-slate-200/70 dark:bg-white/90"
+                            className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white/90 px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
                             aria-label="Watch 60-second overview video"
                         >
                             <Play className="h-4 w-4 transition group-hover:scale-110" aria-hidden="true" />
@@ -121,7 +120,7 @@ export default function AboutHeroSection() {
                     <motion.div
                         {...fadeUp}
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.3 }}
-                        className="mt-8 flex flex-wrap items-center gap-5 text-sm"
+                        className="mt-7 flex flex-wrap items-center gap-3 text-sm"
                     >
                         <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 text-slate-800 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
                             <Star className="h-4 w-4" aria-hidden="true" />
@@ -132,47 +131,48 @@ export default function AboutHeroSection() {
                             <ShieldCheck className="h-4 w-4" aria-hidden="true" />
                             <span className="font-semibold">Placement Assistance</span>
                         </div>
-                        <div className="inline-flex items-center gap-2 text-slate-700">
-                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90">
+                        <div className="inline-flex flex-wrap items-center gap-2 text-slate-700">
+                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
                                 10k+ Learners
                             </span>
-                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90">
+                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
                                 Job-Ready Skills
                             </span>
-                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90">
+                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
                                 Mentor-Led
                             </span>
                         </div>
                     </motion.div>
                 </div>
 
-                {/* RIGHT */}
+                {/* RIGHT — second on mobile; right column on lg+ */}
                 <motion.div
                     initial={{ opacity: 0, scale: 0.985 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.55, ease: easeBezier }}
-                    className="flex relative order-first justify-center items-center top-0 mt-12 h-[18rem] w-full overflow-hidden rounded-3xl bg-white/92 ring-1 ring-slate-200 shadow-[0_20px_45px_-20px_rgba(2,6,23,0.25)] backdrop-blur md:order-last md:h-[22rem] dark:bg-white/92"
+                    className="order-2 lg:order-2 relative top-0 mt-6 h-56 w-full overflow-hidden rounded-3xl bg-white/92 ring-1 ring-slate-200 shadow-[0_20px_45px_-20px_rgba(2,6,23,0.25)] backdrop-blur sm:h-64 md:h-80 lg:mt-0 lg:h-[22rem] dark:bg-white/92"
                     role="img"
                     aria-label="Students collaborating with mentors on live software testing and data science projects"
                 >
+                    {/* Use fill + object-contain for perfect scaling on any viewport */}
                     <Image
                         src="/images/cdpl-logo.png"
                         alt="Cinute Digital learners collaborating on live tech projects"
-                        width={300}
-                        height={200}
-                        className="object-cover"
+                        fill
+                        sizes="(max-width: 1024px) 100vw, 50vw"
+                        className="object-contain"
                         priority
                     />
                     {/* Softer overlay in dark so it doesn't glow to edges */}
                     <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/50 via-transparent to-white/60 dark:from-white/15 dark:to-white/20" />
                     {/* Floating stat pill */}
-                    <div className="absolute bottom-4 left-4 flex items-center gap-3 rounded-2xl border border-slate-200 bg-white/90 px-4 py-2 text-slate-900 shadow-md backdrop-blur dark:border-slate-200/70 dark:bg-white/90">
+                    <div className="absolute bottom-0 left-0 md:bottom-4 md:left-4 flex flex-col md:flex-row items-center md:gap-3 rounded-2xl border border-slate-200 bg-white/90 p-0 px-1 md:px-4 md:py-2 text-slate-900 shadow-md backdrop-blur dark:border-slate-200/70 dark:bg-white/90">
                         <div className="flex -space-x-2">
                             {[1, 2, 3].map((i) => (
                                 <span key={i} className="h-6 w-6 rounded-full border border-white/80 bg-slate-200" />
                             ))}
                         </div>
-                        <div className="text-xs leading-tight">
+                        <div className="text-[11px] leading-tight sm:text-xs">
                             <p className="font-semibold">Hiring Partners Onboard</p>
                             <p className="text-slate-600">Top tech companies & startups</p>
                         </div>
@@ -180,16 +180,17 @@ export default function AboutHeroSection() {
                 </motion.div>
             </div>
 
-            {/* Logos + JSON-LD unchanged */}
+            {/* Logos */}
             <motion.div
                 {...fadeUp}
                 transition={{ ...(fadeUp.transition as Transition), delay: 0.36 }}
                 className="mt-10"
             >
-                <p className="text-xs uppercase tracking-wider text-slate-500">
+                <p className="text-[11px] uppercase tracking-wider text-slate-500 sm:text-xs">
                     Trusted by learners & teams from
                 </p>
-                <div className="mt-3 grid grid-cols-2 items-center gap-4 opacity-80 sm:grid-cols-4 md:grid-cols-6">
+
+                <div className="mt-3 grid grid-cols-2 items-center gap-3 opacity-80 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6">
                     {[
                         "/images/Testriq-Logo-1.webp",
                         "/images/Testriq-Logo-1.webp",
@@ -198,13 +199,14 @@ export default function AboutHeroSection() {
                         "/images/Testriq-Logo-1.webp",
                         "/images/Testriq-Logo-1.webp",
                     ].map((src, i) => (
-                        <div key={i} className="relative h-6 w-full grayscale mt-2">
-                            <Image src={src} alt="Brand logo" width={100} height={100} className="object-contain" />
+                        <div key={i} className="relative mt-1 h-7 w-full grayscale sm:h-8 md:h-9 lg:h-10">
+                            <Image src={src} alt="Brand logo" fill sizes="(max-width: 768px) 33vw, 16vw" className="object-contain" />
                         </div>
                     ))}
                 </div>
             </motion.div>
 
+            {/* SEO JSON-LD */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{
