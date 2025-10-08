@@ -136,7 +136,7 @@ const BlogPageNewUI: React.FC = () => {
     };
 
     return (
-        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 bg-gradient-to-br from-blue-50 via-white to-purple-50">
             {/* Hero/Featured Article */}
             <section className="gradient-bg rounded-2xl shadow-lg p-8 md:p-12 mb-12">
                 <div className="grid md:grid-cols-2 gap-8 items-center">
