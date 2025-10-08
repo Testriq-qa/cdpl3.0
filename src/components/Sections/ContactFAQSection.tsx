@@ -6,82 +6,82 @@ import Script from "next/script";
 type FAQ = { q: string; a: string; cat: "Admissions" | "Learning" | "Financing" | "Placement" | "Corporate" };
 
 const ALL_FAQS: FAQ[] = [
-    // — Admissions
-    {
-        cat: "Admissions",
-        q: "How do I apply for a course at Cinute Digital?",
-        a: "Submit the contact form or book a free 1:1 counseling call. Our admissions team will guide you through eligibility, batch start dates, and required documents.",
-    },
-    {
-        cat: "Admissions",
-        q: "What are the eligibility criteria?",
-        a: "Open to graduates, final-year students, and working professionals. For advanced tracks in Data Science & AI or Full-Stack, basic programming familiarity is recommended.",
-    },
-    {
-        cat: "Admissions",
-        q: "Do you share a detailed syllabus before enrollment?",
-        a: "Yes. We provide curriculum PDFs covering modules, projects, tools, and assessments for Software Testing, Data Science & AI, and Full-Stack Development.",
-    },
+  // — Admissions
+  {
+    cat: "Admissions",
+    q: "How do I apply for a course at Cinute Digital?",
+    a: "Submit the contact form or book a free 1:1 counseling call. Our admissions team will guide you through eligibility, batch start dates, and required documents.",
+  },
+  {
+    cat: "Admissions",
+    q: "What are the eligibility criteria?",
+    a: "Open to graduates, final-year students, and working professionals. For advanced tracks in Data Science & AI or Full-Stack, basic programming familiarity is recommended.",
+  },
+  {
+    cat: "Admissions",
+    q: "Do you share a detailed syllabus before enrollment?",
+    a: "Yes. We provide curriculum PDFs covering modules, projects, tools, and assessments for Software Testing, Data Science & AI, and Full-Stack Development.",
+  },
 
-    // — Learning
-    {
-        cat: "Learning",
-        q: "Are classes live or self-paced?",
-        a: "Live mentor-led classes with recordings, hands-on labs, capstone projects, and weekly doubt-solving support.",
-    },
-    {
-        cat: "Learning",
-        q: "Which tools and technologies will I learn?",
-        a: "Programs include Git & GitHub, SQL, Python, Power BI, Tableau, React, Node.js, Selenium, Postman, and more—aligned with current industry hiring.",
-    },
-    {
-        cat: "Learning",
-        q: "Do you provide certificates?",
-        a: "Yes. On successful completion you receive an industry-recognized certificate from Cinute Digital along with project portfolios.",
-    },
+  // — Learning
+  {
+    cat: "Learning",
+    q: "Are classes live or self-paced?",
+    a: "Live mentor-led classes with recordings, hands-on labs, capstone projects, and weekly doubt-solving support.",
+  },
+  {
+    cat: "Learning",
+    q: "Which tools and technologies will I learn?",
+    a: "Programs include Git & GitHub, SQL, Python, Power BI, Tableau, React, Node.js, Selenium, Postman, and more—aligned with current industry hiring.",
+  },
+  {
+    cat: "Learning",
+    q: "Do you provide certificates?",
+    a: "Yes. On successful completion you receive an industry-recognized certificate from Cinute Digital along with project portfolios.",
+  },
 
-    // — Financing
-    {
-        cat: "Financing",
-        q: "Do you have EMI or flexible payment options?",
-        a: "Yes. We offer convenient EMI plans via finance partners and occasional scholarships on eligible programs.",
-    },
-    {
-        cat: "Financing",
-        q: "Are there any scholarships or discounts?",
-        a: "Merit-based and need-based scholarships are available on select batches. Speak to admissions for current offers and criteria.",
-    },
+  // — Financing
+  {
+    cat: "Financing",
+    q: "Do you have EMI or flexible payment options?",
+    a: "Yes. We offer convenient EMI plans via finance partners and occasional scholarships on eligible programs.",
+  },
+  {
+    cat: "Financing",
+    q: "Are there any scholarships or discounts?",
+    a: "Merit-based and need-based scholarships are available on select batches. Speak to admissions for current offers and criteria.",
+  },
 
-    // — Placement
-    {
-        cat: "Placement",
-        q: "Do you offer placement assistance?",
-        a: "Yes—resume reviews, mock interviews, LinkedIn optimization, career counseling, and hiring drives with partner companies.",
-    },
-    {
-        cat: "Placement",
-        q: "What is the average placement support timeline?",
-        a: "Most learners start interview pipelines within 4–8 weeks of completing capstone projects and meeting placement-readiness criteria.",
-    },
+  // — Placement
+  {
+    cat: "Placement",
+    q: "Do you offer placement assistance?",
+    a: "Yes—resume reviews, mock interviews, LinkedIn optimization, career counseling, and hiring drives with partner companies.",
+  },
+  {
+    cat: "Placement",
+    q: "What is the average placement support timeline?",
+    a: "Most learners start interview pipelines within 4–8 weeks of completing capstone projects and meeting placement-readiness criteria.",
+  },
 
-    // — Corporate
-    {
-        cat: "Corporate",
-        q: "Can you customize corporate training for teams?",
-        a: "Absolutely. We tailor content, labs, assessments, and delivery (online or on-site) to your team’s skill gaps, tools, and timelines.",
-    },
-    {
-        cat: "Corporate",
-        q: "Do you conduct upskilling bootcamps for companies?",
-        a: "Yes. We run outcome-driven bootcamps in Software Testing, Data Analytics, AI, and Full-Stack with real datasets and internal use-cases.",
-    },
+  // — Corporate
+  {
+    cat: "Corporate",
+    q: "Can you customize corporate training for teams?",
+    a: "Absolutely. We tailor content, labs, assessments, and delivery (online or on-site) to your team’s skill gaps, tools, and timelines.",
+  },
+  {
+    cat: "Corporate",
+    q: "Do you conduct upskilling bootcamps for companies?",
+    a: "Yes. We run outcome-driven bootcamps in Software Testing, Data Analytics, AI, and Full-Stack with real datasets and internal use-cases.",
+  },
 
-    // quick response
-    {
-        cat: "Admissions",
-        q: "How soon will I get a response after contacting you?",
-        a: "Within one business day. For urgent queries, use WhatsApp for the fastest response during working hours.",
-    },
+  // quick response
+  {
+    cat: "Admissions",
+    q: "How soon will I get a response after contacting you?",
+    a: "Within one business day. For urgent queries, use WhatsApp for the fastest response during working hours.",
+  },
 ];
 
 const CATEGORIES: Array<FAQ["cat"]> = ["Admissions", "Learning", "Financing", "Placement", "Corporate"];
@@ -119,16 +119,6 @@ export function ContactFAQSection() {
               Everything you need to know about <strong>admissions</strong>, <strong>live mentor-led learning</strong>,{" "}
               <strong>EMI & scholarships</strong>, and <strong>placement assistance</strong> at Cinute Digital.
             </p>
-          </div>
-
-          {/* Optional search */}
-          <div className="mt-5 max-w-xl mx-auto">
-            <input
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              placeholder="Search FAQs (e.g., EMI, placements, syllabus)"
-              className="w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-400 outline-none focus:border-brand focus:ring-1 focus:ring-brand"
-            />
           </div>
 
           {/* Category pills */}

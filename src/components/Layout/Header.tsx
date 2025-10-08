@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Menu, X, ChevronDown, ChevronRight, Award, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
@@ -238,6 +238,11 @@ const Header = () => {
     string | null
   >(null);
 
+  // NEW: Jobs dropdown state/refs
+  const [isJobsOpen, setIsJobsOpen] = useState(false);
+  const jobsButtonRef = useRef<HTMLButtonElement | null>(null);
+  const jobsMenuRef = useRef<HTMLDivElement | null>(null);
+
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     if (isMenuOpen) {
@@ -269,6 +274,31 @@ const Header = () => {
   const displayDescription = hoveredCourse
     ? hoveredCourseData?.description
     : selectedCategoryData?.description;
+
+  // NEW: Close Jobs dropdown on outside click / ESC
+  useEffect(() => {
+    const onClickOutside = (e: MouseEvent) => {
+      if (!isJobsOpen) return;
+      const target = e.target as Node;
+      if (
+        jobsMenuRef.current &&
+        !jobsMenuRef.current.contains(target) &&
+        jobsButtonRef.current &&
+        !jobsButtonRef.current.contains(target)
+      ) {
+        setIsJobsOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsJobsOpen(false);
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClickOutside);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [isJobsOpen]);
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
@@ -481,7 +511,71 @@ const Header = () => {
 
             <Link href='#' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Mentors</Link>
 
-            <Link href='#' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Jobs</Link>
+            {/* NEW: Jobs Dropdown (Desktop) */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsJobsOpen(true)}
+              onMouseLeave={() => setIsJobsOpen(false)}
+            >
+              <button
+                ref={jobsButtonRef}
+                onClick={() => setIsJobsOpen((p) => !p)}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    setIsJobsOpen(true);
+                    requestAnimationFrame(() => {
+                      const first = jobsMenuRef.current?.querySelector<HTMLAnchorElement>('a[role="menuitem"]');
+                      first?.focus();
+                    });
+                  }
+                }}
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                aria-haspopup="menu"
+                aria-expanded={isJobsOpen}
+                aria-controls="jobs-menu"
+              >
+                Jobs
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+
+              {isJobsOpen && (
+                <div
+                  id="jobs-menu"
+                  ref={jobsMenuRef}
+                  role="menu"
+                  aria-label="Jobs"
+                  className="absolute left-0 top-full mt-0 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl py-2 z-50"
+                >
+                  <div className="px-4 py-2 border-b border-gray-100">
+                    <p className="text-xs uppercase tracking-wider text-gray-500">Explore</p>
+                  </div>
+                  <div className="py-1">
+                    <Link
+                      href="/jobs/live"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Live Jobs
+                    </Link>
+                    <Link
+                      href="/jobs/placements"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Placements
+                    </Link>
+                    <Link
+                      href="/jobs/careers"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Careers
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
 
             <a
               href="/about-us"
@@ -603,6 +697,47 @@ const Header = () => {
                     >
                       View All Courses →
                     </a>
+                  </div>
+                )}
+              </div>
+
+              {/* NEW: Mobile Jobs Accordion */}
+              <div className="space-y-2">
+                <button
+                  onClick={() => toggleMobileCategory("jobs")}
+                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                  aria-expanded={expandedMobileCategory === "jobs"}
+                  aria-controls="mobile-jobs"
+                >
+                  <span>Jobs</span>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === "jobs" ? "rotate-180" : ""
+                      }`}
+                  />
+                </button>
+                {expandedMobileCategory === "jobs" && (
+                  <div id="mobile-jobs" className="pl-4 space-y-1">
+                    <Link
+                      href="/jobs/live"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      • Live Jobs
+                    </Link>
+                    <Link
+                      href="/jobs/placements"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      • Placements
+                    </Link>
+                    <Link
+                      href="/jobs/careers"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      • Careers
+                    </Link>
                   </div>
                 )}
               </div>

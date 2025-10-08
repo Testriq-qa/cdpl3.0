@@ -1,0 +1,210 @@
+"use client";
+
+import Link from "next/link";
+import { useEffect, useMemo, useRef, useState } from "react";
+
+// ---- Utils ----
+const formatCompact = (n: number) =>
+    new Intl.NumberFormat(undefined, { notation: "compact", maximumFractionDigits: 1 }).format(n);
+
+// Parse a friendly suffix strategy, e.g. 10k+, 120+, 100%
+type Suffix = "" | "+" | "%" | "k+" | "M+" | "k";
+const applySuffix = (n: number, suffix: Suffix) => {
+    switch (suffix) {
+        case "%":
+            return `${Math.round(n)}%`;
+        case "+":
+            return `${Math.round(n)}+`;
+        case "k":
+        case "k+":
+        case "M+":
+            // Use compact for k/M; preserve +
+            return `${formatCompact(n)}${suffix.endsWith("+") ? "+" : ""}`;
+        default:
+            return `${Math.round(n)}`;
+    }
+};
+
+// Eases-out smoothly
+const easeOutCubic = (t: number) => 1 - Math.pow(1 - t, 3);
+
+// CountUp hook with rAF + IntersectionObserver
+function useCountUp(shouldStart: boolean, end: number, durationMs = 1600, reducedMotion = false) {
+    const [val, setVal] = useState(0);
+    const started = useRef(false);
+
+    useEffect(() => {
+        if (!shouldStart || started.current) return;
+        started.current = true;
+
+        if (reducedMotion) {
+            setVal(end);
+            return;
+        }
+
+        let raf = 0;
+        const start = performance.now();
+        const tick = (now: number) => {
+            const t = Math.min(1, (now - start) / durationMs);
+            setVal(end * easeOutCubic(t));
+            if (t < 1) raf = requestAnimationFrame(tick);
+        };
+        raf = requestAnimationFrame(tick);
+        return () => cancelAnimationFrame(raf);
+    }, [shouldStart, end, durationMs, reducedMotion]);
+
+    return val;
+}
+
+export default function AboutStatsSection() {
+    // Define stats with numeric targets and display suffixes
+    const stats = useMemo(
+        () =>
+            [
+                { label: "Learners Trained", target: 10000, suffix: "k+" as Suffix, desc: "Upskilled in software testing, data science & AI/ML" },
+                { label: "Hiring Partners", target: 120, suffix: "+" as Suffix, desc: "Product companies, startups & global tech leaders" },
+                { label: "Mentors & SMEs", target: 60, suffix: "+" as Suffix, desc: "Industry experts, QA leads & data scientists" },
+                { label: "Placement Support", target: 100, suffix: "%" as Suffix, desc: "Career guidance, mock interviews & referrals" },
+            ] as const,
+        []
+    );
+
+    // IntersectionObserver to trigger once when the grid is visible
+    const rootRef = useRef<HTMLElement | null>(null);
+    const [inView, setInView] = useState(false);
+    useEffect(() => {
+        if (!rootRef.current) return;
+        const el = rootRef.current;
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    setInView(true);
+                    io.disconnect();
+                }
+            },
+            { rootMargin: "0px 0px -15% 0px", threshold: 0.25 }
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, []);
+
+    // Respect prefers-reduced-motion
+    const [reducedMotion, setReducedMotion] = useState(false);
+    useEffect(() => {
+        const m = window.matchMedia("(prefers-reduced-motion: reduce)");
+        const handler = () => setReducedMotion(m.matches);
+        handler();
+        m.addEventListener?.("change", handler);
+        return () => m.removeEventListener?.("change", handler);
+    }, []);
+
+    return (
+        <section
+            ref={rootRef as any}
+            aria-labelledby="about-stats-heading"
+            className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
+        >
+            {/* Header */}
+            <div className="mb-6 text-center">
+                <p className="text-xs font-medium uppercase tracking-wider text-slate-500">
+                    Outcomes that matter
+                </p>
+                <h2
+                    id="about-stats-heading"
+                    className="mt-2 text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-[linear-gradient(90deg,#0ea5e9,#2563eb,#22c55e)]"
+                >
+                    Career-focused results with{" "}
+                    <span className="text-brand">Cinute Digital</span>
+                </h2>
+                <p className="mt-5 mx-auto max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+                    Real <strong>EdTech</strong> impact: <strong>industry-ready skills</strong>,{" "}
+                    <strong>mentor-led learning</strong>, and <strong>placement assistance</strong> designed
+                    for <strong>software testing</strong>, <strong>automation</strong>,{" "}
+                    <strong>data science</strong>, and <strong>AI/ML</strong> careers.
+                </p>
+            </div>
+
+
+            {/* Stats Card */}
+            <div
+                className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white/92 p-6 shadow-sm ring-1 ring-transparent backdrop-blur
+                   sm:p-8 dark:bg-white/92"
+            >
+                {/* Subtle futuristic glow contained inside the card */}
+                <div
+                    aria-hidden="true"
+                    className="pointer-events-none absolute inset-0 -z-10"
+                    style={{
+                        maskImage:
+                            "radial-gradient(40% 60% at 80% 0%, black 0%, transparent 60%), radial-gradient(35% 55% at 0% 100%, black 0%, transparent 60%)",
+                        WebkitMaskImage:
+                            "radial-gradient(40% 60% at 80% 0%, black 0%, transparent 60%), radial-gradient(35% 55% at 0% 100%, black 0%, transparent 60%)",
+                        background:
+                            "radial-gradient(600px 200px at 80% -10%, rgba(37,99,235,0.10), transparent), radial-gradient(500px 180px at -10% 110%, rgba(34,197,94,0.10), transparent)",
+                    }}
+                />
+
+                {/* Top badges */}
+                <div className="mb-5 flex flex-wrap items-center justify-center gap-2">
+                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
+                        Job-Oriented Curriculum
+                    </span>
+                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
+                        Live Projects & Capstones
+                    </span>
+                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
+                        Mentor-Led Learning
+                    </span>
+                </div>
+
+                {/* Grid */}
+                <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
+                    {stats.map((s) => {
+                        const animated = useCountUp(inView, s.target, 1400, reducedMotion);
+                        return (
+                            <div key={s.label} className="text-center">
+                                <div className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+                                    {/* Animated number */}
+                                    <span aria-hidden="true">
+                                        {applySuffix(animated, s.suffix)}
+                                    </span>
+                                    {/* Accessible, non-animated fallback for screen readers */}
+                                    <span className="sr-only">{applySuffix(s.target, s.suffix)}</span>
+                                </div>
+                                <div className="mt-1 text-xs font-medium text-slate-600">{s.label}</div>
+                                <div className="mt-1.5 text-[11px] leading-4 text-slate-500">
+                                    {s.desc}
+                                </div>
+                            </div>
+                        );
+                    })}
+                </div>
+
+                {/* Bottom CTA line (SEO-friendly anchor) */}
+                <div className="mt-7 flex flex-wrap items-center justify-center gap-3 text-center">
+                    <Link
+                        href="/placements"
+                        className="inline-flex items-center justify-center rounded-xl ring-1 ring-brand bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-brand focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300"
+                    >
+                        Explore Placements
+                    </Link>
+                    <Link
+                        href="/reviews"
+                        className="inline-flex items-center justify-center rounded-xl bg-gradient-to-r from-orange-600 to-blue-400 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:translate-y-[-1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+                    >
+                        Read Learner Reviews
+                    </Link>
+                </div>
+            </div>
+
+            {/* Subtext for extra SEO relevance (concise) */}
+            <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-5 text-slate-500">
+                Build <strong>job-ready skills</strong> with an <strong>industry-aligned edtech program</strong> in{" "}
+                <strong>software testing</strong>, <strong>automation</strong>,{" "}
+                <strong>data science</strong>, and <strong>AI/ML</strong>—with{" "}
+                <strong>mentorship</strong>, <strong>portfolio projects</strong>, and{" "}
+                <strong>placement assistance</strong>.
+            </p>
+        </section>
+    );
+}
