@@ -140,9 +140,10 @@ export default function TestimonialFeedbackSection() {
   return (
     <section
       id="all-reviews"
-      className="relative mx-auto w-full max-w-6xl px-4 py-8 sm:py-12"  
+      className="relative mx-auto w-full max-w-6xl px-4 pb-8 pt-8 sm:pb-12 sm:pt-12 lg:pt-0"
       aria-label="Student success stories and testimonials"
     >
+
       <Script id="cdpl-students-grid-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <header className="mx-auto mb-6 max-w-3xl text-center">
@@ -234,7 +235,7 @@ export default function TestimonialFeedbackSection() {
             aria-label="Jump to application call-to-action"
             title="Jump to apply"
           >
-            You’ve reached the end.
+            That's all! — <span className="font-semibold">join 1,000+ successful students</span> →
           </a>
         )}
       </div>

@@ -62,8 +62,8 @@ export default function TestimonialHeroSection() {
             </div>
           </div>
 
-          {/* CTA */}
-          <div className="mt-6 flex justify-center">
+          {/* CTA — move UP even more on small screens */}
+          <div className="-mt-14 sm:-mt-12 md:-mt-10 flex justify-center">
             <Link
               href="#all-reviews"
               className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
@@ -81,7 +81,9 @@ export default function TestimonialHeroSection() {
             <TiltCard review={REVIEWS[1]} color="brandSoft" float={!prefersReduced} className="translate-y-1 rotate-[-4deg]" />
             <TiltCard review={REVIEWS[2]} color="light" float={!prefersReduced} className="-translate-y-2 rotate-[7deg]" />
           </div>
-          <div className="mt-30 sm:mt-4 flex justify-center">
+
+          {/* CTA — move DOWN even more on large screens */}
+          <div className="mt-32 xl:mt-40 2xl:mt-48 flex justify-center">
             <Link
               href="#all-reviews"
               className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
