@@ -3,7 +3,7 @@ import dynamic from 'next/dynamic';
 import React from 'react';
 
 const BlogPageNewUI = dynamic(
-    () => import("@/components/Sections/BlogPageNewUI"),
+    () => import("@/components/sections/BlogPageNewUI"),
     {
         ssr: true,
         loading: () => (
