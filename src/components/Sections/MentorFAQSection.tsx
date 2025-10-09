@@ -34,16 +34,16 @@ export default function MentorFAQSection() {
 
   return (
     <section className="py-10 bg-white">
-      {/* page container */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-5 flex items-start justify-between gap-4">
+        {/* Header row: stack on small screens, row on larger */}
+        <div className="mb-5 flex flex-col gap-3 sm:gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div>
             <h2 className="text-2xl font-semibold text-slate-900">Frequently asked questions</h2>
             <p className="mt-1 text-sm text-slate-600">Short answers to common queries.</p>
           </div>
 
-          {/* audience toggle */}
-          <div className="flex gap-2.5">
+          {/* Toggle: sits below title on small, right side on larger */}
+          <div className="mt-1 sm:mt-0 flex flex-wrap gap-2.5">
             <button
               type="button"
               className={`${baseTab} ${audience === "mentee" ? activeTab : inactiveTab}`}
@@ -63,7 +63,7 @@ export default function MentorFAQSection() {
           </div>
         </div>
 
-        {/* FULL-WIDTH within the container (no inner max-width) */}
+        {/* FAQ list */}
         <div className="grid grid-cols-1 gap-3">
           {faqs.map((f, i) => {
             const isOpen = openIdx === i;
@@ -88,7 +88,6 @@ export default function MentorFAQSection() {
                   </span>
                 </button>
 
-                {/* No extra spacing when closed */}
                 <div
                   className={`px-4 pt-0 ${
                     isOpen ? "pb-4 grid grid-rows-[1fr]" : "pb-0 grid grid-rows-[0fr]"

@@ -1,7 +1,10 @@
-// components/mentors/Flow.tsx
+// components/Sections/MentorProcessFlowSection.tsx
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
+
+// Helper type for CSS custom properties
+type CSSVars<T extends string> = CSSProperties & Record<T, string | number>;
 
 export default function MentorProcessFlowSection() {
   const steps = [
@@ -11,12 +14,10 @@ export default function MentorProcessFlowSection() {
     { title: "Get placed", desc: "Internship + referrals through partner network." },
   ];
 
-  // reveal-on-view + progress to highlight the SVG beam up to the step
   const itemRefs = useRef<(HTMLLIElement | null)[]>([]);
   const [visible, setVisible] = useState<boolean[]>(Array(steps.length).fill(false));
-  const [progress, setProgress] = useState(0); // 0..1, how much of the beam is lit
+  const [progress, setProgress] = useState(0); // 0..1
 
-  // set initial mild progress so the line isn't dead
   useEffect(() => setProgress(1 / steps.length), [steps.length]);
 
   useEffect(() => {
@@ -42,21 +43,21 @@ export default function MentorProcessFlowSection() {
   const onEnter = (i: number) => setProgress((i + 1) / steps.length);
   const onLeave = () => setProgress(1 / steps.length);
 
+  const sectionVars: CSSVars<"--brand" | "--brandSoft" | "--navy" | "--glass" | "--grid"> = {
+    colorScheme: "light",
+    "--brand": "#ff8c00",
+    "--brandSoft": "#ffb157",
+    "--navy": "#0a1221",
+    "--glass": "rgba(255,255,255,.62)",
+    "--grid": "rgba(10,18,33,.08)",
+  };
+
+  const listVars: CSSVars<"--progress"> = {
+    "--progress": Math.max(0, Math.min(1, progress)),
+  };
+
   return (
-    <section
-      className="relative overflow-hidden py-16 bg-white"
-      style={
-        {
-          // Force a light color scheme for native UI elements (just in case)
-          colorScheme: "light",
-          ["--brand" as any]: "#ff8c00",
-          ["--brandSoft" as any]: "#ffb157",
-          ["--navy" as any]: "#0a1221",
-          ["--glass" as any]: "rgba(255,255,255,.62)",
-          ["--grid" as any]: "rgba(10,18,33,.08)",
-        } as React.CSSProperties
-      }
-    >
+    <section className="relative overflow-hidden py-16 bg-white" style={sectionVars}>
       {/* Light-only canvas */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-[-32%] h-[38rem] w-[80rem] -translate-x-1/2 rounded-[48%] opacity-[.18] blur-3xl bg-[radial-gradient(60%_60%_at_50%_50%,var(--brand)_0%,rgba(255,140,0,0)_72%)]" />
@@ -83,10 +84,7 @@ export default function MentorProcessFlowSection() {
         </div>
 
         {/* FLOW */}
-        <ol
-          className="relative mx-auto grid max-w-6xl grid-cols-1 gap-7 lg:grid-cols-4 lg:gap-6"
-          style={{ ["--progress" as any]: `${Math.max(0, Math.min(1, progress))}` } as React.CSSProperties}
-        >
+        <ol className="relative mx-auto grid max-w-6xl grid-cols-1 gap-7 lg:grid-cols-4 lg:gap-6" style={listVars}>
           {/* Mobile straight connector w/ progress */}
           <MobileConnector />
 
@@ -96,7 +94,7 @@ export default function MentorProcessFlowSection() {
               <li
                 key={s.title}
                 data-index={i}
-                ref={(el) => (itemRefs.current[i] = el)}
+                ref={(el) => { itemRefs.current[i] = el; }}  // ← block body, no return value
                 onMouseEnter={() => onEnter(i)}
                 onFocus={() => onEnter(i)}
                 onMouseLeave={onLeave}
@@ -104,6 +102,7 @@ export default function MentorProcessFlowSection() {
                 className="relative group"
                 style={{ transitionDelay: show ? `${i * 80}ms` : "0ms" }}
               >
+
                 {/* Neon node */}
                 <div className="relative z-10 flex items-center lg:justify-center">
                   <span
@@ -163,7 +162,6 @@ export default function MentorProcessFlowSection() {
         </ol>
       </div>
 
-      {/* Light-only keyframes (no dark-mode overrides) */}
       <style>{`
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes fill {
@@ -202,20 +200,12 @@ function Beam({ progress }: { progress: number }) {
             <feMergeNode in="SourceGraphic" />
           </feMerge>
         </filter>
-        {/* mask to reveal only a portion = progress */}
         <mask id="reveal">
           <rect x="0" y="0" width={1200 * Math.max(0.08, Math.min(1, progress))} height="260" fill="white" />
         </mask>
       </defs>
 
-      {/* faint base line */}
-      <path
-        d="M60,130 C300,30 900,230 1140,130"
-        stroke="rgba(15,23,42,.12)"
-        strokeWidth="2"
-        strokeLinecap="round"
-      />
-      {/* lit beam */}
+      <path d="M60,130 C300,30 900,230 1140,130" stroke="rgba(15,23,42,.12)" strokeWidth="2" strokeLinecap="round" />
       <g mask="url(#reveal)">
         <path
           d="M60,130 C300,30 900,230 1140,130"

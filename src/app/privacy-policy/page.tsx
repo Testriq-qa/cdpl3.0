@@ -895,7 +895,7 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="space-y-4">
-              <h3 className={H3}>"Do Not Track" Policy as Required by California Online Privacy Protection Act (CalOPPA)</h3>
+              <h3 className={H3}>&ldquo;Do Not Track&ldquo; Policy as Required by California Online Privacy Protection Act (CalOPPA)</h3>
               <p className={P}>Our Service does not respond to Do Not Track signals.</p>
               <p className={P}>
                 However, some third party websites do keep track of Your browsing activities. If You are visiting such websites, You can set Your preferences
@@ -905,9 +905,9 @@ export default function PrivacyPolicyPage() {
             </div>
 
             <div className="space-y-4">
-              <h3 className={H3}>Your California Privacy Rights (California's Shine the Light law)</h3>
+              <h3 className={H3}>Your California Privacy Rights (California&lsquo;s Shine the Light law)</h3>
               <p className={P}>
-                Under California Civil Code Section 1798 (California’s Shine the Light law), California residents with an established business relationship with
+                Under California Civil Code Section 1798 (California&lsquo;s Shine the Light law), California residents with an established business relationship with
                 us can request information once a year about sharing their Personal Data with third parties for the third parties’ direct marketing purposes.
               </p>
               <p className={P}>

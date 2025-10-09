@@ -190,7 +190,7 @@ export default function TermsOfServicePage() {
             <p className={P}>
               To be eligible for our comprehensive Job Assistance services, you must be a graduate of one of our paid masterclass training programs. This ensures you have the foundational skills and knowledge employers seek.
             </p>
-            <p className={P}>Here's a breakdown of what being eligible entails:</p>
+            <p className={P}>Here&lsquo;s a breakdown of what being eligible entails:</p>
             <ul className={UL}>
               <li>Course Completion: You must have successfully completed the relevant training program at Cinute Digital Pvt. Ltd.</li>
               <li>Attendance: Regular attendance throughout the course demonstrates your commitment to learning and career development.(90% and above)</li>
@@ -214,7 +214,7 @@ export default function TermsOfServicePage() {
             <h2 className={H2}>3. I got placed through a 3rd party, am I also eligible for job assistance? Or will you give some part of my fees back, as I am not using your job assistance program?</h2>
             <h3 className={H3}>Placement Through Third Party and Fee Refunds:</h3>
             <p className={P}>
-              If you secure a job through a third-party recruiter or platform, you're still eligible for our Job Assistance services. However, due to the nature of our program structure, refunds on course fees are not applicable in such cases.
+              If you secure a job through a third-party recruiter or platform, you&lsquo;re still eligible for our Job Assistance services. However, due to the nature of our program structure, refunds on course fees are not applicable in such cases.
             </p>
           </section>
 
@@ -222,7 +222,7 @@ export default function TermsOfServicePage() {
             <h2 className={H2}>4. Can I share my job preference to CDPL, so placement officers will put me on priority if my preferred job is available?</h2>
             <h3 className={H3}>Job Preferences and Prioritization:</h3>
             <p className={P}>
-              We highly encourage you to share your job preferences with us!  Knowing your desired roles and companies allows us to tailor our assistance and potentially connect you with relevant opportunities sooner. However, placement ultimately depends on a two-way fit between your qualifications and the employer's requirements.
+              We highly encourage you to share your job preferences with us!  Knowing your desired roles and companies allows us to tailor our assistance and potentially connect you with relevant opportunities sooner. However, placement ultimately depends on a two-way fit between your qualifications and the employer&lsquo;s requirements.
             </p>
           </section>
 
@@ -230,7 +230,7 @@ export default function TermsOfServicePage() {
             <h2 className={H2}>5. I have issues with my placement, my employer is not good. Does CDPL take responsibility for this?</h2>
             <h3 className={H3}>Issues with Employer Placement:</h3>
             <p className={P}>
-              While we meticulously research potential employers, we cannot guarantee the work environment or company culture.  However, we're here to support you!  If you encounter issues with your placement, please don't hesitate to reach out. We'll offer guidance and explore potential solutions to help navigate the situation.
+              While we meticulously research potential employers, we cannot guarantee the work environment or company culture.  However, we&lsquo;re here to support you!  If you encounter issues with your placement, please don&lsquo;t hesitate to reach out. We&lsquo;ll offer guidance and explore potential solutions to help navigate the situation.
             </p>
           </section>
         </div>
