@@ -4,14 +4,14 @@ import Link from "next/link";
 
 export default function MentorHeroSection() {
   return (
-    <section className="relative overflow-hidden isolate bg-white text-slate-900">
-      {/* background wash */}
+    <section className="relative isolate overflow-hidden bg-white text-slate-900">
+      {/* background wash (full-bleed) */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white" />
         <div className="absolute left-1/2 top-[-6rem] h-[30rem] w-[60rem] -translate-x-1/2 rounded-full blur-3xl opacity-30 bg-[radial-gradient(circle_at_center,theme(colors.indigo.200)_0,transparent_60%)]" />
       </div>
 
-      {/* text/content */}
+      {/* content container ONLY */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
         <div className="text-center min-[1040px]:text-left">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-600 backdrop-blur">
@@ -30,11 +30,10 @@ export default function MentorHeroSection() {
             Learn directly from CDPL mentors across <strong>Software Testing (QA)</strong>,{" "}
             <strong>Data Science &amp; AI/ML</strong>, <strong>Product</strong>, and{" "}
             <strong>Engineering</strong>. Build a job-ready portfolio with real projects, get tailored
-            feedback and mock interviews, and follow a clear placement roadmap across India, UAE,
-            USA, and Germany.
+            feedback and mock interviews, and follow a clear placement roadmap across India.
           </p>
 
-          <div className="mt-6 flex flex-wrap items-center gap-3 text-sm text-slate-700 justify-center min-[1040px]:justify-start">
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-slate-700 min-[1040px]:justify-start">
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">200+ real projects</span>
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">100+ datasets</span>
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">Interview prep + mock rounds</span>
@@ -82,7 +81,7 @@ export default function MentorHeroSection() {
         </div>
       </div>
 
-      {/* ≥1040px – floating bubbles (behind content) */}
+      {/* ≥1040px – floating bubbles (full-bleed, behind content) */}
       <div className="pointer-events-none absolute inset-0 z-0 hidden min-[1040px]:block" aria-hidden="true">
         <div className="absolute left-[12%] top-[10%] h-14 w-14 overflow-hidden rounded-full ring-2 ring-white shadow-sm">
           <Image src="/testimonial_images/testimonial.jpeg" alt="" fill className="object-cover rounded-full" />
@@ -104,7 +103,7 @@ export default function MentorHeroSection() {
         <span className="absolute -left-6 top-[75%] h-12 w-12 rounded-full" style={{ backgroundColor: "var(--color-brand, #ff8c00)" }} />
       </div>
 
-      {/* <1040px – avatar cloud below text */}
+      {/* <1040px – avatar cloud (still inside a content container) */}
       <div className="relative z-0 mt-8 block min-[1040px]:hidden" aria-hidden="true">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="flex justify-center">

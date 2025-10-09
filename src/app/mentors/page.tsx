@@ -1,15 +1,18 @@
-// app/testimonial_images/testimonial
+// app/mentors/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
 
-// components (all server by default)
-
-
+// Sections (server by default)
 import MentorHeroSection from "@/components/Sections/MentorHeroSection";
-import MentorOurSection from "@/components/Sections/MentorOurSection";
 import MentorProcessFlowSection from "@/components/Sections/MentorProcessFlowSection";
-import MentorFAQSection from "@/components/Sections/MentorFAQSection";
-import { Mentor } from "@/lib/mentorShared";
+
+// ✅ Client browser (filters + grid) and its type
+import MentorBrowserSection, {
+  type Mentor as BrowserMentor,
+} from "@/components/Sections/MentorBrowserSection";
+import MentorHelpCTASection from "@/components/Sections/MentorHelpCTASection";
+import MentorsImpactSection from "@/components/Sections/MentorsImpactSection";
+import MentorOutcomesSection from "@/components/Sections/MentorOutcomesSection";
 
 export const metadata: Metadata = {
   title: "Mentors | CDPL",
@@ -31,8 +34,22 @@ export const metadata: Metadata = {
   },
 };
 
-// Your data (kept here, passed down to the grid)
-const MENTORS_DATA: Mentor[] = [
+// --------- Local data shape (matches what you already have) ----------
+type UIMentor = {
+  id: string;
+  name: string;
+  title: string; // maps to BrowserMentor.role
+  company?: string;
+  domain: string; // e.g., "Data Science", "Engineering"
+  experience?: string; // e.g., "20+ yrs"
+  avatar?: string; // maps to BrowserMentor.image
+  bio?: string;
+  highlights?: string[]; // maps to skills
+  socials?: { platform: "linkedin" | string; url: string }[];
+};
+
+// Your data (kept here, passed down via a mapping)
+const MENTORS_DATA: UIMentor[] = [
   {
     id: "pravin-mhaske",
     name: "Pravin Mhaske",
@@ -123,6 +140,7 @@ const MENTORS_DATA: Mentor[] = [
   },
 ];
 
+// --------- JSON-LD (uses your raw data) ----------
 function StructuredData() {
   const data = {
     "@context": "https://schema.org",
@@ -148,45 +166,52 @@ function StructuredData() {
   );
 }
 
+// --------- Mapping helpers (to BrowserMentor shape) ----------
+function mapDomain(d: string): BrowserMentor["domain"] {
+  const s = d.toLowerCase();
+  if (s.includes("qa") || s.includes("test")) return "QA";
+  if (s.includes("product")) return "Product";
+  if (s.includes("engineer")) return "Engineering";
+  if (s.includes("market")) return "Marketing";
+  if (s.includes("data")) return "Data"; // covers Data Science/Analytics/Engineering
+  return "Data";
+}
+
+function years(exp?: string) {
+  const m = (exp ?? "").match(/\d+/);
+  return m ? Number(m[0]) : 0;
+}
+
+// --------- Final list consumed by MentorBrowserSection ----------
+const BROWSER_MENTORS: BrowserMentor[] = MENTORS_DATA.map((m) => ({
+  id: m.id,
+  name: m.name,
+  role: m.title,                                   // title → role
+  company: m.company?.replace(/^@\s*/, "") || undefined,
+  bio: m.bio ?? "",                                // ensure string
+  domain: mapDomain(m.domain),
+  experienceYears: years(m.experience),
+  skills: m.highlights ?? [],
+  location: undefined,
+  image: m.avatar ?? "/placeholder/mentor.jpg",    // ensure string
+  linkedin: m.socials?.find((s) => s.platform === "linkedin")?.url || undefined,
+}));
+
 export default function MentorsPage() {
   return (
     <main className="relative bg-white text-slate-900">
       <StructuredData />
-      <MentorHeroSection />
-      <MentorOurSection mentors={MENTORS_DATA} />
-      <MentorProcessFlowSection />
-      <MentorFAQSection />
 
-      {/* Optional CTA (kept simple/light) */}
-      <section className="py-16">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50">
-            <div className="p-8 md:p-12 lg:p-14">
-              <h2 className="text-2xl font-semibold text-slate-900">
-                Start your mentorship journey
-              </h2>
-              <p className="mt-2 max-w-2xl text-slate-600">
-                Book a free session, get a personalized roadmap, and learn by
-                shipping real projects.
-              </p>
-              <div className="mt-6 flex flex-wrap gap-3">
-                <Link
-                  href="/contact-us"
-                  className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand,#ff8c00)] px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-90"
-                >
-                  Book a free session
-                </Link>
-                <Link
-                  href="/events"
-                  className="inline-flex items-center justify-center rounded-full bg-white px-4 py-2 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 hover:bg-slate-50"
-                >
-                  See upcoming events
-                </Link>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <MentorHeroSection />
+<MentorsImpactSection />
+<MentorOutcomesSection/>
+      {/* Brand-gradient filters + grid (client component) */}
+      {/* <MentorBrowserSection mentors={BROWSER_MENTORS} /> */}
+
+      <MentorProcessFlowSection />
+      <MentorHelpCTASection />
+
+     
     </main>
   );
 }

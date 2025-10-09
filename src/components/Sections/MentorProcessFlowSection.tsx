@@ -57,7 +57,7 @@ export default function MentorProcessFlowSection() {
   };
 
   return (
-    <section className="relative overflow-hidden py-16 bg-white" style={sectionVars}>
+    <section className="relative overflow-hidden bg-white" style={sectionVars}>
       {/* Light-only canvas */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div className="absolute left-1/2 top-[-32%] h-[38rem] w-[80rem] -translate-x-1/2 rounded-[48%] opacity-[.18] blur-3xl bg-[radial-gradient(60%_60%_at_50%_50%,var(--brand)_0%,rgba(255,140,0,0)_72%)]" />
@@ -72,7 +72,8 @@ export default function MentorProcessFlowSection() {
         />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+      {/* CONTENT CONTAINER ONLY */}
+      <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <header className="mb-10">
           <h2 className="text-3xl font-semibold tracking-tight text-slate-900">How mentorship works</h2>
           <p className="mt-1 text-sm text-slate-600">A simple, outcomes-focused, 4-step path.</p>
@@ -102,7 +103,6 @@ export default function MentorProcessFlowSection() {
                 className="relative group"
                 style={{ transitionDelay: show ? `${i * 80}ms` : "0ms" }}
               >
-
                 {/* Neon node */}
                 <div className="relative z-10 flex items-center lg:justify-center">
                   <span
