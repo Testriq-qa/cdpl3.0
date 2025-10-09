@@ -190,13 +190,13 @@ export default function AboutAccreditations() {
           <div className="flex flex-wrap items-center justify-center gap-3">
             <Link
               href="/certifications"
-              className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
+              className="inline-flex items-center justify-center rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:shadow-md hover:translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
             >
               Browse Certifications
             </Link>
             <Link
               href="/placements"
-              className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
+              className="inline-flex items-center justify-center rounded-xl border border-brand bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-brand hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
             >
               View Hiring Partners
             </Link>

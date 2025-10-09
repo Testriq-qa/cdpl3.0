@@ -165,7 +165,7 @@ export default function AboutWhyJoinUs() {
           </Link>
           <Link
             href="/contact"
-            className="inline-flex items-center justify-center rounded-2xl ring-1 ring-brand bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-brand focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300 dark:border-slate-200/70 dark:bg-white/90"
+            className="inline-flex items-center justify-center rounded-2xl ring-1 ring-brand bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300 dark:border-slate-200/70 dark:bg-white/90"
           >
             Talk to an Advisor
           </Link>
