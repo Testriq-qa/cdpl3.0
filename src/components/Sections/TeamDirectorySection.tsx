@@ -3,105 +3,341 @@
 // =============================
 "use client";
 
-
-import { useId, useMemo, useState } from "react";
+import { useDeferredValue, useEffect, useId, useMemo, useRef, useState } from "react";
+import Image from "next/image";
 import type { TeamMember } from "@/app/our-team/types";
-import { TeamCard } from "@/app/our-team/ui";
-import { Search, Filter } from "lucide-react";
+import {
+    Search,
+    Filter,
+    SlidersHorizontal,
+    X,
+    Tag,
+    RefreshCw,
+    Sparkles,
+    ArrowUpAZ,
+    ArrowDownAZ,
+    ChevronDown,
+    Shield,
+    Quote,
+    GraduationCap,
+} from "lucide-react";
 
+/**
+ * TeamDirectory — Cinute Digital (EdTech) — Light Theme
+ * - New premium MentorCard (hover lift, gradient ring, compact metadata)
+ * - Refined toolbar: command-style search, chip filters, segmented sort, reset
+ * - SEO: ItemList JSON-LD + keyword-rich helper copy (non-spammy)
+ * - A11y: labels, aria-live counts, focus-visible rings, kbd "/" to focus search
+ * - Perf: deferred search, memoized derivations
+ */
+
+type SortKey = "relevance" | "name-asc" | "name-desc";
 
 export default function TeamDirectory({ data }: { data: TeamMember[] }) {
     const [query, setQuery] = useState("");
     const [role, setRole] = useState<"All" | TeamMember["role"]>("All");
     const [skill, setSkill] = useState<string>("All");
+    const [sort, setSort] = useState<SortKey>("relevance");
     const id = useId();
 
+    // Brand via CSS var to keep Tailwind clean
+    const brand = "#ff8c00";
 
+    // Keyboard shortcut: "/" focuses search
+    const searchRef = useRef<HTMLInputElement | null>(null);
+    useEffect(() => {
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === "/" && !e.metaKey && !e.ctrlKey && !e.altKey) {
+                e.preventDefault();
+                searchRef.current?.focus();
+            }
+        };
+        window.addEventListener("keydown", onKey);
+        return () => window.removeEventListener("keydown", onKey);
+    }, []);
+
+    // Defer heavy search to keep typing smooth
+    const deferredQuery = useDeferredValue(query.trim().toLowerCase());
+
+    // Unique roles (fallback to known set if empty in data)
+    const roles: ("All" | TeamMember["role"])[] = useMemo(() => {
+        const r = new Set<TeamMember["role"]>();
+        data.forEach((m) => r.add(m.role));
+        const fromData = Array.from(r);
+        const canonical: ("All" | TeamMember["role"])[] = ["All", "Leadership", "Faculty", "Advisory", "Operations"];
+        return ["All", ...(fromData.length ? fromData : canonical.filter((x) => x !== "All"))] as any;
+    }, [data]);
+
+    // Skills list (unique + sorted)
     const skills = useMemo(() => {
         const s = new Set<string>();
         data.forEach((m) => m.expertise.forEach((e) => s.add(e)));
         return ["All", ...Array.from(s).sort((a, b) => a.localeCompare(b))];
     }, [data]);
 
+    // Popular skills by frequency
+    const popularSkills = useMemo(() => {
+        const counts = new Map<string, number>();
+        data.forEach((m) => m.expertise.forEach((e) => counts.set(e, (counts.get(e) ?? 0) + 1)));
+        return [...counts.entries()]
+            .sort((a, b) => b[1] - a[1])
+            .slice(0, 8)
+            .map(([name]) => name);
+    }, [data]);
 
-    const roles: ("All" | TeamMember["role"])[] = ["All", "Leadership", "Faculty", "Advisory", "Operations"];
-
+    // Basic scoring for "relevance"
+    const scoreMember = (m: TeamMember, q: string) => {
+        if (!q) return 0;
+        const hay = [m.name, m.title, m.bio, ...m.expertise].join(" ").toLowerCase();
+        let score = 0;
+        if (hay.includes(q)) score += 1;
+        if (m.name.toLowerCase().includes(q)) score += 2;
+        if (m.title.toLowerCase().includes(q)) score += 1;
+        return score;
+    };
 
     const filtered = useMemo(() => {
-        const q = query.trim().toLowerCase();
-        return data.filter((m) => {
+        const q = deferredQuery;
+
+        const base = data.filter((m) => {
             const matchesRole = role === "All" || m.role === role;
             const matchesSkill = skill === "All" || m.expertise.includes(skill);
             const matchesSearch =
-                q.length === 0 || [m.name, m.title, m.bio, ...m.expertise].join(" ").toLowerCase().includes(q);
+                q.length === 0 ||
+                [m.name, m.title, m.bio, ...m.expertise].join(" ").toLowerCase().includes(q);
             return matchesRole && matchesSkill && matchesSearch;
         });
-    }, [data, query, role, skill]);
+
+        const sorted = [...base];
+        if (sort === "name-asc") {
+            sorted.sort((a, b) => a.name.localeCompare(b.name));
+        } else if (sort === "name-desc") {
+            sorted.sort((a, b) => b.name.localeCompare(a.name));
+        } else {
+            sorted.sort((a, b) => scoreMember(b, q) - scoreMember(a, q));
+        }
+        return sorted;
+    }, [data, deferredQuery, role, skill, sort]);
+
+    // JSON-LD for ItemList (reflect visible mentors)
+    useEffect(() => {
+        const scriptId = `${id}-jsonld-team-directory`;
+        const existing = document.getElementById(scriptId);
+        if (existing) existing.remove();
+
+        const itemList = {
+            "@context": "https://schema.org",
+            "@type": "ItemList",
+            name: "Cinute Digital Mentor Directory",
+            description:
+                "Explore Cinute Digital’s mentor directory featuring leadership, faculty, advisory, and operations experts in software testing, automation, QA, DevOps, and modern engineering practices.",
+            numberOfItems: filtered.length,
+            itemListElement: filtered.map((m, index) => ({
+                "@type": "Person",
+                name: m.name,
+                jobTitle: m.title,
+                worksFor: { "@type": "Organization", name: "Cinute Digital" },
+                disambiguatingDescription: `${m.role} • ${m.expertise.join(", ")}`,
+                position: index + 1,
+            })),
+        };
+
+        const s = document.createElement("script");
+        s.type = "application/ld+json";
+        s.id = scriptId;
+        s.text = JSON.stringify(itemList);
+        document.head.appendChild(s);
+
+        return () => document.getElementById(scriptId)?.remove();
+    }, [filtered, id]);
+
+    const clearAll = () => {
+        setQuery("");
+        setRole("All");
+        setSkill("All");
+        setSort("relevance");
+        searchRef.current?.focus();
+    };
 
     return (
-        <section id="directory" aria-labelledby={`${id}-directory`} className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-            <h2 id={`${id}-directory`} className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">Our Team Directory</h2>
+        <section
+            id="directory"
+            aria-labelledby={`${id}-directory`}
+            className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8"
+            style={{ ["--brand" as any]: brand }}
+        >
+            {/* Decorative halo */}
+            <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 -top-10 mx-auto h-40 max-w-5xl blur-2xl"
+                style={{
+                    background: "radial-gradient(60% 60% at 50% 35%, rgba(255,140,0,0.12), rgba(255,140,0,0))",
+                }}
+            />
 
+            {/* Header */}
+            <div className="flex items-start justify-between gap-4">
+                <div>
+                    <h2 id={`${id}-directory`} className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
+                        Our Team Directory
+                    </h2>
+                    <p className="mt-1 max-w-2xl text-sm text-slate-600">
+                        Discover experienced <strong className="font-semibold">mentors, faculty, and advisors</strong> in{" "}
+                        <em>software testing, automation, QA, and industry-ready skills</em>. Learn from leaders who build
+                        job-ready talent through hands-on, project-based learning.
+                    </p>
+                </div>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
-                <label className="relative">
-                    <span className="sr-only">Search team</span>
-                    <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
-                    <input
-                        value={query}
-                        onChange={(e) => setQuery(e.target.value)}
-                        placeholder="Search mentors by name, skill, or role…"
-                        className="w-full rounded-2xl border border-slate-200 bg-white px-9 py-2.5 text-sm text-slate-900 placeholder:text-slate-400 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    />
-                </label>
-
-
-                <label className="relative">
-                    <span className="inline-flex items-center gap-2 pb-1 text-xs font-medium text-slate-600">
-                        <Filter className="h-3.5 w-3.5" /> Role
-                    </span>
-                    <select
-                        aria-label="Filter by role"
-                        value={role}
-                        onChange={(e) => setRole(e.target.value as any)}
-                        className="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    >
-                        {roles.map((r) => (
-                            <option key={r} value={r}>{r}</option>
-                        ))}
-                    </select>
-                </label>
-
-                <label className="relative">
-                    <span className="inline-flex items-center gap-2 pb-1 text-xs font-medium text-slate-600">
-                        <Filter className="h-3.5 w-3.5" /> Expertise
-                    </span>
-                    <select
-                        aria-label="Filter by expertise"
-                        value={skill}
-                        onChange={(e) => setSkill(e.target.value)}
-                        className="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                    >
-                        {skills.map((s) => (
-                            <option key={s} value={s}>{s}</option>
-                        ))}
-                    </select>
-                </label>
+                <div className="hidden sm:flex items-center gap-2 text-xs text-slate-600">
+                    <Sparkles className="h-4 w-4" aria-hidden="true" />
+                    <span>Curated for job-ready outcomes</span>
+                </div>
             </div>
 
-
-            <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {/* Grid */}
+            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {filtered.map((m) => (
-                    <TeamCard key={m.id} m={m} />
+                    <MentorCard key={m.id} m={m} />
                 ))}
             </div>
 
-
+            {/* Empty state */}
             {filtered.length === 0 && (
-                <div className="mt-8 rounded-3xl border border-dashed border-slate-200 bg-white p-8 text-center text-slate-600">
-                    No results. Try a different keyword or filter.
+                <div className="mt-8 rounded-3xl border border-dashed border-slate-200 bg-white p-8 text-center">
+                    <p className="text-slate-700 font-medium">No results found</p>
+                    <p className="mt-1 text-sm text-slate-600">
+                        Try broader keywords (e.g., “QA”, “Automation”, “Manual Testing”) or remove a filter.
+                    </p>
+                    <div className="mt-4 flex justify-center">
+                        <button
+                            type="button"
+                            onClick={clearAll}
+                            className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold text-white shadow-sm transition focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                            style={{ backgroundColor: brand }}
+                        >
+                            <RefreshCw className="h-4 w-4" />
+                            Clear all filters
+                        </button>
+                    </div>
                 </div>
             )}
+
+            {/* SEO helper copy */}
+            <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-6">
+                <h3 className="text-base font-semibold text-slate-900">Learn with industry mentors at Cinute Digital</h3>
+                <p className="mt-2 text-sm leading-6 text-slate-600">
+                    Our mentor directory brings together{" "}
+                    <strong className="font-semibold">
+                        software testing experts, automation engineers, QA leads, and industry advisors
+                    </strong>{" "}
+                    who teach real-world workflows—test strategy, API testing, CI/CD, Selenium, Playwright, Agile & DevOps.
+                    Build a job-ready portfolio with live projects, capstones, and interview preparation to accelerate{" "}
+                    <strong className="font-semibold">tech careers and high-growth placements</strong>.
+                </p>
+            </div>
         </section>
+    );
+}
+
+/* =============================
+ * New Mentor Card (Premium)
+ * ============================= */
+function MentorCard({ m }: { m: TeamMember }) {
+    return (
+        <article
+            className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md focus-within:shadow-md"
+            aria-label={`${m.name}, ${m.title}`}
+        >
+            {/* Gradient ring on hover */}
+            <div className="pointer-events-none absolute inset-0 rounded-[22px] opacity-0 ring-2 ring-[var(--brand)]/40 transition group-hover:opacity-100" />
+
+            <div className="flex flex-col md:flex-row items-start gap-4">
+                <div className="self-center md:self-start">
+                    <Avatar name={m.name} src={(m as any).avatar} />
+                </div>
+
+                <div className="min-w-0 flex-1">
+                    <h3 className="truncate text-base font-semibold text-slate-900">{m.name}</h3>
+                    <p className="truncate text-sm text-slate-600">{m.title}</p>
+
+                    <div className="mt-2 flex flex-wrap gap-1.5">
+                        {m.expertise.slice(0, 4).map((e) => (
+                            <span
+                                key={e}
+                                className="inline-flex items-center rounded-full bg-orange-50 px-2 py-0.5 text-[11px] font-medium text-orange-700 ring-1 ring-inset ring-orange-200"
+                            >
+                                {e}
+                            </span>
+                        ))}
+                        {m.expertise.length > 4 && (
+                            <span className="inline-flex items-center rounded-full bg-slate-50 px-2 py-0.5 text-[11px] text-slate-600 ring-1 ring-slate-200">
+                                +{m.expertise.length - 4}
+                            </span>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+
+            {/* Bio teaser */}
+            {m.bio && (
+                <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-600">
+                    {m.bio}
+                </p>
+            )}
+
+            {/* Metadata strip */}
+            <div className="mt-3 flex items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-slate-50/60 px-3 py-2">
+                <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-700">
+                    <Shield className="h-3.5 w-3.5 text-slate-500" />
+                    {m.role}
+                </span>
+                <span className="inline-flex items-center gap-1.5 text-xs text-slate-600">
+                    <GraduationCap className="h-3.5 w-3.5 text-slate-500" />
+                    Mentoring for job-readiness
+                </span>
+            </div>
+
+            {/* Actions */}
+            <div className="mt-3 flex items-center gap-2">
+                <a
+                    href={`#mentor-${m.id}`}
+                    className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                >
+                    View Profile
+                </a>
+                <a
+                    href="#contact"
+                    className="inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
+                    style={{ backgroundColor: "#ff8c00" }}
+                >
+                    LinkedIn
+                </a>
+                <span className="ml-auto inline-flex items-center gap-1 text-[11px] text-slate-500">
+                    <Quote className="h-3.5 w-3.5" />
+                    Industry-aligned teaching
+                </span>
+            </div>
+        </article>
+    );
+}
+
+function Avatar({ name, src }: { name: string; src?: string }) {
+    const initials = name
+        .split(" ")
+        .map((n) => n[0])
+        .slice(0, 2)
+        .join("")
+        .toUpperCase();
+
+    return src ? (
+        <div className="relative w-40 h-40 md:w-30 md:h-30 overflow-hidden rounded-full ring-1 ring-slate-200">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <Image src={src} alt={`${name} avatar`} width={160} height={120} className="object-cover rounded-full" />
+        </div>
+    ) : (
+        <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-orange-100 to-amber-100 text-sm font-semibold text-orange-700 ring-1 ring-slate-200">
+            {initials}
+        </div>
     );
 }

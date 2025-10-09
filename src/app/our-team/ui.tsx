@@ -39,47 +39,62 @@ export function TeamCard({ m }: { m: TeamMember }) {
     return (
         <motion.article
             {...fadeUp}
-            className="group relative rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md ring-1 ring-slate-200/80"
+            className="group rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md"
         >
-            <div className="flex items-start gap-4">
-                <div className="relative h-20 w-20 shrink-0 overflow-hidden rounded-2xl ring-1 ring-slate-200 bg-white">
-                    <Image
-                        src={m.avatar}
-                        alt={`${m.name} — ${m.title}`}
-                        fill
-                        className="object-cover"
-                        sizes="80px"
-                        priority
-                    />
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:items-center">
+                {/* LEFT: Avatar */}
+                <div className="flex justify-center md:justify-start">
+                    <div className="relative h-40 w-40 md:w-35 md:h-35 overflow-hidden rounded-full ring-1 ring-slate-200">
+                        <Image
+                            src={m.avatar}
+                            alt={`${m.name} — ${m.title}`}
+                            width={160}
+                            height={160}
+                            className="object-cover"
+                            sizes="(min-width: 768px) 160px, 40vw"
+                            priority
+                        />
+                    </div>
                 </div>
+
+                {/* RIGHT (same row on md+): Name / Title / Location */}
                 <div className="min-w-0">
                     <h3 className="truncate text-base font-semibold text-slate-900">{m.name}</h3>
-                    <p className="text-sm text-slate-600">{m.title}</p>
+                    <p className="truncate text-sm text-slate-600">{m.title}</p>
                     {m.location && <p className="mt-0.5 text-xs text-slate-500">{m.location}</p>}
-                    <p className="mt-3 line-clamp-3 text-sm text-slate-700">{m.bio}</p>
+                </div>
+
+                {/* BELOW (full width): Bio */}
+                {m.bio && (
+                    <p className="md:col-span-2 mt-2 text-sm leading-6 text-slate-700">{m.bio}</p>
+                )}
+
+                {/* BELOW (full width): Expertise + CTAs */}
+                <div className="md:col-span-2 flex flex-col gap-3">
                     {m.expertise?.length > 0 && (
-                        <div className="mt-3 flex flex-wrap gap-1.5">
-                            {m.expertise.slice(0, 5).map((x) => (
+                        <div className="flex flex-wrap gap-1.5">
+                            {m.expertise.slice(0, 5).map((x: string) => (
                                 <Pill key={x}>{x}</Pill>
                             ))}
                         </div>
                     )}
+
                     {(m.linkedin || m.email) && (
-                        <div className="mt-4 flex items-center gap-3">
+                        <div className="flex items-center gap-3">
                             {m.linkedin && (
                                 <a
                                     href={m.linkedin}
                                     aria-label={`Open ${m.name}'s LinkedIn profile`}
-                                    className="inline-flex items-center gap-1 text-sm font-medium text-slate-700 hover:text-slate-900"
+                                    className="inline-flex items-center gap-1 rounded-full bg-brand px-4 py-2 text-sm font-medium text-white transition-all hover:text-slate-900"
                                 >
                                     LinkedIn
                                 </a>
                             )}
                             {m.email && (
                                 <a
-                                    href={m.email}
+                                    href={`mailto:${m.email}`}
                                     aria-label={`Email ${m.name}`}
-                                    className="inline-flex items-center gap-1 text-sm font-medium text-slate-700 hover:text-slate-900"
+                                    className="inline-flex items-center gap-1 rounded-full border border-brand px-4 py-2 text-sm font-medium text-slate-700 transition-all hover:bg-brand hover:text-white"
                                 >
                                     Email
                                 </a>
@@ -88,6 +103,7 @@ export function TeamCard({ m }: { m: TeamMember }) {
                     )}
                 </div>
             </div>
+
             {m.highlights && m.highlights.length > 0 && (
                 <ul className="mt-4 grid grid-cols-1 gap-2 border-t border-slate-100 pt-4 text-xs text-slate-600 sm:grid-cols-3">
                     {m.highlights.map((h) => (

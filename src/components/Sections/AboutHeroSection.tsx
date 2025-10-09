@@ -150,7 +150,7 @@ export default function AboutHeroSection() {
                     initial={{ opacity: 0, scale: 0.985 }}
                     animate={{ opacity: 1, scale: 1 }}
                     transition={{ duration: 0.55, ease: easeBezier }}
-                    className="order-2 lg:order-2 relative top-0 mt-6 h-56 w-full overflow-hidden rounded-3xl bg-white/92 ring-1 ring-slate-200 shadow-[0_20px_45px_-20px_rgba(2,6,23,0.25)] backdrop-blur sm:h-64 md:h-80 lg:mt-0 lg:h-[22rem] dark:bg-white/92"
+                    className="order-2 lg:order-2 relative top-0 mt-6 lg:mt-8 h-56 w-full overflow-hidden rounded-3xl bg-white/92 ring-1 ring-slate-200 shadow-[0_20px_45px_-20px_rgba(2,6,23,0.25)] backdrop-blur sm:h-64 md:h-80 lg:h-[22rem] dark:bg-white/92"
                     role="img"
                     aria-label="Students collaborating with mentors on live software testing and data science projects"
                 >

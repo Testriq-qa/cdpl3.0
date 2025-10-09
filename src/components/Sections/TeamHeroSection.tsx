@@ -115,14 +115,14 @@ export default function TeamHero() {
                 <div className="flex gap-3">
                     <Link
                         href="#mentors"
-                        className="inline-flex items-center justify-center rounded-2xl bg-[--brand,_#ff8c00] px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
+                        className="inline-flex items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:shadow-xl hover:bg-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
                         style={{ ["--brand" as any]: BRAND }}
                     >
                         Explore Mentors <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                     <Link
                         href="/become-a-mentor"
-                        className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
+                        className="inline-flex items-center justify-center rounded-2xl border border-brand bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-brand hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
                     >
                         Become a Mentor
                     </Link>
@@ -174,10 +174,10 @@ export default function TeamHero() {
                 <p className="text-center text-sm font-medium text-slate-500">
                     Trusted by industry & aligned with global standards
                 </p>
-                <div className="mt-4 grid grid-cols-2 items-center justify-items-center gap-6 sm:grid-cols-4">
+                <div className="mt-6 grid grid-cols-2 md:grid-cols-4 items-center justify-items-center gap-18">
                     {logos.map((l) => (
                         <div key={l.alt} className="relative h-8 w-28 opacity-80 transition hover:opacity-100">
-                            <Image src={l.src} alt={l.alt} fill className="object-contain" />
+                            <Image src={l.src} alt={l.alt} width={100} height={100} className="object-contain" />
                         </div>
                     ))}
                 </div>
@@ -187,7 +187,7 @@ export default function TeamHero() {
             <motion.div
                 {...fadeUp}
                 transition={{ duration: 0.6, ease: easeBezier, delay: 0.46 }}
-                className="mt-10 grid gap-4 sm:grid-cols-3"
+                className="mt-18 grid gap-4 sm:grid-cols-3"
             >
                 {[
                     { name: "Ami Khambata", role: "Lead SDET Mentor", img: "/images/ami-khambata.png" },
@@ -199,8 +199,8 @@ export default function TeamHero() {
                         className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
                     >
                         <div className="flex items-center gap-3">
-                            <div className="relative h-12 w-12 overflow-hidden rounded-full border border-slate-200">
-                                <Image src={m.img} alt={m.name} fill className="object-cover" />
+                            <div className="relative overflow-hidden rounded-full border border-slate-200">
+                                <Image src={m.img} alt={m.name} width={80} height={80} className="object-cover" />
                             </div>
                             <figcaption>
                                 <p className="font-semibold text-slate-900">{m.name}</p>

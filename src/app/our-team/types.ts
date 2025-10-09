@@ -13,4 +13,20 @@ export type TeamMember = {
     linkedin?: string;
     email?: string;
     highlights?: string[];
+    src?: string
+};
+
+export type Trainer = {
+  id: string;
+  name: string;
+  role: string; // e.g., "Senior QA Mentor"
+  avatar: string; // public path or remote URL
+  bio: string;
+  yearsExp: number;
+  rating?: number; // 0–5
+  specialties: string[]; // e.g., ["Manual Testing", "Playwright", "API Testing"]
+  certifications?: string[]; // e.g., ["ISTQB CTFL", "Scrum Master"]
+  languages?: string[]; // e.g., ["English", "Hindi"]
+  successStories?: number; // no. of placed learners or notable outcomes
+  slug?: string; // optional profile link
 };
