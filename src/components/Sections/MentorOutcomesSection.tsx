@@ -291,8 +291,8 @@ function OutcomeOrbit({
           </svg>
         </div>
 
-        {/* Center spotlight — wider & slightly higher on mobile */}
-        <div className="absolute left-1/2 top-[44%] sm:top-1/2 w-[88%] sm:w-[66%] max-w-[440px] -translate-x-1/2 -translate-y-1/2">
+        {/* Center spotlight — wider & slightly higher on mobile; extra tweaks for ≤360px */}
+        <div className="absolute left-1/2 top-[44%] sm:top-1/2 w-[88%] sm:w-[66%] max-w-[440px] -translate-x-1/2 -translate-y-1/2 max-[360px]:w-[92%] max-[360px]:top-[42%]">
           <div className="rounded-3xl border border-zinc-200 bg-white/90 p-4 shadow-[0_22px_60px_-28px_rgba(0,0,0,0.45)] backdrop-blur-sm">
             {active ? (
               <>
@@ -343,14 +343,14 @@ function OutcomeOrbit({
         </div>
 
         {/* MOBILE: overlapping horizontal stack (visible <sm) */}
-        <div className="absolute inset-x-0 bottom-[8%] flex items-end justify-center gap-0 sm:hidden">
+        <div className="absolute inset-x-0 bottom-[8%] flex items-end justify-center gap-0 sm:hidden max-[360px]:bottom-[2%]">
           {cases.map((c, i) => {
             const isActive = i === activeIdx;
             return (
               <button
                 key={c.name + c.company + "m"}
                 onClick={() => setActiveIdx(i)}
-                className="relative -ml-3 first:ml-0 shrink-0"
+                className="relative -ml-3 first:ml-0 shrink-0 max-[360px]:-ml-2"
                 style={{ zIndex: isActive ? 100 : 10 + i }}
                 aria-label={`${c.name}, ${c.role} at ${c.company}`}
               >
@@ -368,17 +368,11 @@ function OutcomeOrbit({
                   <img
                     src={c.avatar}
                     alt=""
-                    className="h-12 w-12 rounded-full object-cover ring-2 ring-white"
+                    className="h-12 w-12 rounded-full object-cover ring-2 ring-white max-[360px]:h-10 max-[360px]:w-10"
                     loading="lazy"
                   />
                 </span>
-
-                {/* Active label — compact and non-intrusive on mobile */}
-                {isActive && (
-                  <span className="mt-1 inline-flex w-fit max-w-[78vw] overflow-hidden text-ellipsis whitespace-nowrap rounded-full border border-zinc-200 bg-white/95 px-2.5 py-0.5 text-[10px] font-semibold text-zinc-800 shadow-sm">
-                    {c.role} @ {c.company}
-                  </span>
-                )}
+                {/* (No mobile label by request) */}
               </button>
             );
           })}

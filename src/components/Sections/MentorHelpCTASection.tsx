@@ -119,8 +119,12 @@ export default function MentorHelpCTASection({
             <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Link
                 href={href}
-                className="group inline-flex items-center gap-2 rounded-full px-5 py-2 text-sm font-semibold text-white transition-transform active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500"
+                className="group inline-flex items-center gap-2 rounded-full text-white transition-transform active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500
+                           whitespace-nowrap overflow-hidden text-ellipsis
+                           text-[13px] leading-none px-4 py-2 min-h-[40px]
+                           sm:text-sm sm:leading-normal sm:px-5 sm:py-2"
                 style={{
+                  fontSize: ".74rem", // ← requested change
                   background:
                     "linear-gradient(90deg, #ff8c00 0%, #ffae3a 50%, #ffb84d 100%)",
                   boxShadow: "0 16px 46px -18px rgba(255,140,0,0.6)",

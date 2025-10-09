@@ -16,7 +16,7 @@ export default function MentorHeroSection() {
         <div className="text-center min-[1040px]:text-left">
           <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-600 backdrop-blur">
             <span
-              className="inline-block h-2 w-2 rounded-full"
+              className="hidden sm:inline-block h-2 w-2 rounded-full"
               style={{ backgroundColor: "var(--color-brand, #ff8c00)" }}
             />
             One-on-One Mentorship • Resume + Interview Prep • Placement Support
