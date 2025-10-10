@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import React from 'react'
 
 const BlogPostHeroSection = dynamic(
-    () => import("@/components/Sections/BlogPostHeroSection").then(m => m.BlogPostHeroSection),
+    () => import("@/components/sections/BlogPostHeroSection").then(m => m.BlogPostHeroSection),
     {
         ssr: true,
         loading: () => (

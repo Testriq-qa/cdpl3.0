@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import TrainersHeroSection from "@/components/Sections/TrainersHeroSection";
-import TrainersDirectorySection from "@/components/Sections/TrainersDirectorySection";
-import TrainersCalloutSection from "@/components/Sections/TrainersCalloutSection";
-import TrainersPartnerSection from "@/components/Sections/TrainersPartnerSection";
-import TrainersOutcomeSection from "@/components/Sections/TrainersOutcomeSection";
-import TrainersCTASection from "@/components/Sections/TrainersCTASection";
+import TrainersHeroSection from "@/components/sections/TrainersHeroSection";
+import TrainersDirectorySection from "@/components/sections/TrainersDirectorySection";
+import TrainersCalloutSection from "@/components/sections/TrainersCalloutSection";
+import TrainersPartnerSection from "@/components/sections/TrainersPartnerSection";
+import TrainersOutcomeSection from "@/components/sections/TrainersOutcomeSection";
+import TrainersCTASection from "@/components/sections/TrainersCTASection";
 import SEOJsonLd from "@/app/trainers/SEOJsonLd";
 import { trainers } from "@/app/trainers/data";
 
