@@ -7,16 +7,8 @@ import { useDeferredValue, useEffect, useId, useMemo, useRef, useState } from "r
 import Image from "next/image";
 import type { TeamMember } from "@/app/our-team/types";
 import {
-    Search,
-    Filter,
-    SlidersHorizontal,
-    X,
-    Tag,
     RefreshCw,
     Sparkles,
-    ArrowUpAZ,
-    ArrowDownAZ,
-    ChevronDown,
     Shield,
     Quote,
     GraduationCap,
@@ -58,32 +50,6 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
 
     // Defer heavy search to keep typing smooth
     const deferredQuery = useDeferredValue(query.trim().toLowerCase());
-
-    // Unique roles (fallback to known set if empty in data)
-    const roles: ("All" | TeamMember["role"])[] = useMemo(() => {
-        const r = new Set<TeamMember["role"]>();
-        data.forEach((m) => r.add(m.role));
-        const fromData = Array.from(r);
-        const canonical: ("All" | TeamMember["role"])[] = ["All", "Leadership", "Faculty", "Advisory", "Operations"];
-        return ["All", ...(fromData.length ? fromData : canonical.filter((x) => x !== "All"))] as any;
-    }, [data]);
-
-    // Skills list (unique + sorted)
-    const skills = useMemo(() => {
-        const s = new Set<string>();
-        data.forEach((m) => m.expertise.forEach((e) => s.add(e)));
-        return ["All", ...Array.from(s).sort((a, b) => a.localeCompare(b))];
-    }, [data]);
-
-    // Popular skills by frequency
-    const popularSkills = useMemo(() => {
-        const counts = new Map<string, number>();
-        data.forEach((m) => m.expertise.forEach((e) => counts.set(e, (counts.get(e) ?? 0) + 1)));
-        return [...counts.entries()]
-            .sort((a, b) => b[1] - a[1])
-            .slice(0, 8)
-            .map(([name]) => name);
-    }, [data]);
 
     // Basic scoring for "relevance"
     const scoreMember = (m: TeamMember, q: string) => {
@@ -163,7 +129,7 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
         <section
             id="directory"
             aria-labelledby={`${id}-directory`}
-            className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8"
+            className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"
             style={{ ["--brand" as any]: brand }}
         >
             {/* Decorative halo */}
@@ -175,24 +141,29 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
                 }}
             />
 
-            {/* Header */}
-            <div className="flex items-start justify-between gap-4">
-                <div>
-                    <h2 id={`${id}-directory`} className="text-2xl font-semibold tracking-tight text-slate-900 sm:text-3xl">
-                        Our Team Directory
+            {/* Header (centered) */}
+            <div className="flex flex-col items-center gap-3">
+                <div className="mx-auto max-w-3xl text-center">
+                    <h2
+                        id={`${id}-directory`}
+                        className="text-4xl font-bold tracking-tight text-slate-900"
+                    >
+                        Our <span className="text-brand">Team</span> Directory
                     </h2>
-                    <p className="mt-1 max-w-2xl text-sm text-slate-600">
+                    <p className="mt-5 mx-auto max-w-5xl text-lg text-slate-600">
                         Discover experienced <strong className="font-semibold">mentors, faculty, and advisors</strong> in{" "}
                         <em>software testing, automation, QA, and industry-ready skills</em>. Learn from leaders who build
                         job-ready talent through hands-on, project-based learning.
                     </p>
                 </div>
 
-                <div className="hidden sm:flex items-center gap-2 text-xs text-slate-600">
+                {/* Centered helper note */}
+                <div className="flex items-center justify-center gap-2 text-xs text-slate-600">
                     <Sparkles className="h-4 w-4" aria-hidden="true" />
                     <span>Curated for job-ready outcomes</span>
                 </div>
             </div>
+
 
             {/* Grid */}
             <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">

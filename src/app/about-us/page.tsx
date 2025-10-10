@@ -3,17 +3,114 @@
 
 import { Metadata } from "next";
 import Head from "next/head";
-import { motion } from "framer-motion";
-import { ShieldCheck, Star, GraduationCap, BadgeCheck, Sparkles } from "lucide-react";
-import AboutHeroSection from "@/components/Sections/AboutHeroSection";
-import AboutStatsSection from "@/components/Sections/AboutStats.Section";
-import AboutWhyJoinUs from "@/components/Sections/AboutWhyJoinUs";
-import AboutStorySection from "@/components/Sections/AboutStorySection";
-import AboutFacultyStrip from "@/components/Sections/AboutFacultyStrip";
-import AboutMissionVision from "@/components/Sections/AboutVisionMission";
-import AboutFAQSection from "@/components/Sections/AboutFAQSection";
-import AboutCTASection from "@/components/Sections/AboutCTASection";
-import AboutAccreditations from "@/components/Sections/AboutAccreditations";
+const AboutHeroSection = dynamic(
+    () => import("@/components/Sections/AboutHeroSection"),
+    {
+        ssr: true,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        )
+    }
+)
+
+const AboutStatsSection = dynamic(
+    () => import("@/components/Sections/AboutStats.Section"),
+    {
+        ssr: true,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        )
+    }
+)
+const AboutWhyJoinUs = dynamic(
+    () => import("@/components/Sections/AboutWhyJoinUs"),
+    {
+        ssr: true,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        )
+    }
+)
+
+const AboutStorySection = dynamic(
+    () => import("@/components/Sections/AboutStorySection"),
+    {
+        ssr: true,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        )
+    }
+)
+
+const AboutFacultyStrip = dynamic(
+    () => import("@/components/Sections/AboutFacultyStrip"),
+    {
+        ssr: true,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        )
+    }
+)
+
+const AboutMissionVision = dynamic(
+    () => import("@/components/Sections/AboutVisionMission"),
+    {
+        ssr: true,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        )
+    }
+)
+
+const AboutFAQSection = dynamic(
+    () => import("@/components/Sections/AboutFAQSection"),
+    {
+        ssr: true,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        )
+    }
+)
+
+const AboutCTASection = dynamic(
+    () => import("@/components/Sections/AboutCTASection"),
+    {
+        ssr: true,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        )
+    }
+)
+
+const AboutAccreditations = dynamic(
+    () => import("@/components/Sections/AboutAccreditations"),
+    {
+        ssr: true,
+        loading: () => (
+            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+                <p className="text-gray-500">Loading...</p>
+            </div>
+        )
+    }
+)
+
+import dynamic from "next/dynamic";
 
 
 // Optional: Next.js metadata for SEO (app router)
@@ -80,7 +177,7 @@ export default function AboutPage() {
             <Head>
                 <script
                     type="application/ld+json"
-                    // @ts-ignore — JSON-LD string is valid
+                    // @ts ignore — JSON-LD string is valid
                     dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </Head>

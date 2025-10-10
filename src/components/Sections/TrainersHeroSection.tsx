@@ -1,4 +1,4 @@
-import { Sparkles, ShieldCheck, Users2, GraduationCap, Check, Search } from "lucide-react";
+import { Sparkles, ShieldCheck, Users2, GraduationCap, Check } from "lucide-react";
 import Link from "next/link";
 
 export default function TrainersHeroSection() {

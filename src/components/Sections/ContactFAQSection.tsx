@@ -87,7 +87,7 @@ const ALL_FAQS: FAQ[] = [
 const CATEGORIES: Array<FAQ["cat"]> = ["Admissions", "Learning", "Financing", "Placement", "Corporate"];
 
 export function ContactFAQSection() {
-  const [query, setQuery] = useState("");
+  const [query] = useState("");
   const [activeCat, setActiveCat] = useState<FAQ["cat"] | "All">("All");
 
   const filtered = useMemo(() => {
