@@ -12,233 +12,169 @@ const courseCategories = [
     name: "Sofware Testing Courses",
     description:
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
-    governingBodies: [
-      { name: "Sofware Testing Courses", logo: "/header_images/Sotware_Testing.png" },
-
-    ],
+    governingBodies: [{ name: "Sofware Testing Courses", logo: "/header_images/Sotware_Testing.png" }],
     courses: [
       {
         name: "Manual Software Testing",
-        description:
-          "Learn to facilitate Scrum teams and drive Agile projects effectively.",
-        governingBodies: [
-          { name: "Manual Testing", logo: "/header_images/Manual-Testing.png" },
-
-        ],
+        description: "Learn to facilitate Scrum teams and drive Agile projects effectively.",
+        governingBodies: [{ name: "Manual Testing", logo: "/header_images/Manual-Testing.png" }],
       },
       {
         name: "API Testing using POSTMAN and RestAPIs",
-        description:
-          "Master product backlog management and stakeholder collaboration.",
-        governingBodies: [
-          { name: "API Testing", logo: "/header_images/API_Testing_Postman.png" },
-        ],
+        description: "Master product backlog management and stakeholder collaboration.",
+        governingBodies: [{ name: "API Testing", logo: "/header_images/API_Testing_Postman.png" }],
       },
       {
         name: "Database Management System using MySQL",
-        description:
-          "Gain advanced Scrum knowledge to lead high-performing teams.",
-        governingBodies: [
-          { name: "Database Management", logo: "/header_images/Database_Management_MySQL.png" },
-        ],
+        description: "Gain advanced Scrum knowledge to lead high-performing teams.",
+        governingBodies: [{ name: "Database Management", logo: "/header_images/Database_Management_MySQL.png" }],
       },
       {
         name: "ETL Testing Course",
-        description:
-          "Learn to lead Agile transformations using the SAFe framework.",
-        governingBodies: [
-          { name: "ETL Testing", logo: "/header_images/ETL_Testing.png" },
-        ],
+        description: "Learn to lead Agile transformations using the SAFe framework.",
+        governingBodies: [{ name: "ETL Testing", logo: "/header_images/ETL_Testing.png" }],
       },
       {
         name: "Advanced Software Testing",
         description: "Facilitate SAFe practices for scaled Agile environments.",
-        governingBodies: [
-          { name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" },
-        ],
+        governingBodies: [{ name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" }],
       },
       {
         name: "Advanced Automation Testing",
         description: "Drive product vision and delivery in SAFe settings.",
-        governingBodies: [
-          { name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" },
-        ],
+        governingBodies: [{ name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" }],
       },
       {
         name: "Advanced Manual and Automation Testing - Master Program",
-        description:
-          "Blend Agile principles with PMI project management standards.",
-        governingBodies: [{ name: "Advanced Manual and Automation Testing - Master Program", logo: "/header_images/Advanced Manual and Automation Testing - Master Program.png" }],
+        description: "Blend Agile principles with PMI project management standards.",
+        governingBodies: [
+          {
+            name: "Advanced Manual and Automation Testing - Master Program",
+            logo: "/header_images/Advanced Manual and Automation Testing - Master Program.png",
+          },
+        ],
       },
     ],
   },
   {
     id: "data-science",
     name: "Data Science, AI - ML & BI Courses",
-    description:
-      "Prepare for job interviews with practical skills and confidence.",
-    governingBodies: [
-      { name: "Data Science, AI - ML & BI Courses", logo: "/header_images/DataScience_AI_ML_BI.png" },
-    ],
+    description: "Prepare for job interviews with practical skills and confidence.",
+    governingBodies: [{ name: "Data Science, AI - ML & BI Courses", logo: "/header_images/DataScience_AI_ML_BI.png" }],
     courses: [
       {
         name: "Machine Learning and Data Science with Python - Hero Program",
-        description:
-          "Build strategies to ace behavioral and technical interviews.",
-        governingBodies: [
-          { name: "Machine Learning and Data Science with Python - Hero Program", logo: "/header_images/ML_and_DS_with_Python.png" },
-        ],
+        description: "Build strategies to ace behavioral and technical interviews.",
+        governingBodies: [{ name: "Machine Learning and Data Science with Python - Hero Program", logo: "/header_images/ML_and_DS_with_Python.png" }],
       },
       {
         name: "Deep Learning, NLP and GenerativeAI",
         description: "Practice real-world interview scenarios with feedback.",
-        governingBodies: [
-          { name: "Deep Learning, NLP and GenerativeAI", logo: "/header_images/DeepLearning_and_NLP.png" },
-        ],
+        governingBodies: [{ name: "Deep Learning, NLP and GenerativeAI", logo: "/header_images/DeepLearning_and_NLP.png" }],
       },
       {
         name: "Advanced Data Analytics - Hero Program",
         description: "Craft a standout resume to impress recruiters.",
-        governingBodies: [
-          { name: "Advanced Data Analytics - Hero Program", logo: "/header_images/Advance_Data_Analytics.png" },
-        ],
+        governingBodies: [{ name: "Advanced Data Analytics - Hero Program", logo: "/header_images/Advance_Data_Analytics.png" }],
       },
       {
         name: "Big Data Engineering",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" },
-        ],
+        governingBodies: [{ name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" }],
       },
       {
         name: "Prompt Engneering with Generative AI",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Prompt Engneering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" },
-        ],
+        governingBodies: [{ name: "Prompt Engneering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" }],
       },
       {
         name: "Advanced Data Science and Machine Learning Masterclass",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Advanced Data Science and Machine Learning Masterclass", logo: "/header_images/Advance_DS_and_ML.png" },
-        ],
+        governingBodies: [{ name: "Advanced Data Science and Machine Learning Masterclass", logo: "/header_images/Advance_DS_and_ML.png" }],
       },
       {
         name: "Comprehensive Data Science and AI - Master Program",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Comprehensive Data Science and AI - Master Program", logo: "/header_images/Comprehensive_DS_and_AI.png" },
-        ],
+        governingBodies: [{ name: "Comprehensive Data Science and AI - Master Program", logo: "/header_images/Comprehensive_DS_and_AI.png" }],
       },
       {
         name: "Data Analysis with BI & Big Data Engineering Master Program",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Data Analysis with BI & Big Data Engineering Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" },
-        ],
+        governingBodies: [{ name: "Data Analysis with BI & Big Data Engineering Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" }],
       },
     ],
   },
   {
     id: "digital-marketing",
     name: "Digital Marketing",
-    description:
-      "Develop skills to manage projects efficiently and effectively.",
-    governingBodies: [
-      { name: "Digital Marketing", logo: "/header_images/Digital_Marketing.png" },
-    ],
+    description: "Develop skills to manage projects efficiently and effectively.",
+    governingBodies: [{ name: "Digital Marketing", logo: "/header_images/Digital_Marketing.png" }],
     courses: [
       {
         name: "Digital Marketing and Analytics - Master Program",
         description: "Earn the globally recognized PMP certification.",
         governingBodies: [{ name: "Digital Marketing and Analytics - Master Program", logo: "/header_images/Digital_Marketing_Analytics.png" }],
       },
-
     ],
   },
   {
     id: "programming-courses",
     name: "Programming Courses",
-    description:
-      "Streamline software development and operations with DevOps practices.",
-    governingBodies: [
-      { name: "Programming Courses", logo: "/header_images/Programming.png" },
-    ],
+    description: "Streamline software development and operations with DevOps practices.",
+    governingBodies: [{ name: "Programming Courses", logo: "/header_images/Programming.png" }],
     courses: [
       {
         name: "Python Programming",
         description: "Master containerization and orchestration technologies.",
-        governingBodies: [
-          { name: "Python Programming", logo: "/header_images/Python_Programming.png" },
-        ],
+        governingBodies: [{ name: "Python Programming", logo: "/header_images/Python_Programming.png" }],
       },
       {
         name: "Java Programming",
         description: "Automate CI/CD pipelines with Jenkins.",
-        governingBodies: [
-          { name: "Java Programming", logo: "/header_images/Java_Programming.png" },
-        ],
+        governingBodies: [{ name: "Java Programming", logo: "/header_images/Java_Programming.png" }],
       },
-
     ],
   },
   {
     id: "aaa-accredited",
     name: "AAA Accredited Courses",
-    description:
-      "Unlock insights from data with advanced analytics and machine learning.",
-    governingBodies: [
-      { name: "AAA Accredited Courses", logo: "/header_images/AAA_Accredited.png" },
-    ],
+    description: "Unlock insights from data with advanced analytics and machine learning.",
+    governingBodies: [{ name: "AAA Accredited Courses", logo: "/header_images/AAA_Accredited.png" }],
     courses: [
       {
         name: "Advanced Software Testing",
         description: "Analyze data to drive business decisions.",
-        governingBodies: [
-          { name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" },
-        ],
+        governingBodies: [{ name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" }],
       },
       {
         name: "Advanced Automation Testing",
-        description:
-          "Build predictive models with machine learning techniques.",
-        governingBodies: [
-          { name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" },
-        ],
+        description: "Build predictive models with machine learning techniques.",
+        governingBodies: [{ name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" }],
       },
       {
         name: "Advanced Data Science and Machine Learning - Masterclass",
         description: "Use Python for data analysis and visualization.",
-        governingBodies: [
-          { name: "Advanced Data Science and Machine Learning - Masterclass", logo: "/header_images/Advance_DS_and_ML.png" },
-        ],
+        governingBodies: [{ name: "Advanced Data Science and Machine Learning - Masterclass", logo: "/header_images/Advance_DS_and_ML.png" }],
       },
       {
         name: "Data Analysis with BI & Big Data Engineering - Master Program",
         description: "Create interactive data visualizations with Power BI.",
-        governingBodies: [
-          { name: "Data Analysis with BI & Big Data Engineering - Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" },
-        ],
+        governingBodies: [{ name: "Data Analysis with BI & Big Data Engineering - Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" }],
       },
-
     ],
   },
 ];
 
 const Header = () => {
+  // Global
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Desktop mega & dropdowns
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(
-    courseCategories[0].id
-  );
+  const [selectedCategory, setSelectedCategory] = useState(courseCategories[0].id);
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const [expandedMobileCategory, setExpandedMobileCategory] = useState<
-    string | null
-  >(null);
 
-  // NEW: Jobs and About dropdown state/refs
   const [isJobsOpen, setIsJobsOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const aboutButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -246,39 +182,58 @@ const Header = () => {
   const jobsButtonRef = useRef<HTMLButtonElement | null>(null);
   const jobsMenuRef = useRef<HTMLDivElement | null>(null);
 
+  // Mobile accordions (keep them independent)
+  const [mobileSections, setMobileSections] = useState<{
+    courses: boolean;
+    jobs: boolean;
+    about: boolean;
+    openCategoryId: string | null;
+  }>({
+    courses: false,
+    jobs: false,
+    about: false,
+    openCategoryId: null,
+  });
+
+  // Basic menu toggle
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((v) => !v);
+    // Reset mobile accordions when the main menu closes
     if (isMenuOpen) {
-      setExpandedMobileCategory(null);
+      setMobileSections({ courses: false, jobs: false, about: false, openCategoryId: null });
     }
   };
 
+  // Desktop dropdown toggles — FIXED to update their own state (not isMenuOpen)
+  const toggleJob = () => setIsJobsOpen((v) => !v);
+  const toggleAbout = () => setIsAboutOpen((v) => !v);
+
+  // Mobile section toggles — independent and predictable
+  const toggleMobileSection = (key: "courses" | "jobs" | "about") => {
+    setMobileSections((s) => {
+      // You can allow multiple to be open; or close others if you prefer. Here, multiple are allowed.
+      const next = { ...s, [key]: !s[key] };
+      // If closing Courses, also close any open nested category
+      if (key === "courses" && s.courses) next.openCategoryId = null;
+      return next;
+    });
+  };
+
+  // Inside Mobile → Courses: open/close exactly one category at a time
   const toggleMobileCategory = (categoryId: string) => {
-    if (categoryId === "courses") {
-      setExpandedMobileCategory(
-        expandedMobileCategory === "courses" ? null : "courses"
-      );
-    } else {
-      setExpandedMobileCategory(
-        expandedMobileCategory === categoryId ? "courses" : categoryId
-      );
-    }
+    setMobileSections((s) => ({
+      ...s,
+      openCategoryId: s.openCategoryId === categoryId ? null : categoryId,
+    }));
   };
 
-  const selectedCategoryData = courseCategories.find(
-    (cat) => cat.id === selectedCategory
-  );
-  const hoveredCourseData = selectedCategoryData?.courses.find(
-    (c) => c.name === hoveredCourse
-  );
-  const displayGoverningBodies = hoveredCourse
-    ? hoveredCourseData?.governingBodies || []
-    : selectedCategoryData?.governingBodies || [];
-  const displayDescription = hoveredCourse
-    ? hoveredCourseData?.description
-    : selectedCategoryData?.description;
+  // Derived
+  const selectedCategoryData = courseCategories.find((cat) => cat.id === selectedCategory);
+  const hoveredCourseData = selectedCategoryData?.courses.find((c) => c.name === hoveredCourse);
+  const displayGoverningBodies = hoveredCourse ? hoveredCourseData?.governingBodies || [] : selectedCategoryData?.governingBodies || [];
+  const displayDescription = hoveredCourse ? hoveredCourseData?.description : selectedCategoryData?.description;
 
-  // NEW: Close Jobs dropdown on outside click / ESC
+  // Close Jobs dropdown on outside click / ESC
   useEffect(() => {
     const onClickOutside = (e: MouseEvent) => {
       if (!isJobsOpen) return;
@@ -303,7 +258,7 @@ const Header = () => {
     };
   }, [isJobsOpen]);
 
-  // NEW: Close About dropdown on outside click / ESC
+  // Close About dropdown on outside click / ESC
   useEffect(() => {
     const onClickOutside = (e: MouseEvent) => {
       if (!isAboutOpen) return;
@@ -344,22 +299,17 @@ const Header = () => {
                   className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14"
                 />
               </div>
-              <span className="text-base sm:text-xl lg:text-2xl font-bold text-brand">
-                Cinute Digital
-              </span>
+              <span className="text-base sm:text-xl lg:text-2xl font-bold text-brand">Cinute Digital</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-            <Link
-              href="/"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
-            >
+            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Home
             </Link>
 
-            {/* Mega Menu Trigger */}
+            {/* Mega Menu Trigger (Desktop only) */}
             <div
               className="relative"
               onMouseEnter={() => setIsMegaMenuOpen(true)}
@@ -380,18 +330,13 @@ const Header = () => {
 
               {/* Mega Menu - Desktop */}
               {isMegaMenuOpen && (
-                <div
-                  id="mega-menu"
-                  className="fixed left-0 right-0 top-[72px] lg:top-[80px] w-full backdrop-blur-sm z-50"
-                >
+                <div id="mega-menu" className="fixed left-0 right-0 top-[72px] lg:top-[80px] w-full backdrop-blur-sm z-50">
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-blue-600">
                       <div className="grid grid-cols-12 gap-4 p-4 sm:p-6 lg:p-8">
                         {/* Column 1: Categories */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-3 border-r border-gray-200 pr-4">
-                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">
-                            Categories
-                          </h3>
+                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Categories</h3>
                           <div className="space-y-1 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2">
                             {courseCategories.map((category) => (
                               <button
@@ -403,29 +348,20 @@ const Header = () => {
                                 }}
                                 onClick={() => setSelectedCategory(category.id)}
                                 className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id
-                                  ? "bg-blue-50 text-blue-700 font-medium"
-                                  : "text-gray-700 hover:bg-gray-50"
+                                    ? "bg-blue-50 text-blue-700 font-medium"
+                                    : "text-gray-700 hover:bg-gray-50"
                                   }`}
-                                aria-current={
-                                  selectedCategory === category.id
-                                    ? "true"
-                                    : "false"
-                                }
+                                aria-current={selectedCategory === category.id ? "true" : "false"}
                               >
                                 <span>{category.name}</span>
                                 <ChevronRight
-                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id
-                                    ? "text-blue-700"
-                                    : "text-gray-400"
+                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-blue-700" : "text-gray-400"
                                     }`}
                                 />
                               </button>
                             ))}
                           </div>
-                          <a
-                            href="/courses"
-                            className="mt-4 flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group"
-                          >
+                          <a href="/courses" className="mt-4 flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group">
                             View All Courses
                             <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                           </a>
@@ -433,50 +369,34 @@ const Header = () => {
 
                         {/* Column 2: Courses */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-5 pr-0 sm:pr-4">
-                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">
-                            Courses
-                          </h3>
+                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Courses</h3>
                           <div className="grid grid-cols-1 gap-1 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2">
-                            {selectedCategoryData?.courses.map(
-                              (course, index) => (
-                                <a
-                                  key={index}
-                                  href={`/courses/${selectedCategory}/${course.name
-                                    .toLowerCase()
-                                    .replace(/[®\s&]+/g, "-")}`}
-                                  onMouseEnter={() =>
-                                    setHoveredCourse(course.name)
-                                  }
-                                  className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name
-                                    ? "bg-blue-50 text-blue-700"
-                                    : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
-                                    }`}
-                                >
-                                  <div className="flex-shrink-0 mt-1">
-                                    <div
-                                      className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name
-                                        ? "bg-blue-700 scale-125"
-                                        : "bg-blue-600 group-hover:scale-125"
-                                        }`}
-                                    />
-                                  </div>
-                                  <div className="ml-3">
-                                    <p className="font-medium text-sm">
-                                      {course.name}
-                                    </p>
-                                  </div>
-                                </a>
-                              )
-                            )}
+                            {selectedCategoryData?.courses.map((course, index) => (
+                              <a
+                                key={index}
+                                href={`/courses/${selectedCategory}/${course.name.toLowerCase().replace(/[®\s&]+/g, "-")}`}
+                                onMouseEnter={() => setHoveredCourse(course.name)}
+                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                                  }`}
+                              >
+                                <div className="flex-shrink-0 mt-1">
+                                  <div
+                                    className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
+                                      }`}
+                                  />
+                                </div>
+                                <div className="ml-3">
+                                  <p className="font-medium text-sm">{course.name}</p>
+                                </div>
+                              </a>
+                            ))}
                           </div>
                         </div>
 
                         {/* Column 3: Governing Bodies */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4">
                           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                            {hoveredCourse || hoveredCategory
-                              ? "Certifications"
-                              : "Governing Bodies"}
+                            {hoveredCourse || hoveredCategory ? "Certifications" : "Governing Bodies"}
                           </h3>
                           <p className="text-xs text-gray-600 mb-4">
                             {hoveredCourse
@@ -492,34 +412,19 @@ const Header = () => {
                                   key={index}
                                   className="bg-white rounded-lg p-8 hover:shadow-md transition-all duration-200 group animate-fadeIn flex flex-col items-center justify-center"
                                 >
-
-                                  <Image
-                                    src={body.logo}
-                                    alt={body.name}
-                                    className="object-contain h-full rounded-2xl"
-                                    width={300}
-                                    height={150}
-                                  />
-                                  <span className="text-[10px] text-gray-700 font-medium mt-2 text-center">
-                                    {body.name}
-                                  </span>
-
+                                  <Image src={body.logo} alt={body.name} className="object-contain h-full rounded-2xl" width={300} height={150} />
+                                  <span className="text-[10px] text-gray-700 font-medium mt-2 text-center">{body.name}</span>
                                 </div>
-
                               ))
                             ) : (
                               <div className="col-span-2 flex flex-col items-center justify-center text-center py-8">
                                 <Award className="h-10 w-10 text-gray-300 mb-2" />
-                                <p className="text-xs text-gray-400">
-                                  Hover over categories or courses to see their
-                                  certifications
-                                </p>
+                                <p className="text-xs text-gray-400">Hover over categories or courses to see their certifications</p>
                               </div>
                             )}
                           </div>
                           <p className="text-xs text-gray-600 mt-4 mb-4">
-                            {displayDescription ||
-                              "Select a category or course to view its description"}
+                            {displayDescription || "Select a category or course to view its description"}
                           </p>
                           <div className="mt-4 pt-4 border-t border-gray-200">
                             <div className="flex items-center text-xs text-gray-600">
@@ -535,19 +440,19 @@ const Header = () => {
               )}
             </div>
 
-            <Link href='#' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Event</Link>
+            <Link href="#" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+              Event
+            </Link>
 
-            <Link href='/mentors' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Mentors</Link>
+            <Link href="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+              Mentors
+            </Link>
 
-            {/* NEW: Jobs Dropdown (Desktop) */}
-            <div
-              className="relative"
-              onMouseEnter={() => setIsJobsOpen(true)}
-              onMouseLeave={() => setIsJobsOpen(false)}
-            >
+            {/* Jobs Dropdown (Desktop) */}
+            <div className="relative" onMouseEnter={() => setIsJobsOpen(true)} onMouseLeave={() => setIsJobsOpen(false)}>
               <button
                 ref={jobsButtonRef}
-                onClick={() => setIsJobsOpen((p) => !p)}
+                onClick={toggleJob}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowDown") {
                     e.preventDefault();
@@ -605,15 +510,11 @@ const Header = () => {
               )}
             </div>
 
-            {/* NEW: Jobs Dropdown (Desktop) */}
-            <div
-              className="relative"
-              onMouseEnter={() => setIsAboutOpen(true)}
-              onMouseLeave={() => setIsAboutOpen(false)}
-            >
+            {/* About Dropdown (Desktop) */}
+            <div className="relative" onMouseEnter={() => setIsAboutOpen(true)} onMouseLeave={() => setIsAboutOpen(false)}>
               <button
                 ref={aboutButtonRef}
-                onClick={() => setIsAboutOpen((p) => !p)}
+                onClick={toggleAbout}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowDown") {
                     e.preventDefault();
@@ -659,21 +560,15 @@ const Header = () => {
                     >
                       Our Team
                     </Link>
-
                   </div>
                 </div>
               )}
             </div>
-            <a
-              href="/blog"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
-            >
+
+            <a href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Blog
             </a>
-            <a
-              href="/contact-us"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
-            >
+            <a href="/contact-us" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Contact
             </a>
           </nav>
@@ -695,11 +590,7 @@ const Header = () => {
               className="text-gray-700 hover:text-blue-600 transition-colors p-2"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-              {isMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -719,58 +610,48 @@ const Header = () => {
               {/* Mobile Courses Accordion */}
               <div className="space-y-2">
                 <button
-                  onClick={() => toggleMobileCategory("courses")}
+                  onClick={() => toggleMobileSection("courses")}
                   className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
-                  aria-expanded={expandedMobileCategory !== null}
+                  aria-expanded={mobileSections.courses}
                   aria-controls="mobile-courses"
                 >
                   <span>Courses</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory !== null ? "rotate-180" : ""
-                      }`}
-                  />
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileSections.courses ? "rotate-180" : ""}`} />
                 </button>
 
-                {expandedMobileCategory !== null && (
+                {mobileSections.courses && (
                   <div id="mobile-courses" className="pl-4 space-y-2">
-                    {courseCategories.map((category) => (
-                      <div key={category.id} className="space-y-2">
-                        <button
-                          onClick={() => toggleMobileCategory(category.id)}
-                          className="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
-                          aria-expanded={expandedMobileCategory === category.id}
-                          aria-controls={`mobile-category-${category.id}`}
-                        >
-                          <span>{category.name}</span>
-                          <ChevronRight
-                            className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === category.id
-                              ? "rotate-90"
-                              : ""
-                              }`}
-                          />
-                        </button>
-
-                        {expandedMobileCategory === category.id && (
-                          <div
-                            id={`mobile-category-${category.id}`}
-                            className="pl-4 space-y-1"
+                    {courseCategories.map((category) => {
+                      const isOpen = mobileSections.openCategoryId === category.id;
+                      return (
+                        <div key={category.id} className="space-y-2">
+                          <button
+                            onClick={() => toggleMobileCategory(category.id)}
+                            className="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                            aria-expanded={isOpen}
+                            aria-controls={`mobile-category-${category.id}`}
                           >
-                            {category.courses.map((course, idx) => (
-                              <a
-                                key={idx}
-                                href={`/courses/${category.id}/${course.name
-                                  .toLowerCase()
-                                  .replace(/[®\s&]+/g, "-")}`}
-                                className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
-                                onClick={toggleMenu}
-                              >
-                                • {course.name}
-                              </a>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                            <span>{category.name}</span>
+                            <ChevronRight className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`} />
+                          </button>
+
+                          {isOpen && (
+                            <div id={`mobile-category-${category.id}`} className="pl-4 space-y-1">
+                              {category.courses.map((course, idx) => (
+                                <a
+                                  key={idx}
+                                  href={`/courses/${category.id}/${course.name.toLowerCase().replace(/[®\s&]+/g, "-")}`}
+                                  className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                                  onClick={toggleMenu}
+                                >
+                                  • {course.name}
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                     <a
                       href="/courses"
                       className="block px-4 py-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
@@ -782,21 +663,18 @@ const Header = () => {
                 )}
               </div>
 
-              {/* NEW: Mobile Jobs Accordion */}
+              {/* Mobile Jobs Accordion */}
               <div className="space-y-2">
                 <button
-                  onClick={() => toggleMobileCategory("jobs")}
+                  onClick={() => toggleMobileSection("jobs")}
                   className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
-                  aria-expanded={expandedMobileCategory === "jobs"}
+                  aria-expanded={mobileSections.jobs}
                   aria-controls="mobile-jobs"
                 >
                   <span>Jobs</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === "jobs" ? "rotate-180" : ""
-                      }`}
-                  />
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileSections.jobs ? "rotate-180" : ""}`} />
                 </button>
-                {expandedMobileCategory === "jobs" && (
+                {mobileSections.jobs && (
                   <div id="mobile-jobs" className="pl-4 space-y-1">
                     <Link
                       href="/jobs/live"
@@ -823,20 +701,18 @@ const Header = () => {
                 )}
               </div>
 
+              {/* Mobile About Accordion */}
               <div className="space-y-2">
                 <button
-                  onClick={() => toggleMobileCategory("about")}
+                  onClick={() => toggleMobileSection("about")}
                   className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
-                  aria-expanded={expandedMobileCategory === "about"}
+                  aria-expanded={mobileSections.about}
                   aria-controls="mobile-about"
                 >
                   <span>About</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === "about" ? "rotate-180" : ""
-                      }`}
-                  />
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileSections.about ? "rotate-180" : ""}`} />
                 </button>
-                {expandedMobileCategory === "about" && (
+                {mobileSections.about && (
                   <div id="mobile-about" className="pl-4 space-y-1">
                     <Link
                       href="/about-us"
@@ -852,10 +728,10 @@ const Header = () => {
                     >
                       Our Team
                     </Link>
-
                   </div>
                 )}
               </div>
+
               <a
                 href="/blog"
                 className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"

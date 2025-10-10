@@ -28,7 +28,7 @@ const BlogArticleList = () => {
       category: "Web Development",
       title: "Building Responsive Layouts with CSS Grid and Flexbox",
       description:
-        "Master the art of creating flexible, responsive layouts using modern CSS techniques.",
+        "A hands-on guide to crafting responsive layouts with CSS Grid and Flexbox. Explore real patterns, common pitfalls, and shortcuts to production-ready UI.",
       author: "Mike Rodriguez",
       date: "September 30, 2025",
       readTime: "6 min read",
@@ -41,7 +41,7 @@ const BlogArticleList = () => {
       category: "React",
       title: "React 19: What's New and How to Migrate",
       description:
-        "A comprehensive guide to React 19's new features and migration strategies.",
+        "React 19 is here. See the biggest changes, why they matter, and follow a simple migration plan—tools, checks, and copy-paste snippets included.",
       author: "Emily Johnson",
       date: "September 28, 2025",
       readTime: "10 min read",
@@ -54,7 +54,7 @@ const BlogArticleList = () => {
       category: "Backend",
       title: "Optimizing Database Performance for High-Traffic Applications",
       description:
-        "Learn proven strategies to scale your database for millions of users.",
+        "A practical guide to keeping databases fast under heavy load. Learn how to profile queries, choose the right indexes, add caching, tune connections, and scale with replication or sharding.",
       author: "David Kim",
       date: "September 25, 2025",
       readTime: "12 min read",
@@ -67,7 +67,7 @@ const BlogArticleList = () => {
       category: "AI & Machine Learning",
       title: "The Impact of Generative AI on Content Creation",
       description:
-        "Exploring how AI is transforming writing, art, and music industries.",
+        "How generative AI is reshaping content creation—from ideation to editing—boosting speed, scale, and personalization while raising new quality and ethics questions.",
       author: "Alex Green",
       date: "September 20, 2025",
       readTime: "8 min read",
@@ -79,7 +79,7 @@ const BlogArticleList = () => {
       id: "5",
       category: "UI/UX Design",
       title: "Designing for Accessibility: Best Practices",
-      description: "Ensuring your web applications are usable by everyone.",
+      description: "Practical accessibility best practices: semantic HTML, contrast, keyboard & screen reader support, and inclusive patterns aligned with WCAG.",
       author: "Sophia Lee",
       date: "September 18, 2025",
       readTime: "7 min read",
@@ -91,7 +91,7 @@ const BlogArticleList = () => {
       id: "6",
       category: "DevOps",
       title: "Introduction to Kubernetes for Developers",
-      description: "A beginner-friendly guide to container orchestration.",
+      description: "A practical intro to Kubernetes from a developer’s viewpoint. Learn Pods, Deployments, Services, and ConfigMaps, then wire up local dev, CI/CD, and debugging to ship reliably.",
       author: "Chris Evans",
       date: "September 15, 2025",
       readTime: "11 min read",
@@ -104,7 +104,7 @@ const BlogArticleList = () => {
       category: "Web Development",
       title: "Understanding Serverless Architectures",
       description:
-        "Building scalable and cost-effective applications without managing servers.",
+        "A practical guide to serverless architectures. Learn core concepts (FaaS, BaaS, events), common trade-offs (cold starts, vendor lock-in), and patterns for scaling, cost control, and observability.",
       author: "Jordan Smith",
       date: "September 12, 2025",
       readTime: "9 min read",
@@ -117,7 +117,7 @@ const BlogArticleList = () => {
       category: "React",
       title: "State Management in React: A Deep Dive",
       description:
-        "Comparing Redux, Context API, and Zustand for your React projects.",
+        "Master React state: local vs context, reducers, Redux Toolkit, Zustand, and React Query—how to choose, structure, and scale without re-renders.",
       author: "Patty O'Lantern",
       date: "September 10, 2025",
       readTime: "13 min read",
@@ -129,7 +129,7 @@ const BlogArticleList = () => {
       id: "9",
       category: "Backend",
       title: "Securing Your APIs with JWT Authentication",
-      description: "Implementing JSON Web Tokens for robust API security.",
+      description: "Secure APIs with JWTs: signing, expiry, refresh tokens, rotation, revocation, and best practices for storage, scopes, and CSRF/XSS defense.",
       author: "Robert Brown",
       date: "September 8, 2025",
       readTime: "10 min read",
@@ -146,7 +146,7 @@ const BlogArticleList = () => {
   return (
     <section className="py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid lg:grid-cols-3 gap-8">
+        <div className="grid lg:grid-cols-2 gap-8">
           {/* Main Content - Article List */}
           <div className="lg:col-span-2">
             {/* Section Header */}
