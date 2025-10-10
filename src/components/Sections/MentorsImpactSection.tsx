@@ -1,16 +1,22 @@
 // app/(site)/components/MentorsImpactSection.tsx
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useRef, useState, useEffect } from "react";
 import Script from "next/script";
 
 /**
  * MentorsImpactSection — CDPL clean gradient (light-only)
- * - Buttons removed (Book Free Intro, View Profile)
- * - Everything else unchanged: domain filter only, redesigned cards, SEO JSON-LD
+ * Spacing tightened to reduce gap from hero:
+ * - container: pt-6 pb-12 (sm:pt-8 sm:pb-16)
+ * - header: mb-6 (sm:mb-8)
+ * - h2: mt-3
+ * - lead p: mt-2
+ * - filter group: mt-4
+ * - metrics: mb-6
+ * - trust strip: mt-8
+ * - footer tip: mt-3
  */
 
-/* ==================== Types ==================== */
 type MentorCard = {
   name: string;
   role: string;
@@ -23,22 +29,14 @@ type MentorCard = {
   keywords: string;
 };
 
-/* ==================== CDPL Gradient System ==================== */
-/** Core brand */
 const CDPL_ORANGE = "#ff8c00";
-/** Darker brand for depth */
 const CDPL_ORANGE_DEEP = "#ff6a00";
-/** Soft highlight */
 const CDPL_PEACH = "#ffd19e";
-/** Subtle warm glow */
 const CDPL_GLOW =
   "radial-gradient(closest-side, rgba(255,140,0,.22), rgba(255,140,0,0) 70%)";
-/** Primary linear brand gradient for headings (kept for visual identity) */
 const GRADIENT_BRAND = `linear-gradient(90deg, ${CDPL_ORANGE_DEEP} 0%, ${CDPL_ORANGE} 55%, ${CDPL_PEACH} 100%)`;
-/** Ultra subtle outline accent for cards */
 const GRADIENT_OUTLINE = `linear-gradient(90deg, ${CDPL_ORANGE}20 0%, ${CDPL_PEACH}30 100%)`;
 
-/* ==================== Data ==================== */
 const MENTORS: MentorCard[] = [
   {
     name: "Dr. Aisha Verma",
@@ -117,7 +115,6 @@ const DOMAINS = [
   "UI/UX Design",
 ];
 
-/* ==================== Component ==================== */
 export default function MentorsImpactSection() {
   const [domain, setDomain] = useState<string>("");
 
@@ -126,7 +123,6 @@ export default function MentorsImpactSection() {
     return MENTORS.filter((m) => !d || m.domain.toLowerCase() === d);
   }, [domain]);
 
-  // JSON-LD for SEO
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
@@ -151,7 +147,7 @@ export default function MentorsImpactSection() {
       className="relative isolate overflow-hidden bg-white text-zinc-900"
       data-theme="light"
     >
-      {/* Warm, brand-only background glows */}
+      {/* background glows (don’t affect layout) */}
       <div
         className="pointer-events-none absolute -top-28 right-[-10%] h-80 w-[48rem] rounded-full blur-[70px] opacity-20"
         style={{ background: CDPL_GLOW }}
@@ -161,10 +157,10 @@ export default function MentorsImpactSection() {
         style={{ background: CDPL_GLOW }}
       />
 
-      {/* content container ONLY */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-20">
+      {/* tightened vertical padding */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 pb-12 sm:pt-8 sm:pb-16">
         {/* Header */}
-        <header className="mb-10 sm:mb-12">
+        <header className="mb-6 sm:mb-8">
           <div className="flex flex-wrap items-center gap-2">
             {[
               "Top-rated Industry Experts",
@@ -183,7 +179,7 @@ export default function MentorsImpactSection() {
 
           <h2
             id="mentors-impact-title"
-            className="mt-5 text-3xl sm:text-4xl font-extrabold leading-tight"
+            className="mt-3 text-3xl sm:text-4xl font-extrabold leading-tight"
           >
             Learn Faster with{" "}
             <span
@@ -194,7 +190,7 @@ export default function MentorsImpactSection() {
             </span>
           </h2>
 
-          <p className="mt-3 max-w-3xl text-[15px] sm:text-base text-zinc-800">
+          <p className="mt-2 max-w-3xl text-[15px] sm:text-base text-zinc-800">
             Accelerate your career with <strong>outcome-driven mentorship</strong> from leaders at Google, Microsoft,
             Amazon, and high-growth startups. Master <strong>Data Science</strong>, <strong>Machine Learning</strong>,{" "}
             <strong>Software Testing</strong> and{" "}
@@ -203,16 +199,18 @@ export default function MentorsImpactSection() {
           </p>
 
           {/* Domain filter only */}
-          <div role="group" aria-label="Mentor domain filter" className="mt-6 max-w-sm">
+          <div role="group" aria-label="Mentor domain filter" className="mt-4 max-w-sm">
             <label className="block rounded-xl border border-zinc-200 bg-white px-3 py-2.5 shadow-sm">
               <div className="mb-1 text-[12px] font-semibold uppercase tracking-wide text-zinc-500">
                 Filter by Domain
               </div>
+
+              {/* 1) Keep native select for accessibility & forms (screen-readers/SSR) */}
               <select
                 id="mentor-domain"
                 value={domain}
                 onChange={(e) => setDomain(e.target.value)}
-                className="w-full bg-transparent text-sm text-zinc-900 outline-none"
+                className="sr-only"
                 aria-label="Filter mentors by domain"
               >
                 <option value="">All domains</option>
@@ -222,12 +220,20 @@ export default function MentorsImpactSection() {
                   </option>
                 ))}
               </select>
+
+              {/* 2) Styled, accessible custom select that mirrors the native one */}
+              <FancySelect
+                value={domain}
+                onChange={setDomain}
+                options={["All domains", ...DOMAINS]}
+                className="w-full"
+              />
             </label>
           </div>
         </header>
 
         {/* Metrics */}
-        <div className="mb-8 grid gap-3 sm:grid-cols-4">
+        <div className="mb-6 grid gap-3 sm:grid-cols-4">
           {[
             { num: "2,400+", label: "1:1 Sessions / month" },
             { num: "96%", label: "Interview-ready in 8 weeks" },
@@ -252,16 +258,12 @@ export default function MentorsImpactSection() {
               className="relative rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
               aria-label={`${m.name} — ${m.role}, ${m.company}`}
             >
-              {/* Subtle warm outline */}
               <div
                 className="absolute -inset-px rounded-3xl opacity-35 pointer-events-none"
                 style={{ backgroundImage: GRADIENT_OUTLINE }}
                 aria-hidden="true"
               />
-
-              {/* Header row */}
               <div className="flex items-start gap-4">
-                {/* Avatar with warm gradient ring */}
                 <div className="relative">
                   <span
                     className="absolute inset-0 -m-[2px] rounded-2xl opacity-55"
@@ -278,15 +280,11 @@ export default function MentorsImpactSection() {
                     className="relative h-22 w-22 rounded-2xl object-cover ring-1 ring-black/5"
                   />
                 </div>
-
-                {/* Name + role */}
                 <div className="min-w-0">
                   <h3 className="truncate text-[16px] font-extrabold leading-tight">{m.name}</h3>
                   <p className="mt-1 text-[13px] text-zinc-700">
                     {m.role} · {m.company}
                   </p>
-
-                  {/* Domain pill */}
                   <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-zinc-700">
                     <span
                       className="inline-block h-2 w-2 rounded-full"
@@ -298,7 +296,6 @@ export default function MentorsImpactSection() {
                 </div>
               </div>
 
-              {/* Tags */}
               <div className="mt-4 flex flex-wrap gap-1.5">
                 {m.tags.map((t) => (
                   <span
@@ -310,7 +307,6 @@ export default function MentorsImpactSection() {
                 ))}
               </div>
 
-              {/* Stat row */}
               <div className="mt-4 grid grid-cols-3 gap-2 text-center">
                 <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
                   <div className="text-[12px] font-extrabold">★ {m.rating.toFixed(1)}</div>
@@ -328,9 +324,6 @@ export default function MentorsImpactSection() {
                 </div>
               </div>
 
-              {/* (Buttons removed as requested) */}
-
-              {/* Micro copy */}
               <p className="mt-3 text-[11px] text-zinc-600">
                 Includes roadmap planning, project reviews, and mock interviews. Ideal for career transitions and promotions.
               </p>
@@ -338,8 +331,7 @@ export default function MentorsImpactSection() {
           ))}
         </div>
 
-        {/* Trust strip */}
-        <div className="mt-10 flex snap-x gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
+        <div className="mt-8 flex snap-x gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {[
             "Trusted by 50,000+ learners",
             "Outcome-driven mentorship",
@@ -356,26 +348,160 @@ export default function MentorsImpactSection() {
           ))}
         </div>
 
-        {/* SEO subheading (screen-reader only) */}
         <h3 className="sr-only">
           CDPL Mentors for Data Science, AI/ML, Full-Stack Development, Cloud & DevOps, Product Management, and UI/UX Design
         </h3>
 
-        <p className="mt-4 text-center text-xs text-zinc-700">
+        <p className="mt-3 text-center text-xs text-zinc-700">
           Tip: Book a free 15-minute intro to map your career goals and create a personalized learning roadmap.
         </p>
       </div>
 
-      {/* JSON-LD for SEO */}
       <Script id="mentors-jsonld" type="application/ld+json">
         {JSON.stringify(jsonLd)}
       </Script>
 
-      {/* Hidden SEO helper copy */}
       <div className="sr-only">
         CDPL mentors provide live 1:1 mentorship, portfolio reviews, mock interviews, and job-focused upskilling for
         Data Science, AI, Full-Stack, DevOps, Product Management, and UX. Learn with real projects and accelerate placements.
       </div>
     </section>
+  );
+}
+
+/* ---------- Tiny, accessible custom select (styled options) ---------- */
+function FancySelect({
+  value,
+  onChange,
+  options,
+  className = "",
+}: {
+  value: string;
+  onChange: (v: string) => void;
+  options: string[];
+  className?: string;
+}) {
+  const [open, setOpen] = useState(false);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const listRef = useRef<HTMLUListElement>(null);
+
+  const display = value || "All domains";
+  const selectedIndex = options.findIndex((o) => o === display);
+
+  // close on outside click
+  useEffect(() => {
+    function onDoc(e: MouseEvent) {
+      if (!open) return;
+      const t = e.target as Node;
+      if (!btnRef.current?.contains(t) && !listRef.current?.contains(t)) {
+        setOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", onDoc);
+    return () => document.removeEventListener("mousedown", onDoc);
+  }, [open]);
+
+  function choose(v: string) {
+    setOpen(false);
+    onChange(v === "All domains" ? "" : v);
+    btnRef.current?.focus();
+  }
+
+  function onKey(e: React.KeyboardEvent<HTMLButtonElement>) {
+    if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      setOpen(true);
+      // focus selected item next tick
+      requestAnimationFrame(() => {
+        const el = listRef.current?.querySelector<HTMLLIElement>(
+          `li[data-index="${Math.max(0, selectedIndex)}"]`
+        );
+        el?.focus();
+      });
+    }
+  }
+
+  function onItemKey(e: React.KeyboardEvent<HTMLLIElement>, i: number) {
+    if (e.key === "Escape") {
+      setOpen(false);
+      btnRef.current?.focus();
+      return;
+    }
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      choose(options[i]);
+      return;
+    }
+    if (e.key === "ArrowDown") {
+      e.preventDefault();
+      (e.currentTarget.nextElementSibling as HTMLLIElement | null)?.focus();
+    }
+    if (e.key === "ArrowUp") {
+      e.preventDefault();
+      (e.currentTarget.previousElementSibling as HTMLLIElement | null)?.focus();
+    }
+  }
+
+  return (
+    <div className={`relative ${className}`}>
+      <button
+        ref={btnRef}
+        type="button"
+        aria-haspopup="listbox"
+        aria-expanded={open}
+        onClick={() => setOpen((s) => !s)}
+        onKeyDown={onKey}
+        className="flex w-full items-center justify-between rounded-lg border border-zinc-200 bg-white px-3 py-2 text-sm text-zinc-900 shadow-sm transition focus:outline-none focus:ring-2 focus:ring-[var(--color-brand,#ff8c00)]/30"
+      >
+        <span className="truncate">{display}</span>
+        <svg
+          className={`ml-2 h-4 w-4 shrink-0 text-zinc-500 transition ${open ? "rotate-180" : ""}`}
+          viewBox="0 0 20 20"
+          fill="currentColor"
+          aria-hidden="true"
+        >
+          <path d="M5.23 7.21a.75.75 0 011.06.02L10 10.17l3.71-2.94a.75.75 0 11.94 1.16l-4.2 3.33a.75.75 0 01-.94 0l-4.2-3.33a.75.75 0 01.02-1.18z" />
+        </svg>
+      </button>
+
+      {open && (
+        <ul
+          ref={listRef}
+          role="listbox"
+          aria-activedescendant={`opt-${selectedIndex}`}
+          className="absolute z-30 mt-2 max-h-64 w-full overflow-auto rounded-xl border border-zinc-200 bg-white py-1 shadow-lg"
+        >
+          {options.map((opt, i) => {
+            const active = i === selectedIndex;
+            return (
+              <li
+                key={opt}
+                id={`opt-${i}`}
+                data-index={i}
+                role="option"
+                aria-selected={active}
+                tabIndex={0}
+                onKeyDown={(e) => onItemKey(e, i)}
+                onClick={() => choose(opt)}
+                className={`mx-1 flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition hover:bg-[rgba(255,140,0,.08)] ${
+                  active ? "bg-[rgba(255,140,0,.12)] font-semibold text-zinc-900" : "text-zinc-800"
+                }`}
+              >
+                <span className="truncate">{opt}</span>
+                {active && (
+                  <svg className="ml-3 h-4 w-4 text-[var(--color-brand,#ff8c00)]" viewBox="0 0 20 20" fill="currentColor">
+                    <path
+                      fillRule="evenodd"
+                      d="M16.704 5.29a1 1 0 010 1.415l-7.01 7.01a1 1 0 01-1.414 0L3.296 8.72a1 1 0 011.414-1.415l3.154 3.155 6.303-6.303a1 1 0 011.537.133z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
   );
 }

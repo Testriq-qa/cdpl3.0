@@ -36,6 +36,21 @@ export default function TestimonialHeroSection() {
 
       {/* tighter top padding */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+        {/* Breadcrumbs for SEO & UX (Home > Testimonials) */}
+        <nav aria-label="Breadcrumb" className="mb-3">
+          <ol className="flex items-center gap-2 text-sm text-slate-500">
+            <li>
+              <Link href="/" className="hover:text-slate-700">Home</Link>
+            </li>
+            <li aria-hidden="true" className="text-slate-400">/</li>
+            <li>
+              <Link href="/testimonials" className="font-medium text-slate-700 hover:text-slate-900">
+                Testimonials
+              </Link>
+            </li>
+          </ol>
+        </nav>
+
         {/* title + deck (kept tight) */}
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Rating &amp; Reviews</p>

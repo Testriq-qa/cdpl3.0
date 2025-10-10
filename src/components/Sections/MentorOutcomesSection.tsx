@@ -5,9 +5,14 @@ import { useMemo, useState } from "react";
 
 /**
  * MentorOutcomesSection — CDPL (Light-surface only)
- * Creative UI: "Outcome Orbit"
- * - Avatars orbit a glowing ring; hover/click a node to spotlight details in the center.
- * - On small screens we show a horizontal, overlapping avatar stack.
+ * Spacing tightened to sit closer to the hero:
+ * - container: pt-6 pb-12 (sm:pt-8 sm:pb-16)  ← was py-10 sm:py-20
+ * - header: mb-6 (sm:mb-8)                     ← was mb-8 sm:mb-10
+ * - lead p: mt-2                                ← was mt-3
+ * - tabs row: mb-4                              ← was mb-6
+ * - KPI row:  mb-8                              ← was mb-10
+ * - logos strip: mt-8                           ← was mt-10
+ * - footer note: mt-4                           ← was mt-6
  */
 
 type Case = {
@@ -101,7 +106,7 @@ export default function MentorOutcomesSection() {
       aria-labelledby="mentor-outcomes-title"
       data-theme="light"
     >
-      {/* Ambient blobs */}
+      {/* Ambient blobs (visual only) */}
       <div
         className="pointer-events-none absolute -top-28 right-[-10%] h-72 w-[44rem] rounded-full blur-[60px] opacity-20"
         style={{ background: ACCENT_GRADIENT }}
@@ -113,9 +118,10 @@ export default function MentorOutcomesSection() {
         aria-hidden
       />
 
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10 sm:py-20">
+      {/* tightened vertical padding */}
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 pb-12 sm:pt-8 sm:pb-16">
         {/* Header */}
-        <header className="mb-8 sm:mb-10">
+        <header className="mb-6 sm:mb-8">
           <h2
             id="mentor-outcomes-title"
             className="text-3xl sm:text-4xl font-extrabold leading-tight"
@@ -128,14 +134,14 @@ export default function MentorOutcomesSection() {
               Real Placements
             </span>
           </h2>
-          <p className="mt-3 max-w-3xl text-[15px] sm:text-base text-zinc-700">
+          <p className="mt-2 max-w-3xl text-[15px] sm:text-base text-zinc-700">
             CDPL mentorship drives tangible career moves across AI/ML, Data
             Science, Full-Stack, Cloud & DevOps, and Product with structured guidance and interview prep.
           </p>
         </header>
 
         {/* Tabs */}
-        <div className="mb-6 flex flex-wrap gap-2">
+        <div className="mb-4 flex flex-wrap gap-2">
           {DOMAINS.map((d) => {
             const active = d === tab;
             return (
@@ -160,7 +166,7 @@ export default function MentorOutcomesSection() {
         </div>
 
         {/* KPI Row */}
-        <div className="mb-10 grid gap-3 sm:grid-cols-4">
+        <div className="mb-8 grid gap-3 sm:grid-cols-4">
           {[
             { num: "92%", label: "Offer rate post mock rounds" },
             { num: "3.1x", label: "Avg. salary jump (select tracks)" },
@@ -185,7 +191,7 @@ export default function MentorOutcomesSection() {
         />
 
         {/* Logos strip */}
-        <div className="mt-10 overflow-hidden">
+        <div className="mt-8 overflow-hidden">
           <div className="flex gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
             {["Google", "Microsoft", "Amazon", "Flipkart", "NVIDIA", "Swiggy", "Razorpay", "Paytm"].map(
               (brand) => (
@@ -206,7 +212,7 @@ export default function MentorOutcomesSection() {
         </div>
 
         {/* Footer note */}
-        <p className="mt-6 text-center text-xs text-zinc-700">
+        <p className="mt-4 text-center text-xs text-zinc-700">
           Results vary by effort, background, and market conditions. Your CDPL mentor will map a plan that fits your goals.
         </p>
       </div>
@@ -281,7 +287,7 @@ function OutcomeOrbit({
           </svg>
         </div>
 
-        {/* Center spotlight — wider & slightly higher on mobile; extra tweaks for ≤360px */}
+        {/* Center spotlight — slightly tighter on small screens */}
         <div className="absolute left-1/2 top-[44%] sm:top-1/2 w-[88%] sm:w-[66%] max-w-[440px] -translate-x-1/2 -translate-y-1/2 max-[360px]:w-[92%] max-[360px]:top-[42%]">
           <div className="rounded-3xl border border-zinc-200 bg-white/90 p-4 shadow-[0_22px_60px_-28px_rgba(0,0,0,0.45)] backdrop-blur-sm">
             {active ? (
@@ -333,13 +339,13 @@ function OutcomeOrbit({
           </div>
         </div>
 
-        {/* MOBILE: overlapping horizontal stack (visible <sm) */}
+        {/* MOBILE: overlapping horizontal stack */}
         <div className="absolute inset-x-0 bottom-[8%] flex items-end justify-center gap-0 sm:hidden max-[360px]:bottom-[2%]">
           {cases.map((c, i) => {
             const isActive = i === activeIdx;
             return (
               <button
-                key={c.name + c.company + "m"}
+                key={c.name + c.company + 'm'}
                 onClick={() => setActiveIdx(i)}
                 className="relative -ml-3 first:ml-0 shrink-0 max-[360px]:-ml-2"
                 style={{ zIndex: isActive ? 100 : 10 + i }}
@@ -364,13 +370,12 @@ function OutcomeOrbit({
                     loading="lazy"
                   />
                 </span>
-                {/* (No mobile label by request) */}
               </button>
             );
           })}
         </div>
 
-        {/* DESKTOP: orbiting avatars — visible from sm and up */}
+        {/* DESKTOP: orbiting avatars */}
         {cases.map((c, i) => {
           const { cx, cy } = positions[i];
           const isActive = i === activeIdx;
@@ -403,7 +408,6 @@ function OutcomeOrbit({
                 />
               </span>
 
-              {/* Full label on desktop */}
               <span className="mt-1 inline-block whitespace-nowrap rounded-full border border-zinc-200 bg-white/90 px-2.5 py-0.5 text-[10px] font-semibold text-zinc-800 shadow-sm">
                 {c.role} @ {c.company}
               </span>
