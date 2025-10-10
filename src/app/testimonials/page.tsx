@@ -1,12 +1,35 @@
 // app/testimonials/page.tsx
-import TestimonialCTAJoinSection from "@/components/Sections/TestimonialCTAJoinSection";
-import TestimonialFeedbackSection from "@/components/Sections/TestimonialFeedbackSection";
-import TestimonialHeroSection from "@/components/Sections/TestimonialHeroSection";
 import type { Metadata } from "next";
 import Script from "next/script";
+import dynamic from "next/dynamic";
 
 // Revalidate content periodically (change to 0 if you fetch SSR)
 export const revalidate = 120;
+
+// ---------- Small, reusable loading UI ----------
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+// ---------- Dynamic sections (SSR enabled, with lightweight fallbacks) ----------
+const TestimonialHeroSection = dynamic(
+  () => import("@/components/Sections/TestimonialHeroSection"),
+  { ssr: true, loading: () => <SectionLoader label="Loading testimonials..." /> }
+);
+
+const TestimonialFeedbackSection = dynamic(
+  () => import("@/components/Sections/TestimonialFeedbackSection"),
+  { ssr: true, loading: () => <SectionLoader label="Loading reviews..." /> }
+);
+
+const TestimonialCTAJoinSection = dynamic(
+  () => import("@/components/Sections/TestimonialCTAJoinSection"),
+  { ssr: true, loading: () => <SectionLoader label="Preparing CTA..." /> }
+);
 
 export const metadata: Metadata = {
   title: "Customer Testimonials & Reviews | CDPL",
@@ -139,11 +162,10 @@ export default function Page() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <TestimonialHeroSection />
 
+      <TestimonialHeroSection />
       {/* Optional: Students’ review strip + featured quote */}
       <TestimonialFeedbackSection />
-
       <TestimonialCTAJoinSection />
     </div>
   );

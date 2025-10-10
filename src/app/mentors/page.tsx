@@ -1,18 +1,66 @@
 // app/mentors/page.tsx
 import type { Metadata } from "next";
 import Link from "next/link";
+import dynamic from "next/dynamic";
+import type { Mentor as BrowserMentor } from "@/components/Sections/MentorBrowserSection";
 
-// Sections (server by default)
-import MentorHeroSection from "@/components/Sections/MentorHeroSection";
-import MentorProcessFlowSection from "@/components/Sections/MentorProcessFlowSection";
+// ---------- Small, reusable loading UI ----------
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500">{label}</p>
+    </div>
+  );
+}
 
-// ✅ Client browser (filters + grid) and its type
-import MentorBrowserSection, {
-  type Mentor as BrowserMentor,
-} from "@/components/Sections/MentorBrowserSection";
-import MentorHelpCTASection from "@/components/Sections/MentorHelpCTASection";
-import MentorsImpactSection from "@/components/Sections/MentorsImpactSection";
-import MentorOutcomesSection from "@/components/Sections/MentorOutcomesSection";
+// ---------- Dynamic sections (SSR enabled like your example) ----------
+const MentorHeroSection = dynamic(
+  () => import("@/components/Sections/MentorHeroSection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading hero..." />,
+  }
+);
+
+const MentorProcessFlowSection = dynamic(
+  () => import("@/components/Sections/MentorProcessFlowSection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading process..." />,
+  }
+);
+
+const MentorBrowserSection = dynamic(
+  () => import("@/components/Sections/MentorBrowserSection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading mentors..." />,
+  }
+);
+
+const MentorHelpCTASection = dynamic(
+  () => import("@/components/Sections/MentorHelpCTASection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading help..." />,
+  }
+);
+
+const MentorsImpactSection = dynamic(
+  () => import("@/components/Sections/MentorsImpactSection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading impact..." />,
+  }
+);
+
+const MentorOutcomesSection = dynamic(
+  () => import("@/components/Sections/MentorOutcomesSection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading outcomes..." />,
+  }
+);
 
 export const metadata: Metadata = {
   title: "Mentors | CDPL",
@@ -34,21 +82,21 @@ export const metadata: Metadata = {
   },
 };
 
-// --------- Local data shape (matches what you already have) ----------
+// --------- Local data shape ----------
 type UIMentor = {
   id: string;
   name: string;
   title: string; // maps to BrowserMentor.role
   company?: string;
-  domain: string; // e.g., "Data Science", "Engineering"
-  experience?: string; // e.g., "20+ yrs"
+  domain: string;
+  experience?: string;
   avatar?: string; // maps to BrowserMentor.image
   bio?: string;
   highlights?: string[]; // maps to skills
   socials?: { platform: "linkedin" | string; url: string }[];
 };
 
-// Your data (kept here, passed down via a mapping)
+// Your data
 const MENTORS_DATA: UIMentor[] = [
   {
     id: "pravin-mhaske",
@@ -155,7 +203,8 @@ function StructuredData() {
       jobTitle: m.title,
       worksFor: m.company?.replace("@ ", "") || undefined,
       image: m.avatar,
-      url: m.socials?.find((s) => s.platform === "linkedin")?.url || undefined,
+      url:
+        m.socials?.find((s) => s.platform === "linkedin")?.url || undefined,
     })),
   };
   return (
@@ -186,15 +235,16 @@ function years(exp?: string) {
 const BROWSER_MENTORS: BrowserMentor[] = MENTORS_DATA.map((m) => ({
   id: m.id,
   name: m.name,
-  role: m.title,                                   // title → role
+  role: m.title, // title → role
   company: m.company?.replace(/^@\s*/, "") || undefined,
-  bio: m.bio ?? "",                                // ensure string
+  bio: m.bio ?? "",
   domain: mapDomain(m.domain),
   experienceYears: years(m.experience),
   skills: m.highlights ?? [],
   location: undefined,
-  image: m.avatar ?? "/placeholder/mentor.jpg",    // ensure string
-  linkedin: m.socials?.find((s) => s.platform === "linkedin")?.url || undefined,
+  image: m.avatar ?? "/placeholder/mentor.jpg",
+  linkedin:
+    m.socials?.find((s) => s.platform === "linkedin")?.url || undefined,
 }));
 
 export default function MentorsPage() {
@@ -203,15 +253,14 @@ export default function MentorsPage() {
       <StructuredData />
 
       <MentorHeroSection />
-<MentorsImpactSection />
-<MentorOutcomesSection/>
+      <MentorsImpactSection />
+      <MentorOutcomesSection />
+
       {/* Brand-gradient filters + grid (client component) */}
-      {/* <MentorBrowserSection mentors={BROWSER_MENTORS} /> */}
+      <MentorBrowserSection mentors={BROWSER_MENTORS} />
 
       <MentorProcessFlowSection />
       <MentorHelpCTASection />
-
-     
     </main>
   );
 }
