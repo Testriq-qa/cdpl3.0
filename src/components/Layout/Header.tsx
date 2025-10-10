@@ -238,8 +238,11 @@ const Header = () => {
     string | null
   >(null);
 
-  // NEW: Jobs dropdown state/refs
+  // NEW: Jobs and About dropdown state/refs
   const [isJobsOpen, setIsJobsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const aboutButtonRef = useRef<HTMLButtonElement | null>(null);
+  const aboutMenuRef = useRef<HTMLDivElement | null>(null);
   const jobsButtonRef = useRef<HTMLButtonElement | null>(null);
   const jobsMenuRef = useRef<HTMLDivElement | null>(null);
 
@@ -299,6 +302,31 @@ const Header = () => {
       document.removeEventListener("keydown", onKey);
     };
   }, [isJobsOpen]);
+
+  // NEW: Close About dropdown on outside click / ESC
+  useEffect(() => {
+    const onClickOutside = (e: MouseEvent) => {
+      if (!isAboutOpen) return;
+      const target = e.target as Node;
+      if (
+        aboutMenuRef.current &&
+        !aboutMenuRef.current.contains(target) &&
+        aboutButtonRef.current &&
+        !aboutButtonRef.current.contains(target)
+      ) {
+        setIsAboutOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsAboutOpen(false);
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClickOutside);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [isAboutOpen]);
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
@@ -577,12 +605,65 @@ const Header = () => {
               )}
             </div>
 
-            <a
-              href="/about-us"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
+            {/* NEW: Jobs Dropdown (Desktop) */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsAboutOpen(true)}
+              onMouseLeave={() => setIsAboutOpen(false)}
             >
-              About
-            </a>
+              <button
+                ref={aboutButtonRef}
+                onClick={() => setIsAboutOpen((p) => !p)}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    setIsAboutOpen(true);
+                    requestAnimationFrame(() => {
+                      const first = aboutMenuRef.current?.querySelector<HTMLAnchorElement>('a[role="menuitem"]');
+                      first?.focus();
+                    });
+                  }
+                }}
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                aria-haspopup="menu"
+                aria-expanded={isAboutOpen}
+                aria-controls="about-menu"
+              >
+                About
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+
+              {isAboutOpen && (
+                <div
+                  id="about-menu"
+                  ref={aboutMenuRef}
+                  role="menu"
+                  aria-label="About"
+                  className="absolute left-0 top-full mt-0 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl py-2 z-50"
+                >
+                  <div className="px-4 py-2 border-b border-gray-100">
+                    <p className="text-xs uppercase tracking-wider text-gray-500">Explore</p>
+                  </div>
+                  <div className="py-1">
+                    <Link
+                      href="/about-us"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      About CDPL
+                    </Link>
+                    <Link
+                      href="/our-team"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Our Team
+                    </Link>
+
+                  </div>
+                </div>
+              )}
+            </div>
             <a
               href="/blog"
               className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
@@ -742,13 +823,39 @@ const Header = () => {
                 )}
               </div>
 
-              <a
-                href="/about-us"
-                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
-                onClick={toggleMenu}
-              >
-                About
-              </a>
+              <div className="space-y-2">
+                <button
+                  onClick={() => toggleMobileCategory("about")}
+                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                  aria-expanded={expandedMobileCategory === "about"}
+                  aria-controls="mobile-about"
+                >
+                  <span>About</span>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === "about" ? "rotate-180" : ""
+                      }`}
+                  />
+                </button>
+                {expandedMobileCategory === "about" && (
+                  <div id="mobile-about" className="pl-4 space-y-1">
+                    <Link
+                      href="/about-us"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      About CDPL
+                    </Link>
+                    <Link
+                      href="/our-team"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      Our Team
+                    </Link>
+
+                  </div>
+                )}
+              </div>
               <a
                 href="/blog"
                 className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
