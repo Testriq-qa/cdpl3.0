@@ -3,7 +3,7 @@ import { Metadata } from 'next';
 import dynamic from 'next/dynamic';
 
 const CategoriesHeroSection = dynamic(
-    () => import("@/components/Sections/CategoriesHeroSection").then((m) => m.CategoriesHeroSection),
+    () => import("@/components/sections/CategoriesHeroSection").then((m) => m.CategoriesHeroSection),
     {
         ssr: true,
         loading: () => (
@@ -15,7 +15,7 @@ const CategoriesHeroSection = dynamic(
 )
 
 const CategoriesGridSection = dynamic(
-    () => import("@/components/Sections/CategoriesGridSection").then((m) => m.CategoriesGridSection),
+    () => import("@/components/sections/CategoriesGridSection").then((m) => m.CategoriesGridSection),
     {
         ssr: true,
         loading: () => (
@@ -27,7 +27,7 @@ const CategoriesGridSection = dynamic(
 )
 
 const CategoriesCTASection = dynamic(
-    () => import("@/components/Sections/CategoriesCTASection").then((m) => m.CategoriesCTASection),
+    () => import("@/components/sections/CategoriesCTASection").then((m) => m.CategoriesCTASection),
     {
         ssr: true,
         loading: () => (
