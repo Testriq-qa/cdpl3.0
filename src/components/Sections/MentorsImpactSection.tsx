@@ -268,6 +268,7 @@ export default function MentorsImpactSection() {
                     style={{ backgroundImage: GRADIENT_BRAND }}
                     aria-hidden="true"
                   />
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={m.img}
                     alt={`Mentor portrait — ${m.domain} ${m.company}`}

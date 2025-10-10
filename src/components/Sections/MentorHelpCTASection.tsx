@@ -186,7 +186,6 @@ export default function MentorHelpCTASection({
       {/* Minimal JSON-LD for SEO */}
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
@@ -287,7 +286,6 @@ function Ticker() {
       </div>
       {/* keyframes inlined to avoid global CSS dependency */}
       <style
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: `
             @keyframes marquee {

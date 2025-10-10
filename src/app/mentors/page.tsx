@@ -1,8 +1,6 @@
 // app/mentors/page.tsx
 import type { Metadata } from "next";
-import Link from "next/link";
 import dynamic from "next/dynamic";
-import type { Mentor as BrowserMentor } from "@/components/Sections/MentorBrowserSection";
 
 // ---------- Small, reusable loading UI ----------
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -30,13 +28,6 @@ const MentorProcessFlowSection = dynamic(
   }
 );
 
-const MentorBrowserSection = dynamic(
-  () => import("@/components/Sections/MentorBrowserSection"),
-  {
-    ssr: true,
-    loading: () => <SectionLoader label="Loading mentors..." />,
-  }
-);
 
 const MentorHelpCTASection = dynamic(
   () => import("@/components/Sections/MentorHelpCTASection"),
@@ -215,37 +206,7 @@ function StructuredData() {
   );
 }
 
-// --------- Mapping helpers (to BrowserMentor shape) ----------
-function mapDomain(d: string): BrowserMentor["domain"] {
-  const s = d.toLowerCase();
-  if (s.includes("qa") || s.includes("test")) return "QA";
-  if (s.includes("product")) return "Product";
-  if (s.includes("engineer")) return "Engineering";
-  if (s.includes("market")) return "Marketing";
-  if (s.includes("data")) return "Data"; // covers Data Science/Analytics/Engineering
-  return "Data";
-}
 
-function years(exp?: string) {
-  const m = (exp ?? "").match(/\d+/);
-  return m ? Number(m[0]) : 0;
-}
-
-// --------- Final list consumed by MentorBrowserSection ----------
-const BROWSER_MENTORS: BrowserMentor[] = MENTORS_DATA.map((m) => ({
-  id: m.id,
-  name: m.name,
-  role: m.title, // title → role
-  company: m.company?.replace(/^@\s*/, "") || undefined,
-  bio: m.bio ?? "",
-  domain: mapDomain(m.domain),
-  experienceYears: years(m.experience),
-  skills: m.highlights ?? [],
-  location: undefined,
-  image: m.avatar ?? "/placeholder/mentor.jpg",
-  linkedin:
-    m.socials?.find((s) => s.platform === "linkedin")?.url || undefined,
-}));
 
 export default function MentorsPage() {
   return (
@@ -255,9 +216,6 @@ export default function MentorsPage() {
       <MentorHeroSection />
       <MentorsImpactSection />
       <MentorOutcomesSection />
-
-      {/* Brand-gradient filters + grid (client component) */}
-      <MentorBrowserSection mentors={BROWSER_MENTORS} />
 
       <MentorProcessFlowSection />
       <MentorHelpCTASection />

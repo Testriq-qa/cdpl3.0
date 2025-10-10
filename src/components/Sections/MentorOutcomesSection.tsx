@@ -1,7 +1,7 @@
 // app/(site)/components/MentorOutcomesSection.tsx
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 
 /**
  * MentorOutcomesSection — CDPL (Light-surface only)
@@ -23,8 +23,7 @@ type Case = {
 
 const BRAND_GRADIENT =
   "linear-gradient(90deg, #ff8c00 0%, #ffb558 50%, #ffd19e 100%)";
-const ACCENT_GRADIENT =
-  "linear-gradient(90deg, #7ee7ff 0%, #9d7bff 100%)";
+const ACCENT_GRADIENT = "linear-gradient(90deg, #7ee7ff 0%, #9d7bff 100%)";
 
 const DOMAINS = ["All", "AI / ML", "Data Science", "Full-Stack", "Cloud & DevOps", "Product"];
 
@@ -231,15 +230,6 @@ function OutcomeOrbit({
   activeIdx: number;
   setActiveIdx: (i: number) => void;
 }) {
-  const [isSmall, setIsSmall] = useState(false);
-
-  useEffect(() => {
-    const set = () => setIsSmall(window.innerWidth < 640);
-    set();
-    window.addEventListener("resize", set);
-    return () => window.removeEventListener("resize", set);
-  }, []);
-
   const N = Math.max(1, cases.length);
 
   const positions = useMemo(() => {
@@ -297,6 +287,7 @@ function OutcomeOrbit({
             {active ? (
               <>
                 <div className="flex items-center gap-3">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={active.avatar}
                     alt={`${active.name} avatar`}
@@ -365,6 +356,7 @@ function OutcomeOrbit({
                     background: "white",
                   }}
                 >
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
                     src={c.avatar}
                     alt=""
@@ -402,6 +394,7 @@ function OutcomeOrbit({
                     : "0 14px 28px -18px rgba(0,0,0,0.35)",
                 }}
               >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={c.avatar}
                   alt=""
