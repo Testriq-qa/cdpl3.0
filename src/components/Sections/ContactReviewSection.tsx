@@ -1,239 +1,231 @@
-// --- Explore Our Reviews (Light + Futuristic, with Logos + Auto Slider) ---
+'use client';
+
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 
-type Review = {
-  name: string;
-  date: string;
-  source: "Google" | "Sulekha" | "Justdial";
-  text: string;
-  city?: string;      // for Sulekha
-};
+type Review = { name: string; date: string; source: "Google"|"Sulekha"|"Justdial"; text: string; city?: string; logo:{src:string;alt:string;} };
 
 const PLATFORM = {
-  Google: {
-    title: "Google",
-    statLabel: "Based on",
-    statValue: "289 reviews",
-    overall: "EXCELLENT",
-    logo: { src: "/logos/google.svg", alt: "Google logo" },
-  },
-  Sulekha: {
-    title: "Sulekha",
-    statLabel: "Rating",
-    statValue: "5.0 · 84 reviews",
-    overall: "EXCELLENT",
-    logo: { src: "/logos/sulekha.svg", alt: "Sulekha logo" },
-  },
-  Justdial: {
-    title: "Justdial",
-    statLabel: "Ratings",
-    statValue: "210 ratings",
-    overall: "GREAT",
-    logo: { src: "/logos/justdial.svg", alt: "Justdial logo" },
-  },
+  Google: { title:"Google", statLabel:"Based on", statValue:"289 reviews", overall:"EXCELLENT", logo:{src:"/slider_logos/google-logo.svg", alt:"Google logo"} },
+  Sulekha:{ title:"Sulekha", statLabel:"Rating", statValue:"5.0 · 84 reviews", overall:"EXCELLENT", logo:{src:"/slider_logos/sulekha.svg", alt:"Sulekha logo"} },
+  Justdial:{ title:"Justdial", statLabel:"Ratings", statValue:"210 ratings", overall:"GREAT", logo:{src:"/slider_logos/justdial.svg", alt:"Justdial logo"} },
 } as const;
 
 const REVIEWS: Review[] = [
-  // --- Google ---
+  // GOOGLE
   {
     name: "Prathik Singh",
     date: "2025-06-27",
     source: "Google",
     text:
       "I had the opportunity to intern at Cinute, and it has been a great learning experience... I worked on data analysis in Excel, created dashboards, and explored Power BI & Tableau. The quality of teaching is so good...",
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
   },
-  { name: "YASH", date: "2025-06-27", source: "Google", text: "—" },
-  { name: "Sujal Vaity", date: "2025-06-27", source: "Google", text: "—" },
+  { name: "YASH", date: "2025-06-27", source: "Google", text: "—", logo: { src: "/slider_logos/google.svg", alt: "Google logo" } },
+  { name: "Sujal Vaity", date: "2025-06-27", source: "Google", text: "—", logo: { src: "/slider_logos/google.svg", alt: "Google logo" } },
   {
     name: "bhumika Ankush",
     date: "2025-06-27",
     source: "Google",
     text: "The subjects taught are relevant and help prepare students for real-world challenges.",
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
   },
   {
     name: "Vedang Mohit",
     date: "2025-06-27",
     source: "Google",
     text: "The subjects taught are relevant and help prepare students for real-world challenges.",
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
   },
   {
     name: "Aryan Prasad",
     date: "2025-06-27",
     source: "Google",
     text: "It's a good opportunity to do course and learn coding languages... good mentors.",
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
   },
   {
     name: "Dhruv Salvi",
     date: "2025-06-27",
     source: "Google",
-    text: "Helped me to learn and gain a lot of knowledge and skills growth throughout, humble and good communicating staff and members.",
+    text:
+      "Helped me to learn and gain a lot of knowledge and skills growth throughout, humble and good communicating staff and members.",
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
   },
   {
     name: "Bhuvan Sharma",
     date: "2025-06-27",
     source: "Google",
-    text: "Good information provided by the domain providers, very good at communicating and humble...",
+    text:
+      "Good information provided by the domain providers, very good at communicating and humble...",
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
   },
-  { name: "Sahil Bhaye", date: "2025-06-27", source: "Google", text: "—" },
+  { name: "Sahil Bhaye", date: "2025-06-27", source: "Google", text: "—", logo: { src: "/slider_logos/google.svg", alt: "Google logo" } },
   {
     name: "Durgesh parab",
     date: "2025-06-27",
     source: "Google",
-    text: "It is best company to get experience... I’m learning full-stack with highly talented staff...",
+    text:
+      "It is best company to get experience... I’m learning full-stack with highly talented staff...",
+    logo: { src: "/slider_logos/google.svg", alt: "Google logo" },
   },
 
-  // --- Sulekha ---
+  // SULEKHA
   {
     name: "Aarya",
     city: "Mumbai",
     date: "06 Nov, 2024",
     source: "Sulekha",
-    text: "Excellent Service, Extremely Professional Behavior, Most Trusted Company. Good explanation and friendly nature.",
+    text:
+      "Excellent Service, Extremely Professional Behavior, Most Trusted Company. Good explanation and friendly nature.",
+    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo" },
   },
   {
     name: "Riya Rajnath Yadav",
     city: "Mumbai",
     date: "06 Nov, 2024",
     source: "Sulekha",
-    text: "Highly Affordable Service, Extremely Professional Behavior, Most Trusted Company. The instructor teaches very well...",
+    text:
+      "Highly Affordable Service, Extremely Professional Behavior, Most Trusted Company. The instructor teaches very well...",
+    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo" },
   },
   {
     name: "Shital Sawant",
     city: "Mumbai",
     date: "28 Oct, 2024",
     source: "Sulekha",
-    text: "Highly Affordable Service, Extremely Professional Behavior, Most Trusted Company. Would recommend the class to freshers & newcomers...",
+    text:
+      "Highly Affordable Service, Extremely Professional Behavior, Most Trusted Company. Would recommend the class to freshers & newcomers...",
+    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo" },
   },
   {
     name: "Piyush Prasad",
     city: "Mumbai",
     date: "17 Oct, 2024",
     source: "Sulekha",
-    text: "Tableau and Excel are excellent batches and the instructors are helpful... I recommend students to enroll in Cinute Digital.",
+    text:
+      "Tableau and Excel are excellent batches and the instructors are helpful... I recommend students to enroll in Cinute Digital.",
+    logo: { src: "/slider_logos/sulekha-logo.webp", alt: "Sulekha logo" },
   },
 
-  // --- Justdial ---
+  // JUSTDIAL
   {
     name: "Atul",
     date: "18 Nov",
     source: "Justdial",
-    text: "EMI available, one-on-one mentoring from specialized faculty in AC classrooms. Approachable faculty and resourceful library...",
+    text:
+      "EMI available, one-on-one mentoring from specialized faculty in AC classrooms. Approachable faculty and resourceful library...",
+    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo" },
   },
   {
     name: "User",
     date: "18 Nov",
     source: "Justdial",
-    text: "Amazing trainers who make even tough topics easy to understand. Super approachable and always ready to help.",
+    text:
+      "Amazing trainers who make even tough topics easy to understand. Super approachable and always ready to help.",
+    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo" },
   },
   {
     name: "Aatish",
     date: "06 Nov",
     source: "Justdial",
-    text: "Clean and highly specialized facilities. Regular evaluation ensures top-notch quality; multiple facilities cater to diverse needs.",
+    text:
+      "Clean and highly specialized facilities. Regular evaluation ensures top-notch quality; multiple facilities cater to diverse needs.",
+    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo" },
   },
-  { name: "Ami", date: "18 Nov", source: "Justdial", text: "Trainers were amazing." },
+  {
+    name: "Ami",
+    date: "18 Nov",
+    source: "Justdial",
+    text: "Trainers were amazing.",
+    logo: { src: "/slider_logos/justdial-logo.png", alt: "Justdial logo" },
+  },
 ];
-
 export function ContactReviewSection() {
   const [tab, setTab] = useState<keyof typeof PLATFORM>("Google");
-
   const filtered = useMemo(() => REVIEWS.filter((r) => r.source === tab), [tab]);
   const stat = PLATFORM[tab];
+  const statLogo = filtered[0]?.logo ?? stat.logo;
 
-  // --- Slider state ---
-  const [index, setIndex] = useState(0);
-  const [perPage, setPerPage] = useState(1); // responsive cards per view
+  // marquee state
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const offsetRef = useRef(0); const halfWidthRef = useRef(0); const rafRef = useRef<number | null>(null);
+  const lastTsRef = useRef<number | null>(null);
   const [paused, setPaused] = useState(false);
-  const maxIndex = Math.max(0, filtered.length - perPage);
-
-  // determine perPage on resize
+  const [speed, setSpeed] = useState(80);
+  const [reduced, setReduced] = useState(false);
   useEffect(() => {
-    const calc = () => {
-      if (window.innerWidth >= 1024) setPerPage(3);
-      else if (window.innerWidth >= 768) setPerPage(2);
-      else setPerPage(1);
-    };
-    calc();
-    window.addEventListener("resize", calc);
-    return () => window.removeEventListener("resize", calc);
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(mq.matches);
+    update(); mq.addEventListener?.("change", update);
+    return () => mq.removeEventListener?.("change", update);
   }, []);
-
-  // reset index when tab/perPage changes
+  const measure = () => {
+    const track = trackRef.current; if (!track) return;
+    halfWidthRef.current = track.scrollWidth / 2;
+    if (typeof window !== "undefined") {
+      if (window.innerWidth >= 1280) setSpeed(110);
+      else if (window.innerWidth >= 1024) setSpeed(95);
+      else if (window.innerWidth >= 640) setSpeed(85);
+      else setSpeed(75);
+    }
+  };
+  useEffect(() => { measure(); const onResize = () => measure(); window.addEventListener("resize", onResize); return () => window.removeEventListener("resize", onResize); }, [tab, filtered.length]);
+  useEffect(() => { offsetRef.current = 0; lastTsRef.current = null; if (trackRef.current) trackRef.current.style.transform = `translateX(0px)`; }, [tab]);
   useEffect(() => {
-    setIndex(0);
-  }, [tab, perPage]);
-
-  // autoplay
-  useEffect(() => {
-    if (paused) return;
-    const id = setInterval(() => {
-      setIndex((i) => (i >= maxIndex ? 0 : i + 1));
-    }, 2500);
-    return () => clearInterval(id);
-  }, [paused, maxIndex]);
-
-  const sliderRef = useRef<HTMLDivElement | null>(null);
+    if (reduced) return;
+    const tick = (ts:number) => {
+      if (!trackRef.current) { rafRef.current = requestAnimationFrame(tick); return; }
+      if (paused) { lastTsRef.current = ts; rafRef.current = requestAnimationFrame(tick); return; }
+      if (lastTsRef.current == null) lastTsRef.current = ts;
+      const dt = (ts - (lastTsRef.current||ts))/1000; lastTsRef.current = ts;
+      offsetRef.current -= speed * dt;
+      const half = halfWidthRef.current || 0;
+      if (half > 0 && Math.abs(offsetRef.current) >= half) offsetRef.current += half;
+      trackRef.current.style.transform = `translateX(${offsetRef.current}px)`;
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+    return () => { if (rafRef.current) cancelAnimationFrame(rafRef.current); };
+  }, [paused, speed, reduced]);
 
   return (
-    <section className="relative isolate">
-      {/* soft gradient bg + glow */}
-      <div aria-hidden className="absolute inset-0 -z-10 bg-gradient-to-b from-sky-50 via-white to-violet-50" />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute -z-10 inset-x-0 top-[-80px] mx-auto h-64 w-[70%] rounded-full blur-3xl"
-        style={{
-          background:
-            "radial-gradient(60% 60% at 50% 40%, rgba(56,189,248,.20), rgba(167,139,250,.12) 60%, transparent 70%)",
-        }}
-      />
-
-      <div className="container mx-auto px-4 py-20">
-        {/* Header */}
+    <section className="w-full relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:[color-scheme:light]">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-10">
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-sm">
             ⭐ Explore Our Reviews
           </span>
           <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
-            What learners say about{" "}
-            <span className="bg-gradient-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent">
-              Cinute Digital
-            </span>
+            What learners say about <span className="text-brand">Cinute Digital</span>
           </h2>
 
-          {/* Tab Switcher */}
-          <div className="mt-8 inline-flex rounded-2xl border border-slate-200 bg-white p-1 shadow-md">
-            {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p) => (
-              <button
-                key={p}
-                onClick={() => setTab(p)}
-                className={[
-                  "px-4 py-2 text-sm font-medium rounded-xl transition",
-                  tab === p
-                    ? "bg-gradient-to-r from-sky-500 to-indigo-500 text-white shadow"
-                    : "text-slate-700 hover:bg-slate-50",
-                ].join(" ")}
-                aria-label={`View ${PLATFORM[p].title} reviews`}
-              >
-                {/* tab logo */}
-                <span className="inline-flex items-center gap-2">
-                  <Image
-                    src={PLATFORM[p].logo.src}
-                    alt={PLATFORM[p].logo.alt}
-                    width={16}
-                    height={16}
-                    priority={p === "Google"}
-                  />
-                  {PLATFORM[p].title}
-                </span>
-              </button>
-            ))}
+          {/* Tabs */}
+          <div className="mt-8 inline-flex rounded-2xl border border-slate-200 bg-white/70 backdrop-blur p-2 shadow-md">
+            {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p) => {
+              const isActive = tab === p;
+              return (
+                <button
+                  key={p}
+                  onClick={() => setTab(p)}
+                  aria-label={`View ${PLATFORM[p].title} reviews`}
+                  className={[
+                    "group relative mx-1 flex items-center justify-center rounded-xl px-3 py-2 transition ring-1 ring-transparent",
+                    isActive
+                      ? "bg-gradient-to-r from-blue-200 to-orange-200 text-white shadow-lg ring-sky-300/40"
+                      : "bg-white/80 text-slate-700 hover:bg-slate-200/70",
+                  ].join(" ")}
+                >
+                  <Image src={PLATFORM[p].logo.src} alt={PLATFORM[p].logo.alt} width={90} height={56} priority={p==="Google"} />
+                </button>
+              );
+            })}
           </div>
 
-          {/* Stat bar */}
           <div className="mt-6 flex items-center justify-center gap-3 text-sm text-slate-600">
             <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 border border-slate-200 shadow-sm">
-              <Image src={stat.logo.src} alt={`${stat.title} logo`} width={16} height={16} />
+              <Image src={statLogo.src} alt={statLogo.alt} width={18} height={18} />
               {stat.overall}
             </span>
             <span className="opacity-60">•</span>
@@ -243,53 +235,41 @@ export function ContactReviewSection() {
           </div>
         </div>
 
-        {/* Slider */}
+        {/* Marquee */}
         <div
           className="mt-10 overflow-hidden"
-          ref={sliderRef}
+          ref={containerRef}
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
+          style={{
+            maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
+          }}
         >
-          <div
-            className="flex transition-transform duration-500 ease-out"
-            style={{
-              transform: `translateX(-${(index * 100) / perPage}%)`,
-              width: `${(filtered.length * 100) / perPage}%`,
-            }}
-          >
-            {filtered.map((r, idx) => (
+          <div ref={trackRef} className="flex will-change-transform py-5">
+            {[...filtered, ...filtered].map((r, idx) => (
               <div
                 key={`${r.source}-${r.name}-${idx}`}
-                className="w-full md:w-1/2 lg:w-1/3 px-2"
+                className="flex-none px-3 w-[70vw] md:w-[40vw] lg:w-[30vw] xl:w-[25vw] hover:scale-105 transition-all ease-in-out duration-200"
+                onMouseEnter={() => setPaused(true)}
+                onMouseLeave={() => setPaused(false)}
               >
                 <article className="group relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition hover:shadow-xl">
-                  {/* corner glow */}
-                  <div
-                    aria-hidden
-                    className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-2xl"
-                  />
+                  <div aria-hidden className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-2xl" />
                   <header className="flex items-start justify-between gap-4">
                     <div className="min-w-0">
                       <h3 className="text-base font-semibold text-slate-900 truncate">{r.name}</h3>
                       <p className="text-xs text-slate-500 mt-0.5">
-                        {r.city ? `${r.city} • ` : ""}
-                        {r.date} • {r.source}
+                        {r.city ? `${r.city} • ` : ""}{r.date} • {r.source}
                       </p>
                     </div>
-                    {/* source logo badge */}
                     <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-600">
-                      <Image
-                        src={PLATFORM[r.source].logo.src}
-                        alt={`${r.source} logo`}
-                        width={14}
-                        height={14}
-                      />
+                      <Image src={r.logo.src} alt={r.logo.alt} width={14} height={14} />
                       Verified
                     </span>
                   </header>
 
                   <p className="mt-3 text-sm leading-6 text-slate-700">{r.text}</p>
-
                   <footer className="mt-4 text-xs text-slate-500">
                     Trustindex verifies source on Google / platform verifies identity where applicable.
                   </footer>
@@ -297,53 +277,25 @@ export function ContactReviewSection() {
               </div>
             ))}
           </div>
-
-          {/* slider controls (optional) */}
-          <div className="mt-6 flex items-center justify-center gap-2">
-            {Array.from({ length: maxIndex + 1 }).map((_, i) => (
-              <button
-                key={i}
-                onClick={() => setIndex(i)}
-                className={[
-                  "h-2.5 w-2.5 rounded-full transition",
-                  i === index ? "bg-sky-600" : "bg-slate-300 hover:bg-slate-400",
-                ].join(" ")}
-                aria-label={`Go to slide ${i + 1}`}
-              />
-            ))}
-          </div>
         </div>
 
-        {/* Platform badges row */}
         <div className="mt-12 grid gap-4 sm:grid-cols-3">
-          <BadgeCard label="Google Reviews" value="80+" note="Public reviews" logo="/slider_logos/google.svg" />
-          <BadgeCard label="Sulekha Reviews" value="84" note="5.0 average" logo="/slider_logos/sulekha.svg" />
-          <BadgeCard label="Justdial Ratings" value="210" note="Verified users" logo="/slider_logos/justdial.svg" />
+          {[
+            { label:"Google Reviews", value:"80+", note:"Public reviews", logo:"/slider_logos/google.svg" },
+            { label:"Sulekha Reviews", value:"84", note:"5.0 average", logo:"/slider_logos/sulekha-logo.webp" },
+            { label:"Justdial Ratings", value:"210", note:"Verified users", logo:"/slider_logos/justdial-logo.png" },
+          ].map((b) => (
+            <div key={b.label} className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-md">
+              <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center">
+                <Image src={b.logo} alt={`${b.label} logo`} width={50} height={50} />
+              </div>
+              <div className="text-3xl font-extrabold tracking-tight text-slate-900">{b.value}</div>
+              <div className="mt-1 text-sm font-medium text-slate-700">{b.label}</div>
+              {b.note && <div className="text-xs text-slate-500 mt-1">{b.note}</div>}
+            </div>
+          ))}
         </div>
       </div>
     </section>
-  );
-}
-
-function BadgeCard({
-  label,
-  value,
-  note,
-  logo,
-}: {
-  label: string;
-  value: string;
-  note?: string;
-  logo: string;
-}) {
-  return (
-    <div className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-md">
-      <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center">
-        <Image src={logo} alt={`${label} logo`} width={50} height={50} />
-      </div>
-      <div className="text-3xl font-extrabold tracking-tight text-slate-900">{value}</div>
-      <div className="mt-1 text-sm font-medium text-slate-700">{label}</div>
-      {note && <div className="text-xs text-slate-500 mt-1">{note}</div>}
-    </div>
   );
 }

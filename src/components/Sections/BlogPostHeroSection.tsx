@@ -1,7 +1,7 @@
-import React from 'react';
 import Image from 'next/image';
 
 export const BlogPostHeroSection: React.FC = () => {
+
     return (
         <section className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-10">
             {/* Title */}
