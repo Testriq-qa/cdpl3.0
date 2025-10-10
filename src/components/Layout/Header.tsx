@@ -342,7 +342,7 @@ const Header = () => {
               }}
             >
               <button
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base"
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="mega-menu"
               >
