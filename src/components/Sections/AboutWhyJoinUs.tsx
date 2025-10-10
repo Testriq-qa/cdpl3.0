@@ -21,62 +21,62 @@ export default function AboutWhyJoinUs() {
       desc:
         "Live projects run parallel to classes. Get hands-on with planning, test design, execution, and reporting.",
       icon: Layers,
-      seo: "industry-ready training, hands-on QA projects",
+      seo: ["industry-ready training", "hands-on QA projects"],
     },
     {
       title: "Professional Exposure",
       desc:
         "Work with experienced mentors and QA leads. Build confidence to meet corporate standards and ace interviews.",
       icon: Briefcase,
-      seo: "mentor-led learning, interview preparation",
+      seo: ["mentor-led learning", "interview preparation"],
     },
     {
       title: "Practical Application",
       desc:
         "Practice web, mobile, and API testing on real devices. Apply concepts from manual to automation testing.",
       icon: BadgeCheck,
-      seo: "manual testing, automation testing, API testing",
+      seo: ["manual testing", "automation testing", "API testing"],
     },
     {
       title: "Our Experience",
       desc:
         "A decade of building QA teams. Learn in-demand tools, frameworks, and best practices used by top companies.",
       icon: Rocket,
-      seo: "QA best practices, modern test frameworks",
+      seo: ["QA best practices", "modern test frameworks"],
     },
     {
       title: "Career Services",
       desc:
         "Placement assistance, portfolio reviews, mock interviews, and referrals to hiring partners and startups.",
       icon: Target,
-      seo: "placement assistance, portfolio-first approach",
+      seo: ["placement assistance", "portfolio-first approach"],
     },
     {
       title: "Certifications & Tools",
       desc:
         "Get guidance on certifications and hands-on with Jira, Postman, Selenium, Playwright, and CI/CD basics.",
       icon: ShieldCheck,
-      seo: "software testing certifications, Selenium, Playwright",
+      seo: ["software testing certifications", "Selenium", "Playwright",]
     },
     {
       title: "Collaborative Community",
       desc:
         "Join a 10k+ learner network, peer reviews, and alumni support for continuous growth and opportunities.",
       icon: Users,
-      seo: "peer learning, alumni network",
+      seo: ["peer learning", "alumni network"],
     },
     {
       title: "Flexible Learning",
       desc:
         "Weekend/weekday cohorts, recorded sessions, and structured roadmaps tailored for job-ready outcomes.",
       icon: GraduationCap,
-      seo: "flexible cohorts, job-ready outcomes",
+      seo: ["flexible cohorts", "job-ready outcomes"],
     },
   ] as const;
 
   return (
     <section
-      className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
+      className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8"
       aria-labelledby="why-join-heading"
     >
       {/* Header */}
@@ -95,7 +95,7 @@ export default function AboutWhyJoinUs() {
           </span>
           ?
         </h2>
-        <p className="mx-auto mt-5 max-w-2xl text-sm leading-6 text-slate-600 sm:text-base">
+        <p className="mx-auto mt-6 max-w-5xl md:text-lg leading-6 text-slate-600 sm:text-base">
           Industry-aligned curriculum, <strong>mentor-led learning</strong>,{" "}
           <strong>live projects</strong>, and <strong>placement assistance</strong>—everything
           designed to make you <strong>job-ready</strong> for{" "}
@@ -124,11 +124,11 @@ export default function AboutWhyJoinUs() {
           }}
         />
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {features.map(({ title, desc, icon: Icon, seo }) => (
             <article
               key={title}
-              className="group relative rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition-transform hover:-translate-y-0.5 hover:shadow-md dark:border-slate-200/70 dark:bg-white"
+              className="group relative h-auto rounded-2xl leading-relaxed border border-slate-700 bg-white p-6 shadow-md hover:shadow-brand transition-transform hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-200/70 dark:bg-white"
             >
               {/* Icon */}
               <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-orange-50 ring-1 ring-orange-100">
@@ -136,16 +136,19 @@ export default function AboutWhyJoinUs() {
               </div>
 
               {/* Title */}
-              <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+              <h3 className="mt-2 text-xl font-bold text-slate-900">{title}</h3>
 
               {/* Description */}
-              <p className="mt-1.5 text-sm text-slate-600">{desc}</p>
+              <p className="mt-2 text-md text-slate-600">{desc}</p>
 
               {/* SEO micro-tag (visually subtle) */}
-              <p className="mt-2 text-[11px] leading-4 text-slate-500">
-                <span className="rounded-sm bg-green-100 px-1.5 py-0.5">
-                  {seo}
-                </span>
+              <p className="flex flex-wrap gap-2 mt-6 text-xs leading-4 text-slate-500">
+            
+                  {seo.map((s)=>{
+                    return <span className="rounded-md bg-green-100 px-1.5 p-0.5 w-fit">
+                      {s}
+                    </span>
+                  })}
               </p>
 
               {/* Hover accent line */}

@@ -102,7 +102,7 @@ export default function AboutStatsSection() {
         <section
             ref={rootRef as any}
             aria-labelledby="about-stats-heading"
-            className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
+            className="mx-auto max-w-7xl px-4 py-4 md:py-12 sm:px-6 lg:px-8"
         >
             {/* Header */}
             <div className="mb-6 text-center">
@@ -116,7 +116,7 @@ export default function AboutStatsSection() {
                     Career-focused results with{" "}
                     <span className="text-brand">Cinute Digital</span>
                 </h2>
-                <p className="mt-5 mx-auto max-w-3xl text-sm leading-6 text-slate-600 sm:text-base">
+                <p className="mt-6 mx-auto max-w-5xl md:text-lg leading-6 text-slate-600 sm:text-base">
                     Real <strong>EdTech</strong> impact: <strong>industry-ready skills</strong>,{" "}
                     <strong>mentor-led learning</strong>, and <strong>placement assistance</strong> designed
                     for <strong>software testing</strong>, <strong>automation</strong>,{" "}
@@ -171,8 +171,8 @@ export default function AboutStatsSection() {
                                     {/* Accessible, non-animated fallback for screen readers */}
                                     <span className="sr-only">{applySuffix(s.target, s.suffix)}</span>
                                 </div>
-                                <div className="mt-1 text-xs font-medium text-slate-600">{s.label}</div>
-                                <div className="mt-1.5 text-[11px] leading-4 text-slate-500">
+                                <div className="mt-1 text-md font-medium text-slate-800">{s.label}</div>
+                                <div className="mt-2.5 text-sm leading-5 text-slate-600">
                                     {s.desc}
                                 </div>
                             </div>
@@ -198,7 +198,7 @@ export default function AboutStatsSection() {
             </div>
 
             {/* Subtext for extra SEO relevance (concise) */}
-            <p className="mx-auto mt-6 max-w-3xl text-center text-xs leading-5 text-slate-500">
+            <p className="mx-auto mt-6 max-w-3xl text-center text-sm leading-5 text-slate-500">
                 Build <strong>job-ready skills</strong> with an <strong>industry-aligned edtech program</strong> in{" "}
                 <strong>software testing</strong>, <strong>automation</strong>,{" "}
                 <strong>data science</strong>, and <strong>AI/ML</strong>—with{" "}

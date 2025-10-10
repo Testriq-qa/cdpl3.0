@@ -50,7 +50,7 @@ export default function AboutMissionVision({
     <section
       aria-labelledby="mission-vision-title"
       className={clsx(
-        "relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8",
+        "relative mx-auto max-w-7xl px-4 py-8 md:py-10 sm:px-6 lg:px-8",
         "bg-white text-slate-900", // light theme only
         className
       )}

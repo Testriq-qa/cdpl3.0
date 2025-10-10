@@ -46,7 +46,7 @@ const AboutStorySection = memo(function AboutStorySection() {
   return (
     <section
       aria-labelledby="about-story-heading"
-      className="relative mx-auto max-w-7xl px-4 py-24 sm:px-6 lg:px-8 overflow-hidden bg-white"
+      className="relative mx-auto max-w-7xl px-4 py-6 md:py-12 sm:px-6 lg:px-8 overflow-hidden bg-white"
     >
       {/* No background textures, no meshes, no conic/blur/masks */}
 
