@@ -13,7 +13,7 @@ function SectionLoader({ label = "Loading..." }: { label?: string }) {
 
 // ---------- Dynamic sections (SSR enabled like your example) ----------
 const MentorHeroSection = dynamic(
-  () => import("@/components/Sections/MentorHeroSection"),
+  () => import("@/components/sections/MentorHeroSection"),
   {
     ssr: true,
     loading: () => <SectionLoader label="Loading hero..." />,
@@ -21,7 +21,7 @@ const MentorHeroSection = dynamic(
 );
 
 const MentorProcessFlowSection = dynamic(
-  () => import("@/components/Sections/MentorProcessFlowSection"),
+  () => import("@/components/sections/MentorProcessFlowSection"),
   {
     ssr: true,
     loading: () => <SectionLoader label="Loading process..." />,
@@ -30,7 +30,7 @@ const MentorProcessFlowSection = dynamic(
 
 
 const MentorHelpCTASection = dynamic(
-  () => import("@/components/Sections/MentorHelpCTASection"),
+  () => import("@/components/sections/MentorHelpCTASection"),
   {
     ssr: true,
     loading: () => <SectionLoader label="Loading help..." />,
@@ -38,7 +38,7 @@ const MentorHelpCTASection = dynamic(
 );
 
 const MentorsImpactSection = dynamic(
-  () => import("@/components/Sections/MentorsImpactSection"),
+  () => import("@/components/sections/MentorsImpactSection"),
   {
     ssr: true,
     loading: () => <SectionLoader label="Loading impact..." />,
@@ -46,7 +46,7 @@ const MentorsImpactSection = dynamic(
 );
 
 const MentorOutcomesSection = dynamic(
-  () => import("@/components/Sections/MentorOutcomesSection"),
+  () => import("@/components/sections/MentorOutcomesSection"),
   {
     ssr: true,
     loading: () => <SectionLoader label="Loading outcomes..." />,

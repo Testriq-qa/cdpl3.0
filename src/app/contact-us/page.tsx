@@ -1,9 +1,9 @@
-import { ContactHeroSection } from '@/components/Sections/ContactHeroSection';
-import { ContactMethodsSection } from '@/components/Sections/ContactMethodSection';
-import { ContactOfficeMapSection } from '@/components/Sections/ContactOfficeMapSection';
-import { ContactReviewSection } from '@/components/Sections/ContactReviewSection';
-import { ContactBookCallSection } from '@/components/Sections/ContactBookCall';
-import { ContactFAQSection } from '@/components/Sections/ContactFAQSection';
+import { ContactHeroSection } from '@/components/sections/ContactHeroSection';
+import { ContactMethodsSection } from '@/components/sections/ContactMethodSection';
+import { ContactOfficeMapSection } from '@/components/sections/ContactOfficeMapSection';
+import { ContactReviewSection } from '@/components/sections/ContactReviewSection';
+import { ContactBookCallSection } from '@/components/sections/ContactBookCall';
+import { ContactFAQSection } from '@/components/sections/ContactFAQSection';
 
 export default function ContactPage() {
   return (
