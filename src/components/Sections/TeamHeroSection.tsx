@@ -13,7 +13,6 @@ const easeBezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
 type Stat = { label: string; value: string; note?: string };
 const stats: Stat[] = [
     { label: "Expert Mentors", value: "45+", note: "QA, Automation, Data" },
-    { label: "Avg. Mentor Rating", value: "4.9/5", note: "Learner reviews" },
     { label: "Learners Mentored", value: "1,000+", note: "Career outcomes" },
     { label: "Hiring Partners", value: "30+", note: "Industry referrals" },
 ];
@@ -77,7 +76,7 @@ export default function TeamHero() {
                 id="our-team-heading"
                 {...fadeUp}
                 transition={{ ...(fadeUp.transition as Transition), delay: 0.06 }}
-                className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-[linear-gradient(90deg,#ff8c00,#ffb95e,#ff8c00)]"
+                className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500"
             >
                 Meet the People Behind <span style={{ color: BRAND }}>Cinute Digital</span>
             </motion.h1>
@@ -181,37 +180,6 @@ export default function TeamHero() {
                         </div>
                     ))}
                 </div>
-            </motion.div>
-
-            {/* Mentor spotlight (optional quick hero avatars) */}
-            <motion.div
-                {...fadeUp}
-                transition={{ duration: 0.6, ease: easeBezier, delay: 0.46 }}
-                className="mt-18 grid gap-4 sm:grid-cols-3"
-            >
-                {[
-                    { name: "Ami Khambata", role: "Lead SDET Mentor", img: "/images/ami-khambata.png" },
-                    { name: "Rahul Verma", role: "Automation Architect", img: "/images/rahul-verma.png" },
-                    { name: "Priya Iyer", role: "Data Science Mentor", img: "/images/priya-iyer.png" },
-                ].map((m) => (
-                    <figure
-                        key={m.name}
-                        className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
-                    >
-                        <div className="flex items-center gap-3">
-                            <div className="relative overflow-hidden rounded-full border border-slate-200">
-                                <Image src={m.img} alt={m.name} width={80} height={80} className="object-cover" />
-                            </div>
-                            <figcaption>
-                                <p className="font-semibold text-slate-900">{m.name}</p>
-                                <p className="text-sm text-slate-600">{m.role}</p>
-                            </figcaption>
-                        </div>
-                        <blockquote className="mt-3 text-sm leading-6 text-slate-700">
-                            “We mentor with production realities—version control, test strategy, CI/CD, and clean code—so you learn what hiring managers value.”
-                        </blockquote>
-                    </figure>
-                ))}
             </motion.div>
 
             {/* JSON-LD for SEO (EducationalOrganization + Mentors as Persons) */}

@@ -39,6 +39,21 @@ export default function AboutHeroSection() {
                 />
             </div>
 
+            {/* Breadcrumbs for SEO & UX */}
+            <nav aria-label="Breadcrumb" className="mb-3">
+                <ol className="flex items-center gap-2 text-sm text-slate-500">
+                    <li>
+                        <Link href="/" className="hover:text-slate-700">Home</Link>
+                    </li>
+                    <li aria-hidden="true" className="text-slate-400">/</li>
+                    <li>
+                        <Link href="/about-us" className="font-medium text-slate-700 hover:text-slate-900">
+                            about-us
+                        </Link>
+                    </li>
+                </ol>
+            </nav>
+
             <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-2">
                 {/* LEFT — first on all viewports */}
                 <div className="order-1 lg:order-1">

@@ -77,7 +77,7 @@ export default function AboutAccreditations() {
               id="accreditations-heading"
               className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl"
             >
-              Trusted Accreditations & Employer‑Ready Certifications
+              Trusted <span className="text-brand">Accreditations</span> & Employer‑Ready <span className="text-brand">Certifications</span>
             </h2>
             <p className="mt-3 text-base leading-relaxed text-slate-600 sm:text-lg">
               Build a future‑proof career with <strong>industry‑aligned software testing, automation, API testing, data science, and AI/ML programs</strong>.
@@ -207,7 +207,7 @@ export default function AboutAccreditations() {
       {/* JSON-LD for SEO: Organization + Accreditation */}
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
+        // eslint disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(
             {

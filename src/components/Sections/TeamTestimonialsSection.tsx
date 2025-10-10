@@ -158,7 +158,7 @@ export default function TeamTestimonialsSection() {
                 </p>
 
                 <div className="mt-6 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                    {testimonials.map((t, idx) => (
+                    {testimonials.map((t) => (
                         <motion.figure
                             key={t.name}
                             {...fadeUp}

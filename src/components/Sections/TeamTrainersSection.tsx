@@ -30,7 +30,7 @@ export default function TeamTrainersSection({
   heading = "Meet Our Expert Trainers",
   subheading = "Mentor-led, job-focused learning from industry practitioners in Quality Engineering, Automation Testing, and DevOps.",
   ctaHref = "/contact",
-  ctaText = "Book a Free Demo Class",
+  ctaText = "Book a Free Demo Session",
   className = "",
 }: TrainersSectionProps) {
   const [query, setQuery] = useState("");
@@ -112,7 +112,7 @@ export default function TeamTrainersSection({
           className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl"
         >
           {heading}{" "}
-          <span className="bg-clip-text text-transparent" style={{ backgroundImage: `linear-gradient(90deg, ${BRAND}, #ffb86b)` }}>
+          <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500" style={{ backgroundImage: `linear-gradient(90deg, ${BRAND}, #ffb86b)` }}>
             at Cinute Digital
           </span>
         </h2>

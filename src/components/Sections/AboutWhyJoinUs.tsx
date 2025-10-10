@@ -143,7 +143,7 @@ export default function AboutWhyJoinUs() {
 
               {/* SEO micro-tag (visually subtle) */}
               <p className="mt-2 text-[11px] leading-4 text-slate-500">
-                <span className="rounded-sm bg-slate-100 px-1.5 py-0.5">
+                <span className="rounded-sm bg-green-100 px-1.5 py-0.5">
                   {seo}
                 </span>
               </p>

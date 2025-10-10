@@ -68,9 +68,9 @@ export default function TeamLeadershipSpotlight({ data }: Props) {
             />
 
             {/* Heading + CTA */}
-            <div className="flex flex-wrap items-end justify-between gap-4">
+            <div className="flex flex-wrap items-end justify-center text-center gap-4">
                 <div>
-                    <div className="flex flex-wrap items-center gap-2">
+                    <div className="flex flex-wrap items-center justify-center gap-2">
                         <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
                             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                             Future-Ready Leadership
@@ -87,17 +87,12 @@ export default function TeamLeadershipSpotlight({ data }: Props) {
 
                     <h2
                         id="leadership-heading"
-                        className="mt-4 bg-clip-text text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl"
-                        style={{
-                            // brand-tinted gradient headline; remains readable on light bg
-                            backgroundImage: `linear-gradient(90deg, ${BRAND}, #ffb36a 30%, #111827 85%)`,
-                            color: "transparent",
-                        }}
+                        className="mt-5 text-3xl font-extrabold tracking-tight sm:text-4xl bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 bg-clip-text text-transparent"
                     >
                         Leadership Spotlight
                     </h2>
 
-                    <p className="mt-3 max-w-2xl text-sm leading-relaxed text-slate-600 sm:text-base">
+                    <p className="mt-5 max-w-5xl text-lg leading-relaxed text-slate-600">
                         Learn from industry veterans who architect{" "}
                         <strong>job-ready, mentor-led programs</strong> with{" "}
                         <strong>real-world projects</strong>, <strong>placement support</strong>, and
@@ -108,7 +103,7 @@ export default function TeamLeadershipSpotlight({ data }: Props) {
                     </p>
                 </div>
 
-                <div className="shrink-0">
+                {/* <div className="shrink-0">
                     <Link
                         href="#directory"
                         className="group inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-slate-300 hover:text-slate-900"
@@ -117,7 +112,7 @@ export default function TeamLeadershipSpotlight({ data }: Props) {
                         See all mentors{" "}
                         <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                     </Link>
-                </div>
+                </div> */}
             </div>
 
             {/* Trust metrics / proof points */}

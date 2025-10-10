@@ -69,7 +69,7 @@ export default function AboutMissionVision({
           id="mission-vision-title"
           className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl"
         >
-          Mission &amp; Vision
+          <span className="bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent">Mission</span> &amp; <span className="text-brand">Vision</span>
         </h2>
 
         <p className="mx-auto mt-3 text-sm leading-6 text-slate-700 sm:text-base">
@@ -91,10 +91,10 @@ export default function AboutMissionVision({
       <div className="mt-10 grid gap-6 md:grid-cols-2">
         <article
           aria-labelledby="mission-heading"
-          className="rounded-2xl border bg-white p-6 shadow-sm"
+          className="rounded-2xl border bg-gradient-to-r from-sky-50 via-blue-50 to-green-50 p-6 shadow-sm"
           style={{ borderColor: "rgba(15,23,42,0.12)" }}
         >
-          <h3 id="mission-heading" className="text-lg font-semibold">
+          <h3 id="mission-heading" className="text-lg font-semibold bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent">
             Our Mission
           </h3>
           <p className="mt-2 text-sm text-slate-700">
@@ -127,10 +127,10 @@ export default function AboutMissionVision({
 
         <article
           aria-labelledby="vision-heading"
-          className="rounded-2xl border bg-white p-6 shadow-sm"
+          className="rounded-2xl border bg-orange-50 p-6 shadow-sm"
           style={{ borderColor: "rgba(15,23,42,0.12)" }}
         >
-          <h3 id="vision-heading" className="text-lg font-semibold">
+          <h3 id="vision-heading" className="text-lg font-semibold text-brand">
             Our Vision
           </h3>
           <p className="mt-2 text-sm text-slate-700">

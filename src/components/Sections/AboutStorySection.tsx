@@ -165,7 +165,7 @@ const AboutStorySection = memo(function AboutStorySection() {
                 {milestones.map((m) => (
                   <li key={m.title} className="flex items-start gap-4">
                     <div
-                      className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full font-bold shadow-sm ring-1 ring-inset"
+                      className="flex h-10 w-15 md:h-13 md:w-13 items-center justify-center rounded-full font-bold shadow-sm ring-1 ring-inset"
                       style={{
                         backgroundColor: ACCENT_LIGHT,
                         color: ACCENT,
@@ -187,18 +187,25 @@ const AboutStorySection = memo(function AboutStorySection() {
               <div className="mt-8 h-px w-full bg-gray-300" />
 
               {/* small stat row */}
-              <div className="mt-6 grid grid-cols-3 gap-3 text-center">
+              <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 text-center">
                 {[
-                  { label: "Learners", value: "20k+" },
-                  { label: "Tracks", value: "4" },
-                  { label: "Projects", value: "Capstone+" },
+                  { label: "Learners", value: "20k+", id: 1 },
+                  { label: "Tracks", value: "4", id: 2 },
+                  { label: "Projects", value: "Capstone+", id: 3 },
                 ].map((s) => (
-                  <div key={s.label} className="rounded-xl py-3 ring-1 ring-gray-200 bg-white">
+                  <div
+                    key={s.label}
+                    className={[
+                      "rounded-xl py-3 ring-1 ring-gray-200 bg-white",
+                      s.id === 3 ? "hidden sm:block" : "",
+                    ].join(" ")}
+                  >
                     <div className="text-sm font-semibold text-gray-900">{s.value}</div>
                     <div className="text-[11px] text-gray-500">{s.label}</div>
                   </div>
                 ))}
               </div>
+
             </div>
           </aside>
         </div>
@@ -268,7 +275,7 @@ const AboutStorySection = memo(function AboutStorySection() {
       {/* JSON-LD (unchanged) */}
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
+        // eslint disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
     </section>

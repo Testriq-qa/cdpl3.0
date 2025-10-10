@@ -111,7 +111,7 @@ export default function AboutStatsSection() {
                 </p>
                 <h2
                     id="about-stats-heading"
-                    className="mt-2 text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-[linear-gradient(90deg,#0ea5e9,#2563eb,#22c55e)]"
+                    className="mt-2 text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-500 via-blue-600 to-green-500"
                 >
                     Career-focused results with{" "}
                     <span className="text-brand">Cinute Digital</span>
