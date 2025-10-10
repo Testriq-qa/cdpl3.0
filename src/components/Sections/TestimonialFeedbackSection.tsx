@@ -147,8 +147,8 @@ export default function TestimonialFeedbackSection() {
       <Script id="cdpl-students-grid-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
       <header className="mx-auto mb-6 max-w-3xl text-center">
-        <h2 className="text-2xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">What our alumni say</h2>
-        <p className="mt-2 text-[15px] text-neutral-600">
+        <h2 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">What our alumni say</h2>
+        <p className="mt-2 text-sm text-neutral-600 sm:text-base">
           All reviewers are ex-students from <span className="font-medium text-neutral-900">Testing</span>,{" "}
           <span className="font-medium text-neutral-900">Data Analyst</span>,{" "}
           <span className="font-medium text-neutral-900">Data Science</span>, and{" "}
@@ -190,7 +190,7 @@ export default function TestimonialFeedbackSection() {
                     ))}
                     <span className="ml-1 text-xs font-medium text-neutral-500">{r.rating.toFixed(1)}</span>
                   </div>
-                  <blockquote className="text-[14.5px] leading-relaxed text-neutral-800 sm:line-clamp-8" itemProp="reviewBody">
+                  <blockquote className="text-sm leading-relaxed text-neutral-800 sm:line-clamp-8" itemProp="reviewBody">
                     “{r.quote}”
                   </blockquote>
                 </div>
@@ -199,7 +199,7 @@ export default function TestimonialFeedbackSection() {
                     <Image src={r.avatar} alt={`${r.name} headshot`} fill className="object-cover" sizes="36px" />
                   </span>
                   <div className="min-w-0">
-                    <p className="truncate text-[13.5px] font-semibold text-neutral-900" itemProp="author" itemScope itemType="https://schema.org/Person">
+                    <p className="truncate text-sm font-semibold text-neutral-900" itemProp="author" itemScope itemType="https://schema.org/Person">
                       <span itemProp="name">{r.name}</span>
                     </p>
                     <p className="truncate text-xs text-neutral-500">
@@ -219,7 +219,7 @@ export default function TestimonialFeedbackSection() {
           <button
             type="button"
             onClick={() => setVisible((v) => Math.min(v + perPage, REVIEWS.length))}
-            className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-medium cursor-pointer text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
+            className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-semibold cursor-pointer text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
             aria-label="View more reviews"
           >
             View more

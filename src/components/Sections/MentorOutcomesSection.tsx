@@ -1,4 +1,3 @@
-// app/(site)/components/MentorOutcomesSection.tsx
 "use client";
 
 import { useMemo, useState } from "react";

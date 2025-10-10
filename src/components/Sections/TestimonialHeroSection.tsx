@@ -55,7 +55,7 @@ export default function TestimonialHeroSection() {
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Rating &amp; Reviews</p>
           <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl">Trusted by students</h1>
-          <p className="mx-auto mt-2 max-w-2xl text-[15px] text-neutral-700 sm:text-base">
+          <p className="mx-auto mt-2 max-w-2xl text-base text-neutral-700 sm:text-lg">
             Hands-on programs in <span className="font-medium text-neutral-900">Testing</span>,{" "}
             <span className="font-medium text-neutral-900">Digital Marketing</span> and{" "}
             <span className="font-medium text-neutral-900">Data Science</span>.
@@ -81,7 +81,7 @@ export default function TestimonialHeroSection() {
           <div className="-mt-14 sm:-mt-12 md:-mt-10 flex justify-center">
             <Link
               href="#all-reviews"
-              className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
+              className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
             >
               Read more student reviews →
             </Link>
@@ -101,7 +101,7 @@ export default function TestimonialHeroSection() {
           <div className="mt-32 xl:mt-40 2xl:mt-28 flex justify-center">
             <Link
               href="#all-reviews"
-              className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-medium text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
+              className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
             >
               Read more student reviews →
             </Link>

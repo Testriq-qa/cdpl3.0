@@ -1,4 +1,3 @@
-// components/Sections/MentorProcessFlowSection.tsx
 "use client";
 
 import { useEffect, useRef, useState, type CSSProperties } from "react";
@@ -75,8 +74,8 @@ export default function MentorProcessFlowSection() {
       {/* CONTENT CONTAINER ONLY */}
       <div className="mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8">
         <header className="mb-10">
-          <h2 className="text-3xl font-semibold tracking-tight text-slate-900">How mentorship works</h2>
-          <p className="mt-1 text-sm text-slate-600">A simple, outcomes-focused, 4-step path.</p>
+          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900">How mentorship works</h2>
+          <p className="mt-1 text-[15px] sm:text-base text-slate-600">A simple, outcomes-focused, 4-step path.</p>
         </header>
 
         {/* Desktop: curved neon SVG beam behind cards */}

@@ -1,4 +1,3 @@
-// components/Sections/MentorHeroSection.tsx  (Server Component – Light theme only)
 import Link from "next/link";
 
 export default function MentorHeroSection() {
@@ -192,11 +191,11 @@ export default function MentorHeroSection() {
             One-on-One Mentorship • Resume + Interview Prep • Placement Support
           </p>
 
-          <h1 className="text-3xl font-semibold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+          <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
             Meet CDPL’s industry mentors
           </h1>
 
-          <p className="mt-4 mx-auto min-[1040px]:mx-0 max-w-3xl text-slate-600">
+          <p className="mt-4 mx-auto min-[1040px]:mx-0 max-w-3xl text-base sm:text-lg text-slate-600">
             Learn directly from CDPL mentors across <strong>Software Testing (QA)</strong>,{" "}
             <strong>Data Science &amp; AI/ML</strong>, <strong>Product</strong>, and{" "}
             <strong>Engineering</strong>. Build a job-ready portfolio with real projects, get tailored
