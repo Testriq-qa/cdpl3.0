@@ -1,54 +1,12 @@
 // app/blog/categories/page.tsx
 import { Metadata } from 'next';
-import dynamic from 'next/dynamic';
 
-const CategoriesHeroSection = dynamic(
-    () => import("@/components/sections/CategoriesHeroSection").then((m) => m.CategoriesHeroSection),
-    {
-        ssr: true,
-        loading: () => (
-            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-                <p className="text-gray-500">Loading...</p>
-            </div>
-        )
-    }
-)
+import { CategoriesHeroSection } from '@/components/sections/CategoriesHeroSection';
+import { CategoriesGridSection } from '@/components/sections/CategoriesGridSection';
+import { CategoriesCTASection } from '@/components/sections/CategoriesCTASection';
+import { CategoriesNewsletterSection } from '@/components/sections/CategoriesNewsLetterSection';
 
-const CategoriesGridSection = dynamic(
-    () => import("@/components/sections/CategoriesGridSection").then((m) => m.CategoriesGridSection),
-    {
-        ssr: true,
-        loading: () => (
-            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-                <p className="text-gray-500">Loading...</p>
-            </div>
-        )
-    }
-)
 
-const CategoriesCTASection = dynamic(
-    () => import("@/components/sections/CategoriesCTASection").then((m) => m.CategoriesCTASection),
-    {
-        ssr: true,
-        loading: () => (
-            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-                <p className="text-gray-500">Loading...</p>
-            </div>
-        )
-    }
-)
-
-const CategoriesNewsletterSection = dynamic(
-    () => import("@/components/Sections/CategoriesNewsLetterSection").then((m) => m.CategoriesNewsletterSection),
-    {
-        ssr: true,
-        loading: () => (
-            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
-                <p className="text-gray-500">Loading...</p>
-            </div>
-        )
-    }
-)
 
 export const metadata: Metadata = {
     title: 'Software Testing Courses & QA Mentorship Programs | Top Automation Testing Certification | Testriq Ed-Tech Institute',
