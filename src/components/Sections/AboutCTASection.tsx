@@ -12,7 +12,7 @@ import { ShieldCheck, Phone, Mail, Calendar, MessageCircle, Star, Check } from "
 export default function AboutFAQSection() {
     return (
         <section
-            className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8"
+            className="mx-auto max-w-7xl px-4 py-8 md:py-14 sm:px-6 lg:px-8"
             aria-labelledby="cta-heading"
         >
             <div className="rounded-[28px] border border-slate-200 bg-white shadow-sm">
@@ -35,12 +35,12 @@ export default function AboutFAQSection() {
                         <div>
                             <h3
                                 id="cta-heading"
-                                className="text-xl font-extrabold tracking-tight text-slate-900 sm:text-2xl"
+                                className="text-xl font-extrabold tracking-tight text-slate-900 sm:text-3xl"
                             >
                                 Build a <span className="text-[#ff8c00]">job-ready</span> tech career with
                                 Cinute Digital
                             </h3>
-                            <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-700">
+                            <p className="mt-5 max-w-2xl text-lg leading-6 text-slate-700">
                                 Get personalized <strong>career counseling</strong>, explore{" "}
                                 <strong>industry-aligned courses</strong>, and map your pathway to
                                 <strong> high-growth roles</strong> like QA Engineer, Automation Tester,
@@ -50,7 +50,7 @@ export default function AboutFAQSection() {
                             </p>
 
                             {/* Trust signals */}
-                            <ul className="mt-4 grid gap-2 text-sm text-slate-800 sm:grid-cols-2">
+                            <ul className="mt-6 grid gap-2 text-md text-slate-800 sm:grid-cols-2">
                                 <li className="flex items-start gap-2">
                                     <ShieldCheck className="mt-0.5 h-4 w-4 text-[#ff8c00]" aria-hidden />
                                     <span>
@@ -84,20 +84,20 @@ export default function AboutFAQSection() {
                             <div className="mt-5 flex flex-wrap items-center gap-4">
                                 <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center shadow-sm">
                                     <div className="text-lg font-extrabold text-slate-900">4.8/5</div>
-                                    <div className="text-xs text-slate-600">Learner Satisfaction</div>
+                                    <div className="text-sm text-slate-600">Learner Satisfaction</div>
                                 </div>
                                 <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center shadow-sm">
                                     <div className="text-lg font-extrabold text-slate-900">10–24 wks</div>
-                                    <div className="text-xs text-slate-600">Job-ready Tracks</div>
+                                    <div className="text-sm text-slate-600">Job-ready Tracks</div>
                                 </div>
                                 <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center shadow-sm">
                                     <div className="text-lg font-extrabold text-slate-900">Live + Labs</div>
-                                    <div className="text-xs text-slate-600">Hands-on Projects</div>
+                                    <div className="text-sm text-slate-600">Hands-on Projects</div>
                                 </div>
                             </div>
 
                             {/* Privacy note */}
-                            <p className="mt-3 text-xs text-slate-500">
+                            <p className="mt-3 text-sm text-slate-500">
                                 No spam. We only use your details to share cohort dates, scholarships, and
                                 a personalized learning plan.
                             </p>
@@ -105,7 +105,7 @@ export default function AboutFAQSection() {
 
                         {/* Right: actions panel */}
                         <div className="rounded-2xl border border-slate-200 bg-white/95 p-5 shadow-sm backdrop-blur">
-                            <p className="text-sm font-semibold text-slate-900">
+                            <p className="text-xl font-bold text-slate-900">
                                 Talk to{" "}
                                 <span className="text-[#ff8c00]">Admissions & Career Experts</span>
                             </p>
