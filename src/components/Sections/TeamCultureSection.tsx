@@ -134,7 +134,7 @@ export default function TeamMentorFuturisticBand() {
         <section
             id="our-team-mentors"
             aria-labelledby="our-team-mentors-heading"
-            className="relative mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8"
+            className="relative mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8 overflow-hidden"
         >
             {/* Animated mesh / beam background */}
             <BeamBg />
