@@ -197,8 +197,9 @@ export default function AboutPage() {
                 <AboutMissionVision />
                 <AboutFacultyStrip />
                 <AboutAccreditations />
-                <AboutFAQSection />
                 <AboutCTASection />
+                <AboutFAQSection />
+                
             </main>
         </LightTheme>
     );

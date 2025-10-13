@@ -53,7 +53,7 @@ const AboutStorySection = memo(function AboutStorySection() {
       {/* Header */}
       <div className="mb-14 text-center relative">
         <span
-          className="inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-semibold shadow-sm ring-1 ring-inset"
+          className="inline-flex items-center gap-2 rounded-full px-2 py-1 text-xs shadow-sm ring-1 ring-inset"
           style={{
             backgroundColor: ACCENT_LIGHT, // opaque
             color: ACCENT,
@@ -61,13 +61,13 @@ const AboutStorySection = memo(function AboutStorySection() {
             borderColor: ACCENT_RING,
           }}
         >
-          <Rocket className="h-5 w-5" aria-hidden="true" />
+          <Rocket className="h-4 w-4" aria-hidden="true" />
           Our Journey Began
         </span>
 
         <h2
           id="about-story-heading"
-          className="mt-4 text-4xl font-black tracking-tight text-gray-900 sm:text-5xl"
+          className="mt-4 text-4xl font-bold tracking-tight text-gray-900"
         >
           Our Story{" "}
           <span
@@ -81,7 +81,7 @@ const AboutStorySection = memo(function AboutStorySection() {
           </span>
         </h2>
 
-        <p className="mx-auto mt-4 max-w-2xl text-lg leading-8 text-gray-700">
+        <p className="mx-auto mt-4 max-w-5xl text-lg leading-8 text-gray-700">
           At <strong>Cinute Digital</strong>, our story is one of passion, innovation, and
           transformation. We’re dedicated to empowering learners with <strong>real-world skills</strong> through{" "}
           <strong>mentorship</strong> and <strong>hands-on projects</strong>, paving the way for thriving careers in tech.

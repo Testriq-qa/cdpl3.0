@@ -54,7 +54,7 @@ export default function AboutAccreditations() {
   return (
     <section
       aria-labelledby="accreditations-heading"
-      className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
+      className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8"
     >
       {/* Shell */}
       <div
@@ -68,18 +68,18 @@ export default function AboutAccreditations() {
 
         {/* Header */}
         <div className="relative px-6 pb-6 pt-10 sm:px-10">
-          <div className="mx-auto max-w-3xl text-center">
+          <div className="mx-auto max-w-5xl text-center">
             <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
               <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
               Verified Quality & Placement Focus
             </div>
             <h2
               id="accreditations-heading"
-              className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl"
+              className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
             >
-              Trusted <span className="text-brand">Accreditations</span> & Employer‑Ready <span className="text-brand">Certifications</span>
+              Trusted <span className="text-brand">Accreditations</span> & <br />Employer‑Ready <span className="text-brand">Certifications</span>
             </h2>
-            <p className="mt-3 text-base leading-relaxed text-slate-600 sm:text-lg">
+            <p className="mt-6 text-base leading-relaxed text-slate-600 sm:text-lg">
               Build a future‑proof career with <strong>industry‑aligned software testing, automation, API testing, data science, and AI/ML programs</strong>.
               Our quality framework blends <strong>ISO 9001:2015</strong> standards with <strong>Skill India (NSDC)</strong> outcomes for measurable learning impact and <strong>job‑ready skills</strong>.
             </p>
@@ -119,8 +119,8 @@ export default function AboutAccreditations() {
                       {item.icon}
                     </span>
                     <div>
-                      <h3 className="text-sm font-semibold text-slate-900">{item.title}</h3>
-                      <p className="mt-1 text-sm leading-relaxed text-slate-600">{item.text}</p>
+                      <h3 className="text-lg font-semibold text-slate-900">{item.title}</h3>
+                      <p className="mt-1 text-md leading-relaxed text-slate-600">{item.text}</p>
                     </div>
                   </div>
                 </li>
@@ -134,13 +134,13 @@ export default function AboutAccreditations() {
               <div className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
                 <div className="mb-3 flex items-center gap-2 text-slate-900">
                   <Star className="h-4 w-4" aria-hidden="true" />
-                  <span className="text-sm font-semibold tracking-wide">Outcomes that employers trust</span>
+                  <span className="text-lg font-bold tracking-wide">Outcomes that employers trust</span>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {stats.map((s) => (
-                    <div key={s.label} className="rounded-xl bg-slate-50 p-4 ring-1 ring-inset ring-slate-200">
+                    <div key={s.label} className="rounded-xl bg-slate-50 p-2 lg:p-4 ring-1 ring-inset ring-slate-200">
                       <div className="text-2xl font-extrabold text-slate-900">{s.value}</div>
-                      <div className="mt-1 text-xs text-slate-600">{s.label}</div>
+                      <div className="mt-1 text-sm text-slate-600">{s.label}</div>
                     </div>
                   ))}
                 </div>
@@ -151,11 +151,11 @@ export default function AboutAccreditations() {
 
               {/* Mini quote */}
               <figure className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-                <blockquote className="text-sm leading-relaxed text-slate-700">
-                  “The <span className="font-semibold">portfolio‑first</span> training and ISO‑driven rubrics gave us confidence to hire quickly
-                  for automation testing and data analyst roles.”
+                <blockquote className="text-md leading-relaxed text-slate-700">
+                  &quot; The <span className="font-semibold">portfolio‑first</span> training and ISO‑driven rubrics gave us confidence to hire quickly
+                  for automation testing and data analyst roles. &quot;
                 </blockquote>
-                <figcaption className="mt-3 flex items-center gap-2 text-xs text-slate-500">
+                <figcaption className="mt-3 flex items-center gap-2 text-sm text-slate-500">
                   <Building2 className="h-3.5 w-3.5" aria-hidden="true" />
                   Talent Partner, Product Engineering (via campus drive)
                 </figcaption>
@@ -183,11 +183,11 @@ export default function AboutAccreditations() {
 
         {/* CTA */}
         <div className="relative flex flex-col items-center gap-3 border-t border-slate-200 px-6 pb-10 pt-6 sm:px-10">
-          <p className="text-center text-sm text-slate-600">
+          <p className="text-center text-md text-slate-600">
             Looking for <strong>accredited software testing</strong> or <strong>AI & Data Science certification</strong> that converts into real offers?
             Explore our curriculum and placement playbook.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-3">
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-5">
             <Link
               href="/certifications"
               className="inline-flex items-center justify-center rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:shadow-md hover:translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
