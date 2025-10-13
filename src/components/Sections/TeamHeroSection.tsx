@@ -208,7 +208,7 @@ export default function TeamHero() {
     <section
       aria-labelledby="our-team-heading"
       // overflow-x-hidden ALWAYS on the section; clip for modern engines to kill sub-pixel scroll
-      className="relative isolate mx-auto max-w-7xl w-full bg-white px-4 pb-14 pt-16 sm:px-6 lg:px-8 overflow-x-hidden"
+      className="relative isolate mx-auto max-w-7xl w-full bg-white px-4 pb-14 pt-8 md:pt-16 sm:px-6 lg:px-8"
       style={{ ["--brand" as any]: brand, overflowX: "clip" as any }}
     >
       {/* Background */}
@@ -230,8 +230,8 @@ export default function TeamHero() {
 
         <motion.div {...fadeUp} className="flex flex-wrap items-center gap-3">
           <div className="flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><Sparkles className="h-3.5 w-3.5" /> Future-Ready Mentors</div>
-          <div className="hidden md:block"><ShieldCheck className="h-3.5 w-3.5" /> ISO-Aligned Training</div>
-          <div className="hidden md:block"><Users2 className="h-3.5 w-3.5" /> Industry Leaders</div>
+          <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><ShieldCheck className="h-3.5 w-3.5" /> ISO-Aligned Training</div>
+          <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><Users2 className="h-3.5 w-3.5" /> Industry Leaders</div>
         </motion.div>
 
         <motion.h1
