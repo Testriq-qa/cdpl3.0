@@ -1,7 +1,15 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X, ChevronDown, ChevronRight, Award, Globe } from "lucide-react";
+import {
+  Menu,
+  X,
+  ChevronDown,
+  ChevronRight,
+  Award,
+  Globe,
+  Briefcase,
+} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -14,214 +22,162 @@ const courseCategories = [
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
     governingBodies: [
       { name: "Sofware Testing Courses", logo: "/header_images/Sotware_Testing.png" },
-
     ],
     courses: [
       {
         name: "Manual Software Testing",
         description:
           "Learn to facilitate Scrum teams and drive Agile projects effectively.",
-        governingBodies: [
-          { name: "Manual Testing", logo: "/header_images/Manual-Testing.png" },
-
-        ],
+        governingBodies: [{ name: "Manual Testing", logo: "/header_images/Manual-Testing.png" }],
       },
       {
         name: "API Testing using POSTMAN and RestAPIs",
         description:
           "Master product backlog management and stakeholder collaboration.",
-        governingBodies: [
-          { name: "API Testing", logo: "/header_images/API_Testing_Postman.png" },
-        ],
+        governingBodies: [{ name: "API Testing", logo: "/header_images/API_Testing_Postman.png" }],
       },
       {
         name: "Database Management System using MySQL",
         description:
           "Gain advanced Scrum knowledge to lead high-performing teams.",
-        governingBodies: [
-          { name: "Database Management", logo: "/header_images/Database_Management_MySQL.png" },
-        ],
+        governingBodies: [{ name: "Database Management", logo: "/header_images/Database_Management_MySQL.png" }],
       },
       {
         name: "ETL Testing Course",
         description:
           "Learn to lead Agile transformations using the SAFe framework.",
-        governingBodies: [
-          { name: "ETL Testing", logo: "/header_images/ETL_Testing.png" },
-        ],
+        governingBodies: [{ name: "ETL Testing", logo: "/header_images/ETL_Testing.png" }],
       },
       {
         name: "Advanced Software Testing",
         description: "Facilitate SAFe practices for scaled Agile environments.",
-        governingBodies: [
-          { name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" },
-        ],
+        governingBodies: [{ name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" }],
       },
       {
         name: "Advanced Automation Testing",
         description: "Drive product vision and delivery in SAFe settings.",
-        governingBodies: [
-          { name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" },
-        ],
+        governingBodies: [{ name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" }],
       },
       {
         name: "Advanced Manual and Automation Testing - Master Program",
         description:
           "Blend Agile principles with PMI project management standards.",
-        governingBodies: [{ name: "Advanced Manual and Automation Testing - Master Program", logo: "/header_images/Advanced Manual and Automation Testing - Master Program.png" }],
+        governingBodies: [
+          {
+            name: "Advanced Manual and Automation Testing - Master Program",
+            logo: "/header_images/Advanced Manual and Automation Testing - Master Program.png",
+          },
+        ],
       },
     ],
   },
   {
     id: "data-science",
     name: "Data Science, AI - ML & BI Courses",
-    description:
-      "Prepare for job interviews with practical skills and confidence.",
+    description: "Prepare for job interviews with practical skills and confidence.",
     governingBodies: [
       { name: "Data Science, AI - ML & BI Courses", logo: "/header_images/DataScience_AI_ML_BI.png" },
     ],
     courses: [
       {
         name: "Machine Learning and Data Science with Python - Hero Program",
-        description:
-          "Build strategies to ace behavioral and technical interviews.",
-        governingBodies: [
-          { name: "Machine Learning and Data Science with Python - Hero Program", logo: "/header_images/ML_and_DS_with_Python.png" },
-        ],
+        description: "Build strategies to ace behavioral and technical interviews.",
+        governingBodies: [{ name: "Machine Learning and Data Science with Python - Hero Program", logo: "/header_images/ML_and_DS_with_Python.png" }],
       },
       {
         name: "Deep Learning, NLP and GenerativeAI",
         description: "Practice real-world interview scenarios with feedback.",
-        governingBodies: [
-          { name: "Deep Learning, NLP and GenerativeAI", logo: "/header_images/DeepLearning_and_NLP.png" },
-        ],
+        governingBodies: [{ name: "Deep Learning, NLP and GenerativeAI", logo: "/header_images/DeepLearning_and_NLP.png" }],
       },
       {
         name: "Advanced Data Analytics - Hero Program",
         description: "Craft a standout resume to impress recruiters.",
-        governingBodies: [
-          { name: "Advanced Data Analytics - Hero Program", logo: "/header_images/Advance_Data_Analytics.png" },
-        ],
+        governingBodies: [{ name: "Advanced Data Analytics - Hero Program", logo: "/header_images/Advance_Data_Analytics.png" }],
       },
       {
         name: "Big Data Engineering",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" },
-        ],
+        governingBodies: [{ name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" }],
       },
       {
         name: "Prompt Engneering with Generative AI",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Prompt Engneering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" },
-        ],
+        governingBodies: [{ name: "Prompt Engneering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" }],
       },
       {
         name: "Advanced Data Science and Machine Learning Masterclass",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Advanced Data Science and Machine Learning Masterclass", logo: "/header_images/Advance_DS_and_ML.png" },
-        ],
+        governingBodies: [{ name: "Advanced Data Science and Machine Learning Masterclass", logo: "/header_images/Advance_DS_and_ML.png" }],
       },
       {
         name: "Comprehensive Data Science and AI - Master Program",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Comprehensive Data Science and AI - Master Program", logo: "/header_images/Comprehensive_DS_and_AI.png" },
-        ],
+        governingBodies: [{ name: "Comprehensive Data Science and AI - Master Program", logo: "/header_images/Comprehensive_DS_and_AI.png" }],
       },
       {
         name: "Data Analysis with BI & Big Data Engineering Master Program",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          { name: "Data Analysis with BI & Big Data Engineering Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" },
-        ],
+        governingBodies: [{ name: "Data Analysis with BI & Big Data Engineering Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" }],
       },
     ],
   },
   {
     id: "digital-marketing",
     name: "Digital Marketing",
-    description:
-      "Develop skills to manage projects efficiently and effectively.",
-    governingBodies: [
-      { name: "Digital Marketing", logo: "/header_images/Digital_Marketing.png" },
-    ],
+    description: "Develop skills to manage projects efficiently and effectively.",
+    governingBodies: [{ name: "Digital Marketing", logo: "/header_images/Digital_Marketing.png" }],
     courses: [
       {
         name: "Digital Marketing and Analytics - Master Program",
         description: "Earn the globally recognized PMP certification.",
         governingBodies: [{ name: "Digital Marketing and Analytics - Master Program", logo: "/header_images/Digital_Marketing_Analytics.png" }],
       },
-
     ],
   },
   {
     id: "programming-courses",
     name: "Programming Courses",
-    description:
-      "Streamline software development and operations with DevOps practices.",
-    governingBodies: [
-      { name: "Programming Courses", logo: "/header_images/Programming.png" },
-    ],
+    description: "Streamline software development and operations with DevOps practices.",
+    governingBodies: [{ name: "Programming Courses", logo: "/header_images/Programming.png" }],
     courses: [
       {
         name: "Python Programming",
         description: "Master containerization and orchestration technologies.",
-        governingBodies: [
-          { name: "Python Programming", logo: "/header_images/Python_Programming.png" },
-        ],
+        governingBodies: [{ name: "Python Programming", logo: "/header_images/Python_Programming.png" }],
       },
       {
         name: "Java Programming",
         description: "Automate CI/CD pipelines with Jenkins.",
-        governingBodies: [
-          { name: "Java Programming", logo: "/header_images/Java_Programming.png" },
-        ],
+        governingBodies: [{ name: "Java Programming", logo: "/header_images/Java_Programming.png" }],
       },
-
     ],
   },
   {
     id: "aaa-accredited",
     name: "AAA Accredited Courses",
-    description:
-      "Unlock insights from data with advanced analytics and machine learning.",
-    governingBodies: [
-      { name: "AAA Accredited Courses", logo: "/header_images/AAA_Accredited.png" },
-    ],
+    description: "Unlock insights from data with advanced analytics and machine learning.",
+    governingBodies: [{ name: "AAA Accredited Courses", logo: "/header_images/AAA_Accredited.png" }],
     courses: [
       {
         name: "Advanced Software Testing",
         description: "Analyze data to drive business decisions.",
-        governingBodies: [
-          { name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" },
-        ],
+        governingBodies: [{ name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" }],
       },
       {
         name: "Advanced Automation Testing",
-        description:
-          "Build predictive models with machine learning techniques.",
-        governingBodies: [
-          { name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" },
-        ],
+        description: "Build predictive models with machine learning techniques.",
+        governingBodies: [{ name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" }],
       },
       {
         name: "Advanced Data Science and Machine Learning - Masterclass",
         description: "Use Python for data analysis and visualization.",
-        governingBodies: [
-          { name: "Advanced Data Science and Machine Learning - Masterclass", logo: "/header_images/Advance_DS_and_ML.png" },
-        ],
+        governingBodies: [{ name: "Advanced Data Science and Machine Learning - Masterclass", logo: "/header_images/Advance_DS_and_ML.png" }],
       },
       {
         name: "Data Analysis with BI & Big Data Engineering - Master Program",
         description: "Create interactive data visualizations with Power BI.",
-        governingBodies: [
-          { name: "Data Analysis with BI & Big Data Engineering - Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" },
-        ],
+        governingBodies: [{ name: "Data Analysis with BI & Big Data Engineering - Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" }],
       },
-
     ],
   },
 ];
@@ -229,19 +185,24 @@ const courseCategories = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
+
+  // Jobs dropdown state (desktop)
+  const [isJobsOpen, setIsJobsOpen] = useState(false);
+
   const [selectedCategory, setSelectedCategory] = useState(
     courseCategories[0].id
   );
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const [expandedMobileCategory, setExpandedMobileCategory] = useState<
-    string | null
-  >(null);
+  const [expandedMobileCategory, setExpandedMobileCategory] =
+    useState<string | null>(null);
+  const [expandedMobileJobs, setExpandedMobileJobs] = useState<boolean>(false);
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
     if (isMenuOpen) {
       setExpandedMobileCategory(null);
+      setExpandedMobileJobs(false);
     }
   };
 
@@ -349,9 +310,7 @@ const Header = () => {
                                   : "text-gray-700 hover:bg-gray-50"
                                   }`}
                                 aria-current={
-                                  selectedCategory === category.id
-                                    ? "true"
-                                    : "false"
+                                  selectedCategory === category.id ? "true" : "false"
                                 }
                               >
                                 <span>{category.name}</span>
@@ -379,46 +338,38 @@ const Header = () => {
                             Courses
                           </h3>
                           <div className="grid grid-cols-1 gap-1 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2">
-                            {selectedCategoryData?.courses.map(
-                              (course, index) => (
-                                <a
-                                  key={index}
-                                  href={`/courses/${selectedCategory}/${course.name
-                                    .toLowerCase()
-                                    .replace(/[®\s&]+/g, "-")}`}
-                                  onMouseEnter={() =>
-                                    setHoveredCourse(course.name)
-                                  }
-                                  className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name
-                                    ? "bg-blue-50 text-blue-700"
-                                    : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
-                                    }`}
-                                >
-                                  <div className="flex-shrink-0 mt-1">
-                                    <div
-                                      className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name
-                                        ? "bg-blue-700 scale-125"
-                                        : "bg-blue-600 group-hover:scale-125"
-                                        }`}
-                                    />
-                                  </div>
-                                  <div className="ml-3">
-                                    <p className="font-medium text-sm">
-                                      {course.name}
-                                    </p>
-                                  </div>
-                                </a>
-                              )
-                            )}
+                            {selectedCategoryData?.courses.map((course, index) => (
+                              <a
+                                key={index}
+                                href={`/courses/${selectedCategory}/${course.name
+                                  .toLowerCase()
+                                  .replace(/[®\s&]+/g, "-")}`}
+                                onMouseEnter={() => setHoveredCourse(course.name)}
+                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name
+                                  ? "bg-blue-50 text-blue-700"
+                                  : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                                  }`}
+                              >
+                                <div className="flex-shrink-0 mt-1">
+                                  <div
+                                    className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name
+                                      ? "bg-blue-700 scale-125"
+                                      : "bg-blue-600 group-hover:scale-125"
+                                      }`}
+                                  />
+                                </div>
+                                <div className="ml-3">
+                                  <p className="font-medium text-sm">{course.name}</p>
+                                </div>
+                              </a>
+                            ))}
                           </div>
                         </div>
 
                         {/* Column 3: Governing Bodies */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4">
                           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
-                            {hoveredCourse || hoveredCategory
-                              ? "Certifications"
-                              : "Governing Bodies"}
+                            {hoveredCourse || hoveredCategory ? "Certifications" : "Governing Bodies"}
                           </h3>
                           <p className="text-xs text-gray-600 mb-4">
                             {hoveredCourse
@@ -434,7 +385,6 @@ const Header = () => {
                                   key={index}
                                   className="bg-white rounded-lg p-8 hover:shadow-md transition-all duration-200 group animate-fadeIn flex flex-col items-center justify-center"
                                 >
-
                                   <Image
                                     src={body.logo}
                                     alt={body.name}
@@ -445,23 +395,19 @@ const Header = () => {
                                   <span className="text-[10px] text-gray-700 font-medium mt-2 text-center">
                                     {body.name}
                                   </span>
-
                                 </div>
-
                               ))
                             ) : (
                               <div className="col-span-2 flex flex-col items-center justify-center text-center py-8">
                                 <Award className="h-10 w-10 text-gray-300 mb-2" />
                                 <p className="text-xs text-gray-400">
-                                  Hover over categories or courses to see their
-                                  certifications
+                                  Hover over categories or courses to see their certifications
                                 </p>
                               </div>
                             )}
                           </div>
                           <p className="text-xs text-gray-600 mt-4 mb-4">
-                            {displayDescription ||
-                              "Select a category or course to view its description"}
+                            {displayDescription || "Select a category or course to view its description"}
                           </p>
                           <div className="mt-4 pt-4 border-t border-gray-200">
                             <div className="flex items-center text-xs text-gray-600">
@@ -477,11 +423,77 @@ const Header = () => {
               )}
             </div>
 
-            <Link href='#' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Event</Link>
+            <Link
+              href="#"
+              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
+            >
+              Event
+            </Link>
 
-            <Link href='/mentors' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Mentors</Link>
+            <Link
+              href="/mentors"
+              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
+            >
+              Mentors
+            </Link>
 
-            <Link href='#' className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Jobs</Link>
+            {/* Jobs dropdown (desktop) */}
+            <div
+              className="relative"
+              onMouseEnter={() => setIsJobsOpen(true)}
+              onMouseLeave={() => setIsJobsOpen(false)}
+            >
+              <button
+                className="text-gray-700 hover:text-[#ff8c00] transition-colors flex items-center py-6 text-sm xl:text-base"
+                aria-expanded={isJobsOpen}
+                aria-controls="jobs-menu"
+              >
+                <Briefcase className="mr-1.5 h-4 w-4 text-[#ff8c00]" />
+                Jobs
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+
+              {isJobsOpen && (
+                <div
+                  id="jobs-menu"
+                  className="absolute left-0 top-full mt-1 w-56 rounded-xl border border-amber-200 bg-white shadow-lg"
+                >
+                  <ul className="py-1.5">
+                    <li>
+                      {/* removed right chevrons; left-aligned text */}
+                      <Link
+                        href="/jobs/live-jobs"
+                        className="block px-3 py-2.5 text-sm rounded-lg text-slate-700 hover:bg-amber-50 hover:text-amber-700"
+                      >
+                        Live jobs
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/jobs/careers"
+                        className="block px-3 py-2.5 text-sm rounded-lg text-slate-700 hover:bg-amber-50 hover:text-amber-700"
+                      >
+                        Careers
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/jobs/placements"
+                        className="block px-3 py-2.5 text-sm rounded-lg text-slate-700 hover:bg-amber-50 hover:text-amber-700"
+                      >
+                        Placements
+                      </Link>
+                    </li>
+                  </ul>
+                  {/* top accent bar in CDPL orange */}
+                  <span
+                    aria-hidden
+                    className="absolute -top-[3px] left-0 right-0 h-[3px] rounded-t-xl"
+                    style={{ background: "linear-gradient(90deg,#ff8c00,#ffb558,#ffd19e)" }}
+                  />
+                </div>
+              )}
+            </div>
 
             <a
               href="/about-us"
@@ -520,11 +532,7 @@ const Header = () => {
               className="text-gray-700 hover:text-blue-600 transition-colors p-2"
               aria-label={isMenuOpen ? "Close menu" : "Open menu"}
             >
-              {isMenuOpen ? (
-                <X className="h-6 w-6" />
-              ) : (
-                <Menu className="h-6 w-6" />
-              )}
+              {isMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
           </div>
         </div>
@@ -568,18 +576,13 @@ const Header = () => {
                         >
                           <span>{category.name}</span>
                           <ChevronRight
-                            className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === category.id
-                              ? "rotate-90"
-                              : ""
+                            className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === category.id ? "rotate-90" : ""
                               }`}
                           />
                         </button>
 
                         {expandedMobileCategory === category.id && (
-                          <div
-                            id={`mobile-category-${category.id}`}
-                            className="pl-4 space-y-1"
-                          >
+                          <div id={`mobile-category-${category.id}`} className="pl-4 space-y-1">
                             {category.courses.map((course, idx) => (
                               <a
                                 key={idx}
@@ -603,6 +606,51 @@ const Header = () => {
                     >
                       View All Courses →
                     </a>
+                  </div>
+                )}
+              </div>
+
+              {/* Mobile Jobs Accordion */}
+              <div className="space-y-2">
+                <button
+                  onClick={() => setExpandedMobileJobs((v) => !v)}
+                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-[#ff8c00] hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                  aria-expanded={expandedMobileJobs}
+                  aria-controls="mobile-jobs"
+                >
+                  <span className="inline-flex items-center">
+                    <Briefcase className="mr-2 h-4 w-4 text-[#ff8c00]" />
+                    Jobs
+                  </span>
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${expandedMobileJobs ? "rotate-180" : ""
+                      }`}
+                  />
+                </button>
+
+                {expandedMobileJobs && (
+                  <div id="mobile-jobs" className="pl-4 space-y-1">
+                    <Link
+                      href="/jobs/live-jobs"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      • Live jobs
+                    </Link>
+                    <Link
+                      href="/jobs/careers"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      • Careers
+                    </Link>
+                    <Link
+                      href="/jobs/placements"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      • Placements
+                    </Link>
                   </div>
                 )}
               </div>
