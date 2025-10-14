@@ -121,13 +121,13 @@ export function ContactHeroSection() {
                             ))}
                         </div>
 
-                        <p className="mt-5 text-sm text-slate-600">
+                        <p className="mt-5 text-[15px] text-slate-600">
                             Serving learners across India — Mumbai, Pune, Bengaluru &amp; beyond. Talk to our{" "}
                             <strong>admissions counselors</strong> for <strong>course fees</strong>, <strong>syllabus &amp; roadmaps</strong>,{" "}
                             <strong>placement support</strong>, or <strong>custom corporate training</strong>.
                         </p>
 
-                        <p className="mt-3 text-[12px] text-slate-500">
+                        <p className="mt-3 text-[13px] text-slate-500">
                             No spam. Our advisors respond within 24 hours with course advice, career guidance, and next steps.
                         </p>
                     </div>

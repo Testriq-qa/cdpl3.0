@@ -15,11 +15,12 @@ export default function Page() {
         <main style={{ /* expose brand as CSS var */["--brand" as any]: BRAND }} className="bg-white">
             <TeamHeroSection />
             <TeamLeadershipSpotlight data={teamData} />
-            <TeamCultureSection />
             <TeamTrainersSection trainers={trainers} />
             <TeamDirectory data={teamData} />
             {/* <TeamTestimonialsSection />
             <TeamCTASection /> */}
+            <TeamCultureSection />
+
             <JsonLdOrganization data={teamData} />
         </main>
     );

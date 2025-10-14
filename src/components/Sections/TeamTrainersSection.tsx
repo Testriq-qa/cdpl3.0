@@ -185,10 +185,10 @@ export default function TeamTrainersSection({
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <h3 className="truncate text-base font-semibold text-slate-900">
+                <h3 className="truncate text-lg font-bold text-slate-900">
                   {t.name}
                 </h3>
-                <p className="truncate text-sm text-slate-600">{t.role}</p>
+                <p className="truncate text-md text-slate-600">{t.role}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
                   <span className="inline-flex items-center gap-1 rounded-full bg-orange-50 px-2 py-0.5 font-medium text-orange-700 ring-1 ring-inset ring-orange-200">
                     <GraduationCap className="h-3.5 w-3.5" />
@@ -220,7 +220,7 @@ export default function TeamTrainersSection({
               {t.specialties.slice(0, 5).map((sp) => (
                 <span
                   key={sp}
-                  className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 text-[11px] font-medium text-slate-700 ring-1 ring-inset ring-slate-200"
+                  className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 text-[14px] font-medium text-slate-700 ring-1 ring-inset ring-slate-200"
                 >
                   <Check className="h-3.5 w-3.5" style={{ color: BRAND }} />
                   {sp}
@@ -237,7 +237,7 @@ export default function TeamTrainersSection({
             <div className="mt-4 grid grid-cols-2 gap-2">
               {t.certifications && t.certifications.length > 0 && (
                 <div className="rounded-2xl border border-slate-200 bg-white p-3">
-                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-800">
+                  <div className="flex items-center gap-2 text-sm font-bold text-slate-800">
                     <BadgeCheck className="h-4 w-4" style={{ color: BRAND }} />
                     Certifications
                   </div>
@@ -252,11 +252,11 @@ export default function TeamTrainersSection({
               )}
               {typeof t.successStories === "number" && (
                 <div className="rounded-2xl border border-slate-200 bg-white p-3">
-                  <div className="flex items-center gap-2 text-xs font-semibold text-slate-800">
+                  <div className="flex items-center gap-2 text-sm font-semibold text-slate-800">
                     <Star className="h-4 w-4" style={{ color: BRAND }} />
                     Success Stories
                   </div>
-                  <p className="mt-1.5 text-sm font-semibold text-slate-900">
+                  <p className="mt-1.5 text-md font-semibold text-slate-900">
                     {t.successStories}+ learners placed
                   </p>
                 </div>
@@ -264,15 +264,14 @@ export default function TeamTrainersSection({
             </div>
 
             {/* Footer */}
-            <div className="mt-5 flex items-center justify-between">
-              <div className="text-xs text-slate-600">
+            <div className="mt-7 flex items-center justify-between">
+              <div className="text-sm text-slate-600">
                 Personalized feedback • Live code reviews • Interview prep
               </div>
               {t.slug ? (
                 <Link
                   href={`${t.linkedin}`}
-                  className="inline-flex items-center rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-900 shadow-sm transition hover:translate-y-[-1px]"
-                  style={{ color: BRAND, borderColor: `${BRAND}33` }}
+                  className="inline-flex items-center rounded-xl bg-blue-900 px-3 py-1.5 text-sm font-semibold text-white shadow-sm transition hover:translate-y-[-1px] hover:bg-brand"
                 >
                   LinkedIn
                 </Link>

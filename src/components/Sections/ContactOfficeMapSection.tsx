@@ -54,11 +54,11 @@ export function ContactOfficeMapSection() {
         }}
       />
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">
+        <div className="mx-auto max-w-5xl text-center">
+          <h2 className="text-4xl font-bold tracking-tight text-slate-900">
             Visit <span className="text-brand">Cinute Digital</span> — Ed-Tech Campuses in India
           </h2>
-          <p className="mt-3 text-slate-600">
+          <p className="mt-6 text-lg text-slate-600">
             Explore our modern training centers for <strong>Software Testing courses</strong>,{" "}
             <strong>Data Science &amp; AI programs</strong>, and <strong>Full-Stack Development</strong>. Get{" "}
             <strong>job-ready training</strong>, hands-on labs, and <strong>placement assistance</strong>.
@@ -75,34 +75,34 @@ export function ContactOfficeMapSection() {
             <div className="relative rounded-3xl border border-slate-100 bg-white p-6 sm:p-8 shadow-xl">
               <div className="flex items-start justify-between gap-4">
                 <div>
-                  <h3 className="text-xl font-bold text-slate-900">{active.label}</h3>
+                  <h3 className="font-bold text-2xl text-slate-900">{active.label}</h3>
                   {active.landmark && (
-                    <p className="mt-1 text-sm text-slate-600">
-                      Landmark: <span className="font-medium">{active.landmark}</span>
+                    <p className="mt-1 text-md text-slate-700">
+                      Landmark: <span className="">{active.landmark}</span>
                     </p>
                   )}
                 </div>
-                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-[11px] text-slate-600">
+                <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-[13px] text-slate-700">
                   Walk-in Friendly
                 </span>
               </div>
 
               <div className="mt-4 grid gap-3 text-sm text-slate-700">
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                  <div className="font-medium text-slate-900">Address</div>
+                  <div className="font-medium text-lg text-slate-900">Address</div>
                   <div
-                    className="mt-1 text-slate-700"
+                    className="mt-1 text-base text-slate-800"
                     dangerouslySetInnerHTML={{ __html: active.addressHtml }}
                   />
-                  <div className="text-slate-700">
+                  <div className="text-slate-800 text-base">
                     {active.city}, {active.state}
                     {active.postalCode ? ` — ${active.postalCode}` : ""}
                   </div>
                 </div>
 
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                  <div className="font-medium text-slate-900">Office Hours</div>
-                  <div className="mt-1">{active.hours}</div>
+                  <div className="font-medium text-lg text-slate-900">Office Hours</div>
+                  <div className="mt-1 text-base">{active.hours}</div>
                 </div>
 
                 <div className="grid sm:grid-cols-2 gap-3">
@@ -111,16 +111,16 @@ export function ContactOfficeMapSection() {
                     className="rounded-xl border border-slate-200 bg-white p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Call ${active.label} office`}
                   >
-                    <div className="font-medium text-slate-900">Admissions Helpline</div>
-                    <div className="mt-1 text-slate-700">{active.phoneDisplay}</div>
+                    <div className="font-medium text-base text-slate-900">Admissions Helpline</div>
+                    <div className="mt-1 text-[14px] text-slate-700">{active.phoneDisplay}</div>
                   </Link>
                   <Link
                     href={active.email}
                     className="rounded-xl border border-slate-200 bg-white p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Email ${active.label} office`}
                   >
-                    <div className="font-medium text-slate-900">Email</div>
-                    <div className="mt-1 text-slate-700">
+                    <div className="font-medium text-base text-slate-900">Email</div>
+                    <div className="mt-1 text-[14px] text-slate-700">
                       {active.email.replace("mailto:", "")}
                     </div>
                   </Link>
@@ -132,7 +132,7 @@ export function ContactOfficeMapSection() {
                       className="rounded-xl border border-emerald-200 bg-emerald-50 p-3 text-sm shadow-sm hover:shadow-md transition"
                       aria-label={`WhatsApp ${active.label} office`}
                     >
-                      <div className="font-medium text-emerald-800">WhatsApp</div>
+                      <div className="font-medium text-base text-emerald-800">WhatsApp</div>
                       <div className="mt-1 text-emerald-700">Instant Responses</div>
                     </Link>
                   )}
@@ -143,7 +143,7 @@ export function ContactOfficeMapSection() {
                     className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Get directions to ${active.label}`}
                   >
-                    <div className="font-medium text-sky-800">Get Directions</div>
+                    <div className="font-medium text-base text-sky-800">Get Directions</div>
                     <div className="mt-1 text-sky-700">Open in Google Maps</div>
                   </Link>
                 </div>

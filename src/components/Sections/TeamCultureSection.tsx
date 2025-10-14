@@ -22,7 +22,9 @@ import {
     Check,
     Star,
     Sparkles,
+    ArrowRight,
 } from "lucide-react";
+import Link from "next/link";
 
 // =============================
 // Types
@@ -194,33 +196,43 @@ export default function TeamMentorFuturisticBand() {
 
             {/* KPI band */}
             <div
-                className="relative z-10 mt-6 grid gap-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-3"
+                className="relative z-10 mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm"
                 style={{ boxShadow: "0 30px 80px -30px rgba(255,140,0,0.18)" }}
             >
-                <Metric kpi="20k+" label="Learners Trained" />
-                <Separator className="hidden sm:block" />
-                <Metric kpi="250+" label="Hiring Partner Referrals" />
-                <Separator className="hidden sm:block" />
-                <Metric kpi="4" label="Job‑Aligned Tracks" />
+                <div className="text-center border-2 border-orange-200 rounded-2xl shadow-xl p-1">
+                    <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-sky-500 to-green-500">20k+</p>
+                    <p className="text-slate-700">Learners Trained</p>
+                </div>
+
+                <div className="text-center border-2 border-orange-200 rounded-2xl shadow-xl p-1">
+                    <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-sky-500 to-green-500">250+</p>
+                    <p className="text-slate-700">Hiring Partner Referrals</p>
+                </div>
+
+                <div className="text-center border-2 border-orange-200 rounded-2xl shadow-xl p-1">
+                    <p className="text-3xl font-bold bg-clip-text text-transparent bg-gradient-to-t from-sky-500 to-green-500">4</p>
+                    <p className="text-slate-700">Job‑Aligned Tracks</p>
+                </div>
+
             </div>
 
             {/* Specialties — holographic grid */}
-            <div className="relative z-10 mt-10">
-                <h3 className="text-base font-semibold text-slate-900">What Our Team Teaches</h3>
-                <p className="mt-1 text-sm text-slate-700">
+            <div className="relative z-10 mt-15 text-center">
+                <h3 className="text-2xl font-bold text-slate-900">What Our Team Teaches</h3>
+                <p className="mt-5 text-lg text-slate-700">
                     <strong>Automation testing trainers</strong>, <strong>API testing mentors</strong>, and
                     <strong> performance engineering experts</strong> deliver hands‑on, recruiter‑trusted skills.
                 </p>
 
-                <div className="mt-4 grid gap-6 md:grid-cols-2">
+                <div className="mt-8 grid gap-6 md:grid-cols-2">
                     {specialties.map((s) => (
                         <HoloCard key={s.title}>
                             <div className="flex items-start gap-3">
                                 <IconWrap Icon={s.icon} />
                                 <div>
-                                    <h4 className="text-sm font-semibold text-slate-900">{s.title}</h4>
-                                    <p className="mt-1 text-sm text-slate-700">{s.desc}</p>
-                                    <div className="mt-2 flex flex-wrap gap-2">
+                                    <h4 className="text-xl font-bold text-slate-900">{s.title}</h4>
+                                    <p className="mt-3 text-md text-slate-700">{s.desc}</p>
+                                    <div className="mt-4 flex flex-wrap gap-2">
                                         {s.tags.map((t: string) => (
                                             <span
                                                 key={t}
@@ -238,22 +250,27 @@ export default function TeamMentorFuturisticBand() {
                 </div>
             </div>
 
-            {/* CTA band */}
-            <div className="relative z-10 mt-10 grid gap-4 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-[1fr_auto]">
-                <div className="max-w-2xl">
-                    <p className="text-sm font-semibold text-slate-900">Learn with mentors who build careers—not just courses</p>
-                    <p className="mt-1 text-sm text-slate-700">
-                        Join mentor‑led programs in <strong>manual & automation testing</strong>, <strong>API testing</strong>,
-                        <strong> performance engineering</strong>, and <strong>data for QA</strong>. Build a recruiter‑ready portfolio.
-                    </p>
+            {/* CTA Section */}
+            <div className="mt-16 overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-lg sm:p-10">
+                <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="text-center lg:text-left">
+                        <h3 className="text-2xl font-bold text-slate-900">
+                            Book a free career consultation
+                        </h3>
+                        <p className="mt-2 text-slate-600">
+                            Speak with a mentor about learning paths, real projects, and{" "}
+                            <span className="font-semibold text-slate-900">placement support</span>.
+                        </p>
+                    </div>
+                    <div className="flex flex-wrap items-center justify-center gap-3">
+                        <Link href="/contact" className="flex items-center p-3 rounded-xl bg-orange-500 text-white shadow-lg transition-all hover:bg-orange-600 hover:translate-y-1">
+                            Talk to a mentor <ArrowRight className="ml-2 h-4 w-4" />
+                        </Link>
+                        <Link href="/programs" className="flex items-center p-3 rounded-xl border-2 border-brand bg-white text-slate-900 hover:bg-brand hover:text-white transition-all ease-in-out">
+                            Explore programs
+                        </Link>
+                    </div>
                 </div>
-                <a
-                    href="/apply"
-                    className="inline-flex items-center justify-center bg-brand rounded-xl px-4 py-2 text-sm font-semibold text-white transition-transform hover:scale-[1.02] active:scale-[0.99]"
-                    
-                >
-                    Apply Now
-                </a>
             </div>
         </section>
     );
@@ -287,9 +304,6 @@ function IconWrap({ Icon }: { Icon: ElementType }) {
     );
 }
 
-function Separator({ className = "" }: { className?: string }) {
-    return <div className={`h-px w-full bg-slate-200 ${className}`} role="separator" />;
-}
 
 function Metric({ kpi, label }: { kpi: string; label: string }) {
     return (

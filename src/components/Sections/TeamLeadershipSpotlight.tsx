@@ -110,28 +110,7 @@ export default function LeadershipSpotlight({ data }: Props) {
                 ))}
             </div>
 
-            {/* CTA Section */}
-            <div className="mt-16 overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-lg sm:p-10">
-                <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between">
-                    <div className="text-center lg:text-left">
-                        <h3 className="text-2xl font-bold text-slate-900">
-                            Book a free career consultation
-                        </h3>
-                        <p className="mt-2 text-slate-600">
-                            Speak with a mentor about learning paths, real projects, and{" "}
-                            <span className="font-semibold text-slate-900">placement support</span>.
-                        </p>
-                    </div>
-                    <div className="flex flex-wrap items-center justify-center gap-3">
-                        <Link href="/contact" className="flex items-center p-3 rounded-xl bg-orange-500 text-white shadow-lg transition-all hover:bg-orange-600 hover:translate-y-1">
-                            Talk to a mentor <ArrowRight className="ml-2 h-4 w-4" />
-                        </Link>
-                        <Link href="/programs" className="flex items-center p-3 rounded-xl border-2 border-brand bg-white text-slate-900 hover:bg-brand hover:text-white transition-all ease-in-out">
-                            Explore programs
-                        </Link>
-                    </div>
-                </div>
-            </div>
+            
         </section>
     );
 }

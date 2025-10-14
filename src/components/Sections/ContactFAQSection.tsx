@@ -113,9 +113,9 @@ export function ContactFAQSection() {
       />
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12">
         <div className="rounded-3xl bg-white/80 backdrop-blur border border-slate-200 shadow-xl p-6 sm:p-8">
-          <div className="text-center max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-extrabold text-slate-900">Frequently Asked Questions</h2>
-            <p className="mt-2 text-slate-600">
+          <div className="text-center max-w-5xl mx-auto">
+            <h2 className="text-4xl font-bold text-slate-900">Frequently <span className="text-brand">Asked</span> Questions</h2>
+            <p className="mt-5 text-lg text-slate-600">
               Everything you need to know about <strong>admissions</strong>, <strong>live mentor-led learning</strong>,{" "}
               <strong>EMI & scholarships</strong>, and <strong>placement assistance</strong> at Cinute Digital.
             </p>
@@ -150,10 +150,10 @@ export function ContactFAQSection() {
               >
                 <summary className="flex cursor-pointer list-none items-start justify-between gap-4">
                   <div>
-                    <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[10px] font-medium text-slate-600">
+                    <span className="inline-flex items-center rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[12px] font-medium text-slate-600">
                       {item.cat}
                     </span>
-                    <h3 className="mt-2 text-slate-900 font-semibold">{item.q}</h3>
+                    <h3 className="mt-2 text-lg text-slate-900 font-semibold">{item.q}</h3>
                   </div>
                   <span
                     className="mt-1 inline-flex h-6 w-6 items-center justify-center rounded-full border border-slate-300 text-slate-600 transition group-open:rotate-45"
@@ -179,10 +179,10 @@ export function ContactFAQSection() {
               Still have questions? Our advisors can help with <strong>course selection</strong>,{" "}
               <strong>career pathways</strong>, and <strong>financing options</strong>.
             </p>
-            <div className="mt-3 flex flex-wrap items-center justify-center gap-3">
+            <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
               <a
                 href="https://wa.me/919999999999"
-                className="inline-flex items-center justify-center rounded-full bg-sky-600 px-5 py-2.5 text-white text-sm font-medium shadow-md transition hover:bg-sky-700"
+                className="inline-flex items-center justify-center rounded-full bg-green-600 px-5 py-2.5 text-white text-sm font-medium shadow-md transition hover:bg-sky-700"
               >
                 WhatsApp Us
               </a>

@@ -27,10 +27,10 @@ export function ContactBookCallSection() {
               }}
             />
             <div className="flex flex-col items-center text-center">
-              <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">
+              <h2 className="text-4xl font-bold tracking-tight text-slate-900">
                 Book a <span className="text-brand">Free 1:1 Career Counseling</span> Session
               </h2>
-              <p className="mt-3 max-w-2xl text-slate-600">
+              <p className="mt-5 text-lg max-w-5xl text-slate-600">
                 Get personalized guidance on <strong>Software Testing</strong>, <strong>Data Science &amp; AI</strong>, and{" "}
                 <strong>Full-Stack Development</strong> programs. Discuss <strong>placements</strong>,{" "}
                 <strong>EMI &amp; scholarships</strong>, and your <strong>job-ready learning roadmap</strong>.
@@ -55,7 +55,7 @@ export function ContactBookCallSection() {
                 </Link>
               </div>
 
-              <div className="mt-4 text-xs text-slate-500">
+              <div className="mt-4 text-sm text-slate-500">
                 No spam. Our advisors reply within 24 hours. Reschedule anytime.
               </div>
             </div>
@@ -78,7 +78,7 @@ export function ContactBookCallSection() {
           </div>
         </div>
 
-        <p className="mt-3 text-center text-[12px] text-slate-500">Available in Mumbai • Online (IST)</p>
+        <p className="mt-3 text-center text-sm text-slate-500">Available in Mumbai • Online (IST)</p>
       </div>
 
       <Script id="schedule-jsonld" type="application/ld+json">

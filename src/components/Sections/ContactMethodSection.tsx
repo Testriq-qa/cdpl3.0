@@ -78,11 +78,11 @@ export function ContactMethodsSection() {
         }}
       />
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12">
-        <div className="mx-auto max-w-3xl text-center">
-          <h2 className="text-2xl md:text-3xl font-extrabold tracking-tight text-slate-900">
+        <div className="mx-auto max-w-5xl text-center">
+          <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">
             Talk to <span className="text-brand">Cinute Digital</span> — India’s Leading Ed-Tech Institute
           </h2>
-          <p className="mt-3 text-slate-600">
+          <p className="mt-5 text-lg text-slate-600">
             Get admissions support, course syllabus, <strong>job-ready training</strong> advice,{" "}
             <strong>placement assistance</strong>, and <strong>corporate upskilling</strong> solutions.
           </p>
@@ -104,7 +104,7 @@ export function ContactMethodsSection() {
                 />
                 <div className="absolute inset-0 rounded-3xl ring-1 ring-transparent transition group-hover:ring-sky-200/60" />
                 <div className="flex items-start justify-between gap-4">
-                  <div className="inline-flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
                     {item.icon}
                   </div>
                   {item.badges && (
@@ -112,7 +112,7 @@ export function ContactMethodsSection() {
                       {item.badges.map((b) => (
                         <span
                           key={b}
-                          className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[10px] font-medium text-slate-600"
+                          className="rounded-full border border-slate-200 bg-white px-2 py-1 text-[11px] font-medium text-slate-600"
                         >
                           {b}
                         </span>
@@ -121,8 +121,8 @@ export function ContactMethodsSection() {
                   )}
                 </div>
 
-                <h3 className="mt-4 text-lg font-semibold text-slate-900">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-700">{item.desc}</p>
+                <h3 className="mt-4 text-xl font-bold text-slate-900">{item.title}</h3>
+                <p className="mt-2 text-md leading-6 text-slate-700">{item.desc}</p>
 
                 {/* @ts-expect error */}
                 <CardShell
@@ -147,8 +147,8 @@ export function ContactMethodsSection() {
               key={pill.title}
               className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm"
             >
-              <div className="text-sm font-semibold text-slate-900">{pill.title}</div>
-              <div className="mt-1 text-xs text-slate-600">{pill.note}</div>
+              <div className="text-md font-semibold text-slate-900">{pill.title}</div>
+              <div className="mt-1 text-sm text-slate-600">{pill.note}</div>
             </div>
           ))}
         </div>
