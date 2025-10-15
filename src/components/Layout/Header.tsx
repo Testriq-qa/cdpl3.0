@@ -485,7 +485,7 @@ const Header = () => {
                   </div>
                   <div className="py-1">
                     <Link
-                      href="/jobs/live"
+                      href="/jobs/live-jobs"
                       role="menuitem"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
                     >
@@ -677,7 +677,7 @@ const Header = () => {
                 {mobileSections.jobs && (
                   <div id="mobile-jobs" className="pl-4 space-y-1">
                     <Link
-                      href="/jobs/live"
+                      href="/jobs/live-jobs"
                       className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
