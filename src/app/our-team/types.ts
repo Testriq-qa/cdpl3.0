@@ -7,10 +7,13 @@ import { Url } from "next/dist/shared/lib/router/router";
 export type TeamLeaders = {
   id: string;
   name: string;
+  experience: string;
+  specialization: string;
   title: string;
   role: string;
   expertise: string[];
   bio: string;
+  achievements: string[];
   location?: string;
   avatar: string;
   linkedin?: string;

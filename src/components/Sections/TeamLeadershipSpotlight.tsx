@@ -110,7 +110,7 @@ export default function LeadershipSpotlight({ data }: Props) {
                 ))}
             </div>
 
-            
+
         </section>
     );
 }
@@ -159,11 +159,11 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
             />
 
             <div
-                className={`relative flex flex-col gap-5 p-8 lg:flex-row lg:items-center lg:gap-16 lg:p-12 ${isEven ? "" : "lg:flex-row-reverse"}`}
+                className={`relative flex flex-col gap-5 p-8 lg:flex-row lg:items-center lg:gap-24 lg:p-12 ${isEven ? "" : "lg:flex-row-reverse"}`}
             >
                 {/* Avatar Section with Futuristic Frame */}
                 <div className="relative mx-auto shrink-0 lg:mx-0">
-                    <div className="relative h-64 w-64 lg:h-72 lg:w-72 overflow-hidden rounded-full transition-all duration-500 group-hover:scale-110 group-hover:border-orange-300">
+                    <div className="relative h-64 w-64 lg:h-90 lg:w-90 overflow-hidden rounded-full transition-all duration-500 group-hover:scale-110 group-hover:border-orange-300">
                         {leader.avatar ? (
                             <img
                                 src={leader.avatar}
@@ -199,12 +199,22 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
                             <p className="text-lg font-semibold text-orange-600 lg:text-xl">
                                 {leader.title}
                             </p>
-                            {leader.location && (
-                                <p className="flex items-center gap-2 text-sm text-slate-600">
-                                    <MapPin className="h-4 w-4 text-orange-500" />
-                                    {leader.location}
+
+                            <div className="flex flex-row items-center gap-3 text-gray-600">
+                                <p className="bg-gray-100 px-3 py-1 rounded-full text-xs border border-brand">
+                                    {leader.experience}
                                 </p>
-                            )}
+                                <p className="text-sm">{leader.specialization}</p>
+
+                                {leader.location && (
+                                    <p className="flex items-center gap-2 text-sm text-slate-600">
+                                        <MapPin className="h-4 w-4 text-orange-500" />
+                                        {leader.location}
+                                    </p>
+                                )}
+                            </div>
+
+
                         </div>
                     </div>
 
@@ -226,6 +236,22 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
                                     {skill}
                                 </span>
                             ))}
+                        </div>
+                    )}
+
+                    {leader.achievements.length > 0 && (
+                        <div className="mb-6">
+                            <h4 className="text-lg font-semibold text-gray-900 mb-3">
+                                Key Achievements
+                            </h4>
+                            <div className="space-y-2">
+                                {leader.achievements.map((achievement, achIndex) => (
+                                    <div key={achIndex} className="flex items-center gap-3">
+                                        <div className="w-2 h-2 bg-[theme(color.brand)] rounded-full"></div>
+                                        <span className="text-gray-700">{achievement}</span>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
                     )}
 
