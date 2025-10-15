@@ -1,15 +1,7 @@
 "use client";
 
-import { useState } from "react";
-import {
-  Menu,
-  X,
-  ChevronDown,
-  ChevronRight,
-  Award,
-  Globe,
-  Briefcase,
-} from "lucide-react";
+import { useEffect, useRef, useState } from "react";
+import { Menu, X, ChevronDown, ChevronRight, Award, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,32 +12,26 @@ const courseCategories = [
     name: "Sofware Testing Courses",
     description:
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
-    governingBodies: [
-      { name: "Sofware Testing Courses", logo: "/header_images/Sotware_Testing.png" },
-    ],
+    governingBodies: [{ name: "Sofware Testing Courses", logo: "/header_images/Sotware_Testing.png" }],
     courses: [
       {
         name: "Manual Software Testing",
-        description:
-          "Learn to facilitate Scrum teams and drive Agile projects effectively.",
+        description: "Learn to facilitate Scrum teams and drive Agile projects effectively.",
         governingBodies: [{ name: "Manual Testing", logo: "/header_images/Manual-Testing.png" }],
       },
       {
         name: "API Testing using POSTMAN and RestAPIs",
-        description:
-          "Master product backlog management and stakeholder collaboration.",
+        description: "Master product backlog management and stakeholder collaboration.",
         governingBodies: [{ name: "API Testing", logo: "/header_images/API_Testing_Postman.png" }],
       },
       {
         name: "Database Management System using MySQL",
-        description:
-          "Gain advanced Scrum knowledge to lead high-performing teams.",
+        description: "Gain advanced Scrum knowledge to lead high-performing teams.",
         governingBodies: [{ name: "Database Management", logo: "/header_images/Database_Management_MySQL.png" }],
       },
       {
         name: "ETL Testing Course",
-        description:
-          "Learn to lead Agile transformations using the SAFe framework.",
+        description: "Learn to lead Agile transformations using the SAFe framework.",
         governingBodies: [{ name: "ETL Testing", logo: "/header_images/ETL_Testing.png" }],
       },
       {
@@ -60,8 +46,7 @@ const courseCategories = [
       },
       {
         name: "Advanced Manual and Automation Testing - Master Program",
-        description:
-          "Blend Agile principles with PMI project management standards.",
+        description: "Blend Agile principles with PMI project management standards.",
         governingBodies: [
           {
             name: "Advanced Manual and Automation Testing - Master Program",
@@ -75,9 +60,7 @@ const courseCategories = [
     id: "data-science",
     name: "Data Science, AI - ML & BI Courses",
     description: "Prepare for job interviews with practical skills and confidence.",
-    governingBodies: [
-      { name: "Data Science, AI - ML & BI Courses", logo: "/header_images/DataScience_AI_ML_BI.png" },
-    ],
+    governingBodies: [{ name: "Data Science, AI - ML & BI Courses", logo: "/header_images/DataScience_AI_ML_BI.png" }],
     courses: [
       {
         name: "Machine Learning and Data Science with Python - Hero Program",
@@ -183,53 +166,122 @@ const courseCategories = [
 ];
 
 const Header = () => {
+  // Global
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // Desktop mega & dropdowns
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
-
-  // Jobs dropdown state (desktop)
-  const [isJobsOpen, setIsJobsOpen] = useState(false);
-
-  const [selectedCategory, setSelectedCategory] = useState(
-    courseCategories[0].id
-  );
+  const [selectedCategory, setSelectedCategory] = useState(courseCategories[0].id);
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
-  const [expandedMobileCategory, setExpandedMobileCategory] =
-    useState<string | null>(null);
-  const [expandedMobileJobs, setExpandedMobileJobs] = useState<boolean>(false);
 
+  const [isJobsOpen, setIsJobsOpen] = useState(false);
+  const [isAboutOpen, setIsAboutOpen] = useState(false);
+  const aboutButtonRef = useRef<HTMLButtonElement | null>(null);
+  const aboutMenuRef = useRef<HTMLDivElement | null>(null);
+  const jobsButtonRef = useRef<HTMLButtonElement | null>(null);
+  const jobsMenuRef = useRef<HTMLDivElement | null>(null);
+
+  // Mobile accordions (keep them independent)
+  const [mobileSections, setMobileSections] = useState<{
+    courses: boolean;
+    jobs: boolean;
+    about: boolean;
+    openCategoryId: string | null;
+  }>({
+    courses: false,
+    jobs: false,
+    about: false,
+    openCategoryId: null,
+  });
+
+  // Basic menu toggle
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsMenuOpen((v) => !v);
+    // Reset mobile accordions when the main menu closes
     if (isMenuOpen) {
-      setExpandedMobileCategory(null);
-      setExpandedMobileJobs(false);
+      setMobileSections({ courses: false, jobs: false, about: false, openCategoryId: null });
     }
   };
 
+  // Desktop dropdown toggles — FIXED to update their own state (not isMenuOpen)
+  const toggleJob = () => setIsJobsOpen((v) => !v);
+  const toggleAbout = () => setIsAboutOpen((v) => !v);
+
+  // Mobile section toggles — independent and predictable
+  const toggleMobileSection = (key: "courses" | "jobs" | "about") => {
+    setMobileSections((s) => {
+      // You can allow multiple to be open; or close others if you prefer. Here, multiple are allowed.
+      const next = { ...s, [key]: !s[key] };
+      // If closing Courses, also close any open nested category
+      if (key === "courses" && s.courses) next.openCategoryId = null;
+      return next;
+    });
+  };
+
+  // Inside Mobile → Courses: open/close exactly one category at a time
   const toggleMobileCategory = (categoryId: string) => {
-    if (categoryId === "courses") {
-      setExpandedMobileCategory(
-        expandedMobileCategory === "courses" ? null : "courses"
-      );
-    } else {
-      setExpandedMobileCategory(
-        expandedMobileCategory === categoryId ? "courses" : categoryId
-      );
-    }
+    setMobileSections((s) => ({
+      ...s,
+      openCategoryId: s.openCategoryId === categoryId ? null : categoryId,
+    }));
   };
 
-  const selectedCategoryData = courseCategories.find(
-    (cat) => cat.id === selectedCategory
-  );
-  const hoveredCourseData = selectedCategoryData?.courses.find(
-    (c) => c.name === hoveredCourse
-  );
-  const displayGoverningBodies = hoveredCourse
-    ? hoveredCourseData?.governingBodies || []
-    : selectedCategoryData?.governingBodies || [];
-  const displayDescription = hoveredCourse
-    ? hoveredCourseData?.description
-    : selectedCategoryData?.description;
+  // Derived
+  const selectedCategoryData = courseCategories.find((cat) => cat.id === selectedCategory);
+  const hoveredCourseData = selectedCategoryData?.courses.find((c) => c.name === hoveredCourse);
+  const displayGoverningBodies = hoveredCourse ? hoveredCourseData?.governingBodies || [] : selectedCategoryData?.governingBodies || [];
+  const displayDescription = hoveredCourse ? hoveredCourseData?.description : selectedCategoryData?.description;
+
+  // Close Jobs dropdown on outside click / ESC
+  useEffect(() => {
+    const onClickOutside = (e: MouseEvent) => {
+      if (!isJobsOpen) return;
+      const target = e.target as Node;
+      if (
+        jobsMenuRef.current &&
+        !jobsMenuRef.current.contains(target) &&
+        jobsButtonRef.current &&
+        !jobsButtonRef.current.contains(target)
+      ) {
+        setIsJobsOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsJobsOpen(false);
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClickOutside);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [isJobsOpen]);
+
+  // Close About dropdown on outside click / ESC
+  useEffect(() => {
+    const onClickOutside = (e: MouseEvent) => {
+      if (!isAboutOpen) return;
+      const target = e.target as Node;
+      if (
+        aboutMenuRef.current &&
+        !aboutMenuRef.current.contains(target) &&
+        aboutButtonRef.current &&
+        !aboutButtonRef.current.contains(target)
+      ) {
+        setIsAboutOpen(false);
+      }
+    };
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setIsAboutOpen(false);
+    };
+    document.addEventListener("mousedown", onClickOutside);
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("mousedown", onClickOutside);
+      document.removeEventListener("keydown", onKey);
+    };
+  }, [isAboutOpen]);
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
@@ -247,22 +299,17 @@ const Header = () => {
                   className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14"
                 />
               </div>
-              <span className="text-base sm:text-xl lg:text-2xl font-bold text-brand">
-                Cinute Digital
-              </span>
+              <span className="text-base sm:text-xl lg:text-2xl font-bold text-brand">Cinute Digital</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-            <Link
-              href="/"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
-            >
+            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Home
             </Link>
 
-            {/* Mega Menu Trigger */}
+            {/* Mega Menu Trigger (Desktop only) */}
             <div
               className="relative"
               onMouseEnter={() => setIsMegaMenuOpen(true)}
@@ -273,7 +320,7 @@ const Header = () => {
               }}
             >
               <button
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base"
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="mega-menu"
               >
@@ -283,18 +330,13 @@ const Header = () => {
 
               {/* Mega Menu - Desktop */}
               {isMegaMenuOpen && (
-                <div
-                  id="mega-menu"
-                  className="fixed left-0 right-0 top-[72px] lg:top-[80px] w-full backdrop-blur-sm z-50"
-                >
+                <div id="mega-menu" className="fixed left-0 right-0 top-[72px] lg:top-[80px] w-full backdrop-blur-sm z-50">
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-blue-600">
                       <div className="grid grid-cols-12 gap-4 p-4 sm:p-6 lg:p-8">
                         {/* Column 1: Categories */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-3 border-r border-gray-200 pr-4">
-                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">
-                            Categories
-                          </h3>
+                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Categories</h3>
                           <div className="space-y-1 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2">
                             {courseCategories.map((category) => (
                               <button
@@ -309,24 +351,17 @@ const Header = () => {
                                   ? "bg-blue-50 text-blue-700 font-medium"
                                   : "text-gray-700 hover:bg-gray-50"
                                   }`}
-                                aria-current={
-                                  selectedCategory === category.id ? "true" : "false"
-                                }
+                                aria-current={selectedCategory === category.id ? "true" : "false"}
                               >
                                 <span>{category.name}</span>
                                 <ChevronRight
-                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id
-                                    ? "text-blue-700"
-                                    : "text-gray-400"
+                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-blue-700" : "text-gray-400"
                                     }`}
                                 />
                               </button>
                             ))}
                           </div>
-                          <a
-                            href="/courses"
-                            className="mt-4 flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group"
-                          >
+                          <a href="/courses" className="mt-4 flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group">
                             View All Courses
                             <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                           </a>
@@ -334,27 +369,19 @@ const Header = () => {
 
                         {/* Column 2: Courses */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-5 pr-0 sm:pr-4">
-                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">
-                            Courses
-                          </h3>
+                          <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Courses</h3>
                           <div className="grid grid-cols-1 gap-1 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2">
                             {selectedCategoryData?.courses.map((course, index) => (
                               <a
                                 key={index}
-                                href={`/courses/${selectedCategory}/${course.name
-                                  .toLowerCase()
-                                  .replace(/[®\s&]+/g, "-")}`}
+                                href={`/courses/${selectedCategory}/${course.name.toLowerCase().replace(/[®\s&]+/g, "-")}`}
                                 onMouseEnter={() => setHoveredCourse(course.name)}
-                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name
-                                  ? "bg-blue-50 text-blue-700"
-                                  : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
                                   }`}
                               >
                                 <div className="flex-shrink-0 mt-1">
                                   <div
-                                    className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name
-                                      ? "bg-blue-700 scale-125"
-                                      : "bg-blue-600 group-hover:scale-125"
+                                    className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
                                       }`}
                                   />
                                 </div>
@@ -385,24 +412,14 @@ const Header = () => {
                                   key={index}
                                   className="bg-white rounded-lg p-8 hover:shadow-md transition-all duration-200 group animate-fadeIn flex flex-col items-center justify-center"
                                 >
-                                  <Image
-                                    src={body.logo}
-                                    alt={body.name}
-                                    className="object-contain h-full rounded-2xl"
-                                    width={300}
-                                    height={150}
-                                  />
-                                  <span className="text-[10px] text-gray-700 font-medium mt-2 text-center">
-                                    {body.name}
-                                  </span>
+                                  <Image src={body.logo} alt={body.name} className="object-contain h-full rounded-2xl" width={300} height={150} />
+                                  <span className="text-[10px] text-gray-700 font-medium mt-2 text-center">{body.name}</span>
                                 </div>
                               ))
                             ) : (
                               <div className="col-span-2 flex flex-col items-center justify-center text-center py-8">
                                 <Award className="h-10 w-10 text-gray-300 mb-2" />
-                                <p className="text-xs text-gray-400">
-                                  Hover over categories or courses to see their certifications
-                                </p>
+                                <p className="text-xs text-gray-400">Hover over categories or courses to see their certifications</p>
                               </div>
                             )}
                           </div>
@@ -423,32 +440,34 @@ const Header = () => {
               )}
             </div>
 
-            <Link
-              href="#"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
-            >
+            <Link href="#" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Event
             </Link>
 
-            <Link
-              href="/mentors"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
-            >
+            <Link href="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Mentors
             </Link>
 
-            {/* Jobs dropdown (desktop) */}
-            <div
-              className="relative"
-              onMouseEnter={() => setIsJobsOpen(true)}
-              onMouseLeave={() => setIsJobsOpen(false)}
-            >
+            {/* Jobs Dropdown (Desktop) */}
+            <div className="relative" onMouseEnter={() => setIsJobsOpen(true)} onMouseLeave={() => setIsJobsOpen(false)}>
               <button
-                className="text-gray-700 hover:text-[#ff8c00] transition-colors flex items-center py-6 text-sm xl:text-base"
+                ref={jobsButtonRef}
+                onClick={toggleJob}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    setIsJobsOpen(true);
+                    requestAnimationFrame(() => {
+                      const first = jobsMenuRef.current?.querySelector<HTMLAnchorElement>('a[role="menuitem"]');
+                      first?.focus();
+                    });
+                  }
+                }}
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                aria-haspopup="menu"
                 aria-expanded={isJobsOpen}
                 aria-controls="jobs-menu"
               >
-                <Briefcase className="mr-1.5 h-4 w-4 text-[#ff8c00]" />
                 Jobs
                 <ChevronDown className="ml-1 h-4 w-4" />
               </button>
@@ -456,61 +475,100 @@ const Header = () => {
               {isJobsOpen && (
                 <div
                   id="jobs-menu"
-                  className="absolute left-0 top-full mt-1 w-56 rounded-xl border border-amber-200 bg-white shadow-lg"
+                  ref={jobsMenuRef}
+                  role="menu"
+                  aria-label="Jobs"
+                  className="absolute left-0 top-full mt-0 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl py-2 z-50"
                 >
-                  <ul className="py-1.5">
-                    <li>
-                      {/* removed right chevrons; left-aligned text */}
-                      <Link
-                        href="/jobs/live-jobs"
-                        className="block px-3 py-2.5 text-sm rounded-lg text-slate-700 hover:bg-amber-50 hover:text-amber-700"
-                      >
-                        Live jobs
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/jobs/careers"
-                        className="block px-3 py-2.5 text-sm rounded-lg text-slate-700 hover:bg-amber-50 hover:text-amber-700"
-                      >
-                        Careers
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        href="/jobs/placements"
-                        className="block px-3 py-2.5 text-sm rounded-lg text-slate-700 hover:bg-amber-50 hover:text-amber-700"
-                      >
-                        Placements
-                      </Link>
-                    </li>
-                  </ul>
-                  {/* top accent bar in CDPL orange */}
-                  <span
-                    aria-hidden
-                    className="absolute -top-[3px] left-0 right-0 h-[3px] rounded-t-xl"
-                    style={{ background: "linear-gradient(90deg,#ff8c00,#ffb558,#ffd19e)" }}
-                  />
+                  <div className="px-4 py-2 border-b border-gray-100">
+                    <p className="text-xs uppercase tracking-wider text-gray-500">Explore</p>
+                  </div>
+                  <div className="py-1">
+                    <Link
+                      href="/jobs/live"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Live Jobs
+                    </Link>
+                    <Link
+                      href="/jobs/placements"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Placements
+                    </Link>
+                    <Link
+                      href="/jobs/careers"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Careers
+                    </Link>
+                  </div>
                 </div>
               )}
             </div>
 
-            <a
-              href="/about-us"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
-            >
-              About
-            </a>
-            <a
-              href="/blog"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
-            >
+            {/* About Dropdown (Desktop) */}
+            <div className="relative" onMouseEnter={() => setIsAboutOpen(true)} onMouseLeave={() => setIsAboutOpen(false)}>
+              <button
+                ref={aboutButtonRef}
+                onClick={toggleAbout}
+                onKeyDown={(e) => {
+                  if (e.key === "ArrowDown") {
+                    e.preventDefault();
+                    setIsAboutOpen(true);
+                    requestAnimationFrame(() => {
+                      const first = aboutMenuRef.current?.querySelector<HTMLAnchorElement>('a[role="menuitem"]');
+                      first?.focus();
+                    });
+                  }
+                }}
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                aria-haspopup="menu"
+                aria-expanded={isAboutOpen}
+                aria-controls="about-menu"
+              >
+                About
+                <ChevronDown className="ml-1 h-4 w-4" />
+              </button>
+
+              {isAboutOpen && (
+                <div
+                  id="about-menu"
+                  ref={aboutMenuRef}
+                  role="menu"
+                  aria-label="About"
+                  className="absolute left-0 top-full mt-0 w-64 bg-white border border-gray-200 rounded-xl shadow-2xl py-2 z-50"
+                >
+                  <div className="px-4 py-2 border-b border-gray-100">
+                    <p className="text-xs uppercase tracking-wider text-gray-500">Explore</p>
+                  </div>
+                  <div className="py-1">
+                    <Link
+                      href="/about-us"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      About CDPL
+                    </Link>
+                    <Link
+                      href="/our-team"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Our Team
+                    </Link>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            <a href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Blog
             </a>
-            <a
-              href="/contact-us"
-              className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base"
-            >
+            <a href="/contact-us" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Contact
             </a>
           </nav>
@@ -552,53 +610,48 @@ const Header = () => {
               {/* Mobile Courses Accordion */}
               <div className="space-y-2">
                 <button
-                  onClick={() => toggleMobileCategory("courses")}
+                  onClick={() => toggleMobileSection("courses")}
                   className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
-                  aria-expanded={expandedMobileCategory !== null}
+                  aria-expanded={mobileSections.courses}
                   aria-controls="mobile-courses"
                 >
                   <span>Courses</span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory !== null ? "rotate-180" : ""
-                      }`}
-                  />
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileSections.courses ? "rotate-180" : ""}`} />
                 </button>
 
-                {expandedMobileCategory !== null && (
+                {mobileSections.courses && (
                   <div id="mobile-courses" className="pl-4 space-y-2">
-                    {courseCategories.map((category) => (
-                      <div key={category.id} className="space-y-2">
-                        <button
-                          onClick={() => toggleMobileCategory(category.id)}
-                          className="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
-                          aria-expanded={expandedMobileCategory === category.id}
-                          aria-controls={`mobile-category-${category.id}`}
-                        >
-                          <span>{category.name}</span>
-                          <ChevronRight
-                            className={`h-4 w-4 transition-transform duration-200 ${expandedMobileCategory === category.id ? "rotate-90" : ""
-                              }`}
-                          />
-                        </button>
+                    {courseCategories.map((category) => {
+                      const isOpen = mobileSections.openCategoryId === category.id;
+                      return (
+                        <div key={category.id} className="space-y-2">
+                          <button
+                            onClick={() => toggleMobileCategory(category.id)}
+                            className="w-full flex items-center justify-between px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                            aria-expanded={isOpen}
+                            aria-controls={`mobile-category-${category.id}`}
+                          >
+                            <span>{category.name}</span>
+                            <ChevronRight className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`} />
+                          </button>
 
-                        {expandedMobileCategory === category.id && (
-                          <div id={`mobile-category-${category.id}`} className="pl-4 space-y-1">
-                            {category.courses.map((course, idx) => (
-                              <a
-                                key={idx}
-                                href={`/courses/${category.id}/${course.name
-                                  .toLowerCase()
-                                  .replace(/[®\s&]+/g, "-")}`}
-                                className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
-                                onClick={toggleMenu}
-                              >
-                                • {course.name}
-                              </a>
-                            ))}
-                          </div>
-                        )}
-                      </div>
-                    ))}
+                          {isOpen && (
+                            <div id={`mobile-category-${category.id}`} className="pl-4 space-y-1">
+                              {category.courses.map((course, idx) => (
+                                <a
+                                  key={idx}
+                                  href={`/courses/${category.id}/${course.name.toLowerCase().replace(/[®\s&]+/g, "-")}`}
+                                  className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                                  onClick={toggleMenu}
+                                >
+                                  • {course.name}
+                                </a>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      );
+                    })}
                     <a
                       href="/courses"
                       className="block px-4 py-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
@@ -613,55 +666,72 @@ const Header = () => {
               {/* Mobile Jobs Accordion */}
               <div className="space-y-2">
                 <button
-                  onClick={() => setExpandedMobileJobs((v) => !v)}
-                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-[#ff8c00] hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
-                  aria-expanded={expandedMobileJobs}
+                  onClick={() => toggleMobileSection("jobs")}
+                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                  aria-expanded={mobileSections.jobs}
                   aria-controls="mobile-jobs"
                 >
-                  <span className="inline-flex items-center">
-                    <Briefcase className="mr-2 h-4 w-4 text-[#ff8c00]" />
-                    Jobs
-                  </span>
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform duration-200 ${expandedMobileJobs ? "rotate-180" : ""
-                      }`}
-                  />
+                  <span>Jobs</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileSections.jobs ? "rotate-180" : ""}`} />
                 </button>
-
-                {expandedMobileJobs && (
+                {mobileSections.jobs && (
                   <div id="mobile-jobs" className="pl-4 space-y-1">
                     <Link
-                      href="/jobs/live-jobs"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
+                      href="/jobs/live"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
-                      • Live jobs
-                    </Link>
-                    <Link
-                      href="/jobs/careers"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
-                      onClick={toggleMenu}
-                    >
-                      • Careers
+                      • Live Jobs
                     </Link>
                     <Link
                       href="/jobs/placements"
-                      className="block px-4 py-2 text-sm text-gray-700 hover:text-amber-700 hover:bg-amber-50 rounded-lg transition-colors"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
                       • Placements
+                    </Link>
+                    <Link
+                      href="/jobs/careers"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      • Careers
                     </Link>
                   </div>
                 )}
               </div>
 
-              <a
-                href="/about-us"
-                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
-                onClick={toggleMenu}
-              >
-                About
-              </a>
+              {/* Mobile About Accordion */}
+              <div className="space-y-2">
+                <button
+                  onClick={() => toggleMobileSection("about")}
+                  className="w-full flex items-center justify-between px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                  aria-expanded={mobileSections.about}
+                  aria-controls="mobile-about"
+                >
+                  <span>About</span>
+                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileSections.about ? "rotate-180" : ""}`} />
+                </button>
+                {mobileSections.about && (
+                  <div id="mobile-about" className="pl-4 space-y-1">
+                    <Link
+                      href="/about-us"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      About CDPL
+                    </Link>
+                    <Link
+                      href="/our-team"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      Our Team
+                    </Link>
+                  </div>
+                )}
+              </div>
+
               <a
                 href="/blog"
                 className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"

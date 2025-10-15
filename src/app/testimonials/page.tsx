@@ -17,17 +17,17 @@ function SectionLoader({ label = "Loading..." }: { label?: string }) {
 
 // ---------- Dynamic sections (SSR enabled, with lightweight fallbacks) ----------
 const TestimonialHeroSection = dynamic(
-  () => import("@/components/Sections/TestimonialHeroSection"),
+  () => import("@/components/sections/TestimonialHeroSection"),
   { ssr: true, loading: () => <SectionLoader label="Loading testimonials..." /> }
 );
 
 const TestimonialFeedbackSection = dynamic(
-  () => import("@/components/Sections/TestimonialFeedbackSection"),
+  () => import("@/components/sections/TestimonialFeedbackSection"),
   { ssr: true, loading: () => <SectionLoader label="Loading reviews..." /> }
 );
 
 const TestimonialCTAJoinSection = dynamic(
-  () => import("@/components/Sections/TestimonialCTAJoinSection"),
+  () => import("@/components/sections/TestimonialCTAJoinSection"),
   { ssr: true, loading: () => <SectionLoader label="Preparing CTA..." /> }
 );
 

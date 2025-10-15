@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic'
 import React from 'react'
 
 const BlogPostHeroSection = dynamic(
-    () => import("@/components/Sections/BlogPostHeroSection").then(m => m.BlogPostHeroSection),
+    () => import("@/components/sections/BlogPostHeroSection").then(m => m.BlogPostHeroSection),
     {
         ssr: true,
         loading: () => (
@@ -14,7 +14,7 @@ const BlogPostHeroSection = dynamic(
 );
 
 const BlogPostSection = dynamic(
-    () => import("@/components/Sections/BlogPostSection").then(m => m.BlogPostSection),
+    () => import("@/components/sections/BlogPostSection").then(m => m.BlogPostSection),
     {
         ssr: true,
         loading: () => (
@@ -26,7 +26,7 @@ const BlogPostSection = dynamic(
 )
 
 const BlogPostContactSection = dynamic(
-    () => import("@/components/Sections/BlogPostContactSection").then(m => m.BlogPostContactSection),
+    () => import("@/components/sections/BlogPostContactSection").then(m => m.BlogPostContactSection),
     {
         ssr: true,
         loading: () => (

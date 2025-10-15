@@ -58,8 +58,11 @@ const Footer: React.FC = () => {
           </div>
         </div>
 
+        {/* hr border */}
+        <hr className="mx-auto my-10 w-auto md:w-auto border-t-2 border-slate-400" />
+
         {/* Bottom Copyright */}
-        <div className="mt-8 py-4 border-t border-4 border-gray-400 rounded-full text-sm text-center">
+        <div className="mt-8 py-4 text-sm text-center">
           © Copyright 2025 Cinute Digital Pvt. Ltd. - All Rights Reserved.
         </div>
       </div>
