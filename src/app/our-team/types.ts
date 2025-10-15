@@ -5,33 +5,33 @@ import { Url } from "next/dist/shared/lib/router/router";
 
 // =============================
 export type TeamLeaders = {
-    id: string;
-    name: string;
-    title: string;
-    role: string;
-    expertise: string[];
-    bio: string;
-    location?: string;
-    avatar: string;
-    linkedin?: string;
-    email?: string;
-    highlights?: string[];
-    src?: string
+  id: string;
+  name: string;
+  title: string;
+  role: string;
+  expertise: string[];
+  bio: string;
+  location?: string;
+  avatar: string;
+  linkedin?: string;
+  email?: string;
+  highlights?: string[];
+  src?: string
 };
 
 export type TeamMember = {
-    id: string;
-    name: string;
-    title: string;
-    role: "Leadership" | "Faculty" | "Advisory" | "Operations";
-    expertise: string[];
-    bio: string;
-    location?: string;
-    avatar: string;
-    linkedin?: string;
-    email?: string;
-    highlights?: string[];
-    src?: string
+  id: string;
+  name: string;
+  title: string;
+  role: string;
+  expertise: string[];
+  bio: string;
+  location?: string;
+  avatar: string;
+  linkedin?: string;
+  email?: string;
+  highlights?: string[];
+  src?: string
 };
 
 export type Trainer = {

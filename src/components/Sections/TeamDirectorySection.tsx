@@ -195,13 +195,13 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
 
             {/* SEO helper copy */}
             <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-6">
-                <h3 className="text-base font-semibold text-slate-900">Learn with industry mentors at Cinute Digital</h3>
-                <p className="mt-2 text-sm leading-6 text-slate-600">
+                <h3 className="text-xl font-bold text-slate-900">Learn with industry mentors at <span className="text-brand">Cinute Digital</span></h3>
+                <p className="mt-2 text-md leading-6 text-slate-600">
                     Our mentor directory brings together{" "}
                     <strong className="font-semibold">
                         software testing experts, automation engineers, QA leads, and industry advisors
                     </strong>{" "}
-                    who teach real-world workflows—test strategy, API testing, CI/CD, Selenium, Playwright, Agile & DevOps.
+                    who teach real-world workflows - test strategy, API testing, CI/CD, Selenium, Playwright, Agile & DevOps.
                     Build a job-ready portfolio with live projects, capstones, and interview preparation to accelerate{" "}
                     <strong className="font-semibold">tech careers and high-growth placements</strong>.
                 </p>
@@ -216,7 +216,7 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
 function MentorCard({ m }: { m: TeamMember }) {
     return (
         <article
-            className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md focus-within:shadow-md"
+            className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-md focus-within:shadow-md"
             aria-label={`${m.name}, ${m.title}`}
         >
             {/* Gradient ring on hover */}
@@ -228,14 +228,14 @@ function MentorCard({ m }: { m: TeamMember }) {
                 </div>
 
                 <div className="min-w-0 flex-1">
-                    <h3 className="truncate text-base font-semibold text-slate-900">{m.name}</h3>
-                    <p className="truncate text-sm text-slate-600">{m.title}</p>
+                    <h3 className="truncate text-xl font-bold text-slate-900">{m.name}</h3>
+                    <p className="truncate text-md text-slate-600">{m.title}</p>
 
                     <div className="mt-2 flex flex-wrap gap-1.5">
                         {m.expertise.slice(0, 4).map((e) => (
                             <span
                                 key={e}
-                                className="inline-flex items-center rounded-full bg-orange-50 px-2 py-0.5 text-[11px] font-medium text-orange-700 ring-1 ring-inset ring-orange-200"
+                                className="inline-flex items-center rounded-full bg-orange-50 px-2 py-1 text-[12px] font-medium text-green-700 ring-1 ring-inset ring-orange-200"
                             >
                                 {e}
                             </span>
@@ -252,13 +252,13 @@ function MentorCard({ m }: { m: TeamMember }) {
 
             {/* Bio teaser */}
             {m.bio && (
-                <p className="mt-3 line-clamp-3 text-sm leading-6 text-slate-600">
+                <p className="mt-6 line-clamp-3 text-md leading-6 text-slate-600">
                     {m.bio}
                 </p>
             )}
 
             {/* Metadata strip */}
-            <div className="mt-3 flex items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-slate-50/60 px-3 py-2">
+            <div className="mt-6 flex items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-slate-50/60 px-3 py-2">
                 <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-700">
                     <Shield className="h-3.5 w-3.5 text-slate-500" />
                     {m.role}
@@ -270,21 +270,14 @@ function MentorCard({ m }: { m: TeamMember }) {
             </div>
 
             {/* Actions */}
-            <div className="mt-3 flex items-center gap-2">
-                <a
-                    href={`#mentor-${m.id}`}
-                    className="inline-flex items-center justify-center rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700 transition hover:border-slate-300 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
-                >
-                    View Profile
-                </a>
+            <div className="mt-6 flex items-center gap-2">
                 <a
                     href="#contact"
-                    className="inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-xs font-semibold text-white shadow-sm transition focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
-                    style={{ backgroundColor: "#ff8c00" }}
+                    className="inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-sm font-semibold text-white bg-blue-800 shadow-sm transition hover:bg-brand focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 >
                     LinkedIn
                 </a>
-                <span className="ml-auto inline-flex items-center gap-1 text-[11px] text-slate-500">
+                <span className="ml-auto inline-flex items-center gap-1 text-[12px] text-slate-500">
                     <Quote className="h-3.5 w-3.5" />
                     Industry-aligned teaching
                 </span>
