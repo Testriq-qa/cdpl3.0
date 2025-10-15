@@ -12,6 +12,7 @@ import {
     MapPin,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link"; // ✅ for breadcrumb links
 
 const BRAND_ORANGE_GRAD =
     "linear-gradient(90deg,#ff8c00 0%,#ffb558 50%,#ffd19e 100%)";
@@ -125,6 +126,25 @@ export default function PlacementsHeroSection() {
                 <FloatingIcon x="90%" y="88%" delay={0.5} duration={6.4} className="hidden sm:block">
                     <Briefcase className="h-6 w-6 text-[#6aa9ff]" />
                 </FloatingIcon>
+            </div>
+
+            {/* ✅ Breadcrumb */}
+            <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-4">
+                <nav aria-label="Breadcrumb">
+                    <ol className="flex items-center gap-2 text-sm text-slate-500">
+                        <li>
+                            <Link href="/" className="hover:text-slate-700 transition-colors">Home</Link>
+                        </li>
+                        <li className="text-slate-300">/</li>
+                        <li>
+                            <Link href="/jobs" className="hover:text-slate-700 transition-colors">Jobs</Link>
+                        </li>
+                        <li className="text-slate-300">/</li>
+                        <li aria-current="page" className="font-semibold text-slate-900">
+                            Placements
+                        </li>
+                    </ol>
+                </nav>
             </div>
 
             {/* content wrapper — EXACT width spec requested */}
