@@ -16,10 +16,10 @@ export default function Page() {
             <TeamHeroSection />
             <TeamLeadershipSpotlight data={teamData} />
             <TeamCultureSection />
-            <TeamDirectory data={teamData} />
             <TeamTrainersSection trainers={trainers} />
-            <TeamTestimonialsSection />
-            <TeamCTASection />
+            <TeamDirectory data={teamData} />
+            {/* <TeamTestimonialsSection />
+            <TeamCTASection /> */}
             <JsonLdOrganization data={teamData} />
         </main>
     );

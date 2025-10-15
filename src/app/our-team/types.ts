@@ -1,6 +1,24 @@
 // =============================
 // components/our-team/types.ts
+
+import { Url } from "next/dist/shared/lib/router/router";
+
 // =============================
+export type TeamLeaders = {
+    id: string;
+    name: string;
+    title: string;
+    role: string;
+    expertise: string[];
+    bio: string;
+    location?: string;
+    avatar: string;
+    linkedin?: string;
+    email?: string;
+    highlights?: string[];
+    src?: string
+};
+
 export type TeamMember = {
     id: string;
     name: string;
@@ -17,7 +35,7 @@ export type TeamMember = {
 };
 
 export type Trainer = {
-  id: string;
+  id: number;
   name: string;
   role: string; // e.g., "Senior QA Mentor"
   avatar: string; // public path or remote URL
@@ -29,4 +47,5 @@ export type Trainer = {
   languages?: string[]; // e.g., ["English", "Hindi"]
   successStories?: number; // no. of placed learners or notable outcomes
   slug?: string; // optional profile link
+  linkedin?: Url;
 };

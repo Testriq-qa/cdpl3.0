@@ -134,7 +134,7 @@ export default function TeamMentorFuturisticBand() {
         <section
             id="our-team-mentors"
             aria-labelledby="our-team-mentors-heading"
-            className="relative mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8"
+            className="relative mx-auto max-w-7xl px-4 pb-16 pt-8 sm:px-6 lg:px-8 overflow-hidden"
         >
             {/* Animated mesh / beam background */}
             <BeamBg />
@@ -150,7 +150,7 @@ export default function TeamMentorFuturisticBand() {
                         The People Behind <span className="text-brand">Job-Ready</span> Careers
                     </h2>
 
-                    <p className="mt-5 max-w-5xl text-lg leading-6 text-slate-700 text-center">
+                    <p className="mt-8 max-w-5xl text-lg leading-6 text-slate-700 text-center">
                         Learn from <strong>industry-certified QA mentors</strong>, <strong>automation testing trainers</strong>, and
                         <strong> API testing experts</strong> who ship real products. Human feedback, portfolio-first projects, and
                         <strong> recruiter-ready outcomes</strong>.

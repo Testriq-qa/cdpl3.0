@@ -12,6 +12,7 @@ import {
   ArrowRight,
   Sparkles,
 } from "lucide-react";
+import Link from "next/link";
 
 type Mentor = {
   name: string;
@@ -83,7 +84,7 @@ export default function AboutFacultyStrip({
     <section
       aria-labelledby="faculty-strip-title"
       className={clsx(
-        "relative mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8",
+        "relative mx-auto max-w-7xl px-4 py-6 md:py-14 sm:px-6 lg:px-8",
         "bg-white text-slate-900",
         className
       )}
@@ -100,72 +101,39 @@ export default function AboutFacultyStrip({
       />
 
       {/* Header */}
-      <header className="mb-8">
-        <div className="mb-3 flex items-center gap-2">
-          <Sparkles className="h-4 w-4" style={{ color: brand }} />
-          <span className="text-xs font-medium text-slate-700">
-            Industry-Aligned Mentors
-          </span>
-        </div>
+      <header className="mb-8 text-center">
 
-        <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
+
+        <span className="inline-flex items-center gap-2 mb-2 rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm">
+          <Sparkles className="h-4 w-4" style={{ color: brand }} />
+          Industry-Aligned Mentors
+        </span>
+
+
+        <div className="flex flex-col items-center gap-3">
+          <div className="max-w-5xl">
             <h2
               id="faculty-strip-title"
-              className="text-2xl font-semibold tracking-tight sm:text-3xl"
+              className="text-3xl font-bold tracking-tight sm:text-4xl"
             >
               {heading}
             </h2>
-            <p className="mt-1 max-w-[65ch] text-sm text-slate-600 sm:text-base">
+            <p className="mt-4 md:text-lg text-slate-600 sm:text-base mx-auto">
               {subheading}
             </p>
           </div>
 
-          {/* CTAs — minimal, accessible focus rings */}
-          <div className="flex gap-2 pt-1">
-            <a
-              href={primaryCtaHref}
-              className="inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium text-slate-900 shadow-sm transition"
-              style={{
-                background: `linear-gradient(90deg, ${brand} , ${withAlpha(brand, 0.9)})`,
-              }}
-            >
-              Meet the Mentors
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </a>
-            <a
-              href={secondaryCtaHref}
-              className={clsx(
-                "inline-flex items-center gap-2 rounded-full border bg-white px-3.5 py-2 text-sm font-medium text-slate-900",
-                "transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-              )}
-              style={{
-                borderColor: "rgba(15,23,42,0.12)",
-                // accessible focus ring in brand color
-                boxShadow: "none",
-              }}
-              onFocus={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.setProperty(
-                  "box-shadow",
-                  `0 0 0 2px ${withAlpha(brand, 0.35)}, 0 0 0 4px white`
-                );
-              }}
-              onBlur={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.removeProperty("box-shadow");
-              }}
-            >
-              Become a Mentor
-            </a>
-          </div>
+
         </div>
 
-        {/* Accent rule */}
+        {/* Accent rule — centered */}
         <div
           aria-hidden="true"
-          className="mt-6 h-[2px] w-16 rounded-full"
+          className="mt-6 h-[2px] w-16 rounded-full mx-auto"
           style={{ backgroundColor: brand }}
         />
       </header>
+
 
       {/* Mentors grid */}
       <ul
@@ -187,7 +155,7 @@ export default function AboutFacultyStrip({
                 className="relative h-40 w-40 shrink-0 rounded-2xl p-[2px]"
                 aria-labelledby={`${slugify(m.name)}-name`}
                 aria-describedby={`${slugify(m.name)}-role`}
-                
+
               >
                 <div className="relative h-full w-full overflow-hidden rounded-[0.9rem] bg-white">
                   <Image
@@ -196,7 +164,7 @@ export default function AboutFacultyStrip({
                     width={200}
                     height={100}
                     className="object-cover"
-                    
+
                     priority={false}
                   />
                 </div>
@@ -250,6 +218,29 @@ export default function AboutFacultyStrip({
           </li>
         ))}
       </ul>
+
+      {/* CTAs — centered */}
+      <div className="flex justify-center gap-2 pt-1 mt-10">
+        <Link
+          href={primaryCtaHref}
+          className="inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium bg-brand text-slate-900 shadow-sm transition hover:bg-amber-600 hover:text-white"
+          
+        >
+          Meet the Mentors
+          <ArrowRight className="h-4 w-4" aria-hidden="true" />
+        </Link>
+
+        <Link
+          href={secondaryCtaHref}
+          className={clsx(
+            "inline-flex items-center border-brand gap-2 rounded-full border-2 bg-white px-3.5 py-2 text-sm font-medium text-slate-900 hover:bg-brand hover:text-white",
+            "transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+          )}
+          
+        >
+          Become a Mentor
+        </Link>
+      </div>
 
       {/* SEO helper for screen readers */}
       <p className="sr-only">

@@ -286,7 +286,7 @@ const Header = () => {
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center py-3 sm:py-4">
+        <div className="flex justify-between items-center py-3 sm:py-1">
           {/* Logo */}
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2 sm:space-x-3">
@@ -330,7 +330,7 @@ const Header = () => {
 
               {/* Mega Menu - Desktop */}
               {isMegaMenuOpen && (
-                <div id="mega-menu" className="fixed left-0 right-0 top-[72px] lg:top-[80px] w-full backdrop-blur-sm z-50">
+                <div id="mega-menu" className="fixed left-0 right-50 top-[72px] lg:top-[55px] w-full backdrop-blur-sm z-50">
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-blue-600">
                       <div className="grid grid-cols-12 gap-4 p-4 sm:p-6 lg:p-8">

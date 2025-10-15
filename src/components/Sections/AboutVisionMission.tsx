@@ -7,7 +7,7 @@ import clsx from "clsx";
 type Pillar = {
   title: string;
   body: string;
-  seo: string;
+  seo: string[];
 };
 
 type Props = {
@@ -20,25 +20,25 @@ const PILLARS: Pillar[] = [
     title: "Empowerment",
     body:
       "Mentor-led, collaborative learning that pairs real-world practice with constructive feedback to build confidence and capability.",
-    seo: "mentor-led learning, peer collaboration",
+    seo: ["mentor-led learning", "peer collaboration"],
   },
   {
     title: "Readiness",
     body:
       "Job-ready training with live projects, interview preparation, and portfolio building aligned to hiring needs.",
-    seo: "job-ready skills, interview preparation",
+    seo: ["job-ready skills", "interview preparation"],
   },
   {
     title: "Innovation",
     body:
       "Continuously updated content and tools—Manual & Automation Testing, API Testing, Data, AI/ML—reflecting industry workflows.",
-    seo: "industry tools, modern workflows",
+    seo: ["industry tools", "modern workflows"],
   },
   {
     title: "Outcomes",
     body:
       "Placement-focused guidance, hiring partner referrals, and a clear path from practice to offers for high-growth roles.",
-    seo: "career outcomes, hiring partners",
+    seo: ["career outcomes", "hiring partners"],
   },
 ];
 
@@ -56,7 +56,7 @@ export default function AboutMissionVision({
       )}
     >
       {/* Header */}
-      <header className="mx-auto max-w-3xl text-center">
+      <header className="mx-auto max-w-5xl text-center">
         <span
           className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm"
           style={{ borderColor: "rgba(15,23,42,0.12)" }}
@@ -67,12 +67,12 @@ export default function AboutMissionVision({
 
         <h2
           id="mission-vision-title"
-          className="mt-3 text-3xl font-extrabold tracking-tight sm:text-4xl"
+          className="mt-3 text-3xl font-extrabold tracking-tight md:text-4xl"
         >
           <span className="bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent">Mission</span> &amp; <span className="text-brand">Vision</span>
         </h2>
 
-        <p className="mx-auto mt-3 text-sm leading-6 text-slate-700 sm:text-base">
+        <p className="mx-auto mt-5 md:text-lg leading-6 text-slate-700 sm:text-base">
           We deliver <strong>industry-aligned, mentor-led, project-based</strong> training that makes learners{" "}
           <strong>job-ready</strong> for roles in <strong>Software Testing</strong>,{" "}
           <strong>Automation</strong>, <strong>Data Science</strong>, and <strong>AI/ML</strong>. Our vision is an{" "}
@@ -94,10 +94,10 @@ export default function AboutMissionVision({
           className="rounded-2xl border bg-gradient-to-r from-sky-50 via-blue-50 to-green-50 p-6 shadow-sm"
           style={{ borderColor: "rgba(15,23,42,0.12)" }}
         >
-          <h3 id="mission-heading" className="text-lg font-semibold bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent">
+          <h3 id="mission-heading" className="text-xl font-bold bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent">
             Our Mission
           </h3>
-          <p className="mt-2 text-sm text-slate-700">
+          <p className="mt-2 text-md text-slate-700">
             Empower learners with <strong>real-world skills</strong> via{" "}
             <strong>live projects</strong>, <strong>mentor feedback</strong>, and{" "}
             <strong>interview preparation</strong> so they can perform from day one in{" "}
@@ -130,10 +130,10 @@ export default function AboutMissionVision({
           className="rounded-2xl border bg-orange-50 p-6 shadow-sm"
           style={{ borderColor: "rgba(15,23,42,0.12)" }}
         >
-          <h3 id="vision-heading" className="text-lg font-semibold text-brand">
+          <h3 id="vision-heading" className="text-xl font-bold text-brand">
             Our Vision
           </h3>
-          <p className="mt-2 text-sm text-slate-700">
+          <p className="mt-2 text-md text-slate-700">
             Build an <strong>inclusive EdTech ecosystem</strong> where <strong>lifelong learning</strong>,{" "}
             <strong>innovation</strong>, and <strong>career outcomes</strong> converge—creating talent that drives
             high-impact products and services.
@@ -163,7 +163,7 @@ export default function AboutMissionVision({
 
       {/* Pillars */}
       <div className="mt-10">
-        <h3 className="text-sm font-semibold">Our Pillars</h3>
+        <h3 className="text-xl font-bold">Our Pillars</h3>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PILLARS.map((p) => (
             <div
@@ -171,10 +171,12 @@ export default function AboutMissionVision({
               className="rounded-xl border bg-white p-5 shadow-sm"
               style={{ borderColor: "rgba(15,23,42,0.12)" }}
             >
-              <h4 className="text-base font-semibold">{p.title}</h4>
-              <p className="mt-1 text-sm text-slate-700">{p.body}</p>
-              <p className="mt-2 text-[11px] leading-4 text-slate-500">
-                <span className="rounded-sm bg-slate-50 px-1.5 py-0.5">{p.seo}</span>
+              <h4 className="text-lg font-bold">{p.title}</h4>
+              <p className="mt-2 text-md text-slate-700">{p.body}</p>
+              <p className="flex flex-wrap gap-2 mt-4 text-xs leading-4 text-slate-700">
+                {p.seo.map((s) => {
+                  return <span className="rounded-lg bg-slate-100 px-1.5 py-0.5">{s}</span>
+                })}
               </p>
             </div>
           ))}

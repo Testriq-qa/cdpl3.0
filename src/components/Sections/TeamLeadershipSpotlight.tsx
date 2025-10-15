@@ -1,224 +1,278 @@
-// =============================
 // components/our-team/LeadershipSpotlight.tsx
-// =============================
-"use client";
-
-import type { TeamMember } from "@/app/our-team/types";
-import { TeamCard } from "@/app/our-team/ui";
-import Link from "next/link";
-import Script from "next/script";
 import {
-    ChevronRight,
     Sparkles,
     ShieldCheck,
     Users2,
     GraduationCap,
     ArrowRight,
+    Linkedin,
+    Mail,
+    MapPin,
 } from "lucide-react";
-import { useMemo } from "react";
+import Link from "next/link";
+
+// ⬇️ NEW: import the TeamLeaders type and the dataset
+import type { TeamLeaders as TeamLeaderType } from "@/app/our-team/types";
+import { teamLeaders } from "@/app/our-team/data";
+
+type TeamMember = {
+    id: string;
+    name: string;
+    title: string;
+    role: string;
+    avatar?: string;
+    linkedin?: string;
+    email?: string;
+    location?: string;
+    bio?: string;
+    expertise?: string[];
+};
 
 type Props = { data: TeamMember[] };
 
-const BRAND = "#ff8c00"; // Cinute Digital brand accent
-
-export default function TeamLeadershipSpotlight({ data }: Props) {
-    const leaders = useMemo(
-        () => data.filter((m) => m.role === "Leadership"),
-        [data]
-    );
+export default function LeadershipSpotlight({ data }: Props) {
+    // ⬇️ Source now comes from teamLeaders; filter to Leadership (keeps section semantics)
+    const leaders: TeamLeaderType[] = teamLeaders.filter((m) => m.role === "Leadership" || "Faculty" || "Advisory" || "Operations");
 
     if (leaders.length === 0) return null;
-
-    // JSON-LD: expose leaders as an ItemList for better SEO
-    const jsonLd = {
-        "@context": "https://schema.org",
-        "@type": "ItemList",
-        name: "Cinute Digital Leadership Team",
-        description:
-            "Meet the leadership team behind Cinute Digital’s mentor-led training, ISO-aligned curriculum, and job-ready outcomes.",
-        itemListElement: leaders.map((m, idx) => ({
-            "@type": "Person",
-            position: idx + 1,
-            name: m.name,
-            jobTitle: m.title ?? "Leadership",
-            worksFor: { "@type": "Organization", name: "Cinute Digital" },
-            image: m.avatar ?? undefined,
-            sameAs: m.linkedin ? [m.linkedin] : undefined,
-        })),
-    };
 
     return (
         <section
             id="leadership"
             aria-labelledby="leadership-heading"
-            className="relative mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8"
+            className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
         >
-            {/* subtle light-theme flourish */}
+            {/* Subtle background gradient */}
             <div
                 aria-hidden="true"
-                className="pointer-events-none absolute inset-0 -z-10 opacity-60"
-                style={{
-                    maskImage:
-                        "radial-gradient(60% 50% at 50% 0%, black 40%, transparent 65%)",
-                    WebkitMaskImage:
-                        "radial-gradient(60% 50% at 50% 0%, black 40%, transparent 65%)",
-                    background:
-                        "linear-gradient(180deg, rgba(255,140,0,0.07), rgba(255,255,255,0.0))",
-                }}
+                className="pointer-events-none absolute inset-0 -z-10 bg-gradient-to-b from-orange-50/60 to-transparent opacity-60"
             />
 
-            {/* Heading + CTA */}
-            <div className="flex flex-wrap items-end justify-center text-center gap-4">
-                <div>
-                    <div className="flex flex-wrap items-center justify-center gap-2">
-                        <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
-                            <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
-                            Future-Ready Leadership
-                        </span>
-                        <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
-                            <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
-                            ISO-Aligned Training
-                        </span>
-                        <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
-                            <GraduationCap className="h-3.5 w-3.5" aria-hidden="true" />
-                            Mentor-Led Learning
-                        </span>
-                    </div>
-
-                    <h2
-                        id="leadership-heading"
-                        className="mt-5 text-3xl font-extrabold tracking-tight sm:text-4xl bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500 bg-clip-text text-transparent"
-                    >
-                        Leadership Spotlight
-                    </h2>
-
-                    <p className="mt-5 max-w-5xl text-lg leading-relaxed text-slate-600">
-                        Learn from industry veterans who architect{" "}
-                        <strong>job-ready, mentor-led programs</strong> with{" "}
-                        <strong>real-world projects</strong>, <strong>placement support</strong>, and
-                        continuously updated, <strong>ISO-aligned curriculum</strong>. Our leadership
-                        team drives outcomes with <strong>hands-on training</strong>,{" "}
-                        <strong>portfolio-first learning</strong>, and{" "}
-                        <strong>cutting-edge tools</strong> used in modern software engineering.
-                    </p>
+            {/* Header Section */}
+            <div className="mb-12 text-center">
+                <div className="mb-6 flex flex-wrap items-center justify-center gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm backdrop-blur-sm">
+                        <Sparkles className="h-3.5 w-3.5 text-orange-500" aria-hidden="true" />
+                        Future-Ready Leadership
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm backdrop-blur-sm">
+                        <ShieldCheck className="h-3.5 w-3.5 text-orange-500" aria-hidden="true" />
+                        ISO-Aligned Training
+                    </span>
+                    <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm backdrop-blur-sm">
+                        <GraduationCap className="h-3.5 w-3.5 text-orange-500" aria-hidden="true" />
+                        Mentor-Led Learning
+                    </span>
                 </div>
 
-                {/* <div className="shrink-0">
-                    <Link
-                        href="#directory"
-                        className="group inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-slate-300 hover:text-slate-900"
-                        aria-label="See all mentors in the team directory"
-                    >
-                        See all mentors{" "}
-                        <ChevronRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-                    </Link>
-                </div> */}
+                <h2
+                    id="leadership-heading"
+                    className="bg-gradient-to-r from-orange-500 via-orange-400 to-amber-500 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl"
+                >
+                    Meet Our Leaders
+                </h2>
+
+                <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
+                    Learn from industry veterans who architect{" "}
+                    <strong className="text-slate-900">job-ready, mentor-led programs</strong> with{" "}
+                    <strong className="text-slate-900">real-world projects</strong>,{" "}
+                    <strong className="text-slate-900">placement support</strong>, and continuously updated,{" "}
+                    <strong className="text-slate-900">ISO-aligned curriculum</strong>.
+                </p>
             </div>
 
-            {/* Trust metrics / proof points */}
-            <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                <StatChip
+            {/* Stats Grid */}
+            <div className="mb-16 grid gap-4 sm:grid-cols-3">
+                <StatCard
                     icon={Users2}
-                    label="Learners mentored"
                     value="10k+"
-                    helper="Live cohorts & 1:1 guidance"
+                    label="Learners mentored"
+                    description="Live cohorts & 1:1 guidance"
                 />
-                <StatChip
+                <StatCard
                     icon={ShieldCheck}
-                    label="Hiring partner touchpoints"
                     value="75+"
-                    helper="Referrals & interview prep"
+                    label="Hiring partner touchpoints"
+                    description="Referrals & interview prep"
                 />
-                <StatChip
+                <StatCard
                     icon={GraduationCap}
-                    label="Capstone success rate"
                     value="94%"
-                    helper="Portfolio-first outcomes"
+                    label="Capstone success rate"
+                    description="Portfolio-first outcomes"
                 />
             </div>
 
-            {/* Leader cards */}
-            <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-                {leaders.map((m) => (
-                    <TeamCard key={m.id} m={m} />
+            {/* Leader Cards - Full Width (from teamLeaders) */}
+            <div className="space-y-16">
+                {leaders.map((leader, index) => (
+                    <LeaderCard key={leader.id + "-" + index} leader={leader} index={index} />
                 ))}
             </div>
 
-            {/* CTA band */}
-            <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
-                <div className="flex flex-col items-start justify-between gap-4 sm:flex-row sm:items-center">
-                    <div>
-                        <p className="text-sm font-semibold tracking-tight text-slate-900">
+            {/* CTA Section */}
+            <div className="mt-16 overflow-hidden rounded-3xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-8 shadow-lg sm:p-10">
+                <div className="flex flex-col items-center gap-8 lg:flex-row lg:items-center lg:justify-between">
+                    <div className="text-center lg:text-left">
+                        <h3 className="text-2xl font-bold text-slate-900">
                             Book a free career consultation
-                        </p>
-                        <p className="mt-1 text-sm text-slate-600">
-                            Speak with a mentor about learning paths, real projects, and
-                            <span className="font-medium"> placement support</span>.
+                        </h3>
+                        <p className="mt-2 text-slate-600">
+                            Speak with a mentor about learning paths, real projects, and{" "}
+                            <span className="font-semibold text-slate-900">placement support</span>.
                         </p>
                     </div>
-                    <div className="flex items-center gap-3">
-                        <Link
-                            href="/contact"
-                            className="inline-flex items-center gap-1 rounded-xl border border-transparent bg-[color:#ff8c00] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[color:#ff8c00]/30"
-                        >
-                            Talk to a mentor <ArrowRight className="h-4 w-4" />
+                    <div className="flex flex-wrap items-center justify-center gap-3">
+                        <Link href="/contact" className="flex items-center p-3 rounded-xl bg-orange-500 text-white shadow-lg transition-all hover:bg-orange-600 hover:translate-y-1">
+                            Talk to a mentor <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
-                        <Link
-                            href="/programs"
-                            className="inline-flex items-center gap-1 rounded-xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:border-slate-300"
-                        >
+                        <Link href="/programs" className="flex items-center p-3 rounded-xl border-2 border-brand bg-white text-slate-900 hover:bg-brand hover:text-white transition-all ease-in-out">
                             Explore programs
                         </Link>
                     </div>
                 </div>
             </div>
-
-            {/* JSON-LD for SEO */}
-            <Script
-                id="leadership-jsonld"
-                type="application/ld+json"
-                dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-            />
         </section>
     );
 }
 
-/** ————— Reusable subcomponent: light-themed stat chip ————— */
-function StatChip({
+// Stat Card Component
+function StatCard({
     icon: Icon,
     value,
     label,
-    helper,
+    description,
 }: {
-    icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+    icon: React.ElementType;
     value: string;
     label: string;
-    helper?: string;
+    description: string;
 }) {
     return (
-        <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition">
-            <div className="flex items-center gap-3">
-                <div
-                    className="grid h-10 w-10 place-items-center rounded-xl"
-                    style={{
-                        background:
-                            "linear-gradient(180deg, rgba(255,140,0,0.12), rgba(255,140,0,0.06))",
-                        boxShadow: "inset 0 0 0 1px rgba(15, 23, 42, 0.06)",
-                    }}
-                    aria-hidden="true"
-                >
-                    <Icon className="h-5 w-5" style={{ color: BRAND }} />
+        <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:shadow-lg">
+            <div className="flex items-start gap-4">
+                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100">
+                    <Icon className="h-6 w-6 text-orange-600" />
                 </div>
-                <div>
-                    <div className="text-lg font-extrabold leading-none text-slate-900">
-                        {value}
-                    </div>
-                    <div className="text-xs font-medium text-slate-600">{label}</div>
+                <div className="flex-1">
+                    <p className="text-3xl font-bold text-slate-900">{value}</p>
+                    <p className="mt-1 font-semibold text-slate-800">{label}</p>
                 </div>
             </div>
-            {helper ? (
-                <p className="mt-2 text-xs text-slate-500">{helper}</p>
-            ) : null}
+            <p className="mt-4 text-sm text-slate-600">{description}</p>
+
+            {/* Decorative element */}
+            <div className="absolute -right-6 -top-6 h-24 w-24 rounded-full bg-orange-500 opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-20" />
+        </div>
+    );
+}
+
+// Leader Card Component - Full Width with Futuristic Design
+function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }) {
+    const isEven = index % 2 === 0;
+
+    return (
+        <div className="group relative overflow-hidden rounded-3xl border border-slate-200/80 bg-gradient-to-br from-white via-slate-50/50 to-white shadow-lg backdrop-blur-sm transition-all duration-500 hover:border-orange-300/50 hover:shadow-2xl">
+            {/* Decorative gradient overlay */}
+            <div
+                className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(255,140,0,0.05),transparent_60%)] opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                aria-hidden="true"
+            />
+
+            <div
+                className={`relative flex flex-col gap-5 p-8 lg:flex-row lg:items-center lg:gap-16 lg:p-12 ${isEven ? "" : "lg:flex-row-reverse"}`}
+            >
+                {/* Avatar Section with Futuristic Frame */}
+                <div className="relative mx-auto shrink-0 lg:mx-0">
+                    <div className="relative h-64 w-64 lg:h-72 lg:w-72 overflow-hidden rounded-full transition-all duration-500 group-hover:scale-110 group-hover:border-orange-300">
+                        {leader.avatar ? (
+                            <img
+                                src={leader.avatar}
+                                alt={`${leader.name} - ${leader.title}`}
+                                className="h-full w-full object-cover transition-transform duration-500"
+                                loading="lazy"
+                            />
+                        ) : (
+                            <div className="flex h-full w-full items-center justify-center text-7xl font-bold text-orange-600">
+                                {leader.name.charAt(0)}
+                            </div>
+                        )}
+                    </div>
+
+                    {/* Floating gradient blob */}
+                    <div
+                        className={`absolute -z-10 top-1/2 -translate-y-1/2 h-48 w-48 rounded-full bg-[radial-gradient(circle,rgba(255,140,0,1),transparent)] opacity-0 blur-3xl transition-all duration-700 group-hover:opacity-30 ${isEven ? "-left-[30%]" : "-right-[30%]"}`}
+                        aria-hidden="true"
+                    />
+                </div>
+
+                {/* Content Section */}
+                <div className="flex-1 space-y-6">
+                    {/* Header */}
+                    <div className="space-y-3">
+                        <div className="flex items-start justify-between gap-4">
+                            <h3 className="text-3xl font-bold leading-tight text-slate-900 lg:text-4xl">
+                                {leader.name}
+                            </h3>
+                        </div>
+
+                        <div className="space-y-2">
+                            <p className="text-lg font-semibold text-orange-600 lg:text-xl">
+                                {leader.title}
+                            </p>
+                            {leader.location && (
+                                <p className="flex items-center gap-2 text-sm text-slate-600">
+                                    <MapPin className="h-4 w-4 text-orange-500" />
+                                    {leader.location}
+                                </p>
+                            )}
+                        </div>
+                    </div>
+
+                    {/* Bio */}
+                    {leader.bio && (
+                        <p className="text-base leading-relaxed text-slate-600 lg:text-lg">
+                            {leader.bio}
+                        </p>
+                    )}
+
+                    {/* Expertise Pills */}
+                    {leader.expertise && leader.expertise.length > 0 && (
+                        <div className="flex flex-wrap gap-2">
+                            {leader.expertise.map((skill, idx) => (
+                                <span
+                                    key={idx}
+                                    className="inline-flex items-center rounded-full border border-slate-200 bg-white/80 px-4 py-1.5 text-sm font-medium text-slate-700 backdrop-blur-sm transition-all hover:border-orange-300 hover:bg-orange-50"
+                                >
+                                    {skill}
+                                </span>
+                            ))}
+                        </div>
+                    )}
+
+                    {/* Action buttons */}
+                    <div className="flex flex-wrap gap-3 pt-2">
+                        {leader.linkedin && (
+                            <Link
+                                href={leader.linkedin}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                aria-label={`Connect with ${leader.name} on LinkedIn`}
+                                className="flex items-center group rounded-xl border-2 p-2 border-slate-400 bg-white transition-all hover:border-orange-300 hover:bg-orange-50"
+                            >
+                                <Linkedin className="mr-2 h-4 w-4 text-orange-600" />
+                                <p className="font-semibold text-brand ">Connect on LinkedIn</p>
+                            </Link>
+                        )}
+                    </div>
+                </div>
+            </div>
+
+            {/* Animated scan line effect */}
+            <div
+                className="absolute left-0 top-0 h-px w-full origin-left scale-x-0 bg-gradient-to-r from-transparent via-orange-500 to-transparent opacity-0 transition-all duration-1000 group-hover:scale-x-100 group-hover:opacity-100"
+                aria-hidden="true"
+            />
         </div>
     );
 }

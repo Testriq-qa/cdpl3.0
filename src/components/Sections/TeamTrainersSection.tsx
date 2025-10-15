@@ -96,10 +96,10 @@ export default function TeamTrainersSection({
   return (
     <section
       aria-labelledby="trainers-heading"
-      className={`mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8 ${className}`}
+      className={`mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8 ${className}`}
     >
       {/* SEO Headings */}
-      <div className="mx-auto max-w-3xl text-center">
+      <div className="mx-auto max-w-5xl text-center">
         <span
           className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
           aria-hidden="true"
@@ -109,14 +109,14 @@ export default function TeamTrainersSection({
         </span>
         <h2
           id="trainers-heading"
-          className="mt-4 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl"
+          className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
         >
           {heading}{" "}
           <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500" style={{ backgroundImage: `linear-gradient(90deg, ${BRAND}, #ffb86b)` }}>
             at Cinute Digital
           </span>
         </h2>
-        <p className="mt-3 text-base leading-7 text-slate-700">
+        <p className="mt-6 text-lg leading-7 text-slate-700">
           {subheading} Our seasoned mentors bring{" "}
           <strong>real-world projects</strong>, <strong>industry certifications</strong>, and{" "}
           <strong>placement-focused guidance</strong> to accelerate your career growth.
@@ -124,7 +124,7 @@ export default function TeamTrainersSection({
       </div>
 
       {/* Controls */}
-      <div className="mt-8 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
+      <div className="mt-16 flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div className="relative flex-1">
           <Search className="pointer-events-none absolute left-3 top-2.5 h-5 w-5 text-slate-400" />
           <input
@@ -174,7 +174,7 @@ export default function TeamTrainersSection({
             className="group rounded-3xl border border-slate-200 bg-white p-5 shadow-sm transition hover:shadow-md"
           >
             <div className="flex flex-col md:flex-row items-center md:items-start gap-4">
-              <div className="relative w-40 h-40 md:h-30 md:w-30 overflow-hidden rounded-full ring-1 ring-slate-200">
+              <div className="relative w-40 h-40 md:h-35 md:w-35 overflow-hidden rounded-full ring-1 ring-slate-200">
                 <Image
                   src={t.avatar}
                   alt={`${t.name}, ${t.role}`}
@@ -270,11 +270,11 @@ export default function TeamTrainersSection({
               </div>
               {t.slug ? (
                 <Link
-                  href={`/mentors/${t.slug}`}
+                  href={`${t.linkedin}`}
                   className="inline-flex items-center rounded-xl border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-900 shadow-sm transition hover:translate-y-[-1px]"
                   style={{ color: BRAND, borderColor: `${BRAND}33` }}
                 >
-                  View Profile
+                  LinkedIn
                 </Link>
               ) : null}
             </div>

@@ -115,7 +115,7 @@ export default function AboutFAQSection() {
 
     return (
         <section
-            className="mx-auto max-w-7xl px-4 py-14 sm:px-6 lg:px-8"
+            className="mx-auto max-w-7xl px-4 py-6 md:py-14 sm:px-6 lg:px-8"
             aria-labelledby="faq-heading"
         >
             {/* JSON-LD script for SEO */}
