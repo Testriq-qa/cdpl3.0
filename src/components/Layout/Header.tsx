@@ -505,6 +505,13 @@ const Header = () => {
                     >
                       Careers
                     </Link>
+                    <Link
+                      href="/jobs/job-openings"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Job Openings
+                    </Link>
                   </div>
                 </div>
               )}

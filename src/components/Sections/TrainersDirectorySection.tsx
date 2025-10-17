@@ -2,8 +2,8 @@
 
 import { useEffect, useMemo, useState } from "react";
 import type { Trainer } from "@/app/trainers/types";
-import TrainerCard from "@/components/sections/TrainersCardSection";
 import { Search, Filter, X, Flame, SortDesc, BadgeCheck } from "lucide-react";
+import TrainersCardSection from "@/components/Sections/TrainersCardSection";
 
 type SortKey = "relevance" | "name" | "experience";
 
@@ -206,7 +206,7 @@ export default function TrainersDirectorySection({ trainers }: { trainers: Train
                         <div className="scrollbar-none -mx-2 flex snap-x gap-4 overflow-x-auto px-2 pb-1">
                             {featured.map((t) => (
                                 <div key={t.id} className="min-w-[260px] snap-start">
-                                    <TrainerCard t={t} />
+                                    <TrainersCardSection t={t} />
                                 </div>
                             ))}
                         </div>
@@ -222,8 +222,8 @@ export default function TrainersDirectorySection({ trainers }: { trainers: Train
                 <button
                     onClick={() => setSkill(null)}
                     className={`rounded-full px-3 py-1 text-xs font-medium ring-1 ${skill === null
-                            ? "bg-brand text-white ring-brand"
-                            : "bg-white text-slate-700 ring-slate-200 hover:bg-slate-50"
+                        ? "bg-brand text-white ring-brand"
+                        : "bg-white text-slate-700 ring-slate-200 hover:bg-slate-50"
                         }`}
                     aria-pressed={skill === null}
                 >
@@ -234,8 +234,8 @@ export default function TrainersDirectorySection({ trainers }: { trainers: Train
                         key={s}
                         onClick={() => setSkill((cur) => (cur === s ? null : s))}
                         className={`rounded-full px-3 py-1 text-xs font-medium ring-1 ${skill === s
-                                ? "bg-brand text-white ring-brand"
-                                : "bg-white text-slate-700 ring-slate-200 hover:bg-slate-50"
+                            ? "bg-brand text-white ring-brand"
+                            : "bg-white text-slate-700 ring-slate-200 hover:bg-slate-50"
                             }`}
                         aria-pressed={skill === s}
                     >
@@ -277,7 +277,7 @@ export default function TrainersDirectorySection({ trainers }: { trainers: Train
             {/* Grid */}
             <div className="mt-6 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {filtered.map((t) => (
-                    <TrainerCard key={t.id} t={t} />
+                    <TrainersCardSection key={t.id} t={t} />
                 ))}
             </div>
 

@@ -1,4 +1,3 @@
-// app/job-share/page.tsx
 import type { Metadata } from "next";
 
 // ---- Types ---------------------------------------------------------------
@@ -9,7 +8,7 @@ export type JobSummary = {
     job_id: string;
     job_title: string;
     description: string;
-    location: string | null;
+    location: string | null | "";
     location_type: "remote" | "onsite" | "hybrid" | string;
     job_type: string;
     min_charge: number | string;
@@ -30,7 +29,7 @@ export type JobDetail = {
     job_id: string;
     job_title: string;
     description: string;
-    location: string | null;
+    location: string | null | "";
     location_type: string;
     job_type: string;
     min_charge: string | number;
@@ -75,6 +74,96 @@ async function ohFetch<T>(path: string, init?: RequestInit): Promise<T> {
     return (await res.json()) as T;
 }
 
+/** Clean/sanitize OptimHire HTML-ish descriptions into plain text */
+function cleanHTML(raw?: string): string {
+    if (!raw) return "";
+
+    // 1) Decode common named entities (incl. &middot;) + extras
+    const named: Record<string, string> = {
+        nbsp: " ",
+        amp: "&",
+        lt: "<",
+        gt: ">",
+        quot: '"',
+        apos: "'",
+        rsquo: "’",
+        lsquo: "‘",
+        ldquo: "“",
+        rdquo: "”",
+        ndash: "–",
+        mdash: "—",
+        hellip: "…",
+        middot: "·",
+        bull: "•",
+        copy: "©",
+        reg: "®",
+        trade: "™",
+        euro: "€",
+    };
+
+    let s = raw.replace(/&([a-zA-Z]+);/g, function (_m, name) {
+        return name in named ? named[name] : _m;
+    });
+
+    // 2) Decode numeric entities: decimal and hex
+    s = s
+        .replace(/&#(\d+);/g, function (_m, d) {
+            var n = parseInt(d, 10);
+            return isFinite(n) ? String.fromCodePoint(n) : _m;
+        })
+        .replace(/&#x([0-9a-fA-F]+);/g, function (_m, h) {
+            var n = parseInt(h, 16);
+            return isFinite(n) ? String.fromCodePoint(n) : _m;
+        });
+
+    // 3) Convert structural tags to line breaks before stripping tags
+    s = s
+        .replace(/<\/(p|div|section|article|h[1-6])>/gi, "\n\n")
+        .replace(/<br\s*\/?>/gi, "\n")
+        .replace(/<\/li>/gi, "\n")
+        .replace(/<\/(ul|ol|table|tr)>/gi, "\n");
+
+    // 4) Strip all remaining tags
+    s = s.replace(/<[^>]+>/g, "");
+
+    // 5) Strip Markdown-ish formatting (ES2017-safe, no dotAll flag)
+    s = s
+        // images: ![alt](url) -> "alt"
+        .replace(/!\[([^\]]*)\]\([^)]+\)/g, function (_m, alt) { return (alt || "").trim(); })
+        // links: [text](url) -> "text"
+        .replace(/\[([^\]]+)\]\(([^)]+)\)/g, function (_m, text) { return (text || "").trim(); })
+        // inline code: `code` -> code
+        .replace(/`([^`]+)`/g, function (_m, code) { return code; })
+        // bold/italic/strikethrough (use [\s\S]*? instead of dotAll)
+        .replace(/(\*\*|__)([\s\S]*?)\1/g, function (_m, _d, txt) { return txt; })
+        .replace(/(\*|_)([\s\S]*?)\1/g, function (_m, _d, txt) { return txt; })
+        .replace(/~~([\s\S]*?)~~/g, function (_m, txt) { return txt; })
+        // headings at line start: "### Title" -> "Title"
+        .replace(/^[ \t]{0,3}#{1,6}[ \t]*/gm, "")
+        // blockquotes: "> text" -> "text"
+        .replace(/^[ \t]*>[ \t]?/gm, "")
+        // horizontal rules
+        .replace(/^[ \t]*([-*_]){3,}[ \t]*$/gm, "");
+
+    // 6) Remove leftover standalone markdown tokens (###, **, __, etc.)
+    s = s
+        .replace(/(^|\s)#{2,}(\s|$)/g, " ")
+        .replace(/\*{2,}/g, "")
+        .replace(/_{2,}/g, "");
+
+    // 7) Tidy repeated punctuation like "???" or "!!!"
+    s = s.replace(/\?{2,}/g, "?").replace(/!{2,}/g, "!");
+
+    // 8) Normalize whitespace
+    s = s
+        .replace(/\u00A0/g, " ")
+        .replace(/[ \t]+/g, " ")
+        .replace(/\n{3,}/g, "\n\n")
+        .trim();
+
+    return s;
+}
+
 // ---- Server Actions ------------------------------------------------------
 export type FetchJobsArgs = { page?: number; size?: number; q?: string };
 
@@ -82,13 +171,39 @@ export async function getJobsServer(args: FetchJobsArgs = { page: 1, size: 10 })
     "use server";
     const { page = 1, size = 10 } = args;
     const query = new URLSearchParams({ page: String(page), size: String(size) }).toString();
-    return ohFetch<JobListResponse>(`/job-list/?${query}`);
+
+    const res = await ohFetch<JobListResponse>(`/job-list/?${query}`);
+
+    const cleaned = {
+        ...res,
+        data: {
+            ...res.data,
+            job: (res.data?.job ?? []).map((j) => ({
+                ...j,
+                description: cleanHTML(j.description),
+            })),
+        },
+    };
+
+    return cleaned;
 }
 
 export async function getJobByIdServer(job_id: string) {
     "use server";
     if (!job_id) throw new Error("job_id is required");
-    return ohFetch<JobDetailResponse>(`/job-description/?job_id=${encodeURIComponent(job_id)}`);
+    const res = await ohFetch<JobDetailResponse>(
+        `/job-description/?job_id=${encodeURIComponent(job_id)}`
+    );
+
+    const cleaned = {
+        ...res,
+        data: {
+            ...res.data,
+            description: cleanHTML(res.data?.description),
+        },
+    };
+
+    return cleaned;
 }
 
 export async function createCandidateServer(payload: CandidatePayload) {
@@ -134,8 +249,11 @@ export default async function JobSharePage() {
                     getJobByIdAction={getJobByIdServer}
                     verifyCandidateAction={verifyCandidateServer}
                     createCandidateAction={createCandidateServer}
-                    emptyState={{ title: "No results", body: "Try adjusting filters like skills, experience, or location." }}
-                    className="rounded-2xl bg-white shadow ring-1 ring-slate-200"
+                    emptyState={{
+                        title: "No results",
+                        body: "Try adjusting filters like skills, experience, or location.",
+                    }}
+                    className=""
                 />
             </section>
         </main>
