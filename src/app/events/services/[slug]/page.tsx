@@ -1,36 +1,10 @@
+'use client';
+
 import { getServiceBySlug, getAllServiceSlugs } from '@/data/servicesData';
 import { getEventsByService } from '@/data/eventsData';
 import { CheckCircle, Calendar, MapPin, Users, ArrowRight, Award, Target, BookOpen, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
-import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-
-export async function generateStaticParams() {
-  return getAllServiceSlugs().map((slug) => ({
-    slug: slug,
-  }));
-}
-
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const service = getServiceBySlug(params.slug);
-  
-  if (!service) {
-    return {
-      title: 'Service Not Found',
-    };
-  }
-  
-  return {
-    title: `${service.title} | Training & Event Services`,
-    description: service.fullDescription,
-    keywords: `${service.title}, ${service.tagline}, corporate training, professional development`,
-    openGraph: {
-      title: service.title,
-      description: service.shortDescription,
-      type: 'website',
-    },
-  };
-}
 
 export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
   const service = getServiceBySlug(params.slug);

@@ -1,18 +1,9 @@
+'use client';
+
 import { trainingServices } from '@/data/servicesData';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import Link from 'next/link';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Training & Event Services | Corporate Training Programs',
-  description: 'Comprehensive training services including expert talks, workshops, on-job training, faculty development, STTP, industrial visits, and custom solutions for organizations.',
-  keywords: 'corporate training services, workshops, expert talks, faculty development, train the trainer, STTP, industrial visits, internship programs, campus to corporate, custom training',
-  openGraph: {
-    title: 'Training & Event Services | Expert-Led Corporate Programs',
-    description: 'Comprehensive training solutions for corporates, academic institutions, and government organizations.',
-    type: 'website',
-  },
-};
 
 export default function TrainingServicesPage() {
   return (

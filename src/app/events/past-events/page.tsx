@@ -1,18 +1,9 @@
+'use client';
+
 import { pastEvents } from '@/data/eventsData';
 import { Calendar, MapPin, Users, ArrowRight, Star } from 'lucide-react';
 import Link from 'next/link';
-import type { Metadata } from 'next';
 
-export const metadata: Metadata = {
-  title: 'Past Events | Training Programs & Workshops Conducted',
-  description: 'Explore our portfolio of successfully conducted training events, workshops, expert sessions, and corporate programs. 150+ events, 25K+ professionals trained across India.',
-  keywords: 'past events, training workshops, corporate training events, expert sessions, faculty development programs, STTP, industrial visits, completed events',
-  openGraph: {
-    title: 'Past Events | Successfully Conducted Training Programs',
-    description: '150+ events conducted, 25K+ professionals trained. View our portfolio of workshops, expert sessions, and corporate training programs.',
-    type: 'website',
-  },
-};
 
 export default function PastEventsPage() {
   const featuredEvents = pastEvents.filter(event => event.featured);
