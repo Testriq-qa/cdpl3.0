@@ -1,13 +1,13 @@
-import { EventsHero, UpcomingEvents, PastEvents } from '@/components/events';
+import { EventsHero, EventServices, PastEvents, CorporateRegistrationModal } from '@/components/events';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: 'Tech Events & Workshops | Learn from Industry Experts',
-  description: 'Join our exclusive tech events, workshops, and webinars. Learn AI/ML, web development, data science, and more from industry leaders. Free registration!',
-  keywords: 'tech events, workshops, webinars, AI ML events, web development workshops, data science seminars, free tech events, technology conferences',
+  title: 'Corporate Training & Events | Expert-Led Programs for Organizations',
+  description: 'Customized training programs, workshops, and expert sessions for corporates, academic institutions, and government organizations. 150+ events conducted, 25K+ professionals trained.',
+  keywords: 'corporate training, workshops, expert talks, faculty development, STTP, industrial visits, on-job training, train the trainer, academic training programs',
   openGraph: {
-    title: 'Tech Events & Workshops | Learn from Industry Experts',
-    description: 'Join our exclusive tech events and workshops. Free registration for all events!',
+    title: 'Corporate Training & Events | Expert-Led Programs',
+    description: 'Customized training programs for your organization. 150+ events conducted, 25K+ professionals trained.',
     type: 'website',
   },
 };
@@ -18,11 +18,14 @@ export default function EventsPage() {
       {/* Hero Section */}
       <EventsHero />
 
-      {/* Upcoming Events Section */}
-      <UpcomingEvents />
+      {/* Services Section */}
+      <EventServices />
 
       {/* Past Events Section */}
       <PastEvents />
+
+      {/* Corporate Registration Modal */}
+      <CorporateRegistrationModal />
     </>
   );
 }
