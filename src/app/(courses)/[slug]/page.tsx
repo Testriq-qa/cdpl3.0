@@ -1,4 +1,5 @@
 // app/courses/[slug]/page.tsx
+import { notFound } from 'next/navigation';
 import type { Metadata } from 'next';
 
 import HeroSection from '@/src/components/city-courses/HeroSection';
@@ -18,8 +19,7 @@ import {
 
 type PageProps = { params: { slug: string } };
 
-export async function generateStaticParams() {
-  // builds every SEO slug (e.g. software-testing-course-in-mumbai)
+export function generateStaticParams() {
   return getAllSeoSlugs().map((slug) => ({ slug }));
 }
 
@@ -30,6 +30,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default function Page({ params }: PageProps) {
   const record = getRecordBySeoSlug(params.slug);
+  if (!record) notFound();
 
   const {
     courseDisplayName,

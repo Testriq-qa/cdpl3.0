@@ -1,12 +1,10 @@
-// lib/cityCourseData.ts
 import type { Metadata } from 'next';
-import { slugify, deslugify, buildSeoSlug, parseSeoSlug } from './slug';
+import { buildSeoSlug, parseSeoSlug, deslugify } from './slug';
 import {
   INDIAN_CITIES,
   generatePageTitle,
   generatePageDescription,
   generateKeywords,
-  generateCanonicalUrl,
   SAMPLE_MODULES,
   SAMPLE_TESTIMONIALS,
   SAMPLE_FAQS,
@@ -17,11 +15,11 @@ import { COURSE_REGISTRY } from './courseRegistry';
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://example.com';
 
 export type CityCourseRecord = {
-  seoSlug: string; // software-testing-course-in-mumbai
-  courseSlug: string; // software-testing
-  citySlug: string;   // mumbai
-  courseDisplayName: string; // Software Testing
-  cityDisplayName: string;   // Mumbai
+  seoSlug: string;
+  courseSlug: string;
+  citySlug: string;
+  courseDisplayName: string;
+  cityDisplayName: string;
   courseCategory: string;
   breadcrumbs: Array<{ label: string; href: string }>;
   categories: typeof COURSE_REGISTRY[keyof typeof COURSE_REGISTRY]['categories'];
@@ -31,27 +29,29 @@ export type CityCourseRecord = {
   hiringPartners: typeof HIRING_PARTNERS;
 };
 
-// Build all SEO slugs
+// ------------- Build all SEO slugs (pick your canonical variant once) -------------
+const CANONICAL_VARIANT: 'plain' | 'course' = 'plain'; // switch to 'course' if you prefer
+
 export function getAllSeoSlugs(): string[] {
   const courseSlugs = Object.keys(COURSE_REGISTRY) as (keyof typeof COURSE_REGISTRY)[];
-  const cityNames = INDIAN_CITIES;
+  const cityNames = INDIAN_CITIES; // Display names like 'Mumbai', 'New Delhi', etc.
   const slugs: string[] = [];
   courseSlugs.forEach((course) => {
     cityNames.forEach((cityName) => {
-      slugs.push(buildSeoSlug(course, cityName));
+      slugs.push(buildSeoSlug(course, cityName, CANONICAL_VARIANT));
     });
   });
   return slugs;
 }
 
-// Core record builder from course & city
+// ------------- Core record builder -------------
 function buildRecord(courseSlug: keyof typeof COURSE_REGISTRY, cityName: string): CityCourseRecord {
   const courseCfg = COURSE_REGISTRY[courseSlug];
   if (!courseCfg) throw new Error(`Unknown course: ${courseSlug}`);
 
   const cityDisplayName = cityName;
-  const citySlug = slugify(cityDisplayName);
-  const seoSlug = buildSeoSlug(courseSlug, cityDisplayName);
+  const citySlug = cityName.toLowerCase().replace(/[^a-z0-9]+/g, '-');
+  const seoSlug = buildSeoSlug(courseSlug, cityDisplayName, CANONICAL_VARIANT);
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
@@ -75,22 +75,35 @@ function buildRecord(courseSlug: keyof typeof COURSE_REGISTRY, cityName: string)
   };
 }
 
-// Public: get record by SEO slug
-export function getRecordBySeoSlug(seoSlug: string): CityCourseRecord {
-  const { courseSlug, citySlug } = parseSeoSlug(seoSlug);
-  const courseKey = courseSlug as keyof typeof COURSE_REGISTRY;
-  const cityDisplayName = deslugify(citySlug);
+// ------------- Public lookups -------------
+export function getRecordBySeoSlug(seoSlug: string): CityCourseRecord | null {
+  let parsed;
+  try {
+    parsed = parseSeoSlug(seoSlug);
+  } catch {
+    return null; // bad format -> let the route 404
+  }
+
+  const courseKey = parsed.courseSlug as keyof typeof COURSE_REGISTRY;
+  const courseCfg = COURSE_REGISTRY[courseKey];
+  if (!courseCfg) return null; // unknown course -> 404
+
+  const cityDisplayName = deslugify(parsed.citySlug);
   return buildRecord(courseKey, cityDisplayName);
 }
 
-// SEO metadata (canonical now uses the one-piece slug)
-export function seoFromRecord(rec: CityCourseRecord): Metadata {
+export function seoFromRecord(rec: CityCourseRecord | null): Metadata {
+  if (!rec) {
+    return {
+      title: 'Course not found',
+      description: 'The requested course or city was not found.',
+      robots: { index: false, follow: false },
+    };
+  }
+
   const title = generatePageTitle(rec.courseDisplayName, rec.cityDisplayName);
   const description = generatePageDescription(rec.courseDisplayName, rec.cityDisplayName);
   const keywords = generateKeywords(rec.courseDisplayName, rec.cityDisplayName);
-
-  // Canonical via your helper, but path should match /courses/{seoSlug}
-  // If your generateCanonicalUrl strictly expects course/city, we override URL manually:
   const canonical = `${SITE_URL}/courses/${rec.seoSlug}`;
 
   return {
@@ -98,16 +111,7 @@ export function seoFromRecord(rec: CityCourseRecord): Metadata {
     description,
     keywords,
     alternates: { canonical },
-    openGraph: {
-      title,
-      description,
-      url: canonical,
-      type: 'website',
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-    },
+    openGraph: { title, description, url: canonical, type: 'website' },
+    twitter: { card: 'summary_large_image', title, description },
   };
 }
