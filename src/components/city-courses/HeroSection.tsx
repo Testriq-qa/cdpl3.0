@@ -103,12 +103,9 @@ export default function HeroSection({
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-18">
-              <span className="bg-gradient-to-r from-slate-900 via-amber-900/70 to-rose-900/70 bg-clip-text text-transparent">
-                {courseName} Training in{' '}
-              </span>
-              <span className="bg-gradient-to-r from-amber-600 via-orange-600 to-rose-600 bg-clip-text text-transparent">
-                {cityName}
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-18 tracking-tight">
+              <span className="bg-gradient-to-r from-[#ff8c00] via-[#ff5f6d] to-[#ffc371] bg-clip-text text-transparent">
+                {courseName} Training in {cityName}
               </span>
             </h1>
 

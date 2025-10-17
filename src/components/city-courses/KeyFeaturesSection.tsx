@@ -104,14 +104,14 @@ export default function KeyFeaturesSection({ cityName, courseName }: KeyFeatures
             </svg>
             Why Choose Us
           </div>
-          
+
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
             <span className="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-900 bg-clip-text text-transparent">What Makes Us </span>
             <span className="bg-gradient-to-r from-blue-600 via-cyan-600 to-purple-600 bg-clip-text text-transparent">Different</span>
           </h2>
-          
+
           <p className="text-lg text-slate-700 max-w-3xl mx-auto leading-relaxed">
-            We don't just teach {courseName}, we prepare you for a successful career. 
+            We don't just teach {courseName}, we prepare you for a successful career.
             Here's why thousands of students in {cityName} trust us with their career growth.
           </p>
         </div>
@@ -139,7 +139,7 @@ export default function KeyFeaturesSection({ cityName, courseName }: KeyFeatures
               <h3 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-3 group-hover:from-blue-600 group-hover:to-cyan-600 transition-all duration-300">
                 {feature.title}
               </h3>
-              
+
               <p className="text-slate-600 leading-relaxed">
                 {feature.description.replace('{cityName}', cityName)}
               </p>
@@ -175,26 +175,28 @@ export default function KeyFeaturesSection({ cityName, courseName }: KeyFeatures
         </div>
 
         {/* CTA Section */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-white/80 backdrop-blur-sm rounded-2xl p-8 shadow-xl shadow-slate-200/50 border border-slate-200/50">
-            <div className="flex-1 text-left">
-              <h3 className="text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-2">
+        <div className="mt-16 text-center mx-auto px-4">
+          <div className="w-full max-w-3xl mx-auto flex flex-col sm:flex-row items-stretch sm:items-center gap-4 bg-white/80 backdrop-blur-sm rounded-2xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 border border-slate-200/50">
+            <div className="flex-1 text-center sm:text-left">
+              <h3 className="text-lg sm:text-xl font-bold bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent mb-2">
                 Ready to Start Your {courseName} Journey?
               </h3>
               <p className="text-slate-600">
                 Join our next batch in {cityName} and transform your career
               </p>
             </div>
-            <div className="flex gap-3">
-              <button className="bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold px-8 py-4 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 whitespace-nowrap">
+
+            <div className="flex flex-col sm:flex-row w-full sm:w-auto gap-3">
+              <button className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-cyan-600 text-white font-semibold px-5 py-3 sm:px-8 sm:py-4 rounded-lg hover:from-blue-700 hover:to-cyan-700 transition-all duration-300 shadow-lg shadow-blue-500/30 hover:shadow-xl hover:shadow-blue-500/40 sm:whitespace-nowrap">
                 Enroll Now
               </button>
-              <button className="bg-white text-blue-600 font-semibold px-8 py-4 rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-all duration-300 whitespace-nowrap">
+              <button className="w-full sm:w-auto bg-white text-blue-600 font-semibold px-5 py-3 sm:px-8 sm:py-4 rounded-lg border-2 border-blue-600 hover:bg-blue-50 transition-all duration-300 sm:whitespace-nowrap">
                 Download Syllabus
               </button>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
