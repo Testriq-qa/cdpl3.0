@@ -1,31 +1,12 @@
+// src/components/Sections/JobsLiveJobsJobsGridSection.tsx
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, Briefcase, Building2, Calendar, MapPin } from "lucide-react";
+import { Calendar, MapPin, Building2, Share2, Copy } from "lucide-react";
+import type { Job } from "@/app/jobs/live-jobs/page";
 import type { JobsFilters } from "./JobsLiveJobsListingSection";
 import { JobsLiveJobsJobCardSection } from "./JobsLiveJobsJobCardSection";
-
-export type Job = {
-  id: string;
-  title: string;
-  company: string;
-  companySite?: string;
-  type: "Walk-in" | "Full-time" | "Internship" | "Contract";
-  mode?: "Onsite" | "Hybrid" | "Remote";
-  location: string;
-  postedOn: string;
-  eventDate?: string;
-  timeWindow?: string;
-  venue?: string;
-  exp: string;
-  salary?: string;
-  highlights: string[];
-  responsibilities?: string[];
-  applyEmail?: string;
-  applyLink?: string;
-  contacts?: string[];
-};
 
 function norm(s: string) {
   return s.toLowerCase();
@@ -42,16 +23,18 @@ function matchesFilters(job: Job, f: JobsFilters) {
     " " +
     norm((job.highlights || []).join(" "));
   const qOk = q ? hay.includes(q) : true;
-
   const locOk = f.loc ? norm(job.location).includes(norm(f.loc)) : true;
   const typeOk = f.type ? job.type === f.type : true;
-
   return qOk && locOk && typeOk;
 }
 
 const formatDate = (iso?: string) =>
   iso
-    ? new Date(iso).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" })
+    ? new Date(iso).toLocaleDateString("en-IN", {
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    })
     : "";
 
 export function JobsLiveJobsJobsGridSection({
@@ -61,80 +44,89 @@ export function JobsLiveJobsJobsGridSection({
   jobs: Job[];
   filters: JobsFilters;
 }) {
-  const FIRST_CHUNK = 12;
-  const NEXT_CHUNK = 12;
-
-  // Detect ≥lg for master-detail behavior
-  const [isLg, setIsLg] = useState(false);
-  useEffect(() => {
-    const mql = window.matchMedia("(min-width: 1024px)");
-    const handler = (e: MediaQueryListEvent) => setIsLg(e.matches);
-    setIsLg(mql.matches);
-    mql.addEventListener("change", handler);
-    return () => mql.removeEventListener("change", handler);
+  // Build base URL once (client-only)
+  const baseUrl = useMemo(() => {
+    if (typeof window === "undefined") return "";
+    // keep query string off so the link is clean; hash will point to the card
+    return `${window.location.origin}${window.location.pathname}`;
   }, []);
 
-  // DEV convenience: clone to showcase scroll behavior if list is small
-  const jobsForView = useMemo(() => {
-    if (!jobs?.length) return jobs;
-    if (jobs.length >= 18) return jobs;
-    const clones: Job[] = [];
-    let i = 0;
-    while (jobs.length + clones.length < 20) {
-      const base = jobs[i % jobs.length];
-      clones.push({
-        ...base,
-        id: `${base.id}-dup-${i}`,
-        title: `${base.title} (Batch ${Math.floor(i / jobs.length) + 1})`,
-      });
-      i++;
+  const buildShareUrl = (id: string) => `${baseUrl}#${id}`;
+
+  const [copiedId, setCopiedId] = useState<string | null>(null);
+
+  const handleShare = async (job: Job) => {
+    const url = buildShareUrl(job.id);
+    try {
+      if (navigator.share && typeof navigator.share === "function") {
+        await navigator.share({
+          title: job.title,
+          text: `${job.title} @ ${job.company}`,
+          url,
+        });
+        return;
+      }
+    } catch {
+      // fall through to copy
     }
-    return [...jobs, ...clones];
-  }, [jobs]);
+    try {
+      await navigator.clipboard.writeText(url);
+      setCopiedId(job.id);
+      setTimeout(() => setCopiedId((prev) => (prev === job.id ? null : prev)), 1500);
+    } catch {
+      // last-resort fallback
+      const tmp = document.createElement("input");
+      tmp.value = url;
+      document.body.appendChild(tmp);
+      tmp.select();
+      document.execCommand("copy");
+      document.body.removeChild(tmp);
+      setCopiedId(job.id);
+      setTimeout(() => setCopiedId((prev) => (prev === job.id ? null : prev)), 1500);
+    }
+  };
 
   const sorted = useMemo(() => {
-    return [...jobsForView].sort((a, b) => {
+    return [...jobs].sort((a, b) => {
       const da = new Date(a.eventDate || a.postedOn).getTime();
       const db = new Date(b.eventDate || b.postedOn).getTime();
       return db - da;
     });
-  }, [jobsForView]);
+  }, [jobs]);
 
   const filtered = useMemo(
     () => sorted.filter((j) => matchesFilters(j, filters)),
     [sorted, filters]
   );
 
-  const [visible, setVisible] = useState<number>(Math.min(FIRST_CHUNK, filtered.length));
-
-  useMemo(() => {
-    (visible > filtered.length) && setVisible(Math.min(FIRST_CHUNK, filtered.length));
-  }, [filtered.length]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const canLoad = visible < filtered.length;
-  const list = filtered.slice(0, visible);
-
-  const [selectedId, setSelectedId] = useState<string | null>(null);
-  const selectedJob = useMemo(
-    () => (selectedId ? filtered.find((j) => j.id === selectedId) ?? null : null),
-    [selectedId, filtered]
-  );
-
+  // Deep-link scroll (#id or ?id=)
   useEffect(() => {
-    if (isLg) {
-      if (!selectedId && list.length) setSelectedId(list[0].id);
-      if (selectedId && !filtered.some((j) => j.id === selectedId)) {
-        setSelectedId(list[0]?.id ?? null);
-      }
-    } else {
-      if (selectedId && !filtered.some((j) => j.id === selectedId)) {
-        setSelectedId(null);
-      }
+    const { hash, search } = window.location;
+    let targetId = hash?.replace(/^#/, "") || "";
+    if (!targetId) {
+      const params = new URLSearchParams(search);
+      const qId = params.get("id");
+      if (qId) targetId = qId;
     }
-  }, [isLg, filtered, list, selectedId]);
+    if (!targetId) return;
 
-  const showList = isLg || !selectedId;
-  const showDetail = isLg || !!selectedId;
+    const t = setTimeout(() => {
+      const el = document.getElementById(targetId);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    }, 50);
+
+    const onHash = () => {
+      const id = window.location.hash.replace(/^#/, "");
+      const node = id ? document.getElementById(id) : null;
+      if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+    window.addEventListener("hashchange", onHash);
+
+    return () => {
+      clearTimeout(t);
+      window.removeEventListener("hashchange", onHash);
+    };
+  }, [filtered.length]);
 
   return (
     <>
@@ -151,8 +143,7 @@ export function JobsLiveJobsJobsGridSection({
       {/* Results meta */}
       <div className="mb-3 flex items-center justify-between text-sm text-slate-600">
         <span>
-          Showing <span className="font-semibold">{list.length}</span> of{" "}
-          <span className="font-semibold">{filtered.length}</span>{" "}
+          Showing <span className="font-semibold">{filtered.length}</span>{" "}
           {filtered.length === 1 ? "role" : "roles"}
         </span>
         {filters.q || filters.loc || filters.type ? (
@@ -162,178 +153,100 @@ export function JobsLiveJobsJobsGridSection({
         ) : null}
       </div>
 
-      {/* Master–Detail */}
-      <div className="grid grid-cols-1 gap-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1.15fr)]">
-        {/* LEFT: list */}
-        {showList && (
-          <section
-            className="rounded-2xl border border-slate-200 bg-white shadow-sm lg:sticky lg:top-24 lg:self-start lg:max-h-[calc(100vh-7rem)] lg:overflow-auto nice-scroll"
-            aria-label="Job listings"
-          >
-            <ul className="divide-y divide-slate-100">
-              <AnimatePresence mode="popLayout">
-                {list.map((job) => {
-                  const active = job.id === selectedId;
-                  return (
-                    <motion.li
-                      key={job.id}
-                      layout
-                      initial={{ opacity: 0, y: 6 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 6 }}
-                      transition={{ duration: 0.2, ease: "easeOut" }}
+      {/* DETAILS-ONLY LIST — each LI is its own card */}
+      <section aria-label="Job details">
+        {/* spacing reduced: gap-y-6 / md:gap-y-8 */}
+        <ul className="grid grid-cols-1 gap-y-6 md:gap-y-8">
+          <AnimatePresence mode="popLayout">
+            {filtered.map((job) => (
+              <motion.li
+                key={job.id}
+                id={job.id}
+                className="scroll-mt-24"
+                layout
+                initial={{ opacity: 0, y: 6 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 6 }}
+                transition={{ duration: 0.2, ease: "easeOut" }}
+              >
+                <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+                  {/* Share button (top-right) */}
+                  <div className="absolute right-3 top-3 z-10">
+                    <button
+                      onClick={() => handleShare(job)}
+                      className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-orange-300"
+                      aria-label={`Share ${job.title}`}
+                      title={copiedId === job.id ? "Link copied!" : "Share"}
                     >
-                      <button
-                        onClick={() => setSelectedId(job.id)}
-                        className={`group grid w-full grid-cols-[auto,1fr] gap-3 p-4 text-left transition ${active ? "bg-orange-50/40" : "hover:bg-slate-50 focus:bg-slate-50"
-                          }`}
-                      >
-                        <div
-                          className="grid h-10 w-10 shrink-0 place-items-center rounded-xl"
-                          style={{
-                            background:
-                              "linear-gradient(180deg, rgba(255,140,0,0.12), rgba(255,140,0,0.06))",
-                            boxShadow: "inset 0 0 0 1px rgba(15, 23, 42, 0.06)",
-                          }}
-                        >
-                          <Briefcase className="h-5 w-5" style={{ color: "#ff8c00" }} />
-                        </div>
+                      {copiedId === job.id ? (
+                        <>
+                          <Copy className="h-3.5 w-3.5" />
+                          Copied
+                        </>
+                      ) : (
+                        <>
+                          <Share2 className="h-3.5 w-3.5" />
+                          Share
+                        </>
+                      )}
+                    </button>
+                  </div>
 
-                        <div className="min-w-0">
-                          <div className="flex items-start justify-between gap-2">
-                            <h3 className="truncate text-[15px] font-extrabold leading-tight text-slate-900">
-                              {job.title}
-                            </h3>
-                            {active && (
-                              <span className="shrink-0 rounded-full border border-orange-200 bg-orange-50 px-2 py-0.5 text-[10px] font-semibold text-orange-700">
-                                Selected
-                              </span>
-                            )}
-                          </div>
+                  {/* compact meta row */}
+                  <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-slate-600">
+                    <span className="inline-flex items-center">
+                      <Building2 className="mr-1 h-3.5 w-3.5" />
+                      {job.company}
+                    </span>
+                    <span className="text-slate-300">•</span>
+                    <span className="inline-flex items-center">
+                      <MapPin className="mr-1 h-3.5 w-3.5" />
+                      {job.location}
+                    </span>
+                    <span className="text-slate-300">•</span>
+                    <span className="inline-flex items-center">
+                      <Calendar className="mr-1 h-3.5 w-3.5" />
+                      {job.eventDate
+                        ? `Event: ${formatDate(job.eventDate)}`
+                        : `Posted: ${formatDate(job.postedOn)}`}
+                    </span>
+                  </div>
 
-                          <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-slate-600">
-                            <span className="inline-flex items-center">
-                              <Building2 className="mr-1 h-3.5 w-3.5" />
-                              {job.company}
-                            </span>
-                            <span className="text-slate-300">•</span>
-                            <span className="inline-flex items-center">
-                              <MapPin className="mr-1 h-3.5 w-3.5" />
-                              {job.location}
-                            </span>
-                            <span className="text-slate-300">•</span>
-                            <span className="inline-flex items-center">
-                              <Calendar className="mr-1 h-3.5 w-3.5" />
-                              {job.eventDate ? `Event: ${formatDate(job.eventDate)}` : `Posted: ${formatDate(job.postedOn)}`}
-                            </span>
-                          </p>
+                  <div className="relative">
+                    <div
+                      aria-hidden
+                      className="pointer-events-none absolute -right-2 -top-2 h-24 w-24 rounded-full opacity-30 blur-2xl"
+                      style={{
+                        background:
+                          "radial-gradient(closest-side, rgba(255,140,0,.25), rgba(255,140,0,0))",
+                      }}
+                    />
+                    <JobsLiveJobsJobCardSection job={job} />
+                  </div>
 
-                          <div className="mt-2 flex flex-wrap items-center gap-1.5">
-                            <span className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-semibold text-slate-700">
-                              {job.type}
-                            </span>
-                            {job.mode && (
-                              <span className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[11px] font-semibold text-slate-700">
-                                {job.mode}
-                              </span>
-                            )}
-                            <span className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[11px] text-slate-700">
-                              Exp: {job.exp}
-                            </span>
-                            {job.salary && (
-                              <span className="rounded-full border border-slate-200 bg-white px-2 py-0.5 text-[11px] text-slate-700">
-                                {job.salary}
-                              </span>
-                            )}
-                          </div>
-
-                          {job.highlights?.length ? (
-                            <p className="mt-2 line-clamp-2 text-[12.5px] leading-relaxed text-slate-700">
-                              {job.highlights[0]}
-                            </p>
-                          ) : null}
-                        </div>
-                      </button>
-                    </motion.li>
-                  );
-                })}
-              </AnimatePresence>
-            </ul>
-
-            <div className="flex items-center justify-center border-t border-slate-100 p-3">
-              {filtered.length === 0 ? (
-                <span className="text-sm text-slate-500">
-                  No matching roles right now. Try clearing filters or broadening your search.
-                </span>
-              ) : canLoad ? (
-                <button
-                  onClick={() => setVisible((v) => Math.min(v + NEXT_CHUNK, filtered.length))}
-                  className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-orange-300"
-                  style={{ backgroundColor: "var(--color-brand, #ff8c00)" }}
-                >
-                  Load more <ArrowRight className="h-4 w-4" />
-                </button>
-              ) : (
-                <span className="text-sm text-slate-500">
-                  You’re all caught up. New roles appear here as soon as we verify them.
-                </span>
-              )}
-            </div>
-          </section>
-        )}
-
-        {/* RIGHT: detail */}
-        {showDetail && (
-          <section
-            className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:max-h:[calc(100vh-7rem)] lg:max-h-[calc(100vh-7rem)] lg:overflow-auto nice-scroll"
-            aria-label="Job details"
-          >
-            {/* Increased z-index so header sits above content/glows */}
-            {!isLg && (
-              <div className="sticky top-16 z-20 -mx-4 mb-3 flex items-center gap-2 border-b border-slate-100 bg-white px-4 py-2 shadow-sm">
-                <button
-                  onClick={() => setSelectedId(null)}
-                  className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-900"
-                >
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to listings
-                </button>
-                <div className="ml-auto text-xs text-slate-500">
-                  {filtered.length} {filtered.length === 1 ? "role" : "roles"}
+                  {/* optional: tiny link preview under the card (comment out if not needed) */}
+                  {/* <div className="mt-3 text-[11px] text-slate-500 break-all">
+                    {buildShareUrl(job.id)}
+                  </div> */}
                 </div>
-              </div>
-            )}
+              </motion.li>
+            ))}
+          </AnimatePresence>
 
-            {!selectedJob ? (
-              <div className="grid min-h-[240px] place-items-center p-8 text-center">
-                <p className="text-sm text-slate-600">Select a job from the list to see details.</p>
-              </div>
-            ) : (
-              <div className="relative">
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -right-2 -top-2 h-24 w-24 rounded-full opacity-30 blur-2xl"
-                  style={{
-                    background:
-                      "radial-gradient(closest-side, rgba(255,140,0,.25), rgba(255,140,0,0))",
-                  }}
-                />
-                <JobsLiveJobsJobCardSection job={selectedJob} />
-              </div>
-            )}
-          </section>
-        )}
-      </div>
+          {filtered.length === 0 && (
+            <li className="text-sm text-slate-500">
+              No matching roles right now. Try clearing filters or broadening your search.
+            </li>
+          )}
+        </ul>
+      </section>
 
-      {/* Global scrollbar styling (WebKit + Firefox) */}
+      {/* Global scrollbar styling */}
       <style jsx global>{`
-        /* Firefox */
         .nice-scroll {
           scrollbar-width: thin;
           scrollbar-color: rgba(255, 140, 0, 0.45) transparent;
         }
-
-        /* WebKit (Chrome, Edge, Brave, etc.) */
         .nice-scroll::-webkit-scrollbar {
           width: 10px;
         }
@@ -352,8 +265,6 @@ export function JobsLiveJobsJobsGridSection({
         .nice-scroll::-webkit-scrollbar-thumb:active {
           background: linear-gradient(180deg, rgba(255,140,0,0.95), rgba(255,184,77,0.95));
         }
-
-        /* ---- HARD-REMOVE WebKit arrow buttons (Chrome/Edge) ---- */
         .nice-scroll::-webkit-scrollbar-button {
           display: none;
           width: 0;
@@ -361,23 +272,6 @@ export function JobsLiveJobsJobsGridSection({
           -webkit-appearance: none;
           background: transparent;
         }
-        /* Some Chromium builds still draw triangles unless ALL variants are targeted */
-        .nice-scroll::-webkit-scrollbar-button:single-button,
-        .nice-scroll::-webkit-scrollbar-button:double-button,
-        .nice-scroll::-webkit-scrollbar-button:start:decrement,
-        .nice-scroll::-webkit-scrollbar-button:end:increment,
-        .nice-scroll::-webkit-scrollbar-button:vertical:decrement,
-        .nice-scroll::-webkit-scrollbar-button:vertical:increment,
-        .nice-scroll::-webkit-scrollbar-button:horizontal:decrement,
-        .nice-scroll::-webkit-scrollbar-button:horizontal:increment {
-          display: none !important;
-          width: 0 !important;
-          height: 0 !important;
-          background: transparent !important;
-          -webkit-appearance: none !important;
-        }
-
-        /* Avoid stray artifacts in some platforms */
         .nice-scroll::-webkit-scrollbar-corner {
           background: transparent;
         }

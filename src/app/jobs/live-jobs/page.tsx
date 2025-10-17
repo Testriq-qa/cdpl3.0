@@ -35,6 +35,9 @@ export type Job = {
     applyEmail?: string;
     applyLink?: string;
     contacts?: string[];
+
+    // NEW: combined job title + unique id (human-readable, shareable)
+    shareKey: string;
 };
 
 // ---------- Dynamic sections (SSR enabled like your example) ----------
@@ -111,7 +114,7 @@ export const metadata: Metadata = {
     robots: { index: true, follow: true },
 };
 
-// Example SSR data (unchanged)
+// Example SSR data (unchanged except shareKey added)
 const JOBS: Job[] = [
     {
         id: "qualitykiosk-perf",
@@ -139,6 +142,7 @@ const JOBS: Job[] = [
             "Ensure test coverage under timelines",
         ],
         applyEmail: "anisa.patel@qualitykiosk.com",
+        shareKey: "performance-tester-jmeter-qualitykiosk-perf",
     },
     {
         id: "tudip-qa",
@@ -164,6 +168,7 @@ const JOBS: Job[] = [
             "Regression, smoke & sanity cycles",
         ],
         applyEmail: "joinus@tudip.com",
+        shareKey: "quality-assurance-engineer-tudip-qa",
     },
     {
         id: "avasoft-trainee",
@@ -192,6 +197,7 @@ const JOBS: Job[] = [
         applyEmail: "recruitment@avasoft.com",
         contacts: ["+91 89258 67655", "+91 89250 08708", "+91 91500 50213"],
         applyLink: "https://bit.ly/TraineeSoftwareEngineer",
+        shareKey: "trainee-software-engineer-avasoft-trainee",
     },
 ];
 
@@ -240,7 +246,6 @@ export default function Page() {
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-
 
             <JobsLiveJobsJobsHeroSection />
 
