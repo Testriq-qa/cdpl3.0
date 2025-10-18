@@ -1,3 +1,4 @@
+// JobOpeningsJobBrowser.tsx
 "use client";
 
 import React from "react";
@@ -63,6 +64,20 @@ export default function JobOpeningsJobBrowser({
     const [selected, setSelected] = React.useState<string | null>(null);
     const [drawerOpen, setDrawerOpen] = React.useState(false);
 
+    // Share UI feedback
+    const [copiedId, setCopiedId] = React.useState<string | null>(null);
+
+    // Open details automatically if the URL has ?job=<id> (or ?id=<id>)
+    React.useEffect(() => {
+        if (typeof window === "undefined") return;
+        const params = new URLSearchParams(window.location.search);
+        const deepId = params.get("job") || params.get("id");
+        if (deepId) {
+            setSelected(deepId);
+            setDrawerOpen(true);
+        }
+    }, []);
+
     async function loadPage(newPage: number) {
         const res = await getJobsAction({ page: newPage, size: pageSize });
         setJobs(res?.data?.job ?? []);
@@ -122,6 +137,29 @@ export default function JobOpeningsJobBrowser({
     // *** Sticky offset (header + breadcrumb + margin). Adjust if your header changes. ***
     const stickyStyle = { ["--sticky-top" as any]: "96px" } as React.CSSProperties;
 
+    // Copy a deep link (?job=<id>) to clipboard
+    const handleShare = async (jobId: string) => {
+        const { origin, pathname, search } = window.location;
+        const params = new URLSearchParams(search);
+        params.set("job", jobId);
+        const url = `${origin}${pathname}?${params.toString()}`;
+
+        try {
+            await navigator.clipboard.writeText(url);
+        } catch {
+            // fallback
+            const tmp = document.createElement("input");
+            tmp.value = url;
+            document.body.appendChild(tmp);
+            tmp.select();
+            document.execCommand("copy");
+            document.body.removeChild(tmp);
+        } finally {
+            setCopiedId(jobId);
+            setTimeout(() => setCopiedId((prev) => (prev === jobId ? null : prev)), 1500);
+        }
+    };
+
     return (
         <div className={`mt-8 ${className ?? ""}`}>
             {/* toolbar (TOP pagination) */}
@@ -156,13 +194,11 @@ export default function JobOpeningsJobBrowser({
                 {/* filter column */}
                 <aside
                     className={
-                        // NOTE: not sticky on mobile (1 column). Sticky only from md+.
                         "w-full shrink-0 md:sticky md:top-[var(--sticky-top)] md:w-[300px] lg:w-[320px] " +
                         "z-30 bg-white/95 supports-[backdrop-filter]:backdrop-blur md:bg-transparent"
                     }
                     style={stickyStyle}
                 >
-                    {/* sticky, viewport-bounded card with its own scroll (only sticks on md+) */}
                     <div className="rounded-xl border border-slate-200 bg-white md:sticky md:top-[var(--sticky-top)] md:max-h[calc(100vh-var(--sticky-top)-1rem)] md:overflow-y-auto md:max-h-[calc(100vh-var(--sticky-top)-1rem)]">
                         <div className="border-b border-slate-200 p-4 text-center text-sm font-semibold text-slate-900">
                             Search other jobs
@@ -188,10 +224,11 @@ export default function JobOpeningsJobBrowser({
                                             <button
                                                 key={key}
                                                 onClick={() => setLocType(key)}
-                                                className={`rounded-md px-3 py-1 text-xs transition ${active
+                                                className={`rounded-md px-3 py-1 text-xs transition ${
+                                                    active
                                                         ? "bg-orange-500 text-white shadow-sm"
                                                         : "bg-white text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50"
-                                                    }`}
+                                                }`}
                                             >
                                                 {key[0].toUpperCase() + key.slice(1)}
                                             </button>
@@ -242,7 +279,7 @@ export default function JobOpeningsJobBrowser({
                                         transition={{ duration: 0.2 }}
                                     >
                                         {/* card */}
-                                        <div className="grid grid-cols-1 gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-[72px,1fr] xl:grid-cols-[72px,1fr,128px]">
+                                        <div className="grid grid-cols-1 gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-[72px,1fr] xl:grid-cols-[72px,1fr,180px]">
                                             {/* logo */}
                                             <div className="sm:pt-1">
                                                 <Logo title={job.job_title} />
@@ -283,16 +320,25 @@ export default function JobOpeningsJobBrowser({
                                             </div>
 
                                             {/* right action */}
-                                            <div className="flex items-center justify-start sm:justify-end">
-                                                <button
-                                                    onClick={() => {
-                                                        setSelected(job.job_id);
-                                                        setDrawerOpen(true);
-                                                    }}
-                                                    className="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-orange-500 via-orange-500 to-amber-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95"
-                                                >
-                                                    View »
-                                                </button>
+                                            <div className="flex items-center justify-start gap-2 sm:justify-end">
+                                            <button
+                                                onClick={() => {
+                                                    setSelected(job.job_id);
+                                                    setDrawerOpen(true);
+                                                }}
+                                                className="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-orange-500 via-orange-500 to-amber-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95"
+                                            >
+                                                View »
+                                            </button>
+
+                                            {/* Share button — copies deep link to clipboard */}
+                                            <button
+                                                onClick={() => handleShare(job.job_id)}
+                                                className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
+                                                title="Copy link to this job"
+                                            >
+                                                {copiedId === job.job_id ? "Copied" : "Share"}
+                                            </button>
                                             </div>
                                         </div>
                                     </motion.li>

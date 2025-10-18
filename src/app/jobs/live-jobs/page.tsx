@@ -81,6 +81,22 @@ const JobsLiveJobsWhyWePostJobsSection = dynamic(
     }
 );
 
+const JobsLiveJobsTestimonialSection = dynamic(
+    () => import("@/components/Sections/JobsLiveJobsTestimonialSection"),
+    {
+        ssr: true,
+        loading: () => <SectionLoader label="Loading why CDPL posts jobs..." />,
+    }
+);
+
+const JobsLiveJobsReviewSection = dynamic(
+    () => import("@/components/Sections/JobsLiveJobsReviewSection"),
+    {
+        ssr: true,
+        loading: () => <SectionLoader label="Loading why CDPL posts jobs..." />,
+    }
+);
+
 // Named export -> use .then
 const JobsLiveJobsSubscribeCTASection = dynamic(
     () =>
@@ -255,6 +271,10 @@ export default function Page() {
             <JobsLiveJobsListingSection jobs={JOBS} />
 
             <JobsLiveJobsWhyWePostJobsSection />
+
+            <JobsLiveJobsTestimonialSection />
+
+            <JobsLiveJobsReviewSection />
 
             <JobsLiveJobsSubscribeCTASection />
         </main>

@@ -9,7 +9,7 @@ import type { JobsFilters } from "./JobsLiveJobsListingSection";
 import { JobsLiveJobsJobCardSection } from "./JobsLiveJobsJobCardSection";
 
 function norm(s: string) {
-  return s.toLowerCase();
+  return (s || "").toLowerCase();
 }
 
 function matchesFilters(job: Job, f: JobsFilters) {
@@ -31,11 +31,36 @@ function matchesFilters(job: Job, f: JobsFilters) {
 const formatDate = (iso?: string) =>
   iso
     ? new Date(iso).toLocaleDateString("en-IN", {
-      day: "2-digit",
-      month: "short",
-      year: "numeric",
-    })
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      })
     : "";
+
+// ---- Chunking config ----
+const CHUNK_SIZE = 10;
+
+// ---- Helper to fabricate extra demo jobs when list is small (dev-only aid) ----
+function makeDemoJobs(seed: Job[], targetCount = 60): Job[] {
+  if (!seed.length) return [];
+  const out: Job[] = [...seed];
+  let copyIdx = 1;
+  while (out.length < targetCount) {
+    for (let i = 0; i < seed.length && out.length < targetCount; i++) {
+      const j = seed[i];
+      out.push({
+        ...j,
+        id: `${j.id || `job-${i}`}-demo-${copyIdx}`,
+        title: `${j.title} (copy ${copyIdx})`,
+        postedOn: j.postedOn
+          ? new Date(new Date(j.postedOn).getTime() - copyIdx * 24 * 3600 * 1000).toISOString()
+          : new Date(Date.now() - copyIdx * 24 * 3600 * 1000).toISOString(),
+      });
+      copyIdx++;
+    }
+  }
+  return out;
+}
 
 export function JobsLiveJobsJobsGridSection({
   jobs,
@@ -44,14 +69,13 @@ export function JobsLiveJobsJobsGridSection({
   jobs: Job[];
   filters: JobsFilters;
 }) {
-  // Build base URL once (client-only)
+  // Build base URL once (client-only) for share links
   const baseUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
-    // keep query string off so the link is clean; hash will point to the card
     return `${window.location.origin}${window.location.pathname}`;
   }, []);
 
-  const buildShareUrl = (id: string) => `${baseUrl}#${id}`;
+  const buildShareUrl = (id: string) => `${baseUrl}#${encodeURIComponent(id)}`;
 
   const [copiedId, setCopiedId] = useState<string | null>(null);
 
@@ -74,7 +98,6 @@ export function JobsLiveJobsJobsGridSection({
       setCopiedId(job.id);
       setTimeout(() => setCopiedId((prev) => (prev === job.id ? null : prev)), 1500);
     } catch {
-      // last-resort fallback
       const tmp = document.createElement("input");
       tmp.value = url;
       document.body.appendChild(tmp);
@@ -86,47 +109,129 @@ export function JobsLiveJobsJobsGridSection({
     }
   };
 
+  // Demo data so chunking is visible when your list is small
+  const withDemo = useMemo(() => {
+    if (jobs.length >= 35) return jobs;
+    return makeDemoJobs(
+      jobs.length
+        ? jobs
+        : ([
+            {
+              id: "ex-1",
+              title: "Frontend Engineer",
+              company: "Acme Corp",
+              location: "Bengaluru",
+              type: "Full-time",
+              postedOn: new Date().toISOString(),
+              highlights: ["React", "TypeScript", "UI/UX"],
+            },
+            {
+              id: "ex-2",
+              title: "Backend Engineer",
+              company: "Globex",
+              location: "Remote (India)",
+              type: "Full-time",
+              postedOn: new Date(Date.now() - 86400000).toISOString(),
+              highlights: ["Node.js", "PostgreSQL", "Microservices"],
+            },
+            {
+              id: "ex-3",
+              title: "SDE Intern",
+              company: "Initech",
+              location: "Hyderabad",
+              type: "Internship",
+              postedOn: new Date(Date.now() - 2 * 86400000).toISOString(),
+              highlights: ["JavaScript", "APIs", "Testing"],
+            },
+          ] as Job[]),
+      60
+    );
+  }, [jobs]);
+
   const sorted = useMemo(() => {
-    return [...jobs].sort((a, b) => {
+    return [...withDemo].sort((a, b) => {
       const da = new Date(a.eventDate || a.postedOn).getTime();
       const db = new Date(b.eventDate || b.postedOn).getTime();
       return db - da;
     });
-  }, [jobs]);
+  }, [withDemo]);
 
   const filtered = useMemo(
     () => sorted.filter((j) => matchesFilters(j, filters)),
     [sorted, filters]
   );
 
-  // Deep-link scroll (#id or ?id=)
+  // ---- Button-only chunked loading ----
+  const [visibleCount, setVisibleCount] = useState<number>(CHUNK_SIZE);
+
+  // Reset chunks on filter changes; reveal enough if deep-linked
   useEffect(() => {
-    const { hash, search } = window.location;
-    let targetId = hash?.replace(/^#/, "") || "";
-    if (!targetId) {
-      const params = new URLSearchParams(search);
-      const qId = params.get("id");
-      if (qId) targetId = qId;
+    if (typeof window === "undefined") return;
+
+    const getTargetId = () => {
+      const { hash, search } = window.location;
+      let targetId = hash?.replace(/^#/, "") || "";
+      if (!targetId) {
+        const params = new URLSearchParams(search);
+        const qId = params.get("id");
+        if (qId) targetId = qId;
+      }
+      try {
+        targetId = decodeURIComponent(targetId);
+      } catch {}
+      return targetId;
+    };
+
+    const targetId = getTargetId();
+    if (targetId) {
+      const idx = filtered.findIndex((j) => j.id === targetId);
+      if (idx >= 0) {
+        const needed = Math.ceil((idx + 1) / CHUNK_SIZE) * CHUNK_SIZE;
+        setVisibleCount(Math.max(CHUNK_SIZE, Math.min(needed, filtered.length)));
+        return;
+      }
     }
-    if (!targetId) return;
+    setVisibleCount(Math.min(CHUNK_SIZE, filtered.length));
+  }, [filters, filtered.length]);
 
-    const t = setTimeout(() => {
-      const el = document.getElementById(targetId);
+  // Scroll to deep link after chunks are revealed
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+
+    const getTargetId = () => {
+      const { hash, search } = window.location;
+      let targetId = hash?.replace(/^#/, "") || "";
+      if (!targetId) {
+        const params = new URLSearchParams(search);
+        const qId = params.get("id");
+        if (qId) targetId = qId;
+      }
+      try {
+        targetId = decodeURIComponent(targetId);
+      } catch {}
+      return targetId;
+    };
+
+    const desiredId = getTargetId();
+    if (!desiredId) return;
+
+    const index = filtered.findIndex((j) => j.id === desiredId);
+    if (index >= 0 && index < visibleCount) {
+      const el = document.getElementById(desiredId);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-    }, 50);
+    }
+  }, [visibleCount, filtered]);
 
-    const onHash = () => {
-      const id = window.location.hash.replace(/^#/, "");
-      const node = id ? document.getElementById(id) : null;
-      if (node) node.scrollIntoView({ behavior: "smooth", block: "start" });
-    };
-    window.addEventListener("hashchange", onHash);
+  const visibleItems = useMemo(
+    () => filtered.slice(0, Math.min(visibleCount, filtered.length)),
+    [filtered, visibleCount]
+  );
 
-    return () => {
-      clearTimeout(t);
-      window.removeEventListener("hashchange", onHash);
-    };
-  }, [filtered.length]);
+  const canLoadMore = visibleCount < filtered.length;
+
+  const handleLoadMore = () => {
+    setVisibleCount((v) => Math.min(v + CHUNK_SIZE, filtered.length));
+  };
 
   return (
     <>
@@ -143,7 +248,11 @@ export function JobsLiveJobsJobsGridSection({
       {/* Results meta */}
       <div className="mb-3 flex items-center justify-between text-sm text-slate-600">
         <span>
-          Showing <span className="font-semibold">{filtered.length}</span>{" "}
+          Showing{" "}
+          <span className="font-semibold">
+            {Math.min(visibleCount, filtered.length)}
+          </span>{" "}
+          of <span className="font-semibold">{filtered.length}</span>{" "}
           {filtered.length === 1 ? "role" : "roles"}
         </span>
         {filters.q || filters.loc || filters.type ? (
@@ -153,12 +262,11 @@ export function JobsLiveJobsJobsGridSection({
         ) : null}
       </div>
 
-      {/* DETAILS-ONLY LIST — each LI is its own card */}
+      {/* DETAILS-ONLY LIST — meta row above title removed */}
       <section aria-label="Job details">
-        {/* spacing reduced: gap-y-6 / md:gap-y-8 */}
         <ul className="grid grid-cols-1 gap-y-6 md:gap-y-8">
           <AnimatePresence mode="popLayout">
-            {filtered.map((job) => (
+            {visibleItems.map((job) => (
               <motion.li
                 key={job.id}
                 id={job.id}
@@ -170,8 +278,8 @@ export function JobsLiveJobsJobsGridSection({
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
                 <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-                  {/* Share button (top-right) */}
-                  <div className="absolute right-3 top-3 z-10">
+                  {/* Share button: static on mobile (no overlap), absolute on md+ */}
+                  <div className="mb-2 flex justify-end md:mb-0 md:absolute md:right-3 md:top-3 md:z-10">
                     <button
                       onClick={() => handleShare(job)}
                       className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:bg-white focus:outline-none focus:ring-2 focus:ring-orange-300"
@@ -192,26 +300,6 @@ export function JobsLiveJobsJobsGridSection({
                     </button>
                   </div>
 
-                  {/* compact meta row */}
-                  <div className="mb-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-[12.5px] text-slate-600">
-                    <span className="inline-flex items-center">
-                      <Building2 className="mr-1 h-3.5 w-3.5" />
-                      {job.company}
-                    </span>
-                    <span className="text-slate-300">•</span>
-                    <span className="inline-flex items-center">
-                      <MapPin className="mr-1 h-3.5 w-3.5" />
-                      {job.location}
-                    </span>
-                    <span className="text-slate-300">•</span>
-                    <span className="inline-flex items-center">
-                      <Calendar className="mr-1 h-3.5 w-3.5" />
-                      {job.eventDate
-                        ? `Event: ${formatDate(job.eventDate)}`
-                        : `Posted: ${formatDate(job.postedOn)}`}
-                    </span>
-                  </div>
-
                   <div className="relative">
                     <div
                       aria-hidden
@@ -223,11 +311,6 @@ export function JobsLiveJobsJobsGridSection({
                     />
                     <JobsLiveJobsJobCardSection job={job} />
                   </div>
-
-                  {/* optional: tiny link preview under the card (comment out if not needed) */}
-                  {/* <div className="mt-3 text-[11px] text-slate-500 break-all">
-                    {buildShareUrl(job.id)}
-                  </div> */}
                 </div>
               </motion.li>
             ))}
@@ -239,6 +322,24 @@ export function JobsLiveJobsJobsGridSection({
             </li>
           )}
         </ul>
+
+        {/* Button to load next chunk */}
+        {canLoadMore ? (
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={handleLoadMore}
+              className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-orange-300"
+            >
+              Load more ({filtered.length - visibleCount} remaining)
+            </button>
+          </div>
+        ) : (
+          filtered.length > 0 && (
+            <div className="mt-6 text-center text-xs text-slate-400">
+              You’re all caught up.
+            </div>
+          )
+        )}
       </section>
 
       {/* Global scrollbar styling */}
@@ -254,16 +355,28 @@ export function JobsLiveJobsJobsGridSection({
           background: transparent;
         }
         .nice-scroll::-webkit-scrollbar-thumb {
-          background: linear-gradient(180deg, rgba(255,140,0,0.55), rgba(255,184,77,0.55));
+          background: linear-gradient(
+            180deg,
+            rgba(255, 140, 0, 0.55),
+            rgba(255, 184, 77, 0.55)
+          );
           border-radius: 9999px;
           border: 3px solid transparent;
           background-clip: padding-box;
         }
         .nice-scroll:hover::-webkit-scrollbar-thumb {
-          background: linear-gradient(180deg, rgba(255,140,0,0.75), rgba(255,184,77,0.75));
+          background: linear-gradient(
+            180deg,
+            rgba(255, 140, 0, 0.75),
+            rgba(255, 184, 77, 0.75)
+          );
         }
         .nice-scroll::-webkit-scrollbar-thumb:active {
-          background: linear-gradient(180deg, rgba(255,140,0,0.95), rgba(255,184,77,0.95));
+          background: linear-gradient(
+            180deg,
+            rgba(255, 140, 0, 0.95),
+            rgba(255, 184, 77, 0.95)
+          );
         }
         .nice-scroll::-webkit-scrollbar-button {
           display: none;
