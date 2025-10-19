@@ -348,8 +348,8 @@ const Header = () => {
                                 }}
                                 onClick={() => setSelectedCategory(category.id)}
                                 className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id
-                                    ? "bg-blue-50 text-blue-700 font-medium"
-                                    : "text-gray-700 hover:bg-gray-50"
+                                  ? "bg-blue-50 text-blue-700 font-medium"
+                                  : "text-gray-700 hover:bg-gray-50"
                                   }`}
                                 aria-current={selectedCategory === category.id ? "true" : "false"}
                               >
@@ -485,7 +485,7 @@ const Header = () => {
                   </div>
                   <div className="py-1">
                     <Link
-                      href="/jobs/live"
+                      href="/jobs/live-jobs"
                       role="menuitem"
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
                     >
@@ -504,6 +504,13 @@ const Header = () => {
                       className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
                     >
                       Careers
+                    </Link>
+                    <Link
+                      href="/jobs/job-openings"
+                      role="menuitem"
+                      className="block px-4 py-2 text-sm text-gray-700 hover:bg-blue-50 hover:text-blue-700 focus:bg-blue-50 focus:text-blue-700 outline-none"
+                    >
+                      Job Openings
                     </Link>
                   </div>
                 </div>
@@ -677,7 +684,7 @@ const Header = () => {
                 {mobileSections.jobs && (
                   <div id="mobile-jobs" className="pl-4 space-y-1">
                     <Link
-                      href="/jobs/live"
+                      href="/jobs/live-jobs"
                       className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
