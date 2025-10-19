@@ -15,6 +15,11 @@ interface FormData {
   message: string;
 }
 
+interface CustomEventDetail {
+  service?: string;
+  eventType?: string;
+}
+
 const CorporateRegistrationModal = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -31,18 +36,16 @@ const CorporateRegistrationModal = () => {
   });
 
   useEffect(() => {
-    interface CustomEventDetail {
-  service?: string;
-  eventType?: string;
-}
-
-const handleOpen = (event: CustomEvent<CustomEventDetail>) => {
+    const handleOpen = (event: Event) => {
+      const customEvent = event as CustomEvent<CustomEventDetail>;
       setIsOpen(true);
-      if (event.detail?.service) {
-        setFormData(prev => ({ ...prev, serviceInterest: event.detail.service }));
+      if (customEvent.detail?.service) {
+        const service = customEvent.detail.service;
+        setFormData(prev => ({ ...prev, serviceInterest: service }));
       }
-      if (event.detail?.eventType) {
-        setFormData(prev => ({ ...prev, serviceInterest: event.detail.eventType }));
+      if (customEvent.detail?.eventType) {
+        const eventType = customEvent.detail.eventType;
+        setFormData(prev => ({ ...prev, serviceInterest: eventType }));
       }
     };
 

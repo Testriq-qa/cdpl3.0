@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import L, { Map, TileLayer, Circle, CircleMarker, LayerGroup } from 'leaflet';
+import L from 'leaflet';
+
 import { MapPin } from "lucide-react";
 
 /* ========= Types & Data ========= */
@@ -30,10 +31,10 @@ const CHIP_CITIES = ["Bengaluru", "Hyderabad", "Pune", "Mumbai", "Gurgaon", "Che
 
 export default function PlacementsLocationsMapSection() {
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const mapRef = useRef<Map | null>(null);
-    const baseRef = useRef<TileLayer | null>(null);
+    const mapRef = useRef<L.Map | null>(null);
+    const baseRef = useRef<L.TileLayer | null>(null);
     const providersRef = useRef<number>(0);
-    const layersRef = useRef<Record<string, { circle: Circle; innerDot: CircleMarker; layerGroup: LayerGroup }>>({});
+    const layersRef = useRef<Record<string, { circle: L.Circle; innerDot: L.CircleMarker; layerGroup: L.LayerGroup }>>({});
     const resizeObsRef = useRef<ResizeObserver | null>(null);
 
     const [active, setActive] = useState<string | null>(null);
@@ -111,7 +112,7 @@ export default function PlacementsLocationsMapSection() {
         }
     }, [addOnce]);
 
-    const wireBaseLayer = useCallback((L: typeof import('leaflet'), map: Map) => {
+    const wireBaseLayer = useCallback((L: typeof import('leaflet'), map: L.Map) => {
         // remove previous base layer
         if (baseRef.current) {
             baseRef.current.remove();
@@ -187,10 +188,10 @@ export default function PlacementsLocationsMapSection() {
                 zoomControl: false,
                 scrollWheelZoom: true,
             });
-            L.control.zoom({ position: "bottomright" }).addTo(mapRef.current);
+            L.control.zoom({ position: "bottomright" }).addTo(mapRef.current!);
 
             // base layer with fallback chain
-            wireBaseLayer(L, mapRef.current);
+            wireBaseLayer(L, mapRef.current!);
 
             // markers
             Object.values(layersRef.current).forEach((layer) => layer.layerGroup.remove());
@@ -232,7 +233,7 @@ export default function PlacementsLocationsMapSection() {
                 circle.bindPopup(popupHTML, { closeButton: false, offset: [0, -6] });
                 innerDot.bindPopup(popupHTML, { closeButton: false, offset: [0, -6] });
 
-                const layerGroup = L.layerGroup([circle, innerDot]).addTo(mapRef.current);
+                const layerGroup = L.layerGroup([circle, innerDot]).addTo(mapRef.current!);
                 layerGroup.on("mouseover", () => circle.setStyle({ fillOpacity: 0.35, weight: 1.8 }));
                 layerGroup.on("mouseout", () => circle.setStyle({ fillOpacity: 0.25, weight: 1.2 }));
                 layerGroup.on("click", () => {
@@ -245,7 +246,7 @@ export default function PlacementsLocationsMapSection() {
             });
 
             const bounds = group.getBounds();
-            if (bounds.isValid()) mapRef.current.fitBounds(bounds.pad(0.2));
+            if (bounds.isValid()) mapRef.current!.fitBounds(bounds.pad(0.2));
 
             // pulse animation
             const styleId = "cdpl-map-pulse-style";
