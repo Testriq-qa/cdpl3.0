@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
+import Link from "next/link";
 import { ChevronDown } from "lucide-react";
 
 /**
@@ -246,12 +247,12 @@ export default function AboutFAQSection() {
                         <span className="font-medium">Admissions & Career</span> team for a
                         personalized roadmap.
                     </p>
-                    <a
-                        href="/contact"
+                    <Link
+                        href="/contact-us"
                         className="inline-flex items-center justify-center rounded-xl bg-[#ff8c00] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/40"
                     >
                         Get Counseling
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>

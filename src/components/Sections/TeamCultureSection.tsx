@@ -7,12 +7,11 @@
 
 import { useMemo } from "react";
 import type { ElementType } from "react";
+
+
 import { motion } from "framer-motion";
 import {
     Award,
-    GraduationCap,
-    Rocket,
-    Gauge,
     Handshake,
     Users2,
     ShieldCheck,
@@ -27,20 +26,9 @@ import Link from "next/link";
 // =============================
 // Types
 // =============================
-type Pillar = {
-    title: string;
-    desc: string;
-    icon: ElementType;
-};
 
-export type Mentor = {
-    id: number;
-    name: string;
-    title: string;
-    avatar?: string; // optional URL
-    bio: string;
-    tags: string[]; // skills
-};
+
+
 
 const BRAND = "#ff8c00"; // Cinute Digital brand
 
@@ -81,7 +69,7 @@ const specialties = [
 // =============================
 // Component
 // =============================
-export default function TeamMentorFuturisticBand() {
+export default function TeamCultureSection() {
 
 
     const marquee = useMemo(

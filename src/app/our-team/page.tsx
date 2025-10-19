@@ -12,7 +12,7 @@ import JsonLdOrganization from "./JsonLdOrganization";
 
 export default function Page() {
     return (
-        <main style={{ /* expose brand as CSS var */["--brand" as any]: BRAND }} className="bg-white">
+        <main className="bg-white">
             <TeamHeroSection />
             <TeamLeadershipSpotlight data={teamData} />
             <TeamTrainersSection trainers={trainers} />

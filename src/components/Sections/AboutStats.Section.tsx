@@ -100,7 +100,7 @@ export default function AboutStatsSection() {
 
     return (
         <section
-            ref={rootRef as any}
+            ref={rootRef}
             aria-labelledby="about-stats-heading"
             className="mx-auto max-w-7xl px-4 py-4 md:py-12 sm:px-6 lg:px-8"
         >
@@ -160,7 +160,7 @@ export default function AboutStatsSection() {
                 {/* Grid */}
                 <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
                     {stats.map((s) => {
-                        const animated = useCountUp(inView, s.target, 1400, reducedMotion);
+                        const animated = useMemo(() => useCountUp(inView, s.target, 1400, reducedMotion), [inView, s.target, reducedMotion]);
                         return (
                             <div key={s.label} className="text-center">
                                 <div className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">

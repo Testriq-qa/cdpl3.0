@@ -68,8 +68,8 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
             try {
                 const res = await actions.getJobByIdAction(jobId);
                 if (!ignore) setDetail(res.data);
-            } catch (e: any) {
-                if (!ignore) setError(e?.message ?? "Failed to load job");
+            } catch (e: unknown) {
+                if (!ignore) setError(e instanceof Error ? e.message : "Failed to load job");
             } finally {
                 if (!ignore) setLoading(false);
             }
@@ -128,8 +128,8 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
 
             window.open(detail.job_referral_url, "_blank", "noopener,noreferrer");
             onClose();
-        } catch (err: any) {
-            setError(err?.message ?? "Something went wrong");
+        } catch (err: unknown) {
+            setError(err instanceof Error ? err.message : "Something went wrong");
         } finally {
             setSubmitting(false);
         }

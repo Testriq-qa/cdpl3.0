@@ -31,7 +31,12 @@ const CorporateRegistrationModal = () => {
   });
 
   useEffect(() => {
-    const handleOpen = (event: any) => {
+    interface CustomEventDetail {
+  service?: string;
+  eventType?: string;
+}
+
+const handleOpen = (event: CustomEvent<CustomEventDetail>) => {
       setIsOpen(true);
       if (event.detail?.service) {
         setFormData(prev => ({ ...prev, serviceInterest: event.detail.service }));

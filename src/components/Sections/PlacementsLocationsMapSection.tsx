@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
+import L, { Map, TileLayer, Circle, CircleMarker, LayerGroup } from 'leaflet';
 import { MapPin } from "lucide-react";
 
 /* ========= Types & Data ========= */
@@ -29,10 +30,10 @@ const CHIP_CITIES = ["Bengaluru", "Hyderabad", "Pune", "Mumbai", "Gurgaon", "Che
 
 export default function PlacementsLocationsMapSection() {
     const containerRef = useRef<HTMLDivElement | null>(null);
-    const mapRef = useRef<any>(null);
-    const baseRef = useRef<any>(null);
+    const mapRef = useRef<Map | null>(null);
+    const baseRef = useRef<TileLayer | null>(null);
     const providersRef = useRef<number>(0);
-    const layersRef = useRef<Record<string, any>>({});
+    const layersRef = useRef<Record<string, { circle: Circle; innerDot: CircleMarker; layerGroup: LayerGroup }>>({});
     const resizeObsRef = useRef<ResizeObserver | null>(null);
 
     const [active, setActive] = useState<string | null>(null);
@@ -90,9 +91,9 @@ export default function PlacementsLocationsMapSection() {
         }
         const ensureScript = (src: string, key: string) =>
             new Promise<void>((resolve, reject) => {
-                if ((window as any).L) return resolve();
+                if (typeof window !== 'undefined' && (window as any).L) return resolve();
                 if (document.querySelector(`[data-leaflet-key="${key}"]`)) {
-                    const check = () => ((window as any).L ? resolve() : setTimeout(check, 50));
+                    const check = () => (typeof window !== 'undefined' && (window as any).L ? resolve() : setTimeout(check, 50));
                     return check();
                 }
                 const script = document.createElement("script");
@@ -110,7 +111,7 @@ export default function PlacementsLocationsMapSection() {
         }
     }, [addOnce]);
 
-    const wireBaseLayer = useCallback((L: any, map: any) => {
+    const wireBaseLayer = useCallback((L: typeof import('leaflet'), map: Map) => {
         // remove previous base layer
         if (baseRef.current) {
             baseRef.current.remove();
@@ -121,7 +122,7 @@ export default function PlacementsLocationsMapSection() {
 
         const layer = L.tileLayer(p.url, {
             maxZoom: 19,
-            subdomains: p.subdomains as any,
+            subdomains: p.subdomains,
             attribution: p.attribution,
             crossOrigin: true,
         });
@@ -163,13 +164,13 @@ export default function PlacementsLocationsMapSection() {
             if (!containerRef.current) return;
             try {
                 await loadLeaflet();
-            } catch (err: any) {
-                setTileMsg(err?.message || "Leaflet failed to load.");
+            } catch (err: unknown) {
+                setTileMsg(err instanceof Error ? err.message : "Leaflet failed to load.");
                 return;
             }
             if (cancelled) return;
 
-            const L = (window as any).L;
+            const L = (window as any).L as typeof import('leaflet');
             if (!L) {
                 setTileMsg("Leaflet not available on window.");
                 return;
@@ -192,7 +193,7 @@ export default function PlacementsLocationsMapSection() {
             wireBaseLayer(L, mapRef.current);
 
             // markers
-            Object.values(layersRef.current).forEach((layer: any) => layer.remove());
+            Object.values(layersRef.current).forEach((layer) => layer.layerGroup.remove());
             layersRef.current = {};
             const group = L.featureGroup();
 
@@ -232,8 +233,8 @@ export default function PlacementsLocationsMapSection() {
                 innerDot.bindPopup(popupHTML, { closeButton: false, offset: [0, -6] });
 
                 const layerGroup = L.layerGroup([circle, innerDot]).addTo(mapRef.current);
-                layerGroup.on("mouseover", () => (circle as any).setStyle({ fillOpacity: 0.35, weight: 1.8 }));
-                layerGroup.on("mouseout", () => (circle as any).setStyle({ fillOpacity: 0.25, weight: 1.2 }));
+                layerGroup.on("mouseover", () => circle.setStyle({ fillOpacity: 0.35, weight: 1.8 }));
+                layerGroup.on("mouseout", () => circle.setStyle({ fillOpacity: 0.25, weight: 1.2 }));
                 layerGroup.on("click", () => {
                     setActive(c.name);
                     innerDot.openPopup();
@@ -265,7 +266,9 @@ export default function PlacementsLocationsMapSection() {
                 resizeObsRef.current = new ResizeObserver(() => {
                     mapRef.current?.invalidateSize();
                 });
-                containerRef.current && resizeObsRef.current.observe(containerRef.current);
+                if (containerRef.current) {
+                    resizeObsRef.current.observe(containerRef.current);
+                }
             }
         };
 

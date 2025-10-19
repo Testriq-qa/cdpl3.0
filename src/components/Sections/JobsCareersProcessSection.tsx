@@ -187,7 +187,7 @@ export default function JobsCareersProcessSection() {
 
             {/* Local CSS */}
             <style
-                // eslint-disable-next-line react/no-danger
+
                 dangerouslySetInnerHTML={{
                     __html: `
           .bg-feather{

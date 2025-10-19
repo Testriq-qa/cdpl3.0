@@ -1,7 +1,7 @@
 // JobOpeningsJobBrowser.tsx
 "use client";
 
-import React from "react";
+import React, { CSSProperties } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import JobDetails, { JobDetailsProps } from "./JobOpeningsJobDetails";
 
@@ -135,7 +135,7 @@ export default function JobOpeningsJobBrowser({
     };
 
     // *** Sticky offset (header + breadcrumb + margin). Adjust if your header changes. ***
-    const stickyStyle = { ["--sticky-top" as any]: "96px" } as React.CSSProperties;
+    const stickyStyle: CSSProperties = { "--sticky-top": "96px" };
 
     // Copy a deep link (?job=<id>) to clipboard
     const handleShare = async (jobId: string) => {

@@ -345,7 +345,7 @@ export function TeamDirectory({ data = team }: { data?: TeamMember[] }) {
           <select
             aria-label="Filter by role"
             value={role}
-            onChange={(e) => setRole(e.target.value as any)}
+            onChange={(e) => setRole(e.target.value as TeamMember["role"] | "All")}
             className="w-full rounded-2xl border border-slate-200 bg-white px-3 py-2.5 text-sm text-slate-900 focus:outline-none focus:ring-2 focus:ring-orange-300"
           >
             {roles.map((r) => (
