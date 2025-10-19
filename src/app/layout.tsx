@@ -6,7 +6,7 @@ import dynamic from "next/dynamic";
 const inter = Inter({ subsets: ["latin"] });
 
 const Header = dynamic(
-  () => import("@/components/Layout/Header"),
+  () => import("@/src/components/Layout/Header"),
   {
     ssr: true,
     loading: () => (
@@ -18,7 +18,7 @@ const Header = dynamic(
 );
 
 const Footer = dynamic(
-  () => import("@/components/Layout/Footer"),
+  () => import("@/src/components/Layout/Footer"),
   {
     ssr: true,
     loading: () => (

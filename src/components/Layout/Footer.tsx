@@ -6,7 +6,7 @@ import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const Footer2 = dynamic(
-  () => import("@/components/Layout/Footer2"),
+  () => import("@/src/components/Layout/Footer2"),
   {
     ssr: true,
     loading: () => (

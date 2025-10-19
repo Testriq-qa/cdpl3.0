@@ -8,7 +8,7 @@ import {
   TestimonialsSection,
   FAQSection,
   CTASection,
-} from '@/components/sections';
+} from '@/src/components/sections';
 
 // Loading component for better UX
 const SectionLoading = ({ className }: { className?: string }) => (
