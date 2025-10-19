@@ -135,7 +135,7 @@ const FAQSection = () => {
             </span>
           </h2>
           <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-            Got questions? We've got answers! Find everything you need to know about 
+            Got questions? We&apos;ve got answers! Find everything you need to know about 
             our courses, training methodology, and placement support.
           </p>
         </div>

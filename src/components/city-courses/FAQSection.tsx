@@ -44,7 +44,7 @@ export default function FAQSection({ faqs, cityName, courseName }: FAQSectionPro
           
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
             <span className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 bg-clip-text text-transparent">
-              Got Questions? We've Got{' '}
+              Got Questions? We&apos;ve Got{' '}
             </span>
             <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
               Answers
@@ -56,7 +56,7 @@ export default function FAQSection({ faqs, cityName, courseName }: FAQSectionPro
             <span className="font-semibold text-purple-700">{courseName}</span> training in{' '}
             <span className="font-semibold text-blue-700">{cityName}</span>.
             <br className="hidden sm:block" />
-            If you can't find what you're looking for, feel free to contact us.
+            If you can&apos;t find what you&apos;re looking for, feel free to contact us.
           </p>
         </div>
 

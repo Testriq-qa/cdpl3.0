@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, fadeUp } from "@/app/our-team/ui";
+import { fadeUp } from "@/app/our-team/ui";
 import { motion, type Transition } from "framer-motion";
 import {
   Sparkles,

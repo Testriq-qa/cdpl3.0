@@ -165,7 +165,7 @@ const WhyChooseUsSection = () => {
             </span>
           </h2>
           <p className="text-lg text-gray-600">
-            We don't just teach courses—we transform careers. Here's why thousands of 
+            We don&apos;t just teach courses—we transform careers. Here&apos;s why thousands of 
             students trust us with their professional growth.
           </p>
         </div>

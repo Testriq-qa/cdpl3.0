@@ -12,7 +12,6 @@ import {
   Star,
   Zap,
 } from "lucide-react";
-import Image from "next/image";
 
 interface Course {
   id: string;

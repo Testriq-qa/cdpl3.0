@@ -78,7 +78,7 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
         return () => {
             ignore = true;
         };
-    }, [open, jobId]);
+    }, [open, jobId, actions]);
 
     const skillChips = useMemo(() => {
         const names = Array.from(new Set((detail?.skills ?? []).map((s) => s.skill_name)));

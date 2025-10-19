@@ -1,10 +1,10 @@
 import { teamData, trainers, BRAND } from "@/app/our-team/data";
-import TeamCTASection from "@/components/sections/TeamCTASection";
+// import TeamCTASection from "@/components/sections/TeamCTASection";
 import TeamCultureSection from "@/components/sections/TeamCultureSection";
 import TeamDirectory from "@/components/sections/TeamDirectorySection";
 import TeamHeroSection from "@/components/sections/TeamHeroSection";
 import TeamLeadershipSpotlight from "@/components/sections/TeamLeadershipSpotlight";
-import TeamTestimonialsSection from "@/components/sections/TeamTestimonialsSection";
+// import TeamTestimonialsSection from "@/components/sections/TeamTestimonialsSection";
 import TeamTrainersSection from "@/components/sections/TeamTrainersSection";
 import JsonLdOrganization from "./JsonLdOrganization";
 

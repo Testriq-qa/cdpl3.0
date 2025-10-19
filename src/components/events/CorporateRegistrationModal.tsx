@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { X, Building2, User, Mail, Phone, MessageSquare, Send, CheckCircle } from "lucide-react";
+import { X, Building2, User, MessageSquare, Send, CheckCircle } from "lucide-react";
 
 interface FormData {
   organizationName: string;
@@ -113,7 +113,7 @@ const CorporateRegistrationModal = () => {
                   </div>
                   <div>
                     <h2 className="text-2xl font-bold">Corporate Training Request</h2>
-                    <p className="text-white/90 text-sm">Let's bring expert training to your organization</p>
+                    <p className="text-white/90 text-sm">Let&apos;s bring expert training to your organization</p>
                   </div>
                 </div>
               </div>
@@ -308,7 +308,7 @@ const CorporateRegistrationModal = () => {
                 </button>
 
                 <p className="text-xs text-gray-500 text-center">
-                  We'll get back to you within 24 hours to discuss your training requirements
+                  We&apos;ll get back to you within 24 hours to discuss your training requirements
                 </p>
               </form>
             </>

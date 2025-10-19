@@ -1,6 +1,4 @@
-"use client";
-
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState, useCallback } from "react";
 import { MapPin } from "lucide-react";
 
 /* ========= Types & Data ========= */
@@ -49,117 +47,117 @@ export default function PlacementsLocationsMapSection() {
 
     /* ===== Helpers ===== */
 
-    const radiusFor = (count: number) => {
+    const radiusFor = useCallback((count: number) => {
         const cmin = 15, cmax = 55;
         const t = (Math.min(cmax, Math.max(cmin, count)) - cmin) / (cmax - cmin);
         return 600 + t * 1200; // meters
-    };
+    }, []);
 
     const tileProviders = [
         {
             url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
             attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
             subdomains: ["a", "b", "c"],
         },
         {
             url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
             attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors \u00a9 <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: ["a", "b", "c", "d"],
         },
         {
             url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
             attribution:
-                '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+                '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors \u00a9 <a href="https://carto.com/attributions">CARTO</a>',
             subdomains: ["a", "b", "c", "d"],
         },
     ];
+
+    const addOnce = useCallback((node: HTMLLinkElement | HTMLScriptElement, key: string) => {
+        node.setAttribute("data-leaflet-key", key);
+        if (!document.querySelector(`[data-leaflet-key="${key}"]`)) {
+            (node.tagName === "LINK" ? document.head : document.body).appendChild(node);
+        }
+    }, []);
+
+    const loadLeaflet = useCallback(async () => {
+        if (!document.querySelector('[data-leaflet-key="leaflet-css"]')) {
+            const link = document.createElement("link");
+            link.rel = "stylesheet";
+            link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
+            addOnce(link, "leaflet-css");
+        }
+        const ensureScript = (src: string, key: string) =>
+            new Promise<void>((resolve, reject) => {
+                if ((window as any).L) return resolve();
+                if (document.querySelector(`[data-leaflet-key="${key}"]`)) {
+                    const check = () => ((window as any).L ? resolve() : setTimeout(check, 50));
+                    return check();
+                }
+                const script = document.createElement("script");
+                script.src = src;
+                script.async = true;
+                addOnce(script, key);
+                script.onload = () => resolve();
+                script.onerror = () => reject(new Error(`Failed to load ${src}`));
+            });
+
+        try {
+            await ensureScript("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", "leaflet-js-unpkg");
+        } catch {
+            await ensureScript("https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js", "leaflet-js-jsdelivr");
+        }
+    }, [addOnce]);
+
+    const wireBaseLayer = useCallback((L: any, map: any) => {
+        // remove previous base layer
+        if (baseRef.current) {
+            baseRef.current.remove();
+            baseRef.current = null;
+        }
+        const idx = providersRef.current % tileProviders.length;
+        const p = tileProviders[idx];
+
+        const layer = L.tileLayer(p.url, {
+            maxZoom: 19,
+            subdomains: p.subdomains as any,
+            attribution: p.attribution,
+            crossOrigin: true,
+        });
+
+        let loaded = false;
+        const onLoad = () => {
+            loaded = true;
+            setTileMsg("");
+            layer.off("load", onLoad);
+            layer.off("tileerror", onError);
+        };
+        const onError = () => {
+            if (loaded) return;
+            // fallback to next provider
+            providersRef.current += 1;
+            setTileMsg("Switching tile provider...");
+            setTimeout(() => {
+                wireBaseLayer(L, map);
+            }, 50);
+        };
+
+        layer.on("load", onLoad);
+        layer.on("tileerror", onError);
+        layer.addTo(map);
+        baseRef.current = layer;
+
+        // safety timeout in case no events fire
+        setTimeout(() => {
+            if (!loaded) onError();
+        }, 1500);
+    }, [tileProviders, setTileMsg, providersRef, baseRef]);
 
     /* ===== Effect: load Leaflet + init map with provider fallback ===== */
 
     useEffect(() => {
         let cancelled = false;
-
-        const addOnce = (node: HTMLLinkElement | HTMLScriptElement, key: string) => {
-            node.setAttribute("data-leaflet-key", key);
-            if (!document.querySelector(`[data-leaflet-key="${key}"]`)) {
-                (node.tagName === "LINK" ? document.head : document.body).appendChild(node);
-            }
-        };
-
-        const loadLeaflet = async () => {
-            if (!document.querySelector('[data-leaflet-key="leaflet-css"]')) {
-                const link = document.createElement("link");
-                link.rel = "stylesheet";
-                link.href = "https://unpkg.com/leaflet@1.9.4/dist/leaflet.css";
-                addOnce(link, "leaflet-css");
-            }
-            const ensureScript = (src: string, key: string) =>
-                new Promise<void>((resolve, reject) => {
-                    if ((window as any).L) return resolve();
-                    if (document.querySelector(`[data-leaflet-key="${key}"]`)) {
-                        const check = () => ((window as any).L ? resolve() : setTimeout(check, 50));
-                        return check();
-                    }
-                    const script = document.createElement("script");
-                    script.src = src;
-                    script.async = true;
-                    addOnce(script, key);
-                    script.onload = () => resolve();
-                    script.onerror = () => reject(new Error(`Failed to load ${src}`));
-                });
-
-            try {
-                await ensureScript("https://unpkg.com/leaflet@1.9.4/dist/leaflet.js", "leaflet-js-unpkg");
-            } catch {
-                await ensureScript("https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js", "leaflet-js-jsdelivr");
-            }
-        };
-
-        const wireBaseLayer = (L: any, map: any) => {
-            // remove previous base layer
-            if (baseRef.current) {
-                baseRef.current.remove();
-                baseRef.current = null;
-            }
-            const idx = providersRef.current % tileProviders.length;
-            const p = tileProviders[idx];
-
-            const layer = L.tileLayer(p.url, {
-                maxZoom: 19,
-                subdomains: p.subdomains as any,
-                attribution: p.attribution,
-                crossOrigin: true,
-            });
-
-            let loaded = false;
-            const onLoad = () => {
-                loaded = true;
-                setTileMsg("");
-                layer.off("load", onLoad);
-                layer.off("tileerror", onError);
-            };
-            const onError = () => {
-                if (loaded) return;
-                // fallback to next provider
-                providersRef.current += 1;
-                setTileMsg("Switching tile provider...");
-                setTimeout(() => {
-                    wireBaseLayer(L, map);
-                }, 50);
-            };
-
-            layer.on("load", onLoad);
-            layer.on("tileerror", onError);
-            layer.addTo(map);
-            baseRef.current = layer;
-
-            // safety timeout in case no events fire
-            setTimeout(() => {
-                if (!loaded) onError();
-            }, 1500);
-        };
 
         const init = async () => {
             if (!containerRef.current) return;
@@ -264,113 +262,102 @@ export default function PlacementsLocationsMapSection() {
             setTimeout(() => mapRef.current?.invalidateSize(), 60);
 
             if (!resizeObsRef.current && "ResizeObserver" in window) {
-                resizeObsRef.current = new ResizeObserver(() => mapRef.current?.invalidateSize());
+                resizeObsRef.current = new ResizeObserver(() => {
+                    mapRef.current?.invalidateSize();
+                });
+                containerRef.current && resizeObsRef.current.observe(containerRef.current);
             }
-            resizeObsRef.current?.observe(containerRef.current!);
         };
 
         init();
 
         return () => {
             cancelled = true;
-            try {
-                resizeObsRef.current?.disconnect();
-            } catch { }
-            if (mapRef.current) {
-                mapRef.current.remove();
-                mapRef.current = null;
-            }
+            mapRef.current?.remove();
+            resizeObsRef.current?.disconnect();
         };
-    }, []);
+    }, [loadLeaflet, wireBaseLayer, radiusFor, containerRef, mapRef, setTileMsg, layersRef, setActive]);
 
-    const focusCity = (name: string) => {
-        setActive(name);
-        const L = (window as any).L;
-        const map = mapRef.current;
-        const layer = layersRef.current[name];
-        if (!L || !map || !layer) return;
-        const { innerDot, circle } = layer;
-        map.setView(innerDot.getLatLng(), Math.max(10, map.getZoom()));
-        innerDot.openPopup();
-        (circle as any).setStyle({ fillOpacity: 0.35, weight: 1.8 });
-        setTimeout(() => (circle as any).setStyle({ fillOpacity: 0.25, weight: 1.2 }), 900);
-    };
 
     return (
-        <section className="py-10 sm:py-12">
-            <div className="flex items-center justify-between gap-4">
-                <h3 className="text-lg font-semibold">Placements by Location</h3>
-                <div className="hidden sm:flex items-center gap-3 text-xs text-gray-600">
-                    <Pill label="Total" value={String(stats.total)} />
-                    <Pill label="Avg LPA" value={`${stats.avg} LPA`} />
-                    <Pill label="Top City" value={stats.topCity.name} />
+        <section className="py-12 md:py-20 bg-gradient-to-br from-purple-50 to-blue-50 relative overflow-hidden">
+            {tileMsg && (
+                <div className="absolute inset-0 z-10 flex items-center justify-center bg-black/50 text-white text-sm font-medium">
+                    {tileMsg}
                 </div>
-            </div>
+            )}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-4">
+                        Our Placement Footprint Across India
+                    </h2>
+                    <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                        Explore the cities where our alumni are making an impact. We connect talent with top companies nationwide.
+                    </p>
+                </div>
 
-            {/* Chips */}
-            <div className="mt-4 grid grid-cols-2 sm:grid-cols-4 lg:grid-cols-8 gap-3">
-                {CHIP_CITIES.map((c) => (
-                    <button
-                        key={c}
-                        onClick={() => focusCity(c)}
-                        onMouseEnter={() => setActive(c)}
-                        onMouseLeave={() => setActive((v) => (v === c ? null : v))}
-                        className={`rounded-xl border border-gray-200/60 dark:border-white/10 bg-white/70 dark:bg-white/5 backdrop-blur-md px-3 py-2 text-center text-sm transition hover:shadow-sm ${active === c ? "shadow-sm ring-1 ring-[#7ee7ff]/50" : ""
-                            }`}
-                    >
-                        <span className="inline-flex items-center gap-1">
-                            <MapPin className="h-4 w-4 text-[#7ee7ff]" />
-                            <span className="truncate">{c}</span>
-                        </span>
-                    </button>
-                ))}
-            </div>
-
-            {/* Map wrapper (no heavy overlays on the actual map div) */}
-            <div className="mt-6 rounded-2xl border border-gray-100/70 dark:border-white/10 overflow-hidden">
-                <div
-                    ref={containerRef}
-                    className="w-full h-[420px] sm:h-[500px] lg:h-[560px]"
-                    aria-label="Placements map"
-                />
-                {tileMsg && (
-                    <div className="px-4 py-2 text-xs text-amber-700 bg-amber-50 border-t border-amber-100">
-                        {tileMsg} — if it persists, your CSP or network may block map tiles. Allow one of:
-                        <code className="ml-1"> *.tile.openstreetmap.org </code> or
-                        <code className="ml-1"> *.basemaps.cartocdn.com </code> in <code>img-src</code>.
+                <div className="grid md:grid-cols-2 gap-10 items-center">
+                    {/* Map Container */}
+                    <div>
+                        <div
+                            ref={containerRef}
+                            className="w-full h-96 bg-gray-200 rounded-xl shadow-xl overflow-hidden relative"
+                        ></div>
+                        <p className="text-xs text-gray-500 mt-3 text-center">
+                            Interactive map showing placement locations.
+                        </p>
                     </div>
-                )}
-                <div className="flex flex-wrap items-center gap-3 px-4 py-3">
-                    <LegendDot label="More placements" gradient />
-                    <LegendDot label="Fewer placements" />
-                    <span className="ml-auto text-xs text-gray-500">
-                        Click a city chip or marker to view Avg/Max LPA & domains
-                    </span>
+
+                    {/* Stats and Call to Action */}
+                    <div className="space-y-8">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                            <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                                <h3 className="text-xl font-semibold text-gray-800 mb-2">Total Placements</h3>
+                                <p className="text-4xl font-bold text-blue-600">{stats.total}+</p>
+                                <p className="text-sm text-gray-500 mt-2">Across various domains</p>
+                            </div>
+                            <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100">
+                                <h3 className="text-xl font-semibold text-gray-800 mb-2">Average Package</h3>
+                                <p className="text-4xl font-bold text-green-600">{stats.avg} LPA</p>
+                                <p className="text-sm text-gray-500 mt-2">For our placed students</p>
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 className="text-2xl font-bold text-gray-900 mb-4">Top Placement Cities</h3>
+                            <div className="flex flex-wrap gap-3">
+                                {CHIP_CITIES.map((city) => (
+                                    <span
+                                        key={city}
+                                        onClick={() => setActive(city)}
+                                        className={`px-4 py-2 rounded-full text-sm font-medium cursor-pointer transition-all ${active === city
+                                                ? "bg-blue-600 text-white shadow-md"
+                                                : "bg-gray-100 text-gray-700 hover:bg-gray-200"}
+                                        `}
+                                    >
+                                        <MapPin className="inline-block w-4 h-4 mr-1" /> {city}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
+
+                        <div className="bg-white rounded-xl shadow-md p-6 border border-gray-100 flex items-center space-x-4">
+                            <div className="flex-shrink-0">
+                                <svg className="w-12 h-12 text-purple-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.001 12.001 0 003 12c0 2.755 1.05 5.492 2.944 7.957l-1.414 1.414A1 1 0 005 22h14a1 1 0 00.707-1.707l-1.414-1.414A12.001 12.001 0 0021 12c0-2.755-1.05-5.492-2.944-7.957z" />
+                                </svg>
+                            </div>
+                            <div>
+                                <h3 className="text-xl font-semibold text-gray-800 mb-1">Ready to Launch Your Career?</h3>
+                                <p className="text-gray-600">Join our programs and become part of our success story.</p>
+                                <button className="mt-3 inline-flex items-center px-5 py-2.5 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-purple-600 hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-purple-500">
+                                    Explore Courses
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </section>
-    );
-}
-
-/* ===== Small UI bits ===== */
-
-function Pill({ label, value }: { label: string; value: string }) {
-    return (
-        <span className="inline-flex items-center gap-2 rounded-full border border-gray-200/60 dark:border-white/10 bg-white/70 dark:bg-white/5 px-3 py-1">
-            <span className="text-gray-500">{label}</span>
-            <span className="font-semibold">{value}</span>
-        </span>
-    );
-}
-
-function LegendDot({ label, gradient = false }: { label: string; gradient?: boolean }) {
-    return (
-        <span className="inline-flex items-center gap-2 text-xs text-gray-600">
-            <span
-                className={`inline-block h-3 w-3 rounded-full ${gradient ? "bg-gradient-to-br from-[#7ee7ff] to-[#9d7bff]" : "bg-[#cfe8ff]"
-                    }`}
-            />
-            {label}
-        </span>
     );
 }

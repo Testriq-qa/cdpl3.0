@@ -1,7 +1,7 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronDown, Search } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 
 /**
  * AboutFAQSection — sleek, light-themed, and slightly futuristic FAQ
@@ -83,7 +83,7 @@ const faqs: FAQ[] = [
 
 export default function AboutFAQSection() {
     const [open, setOpen] = useState<number | null>(0);
-    const [query, setQuery] = useState("");
+    const [query] = useState("");
 
     const filteredFaqs = useMemo(() => {
         const q = query.trim().toLowerCase();

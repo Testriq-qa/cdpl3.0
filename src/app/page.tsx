@@ -1,5 +1,5 @@
 
-import { Suspense } from 'react';
+
 import {
   HeroSection,
   StatsSection,
@@ -10,22 +10,6 @@ import {
   CTASection,
 } from '@/components/sections';
 
-// Loading component for better UX
-const SectionLoading = ({ className }: { className?: string }) => (
-  <div className={`animate-pulse ${className}`}>
-    <div className="container mx-auto px-4 py-20">
-      <div className="max-w-4xl mx-auto">
-        <div className="h-8 bg-gray-200 rounded-lg mb-4 w-3/4 mx-auto"></div>
-        <div className="h-4 bg-gray-200 rounded-lg mb-8 w-1/2 mx-auto"></div>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {[1, 2, 3].map((i) => (
-            <div key={i} className="h-32 bg-gray-200 rounded-lg"></div>
-          ))}
-        </div>
-      </div>
-    </div>
-  </div>
-);
 
 // export default function HomePage() {
 //   return (

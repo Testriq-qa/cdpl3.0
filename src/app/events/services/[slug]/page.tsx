@@ -1,6 +1,6 @@
 'use client';
 
-import { getServiceBySlug, getAllServiceSlugs } from '@/data/servicesData';
+import { getServiceBySlug } from '@/data/servicesData';
 import { getEventsByService } from '@/data/eventsData';
 import { CheckCircle, Calendar, MapPin, Users, ArrowRight, Award, Target, BookOpen, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
@@ -199,7 +199,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-4xl font-bold text-gray-900 mb-8">Past Events & Programs</h2>
             <p className="text-lg text-gray-600 mb-12">
-              See how we've successfully delivered this service to organizations like yours.
+              See how we&apos;ve successfully delivered this service to organizations like yours.
             </p>
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -263,7 +263,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
             <IconComponent className="w-16 h-16 mx-auto mb-6" />
             <h2 className="text-3xl font-bold mb-4">Ready to Get Started?</h2>
             <p className="text-xl mb-8 text-white/90">
-              Let's discuss how {service.title} can benefit your organization.
+              Let&apos;s discuss how {service.title} can benefit your organization.
             </p>
             <button
               onClick={() => {

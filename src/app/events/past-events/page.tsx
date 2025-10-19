@@ -197,7 +197,7 @@ export default function PastEventsPage() {
           <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-12 text-center text-white shadow-2xl">
             <h2 className="text-3xl font-bold mb-4">Want Similar Training for Your Organization?</h2>
             <p className="text-xl mb-8 text-white/90">
-              We can customize and deliver any of these programs for your team. Let's discuss your training needs.
+              We can customize and deliver any of these programs for your team. Let&apos;s discuss your training needs.
             </p>
             <button
               onClick={() => {
