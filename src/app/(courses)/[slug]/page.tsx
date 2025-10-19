@@ -17,25 +17,26 @@ import {
   seoFromRecord,
 } from '@/lib/cityCourseData';
 
-type PageProps = { params: { slug: string } };
+type PageProps = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return getAllSeoSlugs().map((slug) => ({ slug }));
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const record = getRecordBySeoSlug(params.slug);
+  const { slug } = await params;
+  const record = getRecordBySeoSlug(slug);
   return seoFromRecord(record);
 }
 
-export default function Page({ params }: PageProps) {
-  const record = getRecordBySeoSlug(params.slug);
+export default async function Page({ params }: PageProps) {
+  const { slug } = await params;
+  const record = getRecordBySeoSlug(slug);
   if (!record) notFound();
 
   const {
     courseDisplayName,
     cityDisplayName,
-    courseCategory,
     breadcrumbs,
     categories,
     modules,
@@ -49,7 +50,6 @@ export default function Page({ params }: PageProps) {
       <HeroSection
         courseName={courseDisplayName}
         cityName={cityDisplayName}
-        courseCategory={courseCategory}
         breadcrumbs={breadcrumbs}
       />
 

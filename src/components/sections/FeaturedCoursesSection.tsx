@@ -121,7 +121,7 @@ const CourseCard = ({ course }: { course: Course }) => {
             </div>
             <div className="flex items-center gap-1">
               <Users className="w-4 h-4" />
-              <span>{course.enrolled.toLocaleString()} enrolled</span>
+              <span>{course.enrolled.toLocaleString('en-IN')} enrolled</span>
             </div>
           </div>
         </div>
@@ -192,14 +192,14 @@ const CourseCard = ({ course }: { course: Course }) => {
           <div>
             <div className="flex items-baseline gap-2">
               <span className="text-3xl font-bold text-gray-900">
-                ₹{course.price.toLocaleString()}
+                ₹{course.price.toLocaleString('en-IN')}
               </span>
               <span className="text-lg text-gray-400 line-through">
-                ₹{course.originalPrice.toLocaleString()}
+                ₹{course.originalPrice.toLocaleString('en-IN')}
               </span>
             </div>
             <span className="text-sm text-green-600 font-semibold">
-              Save ₹{(course.originalPrice - course.price).toLocaleString()}
+              Save ₹{(course.originalPrice - course.price).toLocaleString('en-IN')}
             </span>
           </div>
           <div className="bg-green-100 text-green-700 px-3 py-1 rounded-lg text-sm font-bold">

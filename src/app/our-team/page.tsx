@@ -1,4 +1,4 @@
-import { teamData, trainers, BRAND } from "@/app/our-team/data";
+import { teamData, trainers } from "@/app/our-team/data";
 // import TeamCTASection from "@/components/sections/TeamCTASection";
 import TeamCultureSection from "@/components/sections/TeamCultureSection";
 import TeamDirectory from "@/components/sections/TeamDirectorySection";

@@ -1,14 +1,25 @@
-'use client';
-
 import { getServiceBySlug } from '@/data/servicesData';
 import { getEventsByService } from '@/data/eventsData';
 import { CheckCircle, Calendar, MapPin, Users, ArrowRight, Award, Target, BookOpen, TrendingUp } from 'lucide-react';
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
+import dynamic from 'next/dynamic';
 
-export default function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const service = getServiceBySlug(params.slug);
-  const pastEvents = getEventsByService(params.slug);
+type PageProps = { params: Promise<{ slug: string }> };
+
+// Dynamically import the client-side RequestButton to handle interactivity without serialization issues
+const RequestButton = dynamic(() => import('./RequestButton'), {
+  loading: () => (
+    <div className="inline-flex items-center px-8 py-4 bg-gray-200 rounded-xl animate-pulse">
+      <div className="h-4 w-32 bg-gray-300 rounded" />
+    </div>
+  ),
+});
+
+export default async function ServiceDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const service = getServiceBySlug(slug);
+  const pastEvents = getEventsByService(slug);
 
   if (!service) {
     notFound();
@@ -38,17 +49,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
               <p className="text-2xl text-white/90 mb-8">{service.tagline}</p>
               <p className="text-lg text-white/80 mb-8">{service.shortDescription}</p>
               
-              <button
-                onClick={() => {
-                  const event = new CustomEvent('openCorporateRegistration', {
-                    detail: { service: service.title }
-                  });
-                  window.dispatchEvent(event);
-                }}
-                className="bg-white text-purple-600 px-8 py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-              >
-                Request This Service
-              </button>
+              <RequestButton serviceTitle={service.title} />
             </div>
 
             {/* Right Column - Quick Info */}
@@ -242,7 +243,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
                     <p className="text-gray-700 text-sm mb-4 line-clamp-3">{event.purpose}</p>
 
                     {/* CTA */}
-                    <Link href={`/events/${event.slug}`}>
+                    <Link href={`/events/${event.slug}`} className="block">
                       <button className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2.5 rounded-xl font-semibold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-300 flex items-center justify-center gap-2 text-sm">
                         View Full Details
                         <ArrowRight className="w-4 h-4" />
@@ -265,17 +266,7 @@ export default function ServiceDetailPage({ params }: { params: { slug: string }
             <p className="text-xl mb-8 text-white/90">
               Let&apos;s discuss how {service.title} can benefit your organization.
             </p>
-            <button
-              onClick={() => {
-                const event = new CustomEvent('openCorporateRegistration', {
-                  detail: { service: service.title }
-                });
-                window.dispatchEvent(event);
-              }}
-              className="bg-white text-purple-600 px-8 py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-            >
-              Request This Service
-            </button>
+            <RequestButton serviceTitle={service.title} />
           </div>
         </div>
       </section>

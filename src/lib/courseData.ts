@@ -1,6 +1,6 @@
 // lib/cityCourseData.ts
 import type { Metadata } from 'next';
-import { slugify, deslugify } from './slug';
+import { toKebab as slugify, deslugify } from './slug';
 import {
   INDIAN_CITIES,
   generatePageTitle,
@@ -11,7 +11,7 @@ import {
   SAMPLE_TESTIMONIALS,
   SAMPLE_FAQS,
   HIRING_PARTNERS,
-} from '@/src/components/city-courses/sampleData';
+} from '@/components/city-courses/sampleData';
 
 import { COURSE_REGISTRY } from './courseRegistry';
 

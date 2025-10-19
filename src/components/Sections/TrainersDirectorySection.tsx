@@ -3,11 +3,20 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Trainer } from "@/app/trainers/types";
 import { Search, Filter, X, Flame, SortDesc, BadgeCheck } from "lucide-react";
-import TrainersCardSection from "@/components/Sections/TrainersCardSection";
+import TrainersCardSection from "@/components/sections/TrainersCardSection";
 
 type SortKey = "relevance" | "name" | "experience";
 
-export default function TrainersDirectorySection({ trainers }: { trainers: Trainer[] }) {
+type ExtendedTrainer = Trainer & {
+    experienceYears?: number;
+    featured?: boolean;
+    linkedin?: string;
+    website?: string;
+    twitter?: string;
+    github?: string;
+};
+
+export default function TrainersDirectorySection({ trainers }: { trainers: ExtendedTrainer[] }) {
     const [query, setQuery] = useState("");
     const [skill, setSkill] = useState<string | null>(null);
     const [sortBy, setSortBy] = useState<SortKey>("relevance");
@@ -45,16 +54,16 @@ export default function TrainersDirectorySection({ trainers }: { trainers: Train
         } else if (sortBy === "experience") {
             // assumes optional numeric field like experienceYears
             sorted.sort(
-                (a, b) => (b as any).experienceYears ?? 0 - ((a as any).experienceYears ?? 0)
+                (a, b) => (b.experienceYears ?? 0) - (a.experienceYears ?? 0)
             );
         } else {
             // "relevance": light heuristic -> featured first, then experience, then name
             sorted.sort((a, b) => {
-                const af = (a as any).featured ? 1 : 0;
-                const bf = (b as any).featured ? 1 : 0;
+                const af = a.featured ? 1 : 0;
+                const bf = b.featured ? 1 : 0;
                 if (bf !== af) return bf - af;
-                const ae = (a as any).experienceYears ?? 0;
-                const be = (b as any).experienceYears ?? 0;
+                const ae = a.experienceYears ?? 0;
+                const be = b.experienceYears ?? 0;
                 if (be !== ae) return be - ae;
                 return a.name.localeCompare(b.name);
             });
@@ -63,7 +72,7 @@ export default function TrainersDirectorySection({ trainers }: { trainers: Train
     }, [trainers, query, skill, sortBy]);
 
     const featured = useMemo(
-        () => trainers.filter((t: any) => t.featured).slice(0, 6),
+        () => trainers.filter((t) => t.featured).slice(0, 6),
         [trainers]
     );
 
@@ -77,10 +86,10 @@ export default function TrainersDirectorySection({ trainers }: { trainers: Train
     const jsonLd = useMemo(() => {
         const items = filtered.slice(0, 12).map((t, idx) => {
             const sameAs = [
-                (t as any).linkedin,
-                (t as any).website,
-                (t as any).twitter,
-                (t as any).github,
+                t.linkedin,
+                t.website,
+                t.twitter,
+                t.github,
             ].filter(Boolean);
             return {
                 "@type": "ListItem",
@@ -262,7 +271,7 @@ export default function TrainersDirectorySection({ trainers }: { trainers: Train
                     {query ? (
                         <>
                             {" "}
-                            matching <strong className="text-slate-900">“{query}”</strong>
+                            matching <strong className="text-slate-900">&quot;{query}&quot;</strong>
                         </>
                     ) : null}
                     .
@@ -311,7 +320,6 @@ export default function TrainersDirectorySection({ trainers }: { trainers: Train
             {/* JSON-LD for rich results */}
             <script
                 type="application/ld+json"
-                // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
         </section>

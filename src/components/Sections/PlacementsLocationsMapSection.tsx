@@ -55,26 +55,29 @@ export default function PlacementsLocationsMapSection() {
         return 600 + t * 1200; // meters
     }, []);
 
-    const tileProviders = [
-        {
-            url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
-            attribution:
-                '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-            subdomains: ["a", "b", "c"],
-        },
-        {
-            url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
-            attribution:
-                '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors \u00a9 <a href="https://carto.com/attributions">CARTO</a>',
-            subdomains: ["a", "b", "c", "d"],
-        },
-        {
-            url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
-            attribution:
-                '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors \u00a9 <a href="https://carto.com/attributions">CARTO</a>',
-            subdomains: ["a", "b", "c", "d"],
-        },
-    ];
+    const tileProviders = useMemo(
+        () => [
+            {
+                url: "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+                attribution:
+                    '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+                subdomains: ["a", "b", "c"],
+            },
+            {
+                url: "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                attribution:
+                    '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors \u00a9 <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: ["a", "b", "c", "d"],
+            },
+            {
+                url: "https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png",
+                attribution:
+                    '\u00a9 <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors \u00a9 <a href="https://carto.com/attributions">CARTO</a>',
+                subdomains: ["a", "b", "c", "d"],
+            },
+        ],
+        []
+    );
 
     const addOnce = useCallback((node: HTMLLinkElement | HTMLScriptElement, key: string) => {
         node.setAttribute("data-leaflet-key", key);
@@ -92,9 +95,10 @@ export default function PlacementsLocationsMapSection() {
         }
         const ensureScript = (src: string, key: string) =>
             new Promise<void>((resolve, reject) => {
-                if (typeof window !== 'undefined' && (window as any).L) return resolve();
+                const win = window as typeof window & { L?: typeof import('leaflet') };
+                if (typeof window !== 'undefined' && win.L) return resolve();
                 if (document.querySelector(`[data-leaflet-key="${key}"]`)) {
-                    const check = () => (typeof window !== 'undefined' && (window as any).L ? resolve() : setTimeout(check, 50));
+                    const check = () => (typeof window !== 'undefined' && win.L ? resolve() : setTimeout(check, 50));
                     return check();
                 }
                 const script = document.createElement("script");
@@ -171,7 +175,8 @@ export default function PlacementsLocationsMapSection() {
             }
             if (cancelled) return;
 
-            const L = (window as any).L as typeof import('leaflet');
+            const win = window as typeof window & { L?: typeof import('leaflet') };
+            const L = win.L as typeof import('leaflet');
             if (!L) {
                 setTileMsg("Leaflet not available on window.");
                 return;

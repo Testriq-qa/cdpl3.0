@@ -69,43 +69,43 @@ function SectionLoader({ label = "Loading..." }: { label?: string }) {
  * Dynamic Imports (Client)
  * ========================= */
 const PlacementsHeroSection = dynamic(
-    () => import("@/components/Sections/PlacementsHeroSection"),
+    () => import("@/components/sections/PlacementsHeroSection"),
     { ssr: true, loading: () => <SectionLoader label="Preparing hero…" /> }
 );
 const PlacementsHighlightsStatsSection = dynamic(
-    () => import("@/components/Sections/PlacementsHighlightsStatsSection"),
+    () => import("@/components/sections/PlacementsHighlightsStatsSection"),
     { ssr: true, loading: () => <SectionLoader label="Loading highlights…" /> }
 );
 const PlacementsOffersTickerSection = dynamic(
-    () => import("@/components/Sections/PlacementsOffersTickerSection"),
+    () => import("@/components/sections/PlacementsOffersTickerSection"),
     { ssr: true, loading: () => <SectionLoader label="Fetching offers…" /> }
 );
 const PlacementsFiltersGridSection = dynamic(
-    () => import("@/components/Sections/PlacementsFiltersGridSection"),
+    () => import("@/components/sections/PlacementsFiltersGridSection"),
     { ssr: true, loading: () => <SectionLoader label="Building grid…" /> }
 );
 const PlacementsCompanyWallSection = dynamic(
-    () => import("@/components/Sections/PlacementsCompanyWallSection"),
+    () => import("@/components/sections/PlacementsCompanyWallSection"),
     { ssr: true, loading: () => <SectionLoader label="Loading partners…" /> }
 );
 const PlacementsSuccessStoriesCarousel = dynamic(
-    () => import("@/components/Sections/PlacementsSuccessStoriesCarousel"),
+    () => import("@/components/sections/PlacementsSuccessStoriesCarousel"),
     { ssr: true, loading: () => <SectionLoader label="Loading stories…" /> }
 );
 const PlacementsRolesBreakdownSection = dynamic(
-    () => import("@/components/Sections/PlacementsRolesBreakdownSection"),
+    () => import("@/components/sections/PlacementsRolesBreakdownSection"),
     { ssr: true, loading: () => <SectionLoader label="Rendering roles…" /> }
 );
 const PlacementsMentorCTASection = dynamic(
-    () => import("@/components/Sections/PlacementsMentorCTASection"),
+    () => import("@/components/sections/PlacementsMentorCTASection"),
     { ssr: true, loading: () => <SectionLoader label="Setting up CTA…" /> }
 );
 const PlacementsFAQSection = dynamic(
-    () => import("@/components/Sections/PlacementsFAQSection"),
+    () => import("@/components/sections/PlacementsFAQSection"),
     { ssr: true, loading: () => <SectionLoader label="Loading FAQs…" /> }
 );
 const PlacementsNewsletterCTASection = dynamic(
-    () => import("@/components/Sections/PlacementsNewsletterCTASection"),
+    () => import("@/components/sections/PlacementsNewsletterCTASection"),
     { ssr: true, loading: () => <SectionLoader label="Loading updates…" /> }
 );
 

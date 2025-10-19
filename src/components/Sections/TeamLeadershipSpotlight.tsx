@@ -31,7 +31,7 @@ type Props = { data: TeamMember[] };
 
 export default function LeadershipSpotlight({ }: Props) {
     // ⬇️ Source now comes from teamLeaders; filter to Leadership (keeps section semantics)
-    const leaders: TeamLeaderType[] = teamLeaders.filter((m) => m.role === "Leadership" || "Faculty" || "Advisory" || "Operations");
+    const leaders: TeamLeaderType[] = teamLeaders.filter((m) => m.role === "Leadership" || m.role === "Faculty" || m.role === "Advisory" || m.role === "Operations");
 
     if (leaders.length === 0) return null;
 
@@ -162,13 +162,15 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
             >
                 {/* Avatar Section with Futuristic Frame */}
                 <div className="relative mx-auto shrink-0 lg:mx-0">
-                    <div className="relative h-64 w-64 lg:h-90 lg:w-90 overflow-hidden rounded-full transition-all duration-500 group-hover:scale-110 group-hover:border-orange-300">
+                    <div className="relative h-64 w-64 lg:h-[360px] lg:w-[360px] overflow-hidden rounded-full transition-all duration-500 group-hover:scale-110 group-hover:border-orange-300">
                         {leader.avatar ? (
                            <Image
                                 src={leader.avatar}
                                 alt={`${leader.name} - ${leader.title}`}
-                                className="h-full w-full object-cover transition-transform duration-500"
+                                fill
+                                className="object-cover transition-transform duration-500"
                                 loading="lazy"
+                                sizes="(max-width: 1024px) 256px, 360px"
                             />
                         ) : (
                             <div className="flex h-full w-full items-center justify-center text-7xl font-bold text-orange-600">

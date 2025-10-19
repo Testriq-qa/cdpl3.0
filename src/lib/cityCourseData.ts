@@ -8,6 +8,7 @@ import {
   SAMPLE_MODULES,
   SAMPLE_FAQS,
   HIRING_PARTNERS,
+  SAMPLE_TESTIMONIALS,
 } from '@/components/city-courses/sampleData';
 import { COURSE_REGISTRY } from './courseRegistry';
 
