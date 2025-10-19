@@ -91,11 +91,11 @@ export default function HeroSection({
         )}
 
         {/* Wider left / narrower right */}
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-24 items-start">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
           {/* Left Content (wider) */}
-          <div className="lg:col-span-7 space-y-6">
+          <div className="lg:col-span-8 space-y-6">
             {/* Badge */}
-            <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-400 to-rose-400 text-white rounded-full px-3 py-1 shadow-sm">
+            <div className="inline-flex items-center space-x-2 bg-brand text-white rounded-full px-3 py-1 shadow-sm">
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
               </svg>
@@ -103,8 +103,8 @@ export default function HeroSection({
             </div>
 
             {/* Main Heading */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-18 tracking-tight">
-              <span className="bg-gradient-to-r from-[#ff8c00] via-[#ff5f6d] to-[#ffc371] bg-clip-text text-transparent">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-12 md:leading-14 lg:leading-18 tracking-tight">
+              <span className="bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent">
                 {courseName} Training in {cityName}
               </span>
             </h1>
@@ -136,7 +136,7 @@ export default function HeroSection({
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 pt-6">
               {/* Primary (warm, non-shiny gradient) */}
-              <button className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-orange-400 to-rose-400 rounded-lg transition-all duration-300 hover:from-orange-500 hover:to-rose-600 hover:scale-[1.02] shadow-sm">
+              <button className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-brand text-white rounded-lg transition-all duration-300 hover:scale-[1.02] shadow-sm">
                 <span className="relative z-10">Download Syllabus</span>
                 <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -144,7 +144,7 @@ export default function HeroSection({
               </button>
 
               {/* Secondary (light surface, clear outline) */}
-              <button className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-white text-slate-900 border-2 border-slate-300 rounded-lg transition-all duration-300 hover:bg-slate-50">
+              <button className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-white text-slate-900 border-2 border-brand rounded-lg transition-all duration-300 hover:bg-brand hover:text-white">
                 <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                 </svg>
@@ -179,7 +179,7 @@ export default function HeroSection({
           </div>
 
           {/* Right Content - Form (narrower) */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10 border border-slate-200 md:-mt-6 lg:-mt-10 lg:self-start w-full lg:max-w-md lg:col-span-5">
+          <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10 border border-slate-200 md:-mt-6 lg:-mt-10 lg:self-start w-full lg:max-w-md lg:col-span-4">
             <div className="mb-6">
               <h3 className="text-2xl font-bold text-slate-900 mb-2">Get Started Today!</h3>
               <p className="text-slate-600">
@@ -197,9 +197,10 @@ export default function HeroSection({
                   id="name"
                   name="name"
                   required
-                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all placeholder-slate-400"
+                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-100 placeholder-slate-400"
                   placeholder="Enter your name"
                 />
+
               </div>
 
               <div>
@@ -211,7 +212,7 @@ export default function HeroSection({
                   id="email"
                   name="email"
                   required
-                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all placeholder-slate-400"
+                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-100  placeholder-slate-400"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -225,7 +226,7 @@ export default function HeroSection({
                   id="phone"
                   name="phone"
                   required
-                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all placeholder-slate-400"
+                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-100 placeholder-slate-400"
                   placeholder="+91 98765 43210"
                 />
               </div>
@@ -237,7 +238,7 @@ export default function HeroSection({
                 <select
                   id="course"
                   name="course"
-                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:ring-2 focus:ring-orange-500 focus:border-transparent transition-all"
+                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-100"
                 >
                   <option value={courseName} className="bg-white">
                     {courseName} in {cityName}
@@ -248,7 +249,7 @@ export default function HeroSection({
 
               <button
                 type="submit"
-                className="w-full bg-gradient-to-r from-orange-400 to-rose-400 text-white font-semibold py-4 px-6 rounded-lg hover:from-orange-500 hover:to-rose-600 transition-all duration-300 shadow-sm"
+                className="w-full bg-brand text-white font-semibold py-4 px-6 rounded-lg hover:shadow-lg hover:bg-amber-600 hover:translate-x-1 cursor-pointer transition-all duration-300 shadow-sm"
               >
                 Enroll Now - Limited Seats!
               </button>

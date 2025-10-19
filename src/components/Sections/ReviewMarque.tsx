@@ -239,7 +239,7 @@ export default function ReviewsMarquee() {
         {/* Tabs + stat header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="mt-1 flex items-center justify-center gap-3 text-sm text-slate-600">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 border border-slate-200 shadow-sm">
+            <span className="inline-flex items-center gap-2 rounded-full bg-white px-2 pr-7 md:pr-3 py-1 border border-slate-200 shadow-sm">
               <Image src={statLogo.src} alt={statLogo.alt} width={18} height={18} />
               {stat.overall}
             </span>
@@ -250,64 +250,143 @@ export default function ReviewsMarquee() {
           </div>
 
           {/* Tabs */}
-          <div className="mt-6 inline-flex rounded-2xl border border-slate-200 bg-white/70 backdrop-blur p-2 shadow-md">
-            {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p) => {
-              const isActive = tab === p;
-              return (
-                <button
-                  key={String(p)}
-                  onClick={() => setTab(p)}
-                  aria-label={`View ${PLATFORM[p].title} reviews`}
-                  className={[
-                    'group relative mx-1 flex items-center justify-center rounded-xl px-3 py-2 transition ring-1 ring-transparent',
-                    isActive
-                      ? 'bg-gradient-to-r from-blue-200 to-orange-200 text-white shadow-lg ring-sky-300/40'
-                      : 'bg-white/80 text-slate-700 hover:bg-slate-200/70',
-                  ].join(' ')}
-                >
-                  <Image src={PLATFORM[p].logo.src} alt={PLATFORM[p].logo.alt} width={90} height={56} priority={p === 'Google'} />
-                </button>
-              );
-            })}
+          {/* Tabs */}
+          <div className="mt-6 -mx-4 sm:mx-0">
+            <div
+              role="tablist"
+              aria-label="Review platforms"
+              className="
+      flex justify-center gap-2 sm:gap-3
+      px-4 sm:px-0 py-2
+      scrollbar-none
+      rounded-2xl border border-slate-200 bg-white/70 backdrop-blur shadow-md
+      snap-x snap-mandatory sm:snap-none
+    "
+            >
+              {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p, i) => {
+                const isActive = tab === p;
+
+                return (
+                  <button
+                    key={String(p)}
+                    onClick={() => setTab(p)}
+                    role="tab"
+                    aria-selected={isActive}
+                    aria-controls={`panel-${String(p)}`}
+                    id={`tab-${String(p)}`}
+                    tabIndex={isActive ? 0 : -1}
+                    aria-label={`View ${PLATFORM[p].title} reviews`}
+                    className={[
+                      "group relative shrink-0 snap-start",
+                      "flex items-center justify-center rounded-xl",
+                      "px-3 sm:px-4 py-2 sm:py-2.5",
+                      "ring-1 ring-transparent transition",
+                      ,
+                      // states
+                      isActive
+                        ? "bg-gradient-to-r from-blue-200 to-orange-200 text-white shadow-lg ring-sky-300/40"
+                        : "bg-white/80 text-slate-700 hover:bg-slate-200/70",
+                      // focus
+                      "focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500",
+                    ].join(" ")}
+                  >
+                    {/* Logo scales a bit on larger screens without needing different width/height props */}
+                    <span className="inline-flex items-center justify-center">
+                      <Image
+                        src={PLATFORM[p].logo.src}
+                        alt={PLATFORM[p].logo.alt}
+                        width={50}
+                        height={48}
+                        priority={p === "Google"}
+                        className=" md:scale-105"
+                      />
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
+
+          {/* Example tab panel wrapper (ensure ids match if you use panels) */}
+          {/* <div id={`panel-${tab}`} role="tabpanel" aria-labelledby={`tab-${tab}`} className="mt-4"> ... </div> */}
+
         </div>
 
         {/* Marquee */}
         <div
-          className="mt-8 overflow-hidden"
+          className="mt-8 overflow-x-auto sm:overflow-hidden"
           onMouseEnter={() => setPaused(true)}
           onMouseLeave={() => setPaused(false)}
           style={{
-            maskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
-            WebkitMaskImage: 'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+            maskImage:
+              'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
+            WebkitMaskImage:
+              'linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)',
           }}
         >
-          <div ref={trackRef} className="flex will-change-transform py-5">
+          {/* Mobile-friendly snap scroll fallback */}
+          <div
+            ref={trackRef}
+            className="flex gap-4 md:gap-6 will-change-transform py-4 sm:py-5 snap-x snap-mandatory sm:snap-none"
+          >
             {[...filtered, ...filtered].map((r, idx) => (
               <div
                 key={`${r.source}-${r.name}-${idx}`}
-                className="flex-none px-3 w-[70vw] md:w-[40vw] lg:w-[30vw] xl:w-[25vw] hover:scale-105 transition-all ease-in-out duration-200"
+                className="
+          flex-none px-2 sm:px-3
+          w-[88vw] sm:w-[60vw] md:w-[44vw] lg:w-[32vw] xl:w-[28vw] 2xl:w-[24vw]
+          max-w-[520px] min-w-[260px]
+          snap-start sm:snap-none
+          transition-transform duration-200 ease-in-out hover:scale-[1.02] active:scale-[0.98]
+        "
                 onMouseEnter={() => setPaused(true)}
                 onMouseLeave={() => setPaused(false)}
               >
-                <article className="group relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition hover:shadow-xl">
-                  <div aria-hidden className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-2xl" />
-                  <header className="flex items-start justify-between gap-4">
+                <article
+                  className="
+            group relative h-full overflow-hidden rounded-3xl
+            border border-slate-200 bg-white
+            p-4 sm:p-6 shadow-md hover:shadow-lg
+            focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500
+          "
+                  tabIndex={0}
+                  role="article"
+                  aria-label={`Review by ${r.name}${r.city ? ` from ${r.city}` : ''} on ${r.source}`}
+                >
+                  <div
+                    aria-hidden
+                    className="pointer-events-none absolute -right-8 -top-8 h-24 w-24 sm:h-32 sm:w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-2xl"
+                  />
+
+                  <header className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
-                      <h3 className="text-base font-semibold text-slate-900 truncate">{r.name}</h3>
-                      <p className="text-xs text-slate-500 mt-0.5">
+                      <h3 className="text-sm sm:text-base font-semibold text-slate-900 truncate">
+                        {r.name}
+                      </h3>
+                      <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">
                         {r.city ? `${r.city} • ` : ''}
                         {r.date} • {r.source}
                       </p>
                     </div>
-                    <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-600">
-                      <Image src={r.logo.src} alt={r.logo.alt} width={14} height={14} />
+
+                    <span
+                      className="
+                inline-flex items-center gap-1 rounded-full
+                border border-slate-200 bg-slate-50
+                px-2 py-1 text-[10px] sm:text-[11px] text-slate-600
+                shrink-0
+              "
+                    >
+                      <Image src={r.logo.src} alt={r.logo.alt} width={14} height={14} className="sm:h-4 sm:w-4" />
                       Verified
                     </span>
                   </header>
 
-                  <p className="mt-3 text-sm leading-6 text-slate-700">{r.text}</p>
-                  <footer className="mt-4 text-xs text-slate-500">
+                  <p className="mt-3 text-[13px] sm:text-sm leading-6 text-slate-700 line-clamp-5">
+                    {r.text}
+                  </p>
+
+                  <footer className="mt-4 text-[11px] sm:text-xs text-slate-500">
                     Trustindex verifies source on Google / platform verifies identity where applicable.
                   </footer>
                 </article>
@@ -315,6 +394,7 @@ export default function ReviewsMarquee() {
             ))}
           </div>
         </div>
+
 
         {/* Bottom summary cards */}
         <div className="mt-10 grid gap-4 sm:grid-cols-3">

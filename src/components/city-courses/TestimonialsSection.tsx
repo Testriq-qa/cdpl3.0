@@ -116,19 +116,37 @@ export default function TestimonialsSection({
           </div>
         </div>
 
-        {/* Trust Badges */}
-        <div className="mt-12 flex flex-wrap justify-center items-center gap-8">
-          <div className="text-center px-8 py-4 bg-white/60 backdrop-blur-sm rounded-2xl border border-slate-200/50 shadow-sm">
-            <div className="text-sm text-slate-500 mb-2 font-medium">Featured On</div>
-            <div className="flex items-center space-x-4">
-              <span className="font-bold text-base bg-gradient-to-r from-slate-700 to-slate-600 bg-clip-text text-transparent">Google Reviews</span>
-              <span className="text-slate-300">•</span>
-              <span className="font-bold text-base bg-gradient-to-r from-slate-700 to-slate-600 bg-clip-text text-transparent">Trustpilot</span>
-              <span className="text-slate-300">•</span>
-              <span className="font-bold text-base bg-gradient-to-r from-slate-700 to-slate-600 bg-clip-text text-transparent">Glassdoor</span>
+        {/* Trust Badges (Responsive) */}
+        <div className="mt-8 sm:mt-12 px-4">
+          <div className="mx-auto max-w-4xl">
+            <div className="flex justify-center">
+              <div className="min-w-0 overflow-hidden text-center w-full sm:w-auto sm:px-4 py-4 bg-white/60 backdrop-blur-sm rounded-2xl border border-slate-200/50 shadow-sm">
+                <div className="text-xs sm:text-sm text-slate-500 mb-2 font-medium">
+                  Featured On
+                </div>
+
+                {/* Badges list that wraps on small screens */}
+                <ul className="flex flex-wrap items-center justify-center gap-x-3 sm:gap-x-4 gap-y-2">
+                  <li className="font-semibold text-sm sm:text-base bg-gradient-to-r from-slate-700 to-slate-600 bg-clip-text text-transparent">
+                    Google Reviews
+                  </li>
+                  {/* show dot only on >=sm; on mobile items wrap without dot */}
+                  <li className="hidden sm:inline text-slate-300" aria-hidden>•</li>
+
+                  <li className="font-semibold text-sm sm:text-base bg-gradient-to-r from-slate-700 to-slate-600 bg-clip-text text-transparent">
+                    Trustpilot
+                  </li>
+                  <li className="hidden sm:inline text-slate-300" aria-hidden>•</li>
+
+                  <li className="font-semibold text-sm sm:text-base bg-gradient-to-r from-slate-700 to-slate-600 bg-clip-text text-transparent">
+                    Glassdoor
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
     </section>
   );
