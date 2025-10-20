@@ -1,5 +1,7 @@
 // import { Url } from "next/dist/shared/lib/router/router";
 
+// types/courseData.ts
+
 export interface CourseData {
   slug: string;
   courseName: string;
@@ -10,6 +12,12 @@ export interface CourseData {
     description: string;
     keywords: string;
   };
+  // NEW: specializations shown in the form's dropdown
+  specializations?: string[];
+
+  // Optional: supply your own breadcrumbs; otherwise the component builds a sensible default
+  breadcrumbs?: Array<{ label: string; href: string }>;
+
   heroContent: {
     title: string;
     subtitle: string;
@@ -123,9 +131,25 @@ export const courseData: Record<string, CourseData> = {
     courseName: "Software Testing",
     location: "Mumbai",
     state: "Maharashtra",
+    // NEW: will drive the form select
+    specializations: [
+      "Manual Testing",
+      "Automation Testing",
+      "API Testing",
+      "Performance Testing",
+      "Mobile App Testing",
+      "Security Testing"
+    ],
+    // (Optional) custom breadcrumbs; else a default is computed
+    breadcrumbs: [
+      { label: "Home", href: "/" },
+      { label: "Software Testing", href: "/courses/software-testing" },
+      { label: "Mumbai", href: "/courses/software-testing/mumbai" },
+    ],
     metadata: {
       title: "Software Testing Course in Mumbai | Learn QA Testing",
-      description: "Comprehensive software testing course in Mumbai. Learn manual testing, automation, performance testing with industry experts. 100% job placement support.",
+      description:
+        "Comprehensive software testing course in Mumbai. Learn manual testing, automation, performance testing with industry experts. 100% job placement support.",
       keywords:
         "software testing course mumbai, qa testing training mumbai, automation testing course, manual testing course, testing certification mumbai, qa course maharashtra",
     },
@@ -147,34 +171,14 @@ export const courseData: Record<string, CourseData> = {
         "Hands-on Projects",
       ],
       stats: [
-        {
-          number: "500+",
-          label: "Students Trained",
-          description: "Successfully completed the course",
-        },
-        {
-          number: "95%",
-          label: "Job Placement",
-          description: "Within 3 months of completion",
-        },
-        {
-          number: "12",
-          label: "Weeks Duration",
-          description: "Intensive learning program",
-        },
-        {
-          number: "24/7",
-          label: "Mentor Support",
-          description: "Dedicated mentorship available",
-        },
+        { number: "500+", label: "Students Trained", description: "Successfully completed the course" },
+        { number: "95%", label: "Job Placement", description: "Within 3 months of completion" },
+        { number: "12", label: "Weeks Duration", description: "Intensive learning program" },
+        { number: "24/7", label: "Mentor Support", description: "Dedicated mentorship available" },
       ],
-      landmarks: [
-        "Bandra-Worli Sea Link",
-        "Gateway of India",
-        "Marine Drive",
-        "Bombay Stock Exchange",
-      ],
+      landmarks: ["Bandra-Worli Sea Link", "Gateway of India", "Marine Drive", "Bombay Stock Exchange"],
     },
+
     courseOverviewContent: {
       title: "Course Modules",
       description: "Comprehensive modules covering all aspects of software testing",
