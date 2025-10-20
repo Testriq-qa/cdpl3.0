@@ -251,7 +251,7 @@ export default async function JobSharePage() {
     <main className="min-h-screen bg-slate-50 text-slate-800">
       <JobOpeningsHeroSection
         title="Discover roles. Share opportunities."
-        subtitle="Powered by OptimHire Partner API — curated jobs with clean UX, filters, and delightful transitions."
+        subtitle="As part of our commitment to expanding career opportunities for our learners, Cinute Digital Pvt. Ltd. has partnered with OptimHire Software Solutions Pvt. Ltd., a third-party recruitment platform."
         ctaLabel="Explore jobs"
         scrollToId="job-browser"
       />
