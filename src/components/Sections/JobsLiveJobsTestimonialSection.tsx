@@ -1,234 +1,621 @@
 "use client";
 
-import React, { CSSProperties } from "react";
-import { Quote, ChevronRight } from "lucide-react";
-import Link from "next/link";
+import * as React from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import Image from "next/image";
+import Script from "next/script";
+import { AnimatePresence, motion } from "framer-motion";
+import { Play, Share2, X, Sparkles, Clock, Star } from "lucide-react";
 
-export type Testimonial = {
+// ----------------------------- Types ---------------------------------
+export type VideoTestimonial = {
   id: string;
-  name: string;
-  handle?: string;
-  avatar?: string;
-  text: string;
-  date?: string;
+  title: string;
+  person: string;
+  role?: string;
+  company?: string;
+  city?: string;
+  src: string;    // mp4 or YouTube embed url (https://www.youtube.com/embed/VIDEO_ID)
+  poster: string; // preview image
+  duration?: string; // "2:31"
+  tags?: string[];
+  rating?: number;   // 0-5
+  transcript?: string;
 };
 
-const DEFAULT_TESTIMONIALS: Testimonial[] = [
-  { id: "t1", name: "Patricia Martin", handle: "@pmartin", text: "ShowTracker is a real gem! I started using it a couple months ago and it completely changed the way I watch TV shows. I can only say I love it.", date: "Jan 18, 2018" },
-  { id: "t2", name: "Gregory Wilson", handle: "@gwilson", text: "I use ShowTracker every day, and it's awesome! I track all of my TV shows in one place.", date: "Jan 18, 2018" },
-  { id: "t3", name: "Bruce Murphy", handle: "@bruce", text: "ShowTracker is a great app! I started using it a couple months ago and it completely changed how I keep up with new episodes.", date: "Jan 18, 2018" },
-  { id: "t4", name: "Megan Waters", handle: "@megwat", text: "Straightforward, clean, and fast. I started using it months ago and it completely changed how I organize my shows.", date: "Jan 20, 2018" },
-  { id: "t5", name: "Crystal Perkins", handle: "@crystal", text: "Simple and delightful. I track all my TV shows and never miss an episode now.", date: "Jan 22, 2018" },
-  { id: "t6", name: "Andrew Cook", handle: "@acook", text: "A must-have for TV lovers. My backlog finally makes sense.", date: "Jan 25, 2018" },
+export type JobsLiveJobsVideoTestimonialsSectionProps = {
+  heading?: string;
+  subheading?: string;
+  videos?: VideoTestimonial[];
+  defaultTag?: string | null;
+};
+
+// ----------------------------- Sample Data ---------------------------
+// Note: replace src/poster with your actual assets
+const DEFAULT_VIDEOS: VideoTestimonial[] = [
+  {
+    id: "cdpl-prathik",
+    title: "CDPL helped me land interviews in 30 days",
+    person: "Prathik Singh",
+    role: "Data Analyst Intern",
+    company: "CDPL",
+    city: "Bengaluru",
+    src: "/testimonial_images/video_testimonial.mp4",
+    poster: "/testimonial_images/video_testimonial_thumbnail.png",
+    duration: "2:31",
+    tags: ["Live Jobs", "Analytics"],
+    rating: 5,
+    transcript:
+      "I learned job-ready skills with CDPL's live projects—dashboards, workflows, and mock interviews that boosted my confidence.",
+  },
+  {
+    id: "cdpl-swathi-qa",
+    title: "From zero to QA automation in 6 weeks",
+    person: "Swathi K",
+    role: "QA Engineer",
+    company: "Product Startup",
+    city: "Hyderabad",
+    src: "/testimonial_images/video_testimonial.mp4",
+    poster: "/testimonial_images/video_testimonial_thumbnail.png",
+    duration: "3:12",
+    tags: ["Software Testing", "Automation"],
+    rating: 4.8,
+    transcript:
+      "Mentor-led sprints, bug tracking, and interview prep turned theory into daily habits.",
+  },
+  {
+    id: "cdpl-yash-walkin",
+    title: "Walk-in success: showcasing real project work",
+    person: "Yash V",
+    role: "Associate QA",
+    company: "IT Services",
+    city: "Pune",
+    src: "/testimonial_images/video_testimonial.mp4",
+    poster: "/testimonial_images/video_testimonial_thumbnail.png",
+    duration: "1:58",
+    tags: ["Walk-in", "Interview"],
+    rating: 4.9,
+    transcript:
+      "The CDPL portfolio checklist and recruiter-ready resume made the difference in the final round.",
+  },
+  {
+    id: "cdpl-aman-devops",
+    title: "DevOps live projects gave me real-world confidence",
+    person: "Aman R",
+    role: "DevOps Trainee",
+    company: "Cloud Services",
+    city: "Noida",
+    src: "/testimonial_images/video_testimonial.mp4",
+    poster: "/testimonial_images/video_testimonial_thumbnail.png",
+    duration: "2:05",
+    tags: ["DevOps", "Live Projects"],
+    rating: 4.7,
+    transcript:
+      "Pipelines, CI/CD, and infra-as-code with mentors made interviews feel like demos of what I already do.",
+  },
+  {
+    id: "cdpl-neha-analytics",
+    title: "Analytics portfolio that recruiters loved",
+    person: "Neha S",
+    role: "Business Analyst",
+    company: "FinTech",
+    city: "Mumbai",
+    src: "/testimonial_images/video_testimonial.mp4",
+    poster: "/testimonial_images/video_testimonial_thumbnail.png",
+    duration: "2:44",
+    tags: ["Analytics", "Portfolio"],
+    rating: 4.9,
+    transcript:
+      "Dashboard storytelling, case studies, and mock interviews helped me stand out in panel rounds.",
+  },
 ];
 
-function chunk<T>(arr: T[], parts: number) {
-  const out: T[][] = Array.from({ length: parts }, () => []);
-  arr.forEach((item, i) => out[i % parts].push(item));
-  return out;
+// ----------------------------- Helpers -------------------------------
+function cx(...cls: (string | false | null | undefined)[]) {
+  return cls.filter(Boolean).join(" ");
 }
 
-export default function JobsLiveJobsTestimonialSection({
-  testimonials = DEFAULT_TESTIMONIALS,
-  ctaHref = "/testimonials",
-}: {
-  testimonials?: Testimonial[];
-  ctaHref?: string;
-}) {
-  const [colA, colB] = chunk(testimonials, 2);
+// Light theme tokens (fixed light look)
+const LIGHT = {
+  page: "relative isolate bg-gradient-to-br from-emerald-50 via-cyan-50 to-blue-50",
+  textPrimary: "text-slate-800",
+  textSecondary: "text-slate-600",
+  chip: "bg-white/80 border border-black/10",
+  card: "bg-white/90 border border-black/10",
+  btn: "bg-white hover:bg-white/90 border border-black/10 text-slate-900",
+  iconBtn: "bg-white/90 hover:bg-white text-slate-900",
+};
+
+// ----------------------------- UI primitives -------------------------
+type PillBaseProps = {
+  children: React.ReactNode;
+  className?: string;
+  title?: string;
+};
+type PillButtonProps = PillBaseProps &
+  React.ButtonHTMLAttributes<HTMLButtonElement> & {
+    as: "button";
+  };
+type PillSpanProps = PillBaseProps & {
+  as?: "span";
+};
+type PillProps = PillButtonProps | PillSpanProps;
+
+function Pill(props: PillProps) {
+  if (props.as === "button") {
+    const { className, children, title, ...rest } = props;
+    return (
+      <button
+        title={title}
+        {...rest}
+        className={cx(
+          "inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium",
+          LIGHT.chip,
+          className
+        )}
+      >
+        {children}
+      </button>
+    );
+  }
+  const { className, children, title } = props;
+  return (
+    <span
+      title={title}
+      className={cx(
+        "inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium",
+        LIGHT.chip,
+        className
+      )}
+    >
+      {children}
+    </span>
+  );
+}
+
+// ----------------------------- Robust index-based carousel utils -----
+function getCards(container: HTMLDivElement) {
+  return Array.from(container.querySelectorAll<HTMLDivElement>("[data-card]"));
+}
+function getNearestIndex(container: HTMLDivElement) {
+  const cards = getCards(container);
+  const left = container.scrollLeft;
+  let idx = 0;
+  let best = Number.POSITIVE_INFINITY;
+  for (let i = 0; i < cards.length; i++) {
+    const diff = Math.abs(cards[i].offsetLeft - left);
+    if (diff < best) {
+      best = diff;
+      idx = i;
+    }
+  }
+  return idx;
+}
+function scrollToIndex(container: HTMLDivElement, index: number) {
+  const cards = getCards(container);
+  if (!cards.length) return;
+  const target = Math.max(0, Math.min(index, cards.length - 1));
+  const x = cards[target].offsetLeft;
+  container.scrollTo({ left: x, behavior: "smooth" });
+}
+function computeScrollAvailable(container: HTMLDivElement) {
+  const canPrev = container.scrollLeft > 0;
+  const max = container.scrollWidth - container.clientWidth - 1;
+  const canNext = container.scrollLeft < max;
+  return { canPrev, canNext };
+}
+
+// ----------------------------- Component -----------------------------
+export default function JobsLiveJobsVideoTestimonialsSection({
+  heading = "CDPL Learner Shorts — Real Outcomes, Live Jobs",
+  subheading =
+  "Swipe through short, vertical stories from learners who used CDPL's mentor-led tracks and live projects to secure interviews and offers.",
+  videos = DEFAULT_VIDEOS,
+  defaultTag = null,
+}: JobsLiveJobsVideoTestimonialsSectionProps) {
+  const [active, setActive] = useState<VideoTestimonial | null>(null);
+  const [tag, setTag] = useState<string | null>(defaultTag);
+  const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const [canPrev, setCanPrev] = useState(false);
+  const [canNext, setCanNext] = useState(false);
+
+  const tags = useMemo(() => {
+    const s = new Set<string>();
+    videos.forEach((v) => v.tags?.forEach((t) => s.add(t)));
+    return Array.from(s).sort((a, b) => a.localeCompare(b));
+  }, [videos]);
+
+  const filtered = useMemo(
+    () => (tag ? videos.filter((v) => v.tags?.includes(tag)) : videos),
+    [tag, videos]
+  );
+
+  // Deep-link open (#video-<id>)
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const hash = window.location.hash.replace("#", "");
+    if (!hash.startsWith("video-")) return;
+    const id = hash.replace("video-", "");
+    const found = videos.find((v) => v.id === id);
+    if (found) setActive(found);
+  }, [videos]);
+
+  // Share link
+  const copyLink = (id: string) => {
+    try {
+      const url = `${window.location.origin}${window.location.pathname}#video-${id}`;
+      navigator.clipboard.writeText(url);
+      const el = document.createElement("div");
+      el.textContent = "Link copied";
+      el.className =
+        "fixed bottom-4 left-1/2 -translate-x-1/2 z-[70] px-3 py-1.5 rounded-full text-sm bg-black/80 text-white";
+      document.body.appendChild(el);
+      setTimeout(() => el.remove(), 1200);
+    } catch { }
+  };
+
+  // SEO JSON-LD
+  const jsonLd = useMemo(() => {
+    const items = videos.map((v) => ({
+      "@type": "VideoObject",
+      name: v.title,
+      description: v.transcript || v.title,
+      thumbnailUrl: [
+        v.poster.startsWith("http")
+          ? v.poster
+          : `${typeof window !== "undefined" ? window.location.origin : ""}${v.poster}`,
+      ],
+      uploadDate: "2025-01-01",
+      duration: v.duration ? `PT${v.duration.replace(":", "M")}S` : undefined,
+      contentUrl: v.src,
+      embedUrl: v.src,
+      publisher: { "@type": "Organization", name: "CDPL" },
+    }));
+    return JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      itemListElement: items,
+    });
+  }, [videos]);
+
+  // Keep arrow enable/disable in sync
+  const refreshArrows = () => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const { canPrev: p, canNext: n } = computeScrollAvailable(el);
+    setCanPrev(p);
+    setCanNext(n);
+  };
+
+  useEffect(() => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    refreshArrows();
+    const onScroll = () => refreshArrows();
+    const onResize = () => refreshArrows();
+    el.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize);
+    return () => {
+      el.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, [filtered.length]);
+
+  // Arrow handlers (index-based)
+  const handlePrev = () => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const cur = getNearestIndex(el);
+    scrollToIndex(el, cur - 1);
+  };
+  const handleNext = () => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const cur = getNearestIndex(el);
+    scrollToIndex(el, cur + 1);
+  };
 
   return (
-    <section
-      id="testimonials"
-      aria-labelledby="testimonials-heading"
-      className="relative isolate w-full overflow-hidden rounded-t-[2rem] bg-white px-4 py-16 sm:px-6 md:px-8 md:py-20 shadow-[0_-10px_40px_rgba(0,0,0,0.06)]"
-    >
-      {/* CDPL light/orange gradient */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 -z-10"
-        style={{
-          backgroundImage: [
-            "linear-gradient(180deg, #ffffff 0%, #fffdf9 24%, #fff7ed 100%)",
-            "radial-gradient(60% 50% at 22% 45%, rgba(255,163,72,0.30) 0%, rgba(255,163,72,0) 60%)",
-            "radial-gradient(45% 45% at 85% 8%, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0) 55%)",
-            "radial-gradient(42% 42% at 88% 85%, rgba(255,196,119,0.22) 0%, rgba(255,196,119,0) 60%)",
-          ].join(", "),
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "100% 100%",
-          filter: "saturate(1.03)",
-        }}
-      />
-
-      <div className="mx-auto max-w-6xl">
-        {/* DESKTOP (≥901px): copy beside two vertical columns */}
-        <div className="only-desktop grid grid-cols-5 gap-6 md:gap-12">
-          <CopyBlock ctaHref={ctaHref} className="col-span-2" />
-          <div className="col-span-3 grid grid-cols-2 gap-4 sm:gap-6">
-            <MarqueeColumn direction="down" items={colA} />
-            <MarqueeColumn direction="up" items={colB} />
-          </div>
+    <section className={LIGHT.page}>
+      {/* Use your requested container sizing */}
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        {/* Header */}
+        <div className="mx-auto max-w-3xl text-center">
+          <Pill className="mb-3">
+            <Sparkles className="h-4 w-4 mr-1" />
+            CDPL Success Stories
+          </Pill>
+          <h2 className={cx("text-3xl sm:text-4xl font-semibold", LIGHT.textPrimary)}>
+            {heading}
+          </h2>
+          <p className={cx("mt-3", LIGHT.textSecondary)}>{subheading}</p>
         </div>
 
-        {/* TABLET (501–900px): copy on top; two vertical columns below */}
-        <div className="only-tablet">
-          <CopyBlock ctaHref={ctaHref} />
-          <div className="grid grid-cols-2 gap-6 mt-8">
-            <MarqueeColumn direction="down" items={colA} className="h-[22rem] sm:h-[26rem]" />
-            <MarqueeColumn direction="up" items={colB} className="h-[22rem] sm:h-[26rem]" />
+        {/* Tag Filter */}
+        {tags.length > 0 && (
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-2">
+            <Pill
+              as="button"
+              onClick={() => setTag(null)}
+              title="Show all"
+              className={cx(
+                "hover:bg-orange-100",
+                !tag && "bg-orange-200 border-orange-300 text-orange-900"
+              )}
+            >
+              All
+            </Pill>
+            {tags.map((t) => (
+              <Pill
+                key={t}
+                as="button"
+                onClick={() => setTag((prev) => (prev === t ? null : t))}
+                className={cx(
+                  "hover:bg-orange-100",
+                  tag === t && "bg-orange-200 border-orange-300 text-orange-900"
+                )}
+                title={`Filter: ${t}`}
+              >
+                {t}
+              </Pill>
+            ))}
           </div>
-        </div>
+        )}
 
-        {/* PHONE (≤500px): copy on top; two rows stacked, items move horizontally */}
-        <div className="only-phone">
-          <CopyBlock ctaHref={ctaHref} />
-          <div className="space-y-6 mt-8">
-            <MarqueeRow direction="ltr" items={colA} />
-            <MarqueeRow direction="rtl" items={colB} />
+        {/* Shorts Carousel */}
+        <div className="mt-8 relative">
+          <div className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
+            <button
+              type="button"
+              aria-label="Previous"
+              onClick={handlePrev}
+              disabled={!canPrev}
+              className={cx(
+                "h-10 w-10 rounded-full shadow transition",
+                LIGHT.btn,
+                !canPrev && "opacity-40 cursor-not-allowed"
+              )}
+            >
+              ‹
+            </button>
+          </div>
+          <div className="absolute right-2 top-1/2 -translate-y-1/2 z-10">
+            <button
+              type="button"
+              aria-label="Next"
+              onClick={handleNext}
+              disabled={!canNext}
+              className={cx(
+                "h-10 w-10 rounded-full shadow transition",
+                LIGHT.btn,
+                !canNext && "opacity-40 cursor-not-allowed"
+              )}
+            >
+              ›
+            </button>
+          </div>
+
+          <div
+            ref={scrollerRef}
+            role="region"
+            aria-label="Testimonial shorts carousel"
+            className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {filtered.map((v) => (
+              <ShortsCard
+                key={v.id}
+                v={v}
+                onPlay={() => setActive(v)}
+                onShare={() => copyLink(v.id)}
+              />
+            ))}
           </div>
         </div>
       </div>
 
-      {/* Animations + visibility (with !important to win any conflicts) */}
-      <style jsx global>{`
-        /* Exclusive visibility gates */
-        .only-desktop, .only-tablet, .only-phone { display: none !important; }
+      {/* Player Modal */}
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            className="fixed inset-0 z-[100]"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+          >
+            <div className="absolute inset-0 bg-black/60" onClick={() => setActive(null)} />
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              className="absolute left-1/2 top-1/2 w-[94vw] max-w-3xl -translate-x-1/2 -translate-y-1/2 overflow-hidden rounded-2xl bg-white shadow-2xl"
+              initial={{ scale: 0.98, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.98, opacity: 0 }}
+            >
+              <div className="relative aspect-video w-full">
+                {(active?.src.includes("youtube.com") || active?.src.includes("youtu.be")) ? (
+                  <iframe
+                    src={active?.src}
+                    title={active?.title}
+                    className="absolute inset-0 h-full w-full"
+                    loading="lazy"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                ) : (
+                  <video
+                    src={active?.src}
+                    poster={active?.poster}
+                    controls
+                    preload="metadata"
+                    className="absolute inset-0 h-full w-full bg-black"
+                  />
+                )}
+                <button
+                  type="button"
+                  onClick={() => setActive(null)}
+                  aria-label="Close"
+                  className="absolute right-3 top-3 z-10 inline-flex h-9 w-9 items-center justify-center rounded-full bg-black/70 text-white"
+                >
+                  <X className="h-5 w-5" />
+                </button>
+              </div>
+              {active && (
+                <div className="px-4 py-3">
+                  <h3 className="text-base sm:text-lg font-semibold">{active.title}</h3>
+                  <p className="mt-1 text-sm text-slate-600">
+                    {active.person}
+                    {active.role ? " • " + active.role : ""}
+                    {active.company ? " @ " + active.company : ""}
+                    {active.city ? " • " + active.city : ""}
+                  </p>
+                </div>
+              )}
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
-        @media (min-width: 901px) {
-          .only-desktop { display: grid !important; }
-          .only-tablet, .only-phone { display: none !important; }
-        }
-        @media (min-width: 501px) and (max-width: 900px) {
-          .only-tablet { display: block !important; }
-          .only-desktop, .only-phone { display: none !important; }
-        }
-        @media (max-width: 500px) {
-          .only-phone { display: block !important; }
-          .only-desktop, .only-tablet { display: none !important; }
-        }
-
-        /* Vertical columns */
-        @keyframes marquee-down { from { transform: translateY(-50%); } to { transform: translateY(0%); } }
-        @keyframes marquee-up { from { transform: translateY(0%); } to { transform: translateY(-50%); } }
-        .marquee-outer { mask-image: linear-gradient(to bottom, transparent, black 10%, black 90%, transparent); }
-        .marquee-track { will-change: transform; }
-        .marquee-down { animation: marquee-down var(--marquee-duration, 28s) linear infinite; }
-        .marquee-up { animation: marquee-up var(--marquee-duration, 28s) linear infinite; }
-        .marquee-col:hover .marquee-track { animation-play-state: paused; }
-
-        /* Horizontal rows (≤500px) */
-        @keyframes marquee-ltr { from { transform: translateX(-50%); } to { transform: translateX(0%); } }
-        @keyframes marquee-rtl { from { transform: translateX(0%); } to { transform: translateX(-50%); } }
-        .row-mask { mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent); }
-        .row-track { will-change: transform; }
-        .row-ltr { animation: marquee-ltr var(--row-duration, 28s) linear infinite; }
-        .row-rtl { animation: marquee-rtl var(--row-duration, 28s) linear infinite; }
-        .row-wrap:hover .row-track { animation-play-state: paused; }
-
-        @media (prefers-reduced-motion: reduce) {
-          .marquee-down, .marquee-up, .row-ltr, .row-rtl { animation: none !important; }
-        }
-      `}</style>
+      {/* Structured data for SEO */}
+      <Script id="cdpl-videoobject-jsonld" type="application/ld+json">
+        {jsonLd}
+      </Script>
     </section>
   );
 }
 
-/* Copy block */
-function CopyBlock({ ctaHref, className = "" }: { ctaHref: string; className?: string }) {
-  return (
-    <div className={`flex flex-col justify-center ${className}`}>
-      <p className="text-sm/6 text-zinc-600 tracking-wide uppercase">Community</p>
-      <h2 id="testimonials-heading" className="mt-3 text-3xl font-semibold tracking-tight text-zinc-900 md:text-4xl">
-        We believe in the
-        <br /> power of community
-      </h2>
-      <p className="mt-4 text-zinc-700 text-base">
-        Our goal is to create a product and service that you’re satisfied
-        with and use every day. This is why we’re constantly working on our
-        services to make it better every day and really listen to what our
-        users have to say.
-      </p>
-      <div className="mt-6">
-        <Link
-          href={ctaHref}
-          className="inline-flex items-center gap-2 rounded-xl bg-orange-500 px-4 py-2 text-sm font-medium text-white shadow-lg shadow-orange-500/20 hover:bg-orange-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
-        >
-          Read more testimonials
-          <ChevronRight className="h-4 w-4" aria-hidden />
-        </Link>
-      </div>
-    </div>
-  );
-}
-
-/* Vertical column (desktop + tablet) */
-function MarqueeColumn({
-  items,
-  direction,
-  className = "",
+// ----------------------------- Shorts Card ---------------------------
+function ShortsCard({
+  v,
+  onPlay,
+  onShare,
 }: {
-  items: Testimonial[];
-  direction: "up" | "down";
-  className?: string;
+  v: VideoTestimonial;
+  onPlay: () => void;
+  onShare: () => void;
 }) {
-  const doubled = React.useMemo(() => [...items, ...items], [items]);
-  return (
-    <div className={`marquee-col relative overflow-hidden rounded-2xl bg-white/80 ring-1 ring-black/5 h-[28rem] sm:h-[32rem] ${className}`}>
-      <div className="absolute inset-0 marquee-outer" aria-hidden />
-      <ul
-        className={`marquee-track ${direction === "down" ? "marquee-down" : "marquee-up"}`}
-        style={{ "--marquee-duration": direction === "down" ? "30s" : "26s" } as CSSProperties}
-      >
-        {doubled.map((t, idx) => (
-          <li key={`${t.id}-${idx}`} className="px-3 py-3 sm:px-4 sm:py-4">
-            <TestimonialCard t={t} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+  const [hovering, setHovering] = useState(false);
+  const vidRef = useRef<HTMLVideoElement | null>(null);
 
-/* Horizontal row (phone ≤500px) */
-function MarqueeRow({
-  items,
-  direction,
-}: {
-  items: Testimonial[];
-  direction: "ltr" | "rtl";
-}) {
-  const doubled = React.useMemo(() => [...items, ...items], [items]);
-  return (
-    <div className="row-wrap relative w-full overflow-hidden rounded-2xl bg-white/80 ring-1 ring-black/5 row-mask">
-      <ul
-        className={`row-track flex gap-4 px-3 py-4 ${direction === "ltr" ? "row-ltr" : "row-rtl"}`}
-      style={{ "--row-duration": direction === "ltr" ? "28s" : "24s" } as CSSProperties}
-      >
-        {doubled.map((t, idx) => (
-          <li key={`${t.id}-row-${idx}`} className="flex-shrink-0 w-[92vw] max-w-none">
-            <TestimonialCard t={t} />
-          </li>
-        ))}
-      </ul>
-    </div>
-  );
-}
+  const isMp4 = !v.src.includes("youtube.com") && !v.src.includes("youtu.be");
 
-/* Card */
-function TestimonialCard({ t }: { t: Testimonial }) {
+  useEffect(() => {
+    if (!vidRef.current) return;
+    if (hovering) {
+      vidRef.current.play().catch(() => { });
+    } else {
+      vidRef.current.pause();
+      vidRef.current.currentTime = 0;
+    }
+  }, [hovering]);
+
   return (
-    <figure className="rounded-xl border border-zinc-200 bg-white p-4 shadow-[0_8px_30px_rgba(0,0,0,0.06)]">
-      <blockquote className="text-sm text-zinc-700">
-        <Quote className="mb-2 h-4 w-4 text-orange-500 opacity-70" aria-hidden />
-        <p>{t.text}</p>
-      </blockquote>
-      <figcaption className="mt-3 flex items-center justify-between text-xs text-zinc-500">
-        <div className="min-w-0">
-          <span className="font-medium text-zinc-800">{t.name}</span>
-          {t.handle ? <span className="ml-1 text-zinc-500">{t.handle}</span> : null}
+    <div
+      id={`video-${v.id}`}
+      data-card
+      className={cx(
+        // slightly wider on md/lg so carousel overflows even with a few cards
+        "shrink-0 w-72 sm:w-80 md:w-[24rem] lg:w-[26rem] snap-start rounded-2xl overflow-hidden",
+        LIGHT.card
+      )}
+    >
+      {/* Top: title + rating */}
+      <div className="p-4 pb-2">
+        <div className="flex items-start justify-between gap-2">
+          <h3 className="text-sm font-semibold leading-tight line-clamp-2 text-slate-900">
+            {v.title}
+          </h3>
+          <span className="inline-flex items-center gap-1 text-amber-500">
+            <Star className="h-4 w-4 fill-current" />
+            <span className="text-xs font-medium">{(v.rating ?? 4.8).toFixed(1)}</span>
+          </span>
         </div>
-        {t.date ? <time dateTime={new Date(t.date).toISOString()}>{t.date}</time> : null}
-      </figcaption>
-    </figure>
+      </div>
+
+      {/* Middle: 9:16 media */}
+      <div className="px-4">
+        <div
+          className="relative aspect-[9/16] overflow-hidden rounded-xl border border-black/10"
+          onMouseEnter={() => setHovering(true)}
+          onMouseLeave={() => setHovering(false)}
+        >
+          {/* Poster */}
+          <Image
+            src={v.poster}
+            alt={`${v.person} — ${v.title}`}
+            fill
+            sizes="(max-width: 640px) 75vw, (max-width: 1024px) 33vw, 26rem"
+            className="object-cover"
+            priority={false}
+          />
+
+          {/* Hover preview for mp4 */}
+          {isMp4 && (
+            <video
+              ref={vidRef}
+              src={v.src + "#t=0.1"}
+              muted
+              loop
+              playsInline
+              preload="none"
+              className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 hover:opacity-100"
+            />
+          )}
+
+          {/* Duration chip */}
+          {v.duration && (
+            <span className="absolute left-2 top-2 text-[11px] px-2 py-0.5 rounded-full bg-black/70 text-white">
+              <Clock className="inline-block h-3 w-3 mr-1" />
+              {v.duration}
+            </span>
+          )}
+
+          {/* Right action rail like Shorts */}
+          <div className="absolute right-2 bottom-3 flex flex-col gap-2">
+            <button
+              type="button"
+              aria-label="Share"
+              className={cx("h-10 w-10 rounded-full shadow", LIGHT.iconBtn)}
+              onClick={onShare}
+            >
+              <Share2 className="h-4 w-4 mx-auto" />
+            </button>
+            <button
+              type="button"
+              aria-label="Play"
+              className={cx("h-10 w-10 rounded-full shadow", LIGHT.iconBtn)}
+              onClick={onPlay}
+            >
+              <Play className="h-4 w-4 mx-auto" />
+            </button>
+          </div>
+
+          {/* Bottom-left meta overlay */}
+          <div className="absolute left-2 bottom-3 text-white drop-shadow">
+            <div className="text-xs font-semibold">
+              {v.person}
+              {v.role ? " • " + v.role : ""}
+            </div>
+            <div className="text-[11px] opacity-90">
+              {v.company ? "@ " + v.company : ""}
+              {v.city ? " • " + v.city : ""}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom: tags (first 3) */}
+      {v.tags?.length ? (
+        <div className="px-4 py-2 flex flex-wrap gap-1.5">
+          {v.tags.slice(0, 3).map((t) => (
+            <span
+              key={t}
+              className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 border border-black/10 text-slate-700 transition-colors hover:bg-orange-100 active:bg-orange-200"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+      ) : null}
+    </div>
   );
 }

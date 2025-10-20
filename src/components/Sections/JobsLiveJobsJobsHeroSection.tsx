@@ -15,16 +15,8 @@ type CDPLHeroProps = {
     secondaryHref?: string;
 };
 
-const BRAND_GRADIENT =
-    "bg-[linear-gradient(90deg,#ff8c00_0%,#ffb558_50%,#ffd19e_100%)]";
-
 export default function JobsLiveJobsJobsHeroSection({
-  
     subtitle = "Verified nearby roles across QA Automation, Data Science, Full-Stack, and DevOps — posted by CDPL so students can apply faster.",
-    primaryCtaText = "Browse all openings",
-    primaryHref = "/jobs/live-jobs",
-    secondaryCtaText = "Subscribe to job alerts",
-    secondaryHref = "/jobs/live-jobs#subscribe",
 }: CDPLHeroProps) {
     const jsonLd = useMemo(
         () => ({
@@ -90,7 +82,8 @@ export default function JobsLiveJobsJobsHeroSection({
                                 transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
                                 className="mt-4 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl"
                             >
-                                <span className={`bg-clip-text text-transparent ${BRAND_GRADIENT}`}>
+                                {/* Solid color title (no gradient) */}
+                                <span className="text-[#ff8c00]">
                                     Jobs & Internships we post
                                 </span>{" "}
                                 to help CDPL students get placed
@@ -111,22 +104,14 @@ export default function JobsLiveJobsJobsHeroSection({
                                 transition={{ duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
                                 className="mt-7 flex flex-col gap-3 sm:flex-row sm:gap-4"
                             >
+                                {/* Single CTA to contact page — solid color button */}
                                 <Link
-                                    href={primaryHref}
+                                    href="/contact-us"
                                     className="group inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-sm transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                                    style={{
-                                        background:
-                                            "linear-gradient(90deg, #ff8c00 0%, #ffb558 50%, #ffd19e 100%)",
-                                    }}
+                                    style={{ backgroundColor: "#ff8c00" }}
                                 >
-                                    {primaryCtaText}
+                                    Contact us
                                     <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                                </Link>
-                                <Link
-                                    href={secondaryHref}
-                                    className="inline-flex items-center justify-center rounded-2xl border border-neutral-200 bg-white px-5 py-3 text-sm font-semibold text-neutral-800 transition-colors hover:bg-neutral-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                                >
-                                    {secondaryCtaText}
                                 </Link>
                             </motion.div>
                         </div>
