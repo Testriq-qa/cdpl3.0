@@ -2,7 +2,25 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
-import ReviewsMarquee from "./ReviewMarque";
+import dynamic from "next/dynamic";
+
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+// Lazy-load the marquee
+const ReviewsMarquee = dynamic(
+  () => import("./ReviewMarque").then((m) => m.default),
+  {
+    ssr: false,
+    loading: () => <SectionLoader label="Loading reviews..." />,
+  }
+);
+
 
 type Review = { name: string; date: string; source: "Google" | "Sulekha" | "Justdial"; text: string; city?: string; logo: { src: string; alt: string; } };
 

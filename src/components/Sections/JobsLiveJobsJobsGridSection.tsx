@@ -4,9 +4,31 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { Share2, Copy } from "lucide-react";
+import dynamic from "next/dynamic";
+
 import type { Job } from "@/app/jobs/live-jobs/page";
 import type { JobsFilters } from "./JobsLiveJobsListingSection";
-import { JobsLiveJobsJobCardSection } from "./JobsLiveJobsJobCardSection";
+
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+// Lazy-load the heavy inner card section
+const JobsLiveJobsJobCardSection = dynamic(
+  () =>
+    import("./JobsLiveJobsJobCardSection").then(
+      (m) => m.JobsLiveJobsJobCardSection
+    ),
+  {
+    ssr: false, // target is a "use client" component
+    loading: () => <SectionLoader label="Loading job..." />,
+  }
+);
+
 
 function norm(s: string) {
   return (s || "").toLowerCase();

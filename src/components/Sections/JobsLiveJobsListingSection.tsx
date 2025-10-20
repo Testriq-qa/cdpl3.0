@@ -2,10 +2,42 @@
 
 import { useMemo, useState } from "react";
 import type { Job } from "@/app/jobs/live-jobs/page";
-import { JobsLiveJobsFilterBarSection } from "./JobsLiveJobsFilterBarSection";
-import { JobsLiveJobsJobsGridSection } from "./JobsLiveJobsJobsGridSection";
+import dynamic from "next/dynamic";
 
 export type JobsFilters = { q: string; loc: string; type: string };
+
+// --- loader (same pattern as your example) ---
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+// Lazy-load filter bar (named export)
+const JobsLiveJobsFilterBarSection = dynamic(
+  () =>
+    import("./JobsLiveJobsFilterBarSection").then(
+      (m) => m.JobsLiveJobsFilterBarSection
+    ),
+  {
+    ssr: false,
+    loading: () => <SectionLoader label="Loading filters..." />,
+  }
+);
+
+// Lazy-load grid (named export)
+const JobsLiveJobsJobsGridSection = dynamic(
+  () =>
+    import("./JobsLiveJobsJobsGridSection").then(
+      (m) => m.JobsLiveJobsJobsGridSection
+    ),
+  {
+    ssr: false,
+    loading: () => <SectionLoader label="Loading jobs..." />,
+  }
+);
 
 export function JobsLiveJobsListingSection({ jobs }: { jobs: Job[] }) {
   const [filters, setFilters] = useState<JobsFilters>({ q: "", loc: "", type: "" });
