@@ -42,7 +42,7 @@ export type Job = {
 
 // ---------- Dynamic sections (SSR enabled like your example) ----------
 const JobsLiveJobsJobsHeroSection = dynamic(
-    () => import("@/components/Sections/JobsLiveJobsJobsHeroSection"),
+    () => import("@/components/sections/JobsLiveJobsJobsHeroSection").then((m) => m.default),
     {
         ssr: true,
         loading: () => <SectionLoader label="Loading hero..." />,
@@ -52,7 +52,7 @@ const JobsLiveJobsJobsHeroSection = dynamic(
 // Named export -> use .then and add props typing
 const JobsLiveJobsJobsTickerSection = dynamic<{ jobs: Job[] }>(
     () =>
-        import("@/components/Sections/JobsLiveJobsJobsTickerSection").then(
+        import("@/components/sections/JobsLiveJobsJobsTickerSection").then(
             (m) => m.JobsLiveJobsJobsTickerSection
         ),
     {
@@ -63,7 +63,7 @@ const JobsLiveJobsJobsTickerSection = dynamic<{ jobs: Job[] }>(
 
 const JobsLiveJobsListingSection = dynamic<{ jobs: Job[] }>(
     () =>
-        import("@/components/Sections/JobsLiveJobsListingSection").then(
+        import("@/components/sections/JobsLiveJobsListingSection").then(
             (m) => m.JobsLiveJobsListingSection
         ),
     {
@@ -74,7 +74,7 @@ const JobsLiveJobsListingSection = dynamic<{ jobs: Job[] }>(
 
 // Default export — keep as-is
 const JobsLiveJobsWhyWePostJobsSection = dynamic(
-    () => import("@/components/Sections/LiveJobsLiveJobsWhyWePostJobsSection"),
+    () => import("@/components/sections/LiveJobsLiveJobsWhyWePostJobsSection"),
     {
         ssr: true,
         loading: () => <SectionLoader label="Loading why CDPL posts jobs..." />,
@@ -82,7 +82,7 @@ const JobsLiveJobsWhyWePostJobsSection = dynamic(
 );
 
 const JobsLiveJobsTestimonialSection = dynamic(
-    () => import("@/components/Sections/JobsLiveJobsTestimonialSection"),
+    () => import("@/components/sections/JobsLiveJobsTestimonialSection"),
     {
         ssr: true,
         loading: () => <SectionLoader label="Loading why CDPL posts jobs..." />,
@@ -90,7 +90,7 @@ const JobsLiveJobsTestimonialSection = dynamic(
 );
 
 const JobsLiveJobsReviewSection = dynamic(
-    () => import("@/components/Sections/JobsLiveJobsReviewSection"),
+    () => import("@/components/sections/JobsLiveJobsReviewSection"),
     {
         ssr: true,
         loading: () => <SectionLoader label="Loading why CDPL posts jobs..." />,
@@ -100,7 +100,7 @@ const JobsLiveJobsReviewSection = dynamic(
 // Named export -> use .then
 const JobsLiveJobsSubscribeCTASection = dynamic(
     () =>
-        import("@/components/Sections/JobsLiveJobsSubscribeCTASection").then(
+        import("@/components/sections/JobsLiveJobsSubscribeCTASection").then(
             (m) => m.JobsLiveJobsSubscribeCTASection
         ),
     {
