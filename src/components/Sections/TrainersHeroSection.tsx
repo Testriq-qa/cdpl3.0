@@ -1,3 +1,5 @@
+"use client";
+
 import { Sparkles, ShieldCheck, Users2, GraduationCap, Check } from "lucide-react";
 import Link from "next/link";
 
@@ -114,7 +116,6 @@ export default function TrainersHeroSection() {
             {/* JSON-LD for rich snippets */}
             <script
                 type="application/ld+json"
-                // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",

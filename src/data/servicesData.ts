@@ -1,4 +1,3 @@
-import { LucideIcon } from "lucide-react";
 import { 
   Presentation, 
   Wrench, 
@@ -16,7 +15,7 @@ import {
 export interface TrainingService {
   id: string;
   slug: string;
-  icon: any;
+  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   title: string;
   tagline: string;
   shortDescription: string;

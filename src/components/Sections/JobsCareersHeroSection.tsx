@@ -119,7 +119,7 @@ export default function JobsCareersHeroSection() {
           </p>
 
           <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
+            <Link
               href="#open-roles"
               className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white shadow-sm transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff8c00] hover:opacity-95"
               style={{
@@ -128,13 +128,13 @@ export default function JobsCareersHeroSection() {
               }}
             >
               View open roles
-            </a>
-            <a
+            </Link>
+            <Link
               href="/about-us"
               className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-gray-900 border border-gray-200 hover:bg-gray-50 transition dark:text-gray-900 dark:border-gray-200 dark:hover:bg-gray-50"
             >
               About CDPL
-            </a>
+            </Link>
           </div>
         </div>
       </div>

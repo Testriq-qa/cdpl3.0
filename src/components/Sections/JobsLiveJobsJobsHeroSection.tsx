@@ -19,7 +19,7 @@ const BRAND_GRADIENT =
     "bg-[linear-gradient(90deg,#ff8c00_0%,#ffb558_50%,#ffd19e_100%)]";
 
 export default function JobsLiveJobsJobsHeroSection({
-    title: _title = "CDPL Live Jobs — Curated Openings to Help Our Students Get Hired",
+  
     subtitle = "Verified nearby roles across QA Automation, Data Science, Full-Stack, and DevOps — posted by CDPL so students can apply faster.",
     primaryCtaText = "Browse all openings",
     primaryHref = "/jobs/live-jobs",

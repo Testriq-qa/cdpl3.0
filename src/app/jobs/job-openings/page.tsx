@@ -1,3 +1,4 @@
+// File: src/app/jobs/job-openings/page.tsx
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
@@ -60,7 +61,7 @@ const API_BASE =
   process.env.OPTIMHIRE_API_BASE ?? "https://partnerapi.optimhire.com/v1/partner";
 const AUTH_HEADER = process.env.OPTIMHIRE_API_KEY
   ? { Authorization: `Bearer ${process.env.OPTIMHIRE_API_KEY}` }
-  : { Authorization: "Auth_Token" };
+  : { Authorization: "Auth Token" };
 
 async function ohFetch<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE}${path}`, {
@@ -154,7 +155,7 @@ function cleanHTML(raw?: string): string {
 // ---- Server Actions ------------------------------------------------------
 export type FetchJobsArgs = { page?: number; size?: number; q?: string };
 
-export async function getJobsServer(args: FetchJobsArgs = { page: 1, size: 10 }) {
+async function getJobsServer(args: FetchJobsArgs = { page: 1, size: 10 }) {
   "use server";
   const { page = 1, size = 10 } = args;
   const query = new URLSearchParams({ page: String(page), size: String(size) }).toString();
@@ -175,7 +176,7 @@ export async function getJobsServer(args: FetchJobsArgs = { page: 1, size: 10 })
   return cleaned;
 }
 
-export async function getJobByIdServer(job_id: string) {
+async function getJobByIdServer(job_id: string) {
   "use server";
   if (!job_id) throw new Error("job_id is required");
   const res = await ohFetch<JobDetailResponse>(
@@ -193,7 +194,7 @@ export async function getJobByIdServer(job_id: string) {
   return cleaned;
 }
 
-export async function createCandidateServer(payload: CandidatePayload) {
+async function createCandidateServer(payload: CandidatePayload) {
   "use server";
   return ohFetch<{ Message: string }>(`/candidate`, {
     method: "POST",
@@ -201,7 +202,7 @@ export async function createCandidateServer(payload: CandidatePayload) {
   });
 }
 
-export async function verifyCandidateServer(payload: VerifyPayload) {
+async function verifyCandidateServer(payload: VerifyPayload) {
   "use server";
   return ohFetch<{ Message: string }>(`/candidate/verify`, {
     method: "POST",

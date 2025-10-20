@@ -4,14 +4,13 @@ import Link from 'next/link';
 interface HeroSectionProps {
   courseName: string;
   cityName: string;
-  courseCategory: string;
+  courseCategory?: string;
   breadcrumbs?: Array<{ label: string; href: string }>;
 }
 
 export default function HeroSection({
   courseName,
   cityName,
-  courseCategory,
   breadcrumbs = []
 }: HeroSectionProps) {
   return (

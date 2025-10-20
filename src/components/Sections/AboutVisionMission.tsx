@@ -175,7 +175,7 @@ export default function AboutMissionVision({
               <p className="mt-2 text-md text-slate-700">{p.body}</p>
               <p className="flex flex-wrap gap-2 mt-4 text-xs leading-4 text-slate-700">
                 {p.seo.map((s) => {
-                  return <span className="rounded-lg bg-slate-100 px-1.5 py-0.5">{s}</span>
+                  return <span key={s} className="rounded-lg bg-slate-100 px-1.5 py-0.5">{s}</span>
                 })}
               </p>
             </div>

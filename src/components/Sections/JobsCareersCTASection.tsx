@@ -1,5 +1,7 @@
 "use client";
 
+import { Link } from "lucide-react";
+
 export default function JobsCareersCTASection() {
     return (
         <section className="w-full bg-white text-neutral-900 dark:bg-white dark:text-neutral-900">
@@ -20,7 +22,7 @@ export default function JobsCareersCTASection() {
                             Tell us how you can raise the bar. Great people shape new roles.
                         </p>
                         <div className="mt-5 flex flex-col sm:flex-row gap-3">
-                            <a
+                            <Link
                                 href="mailto:careers@cinutedigital.com?subject=General%20Application%20—%20CDPL"
                                 className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-white shadow-sm transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[#ff8c00] hover:opacity-95"
                                 style={{
@@ -29,13 +31,13 @@ export default function JobsCareersCTASection() {
                                 }}
                             >
                                 Write to us
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="/about-us"
                                 className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-gray-900 border border-gray-200 hover:bg-gray-50 transition dark:text-gray-900 dark:border-gray-200 dark:hover:bg-gray-50"
                             >
                                 Learn about CDPL
-                            </a>
+                            </Link>
                         </div>
                     </div>
                 </div>

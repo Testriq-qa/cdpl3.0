@@ -56,6 +56,33 @@ function useCountUp(shouldStart: boolean, end: number, durationMs = 1600, reduce
     return val;
 }
 
+type Stat = {
+    label: string;
+    target: number;
+    suffix: Suffix;
+    desc: string;
+};
+
+function StatItem({ stat, shouldStart, reducedMotion }: { stat: Stat; shouldStart: boolean; reducedMotion: boolean }) {
+    const animated = useCountUp(shouldStart, stat.target, 1400, reducedMotion);
+    return (
+        <div className="text-center">
+            <div className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+                {/* Animated number */}
+                <span aria-hidden="true">
+                    {applySuffix(animated, stat.suffix)}
+                </span>
+                {/* Accessible, non-animated fallback for screen readers */}
+                <span className="sr-only">{applySuffix(stat.target, stat.suffix)}</span>
+            </div>
+            <div className="mt-1 text-md font-medium text-slate-800">{stat.label}</div>
+            <div className="mt-2.5 text-sm leading-5 text-slate-600">
+                {stat.desc}
+            </div>
+        </div>
+    );
+}
+
 export default function AboutStatsSection() {
     // Define stats with numeric targets and display suffixes
     const stats = useMemo(
@@ -100,7 +127,7 @@ export default function AboutStatsSection() {
 
     return (
         <section
-            ref={rootRef as any}
+            ref={rootRef}
             aria-labelledby="about-stats-heading"
             className="mx-auto max-w-7xl px-4 py-4 md:py-12 sm:px-6 lg:px-8"
         >
@@ -159,25 +186,14 @@ export default function AboutStatsSection() {
 
                 {/* Grid */}
                 <div className="grid grid-cols-2 gap-6 sm:grid-cols-4">
-                    {stats.map((s) => {
-                        const animated = useCountUp(inView, s.target, 1400, reducedMotion);
-                        return (
-                            <div key={s.label} className="text-center">
-                                <div className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
-                                    {/* Animated number */}
-                                    <span aria-hidden="true">
-                                        {applySuffix(animated, s.suffix)}
-                                    </span>
-                                    {/* Accessible, non-animated fallback for screen readers */}
-                                    <span className="sr-only">{applySuffix(s.target, s.suffix)}</span>
-                                </div>
-                                <div className="mt-1 text-md font-medium text-slate-800">{s.label}</div>
-                                <div className="mt-2.5 text-sm leading-5 text-slate-600">
-                                    {s.desc}
-                                </div>
-                            </div>
-                        );
-                    })}
+                    {stats.map((s, index) => (
+                        <StatItem
+                            key={`${s.label}-${index}`}
+                            stat={s}
+                            shouldStart={inView}
+                            reducedMotion={reducedMotion}
+                        />
+                    ))}
                 </div>
 
                 {/* Bottom CTA line (SEO-friendly anchor) */}

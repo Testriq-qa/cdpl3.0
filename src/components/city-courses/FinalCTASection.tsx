@@ -78,7 +78,7 @@ export default function FinalCTASection({ cityName, courseName }: FinalCTASectio
                 </span>
               </h2>
               <p className="text-xl text-gray-300 leading-relaxed">
-                Don't miss this opportunity to become a certified <span className="text-cyan-300 font-semibold">{courseName}</span> professional. 
+                Don&apos;t miss this opportunity to become a certified <span className="text-cyan-300 font-semibold">{courseName}</span> professional. 
                 Join thousands of successful students who started their journey with us.
               </p>
             </div>

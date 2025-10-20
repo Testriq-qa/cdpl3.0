@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { Star, Quote, ChevronLeft, ChevronRight, Briefcase, TrendingUp } from "lucide-react";
-import Image from "next/image";
 
 interface Testimonial {
   id: number;
@@ -43,7 +42,7 @@ const TestimonialCard = ({ testimonial }: { testimonial: Testimonial }) => {
 
       {/* Testimonial Text */}
       <p className="text-gray-700 leading-relaxed mb-6 flex-grow">
-        "{testimonial.testimonial}"
+        &quot;{testimonial.testimonial}&quot;
       </p>
 
       {/* Course Badge */}

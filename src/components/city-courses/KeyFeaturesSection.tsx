@@ -111,14 +111,14 @@ export default function KeyFeaturesSection({ cityName, courseName }: KeyFeatures
           </h2>
 
           <p className="text-lg text-slate-700 max-w-3xl mx-auto leading-relaxed">
-            We don't just teach {courseName}, we prepare you for a successful career.
-            Here's why thousands of students in {cityName} trust us with their career growth.
+           We don&apos;t just teach {courseName}, we prepare you for a successful career.
+            Here&apos;s why thousands of students in {cityName} trust us with their career growth.
           </p>
         </div>
 
         {/* Features Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {features.map((feature, index) => (
+          {features.map((feature) => (
             <div
               key={feature.id}
               className="group relative bg-white/70 backdrop-blur-sm rounded-2xl p-8 border border-slate-200/50 hover:border-blue-300/50 transition-all duration-300 hover:shadow-2xl hover:shadow-blue-500/10 transform hover:-translate-y-2"

@@ -6,7 +6,7 @@ import {
   SAMPLE_TESTIMONIALS,
   SAMPLE_FAQS,
   HIRING_PARTNERS,
-} from '@/src/components/city-courses/sampleData';
+} from '@/components/city-courses/sampleData';
 
 type CourseKey = 'software-testing' | 'data-science';
 

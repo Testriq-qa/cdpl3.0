@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { CSSProperties } from "react";
 import { Quote, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
@@ -177,7 +177,7 @@ function MarqueeColumn({
       <div className="absolute inset-0 marquee-outer" aria-hidden />
       <ul
         className={`marquee-track ${direction === "down" ? "marquee-down" : "marquee-up"}`}
-        style={{ ["--marquee-duration" as any]: direction === "down" ? "30s" : "26s" }}
+        style={{ "--marquee-duration": direction === "down" ? "30s" : "26s" } as CSSProperties}
       >
         {doubled.map((t, idx) => (
           <li key={`${t.id}-${idx}`} className="px-3 py-3 sm:px-4 sm:py-4">
@@ -202,7 +202,7 @@ function MarqueeRow({
     <div className="row-wrap relative w-full overflow-hidden rounded-2xl bg-white/80 ring-1 ring-black/5 row-mask">
       <ul
         className={`row-track flex gap-4 px-3 py-4 ${direction === "ltr" ? "row-ltr" : "row-rtl"}`}
-        style={{ ["--row-duration" as any]: direction === "ltr" ? "28s" : "24s" }}
+      style={{ "--row-duration": direction === "ltr" ? "28s" : "24s" } as CSSProperties}
       >
         {doubled.map((t, idx) => (
           <li key={`${t.id}-row-${idx}`} className="flex-shrink-0 w-[92vw] max-w-none">

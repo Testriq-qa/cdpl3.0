@@ -3,7 +3,7 @@
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ChevronDown, HelpCircle } from "lucide-react";
+import { ChevronDown, HelpCircle, Link } from "lucide-react";
 import Script from "next/script";
 
 const BRAND = "#ff8c00"; // CDPL accent — locked for light look in both modes
@@ -171,12 +171,12 @@ export default function JobsLiveJobsJobsFAQSection() {
                 Talk to a CDPL mentor about roles and readiness.
               </span>
             </p>
-            <a
+            <Link
               href="/contact-us"
               className="inline-flex w-full lg:w-auto items-center justify-center rounded-xl bg-[color:#ff8c00] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300 min-h-[44px]"
             >
               Get guidance
-            </a>
+            </Link>
           </div>
         </div>
       </div>

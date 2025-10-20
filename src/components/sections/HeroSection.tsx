@@ -2,7 +2,6 @@
 
 import { useState } from "react";
 import { ArrowRight, Award, CheckCircle, Star } from "lucide-react";
-import Image from "next/image";
 
 const HeroSection = () => {
   const [formData, setFormData] = useState({
@@ -44,7 +43,7 @@ const HeroSection = () => {
             <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-sm border border-blue-100">
               <Award className="w-4 h-4 text-blue-600" />
               <span className="text-sm font-medium text-gray-700">
-                India's Leading IT Training Institute
+                India&apos;s Leading IT Training Institute
               </span>
             </div>
 

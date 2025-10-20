@@ -66,7 +66,6 @@ export default function PlacementsJobTitlesRow({ chips, speed = 60 }: Props) {
                 </div>
             </div>
 
-            {/* global to avoid styled-jsx scoping issues */}
             <style jsx global>{`
         @keyframes cdpl-marquee {
           from {

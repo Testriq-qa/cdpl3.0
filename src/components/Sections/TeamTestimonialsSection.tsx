@@ -5,7 +5,7 @@
 
 import Image from "next/image";
 import { motion, type Transition } from "framer-motion";
-import { Quote, Star, CheckCircle2 } from "lucide-react";
+import { Quote, Star, CheckCircle2, Link } from "lucide-react";
 
 type Testimonial = {
     name: string;
@@ -91,7 +91,6 @@ export default function TeamTestimonialsSection() {
             {/* JSON-LD for rich results (AggregateRating + Reviews) */}
             <script
                 type="application/ld+json"
-                // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
@@ -196,7 +195,7 @@ export default function TeamTestimonialsSection() {
                             </div>
 
                             <blockquote className="mt-3 text-[15px] leading-relaxed text-slate-700">
-                                “{t.quote}”
+                                &quot;{t.quote}&quot;
                             </blockquote>
 
                             <div className="mt-4 flex flex-wrap gap-1.5">
@@ -264,13 +263,13 @@ export default function TeamTestimonialsSection() {
                         live projects, structured mentorship, and{" "}
                         <span className="font-medium">career services</span>.
                     </p>
-                    <a
+                    <Link
                         href="/success-stories"
                         className="inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-800 shadow-sm transition hover:shadow"
                         style={{ boxShadow: "0 8px 20px -10px rgba(255,140,0,0.35)" }}
                     >
                         Read more success stories
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>
