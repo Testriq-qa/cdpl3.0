@@ -6,11 +6,7 @@ import ReviewsMarquee from "./ReviewMarque";
 
 type Review = { name: string; date: string; source: "Google" | "Sulekha" | "Justdial"; text: string; city?: string; logo: { src: string; alt: string; } };
 
-const PLATFORM = {
-  Google: { title: "Google", statLabel: "Based on", statValue: "289 reviews", overall: "EXCELLENT", logo: { src: "/slider_logos/google-logo.svg", alt: "Google logo" } },
-  Sulekha: { title: "Sulekha", statLabel: "Rating", statValue: "5.0 · 84 reviews", overall: "EXCELLENT", logo: { src: "/slider_logos/sulekha.svg", alt: "Sulekha logo" } },
-  Justdial: { title: "Justdial", statLabel: "Ratings", statValue: "210 ratings", overall: "GREAT", logo: { src: "/slider_logos/justdial.svg", alt: "Justdial logo" } },
-} as const;
+type PLATFORM = "Google" | "Sulekha" | "Justdial";
 
 const REVIEWS: Review[] = [
   // (unchanged) ...
@@ -144,6 +140,7 @@ const REVIEWS: Review[] = [
 ];
 
 /** Consistent logo sizing */
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function LogoBox({
   src, alt,
   size = "tab",
@@ -158,19 +155,19 @@ function LogoBox({
 }
 
 export default function JobsLiveJobsReviewSection() {
-  const [tab, setTab] = useState<keyof typeof PLATFORM>("Google");
+  // setter not used in this file
+  const [tab] = useState<PLATFORM>("Google");
   const filtered = useMemo(() => REVIEWS.filter((r) => r.source === tab), [tab]);
-  const stat = PLATFORM[tab];
-  const statLogo = filtered[0]?.logo ?? stat.logo;
+  // const statLogo = filtered[0]?.logo ?? stat.logo; // unused
 
   // marquee state
-  const containerRef = useRef<HTMLDivElement | null>(null);
+  // const containerRef = useRef<HTMLDivElement | null>(null); // unused
   const trackRef = useRef<HTMLDivElement | null>(null);
   const offsetRef = useRef(0);
   const halfWidthRef = useRef(0);
   const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number | null>(null);
-  const [paused, setPaused] = useState(false);
+  const [paused] = useState(false); // setter not used
   const [speed, setSpeed] = useState(80);
   const [reduced, setReduced] = useState(false);
 
@@ -241,13 +238,9 @@ export default function JobsLiveJobsReviewSection() {
           </h2>
 
           {/* Tabs */}
-
-
         </div>
 
         <ReviewsMarquee />
-
-
       </div>
     </section>
   );

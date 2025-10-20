@@ -64,7 +64,8 @@ export function JobsLiveJobsJobsGridSection({
   // Build base URL once (client-only) for share links
   const baseUrl = useMemo(() => {
     if (typeof window === "undefined") return "";
-    return `${window.location.origin}${window.location.pathname}`;
+    // Preserve current search params too (optional—nice for UTMs)
+    return `${window.location.origin}${window.location.pathname}${window.location.search}`;
   }, []);
 
   const buildShareUrl = (id: string) => `${baseUrl}#${encodeURIComponent(id)}`;
@@ -108,34 +109,34 @@ export function JobsLiveJobsJobsGridSection({
       jobs.length
         ? jobs
         : ([
-            {
-              id: "ex-1",
-              title: "Frontend Engineer",
-              company: "Acme Corp",
-              location: "Bengaluru",
-              type: "Full-time",
-              postedOn: new Date().toISOString(),
-              highlights: ["React", "TypeScript", "UI/UX"],
-            },
-            {
-              id: "ex-2",
-              title: "Backend Engineer",
-              company: "Globex",
-              location: "Remote (India)",
-              type: "Full-time",
-              postedOn: new Date(Date.now() - 86400000).toISOString(),
-              highlights: ["Node.js", "PostgreSQL", "Microservices"],
-            },
-            {
-              id: "ex-3",
-              title: "SDE Intern",
-              company: "Initech",
-              location: "Hyderabad",
-              type: "Internship",
-              postedOn: new Date(Date.now() - 2 * 86400000).toISOString(),
-              highlights: ["JavaScript", "APIs", "Testing"],
-            },
-          ] as Job[]),
+          {
+            id: "ex-1",
+            title: "Frontend Engineer",
+            company: "Acme Corp",
+            location: "Bengaluru",
+            type: "Full-time",
+            postedOn: new Date().toISOString(),
+            highlights: ["React", "TypeScript", "UI/UX"],
+          },
+          {
+            id: "ex-2",
+            title: "Backend Engineer",
+            company: "Globex",
+            location: "Remote (India)",
+            type: "Full-time",
+            postedOn: new Date(Date.now() - 86400000).toISOString(),
+            highlights: ["Node.js", "PostgreSQL", "Microservices"],
+          },
+          {
+            id: "ex-3",
+            title: "SDE Intern",
+            company: "Initech",
+            location: "Hyderabad",
+            type: "Internship",
+            postedOn: new Date(Date.now() - 2 * 86400000).toISOString(),
+            highlights: ["JavaScript", "APIs", "Testing"],
+          },
+        ] as Job[]),
       60
     );
   }, [jobs]);
@@ -170,7 +171,7 @@ export function JobsLiveJobsJobsGridSection({
       }
       try {
         targetId = decodeURIComponent(targetId);
-      } catch {}
+      } catch { }
       return targetId;
     };
 
@@ -200,7 +201,7 @@ export function JobsLiveJobsJobsGridSection({
       }
       try {
         targetId = decodeURIComponent(targetId);
-      } catch {}
+      } catch { }
       return targetId;
     };
 
@@ -380,6 +381,7 @@ export function JobsLiveJobsJobsGridSection({
         .nice-scroll::-webkit-scrollbar-corner {
           background: transparent;
         }
+      :target { scroll-margin-top: 96px; }
       `}</style>
     </>
   );
