@@ -55,7 +55,7 @@ export function JobsLiveJobsJobCardSection({ job }: { job: Job }) {
         tips?: string | string[];
     };
 
-    const _tech = (anyJob.tech && anyJob.tech.length ? anyJob.tech : inferTech(job)).slice(0, 12);
+   
     const _requirements =
         (anyJob.requirements && anyJob.requirements.length
             ? anyJob.requirements

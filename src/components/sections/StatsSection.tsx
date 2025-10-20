@@ -18,6 +18,8 @@ const StatCard = ({ icon, value, suffix = "", label, description, color }: StatC
   const cardRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (!cardRef.current) return;
+    const element = cardRef.current;
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
@@ -26,15 +28,10 @@ const StatCard = ({ icon, value, suffix = "", label, description, color }: StatC
       },
       { threshold: 0.3 }
     );
-
-    if (cardRef.current) {
-      observer.observe(cardRef.current);
-    }
+    observer.observe(element);
 
     return () => {
-      if (cardRef.current) {
-        observer.unobserve(cardRef.current);
-      }
+      observer.unobserve(element);
     };
   }, []);
 

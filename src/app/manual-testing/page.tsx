@@ -5,7 +5,6 @@ import {
   Users, 
   Clock, 
   BookOpen, 
-  TrendingUp, 
   Shield, 
   Star,
   ChevronDown,
@@ -16,13 +15,10 @@ import {
   Target,
   Zap,
   Code,
-  Database,
   FileCheck,
   Briefcase,
   GraduationCap,
   Trophy,
-  MessageSquare,
-  Play,
   Download
 } from 'lucide-react';
 import { ReactNode } from 'react';
@@ -691,15 +687,15 @@ function CourseOverviewSection() {
           {/* Left Column: Description */}
           <div className="space-y-6">
             <div className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">What You'll Learn</h3>
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">What You&apos;ll Learn</h3>
               <p className="text-gray-600 leading-relaxed mb-6">
                 Manual Software Testing is the foundation of quality assurance in software development. This comprehensive course takes you from absolute beginner to job-ready QA professional, covering everything from testing fundamentals to advanced test design techniques, defect management, and ISTQB certification preparation.
               </p>
               <p className="text-gray-600 leading-relaxed mb-6">
-                You'll gain hands-on experience with industry-standard tools like JIRA, TestRail, and Postman, and work on real-world projects spanning e-commerce, banking, healthcare, and telecom domains. Our expert instructors bring 15+ years of industry experience, ensuring you learn not just theory, but practical skills that employers demand.
+                You&apos;ll gain hands-on experience with industry-standard tools like JIRA, TestRail, and Postman, and work on real-world projects spanning e-commerce, banking, healthcare, and telecom domains. Our expert instructors bring 15+ years of industry experience, ensuring you learn not just theory, but practical skills that employers demand.
               </p>
               <p className="text-gray-600 leading-relaxed">
-                Whether you're a fresh graduate, a career changer, or a professional looking to formalize your testing skills, this course provides the perfect launchpad for a rewarding career in software quality assurance. No programming knowledge required—just a passion for quality and attention to detail!
+                Whether you&apos;re a fresh graduate, a career changer, or a professional looking to formalize your testing skills, this course provides the perfect launchpad for a rewarding career in software quality assurance. No programming knowledge required—just a passion for quality and attention to detail!
               </p>
             </div>
           </div>
@@ -814,7 +810,7 @@ function SkillsCoveredSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Skills You'll{' '}
+            Skills You&apos;ll{' '}
             <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
               Master
             </span>
@@ -908,7 +904,7 @@ function ToolsCoveredSection() {
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
-            Tools You'll{' '}
+            Tools You&apos;ll{' '}
             <span className="bg-gradient-to-r from-orange-600 to-orange-500 bg-clip-text text-transparent">
               Work With
             </span>
@@ -1132,7 +1128,7 @@ function AchievementsSection() {
             </span>
           </h2>
           <p className="text-lg text-gray-600">
-            Explore the milestones of our journey and the recognition we've earned for excellence in education.
+            Explore the milestones of our journey and the recognition we&apos;ve earned for excellence in education.
           </p>
         </div>
 
@@ -1186,14 +1182,14 @@ function AboutSection() {
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Essential Skill Set for Tech Careers</h3>
               <p className="text-gray-600 leading-relaxed">
-                Manual Testing is not just about finding bugs—it's about developing critical thinking, problem-solving, and analytical skills that are transferable across domains. Whether you're working in healthcare, finance, e-commerce, or telecom, the ability to ensure software quality is a highly valued and recession-proof skill that opens doors to diverse career opportunities.
+                Manual Testing is not just about finding bugs—it&apos;s about developing critical thinking, problem-solving, and analytical skills that are transferable across domains. Whether you&apos;re working in healthcare, finance, e-commerce, or telecom, the ability to ensure software quality is a highly valued and recession-proof skill that opens doors to diverse career opportunities.
               </p>
             </div>
 
             <div>
               <h3 className="text-2xl font-bold text-gray-900 mb-4">Perfect Entry Point to QA Careers</h3>
               <p className="text-gray-600 leading-relaxed">
-                Unlike automation testing or development roles that require programming expertise, Manual Software Testing is accessible to everyone—regardless of your educational background. It's the perfect starting point for fresh graduates, career changers, and professionals looking to break into the tech industry without needing to learn complex coding languages.
+                Unlike automation testing or development roles that require programming expertise, Manual Software Testing is accessible to everyone—regardless of your educational background. It&apos;s the perfect starting point for fresh graduates, career changers, and professionals looking to break into the tech industry without needing to learn complex coding languages.
               </p>
             </div>
           </div>

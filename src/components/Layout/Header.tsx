@@ -361,10 +361,10 @@ const Header = () => {
                               </button>
                             ))}
                           </div>
-                          <a href="/courses" className="mt-4 flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group">
+                          `<Link  href="/courses" className="mt-4 flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group">
                             View All Courses
                             <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
-                          </a>
+                          </Link>
                         </div>
 
                         {/* Column 2: Courses */}
@@ -572,22 +572,22 @@ const Header = () => {
               )}
             </div>
 
-            <a href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Blog
-            </a>
-            <a href="/contact-us" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            </Link>
+            <Link href="/contact-us" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Contact
-            </a>
+            </Link>
           </nav>
 
           {/* CTA Button */}
           <div className="hidden sm:flex items-center">
-            <a
+            <Link
               href="/contact-us"
               className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 sm:px-5 py-2 rounded-lg hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105 text-sm"
             >
               Get Started
-            </a>
+            </Link>
           </div>
 
           {/* Mobile/Tablet Menu Button */}
@@ -659,13 +659,13 @@ const Header = () => {
                         </div>
                       );
                     })}
-                    <a
+                    <Link
                       href="/courses"
                       className="block px-4 py-2 text-sm text-blue-600 hover:text-blue-700 font-medium"
                       onClick={toggleMenu}
                     >
                       View All Courses →
-                    </a>
+                    </Link>
                   </div>
                 )}
               </div>
@@ -739,27 +739,27 @@ const Header = () => {
                 )}
               </div>
 
-              <a
+              <Link
                 href="/blog"
                 className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
                 onClick={toggleMenu}
               >
                 Blog
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/contact-us"
                 className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
                 onClick={toggleMenu}
               >
                 Contact
-              </a>
-              <a
+              </Link>
+              <Link
                 href="/contact-us"
                 className="block px-4 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg text-center text-sm sm:text-base"
                 onClick={toggleMenu}
               >
                 Get Started
-              </a>
+              </Link>
             </div>
           </div>
         )}

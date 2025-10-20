@@ -1,6 +1,6 @@
 "use client";
 
-import { ShieldCheck, Phone, Mail, Calendar, MessageCircle, Star, Check } from "lucide-react";
+import { ShieldCheck, Phone, Mail, Calendar, MessageCircle, Star, Check, Link } from "lucide-react";
 
 /**
  * CTA-only section — light, sleek, slightly futuristic
@@ -115,30 +115,30 @@ export default function AboutFAQSection() {
                             </p>
 
                             <div className="mt-4 grid gap-3">
-                                <a
+                                <Link
                                     href="/contact"
                                     className="inline-flex items-center justify-center rounded-xl bg-[#ff8c00] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/40"
                                 >
                                     Get Counseling
-                                </a>
+                                </Link>
 
-                                <a
+                                <Link
                                     href="tel:+0000000000"
                                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
                                     aria-label="Call our admissions team"
                                 >
                                     <Phone className="h-4 w-4" aria-hidden />
                                     Call Admissions
-                                </a>
+                                </Link>
 
-                                <a
+                                <Link
                                     href="mailto:admissions@cinutedigital.com"
                                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
                                     aria-label="Email our admissions team"
                                 >
                                     <Mail className="h-4 w-4" aria-hidden />
                                     Email Syllabus
-                                </a>
+                                </Link>
 
                                 <a
                                     href="https://wa.me/0000000000"

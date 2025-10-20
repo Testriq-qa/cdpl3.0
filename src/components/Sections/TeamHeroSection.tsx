@@ -1,6 +1,6 @@
 "use client";
 
-import { Badge, fadeUp } from "@/app/our-team/ui";
+import { fadeUp } from "@/app/our-team/ui";
 import { motion, type Transition } from "framer-motion";
 import {
   Sparkles,
@@ -201,6 +201,8 @@ function BackgroundFuturisticMotion({ brand = "#ff8c00" }: { brand?: string }) {
   );
 }
 
+type CustomCSSProperties = React.CSSProperties & { [key: `--${string}`]: string };
+
 export default function TeamHero() {
   const brand = BRAND || "#ff8c00";
 
@@ -209,7 +211,7 @@ export default function TeamHero() {
       aria-labelledby="our-team-heading"
       // overflow-x-hidden ALWAYS on the section; clip for modern engines to kill sub-pixel scroll
       className="relative isolate mx-auto max-w-7xl w-full bg-white px-4 pb-14 pt-8 md:pt-16 sm:px-6 lg:px-8"
-      style={{ ["--brand" as any]: brand, overflowX: "clip" as any }}
+      style={{ "--brand": brand, overflowX: "clip" } as CustomCSSProperties}
     >
       {/* Background */}
       <BackgroundFuturisticMotion brand={brand} />
@@ -240,7 +242,7 @@ export default function TeamHero() {
           transition={{ ...(fadeUp.transition as Transition), delay: 0.06 }}
           className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500"
         >
-          Meet the People Behind <span style={{ color: brand }}>Cinute Digital</span>
+          Meet the People Behind <span style={{ color: brand } as React.CSSProperties}>Cinute Digital</span>
         </motion.h1>
 
         <motion.p
@@ -274,14 +276,14 @@ export default function TeamHero() {
             <Link
               href="#mentors"
               className="inline-flex items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:shadow-xl hover:bg-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
-              style={{ ["--brand" as any]: brand }}
+              style={{ "--brand": brand } as CustomCSSProperties}
             >
               Explore Mentors <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link
               href="/become-a-mentor"
               className="inline-flex items-center justify-center rounded-2xl border border-brand bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-brand hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
-              style={{ ["--brand" as any]: brand }}
+              style={{ "--brand": brand } as CustomCSSProperties}
             >
               Become a Mentor
             </Link>
@@ -316,7 +318,7 @@ export default function TeamHero() {
         >
           {highlights.map((h) => (
             <li key={h} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <Check className="mt-0.5 h-5 w-5 shrink-0 text-[--brand]" style={{ ["--brand" as any]: brand }} />
+              <Check className="mt-0.5 h-5 w-5 shrink-0 text-[--brand]" style={{ "--brand": brand } as CustomCSSProperties} />
               <p className="text-slate-700">{h}</p>
             </li>
           ))}

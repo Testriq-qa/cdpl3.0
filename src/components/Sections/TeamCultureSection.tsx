@@ -5,22 +5,19 @@
 // =============================
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo } from "react";
 import type { ElementType } from "react";
+
+
 import { motion } from "framer-motion";
 import {
     Award,
-    GraduationCap,
-    Rocket,
-    Gauge,
     Handshake,
     Users2,
     ShieldCheck,
     BookOpen,
     Target,
     Cpu,
-    Check,
-    Star,
     Sparkles,
     ArrowRight,
 } from "lucide-react";
@@ -29,43 +26,16 @@ import Link from "next/link";
 // =============================
 // Types
 // =============================
-type Pillar = {
-    title: string;
-    desc: string;
-    icon: ElementType;
-};
 
-export type Mentor = {
-    id: number;
-    name: string;
-    title: string;
-    avatar?: string; // optional URL
-    bio: string;
-    tags: string[]; // skills
-};
+
+
 
 const BRAND = "#ff8c00"; // Cinute Digital brand
 
 // =============================
 // Data (sample — replace with dynamic data later if needed)
 // =============================
-const pillars: Pillar[] = [
-    {
-        title: "Mentor-Led, Job-Ready",
-        desc: "Senior QA engineers & data practitioners lead live sessions, code reviews, and mock interviews for job-ready outcomes.",
-        icon: GraduationCap,
-    },
-    {
-        title: "Portfolio Over Theory",
-        desc: "Ship capstones mirroring real sprints—defect triage, CI/CD, release readiness that hiring managers trust.",
-        icon: Rocket,
-    },
-    {
-        title: "Measured Skill Growth",
-        desc: "Rubric-based assessments, weekly checkpoints, and personalized feedback mapped to hiring-partner skill matrices.",
-        icon: Gauge,
-    },
-];
+
 
 const specialties = [
     {
@@ -94,37 +64,12 @@ const specialties = [
     },
 ];
 
-const mentors: Mentor[] = [
-    {
-        id: 1,
-        name: "Aisha Menon",
-        title: "Principal QA Engineer • Automation",
-        avatar: "/images/trainers/aisha.jpg",
-        bio: "Ex-FAANG QA. Scales Playwright test suites, builds CI pipelines, and mentors on debugging at speed.",
-        tags: ["Playwright", "TypeScript", "CI/CD"],
-    },
-    {
-        id: 2,
-        name: "Rohit Sharma",
-        title: "Lead SDET • API & Reliability",
-        avatar: "/images/trainers/rohit.jpg",
-        bio: "Designs contract tests, observability dashboards, and resilient API test harnesses.",
-        tags: ["Postman", "GraphQL", "k6"],
-    },
-    {
-        id: 3,
-        name: "Meera Iyer",
-        title: "Data in QA • GenAI Coach",
-        avatar: "/images/trainers/meera.jpg",
-        bio: "Brings data-best practices to QA, plus responsible GenAI for faster authoring & analysis.",
-        tags: ["Python", "Pandas", "GenAI"],
-    },
-];
+
 
 // =============================
 // Component
 // =============================
-export default function TeamMentorFuturisticBand() {
+export default function TeamCultureSection() {
 
 
     const marquee = useMemo(
@@ -305,14 +250,7 @@ function IconWrap({ Icon }: { Icon: ElementType }) {
 }
 
 
-function Metric({ kpi, label }: { kpi: string; label: string }) {
-    return (
-        <div className="flex items-center justify-between gap-3 sm:justify-start">
-            <div className="text-xl font-bold text-slate-900">{kpi}</div>
-            <div className="text-sm text-slate-600">{label}</div>
-        </div>
-    );
-}
+
 
 // Glassy holographic card with animated border sheen
 function HoloCard({ children }: { children: React.ReactNode }) {

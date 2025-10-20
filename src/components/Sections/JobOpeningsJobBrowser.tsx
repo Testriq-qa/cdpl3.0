@@ -40,6 +40,8 @@ type Props = {
     createCandidateAction: JobDetailsProps["createCandidateAction"];
 };
 
+type CustomCSSProperties = React.CSSProperties & { [key: `--${string}`]: string };
+
 export default function JobOpeningsJobBrowser({
     initialJobs,
     totalCount,
@@ -135,7 +137,7 @@ export default function JobOpeningsJobBrowser({
     };
 
     // *** Sticky offset (header + breadcrumb + margin). Adjust if your header changes. ***
-    const stickyStyle = { ["--sticky-top" as any]: "96px" } as React.CSSProperties;
+    const stickyStyle: CustomCSSProperties = { "--sticky-top": "96px" };
 
     // Copy a deep link (?job=<id>) to clipboard
     const handleShare = async (jobId: string) => {

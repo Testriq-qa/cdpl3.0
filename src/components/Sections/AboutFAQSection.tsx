@@ -1,7 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { ChevronDown, Search } from "lucide-react";
+import Link from "next/link";
+import { ChevronDown } from "lucide-react";
 
 /**
  * AboutFAQSection — sleek, light-themed, and slightly futuristic FAQ
@@ -83,7 +84,7 @@ const faqs: FAQ[] = [
 
 export default function AboutFAQSection() {
     const [open, setOpen] = useState<number | null>(0);
-    const [query, setQuery] = useState("");
+    const [query] = useState("");
 
     const filteredFaqs = useMemo(() => {
         const q = query.trim().toLowerCase();
@@ -121,7 +122,6 @@ export default function AboutFAQSection() {
             {/* JSON-LD script for SEO */}
             <script
                 type="application/ld+json"
-                // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
@@ -246,12 +246,12 @@ export default function AboutFAQSection() {
                         <span className="font-medium">Admissions & Career</span> team for a
                         personalized roadmap.
                     </p>
-                    <a
-                        href="/contact"
+                    <Link
+                        href="/contact-us"
                         className="inline-flex items-center justify-center rounded-xl bg-[#ff8c00] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/40"
                     >
                         Get Counseling
-                    </a>
+                    </Link>
                 </div>
             </div>
         </section>

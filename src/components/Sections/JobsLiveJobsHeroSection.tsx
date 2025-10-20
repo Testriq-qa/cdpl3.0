@@ -162,8 +162,7 @@ function Chip({ children }: { children: React.ReactNode }) {
 function FloatingIcon({
   Icon,
   className,
-  hue,
-  delay = 0,
+  hue
 }: {
   Icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
   className?: string;

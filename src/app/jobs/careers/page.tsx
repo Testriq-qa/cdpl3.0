@@ -206,37 +206,37 @@ function SectionLoader({ label = "Loading..." }: { label?: string }) {
 
 // ====== Dynamic Section Imports (typed) ======
 const JobsCareersHeroSection = dynamic(
-    () => import("@/components/Sections/JobsCareersHeroSection"),
+    () => import("@/components/sections/JobsCareersHeroSection"),
     { ssr: true, loading: () => <SectionLoader label="Loading hero..." /> }
 );
 
 const JobsCareersOpenRolesSection = dynamic<{ jobs: Job[] }>(
-    () => import("@/components/Sections/JobsCareersOpenRolesSection"),
+    () => import("@/components/sections/JobsCareersOpenRolesSection"),
     { ssr: true, loading: () => <SectionLoader label="Loading roles..." /> }
 );
 
 const JobsCareersProcessSection = dynamic(
-    () => import("@/components/Sections/JobsCareersProcessSection"),
+    () => import("@/components/sections/JobsCareersProcessSection"),
     { ssr: true, loading: () => <SectionLoader label="Loading process..." /> }
 );
 
 const JobsCareersBenefitsSection = dynamic(
-    () => import("@/components/Sections/JobsCareersBenefitsSection"),
+    () => import("@/components/sections/JobsCareersBenefitsSection"),
     { ssr: true, loading: () => <SectionLoader label="Loading benefits..." /> }
 );
 
 const JobsCareersCultureSection = dynamic(
-    () => import("@/components/Sections/JobsCareersCultureSection"),
+    () => import("@/components/sections/JobsCareersCultureSection"),
     { ssr: true, loading: () => <SectionLoader label="Loading culture..." /> }
 );
 
 const JobsCareersFAQSection = dynamic(
-    () => import("@/components/Sections/JobsCareersFAQSection"),
+    () => import("@/components/sections/JobsCareersFAQSection"),
     { ssr: true, loading: () => <SectionLoader label="Loading FAQs..." /> }
 );
 
 const JobsCareersCTASection = dynamic(
-    () => import("@/components/Sections/JobsCareersCTASection"),
+    () => import("@/components/sections/JobsCareersCTASection"),
     { ssr: true, loading: () => <SectionLoader label="Loading CTA..." /> }
 );
 

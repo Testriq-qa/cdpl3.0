@@ -149,7 +149,7 @@ export default function TrainingServicesPage() {
           <div className="bg-gradient-to-r from-purple-600 to-blue-600 rounded-3xl p-12 text-center text-white shadow-2xl">
             <h2 className="text-3xl font-bold mb-4">Ready to Transform Your Team?</h2>
             <p className="text-xl mb-8 text-white/90">
-              Let's discuss how our training services can help your organization achieve its goals.
+              Let&apos;s discuss how our training services can help your organization achieve its goals.
             </p>
             <button
               onClick={() => {

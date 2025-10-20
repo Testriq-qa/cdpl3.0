@@ -1,9 +1,21 @@
 import { getEventBySlug, pastEvents } from '@/data/eventsData';
 import { Calendar, MapPin, Users, Award, Building2, ArrowLeft } from "lucide-react";
 import Link from "next/link";
-import { CorporateRegistrationModal } from '@/components/events';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
+import dynamic from 'next/dynamic';
+import { CorporateRegistrationModal } from '@/components/events';
+
+type PageProps = { params: Promise<{ slug: string }> };
+
+const CorporateRequestButton = dynamic(
+  () => import('./CorporateRequestButton'),
+  {
+    loading: () => (
+      <div className="w-full h-16 bg-gray-200 rounded-xl animate-pulse" />
+    ),
+  }
+);
 
 export async function generateStaticParams() {
   return pastEvents.map((event) => ({
@@ -11,8 +23,9 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const event = getEventBySlug(params.slug);
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const { slug } = await params;
+  const event = getEventBySlug(slug);
   
   if (!event) {
     return {
@@ -32,8 +45,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
   };
 }
 
-export default function EventDetailPage({ params }: { params: { slug: string } }) {
-  const event = getEventBySlug(params.slug);
+export default async function EventDetailPage({ params }: PageProps) {
+  const { slug } = await params;
+  const event = getEventBySlug(slug);
 
   if (!event) {
     notFound();
@@ -219,17 +233,7 @@ export default function EventDetailPage({ params }: { params: { slug: string } }
                   <p className="text-gray-700 mb-6">
                     Bring this expert-led training to your organization. Customized programs available for corporates and institutions.
                   </p>
-                  <button
-                    onClick={() => {
-                      const customEvent = new CustomEvent('openCorporateRegistration', {
-                        detail: { eventType: event.category }
-                      });
-                      window.dispatchEvent(customEvent);
-                    }}
-                    className="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white px-6 py-4 rounded-xl font-bold shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
-                  >
-                    Request for Your Organization
-                  </button>
+                  <CorporateRequestButton eventCategory={event.category} />
                 </div>
 
                 {/* Benefits Card */}
