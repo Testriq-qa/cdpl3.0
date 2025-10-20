@@ -1,87 +1,126 @@
 "use client";
 
-import React from "react";
-import { motion } from "framer-motion";
-import { CourseData } from "@/types/courseData";
-import { ArrowRight, Phone, Mail, MapPin, Check } from "lucide-react";
+import React, { useState } from "react";
+import { motion, type Variants } from "framer-motion";
+import { ArrowRight, Phone, Mail, MapPin, Check, Star, Zap } from "lucide-react";
 
 interface CTASectionProps {
-  data: CourseData;
+  data: {
+    ctaContent: {
+      title: string;
+      subtitle: string;
+      description: string;
+      benefits?: string[];
+      contactInfo: {
+        phone: string;
+        email: string;
+        address: string;
+      };
+    };
+  };
 }
+
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
+};
 
 const CTASection: React.FC<CTASectionProps> = ({ data }) => {
   const { ctaContent } = data;
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
 
-  const itemVariants = {
-    hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(
+      `Consultation Request:\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}`
+    );
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 overflow-hidden">
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-blue-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-pink-500 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-white via-indigo-50 to-violet-50">
+      {/* Soft background shapes */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-20 -left-24 h-80 w-80 rounded-full bg-indigo-200/40 blur-3xl" />
+        <div className="absolute -bottom-28 -right-28 h-96 w-96 rounded-full bg-violet-200/40 blur-3xl" />
+        <div className="absolute top-1/2 left-1/2 h-72 w-72 -translate-x-1/2 -translate-y-1/2 rounded-full bg-pink-200/30 blur-3xl" />
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8 lg:py-24">
         <motion.div
-          className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+          className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
         >
-          {/* Left Content */}
-          <motion.div className="space-y-8" variants={itemVariants}>
-            <div>
-              <motion.h2
-                className="text-4xl lg:text-5xl font-bold text-white mb-4"
-                variants={itemVariants}
-              >
-                {ctaContent.title}
-              </motion.h2>
-              <motion.p
-                className="text-xl text-purple-200 font-semibold mb-4"
-                variants={itemVariants}
-              >
-                {ctaContent.subtitle}
-              </motion.p>
-              <motion.p
-                className="text-lg text-gray-300 leading-relaxed"
-                variants={itemVariants}
-              >
-                {ctaContent.description}
-              </motion.p>
-            </div>
+          {/* LEFT: Content + Benefits */}
+          <div className="lg:col-span-7">
+            {/* Special offer badge */}
+            <motion.div
+              variants={itemVariants}
+              className="mb-4 inline-flex items-center gap-2 rounded-full border border-amber-200 bg-gradient-to-r from-amber-50 to-orange-50 px-3 py-1.5 shadow-sm"
+            >
+              <Zap className="h-4 w-4 fill-amber-500 text-amber-500" />
+              <span className="text-xs font-semibold text-amber-900">
+                Limited Time: 33% Discount Available!
+              </span>
+            </motion.div>
+
+            <motion.h2
+              variants={itemVariants}
+              className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl"
+            >
+              {ctaContent.title}
+            </motion.h2>
+
+            <motion.p
+              variants={itemVariants}
+              className="mt-3 text-lg font-semibold text-indigo-700"
+            >
+              {ctaContent.subtitle}
+            </motion.p>
+
+            <motion.p
+              variants={itemVariants}
+              className="mt-4 max-w-2xl text-base leading-relaxed text-slate-700"
+            >
+              {ctaContent.description}
+            </motion.p>
 
             {/* Benefits List */}
             {ctaContent.benefits && ctaContent.benefits.length > 0 && (
-              <motion.div className="space-y-3" variants={itemVariants}>
+              <motion.div
+                variants={itemVariants}
+                className="mt-8 space-y-3"
+              >
                 {ctaContent.benefits.map((benefit, index) => (
                   <div
                     key={index}
-                    className="flex items-center gap-3 text-white"
+                    className="flex items-start gap-3"
                   >
-                    <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
-                    <span className="font-medium">{benefit}</span>
+                    <div className="mt-0.5 flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-green-400 to-emerald-500">
+                      <Check className="h-4 w-4 text-white" />
+                    </div>
+                    <span className="text-base font-medium text-slate-800">
+                      {benefit}
+                    </span>
                   </div>
                 ))}
               </motion.div>
@@ -89,137 +128,156 @@ const CTASection: React.FC<CTASectionProps> = ({ data }) => {
 
             {/* CTA Buttons */}
             <motion.div
-              className="flex flex-col sm:flex-row gap-4 pt-4"
               variants={itemVariants}
+              className="mt-8 flex flex-col gap-3 sm:flex-row"
             >
-              <button className="group relative px-8 py-4 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg overflow-hidden transition-all duration-300 hover:shadow-2xl hover:shadow-purple-500/50">
-                <span className="relative z-10 flex items-center justify-center gap-2">
-                  Enroll Now
-                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-                </span>
-              </button>
-              <button className="px-8 py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold rounded-lg hover:bg-white/20 transition-all duration-300">
+              <a
+                href="#enroll"
+                className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-8 py-3.5 font-semibold text-white shadow-lg transition hover:shadow-xl"
+              >
+                Enroll Now
+                <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="#demo"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-8 py-3.5 font-semibold text-slate-800 shadow-sm transition hover:border-slate-400 hover:shadow-md"
+              >
                 Get Free Demo
-              </button>
+              </a>
             </motion.div>
 
-            {/* Offer Badge */}
+            {/* Contact Info Cards */}
             <motion.div
-              className="inline-flex items-center gap-2 bg-gradient-to-r from-yellow-400/20 to-orange-400/20 border border-yellow-400/50 rounded-full px-4 py-3"
               variants={itemVariants}
+              className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-3"
             >
-              <span className="text-yellow-300 font-bold">⚡</span>
-              <span className="text-white font-semibold">
-                Limited Time: 33% Discount Available!
-              </span>
-            </motion.div>
-          </motion.div>
-
-          {/* Right Contact Info */}
-          <motion.div
-            className="space-y-6"
-            variants={containerVariants}
-          >
-            {/* Contact Card */}
-            <motion.div
-              className="bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 space-y-6"
-              variants={itemVariants}
-            >
-              <h3 className="text-2xl font-bold text-white mb-6">
-                Get in Touch
-              </h3>
-
               {/* Phone */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg">
-                    <Phone className="w-6 h-6 text-white" />
-                  </div>
+              <div className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500">
+                  <Phone className="h-5 w-5 text-white" />
                 </div>
-                <div>
-                  <p className="text-sm text-gray-300 uppercase tracking-wider">
-                    Phone
-                  </p>
-                  <a
-                    href={`tel:${ctaContent.contactInfo.phone}`}
-                    className="text-lg font-semibold text-white hover:text-purple-300 transition-colors"
-                  >
-                    {ctaContent.contactInfo.phone}
-                  </a>
-                </div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  Phone
+                </p>
+                <a
+                  href={`tel:${ctaContent.contactInfo.phone}`}
+                  className="mt-1 block text-sm font-semibold text-slate-900 transition group-hover:text-indigo-600"
+                >
+                  {ctaContent.contactInfo.phone}
+                </a>
               </div>
 
               {/* Email */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg">
-                    <Mail className="w-6 h-6 text-white" />
-                  </div>
+              <div className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500">
+                  <Mail className="h-5 w-5 text-white" />
                 </div>
-                <div>
-                  <p className="text-sm text-gray-300 uppercase tracking-wider">
-                    Email
-                  </p>
-                  <a
-                    href={`mailto:${ctaContent.contactInfo.email}`}
-                    className="text-lg font-semibold text-white hover:text-purple-300 transition-colors break-all"
-                  >
-                    {ctaContent.contactInfo.email}
-                  </a>
-                </div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  Email
+                </p>
+                <a
+                  href={`mailto:${ctaContent.contactInfo.email}`}
+                  className="mt-1 block text-sm font-semibold text-slate-900 transition group-hover:text-indigo-600"
+                >
+                  {ctaContent.contactInfo.email}
+                </a>
               </div>
 
-              {/* Address */}
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0">
-                  <div className="flex items-center justify-center w-12 h-12 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg">
-                    <MapPin className="w-6 h-6 text-white" />
-                  </div>
+              {/* Location */}
+              <div className="group rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md">
+                <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-lg bg-gradient-to-br from-indigo-500 to-violet-500">
+                  <MapPin className="h-5 w-5 text-white" />
                 </div>
-                <div>
-                  <p className="text-sm text-gray-300 uppercase tracking-wider">
-                    Location
-                  </p>
-                  <p className="text-lg font-semibold text-white">
-                    {ctaContent.contactInfo.address}
-                  </p>
-                </div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
+                  Location
+                </p>
+                <p className="mt-1 text-sm font-semibold text-slate-900">
+                  {ctaContent.contactInfo.address}
+                </p>
               </div>
             </motion.div>
+          </div>
 
-            {/* Form CTA */}
-            <motion.div
-              className="bg-gradient-to-br from-purple-600 to-blue-600 rounded-2xl p-8"
-              variants={itemVariants}
-            >
-              <h3 className="text-xl font-bold text-white mb-4">
-                Get Free Consultation
+          {/* RIGHT: Consultation Form */}
+          <motion.div variants={itemVariants} className="lg:col-span-5">
+            <div className="rounded-2xl border border-indigo-200 bg-gradient-to-br from-indigo-600 to-violet-600 p-8 shadow-2xl max-w-md w-full lg:ml-auto">
+              <div className="mb-2 inline-flex items-center gap-2 rounded-full bg-white/20 px-3 py-1 backdrop-blur-sm">
+                <Star className="h-4 w-4 fill-yellow-300 text-yellow-300" />
+                <span className="text-xs font-semibold text-white">
+                  Free Consultation
+                </span>
+              </div>
+
+              <h3 className="text-2xl font-bold text-white">
+                Get Expert Guidance
               </h3>
-              <form className="space-y-4">
-                <input
-                  type="text"
-                  placeholder="Your Name"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/50 transition-all"
-                />
-                <input
-                  type="email"
-                  placeholder="Your Email"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/50 transition-all"
-                />
-                <input
-                  type="tel"
-                  placeholder="Your Phone"
-                  className="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-white/50 transition-all"
-                />
+              <p className="mt-2 text-sm text-indigo-100">
+                Schedule a free consultation with our career counselors and discover the best learning path for you.
+              </p>
+
+              <form onSubmit={onSubmit} className="mt-6 space-y-4">
+                <div>
+                  <label htmlFor="cta-name" className="mb-1.5 block text-sm font-medium text-white">
+                    Your Name
+                  </label>
+                  <input
+                    id="cta-name"
+                    name="name"
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                    className="block w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-white/40 focus:ring-2 focus:ring-white/30"
+                    placeholder="Enter your name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="cta-email" className="mb-1.5 block text-sm font-medium text-white">
+                    Your Email
+                  </label>
+                  <input
+                    id="cta-email"
+                    name="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                    className="block w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-white/40 focus:ring-2 focus:ring-white/30"
+                    placeholder="you@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="cta-phone" className="mb-1.5 block text-sm font-medium text-white">
+                    Your Phone
+                  </label>
+                  <input
+                    id="cta-phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    pattern="^[0-9+\\-\\s()]{7,15}$"
+                    value={form.phone}
+                    onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                    className="block w-full rounded-lg border border-white/20 bg-white/10 px-4 py-3 text-white placeholder-indigo-200 shadow-sm backdrop-blur-sm outline-none transition focus:border-white/40 focus:ring-2 focus:ring-white/30"
+                    placeholder="+91 98765 43210"
+                  />
+                </div>
+
                 <button
                   type="submit"
-                  className="w-full px-4 py-3 bg-white text-purple-600 font-semibold rounded-lg hover:bg-gray-100 transition-all duration-300 flex items-center justify-center gap-2"
+                  className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-white px-6 py-3.5 font-semibold text-indigo-600 shadow-lg transition hover:bg-indigo-50 hover:shadow-xl"
                 >
                   Get Free Consultation
-                  <ArrowRight className="w-5 h-5" />
+                  <ArrowRight className="ml-2 h-5 w-5" />
                 </button>
+
+                <p className="text-xs text-indigo-100">
+                  By submitting, you agree to be contacted about courses and placements.
+                </p>
               </form>
-            </motion.div>
+            </div>
           </motion.div>
         </motion.div>
       </div>
@@ -228,4 +286,3 @@ const CTASection: React.FC<CTASectionProps> = ({ data }) => {
 };
 
 export default CTASection;
-

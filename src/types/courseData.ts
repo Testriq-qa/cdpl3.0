@@ -42,13 +42,19 @@ export interface CourseData {
   curriculumContent: {
     title: string;
     subtitle: string;
-    weeks: {
-      number: string;
-      title: string;
-      description: string;
-      deliverables?: string[];
+    // UPDATED: multiple tracks (tabs). Each track has its own weeks list
+    tracks: {
+      id: string;     // stable key for tab + a11y
+      title: string;  // tab label (your provided titles)
+      weeks: {
+        number: string;
+        title: string;
+        description: string;
+        deliverables?: string[];
+      }[];
     }[];
   };
+
   toolsFrameworkContent: {
     title: string;
     description: string;
@@ -131,7 +137,6 @@ export const courseData: Record<string, CourseData> = {
     courseName: "Software Testing",
     location: "Mumbai",
     state: "Maharashtra",
-    // NEW: will drive the form select
     specializations: [
       "Manual Testing",
       "Automation Testing",
@@ -140,7 +145,6 @@ export const courseData: Record<string, CourseData> = {
       "Mobile App Testing",
       "Security Testing"
     ],
-    // (Optional) custom breadcrumbs; else a default is computed
     breadcrumbs: [
       { label: "Home", href: "/" },
       { label: "Software Testing", href: "/courses/software-testing" },
@@ -165,11 +169,7 @@ export const courseData: Record<string, CourseData> = {
       subtitle: "Industry-Recognized QA Testing Course",
       description:
         "Learn comprehensive software testing skills from industry experts in Mumbai. Master manual testing, automation, performance testing, and quality assurance to launch your career in tech.",
-      certifications: [
-        "ISTQB Certification Ready",
-        "Industry-Recognized",
-        "Hands-on Projects",
-      ],
+      certifications: ["ISTQB Certification Ready", "Industry-Recognized", "Hands-on Projects"],
       stats: [
         { number: "500+", label: "Students Trained", description: "Successfully completed the course" },
         { number: "95%", label: "Job Placement", description: "Within 3 months of completion" },
@@ -182,166 +182,335 @@ export const courseData: Record<string, CourseData> = {
     courseOverviewContent: {
       title: "Course Modules",
       description: "Comprehensive modules covering all aspects of software testing",
-      subtitle:
-        "Learn industry-relevant skills with hands-on projects and real-world scenarios.",
+      subtitle: "Learn industry-relevant skills with hands-on projects and real-world scenarios.",
       modules: [
-        {
-          icon: "BookOpen",
-          trending: true,
-          name: "Testing Fundamentals",
-          description:
-            "Master the basics of software testing, SDLC, and QA processes.",
-          topics: [
-            "Testing Concepts",
-            "SDLC Models",
-            "Testing Types",
-            "Bug Lifecycle",
-          ],
-          link: "/courses/testing-fundamentals",
-        },
         {
           icon: "CheckCircle",
           trending: true,
-          name: "Manual Testing",
-          description:
-            "Learn comprehensive manual testing techniques and best practices.",
+          name: "Manual Software Testing",
+          description: "Master core testing fundamentals—techniques, plans, and defect workflows used in real projects.",
           topics: [
-            "Test Case Design",
-            "Exploratory Testing",
-            "Regression Testing",
-            "Usability Testing",
+            "Test Case & Scenario Design",
+            "Functional vs. Non-Functional Testing",
+            "Bug Lifecycle & Reporting",
+            "Exploratory & Regression Testing"
           ],
-          link: "/courses/manual-testing",
+          link: "/courses/manual-software-testing",
         },
         {
           icon: "Zap",
           trending: true,
-          name: "Automation Testing",
-          description:
-            "Master automation frameworks and tools for efficient testing.",
+          name: "API Testing using POSTMAN and RestAPIs",
+          description: "Design, execute, and automate REST API tests with Postman and integrate them into CI pipelines.",
           topics: [
-            "Selenium WebDriver",
-            "Test Automation Framework",
-            "CI/CD Integration",
-            "API Automation",
+            "HTTP Methods & Status Codes",
+            "Postman Collections & Environments",
+            "Auth (Bearer/OAuth/JWT) & Headers",
+            "Tests, Schemas & Newman CI"
           ],
-          link: "/courses/automation-testing",
+          link: "/courses/api-testing-postman-rest",
+        },
+        {
+          icon: "BookOpen",
+          trending: false,
+          name: "Database Management System using MySQL",
+          description: "Query and validate data with SQL—ensure integrity, performance, and clean test datasets.",
+          topics: [
+            "SQL CRUD, Joins & Subqueries",
+            "Constraints, Keys & Transactions",
+            "Normalization & Indexing",
+            "Data Aggregation & Views"
+          ],
+          link: "/courses/mysql-dbms",
         },
         {
           icon: "Gauge",
           trending: false,
-          name: "Performance Testing",
-          description:
-            "Learn load testing, stress testing, and performance optimization.",
+          name: "ETL Testing Course",
+          description: "Validate data pipelines—ensure accurate extraction, transformation, and loading across systems.",
           topics: [
-            "Load Testing",
-            "Stress Testing",
-            "JMeter Basics",
-            "Performance Analysis",
+            "Source-to-Target Mapping",
+            "Data Quality & Reconciliation",
+            "Incremental Loads & CDC",
+            "SQL for ETL Validation"
           ],
-          link: "/courses/performance-testing",
+          link: "/courses/etl-testing",
         },
         {
           icon: "Shield",
-          trending: false,
-          name: "Security Testing",
-          description:
-            "Understand security vulnerabilities and penetration testing.",
+          trending: true,
+          name: "Advanced Software Testing",
+          description: "Go beyond the basics—build strategies, manage risk, and measure quality with actionable metrics.",
           topics: [
-            "Security Concepts",
-            "Vulnerability Assessment",
-            "OWASP Top 10",
-            "Security Best Practices",
+            "Test Strategy & Risk-Based Testing",
+            "Traceability & Coverage Techniques",
+            "Test Management & Metrics",
+            "Performance/Security Test Readiness"
           ],
-          link: "/courses/security-testing",
+          link: "/courses/advanced-software-testing",
         },
         {
           icon: "Smartphone",
           trending: true,
-          name: "Mobile Testing",
-          description: "Test mobile applications across iOS and Android platforms.",
+          name: "Advanced Automation Testing",
+          description: "Engineer robust automation—framework design, CI/CD, parallel runs, and rock-solid reporting.",
           topics: [
-            "Mobile Testing Concepts",
-            "Appium Framework",
-            "Device Testing",
-            "Cross-Platform Testing",
+            "Framework Design (POM/Modular)",
+            "Selenium/WebDriver Best Practices",
+            "CI/CD Integration & Newman/Allure",
+            "Parallel/Cross-Browser & Flaky Test Fixes"
           ],
-          link: "/courses/mobile-testing",
+          link: "/courses/advanced-automation-testing",
         },
+        {
+          icon: "Gauge",
+          trending: true,
+          name: "Advanced Manual & Automation Testing — Master Program",
+          description: "End-to-end mastery: advanced test strategy and leadership combined with enterprise-grade automation and CI/CD.",
+          topics: [
+            "Risk-Based Strategy & Quality Metrics",
+            "Advanced Test Design & Bug Advocacy",
+            "Automation Frameworks (POM/Hybrid, API + UI)",
+            "CI/CD, Parallel & Cross-Browser at Scale"
+          ],
+          link: "/courses/advanced-manual-automation-master",
+        },
+
       ],
     },
+
+
+    // ✅ NEW: multiple curricula as tracks matching your requested titles
     curriculumContent: {
       title: "Detailed Curriculum",
-      subtitle: "Week-by-week learning path designed by industry experts.",
-      weeks: [
+      subtitle: "Choose a program tab to see its modules.",
+      tracks: [
         {
-          number: "01-02",
-          title: "Testing Fundamentals & SDLC",
-          description:
-            "Introduction to software testing, SDLC models, testing types, and quality assurance principles.",
-          deliverables: [
-            "Understanding of SDLC",
-            "Testing concepts mastery",
-            "First test case creation",
+          id: "manual-testing",
+          title: "Manual Software Testing",
+          weeks: [
+            {
+              number: "01",
+              title: "Testing Fundamentals & SDLC",
+              description: "Principles of testing, SDLC/STLC, test levels & types, QA vs QC.",
+              deliverables: ["Glossary & notes", "mini quiz"],
+            },
+            {
+              number: "02",
+              title: "Requirements & Test Design",
+              description: "SRS/BRD review, equivalence partitioning, boundary analysis, decision tables.",
+              deliverables: ["15+ test cases", "review checklist"],
+            },
+            {
+              number: "03",
+              title: "Test Execution & Defect Lifecycle",
+              description: "Test execution, defect reporting (JIRA), severity vs priority, RCA basics.",
+              deliverables: ["Defect log", "RCA report"],
+            },
+            {
+              number: "04",
+              title: "Regression, UAT & Test Reporting",
+              description: "Regression planning, UAT coordination, metrics & exit criteria.",
+              deliverables: ["Test summary report", "UAT sign-off template"],
+            },
           ],
         },
         {
-          number: "03-04",
-          title: "Manual Testing Mastery",
-          description:
-            "Deep dive into manual testing techniques, test case design, and defect reporting.",
-          deliverables: [
-            "50+ test cases",
-            "Defect reports",
-            "Testing documentation",
+          id: "api-postman-rest",
+          title: "API Testing using POSTMAN and RestAPIs",
+          weeks: [
+            {
+              number: "01",
+              title: "HTTP & REST Basics",
+              description: "HTTP verbs, status codes, headers, REST constraints, Postman setup.",
+              deliverables: ["Workspace setup", "collection skeleton"],
+            },
+            {
+              number: "02",
+              title: "Postman Collections & Scripts",
+              description: "Params, envs, pre-request scripts, assertions, Newman CLI runs.",
+              deliverables: ["Parameterized collection", "CLI run report"],
+            },
+            {
+              number: "03",
+              title: "Auth, Chaining & Mock Servers",
+              description: "Bearer/OAuth2, chaining requests, mock servers, data-driven testing.",
+              deliverables: ["Auth-enabled suite", "Mock-based tests"],
+            },
+            {
+              number: "04",
+              title: "Contract & Negative Testing",
+              description: "JSON schema validation, error handling, rate limits, retries.",
+              deliverables: ["Schema files", "negative test pack"],
+            },
           ],
         },
         {
-          number: "05-06",
-          title: "Automation Testing with Selenium",
-          description:
-            "Learn Selenium WebDriver, automation framework design, and script development.",
-          deliverables: [
-            "Automation framework",
-            "20+ automated scripts",
-            "Test execution reports",
+          id: "dbms-mysql",
+          title: "Database Management System using MySQL",
+          weeks: [
+            {
+              number: "01",
+              title: "SQL Foundations",
+              description: "DDL, DML, DQL; SELECT, WHERE, ORDER BY, LIMIT; NULL handling.",
+              deliverables: ["Practice queries set-1"],
+            },
+            {
+              number: "02",
+              title: "Joins & Aggregations",
+              description: "INNER/LEFT/RIGHT joins, GROUP BY, HAVING, window functions basics.",
+              deliverables: ["Join exercises", "analytics queries"],
+            },
+            {
+              number: "03",
+              title: "Constraints & Transactions",
+              description: "PK/FK, indexes, ACID, transactions, isolation & locking.",
+              deliverables: ["Schema with constraints", "TX scripts"],
+            },
+            {
+              number: "04",
+              title: "DB Testing",
+              description: "Test data design, DB assertions from API/UI, backups & restores.",
+              deliverables: ["DB test cases", "backup checklist"],
+            },
           ],
         },
         {
-          number: "07-08",
-          title: "API & Database Testing",
-          description:
-            "Master API testing tools, REST API testing, and database validation.",
-          deliverables: [
-            "API test suite",
-            "Database test cases",
-            "Integration testing",
+          id: "etl-testing",
+          title: "ETL Testing Course",
+          weeks: [
+            {
+              number: "01",
+              title: "ETL Concepts & Architecture",
+              description: "Source-to-target mapping, staging, dimensional modeling (star/snowflake).",
+              deliverables: ["STM document", "mapping sheet"],
+            },
+            {
+              number: "02",
+              title: "Data Validation Techniques",
+              description: "Record counts, duplicates, constraints, referential integrity.",
+              deliverables: ["Validation queries pack"],
+            },
+            {
+              number: "03",
+              title: "Transformations & SCD",
+              description: "Common transforms, SCD types, incremental loads & CDC testing.",
+              deliverables: ["SCD test suite"],
+            },
+            {
+              number: "04",
+              title: "Performance & Job Orchestration",
+              description: "Batch windows, job dependency checks, error handling & re-runs.",
+              deliverables: ["Runbook", "perf report"],
+            },
           ],
         },
         {
-          number: "09-10",
-          title: "Performance & Security Testing",
-          description:
-            "Learn load testing, stress testing, and security vulnerability assessment.",
-          deliverables: [
-            "Performance test report",
-            "Security assessment",
-            "Optimization recommendations",
+          id: "advanced-software-testing",
+          title: "Advanced Software Testing",
+          weeks: [
+            {
+              number: "01",
+              title: "Test Strategy & Risk-Based Testing",
+              description: "Product risks, priority matrices, coverage heuristics.",
+              deliverables: ["Risk register", "strategy doc"],
+            },
+            {
+              number: "02",
+              title: "Exploratory & Session-Based Testing",
+              description: "Charters, time-boxing, debriefs, mind-maps.",
+              deliverables: ["Session notes", "mind-map"],
+            },
+            {
+              number: "03",
+              title: "Non-Functional Testing Deep Dive",
+              description: "Security, performance, reliability, accessibility overview for testers.",
+              deliverables: ["NFR checklist"],
+            },
+            {
+              number: "04",
+              title: "Metrics, Dashboards & Storytelling",
+              description: "Meaningful metrics, dashboards, stakeholder comms.",
+              deliverables: ["QA dashboard", "weekly report"],
+            },
           ],
         },
         {
-          number: "11-12",
-          title: "Capstone Project & Interview Prep",
-          description:
-            "Complete a real-world project and prepare for job interviews.",
-          deliverables: [
-            "Capstone project",
-            "Portfolio",
-            "Interview preparation",
+          id: "advanced-automation",
+          title: "Advanced Automation Testing",
+          weeks: [
+            {
+              number: "01-02",
+              title: "Framework Design",
+              description: "POM, data-driven, modular, logging, reporting (Allure/JUnit).",
+              deliverables: ["Starter framework repo"],
+            },
+            {
+              number: "03",
+              title: "Parallelism & CI/CD",
+              description: "Grid/cloud runs, retries, flakiness control, CI integration.",
+              deliverables: ["CI pipeline", "parallel suite"],
+            },
+            {
+              number: "04",
+              title: "API & Component Automation",
+              description: "Hybrid UI+API strategies, contract tests, test pyramids.",
+              deliverables: ["Hybrid suite", "pyramid doc"],
+            },
+          ],
+        },
+        {
+          id: "master-program",
+          title: "Advanced Manual and Automation Testing - Master Program",
+          // Your original 12 weeks condensed into 6 modules (kept content meaning)
+          weeks: [
+            {
+              number: "01-02",
+              title: "Testing Fundamentals & SDLC",
+              description:
+                "Introduction to software testing, SDLC models, testing types, and QA principles.",
+              deliverables: ["Understanding of SDLC", "Testing concepts mastery", "First test case creation"],
+            },
+            {
+              number: "03-04",
+              title: "Manual Testing Mastery",
+              description:
+                "Deep dive into test design, execution, and defect lifecycle with JIRA.",
+              deliverables: ["50+ test cases", "Defect reports", "Testing documentation"],
+            },
+            {
+              number: "05-06",
+              title: "Automation with Selenium",
+              description:
+                "WebDriver, waits, page objects, framework design, reporting.",
+              deliverables: ["Automation framework", "20+ automated scripts", "Test execution reports"],
+            },
+            {
+              number: "07-08",
+              title: "API & Database Testing",
+              description:
+                "REST testing with Postman/Newman and DB assertions with MySQL.",
+              deliverables: ["API test suite", "Database test cases", "Integration testing"],
+            },
+            {
+              number: "09-10",
+              title: "Performance & Security Basics",
+              description:
+                "Load/stress testing with JMeter and OWASP top 10 awareness.",
+              deliverables: ["Performance report", "Security assessment"],
+            },
+            {
+              number: "11-12",
+              title: "Capstone & Interview Prep",
+              description:
+                "End-to-end project, portfolio, mock interviews & resume workshop.",
+              deliverables: ["Capstone project", "Portfolio", "Interview preparation"],
+            },
           ],
         },
       ],
     },
+
     toolsFrameworkContent: {
       title: "Tools & Technologies",
       description: "Learn industry-standard tools used by leading companies.",
@@ -352,38 +521,15 @@ export const courseData: Record<string, CourseData> = {
         jobPlacement: "95%",
       },
     },
+
     whyChooseContent: {
       title: "Why Choose Our Course?",
       subtitle: "Get trained by industry experts with real-world experience.",
       reasons: [
-        {
-          icon: "Award",
-          title: "Expert Instructors",
-          stats: "10+ Years Experience",
-          description:
-            "Learn from professionals with extensive industry experience.",
-        },
-        {
-          icon: "Briefcase",
-          title: "Job Placement",
-          stats: "95% Success Rate",
-          description:
-            "Dedicated placement assistance and interview preparation.",
-        },
-        {
-          icon: "Users",
-          title: "Community Support",
-          stats: "500+ Alumni",
-          description:
-            "Join a thriving community of professionals and learners.",
-        },
-        {
-          icon: "Clock",
-          title: "Flexible Learning",
-          stats: "Self-Paced Options",
-          description:
-            "Learn at your own pace with recorded sessions available.",
-        },
+        { icon: "Award", title: "Expert Instructors", stats: "10+ Years Experience", description: "Learn from professionals with extensive industry experience." },
+        { icon: "Briefcase", title: "Job Placement", stats: "95% Success Rate", description: "Dedicated placement assistance and interview preparation." },
+        { icon: "Users", title: "Community Support", stats: "500+ Alumni", description: "Join a thriving community of professionals and learners." },
+        { icon: "Clock", title: "Flexible Learning", stats: "Self-Paced Options", description: "Learn at your own pace with recorded sessions available." },
       ],
       testimonial: {
         text: "This course completely transformed my career. The practical approach and mentorship helped me land a job within 2 months of completion. Highly recommended!",
@@ -392,6 +538,7 @@ export const courseData: Record<string, CourseData> = {
         rating: 5,
       },
     },
+
     projectsContent: {
       title: "Hands-On Projects",
       description: "Build real-world projects to strengthen your portfolio.",
@@ -399,54 +546,31 @@ export const courseData: Record<string, CourseData> = {
       projects: [
         {
           name: "E-Commerce Platform Testing",
-          description:
-            "Complete testing of an e-commerce application including manual and automation testing.",
-          skills: [
-            "Manual Testing",
-            "Selenium",
-            "Test Case Design",
-            "Bug Reporting",
-          ],
+          description: "Complete testing of an e-commerce application including manual and automation testing.",
+          skills: ["Manual Testing", "Selenium", "Test Case Design", "Bug Reporting"],
           difficulty: "Intermediate",
         },
         {
           name: "Banking Application QA",
-          description:
-            "Security and performance testing of a banking application.",
-          skills: [
-            "Security Testing",
-            "Performance Testing",
-            "API Testing",
-            "Database Testing",
-          ],
+          description: "Security and performance testing of a banking application.",
+          skills: ["Security Testing", "Performance Testing", "API Testing", "Database Testing"],
           difficulty: "Advanced",
         },
         {
           name: "Mobile App Testing Suite",
-          description:
-            "Comprehensive testing of a mobile application across multiple devices.",
-          skills: [
-            "Mobile Testing",
-            "Appium",
-            "Cross-Platform Testing",
-            "Device Testing",
-          ],
+          description: "Comprehensive testing of a mobile application across multiple devices.",
+          skills: ["Mobile Testing", "Appium", "Cross-Platform Testing", "Device Testing"],
           difficulty: "Intermediate",
         },
         {
           name: "CI/CD Pipeline Implementation",
-          description:
-            "Set up automated testing in a CI/CD pipeline with Jenkins.",
-          skills: [
-            "Automation Testing",
-            "Jenkins",
-            "Git Integration",
-            "Test Reporting",
-          ],
+          description: "Set up automated testing in a CI/CD pipeline with Jenkins.",
+          skills: ["Automation Testing", "Jenkins", "Git Integration", "Test Reporting"],
           difficulty: "Advanced",
         },
       ],
     },
+
     careerPathContent: {
       title: "Career Opportunities",
       description: "Explore diverse career paths after completing the course.",
@@ -455,131 +579,56 @@ export const courseData: Record<string, CourseData> = {
         {
           role: "QA Engineer",
           trending: true,
-          description:
-            "Perform manual and automated testing to ensure software quality.",
+          description: "Perform manual and automated testing to ensure software quality.",
           salaryRange: "₹4-8 LPA",
-          skills: [
-            "Manual Testing",
-            "Automation",
-            "Test Planning",
-            "Bug Reporting",
-          ],
-          opportunities: [
-            "Startups",
-            "IT Companies",
-            "Product Companies",
-            "Consulting Firms",
-          ],
+          skills: ["Manual Testing", "Automation", "Test Planning", "Bug Reporting"],
+          opportunities: ["Startups", "IT Companies", "Product Companies", "Consulting Firms"],
         },
         {
           role: "Automation Test Engineer",
           trending: true,
-          description:
-            "Develop and maintain automated test suites and frameworks.",
+          description: "Develop and maintain automated test suites and frameworks.",
           salaryRange: "₹5-10 LPA",
-          skills: [
-            "Selenium",
-            "API Testing",
-            "Framework Design",
-            "Scripting",
-          ],
-          opportunities: [
-            "Tech Giants",
-            "Product Companies",
-            "Testing Services",
-            "Startups",
-          ],
+          skills: ["Selenium", "API Testing", "Framework Design", "Scripting"],
+          opportunities: ["Tech Giants", "Product Companies", "Testing Services", "Startups"],
         },
         {
           role: "Performance Test Engineer",
           trending: false,
-          description:
-            "Conduct performance and load testing to optimize applications.",
+          description: "Conduct performance and load testing to optimize applications.",
           salaryRange: "₹6-12 LPA",
-          skills: [
-            "JMeter",
-            "LoadRunner",
-            "Performance Analysis",
-            "Optimization",
-          ],
-          opportunities: [
-            "Enterprise Companies",
-            "Financial Services",
-            "E-Commerce",
-            "Tech Companies",
-          ],
+          skills: ["JMeter", "LoadRunner", "Performance Analysis", "Optimization"],
+          opportunities: ["Enterprise Companies", "Financial Services", "E-Commerce", "Tech Companies"],
         },
         {
           role: "QA Lead / Manager",
           trending: false,
-          description:
-            "Lead QA teams and manage testing strategies and processes.",
+          description: "Lead QA teams and manage testing strategies and processes.",
           salaryRange: "₹10-18 LPA",
-          skills: [
-            "Team Management",
-            "Test Strategy",
-            "Process Improvement",
-            "Leadership",
-          ],
-          opportunities: [
-            "IT Companies",
-            "Product Companies",
-            "Consulting Firms",
-            "Startups",
-          ],
+          skills: ["Team Management", "Test Strategy", "Process Improvement", "Leadership"],
+          opportunities: ["IT Companies", "Product Companies", "Consulting Firms", "Startups"],
         },
       ],
     },
+
     faqsContent: {
       title: "Frequently Asked Questions",
       subtitle: "Get answers to common questions about the course.",
       faqs: [
-        {
-          question: "Do I need prior programming experience?",
-          answer:
-            "No, this course is designed for beginners. We cover all fundamentals from scratch. Basic computer knowledge is sufficient to get started.",
-        },
-        {
-          question: "What is the course duration?",
-          answer:
-            "The course is 12 weeks long with 120+ hours of content. You can complete it at your own pace with flexible learning options.",
-        },
-        {
-          question: "Will I get a certificate?",
-          answer:
-            "Yes, you'll receive an industry-recognized certificate upon completion. The certificate is valued by employers across India.",
-        },
-        {
-          question: "What is the job placement rate?",
-          answer:
-            "We have a 95% job placement rate within 3 months of course completion. Our placement team actively assists with job search and interviews.",
-        },
-        {
-          question: "Can I access the course content after completion?",
-          answer:
-            "Yes, you get lifetime access to all course materials, including future updates and new content additions.",
-        },
-        {
-          question: "Is there any refund policy?",
-          answer:
-            "We offer a 7-day money-back guarantee if you're not satisfied with the course. No questions asked.",
-        },
-        {
-          question: "What tools will I learn?",
-          answer:
-            "You'll learn Selenium, Appium, JMeter, Postman, Jenkins, and other industry-standard testing tools.",
-        },
-        {
-          question: "Is there mentor support?",
-          answer:
-            "Yes, we provide 24/7 mentor support through chat, email, and scheduled calls. Our mentors are experienced QA professionals.",
-        },
+        { question: "Do I need prior programming experience?", answer: "No, this course is designed for beginners. We cover all fundamentals from scratch. Basic computer knowledge is sufficient to get started." },
+        { question: "What is the course duration?", answer: "The course is 12 weeks long with 120+ hours of content. You can complete it at your own pace with flexible learning options." },
+        { question: "Will I get a certificate?", answer: "Yes, you'll receive an industry-recognized certificate upon completion. The certificate is valued by employers across India." },
+        { question: "What is the job placement rate?", answer: "We have a 95% job placement rate within 3 months of course completion. Our placement team actively assists with job search and interviews." },
+        { question: "Can I access the course content after completion?", answer: "Yes, you get lifetime access to all course materials, including future updates and new content additions." },
+        { question: "Is there any refund policy?", answer: "We offer a 7-day money-back guarantee if you're not satisfied with the course. No questions asked." },
+        { question: "What tools will I learn?", answer: "You'll learn Selenium, Appium, JMeter, Postman, Jenkins, and other industry-standard testing tools." },
+        { question: "Is there mentor support?", answer: "Yes, we provide 24/7 mentor support through chat, email, and scheduled calls. Our mentors are experienced QA professionals." },
       ],
     },
+
     ctaContent: {
       title: "Ready to Start Your Testing Career?",
-      description:
-        "Join 500+ students who have successfully launched their QA careers.",
+      description: "Join 500+ students who have successfully launched their QA careers.",
       subtitle: "Enroll now and get 33% discount for limited time.",
       benefits: [
         "Industry-recognized certificate",
@@ -596,5 +645,5 @@ export const courseData: Record<string, CourseData> = {
       },
     },
   },
+  
 };
-

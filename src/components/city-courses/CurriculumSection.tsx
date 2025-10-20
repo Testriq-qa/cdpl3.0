@@ -1,9 +1,55 @@
 "use client";
 
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { CourseData } from "@/types/courseData";
-import { ChevronDown, CheckCircle } from "lucide-react";
+import React, { useMemo, useState } from "react";
+import { motion, AnimatePresence, type Variants } from "framer-motion";
+import type { CourseData } from "@/types/courseData";
+import { ChevronDown, CheckCircle2, BookOpen } from "lucide-react";
+
+/** ---- Framer variants ---- */
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.08, delayChildren: 0.05 } },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.35, ease: "easeOut" } },
+};
+
+const panelVariants: Variants = {
+  hidden: { opacity: 0, y: 12 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.25 } },
+  exit: { opacity: 0, y: 12, transition: { duration: 0.2 } },
+};
+
+/** ---- Match tab colors to CourseOverview VARIANTS order ---- */
+type Variant = {
+  header: string;
+  button: string;
+  hoverBorder: string;
+};
+
+const VARIANTS: Variant[] = [
+  {
+    header: "bg-gradient-to-br from-indigo-600 via-purple-600 to-fuchsia-600 text-white",
+    button: "bg-gradient-to-r from-indigo-600 to-fuchsia-600",
+    hoverBorder: "hover:border-indigo-300",
+  },
+  {
+    header: "bg-gradient-to-br from-emerald-600 via-teal-600 to-cyan-600 text-white",
+    button: "bg-gradient-to-r from-emerald-600 to-cyan-600",
+    hoverBorder: "hover:border-emerald-300",
+  },
+  {
+    header: "bg-gradient-to-br from-rose-600 via-pink-600 to-orange-500 text-white",
+    button: "bg-gradient-to-r from-rose-600 to-orange-500",
+    hoverBorder: "hover:border-rose-300",
+  },
+];
+
+function pickVariant(i: number): Variant {
+  return VARIANTS[i % VARIANTS.length];
+}
 
 interface CurriculumSectionProps {
   data: CourseData;
@@ -11,182 +57,225 @@ interface CurriculumSectionProps {
 
 const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
   const { curriculumContent } = data;
-  const [expandedWeek, setExpandedWeek] = useState<number | null>(0);
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  // tracks-based data model
+  const tracks = useMemo(() => curriculumContent?.tracks ?? [], [curriculumContent?.tracks]);
+  const [activeTrack, setActiveTrack] = useState<number>(0);
+  const current = tracks[activeTrack];
 
-  const itemVariants = {
-    hidden: { opacity: 0, x: -20 },
-    visible: {
-      opacity: 1,
-      x: 0,
-      transition: { duration: 0.6 },
-    },
-  };
+  const totalWeeks = current?.weeks?.length ?? 0;
 
   return (
-    <section className="relative py-20 bg-white overflow-hidden">
-      {/* Background Decoration */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-1/2 left-0 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+    <section className="relative py-16 sm:py-20 bg-white">
+      {/* Soft background */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute -top-24 -left-16 h-72 w-72 rounded-full bg-violet-100 blur-3xl opacity-30" />
+        <div className="absolute -bottom-24 -right-16 h-72 w-72 rounded-full bg-blue-100 blur-3xl opacity-30" />
       </div>
 
-      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-8 sm:mb-12"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
         >
           <motion.p
-            className="text-purple-600 font-semibold uppercase tracking-wider mb-4"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-semibold tracking-wider text-violet-700 uppercase"
             variants={itemVariants}
           >
-            Learning Path
+            <BookOpen className="h-4 w-4" />
+            Curriculum Tracks
           </motion.p>
           <motion.h2
-            className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+            className="mt-3 text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-slate-900"
             variants={itemVariants}
           >
             {curriculumContent.title}
           </motion.h2>
-          <motion.p
-            className="text-xl text-gray-600 max-w-2xl mx-auto"
-            variants={itemVariants}
-          >
-            {curriculumContent.subtitle}
-          </motion.p>
-        </motion.div>
-
-        {/* Timeline */}
-        <motion.div
-          className="space-y-4"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {curriculumContent.weeks.map((week, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <button
-                onClick={() =>
-                  setExpandedWeek(expandedWeek === index ? null : index)
-                }
-                className="w-full group"
-              >
-                <div className="relative bg-gradient-to-r from-slate-50 to-white border border-gray-200 rounded-lg p-6 hover:border-purple-500 transition-all duration-300 hover:shadow-lg overflow-hidden">
-                  {/* Hover Background */}
-                  <div className="absolute inset-0 bg-gradient-to-r from-purple-50/0 to-blue-50/0 group-hover:from-purple-50 group-hover:to-blue-50 transition-all duration-300"></div>
-
-                  <div className="relative z-10 flex items-start justify-between">
-                    <div className="flex items-start gap-6 flex-1">
-                      {/* Week Number */}
-                      <div className="flex-shrink-0">
-                        <div className="flex items-center justify-center w-20 h-20 bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg text-white font-bold text-2xl group-hover:shadow-lg transition-all duration-300">
-                          {week.number}
-                        </div>
-                      </div>
-
-                      {/* Content */}
-                      <div className="flex-1 text-left pt-2">
-                        <h3 className="text-xl font-bold text-gray-900 mb-2">
-                          {week.title}
-                        </h3>
-                        <p className="text-gray-600 text-sm leading-relaxed">
-                          {week.description}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Expand Icon */}
-                    <motion.div
-                      animate={{
-                        rotate: expandedWeek === index ? 180 : 0,
-                      }}
-                      transition={{ duration: 0.3 }}
-                      className="flex-shrink-0 ml-4"
-                    >
-                      <ChevronDown className="w-6 h-6 text-purple-600" />
-                    </motion.div>
-                  </div>
-                </div>
-              </button>
-
-              {/* Expanded Content */}
-              <AnimatePresence>
-                {expandedWeek === index && week.deliverables && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="mt-2 ml-6 bg-gradient-to-r from-purple-50 to-blue-50 border border-purple-200 rounded-lg p-6">
-                      <p className="text-sm font-semibold text-gray-700 uppercase tracking-wider mb-4">
-                        Deliverables
-                      </p>
-                      <ul className="space-y-3">
-                        {week.deliverables.map((deliverable, delIndex) => (
-                          <li
-                            key={delIndex}
-                            className="flex items-center gap-3 text-gray-700"
-                          >
-                            <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0" />
-                            <span className="font-medium">{deliverable}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
-        </motion.div>
-
-        {/* Summary Stats */}
-        <motion.div
-          className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-6"
-          variants={containerVariants}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-        >
-          {[
-            { label: "Total Weeks", value: "12" },
-            { label: "Total Hours", value: "120+" },
-            { label: "Projects", value: "8" },
-            { label: "Modules", value: "6" },
-          ].map((stat, index) => (
-            <motion.div
-              key={index}
-              className="bg-gradient-to-br from-white to-slate-50 border border-gray-200 rounded-lg p-6 text-center hover:border-purple-500 transition-all duration-300 hover:shadow-lg"
+          {curriculumContent.subtitle && (
+            <motion.p
+              className="mx-auto mt-4 max-w-2xl text-base sm:text-lg text-slate-600"
               variants={itemVariants}
             >
-              <p className="text-3xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
-                {stat.value}
-              </p>
-              <p className="text-gray-600 font-medium">{stat.label}</p>
-            </motion.div>
-          ))}
+              {curriculumContent.subtitle}
+            </motion.p>
+          )}
         </motion.div>
+
+        {/* Tabs */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          className="relative"
+        >
+          <motion.div variants={itemVariants}>
+            <div
+              role="tablist"
+              aria-label="Curriculum tracks"
+              className="
+                flex flex-wrap justify-center
+                gap-2 sm:gap-3
+                w-full
+              "
+            >
+              {tracks.map((t: any, i: number) => {
+                const active = i === activeTrack;
+                const variant = pickVariant(i);
+
+                return (
+                  <button
+                    key={t.id ?? i}
+                    role="tab"
+                    aria-selected={active}
+                    aria-controls={`track-panel-${t.id ?? i}`}
+                    id={`track-tab-${t.id ?? i}`}
+                    onClick={() => setActiveTrack(i)}
+                    title={t.title}
+                    className={[
+                      // sizing & layout
+                      "inline-flex items-center flex-none",
+                      "whitespace-nowrap", // keep the title on one line (no wrapping)
+                      "px-4 sm:px-5 py-2 rounded-full text-sm font-semibold transition-all",
+                      // gradient background borrowed from card headers
+                      variant.header, // includes text-white
+                      "border border-transparent shadow-sm",
+                      // state styles
+                      active
+                        ? "opacity-100 ring-2 ring-white/40"
+                        : "opacity-85 hover:opacity-100 hover:shadow-md",
+                      // small readable text glow on gradients
+                      "[text-shadow:0_1px_0_rgba(0,0,0,0.25)]",
+                    ].join(" ")}
+                  >
+                    {t.title}
+                  </button>
+                );
+              })}
+            </div>
+          </motion.div>
+
+          {/* Quick meta */}
+          {current && (
+            <motion.div
+              variants={itemVariants}
+              className="mt-4 text-center text-sm text-slate-600"
+            >
+              <span className="rounded-full bg-slate-50 border border-slate-200 px-3 py-1">
+                {totalWeeks} {totalWeeks === 1 ? "Module" : "Modules"}
+              </span>
+            </motion.div>
+          )}
+        </motion.div>
+
+        {/* Tab Panel */}
+        <div className="mt-8 lg:mt-10">
+          <AnimatePresence mode="wait">
+            {current ? (
+              <motion.div
+                key={current.id ?? activeTrack}
+                variants={panelVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                id={`track-panel-${current.id ?? activeTrack}`}
+                role="tabpanel"
+                aria-labelledby={`track-tab-${current.id ?? activeTrack}`}
+                className="rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 to-blue-50 p-4 sm:p-6 lg:p-7 shadow-sm"
+              >
+                {/* Table-like card */}
+                <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                  {/* Header row */}
+                  <div className="hidden min-w-[720px] md:grid md:grid-cols-12 gap-0 border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                    <div className="col-span-2">Week</div>
+                    <div className="col-span-3">Module</div>
+                    <div className="col-span-5">What you'll learn</div>
+                    <div className="col-span-2">Deliverables</div>
+                  </div>
+
+                  {/* Rows */}
+                  <ul className="divide-y divide-slate-200 min-w-[720px]">
+                    {current.weeks.map((w: any, idx: number) => (
+                      <li key={idx} className="md:grid md:grid-cols-12 gap-0 px-4 py-4">
+                        {/* Mobile labels */}
+                        <div className="md:hidden mb-2">
+                          <div className="text-xs font-semibold uppercase text-slate-500">Week</div>
+                          <div className="mt-0.5 inline-flex items-center rounded-md bg-violet-600/10 text-violet-700 px-2 py-1 text-xs font-semibold">
+                            {w.number || String(idx + 1)}
+                          </div>
+                        </div>
+
+                        {/* Week */}
+                        <div className="hidden md:block col-span-2">
+                          <span className="inline-flex items-center rounded-md bg-violet-600/10 text-violet-700 px-2 py-1 text-xs font-semibold">
+                            {w.number || String(idx + 1)}
+                          </span>
+                        </div>
+
+                        {/* Module title */}
+                        <div className="md:col-span-3">
+                          <div className="md:hidden text-xs font-semibold uppercase text-slate-500">Module</div>
+                          <div className="text-base font-semibold text-slate-900">{w.title}</div>
+                        </div>
+
+                        {/* Description */}
+                        <div className="mt-2 md:mt-0 md:col-span-5">
+                          <div className="md:hidden text-xs font-semibold uppercase text-slate-500 mb-1">
+                            What you'll learn
+                          </div>
+                          <p className="text-sm text-slate-700">{w.description}</p>
+                        </div>
+
+                        {/* Deliverables */}
+                        <div className="mt-3 md:mt-0 md:col-span-2">
+                          <div className="md:hidden text-xs font-semibold uppercase text-slate-500 mb-1">
+                            Deliverables
+                          </div>
+                          {Array.isArray(w.deliverables) && w.deliverables.length > 0 ? (
+                            <ul className="space-y-1">
+                              {w.deliverables.map((d: string, i: number) => (
+                                <li key={i} className="flex items-start gap-2 text-sm text-slate-800">
+                                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-green-600 flex-shrink-0" />
+                                  <span>{d}</span>
+                                </li>
+                              ))}
+                            </ul>
+                          ) : (
+                            <span className="text-sm text-slate-500">—</span>
+                          )}
+                        </div>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                {/* Collapsible hint for small screens */}
+                <div className="mt-3 flex items-center justify-center gap-1 text-xs text-slate-500 md:hidden">
+                  <ChevronDown className="h-4 w-4" />
+                  Scroll the card horizontally if content overflows
+                </div>
+              </motion.div>
+            ) : (
+              <motion.div
+                key="empty"
+                variants={panelVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="rounded-2xl border border-slate-200 bg-white p-6 text-center text-slate-600"
+              >
+                Select a track to view its curriculum.
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </section>
   );
 };
 
 export default CurriculumSection;
-

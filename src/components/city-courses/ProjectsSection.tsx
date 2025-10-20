@@ -1,18 +1,35 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
-import { CourseData } from "@/types/courseData";
+import { easeOut, motion } from "framer-motion";
 import { Code2, Briefcase, Award, Zap } from "lucide-react";
+
+interface Project {
+  name: string;
+  description: string;
+  difficulty: string;
+  skills: string[];
+}
+
+interface ProjectsContent {
+  title: string;
+  description: string;
+  subtitle?: string;
+  projects: Project[];
+}
+
+interface CourseData {
+  projectsContent: ProjectsContent;
+}
 
 interface ProjectsSectionProps {
   data: CourseData;
 }
 
 const difficultyConfig = {
-  Beginner: { bg: "bg-green-100", text: "text-green-700", border: "border-green-300" },
-  Intermediate: { bg: "bg-yellow-100", text: "text-yellow-700", border: "border-yellow-300" },
-  Advanced: { bg: "bg-red-100", text: "text-red-700", border: "border-red-300" },
+  Beginner: { bg: "bg-emerald-100", text: "text-emerald-700", border: "border-emerald-300" },
+  Intermediate: { bg: "bg-amber-100", text: "text-amber-700", border: "border-amber-300" },
+  Advanced: { bg: "bg-rose-100", text: "text-rose-700", border: "border-rose-300" },
 };
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
@@ -23,71 +40,75 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
+        staggerChildren: 0.1,
+        delayChildren: 0.1,
       },
     },
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.6 },
+      transition: { duration: 0.5, ease: easeOut },
+    },
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, scale: 0.95 },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.5, ease: easeOut },
     },
   };
 
   return (
-    <section className="relative py-20 bg-gradient-to-b from-white to-slate-50 overflow-hidden">
-      {/* Background Decoration */}
-      <div className="absolute inset-0 pointer-events-none">
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-purple-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
-        <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-blue-100 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+    <section className="relative py-16 md:py-24 bg-gradient-to-b from-slate-50 to-white overflow-hidden">
+      {/* Subtle Background Pattern */}
+      <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute top-20 right-10 w-64 h-64 bg-cyan-200 rounded-full mix-blend-multiply filter blur-3xl"></div>
+        <div className="absolute bottom-20 left-10 w-64 h-64 bg-indigo-200 rounded-full mix-blend-multiply filter blur-3xl"></div>
       </div>
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <motion.div
-          className="text-center mb-16"
+          className="text-center mb-12 md:mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
         >
-          <motion.p
-            className="text-purple-600 font-semibold uppercase tracking-wider mb-4"
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-2 bg-cyan-50 text-cyan-700 rounded-full text-sm font-semibold mb-4 border border-cyan-200"
             variants={itemVariants}
           >
-            Practical Experience
-          </motion.p>
+            <Code2 className="w-4 h-4" />
+            Hands-On Projects
+          </motion.div>
           <motion.h2
-            className="text-4xl lg:text-5xl font-bold text-gray-900 mb-4"
+            className="text-3xl md:text-4xl lg:text-5xl font-bold text-slate-900 mb-4"
             variants={itemVariants}
           >
             {projectsContent.title}
           </motion.h2>
           <motion.p
-            className="text-xl text-gray-600 max-w-2xl mx-auto mb-4"
+            className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto"
             variants={itemVariants}
           >
             {projectsContent.description}
-          </motion.p>
-          <motion.p
-            className="text-lg text-gray-500"
-            variants={itemVariants}
-          >
-            {projectsContent.subtitle}
           </motion.p>
         </motion.div>
 
         {/* Projects Grid */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 gap-8"
+          className="grid grid-cols-1 lg:grid-cols-2 gap-6 md:gap-8 mb-16"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
         >
           {projectsContent.projects.map((project, index) => {
             const diffConfig = difficultyConfig[project.difficulty as keyof typeof difficultyConfig] || difficultyConfig.Intermediate;
@@ -95,49 +116,44 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
             return (
               <motion.div
                 key={index}
-                className="group relative"
-                variants={itemVariants}
+                className="group"
+                variants={cardVariants}
               >
-                <div className="relative h-full bg-white rounded-xl border border-gray-200 p-8 hover:border-purple-500 transition-all duration-300 hover:shadow-2xl overflow-hidden">
-                  {/* Background Gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-purple-50/0 to-blue-50/0 group-hover:from-purple-50 group-hover:to-blue-50 transition-all duration-300"></div>
-
+                <div className="relative h-full bg-white rounded-2xl border border-slate-200 p-6 md:p-8 hover:border-cyan-400 hover:shadow-xl transition-all duration-300">
                   {/* Content */}
-                  <div className="relative z-10 space-y-6">
+                  <div className="space-y-5">
                     {/* Header */}
-                    <div className="flex items-start justify-between">
-                      <div className="flex-1">
-                        <h3 className="text-2xl font-bold text-gray-900 mb-2">
+                    <div className="flex items-start gap-4">
+                      <div className="flex-shrink-0 w-12 h-12 bg-gradient-to-br from-cyan-500 to-indigo-600 rounded-xl flex items-center justify-center text-white shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300">
+                        <Code2 className="w-6 h-6" />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="text-xl md:text-2xl font-bold text-slate-900 mb-2">
                           {project.name}
                         </h3>
-                        <p className="text-gray-600 leading-relaxed">
-                          {project.description}
-                        </p>
-                      </div>
-                      <div className="flex-shrink-0 ml-4">
-                        <div className="w-12 h-12 bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg flex items-center justify-center text-purple-600 group-hover:shadow-lg transition-all duration-300">
-                          <Code2 className="w-6 h-6" />
-                        </div>
+                        <span className={`inline-block px-3 py-1 rounded-full text-xs font-semibold ${diffConfig.bg} ${diffConfig.text}`}>
+                          {project.difficulty}
+                        </span>
                       </div>
                     </div>
 
-                    {/* Difficulty Badge */}
-                    <div className={`inline-flex px-4 py-2 rounded-full border ${diffConfig.bg} ${diffConfig.text} ${diffConfig.border} font-semibold text-sm`}>
-                      {project.difficulty}
-                    </div>
+                    {/* Description */}
+                    <p className="text-slate-600 leading-relaxed">
+                      {project.description}
+                    </p>
 
                     {/* Skills */}
-                    <div className="space-y-3 pt-4 border-t border-gray-200">
-                      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wider">
-                        Skills You'll Learn
+                    <div className="space-y-3 pt-4 border-t border-slate-100">
+                      <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
+                        What You'll Build
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {project.skills.map((skill, skillIndex) => (
                           <span
                             key={skillIndex}
-                            className="inline-flex items-center gap-1 bg-gradient-to-r from-purple-100 to-blue-100 text-purple-700 px-3 py-1 rounded-full text-sm font-medium"
+                            className="inline-flex items-center gap-1.5 bg-slate-50 text-slate-700 px-3 py-1.5 rounded-lg text-sm border border-slate-200 hover:border-cyan-300 hover:bg-cyan-50 hover:text-cyan-700 transition-all duration-200"
                           >
-                            <span className="text-purple-500">✓</span>
+                            <span className="text-cyan-500 text-xs">✓</span>
                             {skill}
                           </span>
                         ))}
@@ -146,12 +162,12 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
 
                     {/* CTA */}
                     <motion.button
-                      className="w-full mt-6 px-4 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-semibold rounded-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center gap-2 group/btn"
-                      whileHover={{ scale: 1.02 }}
+                      className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 flex items-center justify-center gap-2 group/btn"
+                      whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      View Project Details
-                      <span className="group-hover/btn:translate-x-1 transition-transform">→</span>
+                      Explore Project
+                      <span className="group-hover/btn:translate-x-1 transition-transform duration-200">→</span>
                     </motion.button>
                   </div>
                 </div>
@@ -162,41 +178,41 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
 
         {/* Project Benefits */}
         <motion.div
-          className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-50px" }}
         >
           {[
             {
-              icon: <Briefcase className="w-8 h-8" />,
-              title: "Portfolio Building",
-              description: "Create impressive projects for your portfolio that showcase your skills to employers.",
+              icon: <Briefcase className="w-6 h-6" />,
+              title: "Portfolio Ready",
+              description: "Build projects that impress employers and stand out in your portfolio.",
             },
             {
-              icon: <Award className="w-8 h-8" />,
-              title: "Real-World Experience",
-              description: "Work on projects similar to what you'll encounter in professional environments.",
+              icon: <Award className="w-6 h-6" />,
+              title: "Real-World Skills",
+              description: "Gain practical experience with industry-standard tools and workflows.",
             },
             {
-              icon: <Zap className="w-8 h-8" />,
-              title: "Hands-On Learning",
-              description: "Apply theoretical concepts through practical implementation and problem-solving.",
+              icon: <Zap className="w-6 h-6" />,
+              title: "Learn by Doing",
+              description: "Master concepts through hands-on coding and problem-solving.",
             },
           ].map((benefit, index) => (
             <motion.div
               key={index}
-              className="bg-white border border-gray-200 rounded-lg p-8 text-center hover:border-purple-500 transition-all duration-300 hover:shadow-lg"
-              variants={itemVariants}
+              className="bg-gradient-to-br from-slate-50 to-white border border-slate-200 rounded-xl p-6 text-center hover:border-cyan-300 hover:shadow-lg transition-all duration-300 group"
+              variants={cardVariants}
             >
-              <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-br from-purple-100 to-blue-100 rounded-lg text-purple-600 mb-4">
+              <div className="inline-flex items-center justify-center w-14 h-14 bg-gradient-to-br from-cyan-500 to-indigo-600 rounded-xl text-white mb-4 shadow-lg shadow-cyan-500/30 group-hover:scale-110 transition-transform duration-300">
                 {benefit.icon}
               </div>
-              <h3 className="text-lg font-bold text-gray-900 mb-2">
+              <h3 className="text-lg font-bold text-slate-900 mb-2">
                 {benefit.title}
               </h3>
-              <p className="text-gray-600 text-sm leading-relaxed">
+              <p className="text-slate-600 text-sm leading-relaxed">
                 {benefit.description}
               </p>
             </motion.div>
@@ -208,4 +224,3 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
 };
 
 export default ProjectsSection;
-
