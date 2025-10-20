@@ -228,7 +228,7 @@ function SectionLoader({ label = "Loading..." }: { label?: string }) {
 // ---- Dynamic Sections ----------------------------------------------------
 // Default export components → direct dynamic import (SSR enabled)
 const JobOpeningsHeroSection = dynamic(
-  () => import("@/components/Sections/JobOpeningsHeroSection"),
+  () => import("@/components/sections/JobOpeningsHeroSection"),
   {
     ssr: true,
     loading: () => <SectionLoader label="Loading hero..." />,
@@ -236,7 +236,7 @@ const JobOpeningsHeroSection = dynamic(
 );
 
 const JobOpeningsJobBrowser = dynamic(
-  () => import("@/components/Sections/JobOpeningsJobBrowser"),
+  () => import("@/components/sections/JobOpeningsJobBrowser"),
   {
     ssr: true,
     loading: () => <SectionLoader label="Loading jobs..." />,

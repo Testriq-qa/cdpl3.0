@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import type { Trainer } from "@/app/trainers/types";
 import { Search, Filter, X, Flame, SortDesc, BadgeCheck } from "lucide-react";
-import TrainersCardSection from "@/components/Sections/TrainersCardSection";
+import TrainersCardSection from "@/components/sections/TrainersCardSection";
 
 type SortKey = "relevance" | "name" | "experience";
 

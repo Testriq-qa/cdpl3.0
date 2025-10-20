@@ -2,13 +2,14 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
+import ReviewsMarquee from "./ReviewMarque";
 
-type Review = { name: string; date: string; source: "Google"|"Sulekha"|"Justdial"; text: string; city?: string; logo:{src:string;alt:string;} };
+type Review = { name: string; date: string; source: "Google" | "Sulekha" | "Justdial"; text: string; city?: string; logo: { src: string; alt: string; } };
 
 const PLATFORM = {
-  Google: { title:"Google", statLabel:"Based on", statValue:"289 reviews", overall:"EXCELLENT", logo:{src:"/slider_logos/google-logo.svg", alt:"Google logo"} },
-  Sulekha:{ title:"Sulekha", statLabel:"Rating", statValue:"5.0 · 84 reviews", overall:"EXCELLENT", logo:{src:"/slider_logos/sulekha.svg", alt:"Sulekha logo"} },
-  Justdial:{ title:"Justdial", statLabel:"Ratings", statValue:"210 ratings", overall:"GREAT", logo:{src:"/slider_logos/justdial.svg", alt:"Justdial logo"} },
+  Google: { title: "Google", statLabel: "Based on", statValue: "289 reviews", overall: "EXCELLENT", logo: { src: "/slider_logos/google-logo.svg", alt: "Google logo" } },
+  Sulekha: { title: "Sulekha", statLabel: "Rating", statValue: "5.0 · 84 reviews", overall: "EXCELLENT", logo: { src: "/slider_logos/sulekha.svg", alt: "Sulekha logo" } },
+  Justdial: { title: "Justdial", statLabel: "Ratings", statValue: "210 ratings", overall: "GREAT", logo: { src: "/slider_logos/justdial.svg", alt: "Justdial logo" } },
 } as const;
 
 const REVIEWS: Review[] = [
@@ -229,7 +230,7 @@ export default function JobsLiveJobsReviewSection() {
   }, [paused, speed, reduced]);
 
   return (
-    <section className="w-full relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:[color-scheme:light]">
+    <section className="overflow-hidden w-full relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:[color-scheme:light]">
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-10">
         <div className="mx-auto max-w-3xl text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-sm">
@@ -240,104 +241,13 @@ export default function JobsLiveJobsReviewSection() {
           </h2>
 
           {/* Tabs */}
-          <div className="mt-8 inline-flex rounded-2xl border border-slate-200 bg-white/70 backdrop-blur p-2 shadow-md">
-            {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p) => {
-              const isActive = tab === p;
-              return (
-                <button
-                  key={p}
-                  onClick={() => setTab(p)}
-                  aria-label={`View ${PLATFORM[p].title} reviews`}
-                  className={[
-                    "group relative mx-1 flex h-12 w-28 items-center justify-center rounded-xl px-2 transition ring-1 ring-transparent",
-                    isActive
-                      ? "bg-gradient-to-r from-orange-400/90 to-amber-300/90 text-white shadow-lg ring-orange-300/50"
-                      : "bg-white/90 text-slate-700 hover:bg-slate-100",
-                  ].join(" ")}
-                >
-                  <LogoBox
-                    src={PLATFORM[p].logo.src}
-                    alt={PLATFORM[p].logo.alt}
-                    size="tab"
-                    priority={p === "Google"}
-                  />
-                </button>
-              );
-            })}
-          </div>
 
-          <div className="mt-6 flex items-center justify-center gap-3 text-sm text-slate-600">
-            <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 border border-slate-200 shadow-sm">
-              <LogoBox src={statLogo.src} alt={statLogo.alt} size="stat" />
-              {stat.overall}
-            </span>
-            <span className="opacity-60">•</span>
-            <span>
-              {stat.statLabel} <strong className="text-slate-900">{stat.statValue}</strong>
-            </span>
-          </div>
+
         </div>
 
-        {/* Marquee */}
-        <div
-          className="mt-10 overflow-hidden"
-          ref={containerRef}
-          onMouseEnter={() => setPaused(true)}
-          onMouseLeave={() => setPaused(false)}
-          style={{
-            maskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-            WebkitMaskImage: "linear-gradient(to right, transparent 0%, black 8%, black 92%, transparent 100%)",
-          }}
-        >
-          <div ref={trackRef} className="flex will-change-transform py-5">
-            {[...filtered, ...filtered].map((r, idx) => (
-              <div
-                key={`${r.source}-${r.name}-${idx}`}
-                className="flex-none px-3 w-[70vw] md:w-[40vw] lg:w-[30vw] xl:w-[25vw] hover:scale-105 transition-all ease-in-out duration-200"
-                onMouseEnter={() => setPaused(true)}
-                onMouseLeave={() => setPaused(false)}
-              >
-                <article className="group relative h-full overflow-hidden rounded-3xl border border-slate-200 bg-white p-6 shadow-lg transition hover:shadow-xl">
-                  <div aria-hidden className="absolute -right-8 -top-8 h-32 w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-2xl" />
-                  <header className="flex items-start justify-between gap-4">
-                    <div className="min-w-0">
-                      <h3 className="text-base font-semibold text-slate-900 truncate">{r.name}</h3>
-                      <p className="text-xs text-slate-500 mt-0.5">
-                        {r.city ? `${r.city} • ` : ""}{r.date} • {r.source}
-                      </p>
-                    </div>
-                    <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 px-2 py-1 text-[11px] text-slate-600">
-                      <LogoBox src={r.logo.src} alt={r.logo.alt} size="chip" />
-                      Verified
-                    </span>
-                  </header>
+        <ReviewsMarquee />
 
-                  <p className="mt-3 text-sm leading-6 text-slate-700">{r.text}</p>
-                  <footer className="mt-4 text-xs text-slate-500">
-                    Trustindex verifies source on Google / platform verifies identity where applicable.
-                  </footer>
-                </article>
-              </div>
-            ))}
-          </div>
-        </div>
 
-        <div className="mt-12 grid gap-4 sm:grid-cols-3">
-          {[
-            { label:"Google Reviews", value:"80+", note:"Public reviews", logo:"/slider_logos/google.svg" },
-            { label:"Sulekha Reviews", value:"84", note:"5.0 average", logo:"/slider_logos/sulekha-logo.webp" },
-            { label:"Justdial Ratings", value:"210", note:"Verified users", logo:"/slider_logos/justdial-logo.png" },
-          ].map((b) => (
-            <div key={b.label} className="rounded-2xl border border-slate-200 bg-white p-5 text-center shadow-md">
-              <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center">
-                <LogoBox src={b.logo} alt={`${b.label} logo`} size="stat" />
-              </div>
-              <div className="text-3xl font-extrabold tracking-tight text-slate-900">{b.value}</div>
-              <div className="mt-1 text-sm font-medium text-slate-700">{b.label}</div>
-              {b.note && <div className="text-xs text-slate-500 mt-1">{b.note}</div>}
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   );
