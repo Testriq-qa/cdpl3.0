@@ -6,10 +6,10 @@ import {
   generatePageDescription,
   generateKeywords,
   SAMPLE_MODULES,
-  SAMPLE_TESTIMONIALS,
   SAMPLE_FAQS,
   HIRING_PARTNERS,
-} from '@/src/components/city-courses/sampleData';
+  SAMPLE_TESTIMONIALS,
+} from '@/components/city-courses/sampleData';
 import { COURSE_REGISTRY } from './courseRegistry';
 
 const SITE_URL = process.env.NEXT_PUBLIC_SITE_URL ?? 'https://example.com';

@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useEffect, useMemo, useState } from 'react';
+import Link from 'next/link';
 import { Star, Clock, Users, CheckCircle, ArrowRight, Download, Zap } from 'lucide-react';
 
 interface CourseCategory {
@@ -22,30 +21,6 @@ interface CourseCategoriesGridProps {
   categories: CourseCategory[];
 }
 
-// ⏱️ Reusable countdown hook (defaults to 48h from mount)
-const useCountdown = (targetISO?: string) => {
-  const target = useMemo(() => {
-    if (targetISO) return new Date(targetISO).getTime();
-    return Date.now() + 48 * 60 * 60 * 1000;
-  }, [targetISO]);
-
-  const [timeLeft, setTimeLeft] = useState(() => Math.max(0, target - Date.now()));
-
-  useEffect(() => {
-    const id = setInterval(() => {
-      setTimeLeft(Math.max(0, target - Date.now()));
-    }, 1000);
-    return () => clearInterval(id);
-  }, [target]);
-
-  const pad2 = (n: number) => String(n).padStart(2, '0');
-  const total = Math.max(0, timeLeft);
-  const hours = Math.floor(total / (1000 * 60 * 60));
-  const minutes = Math.floor((total % (1000 * 60 * 60)) / (1000 * 60));
-  const seconds = Math.floor((total % (1000 * 60)) / 1000);
-
-  return { hours: pad2(hours), minutes: pad2(minutes), seconds: pad2(seconds), isOver: total <= 0 };
-};
 
 // 🎨 Color variants for per-card theming (header + primary button + hover border)
 const CARD_VARIANTS = [
@@ -134,7 +109,7 @@ export default function CourseCategoriesGrid({
         <div
           className="absolute inset-0 opacity-[0.03]"
           style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234F46E5' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'\%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'\%3E%3Cg fill=\'%234F46E5\' fill-opacity=\'1\'\%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'\/%3E%3C\/g%3E%3C\/g%3E%3C\/svg%3E")`,
           }}
         ></div>
 
@@ -172,7 +147,7 @@ export default function CourseCategoriesGrid({
         {/* Categories Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {categories.map((category, index) => {
-            const { hours, minutes, seconds, isOver } = useCountdown();
+            
             const variant = CARD_VARIANTS[index % CARD_VARIANTS.length];
 
             return (
@@ -187,7 +162,7 @@ export default function CourseCategoriesGrid({
                     <div
                       className="absolute inset-0"
                       style={{
-                        backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+                        backgroundImage: `url("data:image/svg+xml,%3Csvg width=\'60\' height=\'60\' viewBox=\'0 0 60 60\' xmlns=\'http://www.w3.org/2000/svg\'\%3E%3Cg fill=\'none\' fill-rule=\'evenodd\'\%3E%3Cg fill=\'%23ffffff\' fill-opacity=\'1\'\%3E%3Cpath d=\'M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z\'\/%3E%3C\/g%3E%3C\/g%3E%3C\/svg%3E")`,
                       }}
                     ></div>
                   </div>
@@ -257,60 +232,42 @@ export default function CourseCategoriesGrid({
                     <p className="text-xs font-semibold text-slate-600 mb-2">Limited-time offer ends in</p>
                     <div className="grid grid-cols-3 gap-3 text-center">
                       <div className="rounded-lg bg-white shadow-sm p-3">
-                        <div className="text-xl font-bold text-slate-900 tabular-nums">{hours}</div>
+                        <div className="text-xl font-bold text-slate-900 tabular-nums">00</div>
                         <div className="text-[10px] text-slate-500 tracking-wide uppercase">Hours</div>
                       </div>
                       <div className="rounded-lg bg-white shadow-sm p-3">
-                        <div className="text-xl font-bold text-slate-900 tabular-nums">{minutes}</div>
+                        <div className="text-xl font-bold text-slate-900 tabular-nums">00</div>
                         <div className="text-[10px] text-slate-500 tracking-wide uppercase">Minutes</div>
                       </div>
                       <div className="rounded-lg bg-white shadow-sm p-3">
-                        <div className="text-xl font-bold text-slate-900 tabular-nums">{seconds}</div>
+                        <div className="text-xl font-bold text-slate-900 tabular-nums">00</div>
                         <div className="text-[10px] text-slate-500 tracking-wide uppercase">Seconds</div>
                       </div>
                     </div>
-                    {isOver && <p className="mt-2 text-xs text-red-600 font-semibold">Offer has ended.</p>}
                   </div>
 
                   {/* CTA Buttons (variant primary) */}
                   <div className="pt-4 space-y-3 mt-auto">
-                    <button className={`flex items-center justify-center gap-2 w-full ${variant.button} text-white font-semibold py-3 rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300`}>
-                      <span>View Course Details</span>
-                      <ArrowRight className="w-4 h-4" />
-                    </button>
-
-                    <button className="w-full flex items-center justify-center space-x-2 text-slate-700 font-semibold py-3 rounded-xl border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300">
-                      <Download className="w-5 h-5" />
-                      <span>Download Brochure</span>
+                    <Link
+                      href={category.href}
+                      className={`group relative inline-flex items-center justify-center px-6 py-3 text-lg font-semibold text-white rounded-lg transition-all duration-300 shadow-md w-full ${variant.button} hover:opacity-90 transform hover:scale-[1.01]`}
+                    >
+                      <span className="relative z-10">Explore Course</span>
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                    <button className="inline-flex items-center justify-center px-6 py-3 text-lg font-semibold bg-white text-slate-800 border-2 border-slate-200 rounded-lg transition-all duration-300 hover:bg-slate-50 w-full">
+                      <Download className="w-5 h-5 mr-2" />
+                      Download Syllabus
                     </button>
                   </div>
                 </div>
-
-                {/* Hover Effect Overlay */}
-                <div className="absolute inset-0 bg-gradient-to-br from-black/0 to-black/0 group-hover:from-black/0 group-hover:to-black/0 transition-all duration-500 pointer-events-none"></div>
               </article>
             );
           })}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-4 bg-white/80 backdrop-blur-sm rounded-2xl shadow-xl p-8 border border-white/20">
-            <div className="flex-1 text-left">
-              <h3 className="text-xl font-bold mb-2">
-                <span className="bg-gradient-to-r from-slate-900 to-slate-700 bg-clip-text text-transparent">
-                  Not sure which course is right for you?
-                </span>
-              </h3>
-              <p className="text-slate-600">
-                Talk to our career counselor and get personalized course recommendations
-              </p>
-            </div>
-            <button className="flex-shrink-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-semibold px-8 py-4 rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300 whitespace-nowrap">
-              Get Free Counselling
-            </button>
-          </div>
-        </div>
+        {/* Spacer for bottom */}
+        <div className="h-16"></div>
       </div>
     </section>
   );

@@ -3,7 +3,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Calendar, MapPin, Building2, Share2, Copy } from "lucide-react";
+import { Share2, Copy } from "lucide-react";
 import type { Job } from "@/app/jobs/live-jobs/page";
 import type { JobsFilters } from "./JobsLiveJobsListingSection";
 import { JobsLiveJobsJobCardSection } from "./JobsLiveJobsJobCardSection";
@@ -28,14 +28,6 @@ function matchesFilters(job: Job, f: JobsFilters) {
   return qOk && locOk && typeOk;
 }
 
-const formatDate = (iso?: string) =>
-  iso
-    ? new Date(iso).toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
-    : "";
 
 // ---- Chunking config ----
 const CHUNK_SIZE = 10;
@@ -192,7 +184,7 @@ export function JobsLiveJobsJobsGridSection({
       }
     }
     setVisibleCount(Math.min(CHUNK_SIZE, filtered.length));
-  }, [filters, filtered.length]);
+  }, [filters, filtered.length, filtered]);
 
   // Scroll to deep link after chunks are revealed
   useEffect(() => {

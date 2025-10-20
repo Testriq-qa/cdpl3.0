@@ -1,13 +1,13 @@
 // lib/expansions.ts
-import { INDIAN_CITIES } from '@/src/components/city-courses/sampleData';
-import { slugify, deslugify } from './slug';
+import { INDIAN_CITIES } from '@/components/city-courses/sampleData';
+import {  deslugify } from './slug';
 import { COURSE_REGISTRY } from './courseRegistry';
 
 export function expandCourseAcrossCities(courseSlug: keyof typeof COURSE_REGISTRY) {
   const courseDisplay = COURSE_REGISTRY[courseSlug].displayName;
 
   return INDIAN_CITIES.map((cityName) => {
-    const citySlug = slugify(cityName);
+    const citySlug = deslugify(cityName);
     return {
       courseSlug,
       courseDisplayName: courseDisplay,

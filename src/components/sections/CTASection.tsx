@@ -58,7 +58,7 @@ const CTASection = () => {
               </h2>
               
               <p className="text-lg text-white/90 leading-relaxed">
-                Don't miss this exclusive opportunity to kickstart your career transformation. 
+                Don&apos;t miss this exclusive opportunity to kickstart your career transformation. 
                 Enroll now and get access to premium features worth ₹25,000 absolutely FREE!
               </p>
 

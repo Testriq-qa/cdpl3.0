@@ -145,7 +145,7 @@ export default function AboutWhyJoinUs() {
               <p className="flex flex-wrap gap-2 mt-6 text-xs leading-4 text-slate-500">
             
                   {seo.map((s)=>{
-                    return <span className="rounded-md bg-green-100 px-1.5 p-0.5 w-fit">
+                    return <span key={s} className="rounded-md bg-green-100 px-1.5 p-0.5 w-fit">
                       {s}
                     </span>
                   })}

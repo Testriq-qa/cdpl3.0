@@ -263,12 +263,3 @@ function slugify(input: string): string {
   return input.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
 }
 
-/** Convert hex like #ff8c00 to rgba with alpha (0..1). */
-function withAlpha(hex: string, alpha = 1): string {
-  const h = hex.replace("#", "");
-  const bigint = parseInt(h.length === 3 ? h.split("").map((c) => c + c).join("") : h, 16);
-  const r = (bigint >> 16) & 255;
-  const g = (bigint >> 8) & 255;
-  const b = bigint & 255;
-  return `rgba(${r}, ${g}, ${b}, ${alpha})`;
-}

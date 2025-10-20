@@ -1,7 +1,6 @@
 'use client';
 
 import React from 'react';
-import Image from 'next/image';
 import ReviewsMarquee from '../sections/ReviewMarque';
 
 interface Testimonial {
@@ -25,8 +24,7 @@ interface TestimonialsSectionProps {
 
 export default function TestimonialsSection({
   cityName,
-  courseName,
-  testimonials
+  courseName
 }: TestimonialsSectionProps) {
   return (
     <section className="py-16 md:py-24 bg-gradient-to-br from-slate-50 via-blue-50/30 to-purple-50/20 relative overflow-hidden">
@@ -64,7 +62,7 @@ export default function TestimonialsSection({
           </h2>
 
           <p className="text-lg text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Don't just take our word for it. Hear from our successful students who transformed
+            Don&apos;t just take our word for it. Hear from our successful students who transformed
             their careers after completing <span className="font-semibold text-slate-700">{courseName}</span> training in <span className="font-semibold text-slate-700">{cityName}</span>.
           </p>
         </div>

@@ -155,7 +155,6 @@ export default function TrainersCalloutSection() {
       {/* JSON-LD: rich snippet for ItemList */}
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             '@context': 'https://schema.org',

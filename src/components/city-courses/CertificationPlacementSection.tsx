@@ -75,8 +75,8 @@ export default function CertificationPlacementSection({
             </div>
 
             <p className="text-slate-600 mb-6 leading-relaxed">
-              Upon successful completion of the {courseName} course, you'll receive an
-              industry-recognized certification that validates your skills and enhances your professional profile. Our certifications are
+              Upon successful completion of the {courseName} course,you&apos;ll receive an 
+              industry-recognized certification that validates your skills and enhances your professional profile. Our certifications are 
               highly valued by employers.
             </p>
 

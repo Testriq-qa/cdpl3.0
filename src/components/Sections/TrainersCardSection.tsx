@@ -3,7 +3,7 @@
 
 import Image from "next/image";
 import type { Trainer } from "@/app/trainers/types";
-import { Linkedin, Globe } from "lucide-react";
+import { Linkedin, Globe, Link } from "lucide-react";
 
 
 function initials(name: string) {
@@ -77,29 +77,29 @@ export default function TrainersCardSection({ t }: { t: Trainer }) {
                     <div className="text-xs text-slate-600">{t.yearsExp ?? "5"}+ yrs exp</div>
                     <div className="flex items-center gap-2">
                         {t.socials?.linkedin && (
-                            <a
+                            <Link
                                 href={t.socials.linkedin}
                                 aria-label={`LinkedIn profile of ${t.name}`}
                                 className="inline-flex items-center rounded-lg border border-slate-200 bg-white p-1.5 text-slate-800 hover:bg-slate-50"
                             >
                                 <Linkedin className="h-4 w-4" />
-                            </a>
+                            </Link>
                         )}
                         {t.socials?.website && (
-                            <a
+                            <Link   
                                 href={t.socials.website}
                                 aria-label={`Website of ${t.name}`}
                                 className="inline-flex items-center rounded-lg border border-slate-200 bg-white p-1.5 text-slate-800 hover:bg-slate-50"
                             >
                                 <Globe className="h-4 w-4" />
-                            </a>
+                            </Link>
                         )}
-                        <a
+                        <Link
                             href="/apply"
                             className="inline-flex items-center justify-center rounded-xl bg-brand px-3 py-1.5 text-xs font-semibold text-white hover:opacity-95"
                         >
                             Book a Demo
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

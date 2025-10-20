@@ -127,7 +127,7 @@ export function ContactFAQSection() {
               {["All", ...CATEGORIES].map((c) => (
                 <button
                   key={c}
-                  onClick={() => setActiveCat(c as any)}
+                  onClick={() => setActiveCat(c as FAQ["cat"] | "All")}
                   className={[
                     "rounded-full border px-3 py-1.5 text-sm transition",
                     activeCat === c

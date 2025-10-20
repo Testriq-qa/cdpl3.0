@@ -14,16 +14,9 @@ import {
     GraduationCap,
 } from "lucide-react";
 
-/**
- * TeamDirectory — Cinute Digital (EdTech) — Light Theme
- * - New premium MentorCard (hover lift, gradient ring, compact metadata)
- * - Refined toolbar: command-style search, chip filters, segmented sort, reset
- * - SEO: ItemList JSON-LD + keyword-rich helper copy (non-spammy)
- * - A11y: labels, aria-live counts, focus-visible rings, kbd "/" to focus search
- * - Perf: deferred search, memoized derivations
- */
-
 type SortKey = "relevance" | "name-asc" | "name-desc";
+
+type CustomCSSProperties = React.CSSProperties & { [key: `--${string}`]: string };
 
 export default function TeamDirectory({ data }: { data: TeamMember[] }) {
     const [query, setQuery] = useState("");
@@ -130,7 +123,7 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
             id="directory"
             aria-labelledby={`${id}-directory`}
             className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-12"
-            style={{ ["--brand" as any]: brand }}
+            style={{ "--brand": brand } as CustomCSSProperties}
         >
             {/* Decorative halo */}
             <div
@@ -213,7 +206,7 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
 /* =============================
  * New Mentor Card (Premium)
  * ============================= */
-function MentorCard({ m }: { m: TeamMember }) {
+function MentorCard({ m }: { m: TeamMember & { avatar?: string } }) {
     return (
         <article
             className="group relative overflow-hidden rounded-3xl border border-slate-200 bg-white p-8 shadow-sm transition hover:shadow-md focus-within:shadow-md"
@@ -224,7 +217,7 @@ function MentorCard({ m }: { m: TeamMember }) {
 
             <div className="flex flex-col md:flex-row items-start gap-4">
                 <div className="self-center md:self-start">
-                    <Avatar name={m.name} src={(m as any).avatar} />
+                    <Avatar name={m.name} src={m.avatar} />
                 </div>
 
                 <div className="min-w-0 flex-1">
@@ -296,7 +289,6 @@ function Avatar({ name, src }: { name: string; src?: string }) {
 
     return src ? (
         <div className="relative w-40 h-40 md:w-30 md:h-30 overflow-hidden rounded-full ring-1 ring-slate-200">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
             <Image src={src} alt={`${name} avatar`} width={160} height={120} className="object-cover rounded-full" />
         </div>
     ) : (
