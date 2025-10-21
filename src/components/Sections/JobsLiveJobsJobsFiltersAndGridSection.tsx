@@ -1,6 +1,6 @@
 "use client";
 
-import { Job } from "@/app/jobs/live-jobs/page";
+import type { Job } from "@/lib/jobsData";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowRight, Briefcase, MapPin, Search, SlidersHorizontal } from "lucide-react";
 import Image from "next/image";

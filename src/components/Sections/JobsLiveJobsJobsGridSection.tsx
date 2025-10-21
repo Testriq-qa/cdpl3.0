@@ -2,11 +2,10 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
-import { Share2, Copy } from "lucide-react";
 import dynamic from "next/dynamic";
 
-import type { Job } from "@/app/jobs/live-jobs/page";
 import type { JobsFilters } from "./JobsLiveJobsListingSection";
+import type { Job } from "@/lib/jobsData";
 
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
   return (
@@ -16,7 +15,6 @@ function SectionLoader({ label = "Loading..." }: { label?: string }) {
   );
 }
 
-// Lazy-load the inner card section
 const JobsLiveJobsJobCardSection = dynamic(
   () =>
     import("./JobsLiveJobsJobCardSection").then(
@@ -70,7 +68,7 @@ export function JobsLiveJobsJobsGridSection({
         await navigator.share({ title: job.title, text: `${job.title} @ ${job.company}`, url });
         return;
       }
-    } catch { }
+    } catch {}
     try {
       await navigator.clipboard.writeText(url);
       setCopiedId(job.id);
@@ -117,7 +115,7 @@ export function JobsLiveJobsJobsGridSection({
       }
       try {
         targetId = decodeURIComponent(targetId);
-      } catch { }
+      } catch {}
       return targetId;
     };
 
@@ -147,7 +145,7 @@ export function JobsLiveJobsJobsGridSection({
       }
       try {
         targetId = decodeURIComponent(targetId);
-      } catch { }
+      } catch {}
       return targetId;
     };
 
@@ -203,31 +201,11 @@ export function JobsLiveJobsJobsGridSection({
                 transition={{ duration: 0.2, ease: "easeOut" }}
               >
                 <div className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm md:p-5">
-                  {/* Share button (copies link, does not open new tab) */}
-                  <div className="mb-2 flex justify-end md:mb-0 md:absolute md:right-3 md:top-3 md:z-10">
-                    <button
-                      onClick={() => handleShare(job)}
-                      className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300"
-                      aria-label={`Share ${job.title}`}
-                      title={copiedId === job.id ? "Link copied!" : "Share"}
-                    >
-                      {copiedId === job.id ? (
-                        <>
-                          <Copy className="h-3.5 w-3.5" />
-                          Copied
-                        </>
-                      ) : (
-                        <>
-                          <Share2 className="h-3.5 w-3.5" />
-                          Share
-                        </>
-                      )}
-                    </button>
-                  </div>
-
-                  <div className="relative">
-                    <JobsLiveJobsJobCardSection job={job} />
-                  </div>
+                  <JobsLiveJobsJobCardSection
+                    job={job}
+                    onShare={handleShare}
+                    isCopied={copiedId === job.id}
+                  />
                 </div>
               </motion.li>
             ))}
@@ -244,7 +222,9 @@ export function JobsLiveJobsJobsGridSection({
         {canLoadMore ? (
           <div className="mt-4 flex justify-center">
             <button
-              onClick={() => setVisibleCount((v) => Math.min(v + CHUNK_SIZE, filtered.length))}
+              onClick={() =>
+                setVisibleCount((v) => Math.min(v + CHUNK_SIZE, filtered.length))
+              }
               className="rounded-full border border-slate-300 bg-white px-4 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-orange-300"
             >
               Load more ({filtered.length - visibleCount} remaining)

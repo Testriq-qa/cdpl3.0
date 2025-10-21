@@ -1,8 +1,8 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Job } from "@/app/jobs/live-jobs/page";
 import dynamic from "next/dynamic";
+import type { Job } from "@/lib/jobsData";
 
 export type JobsFilters = { q: string; loc: string; type: string };
 
