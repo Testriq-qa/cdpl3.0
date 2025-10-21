@@ -145,7 +145,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
                     {/* Skills */}
                     <div className="space-y-3 pt-4 border-t border-slate-100">
                       <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide">
-                        What You'll Build
+                        What You&apos;ll Build
                       </p>
                       <div className="flex flex-wrap gap-2">
                         {project.skills.map((skill, skillIndex) => (

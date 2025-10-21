@@ -205,7 +205,7 @@ const FAQSection: React.FC<FAQSectionProps> = ({ data = mockData }) => {
               </h3>
               
               <p className="text-emerald-50 text-base md:text-lg mb-8 max-w-2xl mx-auto">
-                Can't find the answer you're looking for? Our dedicated support team is ready to assist you.
+                Can&apos;t find the answer you&apos;re looking for? Our dedicated support team is ready to assist you.
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">

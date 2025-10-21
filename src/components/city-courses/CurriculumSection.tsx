@@ -193,7 +193,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                   <div className="hidden min-w-[720px] md:grid md:grid-cols-12 gap-0 border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-600">
                     <div className="col-span-2">Week</div>
                     <div className="col-span-3">Module</div>
-                    <div className="col-span-5">What you'll learn</div>
+                    <div className="col-span-5">What you&apos;ll learn</div>
                     <div className="col-span-2">Deliverables</div>
                   </div>
 
@@ -225,7 +225,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                         {/* Description */}
                         <div className="mt-2 md:mt-0 md:col-span-5">
                           <div className="md:hidden text-xs font-semibold uppercase text-slate-500 mb-1">
-                            What you'll learn
+                            What you&apos;ll learn
                           </div>
                           <p className="text-sm text-slate-700">{w.description}</p>
                         </div>
