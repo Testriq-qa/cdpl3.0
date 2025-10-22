@@ -1,27 +1,49 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import type { Job } from "@/app/jobs/live-jobs/page";
-import { JobsLiveJobsFilterBarSection } from "./JobsLiveJobsFilterBarSection";
-import { JobsLiveJobsJobsGridSection } from "./JobsLiveJobsJobsGridSection";
+import dynamic from "next/dynamic";
+import type { Job } from "@/lib/jobsData";
 
 export type JobsFilters = { q: string; loc: string; type: string };
+
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+const JobsLiveJobsFilterBarSection = dynamic(
+  () =>
+    import("./JobsLiveJobsFilterBarSection").then(
+      (m) => m.JobsLiveJobsFilterBarSection
+    ),
+  { ssr: false, loading: () => <SectionLoader label="Loading filters..." /> }
+);
+
+const JobsLiveJobsJobsGridSection = dynamic(
+  () =>
+    import("./JobsLiveJobsJobsGridSection").then(
+      (m) => m.JobsLiveJobsJobsGridSection
+    ),
+  { ssr: false, loading: () => <SectionLoader label="Loading jobs..." /> }
+);
 
 export function JobsLiveJobsListingSection({ jobs }: { jobs: Job[] }) {
   const [filters, setFilters] = useState<JobsFilters>({ q: "", loc: "", type: "" });
 
   const locations = useMemo(() => {
     const set = new Set<string>();
-    jobs.forEach(j => {
-      set.add(j.location);
-      j.location.split("/").map(s => s.trim()).forEach(c => set.add(c));
+    jobs.forEach((j) => {
+      if (j.location) {
+        set.add(j.location);
+        j.location.split("/").map((s) => s.trim()).forEach((c) => set.add(c));
+      }
     });
     const arr = Array.from(set).filter(Boolean);
     const prio = ["Mumbai", "Navi Mumbai", "Pune", "Chennai", "Bengaluru", "Hyderabad", "Gurugram", "Remote"];
-    const sorted = [
-      ...prio.filter(p => arr.includes(p)),
-      ...arr.filter(a => !prio.includes(a))
-    ];
+    const sorted = [...prio.filter((p) => arr.includes(p)), ...arr.filter((a) => !prio.includes(a))];
     return sorted;
   }, [jobs]);
 
@@ -29,14 +51,12 @@ export function JobsLiveJobsListingSection({ jobs }: { jobs: Job[] }) {
     <section aria-labelledby="jobs-listing" className="w-full">
       <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="mb-4">
-          <JobsLiveJobsFilterBarSection
-            value={filters}
-            onChange={setFilters}
-            locations={locations}
-          />
+          <JobsLiveJobsFilterBarSection value={filters} onChange={setFilters} locations={locations} />
         </div>
 
-        <h2 id="jobs-listing" className="text-2xl font-extrabold leading-tight">Latest openings</h2>
+        <h2 id="jobs-listing" className="text-2xl font-extrabold leading-tight">
+          Latest openings
+        </h2>
         <p className="mt-1 text-[15px] text-slate-600 sm:text-base">
           We verify authenticity before posting. Check venue and timing for walk-ins; carry updated CV and ID.
         </p>

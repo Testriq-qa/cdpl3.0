@@ -27,30 +27,28 @@ export default function JobsCareersHeroSection() {
 
   return (
     <section className="relative overflow-hidden bg-white text-neutral-900 dark:bg-white dark:text-neutral-900">
-      {/* Breadcrumb */}
-      <div className="border-t border-[#cde4f7]">
+      {/* Breadcrumb — nudged slightly upward; absolute so total height stays the same */}
+      <nav
+        aria-label="Breadcrumb"
+        className="absolute inset-x-0 z-20 top-8 sm:top-10 lg:top-12"
+      >
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <nav
-            aria-label="Breadcrumb"
-            className="py-2 text-sm text-neutral-500"
-          >
-            <ol className="flex items-center gap-2">
-              <li>
-                <Link href="/" className="hover:underline">Home</Link>
-              </li>
-              <li className="text-neutral-400">/</li>
-              <li>
-                {/* Jobs is just a URL segment — not a link */}
-                <span className="text-neutral-600">Jobs</span>
-              </li>
-              <li className="text-neutral-400">/</li>
-              <li className="font-semibold text-neutral-700">
-                Careers
-              </li>
-            </ol>
-          </nav>
+          <ol className="flex items-center gap-2 text-sm text-neutral-500">
+            <li>
+              <Link href="/" className="hover:text-neutral-700">Home</Link>
+            </li>
+            <li className="text-neutral-400" aria-hidden>/</li>
+            <li>
+              {/* Jobs is just a URL segment — not a link */}
+              <span className="font-medium text-neutral-600">Jobs</span>
+            </li>
+            <li className="text-neutral-400" aria-hidden>/</li>
+            <li className="font-semibold text-neutral-700" aria-current="page">
+              Careers
+            </li>
+          </ol>
         </div>
-      </div>
+      </nav>
 
       {/* Floating vector sprites — behind content but ABOVE the white background.
           Mask removes the center area so icons never overlap hero text/buttons. */}
@@ -98,7 +96,8 @@ export default function JobsCareersHeroSection() {
         ))}
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 sm:py-16 lg:py-20">
+      {/* Hero container — height unchanged */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-16 sm:py-20 lg:py-24">
         <div className="mx-auto max-w-3xl text-center">
           <span
             className={`inline-flex items-center rounded-full px-3 py-1 text-xs font-medium text-white ${ACCENT_GRADIENT}`}

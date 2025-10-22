@@ -2,7 +2,7 @@
 "use client";
 
 import { MapPin, Calendar } from "lucide-react";
-import type { Job } from "@/app/jobs/live-jobs/page";
+import type { Job } from "@/lib/jobsData";
 
 const formatDate = (iso: string) =>
   new Date(iso).toLocaleDateString("en-IN", {
