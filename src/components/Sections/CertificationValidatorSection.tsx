@@ -3,9 +3,8 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import type { Certificate } from "@/data/certificates/registry";
-import { getCertificateById } from "@/data/certificates/registry";
 import { CertificationPreviewSection } from "./CertificationPreviewSection";
+import { Certificate, getCertificateById } from "@/data/certificates/registry";
 
 export default function CertificationValidatorSection() {
   const [query, setQuery] = useState("");
