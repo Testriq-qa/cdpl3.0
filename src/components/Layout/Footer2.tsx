@@ -50,16 +50,19 @@ const Footer: React.FC = () => {
               <span className='hidden lg:block'>|</span>
               <Link href="/cookies-policy" className="hover:text-orange-400 transition-colors md:mr-0 lg:mr-4">Cookies Policy</Link>
               <span className='hidden lg:block'>|</span>
-              <Link href="/terms-conditions" className="hover:text-orange-400 transition-colors md:mr-3 lg:mr-0 xl:mr-4">Terms and Conditions</Link>
+              <Link href="/terms-of-service" className="hover:text-orange-400 transition-colors md:mr-3 lg:mr-0 xl:mr-4">Terms and Conditions</Link>
               <span className='hidden xl:block'>|</span>
-              <Link href="/cancellation-refund" className="hover:text-orange-400 transition-colors">Cancellation/Refund Policy</Link>
+              <Link href="/cancellation-refund-policy" className="hover:text-orange-400 transition-colors">Cancellation/Refund Policy</Link>
             </div>
             <p className="mt-6 text-sm text-center md:text-right">ISO 9001:2015 (QMS) 27001:2013 (ISMS) Certified Company.</p>
           </div>
         </div>
 
+        {/* hr border */}
+        <hr className="mx-auto my-10 w-auto md:w-auto border-t-2 border-slate-400" />
+
         {/* Bottom Copyright */}
-        <div className="mt-8 py-4 border-t border-4 border-gray-400 rounded-full text-sm text-center">
+        <div className="mt-8 py-4 text-sm text-center">
           © Copyright 2025 Cinute Digital Pvt. Ltd. - All Rights Reserved.
         </div>
       </div>
