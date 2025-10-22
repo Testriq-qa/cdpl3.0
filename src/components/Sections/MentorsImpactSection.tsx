@@ -165,7 +165,7 @@ export default function MentorsImpactSection() {
               "Top-rated Industry Experts",
               "1:1 Live Mentorship",
               "Career-Focused Guidance",
-              "AI-Powered Matching",
+              // "AI-Powered Matching"  // removed per request
             ].map((b) => (
               <span
                 key={b}
@@ -182,8 +182,7 @@ export default function MentorsImpactSection() {
           >
             Learn Faster with{" "}
             <span
-              className="bg-clip-text text-transparent drop-shadow-sm"
-              style={{ backgroundImage: GRADIENT_BRAND }}
+              className="drop-shadow-sm text-[var(--color-brand,#ff8c00)]" // brand color, no gradient
             >
               CDPL World-Class Mentors
             </span>

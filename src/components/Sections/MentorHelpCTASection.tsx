@@ -17,7 +17,8 @@ export default function MentorHelpCTASection({
   title = "CDPL Mentorship: Learn from people who’ve shipped it",
   subtitle = "1:1 guidance for AI/ML, Data Science, Full-Stack, and DevOps — resume reviews, project feedback, and interview prep to accelerate outcomes.",
   ctaText = "Get matched with a CDPL mentor",
-  href = "/contact-us",
+  // default the CTA to the in-page anchor you asked for
+  href = "#mentors-impact",
   bgImageSrc = "/images/cta-helping-hands.png", // soft background artwork
   className = "",
 }: {
@@ -28,6 +29,23 @@ export default function MentorHelpCTASection({
   bgImageSrc?: string;
   className?: string;
 }) {
+  // Smooth-scroll helper that targets #mentors-impact (or any anchor passed via href)
+  const handleAnchorClick = (
+    e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
+  ) => {
+    const target = (e.currentTarget.getAttribute("href") || "").trim();
+    // Only intercept in-page anchors, e.g. "#mentors-impact"
+    if (target.startsWith("#")) {
+      e.preventDefault();
+      const el = document.querySelector(target);
+      if (el) {
+        (el as HTMLElement).scrollIntoView({ behavior: "smooth", block: "start" });
+        // Ensure hash updates for back/forward nav
+        history.replaceState(null, "", target);
+      }
+    }
+  };
+
   return (
     <section
       className={`relative isolate bg-white text-neutral-900 ${className}`}
@@ -118,6 +136,7 @@ export default function MentorHelpCTASection({
             <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Link
                 href={href}
+                onClick={handleAnchorClick}
                 className="group inline-flex items-center gap-2 rounded-full text-white transition-transform active:translate-y-[1px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500
                            whitespace-nowrap overflow-hidden text-ellipsis
                            text-[13px] leading-none px-4 py-2 min-h-[40px]
@@ -134,8 +153,10 @@ export default function MentorHelpCTASection({
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
 
+              {/* Also scroll to #mentors-impact for this secondary link */}
               <Link
-                href="/mentors"
+                href="#mentors-impact"
+                onClick={handleAnchorClick}
                 className="inline-flex items-center gap-2 text-sm font-semibold text-neutral-900 underline underline-offset-4 decoration-neutral-300 hover:decoration-neutral-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-neutral-300"
                 aria-label="Browse CDPL mentor directory"
               >

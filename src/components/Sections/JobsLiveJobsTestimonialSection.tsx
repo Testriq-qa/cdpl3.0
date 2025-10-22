@@ -31,7 +31,6 @@ export type JobsLiveJobsVideoTestimonialsSectionProps = {
 };
 
 // ----------------------------- Sample Data ---------------------------
-// Note: replace src/poster with your actual assets
 const DEFAULT_VIDEOS: VideoTestimonial[] = [
   {
     id: "cdpl-prathik",
@@ -126,6 +125,33 @@ const LIGHT = {
   iconBtn: "bg-white/90 hover:bg-white text-slate-900",
 };
 
+// Brand color used like reviews section
+const BRAND_TEXT = "text-orange-600";
+
+// Split heading into two parts so second half can be brand-colored
+function splitHeadingForColoring(input: string): { left: string; right: string } {
+  // Prefer the em dash if present
+  const emDashIdx = input.indexOf("—");
+  if (emDashIdx !== -1) {
+    return {
+      left: input.slice(0, emDashIdx + 1).trim(),   // include the dash on left
+      right: input.slice(emDashIdx + 1).trim(),
+    };
+  }
+  // Fallback: split by comma into two halves
+  const commaIdx = input.indexOf(",");
+  if (commaIdx !== -1) {
+    return {
+      left: input.slice(0, commaIdx + 1).trim(),
+      right: input.slice(commaIdx + 1).trim(),
+    };
+  }
+  // Final fallback: split words in half
+  const words = input.split(/\s+/);
+  const mid = Math.floor(words.length / 2);
+  return { left: words.slice(0, mid).join(" "), right: words.slice(mid).join(" ") };
+}
+
 // ----------------------------- UI primitives -------------------------
 type PillBaseProps = {
   children: React.ReactNode;
@@ -149,7 +175,7 @@ function Pill(props: PillProps) {
         title={title}
         {...rest}
         className={cx(
-          "inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium",
+          "inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium transition-colors",
           LIGHT.chip,
           className
         )}
@@ -209,7 +235,7 @@ function computeScrollAvailable(container: HTMLDivElement) {
 export default function JobsLiveJobsVideoTestimonialsSection({
   heading = "CDPL Learner Shorts — Real Outcomes, Live Jobs",
   subheading =
-  "Swipe through short, vertical stories from learners who used CDPL's mentor-led tracks and live projects to secure interviews and offers.",
+    "Swipe through short, vertical stories from learners who used CDPL's mentor-led tracks and live projects to secure interviews and offers.",
   videos = DEFAULT_VIDEOS,
   defaultTag = null,
 }: JobsLiveJobsVideoTestimonialsSectionProps) {
@@ -251,7 +277,7 @@ export default function JobsLiveJobsVideoTestimonialsSection({
         "fixed bottom-4 left-1/2 -translate-x-1/2 z-[70] px-3 py-1.5 rounded-full text-sm bg-black/80 text-white";
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 1200);
-    } catch { }
+    } catch {}
   };
 
   // SEO JSON-LD
@@ -315,20 +341,34 @@ export default function JobsLiveJobsVideoTestimonialsSection({
     scrollToIndex(el, cur + 1);
   };
 
+  // Prepare split heading for half-black/half-brand color
+  const split = useMemo(() => splitHeadingForColoring(heading), [heading]);
+
   return (
     <section className={LIGHT.page}>
-      {/* Use your requested container sizing */}
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="mx-auto max-w-3xl text-center">
+        <div className="mx-auto max-w-5xl text-center">
           <Pill className="mb-3">
             <Sparkles className="h-4 w-4 mr-1" />
             CDPL Success Stories
           </Pill>
-          <h2 className={cx("text-3xl sm:text-4xl font-semibold", LIGHT.textPrimary)}>
-            {heading}
+
+          {/* Bigger, heavier, split-colored heading */}
+          <h2
+            className={cx(
+              "mx-auto font-extrabold tracking-tight leading-tight",
+              // sizes match the screenshot emphasis
+              "text-4xl sm:text-5xl lg:text-6xl"
+            )}
+          >
+            <span className="text-slate-900">{split.left}</span>{" "}
+            <span className={BRAND_TEXT}>{split.right}</span>
           </h2>
-          <p className={cx("mt-3", LIGHT.textSecondary)}>{subheading}</p>
+
+          <p className={cx("mt-4 text-base sm:text-lg", LIGHT.textSecondary)}>
+            {subheading}
+          </p>
         </div>
 
         {/* Tag Filter */}
@@ -501,7 +541,7 @@ function ShortsCard({
   useEffect(() => {
     if (!vidRef.current) return;
     if (hovering) {
-      vidRef.current.play().catch(() => { });
+      vidRef.current.play().catch(() => {});
     } else {
       vidRef.current.pause();
       vidRef.current.currentTime = 0;
@@ -513,7 +553,6 @@ function ShortsCard({
       id={`video-${v.id}`}
       data-card
       className={cx(
-        // slightly wider on md/lg so carousel overflows even with a few cards
         "shrink-0 w-72 sm:w-80 md:w-[24rem] lg:w-[26rem] snap-start rounded-2xl overflow-hidden",
         LIGHT.card
       )}
@@ -531,14 +570,13 @@ function ShortsCard({
         </div>
       </div>
 
-      {/* Middle: 9:16 media */}
+      {/* Middle: 9:16 media with equal padding left/right */}
       <div className="px-4">
         <div
           className="relative aspect-[9/16] overflow-hidden rounded-xl border border-black/10"
           onMouseEnter={() => setHovering(true)}
           onMouseLeave={() => setHovering(false)}
         >
-          {/* Poster */}
           <Image
             src={v.poster}
             alt={`${v.person} — ${v.title}`}
@@ -548,7 +586,6 @@ function ShortsCard({
             priority={false}
           />
 
-          {/* Hover preview for mp4 */}
           {isMp4 && (
             <video
               ref={vidRef}
@@ -561,7 +598,6 @@ function ShortsCard({
             />
           )}
 
-          {/* Duration chip */}
           {v.duration && (
             <span className="absolute left-2 top-2 text-[11px] px-2 py-0.5 rounded-full bg-black/70 text-white">
               <Clock className="inline-block h-3 w-3 mr-1" />
@@ -569,7 +605,7 @@ function ShortsCard({
             </span>
           )}
 
-          {/* Right action rail like Shorts */}
+          {/* Right action rail */}
           <div className="absolute right-2 bottom-3 flex flex-col gap-2">
             <button
               type="button"
@@ -589,7 +625,7 @@ function ShortsCard({
             </button>
           </div>
 
-          {/* Bottom-left meta overlay */}
+          {/* Bottom-left meta */}
           <div className="absolute left-2 bottom-3 text-white drop-shadow">
             <div className="text-xs font-semibold">
               {v.person}

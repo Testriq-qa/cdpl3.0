@@ -3,15 +3,11 @@
 import { useMemo, useState } from "react";
 
 /**
- * MentorOutcomesSection — CDPL (Light-surface only)
- * Spacing tightened to sit closer to the hero:
- * - container: pt-6 pb-12 (sm:pt-8 sm:pb-16)  ← was py-10 sm:py-20
- * - header: mb-6 (sm:mb-8)                     ← was mb-8 sm:mb-10
- * - lead p: mt-2                                ← was mt-3
- * - tabs row: mb-4                              ← was mb-6
- * - KPI row:  mb-8                              ← was mb-10
- * - logos strip: mt-8                           ← was mt-10
- * - footer note: mt-4                           ← was mt-6
+ * MentorOutcomesSection — polished / clean
+ * - Soft ring, no dashed spinner
+ * - Evenly spaced larger avatars, no external labels
+ * - Balanced center card with neat spacing
+ * - Tight but breathable section spacing
  */
 
 type Case = {
@@ -25,11 +21,19 @@ type Case = {
   avatar: string;
 };
 
-const BRAND_GRADIENT =
-  "linear-gradient(90deg, #ff8c00 0%, #ffb558 50%, #ffd19e 100%)";
-const ACCENT_GRADIENT = "linear-gradient(90deg, #7ee7ff 0%, #9d7bff 100%)";
+const BRAND = "#ff8c00";
+const GRADIENT_BRAND =
+  "linear-gradient(90deg, #ff8c00 0%, #ffb558 55%, #ffd19e 100%)";
+const GRADIENT_ACCENT = "linear-gradient(90deg,#e0f2ff 0%,#efe9ff 100%)";
 
-const DOMAINS = ["All", "AI / ML", "Data Science", "Full-Stack", "Cloud & DevOps", "Product"];
+const DOMAINS = [
+  "All",
+  "AI / ML",
+  "Data Science",
+  "Full-Stack",
+  "Cloud & DevOps",
+  "Product",
+];
 
 const CASES: Case[] = [
   {
@@ -41,7 +45,7 @@ const CASES: Case[] = [
     outcome: "CTC +140% in 5 months",
     domain: "AI / ML",
     avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=160&auto=format&fit=crop",
   },
   {
     name: "Rahul K.",
@@ -52,7 +56,7 @@ const CASES: Case[] = [
     outcome: "Offer in 10 weeks",
     domain: "Data Science",
     avatar:
-      "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=160&auto=format&fit=crop",
   },
   {
     name: "Meera T.",
@@ -63,7 +67,7 @@ const CASES: Case[] = [
     outcome: "Level jump + onsite",
     domain: "Full-Stack",
     avatar:
-      "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=160&auto=format&fit=crop",
   },
   {
     name: "Zaid I.",
@@ -74,7 +78,7 @@ const CASES: Case[] = [
     outcome: "K8s + Terraform in prod",
     domain: "Cloud & DevOps",
     avatar:
-      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=160&auto=format&fit=crop",
   },
   {
     name: "Priya V.",
@@ -82,20 +86,19 @@ const CASES: Case[] = [
     company: "Razorpay",
     before: "Business Analyst",
     after: "PM",
-    outcome: "Hired via mentor referral",
+    outcome: "Referral hire via mentor",
     domain: "Product",
     avatar:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=80&auto=format&fit=crop",
+      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=160&auto=format&fit=crop",
   },
 ];
 
 export default function MentorOutcomesSection() {
   const [tab, setTab] = useState<string>("All");
-  const filteredCases = useMemo(
+  const filtered = useMemo(
     () => (tab === "All" ? CASES : CASES.filter((c) => c.domain === tab)),
     [tab]
   );
-
   const [activeIdx, setActiveIdx] = useState(0);
 
   return (
@@ -103,39 +106,33 @@ export default function MentorOutcomesSection() {
       id="mentor-outcomes"
       className="relative isolate overflow-hidden bg-white text-zinc-900"
       aria-labelledby="mentor-outcomes-title"
-      data-theme="light"
     >
-      {/* Ambient blobs (visual only) */}
+      {/* soft background aura */}
       <div
-        className="pointer-events-none absolute -top-28 right-[-10%] h-72 w-[44rem] rounded-full blur-[60px] opacity-20"
-        style={{ background: ACCENT_GRADIENT }}
+        className="pointer-events-none absolute -top-24 right-[-12%] h-72 w-[46rem] rounded-full blur-[70px] opacity-25"
+        style={{ background: GRADIENT_ACCENT }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -bottom-28 left-[-10%] h-72 w-[44rem] rounded-full blur-[60px] opacity-15"
-        style={{ background: BRAND_GRADIENT }}
+        className="pointer-events-none absolute -bottom-24 left-[-12%] h-72 w-[46rem] rounded-full blur-[70px] opacity-20"
+        style={{ background: GRADIENT_BRAND }}
         aria-hidden
       />
 
-      {/* tightened vertical padding */}
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 pb-12 sm:pt-8 sm:pb-16">
+      <div className="mx-auto max-w-7xl px-4 pt-6 pb-12 sm:px-6 sm:pt-8 sm:pb-16 lg:px-8">
         {/* Header */}
         <header className="mb-6 sm:mb-8">
           <h2
             id="mentor-outcomes-title"
-            className="text-3xl sm:text-4xl font-extrabold leading-tight"
+            className="text-3xl font-extrabold leading-tight sm:text-4xl"
           >
             Proven Outcomes &{" "}
-            <span
-              className="bg-clip-text text-transparent"
-              style={{ backgroundImage: BRAND_GRADIENT }}
-            >
-              Real Placements
-            </span>
+            <span style={{ color: BRAND }}>Real Placements</span>
           </h2>
-          <p className="mt-2 max-w-3xl text-[15px] sm:text-base text-zinc-700">
+          <p className="mt-2 max-w-3xl text-[15px] text-zinc-700 sm:text-base">
             CDPL mentorship drives tangible career moves across AI/ML, Data
-            Science, Full-Stack, Cloud & DevOps, and Product with structured guidance and interview prep.
+            Science, Full-Stack, Cloud & DevOps, and Product with structured
+            guidance and interview prep.
           </p>
         </header>
 
@@ -155,7 +152,7 @@ export default function MentorOutcomesSection() {
                     ? "border-zinc-300 text-zinc-900 shadow-sm"
                     : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
                 }`}
-                style={active ? { backgroundImage: BRAND_GRADIENT } : { background: "#fff" }}
+                style={active ? { backgroundImage: GRADIENT_BRAND } : {}}
                 aria-pressed={active}
               >
                 {d}
@@ -164,7 +161,7 @@ export default function MentorOutcomesSection() {
           })}
         </div>
 
-        {/* KPI Row */}
+        {/* KPIs */}
         <div className="mb-8 grid gap-3 sm:grid-cols-4">
           {[
             { num: "92%", label: "Offer rate post mock rounds" },
@@ -176,57 +173,195 @@ export default function MentorOutcomesSection() {
               key={m.label}
               className="rounded-2xl border border-zinc-200 bg-white p-4 text-center shadow-sm"
             >
-              <div className="text-xl font-extrabold tracking-wide">{m.num}</div>
+              <div className="text-xl font-extrabold tracking-wide">
+                {m.num}
+              </div>
               <div className="mt-1 text-xs text-zinc-700">{m.label}</div>
             </div>
           ))}
         </div>
 
-        {/* Outcome Orbit */}
-        <OutcomeOrbit
-          cases={filteredCases}
+        {/* Orbit */}
+        <Orbit
+          cases={filtered}
           activeIdx={activeIdx}
           setActiveIdx={setActiveIdx}
         />
 
-        {/* Logos strip */}
-        <div className="mt-8 overflow-hidden">
-          <div className="flex gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
-            {["Google", "Microsoft", "Amazon", "Flipkart", "NVIDIA", "Swiggy", "Razorpay", "Paytm"].map(
-              (brand) => (
-                <div
-                  key={brand}
-                  className="flex items-center gap-2 whitespace-nowrap rounded-xl border border-zinc-200 bg-white px-4 py-2 text-xs text-zinc-700 shadow-sm"
-                >
-                  <div
-                    className="h-5 w-5 rounded-md"
-                    style={{ backgroundImage: BRAND_GRADIENT }}
-                    aria-hidden="true"
-                  />
-                  {brand}
-                </div>
-              )
-            )}
-          </div>
-        </div>
-
-        {/* Footer note */}
+        {/* Brand strip */}
+        <BrandMarquee />
         <p className="mt-4 text-center text-xs text-zinc-700">
-          Results vary by effort, background, and market conditions. Your CDPL mentor will map a plan that fits your goals.
+          Results vary by effort, background, and market conditions. Your CDPL
+          mentor will map a plan that fits your goals.
         </p>
       </div>
 
-      {/* Hidden SEO helper */}
       <div className="sr-only">
-        CDPL outcomes include placements with Google, Microsoft, Amazon, Flipkart, NVIDIA, Swiggy, Razorpay, and Paytm.
-        Orbit shows transitions and results across AI/ML, Data Science, Full-Stack, Cloud & DevOps, and Product.
+        CDPL outcomes include placements with technoscripts, jm-financial,
+        vistaar, sp-ultraflex, marqetrix, raw-engineering, galentic,
+        tech-cryptors, axiom, medi-venturz, aryan-technologies, credility,
+        idfy, and testriq.
       </div>
     </section>
   );
 }
 
-/* ============================ OutcomeOrbit ============================ */
-function OutcomeOrbit({
+/* ============================ BrandMarquee ============================ */
+function BrandMarquee() {
+  // pause/resume on hover OR click
+  const [paused, setPaused] = useState(false);
+  const toggleClickPause = () => setPaused((p) => !p);
+
+  // source: 14 logos from your Elementor carousel
+  const BRANDS = [
+    {
+      name: "Technoscripts",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006266.webp",
+    },
+    {
+      name: "JM-Financial",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006267.webp",
+    },
+    {
+      name: "Vistaar",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006278.webp",
+    },
+    {
+      name: "SP-Ultraflex",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006279.webp",
+    },
+    {
+      name: "Marqetrix",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006280.webp",
+    },
+    {
+      name: "Raw-Engineering",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006281.webp",
+    },
+    {
+      name: "Galentic",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006282.webp",
+    },
+    {
+      name: "Tech-Cryptors",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006283.webp",
+    },
+    {
+      name: "Axiom",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006284.webp",
+    },
+    {
+      name: "Medi-Venturz",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006285.webp",
+    },
+    {
+      name: "Aryan-Technologies",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006286.webp",
+    },
+    {
+      name: "Credility",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006287.webp",
+    },
+    {
+      name: "IDfy",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006289.webp",
+    },
+    {
+      name: "Testriq",
+      logo:
+        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006290.webp",
+    },
+  ];
+
+  // duplicate once for seamless loop
+  const scrollingList = [...BRANDS, ...BRANDS];
+
+  // keyboard accessibility for pause on Enter/Space
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      toggleClickPause();
+    }
+  };
+
+  return (
+    <>
+      <div
+        className="group relative mt-8 select-none overflow-hidden rounded-2xl border border-orange-100 bg-gradient-to-b from-orange-50/60 to-orange-100/40 p-2"
+        role="region"
+        aria-label="Hiring partners carousel"
+      >
+        <div
+          className="marquee-track flex w-[200%] items-center gap-4"
+          style={{ animationPlayState: paused ? "paused" : "running" }}
+          onMouseEnter={() => setPaused(true)}
+          onMouseLeave={() => setPaused(false)}
+          onClick={toggleClickPause}
+          onKeyDown={onKeyDown}
+          tabIndex={0}
+          aria-roledescription="marquee"
+          aria-live="off"
+        >
+          {scrollingList.map((brand, i) => (
+            <div
+              key={brand.name + i}
+              className="flex min-w-52 max-w-60 flex-none items-center gap-3 rounded-2xl bg-white/80 px-4 py-2 shadow-sm ring-1 ring-zinc-200 backdrop-blur"
+              title={brand.name}
+            >
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={brand.logo}
+                alt={`${brand.name} logo`}
+                className="h-7 w-7 flex-none rounded-md object-contain"
+                loading="lazy"
+              />
+              <span className="block w-full truncate text-sm font-semibold text-zinc-800">
+                {brand.name}
+              </span>
+            </div>
+          ))}
+        </div>
+
+        {/* subtle gradient edges */}
+        <div className="pointer-events-none absolute inset-y-0 left-0 w-10 bg-gradient-to-r from-orange-50/90 to-transparent" />
+        <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-orange-50/90 to-transparent" />
+      </div>
+
+      {/* marquee styles */}
+      <style jsx>{`
+        .marquee-track {
+          /* Move LEFT -> RIGHT continuously */
+          animation: marquee-ltr 28s linear infinite;
+          will-change: transform;
+        }
+        @keyframes marquee-ltr {
+          0% {
+            transform: translateX(-50%);
+          }
+          100% {
+            transform: translateX(0%);
+          }
+        }
+      `}</style>
+    </>
+  );
+}
+
+/* ============================ Orbit ============================ */
+function Orbit({
   cases,
   activeIdx,
   setActiveIdx,
@@ -237,58 +372,54 @@ function OutcomeOrbit({
 }) {
   const N = Math.max(1, cases.length);
 
+  // even distribution around a slightly smaller radius to reduce empty center
   const positions = useMemo(() => {
-    const baseAngle = -90; // start at top
-    const rBase = 48; // base radius
-    return cases.map((_, i) => {
-      const t = N === 1 ? 0 : i / N;
-      const angle = baseAngle + t * 360;
+    const r = 40; // cleaner, closer circle
+    const start = -90; // top
+    return new Array(N).fill(0).map((_, i) => {
+      const angle = start + (360 / N) * i;
       const rad = (angle * Math.PI) / 180;
-      const horizontalBoost = Math.pow(Math.abs(Math.cos(rad)), 2) * 4;
-      const r = rBase + horizontalBoost;
-      const cx = 50 + Math.cos(rad) * r;
-      const cy = 50 + Math.sin(rad) * (r - 2);
-      return { cx, cy, angle };
+      return {
+        cx: 50 + Math.cos(rad) * r,
+        cy: 50 + Math.sin(rad) * (r - 1.5),
+      };
     });
-  }, [N, cases]);
+  }, [N]);
 
-  const active = cases[Math.min(activeIdx, Math.max(0, cases.length - 1))];
+  const active = cases[Math.min(activeIdx, Math.max(0, N - 1))];
 
   return (
     <div className="relative mx-auto grid w-full max-w-5xl place-items-center">
-      <div className="relative aspect-square w-full max-w-[680px] min-w-[280px]">
-        {/* Ring visuals */}
+      <div className="relative aspect-square w-full min-w-[280px] max-w-[680px]">
+        {/* Soft ring */}
         <div className="absolute inset-0">
           <svg viewBox="0 0 100 100" className="h-full w-full" aria-hidden>
             <defs>
-              <radialGradient id="ringfill" cx="50%" cy="50%">
-                <stop offset="0%" stopColor="rgba(255,140,0,0.12)" />
-                <stop offset="55%" stopColor="rgba(255,140,0,0.06)" />
+              <radialGradient id="o-fill" cx="50%" cy="50%">
+                <stop offset="0%" stopColor="rgba(255,140,0,0.10)" />
+                <stop offset="55%" stopColor="rgba(255,140,0,0.05)" />
                 <stop offset="100%" stopColor="rgba(255,140,0,0)" />
               </radialGradient>
-              <linearGradient id="ringstroke" x1="0" y1="0" x2="100" y2="0">
-                <stop stopColor="#ff8c00" />
-                <stop offset="0.5" stopColor="#ffb558" />
-                <stop offset="1" stopColor="#ffd19e" />
+              <linearGradient id="o-stroke" x1="0" y1="0" x2="100" y2="0">
+                <stop stopColor="#ffd8b0" />
+                <stop offset="1" stopColor="#ffe8cb" />
               </linearGradient>
             </defs>
-
-            <circle cx="50" cy="50" r="40" fill="url(#ringfill)" />
+            <circle cx="50" cy="50" r="38.5" fill="url(#o-fill)" />
             <circle
               cx="50"
               cy="50"
-              r="40"
+              r="38.5"
               fill="none"
-              stroke="url(#ringstroke)"
-              strokeWidth="1.6"
-              className="animate-[spin_18s_linear_infinite] [stroke-dasharray:2.5_3]"
+              stroke="url(#o-stroke)"
+              strokeWidth="0.8"
             />
           </svg>
         </div>
 
-        {/* Center spotlight — slightly tighter on small screens */}
-        <div className="absolute left-1/2 top-[44%] sm:top-1/2 w-[88%] sm:w-[66%] max-w-[440px] -translate-x-1/2 -translate-y-1/2 max-[360px]:w-[92%] max-[360px]:top-[42%]">
-          <div className="rounded-3xl border border-zinc-200 bg-white/90 p-4 shadow-[0_22px_60px_-28px_rgba(0,0,0,0.45)] backdrop-blur-sm">
+        {/* Center card */}
+        <div className="absolute left-1/2 top-1/2 w-[90%] max-w-[420px] -translate-x-1/2 -translate-y-1/2 sm:w-[66%]">
+          <div className="rounded-3xl border border-zinc-200 bg-white/95 p-4 shadow-[0_22px_50px_-30px_rgba(2,6,23,0.45)] backdrop-blur">
             {active ? (
               <>
                 <div className="flex items-center gap-3">
@@ -296,11 +427,11 @@ function OutcomeOrbit({
                   <img
                     src={active.avatar}
                     alt={`${active.name} avatar`}
-                    className="h-10 w-10 rounded-full object-cover ring-1 ring-black/5"
+                    className="h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm"
                     loading="lazy"
                   />
                   <div>
-                    <div className="text-sm font-bold leading-tight">
+                    <div className="text-sm font-extrabold leading-tight">
                       {active.name} — {active.role}
                     </div>
                     <div className="text-xs text-zinc-700">{active.company}</div>
@@ -322,7 +453,7 @@ function OutcomeOrbit({
                   </div>
                 </dl>
 
-                <div className="mt-3 flex items-center gap-2 text-[11px] text-zinc-600">
+                <div className="mt-3 inline-flex items-center gap-2 text-[11px] text-zinc-600">
                   <span className="rounded-full border border-zinc-200 bg-white px-2 py-0.5">
                     {active.domain}
                   </span>
@@ -338,43 +469,33 @@ function OutcomeOrbit({
           </div>
         </div>
 
-        {/* MOBILE: overlapping horizontal stack */}
-        <div className="absolute inset-x-0 bottom-[8%] flex items-end justify-center gap-0 sm:hidden max-[360px]:bottom-[2%]">
+        {/* MOBILE: small stacked avatars at bottom */}
+        <div className="absolute inset-x-0 bottom-[8%] flex items-end justify-center gap-1.5 sm:hidden">
           {cases.map((c, i) => {
             const isActive = i === activeIdx;
             return (
               <button
-                key={c.name + c.company + 'm'}
+                key={c.name + c.company + "m"}
                 onClick={() => setActiveIdx(i)}
-                className="relative -ml-3 first:ml-0 shrink-0 max-[360px]:-ml-2"
-                style={{ zIndex: isActive ? 100 : 10 + i }}
+                className="relative"
                 aria-label={`${c.name}, ${c.role} at ${c.company}`}
+                style={{ zIndex: isActive ? 100 : 10 + i }}
               >
-                <span
-                  className={`inline-grid w-fit place-items-center rounded-full transition-transform ${
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={c.avatar}
+                  alt=""
+                  className={`h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${
                     isActive ? "scale-105" : "scale-100"
                   }`}
-                  style={{
-                    boxShadow: isActive
-                      ? "0 18px 36px -18px rgba(255,140,0,0.6)"
-                      : "0 14px 28px -18px rgba(0,0,0,0.35)",
-                    background: "white",
-                  }}
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={c.avatar}
-                    alt=""
-                    className="h-12 w-12 rounded-full object-cover ring-2 ring-white max-[360px]:h-10 max-[360px]:w-10"
-                    loading="lazy"
-                  />
-                </span>
+                  loading="lazy"
+                />
               </button>
             );
           })}
         </div>
 
-        {/* DESKTOP: orbiting avatars */}
+        {/* DESKTOP: clean orbiting avatars (no labels) */}
         {cases.map((c, i) => {
           const { cx, cy } = positions[i];
           const isActive = i === activeIdx;
@@ -388,28 +509,20 @@ function OutcomeOrbit({
               style={{ left: `${cx}%`, top: `${cy}%` }}
               aria-label={`${c.name}, ${c.role} at ${c.company}`}
             >
-              <span
-                className={`inline-grid w-fit place-items-center rounded-full transition-transform ${
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={c.avatar}
+                alt=""
+                className={`h-16 w-16 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${
                   isActive ? "scale-[1.06]" : "scale-100"
                 }`}
+                loading="lazy"
                 style={{
                   boxShadow: isActive
-                    ? "0 18px 36px -18px rgba(255,140,0,0.6)"
-                    : "0 14px 28px -18px rgba(0,0,0,0.35)",
+                    ? "0 20px 38px -20px rgba(255,140,0,0.35)"
+                    : "0 16px 32px -22px rgba(2,6,23,0.35)",
                 }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
-                  src={c.avatar}
-                  alt=""
-                  className="h-12 w-12 rounded-full object-cover ring-2 ring-white"
-                  loading="lazy"
-                />
-              </span>
-
-              <span className="mt-1 inline-block whitespace-nowrap rounded-full border border-zinc-200 bg-white/90 px-2.5 py-0.5 text-[10px] font-semibold text-zinc-800 shadow-sm">
-                {c.role} @ {c.company}
-              </span>
+              />
             </button>
           );
         })}
