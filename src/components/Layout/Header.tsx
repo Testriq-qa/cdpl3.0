@@ -281,8 +281,7 @@ const Header = () => {
     setIsMenuOpen((v) => !v);
     if (isMenuOpen) setMobileSections({ courses: false, jobs: false, about: false, openCategoryId: null });
   };
-  const toggleJob = () => setIsJobsOpen((v) => !v);
-  const toggleAbout = () => setIsAboutOpen((v) => !v);
+  
   const toggleMobileSection = (key: "courses" | "jobs" | "about") => {
     setMobileSections((s) => {
       const next = { ...s, [key]: !s[key] };
