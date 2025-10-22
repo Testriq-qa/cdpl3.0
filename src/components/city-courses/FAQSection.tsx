@@ -1,179 +1,230 @@
-'use client';
+"use client";
 
-import React, { useState } from 'react';
-import { FAQ } from './types';
+import React, { useState } from "react";
+import { motion, AnimatePresence, easeOut } from "framer-motion";
+import { ChevronDown, HelpCircle, MessageCircle, Calendar, Sparkles } from "lucide-react";
+
+// Mock data for demonstration
+const mockData = {
+  faqsContent: {
+    title: "Frequently Asked Questions",
+    subtitle: "Everything you need to know about our courses",
+    faqs: [
+      {
+        question: "What are the prerequisites for this course?",
+        answer: "No prior experience is required! Our course is designed for beginners and includes all the foundational concepts you need to get started. We'll guide you step-by-step through each topic."
+      },
+      {
+        question: "How long do I have access to the course materials?",
+        answer: "You get lifetime access to all course materials, including future updates. Learn at your own pace and revisit the content whenever you need a refresher."
+      },
+      {
+        question: "Is there a certificate upon completion?",
+        answer: "Yes! Upon successful completion of the course and all assignments, you'll receive a verified certificate that you can share on LinkedIn and add to your resume."
+      },
+      {
+        question: "What if I'm not satisfied with the course?",
+        answer: "We offer a 30-day money-back guarantee. If you're not completely satisfied with the course within the first 30 days, we'll give you a full refund—no questions asked."
+      },
+      {
+        question: "Do you offer student discounts?",
+        answer: "Absolutely! We offer a 20% discount for students with a valid student ID. Contact our support team to get your discount code."
+      }
+    ]
+  }
+};
 
 interface FAQSectionProps {
-  faqs: FAQ[];
-  cityName: string;
-  courseName: string;
+  data?: typeof mockData;
 }
 
-export default function FAQSection({ faqs, cityName, courseName }: FAQSectionProps) {
-  const [openFAQ, setOpenFAQ] = useState<string | null>(null);
+const FAQSection: React.FC<FAQSectionProps> = ({ data = mockData }) => {
+  const { faqsContent } = data;
+  const [expandedFAQ, setExpandedFAQ] = useState<number | null>(0);
 
-  const toggleFAQ = (id: string) => {
-    setOpenFAQ(openFAQ === id ? null : id);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.08,
+        delayChildren: 0.1,
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.5, ease: easeOut },
+    },
   };
 
   return (
-    <section 
-      className="py-16 md:py-24 relative overflow-hidden" 
-      itemScope 
-      itemType="https://schema.org/FAQPage"
-      style={{
-        background: 'linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 25%, #f0f4ff 50%, #faf5ff 75%, #fef3f8 100%)'
-      }}
-    >
-      {/* Futuristic Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-gradient-to-br from-blue-200/20 to-purple-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-gradient-to-tr from-pink-200/20 to-cyan-200/20 rounded-full blur-3xl"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-r from-indigo-100/10 to-purple-100/10 rounded-full blur-3xl"></div>
+    <section className="relative py-16 md:py-24 bg-gradient-to-b from-slate-50 via-white to-slate-50 overflow-hidden">
+      {/* Animated Background Elements */}
+      <div className="absolute inset-0 pointer-events-none overflow-hidden">
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-gradient-to-br from-emerald-200/30 to-teal-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-pulse"></div>
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-gradient-to-tr from-blue-200/30 to-cyan-300/30 rounded-full mix-blend-multiply filter blur-3xl opacity-60 animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-br from-indigo-200/20 to-purple-200/20 rounded-full mix-blend-multiply filter blur-3xl opacity-40"></div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <div className="inline-flex items-center justify-center px-5 py-2.5 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 text-white rounded-full text-sm font-semibold mb-6 shadow-lg shadow-purple-500/30">
-            <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
-              <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5L5.4 11H8a1 1 0 011 1v3a1 1 0 102 0v-3a1 1 0 011-1h2.6l-2.733-3.5A1 1 0 0010 7z" clipRule="evenodd" />
-            </svg>
-            Common Questions
-          </div>
-          
-          <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
-            <span className="bg-gradient-to-r from-slate-900 via-purple-900 to-slate-900 bg-clip-text text-transparent">
-              Got Questions? We&apos;ve Got{' '}
+      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Header */}
+        <motion.div
+          className="text-center mb-12 md:mb-16"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-100px" }}
+        >
+          <motion.div
+            className="inline-flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-emerald-100 to-teal-100 rounded-full mb-6"
+            variants={itemVariants}
+          >
+            <Sparkles className="w-4 h-4 text-emerald-600" />
+            <span className="text-sm font-semibold text-emerald-700 uppercase tracking-wide">
+              Questions & Answers
             </span>
-            <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-              Answers
-            </span>
-          </h2>
+          </motion.div>
           
-          <p className="text-lg md:text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed">
-            Find answers to the most frequently asked questions about our{' '}
-            <span className="font-semibold text-purple-700">{courseName}</span> training in{' '}
-            <span className="font-semibold text-blue-700">{cityName}</span>.
-            <br className="hidden sm:block" />
-            If you can&apos;t find what you&apos;re looking for, feel free to contact us.
-          </p>
-        </div>
+          <motion.h2
+            className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight"
+            variants={itemVariants}
+          >
+            {faqsContent.title}
+          </motion.h2>
+          
+          <motion.p
+            className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto"
+            variants={itemVariants}
+          >
+            {faqsContent.subtitle}
+          </motion.p>
+        </motion.div>
 
-        {/* FAQ Grid */}
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-8">
-          <div className="space-y-5">
-            {faqs.slice(0, Math.ceil(faqs.length / 2)).map((faq) => (
-              <div
-                key={faq.id}
-                className="group bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl border border-white/60 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-purple-200"
-                itemProp="mainEntity" 
-                itemScope 
-                itemType="https://schema.org/Question"
+        {/* FAQs Grid */}
+        <motion.div
+          className="space-y-3 md:space-y-4"
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+        >
+          {faqsContent.faqs.map((faq, index) => (
+            <motion.div 
+              key={index} 
+              variants={itemVariants}
+              className="group"
+            >
+              <button
+                onClick={() =>
+                  setExpandedFAQ(expandedFAQ === index ? null : index)
+                }
+                className="w-full text-left"
               >
-                <button
-                  className="flex justify-between items-center w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 rounded-2xl"
-                  onClick={() => toggleFAQ(faq.id)}
-                >
-                  <h3 className="text-lg font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent pr-4 group-hover:from-purple-700 group-hover:to-blue-700 transition-all duration-300" itemProp="name">
-                    {faq.question}
-                  </h3>
-                  <div className={`flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-md transform transition-all duration-300 ${openFAQ === faq.id ? 'rotate-180 scale-110' : 'group-hover:scale-110'}`}>
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                </button>
-                {openFAQ === faq.id && (
-                  <div className="px-6 pb-6 pt-0 animate-fadeIn" itemProp="acceptedAnswer" itemScope itemType="https://schema.org/Answer">
-                    <div className="h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent mb-4"></div>
-                    <p className="text-slate-700 leading-relaxed" itemProp="text">
-                      {faq.answer}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="space-y-5">
-            {faqs.slice(Math.ceil(faqs.length / 2)).map((faq) => (
-              <div
-                key={faq.id}
-                className="group bg-white/70 backdrop-blur-sm rounded-2xl shadow-lg hover:shadow-xl border border-white/60 overflow-hidden transition-all duration-300 hover:scale-[1.02] hover:border-purple-200"
-                itemProp="mainEntity" 
-                itemScope 
-                itemType="https://schema.org/Question"
-              >
-                <button
-                  className="flex justify-between items-center w-full text-left p-6 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 rounded-2xl"
-                  onClick={() => toggleFAQ(faq.id)}
-                >
-                  <h3 className="text-lg font-bold bg-gradient-to-r from-slate-800 to-slate-600 bg-clip-text text-transparent pr-4 group-hover:from-purple-700 group-hover:to-blue-700 transition-all duration-300" itemProp="name">
-                    {faq.question}
-                  </h3>
-                  <div className={`flex-shrink-0 w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center shadow-md transform transition-all duration-300 ${openFAQ === faq.id ? 'rotate-180 scale-110' : 'group-hover:scale-110'}`}>
-                    <svg
-                      className="w-5 h-5 text-white"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </div>
-                </button>
-                {openFAQ === faq.id && (
-                  <div className="px-6 pb-6 pt-0 animate-fadeIn" itemProp="acceptedAnswer" itemScope itemType="https://schema.org/Answer">
-                    <div className="h-px bg-gradient-to-r from-transparent via-purple-300 to-transparent mb-4"></div>
-                    <p className="text-slate-700 leading-relaxed" itemProp="text">
-                      {faq.answer}
-                    </p>
-                  </div>
-                )}
-              </div>
-            ))}
-          </div>
-        </div>
+                <div className="relative bg-white border-2 border-gray-200 rounded-2xl p-5 md:p-6 transition-all duration-300 hover:border-emerald-400 hover:shadow-xl hover:shadow-emerald-100/50 overflow-hidden group">
+                  {/* Gradient Hover Effect */}
+                  <div className="absolute inset-0 bg-gradient-to-r from-emerald-50/0 via-teal-50/0 to-cyan-50/0 group-hover:from-emerald-50 group-hover:via-teal-50 group-hover:to-cyan-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
 
-        {/* Contact CTA */}
-        <div className="mt-16 text-center">
-          <div className="inline-flex flex-col sm:flex-row items-center gap-6 bg-white/80 backdrop-blur-md rounded-3xl p-8 shadow-2xl border border-white/80 max-w-3xl">
-            <div className="flex-1 text-left">
-              <h3 className="text-2xl font-bold bg-gradient-to-r from-slate-900 via-purple-800 to-slate-900 bg-clip-text text-transparent mb-2">
+                  <div className="relative z-10 flex items-start justify-between gap-4">
+                    <div className="flex items-start gap-3 md:gap-4 flex-1 min-w-0">
+                      {/* Icon Circle */}
+                      <div className="flex-shrink-0 mt-0.5">
+                        <div className="w-10 h-10 md:w-11 md:h-11 rounded-xl bg-gradient-to-br from-emerald-100 to-teal-100 flex items-center justify-center group-hover:from-emerald-200 group-hover:to-teal-200 transition-all duration-300 group-hover:scale-110">
+                          <HelpCircle className="w-5 h-5 md:w-6 md:h-6 text-emerald-600 group-hover:text-emerald-700 transition-colors" />
+                        </div>
+                      </div>
+
+                      {/* Question */}
+                      <h3 className="text-base md:text-lg font-semibold text-gray-900 group-hover:text-emerald-700 transition-colors pt-1.5 md:pt-2 leading-snug">
+                        {faq.question}
+                      </h3>
+                    </div>
+
+                    {/* Expand Icon */}
+                    <motion.div
+                      animate={{
+                        rotate: expandedFAQ === index ? 180 : 0,
+                      }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="flex-shrink-0 mt-2"
+                    >
+                      <div className="w-8 h-8 md:w-9 md:h-9 rounded-lg bg-gradient-to-br from-gray-100 to-gray-200 group-hover:from-emerald-100 group-hover:to-teal-100 flex items-center justify-center transition-all duration-300">
+                        <ChevronDown className="w-5 h-5 text-gray-600 group-hover:text-emerald-600 transition-colors" />
+                      </div>
+                    </motion.div>
+                  </div>
+                </div>
+              </button>
+
+              {/* Expanded Content */}
+              <AnimatePresence>
+                {expandedFAQ === index && (
+                  <motion.div
+                    initial={{ opacity: 0, height: 0, marginTop: 0 }}
+                    animate={{ opacity: 1, height: "auto", marginTop: 12 }}
+                    exit={{ opacity: 0, height: 0, marginTop: 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className="overflow-hidden"
+                  >
+                    <div className="ml-0 md:ml-16 bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-50 border-2 border-emerald-200 rounded-2xl p-5 md:p-6 shadow-lg shadow-emerald-100/50">
+                      <p className="text-gray-700 leading-relaxed text-sm md:text-base">
+                        {faq.answer}
+                      </p>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
+          ))}
+        </motion.div>
+
+        {/* Contact CTA Card */}
+        <motion.div
+          className="mt-12 md:mt-16 relative overflow-hidden"
+          variants={itemVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+        >
+          <div className="relative bg-gradient-to-br from-emerald-500 via-teal-500 to-cyan-500 rounded-3xl p-8 md:p-10 text-center shadow-2xl shadow-emerald-200/50">
+            {/* Decorative Elements */}
+            <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-2xl"></div>
+            <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full -ml-20 -mb-20 blur-2xl"></div>
+            
+            <div className="relative z-10">
+              <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mb-6">
+                <MessageCircle className="w-8 h-8 text-white" />
+              </div>
+              
+              <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 Still have questions?
               </h3>
-              <p className="text-slate-600 text-base">
-                Our team is here to help! Get in touch with us for personalized assistance.
+              
+              <p className="text-emerald-50 text-base md:text-lg mb-8 max-w-2xl mx-auto">
+                Can&apos;t find the answer you&apos;re looking for? Our dedicated support team is ready to assist you.
               </p>
+              
+              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                <button className="group px-8 py-4 bg-white text-emerald-600 font-semibold rounded-xl hover:bg-emerald-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2">
+                  <MessageCircle className="w-5 h-5 group-hover:rotate-12 transition-transform" />
+                  <span>Contact Support</span>
+                </button>
+                
+                <button className="group px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2">
+                  <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" />
+                  <span>Schedule a Call</span>
+                </button>
+              </div>
             </div>
-            <button className="group flex-shrink-0 relative bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 text-white font-bold px-10 py-4 rounded-xl overflow-hidden transition-all duration-300 shadow-lg hover:shadow-2xl hover:shadow-purple-500/50 whitespace-nowrap">
-              <span className="relative z-10">Contact Us</span>
-              <div className="absolute inset-0 bg-gradient-to-r from-pink-600 via-purple-600 to-blue-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </button>
           </div>
-        </div>
+        </motion.div>
       </div>
-
-      <style jsx>{`
-        @keyframes fadeIn {
-          from {
-            opacity: 0;
-            transform: translateY(-10px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-        .animate-fadeIn {
-          animation: fadeIn 0.3s ease-out forwards;
-        }
-      `}</style>
     </section>
   );
-}
+};
+
+export default FAQSection;

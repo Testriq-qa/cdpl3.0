@@ -1,266 +1,298 @@
-'use client';
-import Link from 'next/link';
+"use client";
+
+import React, { useMemo, useState } from "react";
+import { motion, type Variants } from "framer-motion";
+import { ArrowRight, Star, MapPin, Home, ChevronRight } from "lucide-react";
+import type { CourseData } from "@/types/courseData";
 
 interface HeroSectionProps {
-  courseName: string;
-  cityName: string;
-  courseCategory?: string;
-  breadcrumbs?: Array<{ label: string; href: string }>;
+  data: CourseData;
 }
 
-export default function HeroSection({
-  courseName,
-  cityName,
-  breadcrumbs = []
-}: HeroSectionProps) {
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.1 },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 18 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.55, ease: "easeOut" },
+  },
+};
+
+const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
+  const { heroContent, location } = data;
+
+  const crumbs = useMemo(() => {
+    if (data.breadcrumbs?.length) return data.breadcrumbs;
+    return [
+      { label: "Home", href: "/" },
+      { label: "Courses", href: "/courses" },
+      { label: data.courseName, href: `/courses/${data.slug}` },
+      { label: location, href: "#" },
+    ];
+  }, [data.breadcrumbs, data.courseName, data.slug, location]);
+
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    track: data.specializations?.[0] ?? "",
+  });
+
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    alert(
+      `Submitted:\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nTrack: ${form.track}`
+    );
+  };
+
   return (
-    <section className="relative bg-gradient-to-br from-rose-50 via-amber-50 to-emerald-50 text-slate-900 overflow-hidden">
-      {/* Subtle Background Grid for depth (lighter + soft) */}
-      <div className="absolute inset-0 opacity-30">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `
-              linear-gradient(to right, rgba(15,23,42,0.06) 1px, transparent 1px),
-              linear-gradient(to bottom, rgba(15,23,42,0.06) 1px, transparent 1px)
-            `,
-            backgroundSize: '60px 60px'
-          }}
-        ></div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-indigo-50">
+      {/* soft shapes */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -top-16 -left-20 h-72 w-72 rounded-full bg-indigo-200/30 blur-3xl" />
+        <div className="absolute -bottom-24 -right-24 h-80 w-80 rounded-full bg-violet-200/30 blur-3xl" />
       </div>
 
-      {/* Gentle pastel orbs */}
-      <div className="pointer-events-none absolute top-0 left-1/4 w-96 h-96 bg-rose-300/20 rounded-full blur-3xl"></div>
-      <div className="pointer-events-none absolute bottom-0 right-1/4 w-96 h-96 bg-amber-300/20 rounded-full blur-3xl"></div>
-      <div className="pointer-events-none absolute top-1/2 left-1/2 w-96 h-96 bg-teal-300/20 rounded-full blur-3xl"></div>
-
-      {/* Soft dot pattern */}
-      <div className="absolute inset-0 opacity-20">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage: `radial-gradient(circle, rgba(2,6,23,0.08) 1px, transparent 1px)`,
-            backgroundSize: '40px 40px'
-          }}
-        ></div>
-      </div>
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-14 pt-8 sm:px-6 lg:px-8 lg:pb-20 lg:pt-10">
         {/* Breadcrumbs */}
-        {breadcrumbs.length > 0 && (
-          <nav className="mb-8" aria-label="Breadcrumb">
-            <ol
-              className="flex flex-wrap items-center space-x-2 text-sm"
-              itemScope
-              itemType="https://schema.org/BreadcrumbList"
+        <nav aria-label="Breadcrumb" className="mb-6">
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            {crumbs.map((c, i) => (
+              <li key={i} className="flex items-center gap-2">
+                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <a
+                  href={c.href}
+                  className={`hover:text-indigo-700 ${i === crumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                >
+                  {c.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <motion.div
+          // CHANGED: use 12-column grid on large screens to control widths precisely
+          className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          {/* LEFT: Heading + Description + (moved) Stats */}
+          <div className="lg:col-span-7">
+            {/* Location chip */}
+            <motion.div
+              variants={itemVariants}
+              className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-slate-700 shadow-sm backdrop-blur"
             >
-              {breadcrumbs.map((crumb, index) => (
-                <li
-                  key={index}
-                  className="flex items-center"
-                  itemProp="itemListElement"
-                  itemScope
-                  itemType="https://schema.org/ListItem"
-                >
-                  <Link
-                    href={crumb.href}
-                    className="text-amber-700 hover:text-amber-800 transition-colors"
-                    itemProp="item"
-                  >
-                    <span itemProp="name">{crumb.label}</span>
-                  </Link>
-                  <meta itemProp="position" content={String(index + 1)} />
-                  {index < breadcrumbs.length - 1 && (
-                    <svg
-                      className="w-4 h-4 mx-2 text-rose-500/80"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    >
-                      <path
-                        fillRule="evenodd"
-                        d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  )}
-                </li>
-              ))}
-            </ol>
-          </nav>
-        )}
-
-        {/* Wider left / narrower right */}
-        <div className="grid lg:grid-cols-12 gap-10 lg:gap-8 items-start">
-          {/* Left Content (wider) */}
-          <div className="lg:col-span-8 space-y-6">
-            {/* Badge */}
-            <div className="inline-flex items-center space-x-2 bg-brand text-white rounded-full px-3 py-1 shadow-sm">
-              <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
-                <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-              </svg>
-              <span className="text-sm font-bold">Top-Rated Training Institute in {cityName}</span>
-            </div>
-
-            {/* Main Heading */}
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-12 md:leading-14 lg:leading-18 tracking-tight">
-              <span className="bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent">
-                {courseName} Training in {cityName}
+              <MapPin className="h-4 w-4 text-indigo-600" />
+              <span className="text-xs font-medium">
+                {location}, {data.state}
               </span>
-            </h1>
+            </motion.div>
 
-            {/* Subheading */}
-            <p className="text-lg md:text-xl text-slate-700 leading-relaxed">
-              Master <span className="text-amber-700 font-semibold">{courseName}</span> with industry-expert trainers. Get hands-on
-              experience, real-world projects, and <span className="text-rose-700 font-semibold">100% placement assistance</span> in {cityName}.
-            </p>
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl"
+            >
+              {heroContent.title}
+            </motion.h1>
 
-            {/* Key Highlights */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-4">
-              {[
-                { icon: '👨‍🏫', text: 'Expert Trainers' },
-                { icon: '💼', text: '100% Placement' },
-                { icon: '🎓', text: 'Certification' },
-                { icon: '⏰', text: 'Flexible Batches' }
-              ].map((item, index) => (
+            <motion.p
+              variants={itemVariants}
+              className="mt-3 text-lg font-semibold text-indigo-700"
+            >
+              {heroContent.subtitle}
+            </motion.p>
+
+            <motion.p
+              variants={itemVariants}
+              className="mt-4 max-w-2xl text-base leading-relaxed text-slate-700"
+            >
+              {heroContent.description}
+            </motion.p>
+
+            {/* (MOVED) Stats under description */}
+            <motion.div
+              variants={itemVariants}
+              className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4"
+            >
+              {heroContent.stats.map((stat, idx) => (
                 <div
-                  key={index}
-                  className="flex items-center space-x-2 bg-white/70 text-slate-900 backdrop-blur-sm rounded-lg p-3 border border-slate-200"
+                  key={idx}
+                  className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md"
                 >
-                  <span className="text-2xl">{item.icon}</span>
-                  <span className="text-sm font-medium">{item.text}</span>
+                  <p className="bg-gradient-to-r from-indigo-600 to-violet-600 bg-clip-text text-2xl font-extrabold text-transparent">
+                    {stat.number}
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-slate-900">{stat.label}</p>
+                  <p className="mt-0.5 text-xs text-slate-600">{stat.description}</p>
+                </div>
+              ))}
+            </motion.div>
+
+            {/* Certifications row */}
+            <motion.div variants={itemVariants} className="mt-6 space-y-2">
+              <p className="text-xs font-semibold uppercase tracking-wider text-slate-600">
+                Certifications & Benefits
+              </p>
+              <div className="flex flex-wrap gap-2">
+                {heroContent.certifications.map((cert, i) => (
+                  <span
+                    key={i}
+                    className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-sm font-medium text-indigo-700"
+                  >
+                    <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
+                    {cert}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* CTAs */}
+            <motion.div variants={itemVariants} className="mt-8 flex flex-col gap-3 sm:flex-row">
+              <a
+                href="#enroll"
+                className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
+              >
+                Enroll Now
+                <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-0.5" />
+              </a>
+              <a
+                href="#learn-more"
+                className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-800 shadow-sm transition hover:border-slate-400 hover:shadow-md"
+              >
+                Learn More
+              </a>
+            </motion.div>
+          </div>
+
+          {/* RIGHT: Lead Form (narrower) */}
+          <motion.div variants={itemVariants} className="lg:col-span-5">
+            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl max-w-md w-full lg:ml-auto">
+              <h2 id="enroll" className="text-xl font-bold text-slate-900">
+                Get a Free Counseling Session
+              </h2>
+              <p className="mt-1 text-sm text-slate-600">
+                Tell us a bit about you, and we’ll share the best track & syllabus.
+              </p>
+
+              <form onSubmit={onSubmit} className="mt-6 space-y-4">
+                <div>
+                  <label htmlFor="name" className="mb-1 block text-sm font-medium text-slate-700">
+                    Full Name *
+                  </label>
+                  <input
+                    id="name"
+                    name="name"
+                    type="text"
+                    required
+                    value={form.name}
+                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                    className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                    placeholder="Enter your name"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-700">
+                    Email *
+                  </label>
+                  <input
+                    id="email"
+                    name="email"
+                    type="email"
+                    required
+                    value={form.email}
+                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                    className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                    placeholder="you@example.com"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="phone" className="mb-1 block text-sm font-medium text-slate-700">
+                    Phone *
+                  </label>
+                  <input
+                    id="phone"
+                    name="phone"
+                    type="tel"
+                    required
+                    pattern="^[0-9+\\-\\s()]{7,15}$"
+                    value={form.phone}
+                    onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                    className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                    placeholder="+91 98765 43210"
+                  />
+                </div>
+
+                <div>
+                  <label htmlFor="track" className="mb-1 block text-sm font-medium text-slate-700">
+                    Select Track *
+                  </label>
+                  <select
+                    id="track"
+                    name="track"
+                    required
+                    value={form.track}
+                    onChange={(e) => setForm((f) => ({ ...f, track: e.target.value }))}
+                    className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+                  >
+                    {(data.specializations?.length ? data.specializations : ["General"]).map(
+                      (opt) => (
+                        <option key={opt} value={opt}>
+                          {opt}
+                        </option>
+                      )
+                    )}
+                  </select>
+                </div>
+
+                <button
+                  type="submit"
+                  className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
+                >
+                  Request Syllabus PDF
+                </button>
+
+                <p className="text-xs text-slate-500">
+                  By submitting, you agree to be contacted about courses and placements.
+                </p>
+              </form>
+            </div>
+          </motion.div>
+        </motion.div>
+
+        {/* Landmarks */}
+        {heroContent.landmarks?.length ? (
+          <motion.div variants={itemVariants} className="mt-14 border-t border-slate-200 pt-10">
+            <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-600">
+              Serving {location}
+            </p>
+            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+              {heroContent.landmarks.map((lm, i) => (
+                <div
+                  key={i}
+                  className="rounded-lg border border-slate-200 bg-white px-4 py-3 text-center text-sm text-slate-700 shadow-sm"
+                >
+                  {lm}
                 </div>
               ))}
             </div>
-
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 pt-6">
-              {/* Primary (warm, non-shiny gradient) */}
-              <button className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-brand text-white rounded-lg transition-all duration-300 hover:scale-[1.02] shadow-sm">
-                <span className="relative z-10">Download Syllabus</span>
-                <svg className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                </svg>
-              </button>
-
-              {/* Secondary (light surface, clear outline) */}
-              <button className="inline-flex items-center justify-center px-8 py-4 text-lg font-semibold bg-white text-slate-900 border-2 border-brand rounded-lg transition-all duration-300 hover:bg-brand hover:text-white">
-                <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                </svg>
-                Request Callback
-              </button>
-            </div>
-
-            {/* Trust Indicators */}
-            <div className="flex flex-wrap items-center gap-6 pt-6 border-t border-slate-200">
-              <div className="flex items-center space-x-2">
-                <div className="flex -space-x-2">
-                  {[1, 2, 3, 4].map((i) => (
-                    <div
-                      key={i}
-                      className="w-8 h-8 rounded-full bg-gradient-to-br from-amber-400 to-rose-400 border-2 border-white flex items-center justify-center text-xs font-bold text-white shadow-sm"
-                    >
-                      {String.fromCharCode(64 + i)}
-                    </div>
-                  ))}
-                </div>
-                <span className="text-sm text-slate-700 font-medium">5000+ Students Trained</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                {[1, 2, 3, 4, 5].map((i) => (
-                  <svg key={i} className="w-5 h-5 text-amber-500" fill="currentColor" viewBox="0 0 20 20">
-                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
-                  </svg>
-                ))}
-                <span className="ml-2 text-sm text-slate-700 font-medium">4.9/5 Rating</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content - Form (narrower) */}
-          <div className="bg-white rounded-2xl shadow-xl p-8 lg:p-10 border border-slate-200 md:-mt-6 lg:-mt-10 lg:self-start w-full lg:max-w-md lg:col-span-4">
-            <div className="mb-6">
-              <h3 className="text-2xl font-bold text-slate-900 mb-2">Get Started Today!</h3>
-              <p className="text-slate-600">
-                Fill out the form and our team will get back to you within 24 hours.
-              </p>
-            </div>
-
-            <form className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-slate-700 mb-1">
-                  Full Name *
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  required
-                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-100 placeholder-slate-400"
-                  placeholder="Enter your name"
-                />
-
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-slate-700 mb-1">
-                  Email Address *
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  required
-                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-100  placeholder-slate-400"
-                  placeholder="your.email@example.com"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="phone" className="block text-sm font-medium text-slate-700 mb-1">
-                  Phone Number *
-                </label>
-                <input
-                  type="tel"
-                  id="phone"
-                  name="phone"
-                  required
-                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-100 placeholder-slate-400"
-                  placeholder="+91 98765 43210"
-                />
-              </div>
-
-              <div>
-                <label htmlFor="course" className="block text-sm font-medium text-slate-700 mb-1">
-                  Interested Course
-                </label>
-                <select
-                  id="course"
-                  name="course"
-                  className="w-full px-4 py-3 bg-white border border-slate-300 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-brand transition-all duration-100"
-                >
-                  <option value={courseName} className="bg-white">
-                    {courseName} in {cityName}
-                  </option>
-                  <option value="other" className="bg-white">Other Course</option>
-                </select>
-              </div>
-
-              <button
-                type="submit"
-                className="w-full bg-brand text-white font-semibold py-4 px-6 rounded-lg hover:shadow-lg hover:bg-amber-600 hover:translate-x-1 cursor-pointer transition-all duration-300 shadow-sm"
-              >
-                Enroll Now - Limited Seats!
-              </button>
-
-              <p className="text-xs text-slate-500 text-center">
-                By submitting this form, you agree to our Terms & Conditions
-              </p>
-            </form>
-          </div>
-
-        </div>
+          </motion.div>
+        ) : null}
       </div>
     </section>
   );
-}
+};
+
+export default HeroSection;
