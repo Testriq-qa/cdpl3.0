@@ -4,7 +4,7 @@
 import { Metadata } from "next";
 import Head from "next/head";
 const AboutHeroSection = dynamic(
-    () => import("@/components/sections/AboutHeroSection"),
+    () => import("@/src/components/sections/AboutHeroSection"),
     {
         ssr: true,
         loading: () => (
@@ -16,7 +16,7 @@ const AboutHeroSection = dynamic(
 )
 
 const AboutStatsSection = dynamic(
-    () => import("@/components/sections/AboutStats.Section"),
+    () => import("@/src/components/sections/AboutStats.Section"),
     {
         ssr: true,
         loading: () => (
@@ -27,7 +27,7 @@ const AboutStatsSection = dynamic(
     }
 )
 const AboutWhyJoinUs = dynamic(
-    () => import("@/components/sections/AboutWhyJoinUs"),
+    () => import("@/src/components/sections/AboutWhyJoinUs"),
     {
         ssr: true,
         loading: () => (
@@ -39,7 +39,7 @@ const AboutWhyJoinUs = dynamic(
 )
 
 const AboutStorySection = dynamic(
-    () => import("@/components/sections/AboutStorySection"),
+    () => import("@/src/components/sections/AboutStorySection"),
     {
         ssr: true,
         loading: () => (
@@ -51,7 +51,7 @@ const AboutStorySection = dynamic(
 )
 
 const AboutFacultyStrip = dynamic(
-    () => import("@/components/sections/AboutFacultyStrip"),
+    () => import("@/src/components/sections/AboutFacultyStrip"),
     {
         ssr: true,
         loading: () => (
@@ -63,7 +63,7 @@ const AboutFacultyStrip = dynamic(
 )
 
 const AboutMissionVision = dynamic(
-    () => import("@/components/sections/AboutVisionMission"),
+    () => import("@/src/components/sections/AboutVisionMission"),
     {
         ssr: true,
         loading: () => (
@@ -75,7 +75,7 @@ const AboutMissionVision = dynamic(
 )
 
 const AboutFAQSection = dynamic(
-    () => import("@/components/sections/AboutFAQSection"),
+    () => import("@/src/components/sections/AboutFAQSection"),
     {
         ssr: true,
         loading: () => (
@@ -87,7 +87,7 @@ const AboutFAQSection = dynamic(
 )
 
 const AboutCTASection = dynamic(
-    () => import("@/components/sections/AboutCTASection"),
+    () => import("@/src/components/sections/AboutCTASection"),
     {
         ssr: true,
         loading: () => (
@@ -99,7 +99,7 @@ const AboutCTASection = dynamic(
 )
 
 const AboutAccreditations = dynamic(
-    () => import("@/components/sections/AboutAccreditations"),
+    () => import("@/src/components/sections/AboutAccreditations"),
     {
         ssr: true,
         loading: () => (
