@@ -70,7 +70,7 @@ const HeroSection = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-gray-900">100% Placement Support</h3>
-                  <p className="text-sm text-gray-600">Guaranteed interview opportunities</p>
+                  <p className="text-sm text-gray-600">Guaranteed interview opportunity</p>
                 </div>
               </div>
               <div className="flex items-start gap-3">
