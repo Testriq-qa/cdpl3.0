@@ -5,6 +5,19 @@ import { motion, AnimatePresence, type Variants } from "framer-motion";
 import type { CourseData } from "@/types/courseData";
 import { ChevronDown, CheckCircle2, BookOpen } from "lucide-react";
 
+interface Track {
+  id?: number | string;
+  title: string;
+  weeks: Week[];
+}
+
+interface Week {
+  number?: string | number;
+  title: string;
+  description: string;
+  deliverables?: string[];
+}
+
 /** ---- Framer variants ---- */
 const containerVariants: Variants = {
   hidden: { opacity: 0 },
@@ -59,7 +72,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
   const { curriculumContent } = data;
 
   // tracks-based data model
-  const tracks = useMemo(() => curriculumContent?.tracks ?? [], [curriculumContent?.tracks]);
+  const tracks = useMemo(() => curriculumContent?.tracks ?? [], [curriculumContent?.tracks]) as Track[];
   const [activeTrack, setActiveTrack] = useState<number>(0);
   const current = tracks[activeTrack];
 
@@ -123,7 +136,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                 w-full
               "
             >
-              {tracks.map((t: any, i: number) => {
+              {tracks.map((t: Track, i: number) => {
                 const active = i === activeTrack;
                 const variant = pickVariant(i);
 
@@ -199,7 +212,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
 
                   {/* Rows */}
                   <ul className="divide-y divide-slate-200 min-w-[720px]">
-                    {current.weeks.map((w: any, idx: number) => (
+                    {current.weeks.map((w: Week, idx: number) => (
                       <li key={idx} className="md:grid md:grid-cols-12 gap-0 px-4 py-4">
                         {/* Mobile labels */}
                         <div className="md:hidden mb-2">

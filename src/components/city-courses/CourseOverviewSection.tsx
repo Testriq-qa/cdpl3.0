@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Variants } from "framer-motion";
 import type { CourseData } from "@/types/courseData";
 import {
   BookOpen,
@@ -19,6 +19,20 @@ import {
 
 interface CourseOverviewSectionProps {
   data: CourseData;
+}
+
+interface Module {
+  name: string;
+  description: string;
+  icon: string;
+  rating?: number;
+  duration?: string;
+  level?: string;
+  studentsEnrolled?: number;
+  features?: string[];
+  trending?: boolean;
+  offerEndsAt?: string | Date;
+  topics?: string[]; // Fallback for features
 }
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -80,7 +94,7 @@ const ModuleCard: React.FC<{
     offerEndsAt?: Date | null;
   };
   variant: Variant;
-  itemVariants: any;
+  itemVariants: Variants;
 }> = ({ nowMs, category, variant, itemVariants }) => {
   // ⚠️ FIX: create a stable fallback deadline only once (not every render)
   const fallbackDeadlineRef = React.useRef<Date | null>(null);
@@ -265,14 +279,14 @@ const CourseOverviewSection: React.FC<CourseOverviewSectionProps> = ({ data }) =
   }, []);
 
   // Framer variants (kept untyped for TS friendliness)
-  const containerVariants: any = {
+  const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: { staggerChildren: 0.1, delayChildren: 0.15 },
     },
   };
-  const itemVariants: any = {
+  const itemVariants: Variants = {
     hidden: { opacity: 0, y: 18 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
   };
@@ -330,33 +344,27 @@ const CourseOverviewSection: React.FC<CourseOverviewSectionProps> = ({ data }) =
           whileInView="visible"
           viewport={{ once: true }}
         >
-          {courseOverviewContent.modules.map((mod, idx) => {
+          {courseOverviewContent.modules.map((mod: Module, idx) => {
             const variant = pickVariant(idx);
             const category = {
               id: idx,
               title: mod.name,
               description: mod.description,
               icon: iconMap[mod.icon] || <BookOpen className="w-10 h-10" />,
-              rating:
-                typeof (mod as any).rating === "number"
-                  ? (mod as any).rating
-                  : 4.8,
-              duration: (mod as any).duration ?? "6–8 weeks",
-              level: (mod as any).level ?? "Beginner",
+              rating: typeof mod.rating === "number" ? mod.rating : 4.8,
+              duration: mod.duration ?? "6–8 weeks",
+              level: mod.level ?? "Beginner",
               studentsEnrolled:
-                typeof (mod as any).studentsEnrolled === "number"
-                  ? (mod as any).studentsEnrolled
+                typeof mod.studentsEnrolled === "number"
+                  ? mod.studentsEnrolled
                   : 2200 + idx * 17,
               features:
-                Array.isArray((mod as any).features) &&
-                (mod as any).features.length
-                  ? (mod as any).features
+                Array.isArray(mod.features) && mod.features.length
+                  ? mod.features
                   : (mod.topics ?? []).slice(0, 4),
-              trending: !!(mod as any).trending,
+              trending: !!mod.trending,
               // Allow ISO strings or Date instances; coerce safely when present
-              offerEndsAt: (mod as any).offerEndsAt
-                ? new Date((mod as any).offerEndsAt)
-                : null,
+              offerEndsAt: mod.offerEndsAt ? new Date(mod.offerEndsAt) : null,
             };
 
             return (

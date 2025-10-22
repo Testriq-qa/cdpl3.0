@@ -1,4 +1,4 @@
-// app/[slug]/page.tsx
+// app/courses/[slug]/page.tsx
 import React from "react";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -14,7 +14,7 @@ import FAQSection from "@/components/city-courses/FAQSection";
 import CTASection from "@/components/city-courses/CTASection";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 // Helper: fetch by the object's internal `slug`
@@ -27,7 +27,8 @@ function getByInternalSlug(slug: string): CourseData | undefined {
 
 // SEO metadata from the matched course
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
-  const data = getByInternalSlug(params.slug);
+  const { slug } = await params;
+  const data = getByInternalSlug(slug);
   if (!data) {
     return {
       title: "Course Not Found",
@@ -53,8 +54,9 @@ export async function generateStaticParams() {
 // Optional hard lock:
 // export const dynamicParams = false;
 
-export default function CoursePage({ params }: PageProps) {
-  const data = getByInternalSlug(params.slug);
+export default async function CoursePage({ params }: PageProps) {
+  const { slug } = await params;
+  const data = getByInternalSlug(slug);
   if (!data) notFound();
 
   return (

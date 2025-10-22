@@ -263,7 +263,7 @@ export default function ReviewsMarquee() {
       snap-x snap-mandatory sm:snap-none
     "
             >
-              {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p, i) => {
+              {(Object.keys(PLATFORM) as Array<keyof typeof PLATFORM>).map((p) => {
                 const isActive = tab === p;
 
                 return (
