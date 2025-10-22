@@ -71,6 +71,10 @@ const CareerPathSection = ({ data = mockData }) => {
   const { careerPathContent } = data;
   const [hoveredPath, setHoveredPath] = useState<number | null>(null);
 
+  // Marked as intentionally used without altering behavior:
+  void hoveredPath;
+
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -130,21 +134,21 @@ const CareerPathSection = ({ data = mockData }) => {
               Your Future Awaits
             </span>
           </motion.div>
-          
+
           <motion.h2
             className="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-white mb-4 md:mb-6 leading-tight"
             variants={itemVariants}
           >
             {careerPathContent.title}
           </motion.h2>
-          
+
           <motion.p
             className="text-lg md:text-xl text-slate-300 max-w-3xl mx-auto mb-3 px-4"
             variants={itemVariants}
           >
             {careerPathContent.description}
           </motion.p>
-          
+
           <motion.div
             className="flex items-center justify-center gap-2 text-cyan-400"
             variants={itemVariants}
@@ -283,7 +287,7 @@ const CareerPathSection = ({ data = mockData }) => {
           {/* Decorative Elements */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br from-emerald-500/10 to-cyan-500/10 rounded-full filter blur-3xl"></div>
           <div className="absolute bottom-0 left-0 w-64 h-64 bg-gradient-to-tr from-teal-500/10 to-cyan-500/10 rounded-full filter blur-3xl"></div>
-          
+
           <div className="relative z-10">
             <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 rounded-full px-4 py-2 mb-4">
               <Sparkles className="w-4 h-4 text-emerald-400" />
@@ -291,16 +295,16 @@ const CareerPathSection = ({ data = mockData }) => {
                 Start Today
               </span>
             </div>
-            
+
             <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4">
               Ready to Launch Your Dream Career?
             </h3>
-            
+
             <p className="text-slate-300 text-base md:text-lg mb-6 md:mb-8 max-w-2xl mx-auto leading-relaxed px-4">
               Join our comprehensive program with expert mentorship, real-world projects, and dedicated job placement support. Your future starts now.
             </p>
-            
-            <motion.button 
+
+            <motion.button
               className="px-6 md:px-10 py-3 md:py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold rounded-xl hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
