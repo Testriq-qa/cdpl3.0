@@ -5,7 +5,7 @@ import { Menu, X, ChevronDown, ChevronRight, Award, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
-// Course data structure with governing bodies per course and category
+/* ----------------------- Course Data ----------------------- */
 const courseCategories = [
   {
     id: "software-testing-courses",
@@ -65,7 +65,12 @@ const courseCategories = [
       {
         name: "Machine Learning and Data Science with Python - Hero Program",
         description: "Build strategies to ace behavioral and technical interviews.",
-        governingBodies: [{ name: "Machine Learning and Data Science with Python - Hero Program", logo: "/header_images/ML_and_DS_with_Python.png" }],
+        governingBodies: [
+          {
+            name: "Machine Learning and Data Science with Python - Hero Program",
+            logo: "/header_images/ML_and_DS_with_Python.png",
+          },
+        ],
       },
       {
         name: "Deep Learning, NLP and GenerativeAI",
@@ -100,7 +105,12 @@ const courseCategories = [
       {
         name: "Data Analysis with BI & Big Data Engineering Master Program",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [{ name: "Data Analysis with BI & Big Data Engineering Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" }],
+        governingBodies: [
+          {
+            name: "Data Analysis with BI & Big Data Engineering Master Program",
+            logo: "/header_images/Data_Analysis_Big_Data_Engineering.png",
+          },
+        ],
       },
     ],
   },
@@ -113,7 +123,12 @@ const courseCategories = [
       {
         name: "Digital Marketing and Analytics - Master Program",
         description: "Earn the globally recognized PMP certification.",
-        governingBodies: [{ name: "Digital Marketing and Analytics - Master Program", logo: "/header_images/Digital_Marketing_Analytics.png" }],
+        governingBodies: [
+          {
+            name: "Digital Marketing and Analytics - Master Program",
+            logo: "/header_images/Digital_Marketing_Analytics.png",
+          },
+        ],
       },
     ],
   },
@@ -154,27 +169,35 @@ const courseCategories = [
       {
         name: "Advanced Data Science and Machine Learning - Masterclass",
         description: "Use Python for data analysis and visualization.",
-        governingBodies: [{ name: "Advanced Data Science and Machine Learning - Masterclass", logo: "/header_images/Advance_DS_and_ML.png" }],
+        governingBodies: [
+          { name: "Advanced Data Science and Machine Learning - Masterclass", logo: "/header_images/Advance_DS_and_ML.png" },
+        ],
       },
       {
         name: "Data Analysis with BI & Big Data Engineering - Master Program",
         description: "Create interactive data visualizations with Power BI.",
-        governingBodies: [{ name: "Data Analysis with BI & Big Data Engineering - Master Program", logo: "/header_images/Data_Analysis_Big_Data_Engineering.png" }],
+        governingBodies: [
+          {
+            name: "Data Analysis with BI & Big Data Engineering - Master Program",
+            logo: "/header_images/Data_Analysis_Big_Data_Engineering.png",
+          },
+        ],
       },
     ],
   },
 ];
 
+/* ----------------------- Header ----------------------- */
 const Header = () => {
-  // Global
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Desktop mega & dropdowns
+  // Mega menu
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(courseCategories[0].id);
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
+  // Other dropdowns
   const [isJobsOpen, setIsJobsOpen] = useState(false);
   const [isAboutOpen, setIsAboutOpen] = useState(false);
   const aboutButtonRef = useRef<HTMLButtonElement | null>(null);
@@ -182,7 +205,7 @@ const Header = () => {
   const jobsButtonRef = useRef<HTMLButtonElement | null>(null);
   const jobsMenuRef = useRef<HTMLDivElement | null>(null);
 
-  // Mobile accordions (keep them independent)
+  // Mobile accordions
   const [mobileSections, setMobileSections] = useState<{
     courses: boolean;
     jobs: boolean;
@@ -195,85 +218,55 @@ const Header = () => {
     openCategoryId: null,
   });
 
-  // Basic menu toggle
-  const toggleMenu = () => {
-    setIsMenuOpen((v) => !v);
-    // Reset mobile accordions when the main menu closes
-    if (isMenuOpen) {
-      setMobileSections({ courses: false, jobs: false, about: false, openCategoryId: null });
+  // Refs to detect boundaries
+  const panelRef = useRef<HTMLDivElement | null>(null);
+  const megaMenuRef = useRef<HTMLDivElement | null>(null);
+
+  const openMega = () => setIsMegaMenuOpen(true);
+  const closeMega = () => {
+    setIsMegaMenuOpen(false);
+    setHoveredCourse(null);
+    setHoveredCategory(null);
+  };
+
+  // Close if leaving Courses button and NOT entering the mega menu
+  const handleCoursesButtonLeave: React.MouseEventHandler<HTMLButtonElement> = (e) => {
+    const next = e.relatedTarget as Node | null;
+    const menuEl = megaMenuRef.current;
+    if (!menuEl || !next || !menuEl.contains(next)) {
+      closeMega();
     }
   };
 
-  // Desktop dropdown toggles — FIXED to update their own state (not isMenuOpen)
-  const toggleJob = () => setIsJobsOpen((v) => !v);
-  const toggleAbout = () => setIsAboutOpen((v) => !v);
-
-  // Mobile section toggles — independent and predictable
-  const toggleMobileSection = (key: "courses" | "jobs" | "about") => {
-    setMobileSections((s) => {
-      // You can allow multiple to be open; or close others if you prefer. Here, multiple are allowed.
-      const next = { ...s, [key]: !s[key] };
-      // If closing Courses, also close any open nested category
-      if (key === "courses" && s.courses) next.openCategoryId = null;
-      return next;
-    });
-  };
-
-  // Inside Mobile → Courses: open/close exactly one category at a time
-  const toggleMobileCategory = (categoryId: string) => {
-    setMobileSections((s) => ({
-      ...s,
-      openCategoryId: s.openCategoryId === categoryId ? null : categoryId,
-    }));
-  };
-
-  // Derived
-  const selectedCategoryData = courseCategories.find((cat) => cat.id === selectedCategory);
-  const hoveredCourseData = selectedCategoryData?.courses.find((c) => c.name === hoveredCourse);
-  const displayGoverningBodies = hoveredCourse ? hoveredCourseData?.governingBodies || [] : selectedCategoryData?.governingBodies || [];
-  const displayDescription = hoveredCourse ? hoveredCourseData?.description : selectedCategoryData?.description;
-
-  // Close Jobs dropdown on outside click / ESC
+  // Close Jobs/About on outside click / ESC
   useEffect(() => {
     const onClickOutside = (e: MouseEvent) => {
-      if (!isJobsOpen) return;
-      const target = e.target as Node;
+      const t = e.target as Node;
       if (
+        isJobsOpen &&
         jobsMenuRef.current &&
-        !jobsMenuRef.current.contains(target) &&
+        !jobsMenuRef.current.contains(t) &&
         jobsButtonRef.current &&
-        !jobsButtonRef.current.contains(target)
+        !jobsButtonRef.current.contains(t)
       ) {
         setIsJobsOpen(false);
       }
-    };
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsJobsOpen(false);
-    };
-    document.addEventListener("mousedown", onClickOutside);
-    document.addEventListener("keydown", onKey);
-    return () => {
-      document.removeEventListener("mousedown", onClickOutside);
-      document.removeEventListener("keydown", onKey);
-    };
-  }, [isJobsOpen]);
-
-  // Close About dropdown on outside click / ESC
-  useEffect(() => {
-    const onClickOutside = (e: MouseEvent) => {
-      if (!isAboutOpen) return;
-      const target = e.target as Node;
       if (
+        isAboutOpen &&
         aboutMenuRef.current &&
-        !aboutMenuRef.current.contains(target) &&
+        !aboutMenuRef.current.contains(t) &&
         aboutButtonRef.current &&
-        !aboutButtonRef.current.contains(target)
+        !aboutButtonRef.current.contains(t)
       ) {
         setIsAboutOpen(false);
       }
     };
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setIsAboutOpen(false);
+      if (e.key === "Escape") {
+        setIsJobsOpen(false);
+        setIsAboutOpen(false);
+        closeMega();
+      }
     };
     document.addEventListener("mousedown", onClickOutside);
     document.addEventListener("keydown", onKey);
@@ -281,7 +274,38 @@ const Header = () => {
       document.removeEventListener("mousedown", onClickOutside);
       document.removeEventListener("keydown", onKey);
     };
-  }, [isAboutOpen]);
+  }, [isJobsOpen, isAboutOpen]);
+
+  // Mobile toggles
+  const toggleMenu = () => {
+    setIsMenuOpen((v) => !v);
+    if (isMenuOpen) setMobileSections({ courses: false, jobs: false, about: false, openCategoryId: null });
+  };
+  
+  const toggleMobileSection = (key: "courses" | "jobs" | "about") => {
+    setMobileSections((s) => {
+      const next = { ...s, [key]: !s[key] };
+      if (key === "courses" && s.courses) next.openCategoryId = null;
+      return next;
+    });
+  };
+  const toggleMobileCategory = (categoryId: string) => {
+    setMobileSections((s) => ({ ...s, openCategoryId: s.openCategoryId === categoryId ? null : categoryId }));
+  };
+
+  // Derived
+  const selectedCategoryData = courseCategories.find((cat) => cat.id === selectedCategory);
+  const hoveredCourseData = selectedCategoryData?.courses.find((c) => c.name === hoveredCourse);
+  const displayGoverningBodies =
+    hoveredCourse ? hoveredCourseData?.governingBodies || [] : selectedCategoryData?.governingBodies || [];
+  const displayDescription = hoveredCourse ? hoveredCourseData?.description : selectedCategoryData?.description;
+
+  // Two images on right; duplicate first if only one
+  const rightColumnBodies = (() => {
+    const arr = displayGoverningBodies?.slice(0, 2) || [];
+    if (arr.length === 1) arr.push(arr[0]);
+    return arr.slice(0, 2);
+  })();
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
@@ -291,13 +315,7 @@ const Header = () => {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2 sm:space-x-3">
               <div className="rounded-lg">
-                <Image
-                  src="/images/cdpl-logo.png"
-                  alt="CDPL Logo"
-                  width={40}
-                  height={40}
-                  className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14"
-                />
+                <Image src="/images/cdpl-logo.png" alt="CDPL Logo" width={40} height={40} className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14" />
               </div>
               <span className="text-base sm:text-xl lg:text-2xl font-bold text-brand">Cinute Digital</span>
             </Link>
@@ -305,39 +323,51 @@ const Header = () => {
 
           {/* Desktop Navigation */}
           <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
-              Home
-            </Link>
+            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Home</Link>
 
-            {/* Mega Menu Trigger (Desktop only) */}
-            <div
-              className="relative"
-              onMouseEnter={() => setIsMegaMenuOpen(true)}
-              onMouseLeave={() => {
-                setIsMegaMenuOpen(false);
-                setHoveredCourse(null);
-                setHoveredCategory(null);
-              }}
-            >
+            {/* Mega Menu Trigger */}
+            <div className="relative">
               <button
                 className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base"
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="mega-menu"
+                onMouseEnter={openMega}
+                onMouseLeave={handleCoursesButtonLeave}
               >
                 Courses
                 <ChevronDown className="ml-1 h-4 w-4" />
               </button>
 
-              {/* Mega Menu - Desktop */}
+              {/* Mega Menu Wrapper */}
               {isMegaMenuOpen && (
-                <div id="mega-menu" className="fixed left-0 right-50 top-[72px] lg:top-[55px] w-full backdrop-blur-sm z-50">
+                <div
+                  id="mega-menu"
+                  ref={megaMenuRef}
+                  className="fixed left-0 right-0 top-[72px] lg:top-[55px] z-50"
+                  onMouseEnter={openMega}
+                  onMouseLeave={closeMega} // immediate close on leaving the wrapper
+                  onMouseMove={(e) => {
+                    // Immediate close if pointer goes outside the visible white panel
+                    const p = panelRef.current;
+                    if (!p) return;
+                    const r = p.getBoundingClientRect();
+                    const x = e.clientX;
+                    const y = e.clientY;
+                    const outside = x < r.left || x > r.right || y < r.top || y > r.bottom;
+                    if (outside) closeMega();
+                  }}
+                >
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <div className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-blue-600">
-                      <div className="grid grid-cols-12 gap-4 p-4 sm:p-6 lg:p-8">
+                    <div
+                      ref={panelRef}
+                      className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-blue-600 overflow-hidden"
+                      style={{ maxHeight: 520 }}
+                    >
+                      <div className="grid grid-cols-12 gap-4 p-4 sm:p-6 lg:p-6">
                         {/* Column 1: Categories */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-3 border-r border-gray-200 pr-4">
                           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Categories</h3>
-                          <div className="space-y-1 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2">
+                          <div className="space-y-1 max-h-[420px] overflow-y-auto pr-2">
                             {courseCategories.map((category) => (
                               <button
                                 key={category.id}
@@ -347,21 +377,21 @@ const Header = () => {
                                   setHoveredCourse(null);
                                 }}
                                 onClick={() => setSelectedCategory(category.id)}
-                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id
-                                  ? "bg-blue-50 text-blue-700 font-medium"
-                                  : "text-gray-700 hover:bg-gray-50"
-                                  }`}
+                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${
+                                  selectedCategory === category.id ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+                                }`}
                                 aria-current={selectedCategory === category.id ? "true" : "false"}
                               >
                                 <span>{category.name}</span>
                                 <ChevronRight
-                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-blue-700" : "text-gray-400"
-                                    }`}
+                                  className={`h-4 w-4 transition-transform ${
+                                    selectedCategory === category.id ? "text-blue-700" : "text-gray-400"
+                                  }`}
                                 />
                               </button>
                             ))}
                           </div>
-                          `<Link  href="/courses" className="mt-4 flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group">
+                          <Link href="/courses" className="mt-4 flex items-center text-blue-600 hover:text-blue-700 font-medium text-sm group">
                             View All Courses
                             <ChevronRight className="ml-1 h-4 w-4 group-hover:translate-x-1 transition-transform" />
                           </Link>
@@ -370,19 +400,21 @@ const Header = () => {
                         {/* Column 2: Courses */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-5 pr-0 sm:pr-4">
                           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Courses</h3>
-                          <div className="grid grid-cols-1 gap-1 max-h-[400px] sm:max-h-[500px] overflow-y-auto pr-2">
+                          <div className="grid grid-cols-1 gap-1 max-h-[420px] overflow-y-auto pr-2">
                             {selectedCategoryData?.courses.map((course, index) => (
                               <a
                                 key={index}
                                 href={`/courses/${selectedCategory}/${course.name.toLowerCase().replace(/[®\s&]+/g, "-")}`}
                                 onMouseEnter={() => setHoveredCourse(course.name)}
-                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
-                                  }`}
+                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${
+                                  hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                                }`}
                               >
                                 <div className="flex-shrink-0 mt-1">
                                   <div
-                                    className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
-                                      }`}
+                                    className={`w-2 h-2 rounded-full transition-transform ${
+                                      hoveredCourse === course.name ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
+                                    }`}
                                   />
                                 </div>
                                 <div className="ml-3">
@@ -393,36 +425,45 @@ const Header = () => {
                           </div>
                         </div>
 
-                        {/* Column 3: Governing Bodies */}
+                        {/* Column 3: Two stacked images */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4">
                           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
                             {hoveredCourse || hoveredCategory ? "Certifications" : "Governing Bodies"}
                           </h3>
                           <p className="text-xs text-gray-600 mb-4">
                             {hoveredCourse
-                              ? `Certified by leading organizations`
+                              ? "Certified by leading organizations"
                               : hoveredCategory
-                                ? `Certified by leading organizations`
-                                : "Hover over a category or course to see its certifications"}
+                              ? "Certified by leading organizations"
+                              : "Hover over a category or course to see its certifications"}
                           </p>
-                          <div className="py-5 min-h-[120px]">
-                            {displayGoverningBodies.length > 0 ? (
-                              displayGoverningBodies.map((body, index) => (
+
+                          <div className="grid grid-rows-2 gap-4">
+                            {rightColumnBodies.length > 0 ? (
+                              rightColumnBodies.map((body, index) => (
                                 <div
-                                  key={index}
-                                  className="bg-white rounded-lg p-8 hover:shadow-md transition-all duration-200 group animate-fadeIn flex flex-col items-center justify-center"
+                                  key={`${body.name}-${index}`}
+                                  className="bg-white rounded-lg p-4 hover:shadow-md transition-all duration-200 flex items-center justify-center h-32"
                                 >
-                                  <Image src={body.logo} alt={body.name} className="object-contain h-full rounded-2xl" width={300} height={150} />
-                                  <span className="text-[10px] text-gray-700 font-medium mt-2 text-center">{body.name}</span>
+                                  <Image
+                                    src={body.logo}
+                                    alt={body.name}
+                                    className="object-contain h-full w-auto rounded-md"
+                                    width={300}
+                                    height={128}
+                                  />
                                 </div>
                               ))
                             ) : (
-                              <div className="col-span-2 flex flex-col items-center justify-center text-center py-8">
+                              <div className="row-span-2 flex flex-col items-center justify-center text-center py-8">
                                 <Award className="h-10 w-10 text-gray-300 mb-2" />
-                                <p className="text-xs text-gray-400">Hover over categories or courses to see their certifications</p>
+                                <p className="text-xs text-gray-400">
+                                  Hover over categories or courses to see their certifications
+                                </p>
                               </div>
                             )}
                           </div>
+
                           <p className="text-xs text-gray-600 mt-4 mb-4">
                             {displayDescription || "Select a category or course to view its description"}
                           </p>
@@ -443,7 +484,6 @@ const Header = () => {
             <Link href="#" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Event
             </Link>
-
             <Link href="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Mentors
             </Link>
@@ -452,7 +492,7 @@ const Header = () => {
             <div className="relative" onMouseEnter={() => setIsJobsOpen(true)} onMouseLeave={() => setIsJobsOpen(false)}>
               <button
                 ref={jobsButtonRef}
-                onClick={toggleJob}
+                onClick={() => setIsJobsOpen((v) => !v)}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowDown") {
                     e.preventDefault();
@@ -521,7 +561,7 @@ const Header = () => {
             <div className="relative" onMouseEnter={() => setIsAboutOpen(true)} onMouseLeave={() => setIsAboutOpen(false)}>
               <button
                 ref={aboutButtonRef}
-                onClick={toggleAbout}
+                onClick={() => setIsAboutOpen((v) => !v)}
                 onKeyDown={(e) => {
                   if (e.key === "ArrowDown") {
                     e.preventDefault();
@@ -623,7 +663,9 @@ const Header = () => {
                   aria-controls="mobile-courses"
                 >
                   <span>Courses</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileSections.courses ? "rotate-180" : ""}`} />
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${mobileSections.courses ? "rotate-180" : ""}`}
+                  />
                 </button>
 
                 {mobileSections.courses && (
@@ -639,7 +681,9 @@ const Header = () => {
                             aria-controls={`mobile-category-${category.id}`}
                           >
                             <span>{category.name}</span>
-                            <ChevronRight className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`} />
+                            <ChevronRight
+                              className={`h-4 w-4 transition-transform duration-200 ${isOpen ? "rotate-90" : ""}`}
+                            />
                           </button>
 
                           {isOpen && (
@@ -679,7 +723,9 @@ const Header = () => {
                   aria-controls="mobile-jobs"
                 >
                   <span>Jobs</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileSections.jobs ? "rotate-180" : ""}`} />
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${mobileSections.jobs ? "rotate-180" : ""}`}
+                  />
                 </button>
                 {mobileSections.jobs && (
                   <div id="mobile-jobs" className="pl-4 space-y-1">
@@ -717,7 +763,9 @@ const Header = () => {
                   aria-controls="mobile-about"
                 >
                   <span>About</span>
-                  <ChevronDown className={`h-4 w-4 transition-transform duration-200 ${mobileSections.about ? "rotate-180" : ""}`} />
+                  <ChevronDown
+                    className={`h-4 w-4 transition-transform duration-200 ${mobileSections.about ? "rotate-180" : ""}`}
+                  />
                 </button>
                 {mobileSections.about && (
                   <div id="mobile-about" className="pl-4 space-y-1">
