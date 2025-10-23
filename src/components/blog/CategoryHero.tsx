@@ -3,13 +3,20 @@
 import { Calendar, Clock, User, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { getFeaturedPost, getCategoryById, getAuthorById } from "@/data/BlogPostData";
+import { getPostsByCategory, getCategoryById, getAuthorById } from "@/data/BlogPostData";
 
-const BlogHero = () => {
-  const featuredPost = getFeaturedPost();
+interface CategoryHeroProps {
+  categoryId: string;
+  categoryName: string;
+}
+
+const CategoryHero: React.FC<CategoryHeroProps> = ({ categoryId, categoryName }) => {
+  // Get latest post from this category
+  const posts = getPostsByCategory(categoryId);
   
-  if (!featuredPost) return null;
-
+  if (posts.length === 0) return null;
+  
+  const featuredPost = posts[0]; // Latest post in this category
   const category = getCategoryById(featuredPost.categoryId);
   const author = getAuthorById(featuredPost.authorId);
 
@@ -23,24 +30,36 @@ const BlogHero = () => {
   });
 
   return (
-    <section className="bg-gradient-to-br from-slate-50 via-white to-blue-50 py-8">
+    <section className="bg-gradient-to-br from-slate-50 via-white to-indigo-50 py-8">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Category Title */}
+        <div className="mb-6">
+          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-3">
+            {categoryName}
+          </h1>
+          <p className="text-lg text-gray-700 leading-relaxed">
+            {category.description}
+          </p>
+        </div>
+
         {/* Featured Article Card */}
         <article className="bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 border border-gray-100">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center p-8 md:p-12">
             {/* Left Column - Content */}
             <div className="space-y-6">
               {/* Category Badge */}
-              <span
-                className={`inline-block px-3 py-1 ${category.color.bg} ${category.color.text} text-xs font-semibold rounded-md`}
-              >
-                {category.name}
-              </span>
+              <div className="flex items-center gap-3">
+                <span
+                  className={`inline-block px-3 py-1 ${category.color.bg} ${category.color.text} text-xs font-semibold rounded-md`}
+                >
+                  Latest in {category.name}
+                </span>
+              </div>
 
               {/* Title - Optimized for readability */}
-              <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                 {featuredPost.title}
-              </h1>
+              </h2>
 
               {/* Description - Optimal reading color */}
               <p className="text-gray-700 text-lg leading-relaxed">
@@ -113,5 +132,4 @@ const BlogHero = () => {
   );
 };
 
-export default BlogHero;
-
+export default CategoryHero;

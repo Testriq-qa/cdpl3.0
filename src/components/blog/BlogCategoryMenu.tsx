@@ -3,43 +3,42 @@
 import { useState, useEffect, useRef } from "react";
 import { Search, ChevronDown, X } from "lucide-react";
 import Link from "next/link";
-
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  count?: number;
-}
+import { getMainCategories, getDropdownCategories, getAllPosts } from "@/data/BlogPostData";
 
 const BlogCategoryMenu = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const [searchResults, setSearchResults] = useState<any[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const searchInputRef = useRef<HTMLInputElement>(null);
   const dropdownRef = useRef<HTMLDivElement>(null);
+  const searchResultsRef = useRef<HTMLDivElement>(null);
 
-  // Main categories displayed in the menu
-  const mainCategories: Category[] = [
-    { id: "all", name: "All Blogs", slug: "/blog" },
-    { id: "software-testing", name: "Software Testing", slug: "/blog/category/software-testing" },
-    { id: "data-science", name: "Data Science", slug: "/blog/category/data-science" },
-    { id: "web-development", name: "Web Development", slug: "/blog/category/web-development" },
-    { id: "ai-ml", name: "AI & ML", slug: "/blog/category/ai-ml" },
-  ];
+  // Get categories from data file
+  const mainCategories = getMainCategories();
+  const dropdownCategories = getDropdownCategories();
 
-  // Additional categories in dropdown
-  const dropdownCategories: Category[] = [
-    { id: "devops", name: "DevOps", slug: "/blog/category/devops" },
-    { id: "cloud-computing", name: "Cloud Computing", slug: "/blog/category/cloud-computing" },
-    { id: "digital-marketing", name: "Digital Marketing", slug: "/blog/category/digital-marketing" },
-    { id: "ui-ux", name: "UI/UX Design", slug: "/blog/category/ui-ux" },
-    { id: "career-tips", name: "Career Tips", slug: "/blog/category/career-tips" },
-    { id: "industry-news", name: "Industry News", slug: "/blog/category/industry-news" },
-    { id: "tutorials", name: "Tutorials", slug: "/blog/category/tutorials" },
-    { id: "case-studies", name: "Case Studies", slug: "/blog/category/case-studies" },
-  ];
+  // Real-time search functionality
+  useEffect(() => {
+    if (searchQuery.trim().length > 0) {
+      const allPosts = getAllPosts();
+      const filtered = allPosts.filter((post) => {
+        const searchLower = searchQuery.toLowerCase();
+        return (
+          post.title.toLowerCase().includes(searchLower) ||
+          post.description.toLowerCase().includes(searchLower) ||
+          post.category.toLowerCase().includes(searchLower) ||
+          post.author.toLowerCase().includes(searchLower) ||
+          post.tags.some(tag => tag.toLowerCase().includes(searchLower))
+        );
+      });
+      setSearchResults(filtered.slice(0, 5)); // Show top 5 results
+    } else {
+      setSearchResults([]);
+    }
+  }, [searchQuery]);
 
   // Handle scroll to hide/show menu
   useEffect(() => {
@@ -77,13 +76,16 @@ const BlogCategoryMenu = () => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
         setIsDropdownOpen(false);
       }
+      if (searchResultsRef.current && !searchResultsRef.current.contains(event.target as Node)) {
+        if (!(event.target as HTMLElement).closest('.search-container')) {
+          setSearchResults([]);
+        }
+      }
     };
 
-    if (isDropdownOpen) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
+    document.addEventListener("mousedown", handleClickOutside);
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [isDropdownOpen]);
+  }, []);
 
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -91,6 +93,18 @@ const BlogCategoryMenu = () => {
       // Navigate to search results
       window.location.href = `/blog/search?q=${encodeURIComponent(searchQuery)}`;
     }
+  };
+
+  const handleCloseSearch = () => {
+    setIsSearchOpen(false);
+    setSearchQuery("");
+    setSearchResults([]);
+  };
+
+  const handleResultClick = () => {
+    setSearchResults([]);
+    setSearchQuery("");
+    setIsSearchOpen(false);
   };
 
   return (
@@ -103,10 +117,19 @@ const BlogCategoryMenu = () => {
         <div className="flex items-center justify-between py-3">
           {/* Categories Navigation */}
           <nav className="flex items-center space-x-1 overflow-x-auto scrollbar-hide flex-1">
+            {/* All Blogs Link */}
+            <Link
+              href="/blog"
+              className="whitespace-nowrap px-4 py-2 text-sm font-medium text-white hover:bg-white/20 rounded-lg transition-all duration-200 flex-shrink-0"
+            >
+              All Blogs
+            </Link>
+
+            {/* Main Categories */}
             {mainCategories.map((category) => (
               <Link
                 key={category.id}
-                href={category.slug}
+                href={`/blog/category/${category.slug}`}
                 className="whitespace-nowrap px-4 py-2 text-sm font-medium text-white hover:bg-white/20 rounded-lg transition-all duration-200 flex-shrink-0"
               >
                 {category.name}
@@ -138,7 +161,7 @@ const BlogCategoryMenu = () => {
                   {dropdownCategories.map((category) => (
                     <Link
                       key={category.id}
-                      href={category.slug}
+                      href={`/blog/category/${category.slug}`}
                       onClick={() => setIsDropdownOpen(false)}
                       className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors duration-150"
                     >
@@ -151,7 +174,7 @@ const BlogCategoryMenu = () => {
           </nav>
 
           {/* Search Section */}
-          <div className="flex items-center ml-4 flex-shrink-0">
+          <div className="flex items-center ml-4 flex-shrink-0 relative search-container">
             {!isSearchOpen ? (
               <button
                 onClick={() => setIsSearchOpen(true)}
@@ -161,30 +184,87 @@ const BlogCategoryMenu = () => {
                 <Search className="w-5 h-5" />
               </button>
             ) : (
-              <form
-                onSubmit={handleSearchSubmit}
-                className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 overflow-hidden animate-expand"
-              >
-                <input
-                  ref={searchInputRef}
-                  type="text"
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  placeholder="Search articles..."
-                  className="bg-transparent text-white placeholder-white/70 px-4 py-2 outline-none w-48 sm:w-64 text-sm"
-                />
-                <button
-                  type="button"
-                  onClick={() => {
-                    setIsSearchOpen(false);
-                    setSearchQuery("");
-                  }}
-                  className="p-2 text-white hover:bg-white/20 transition-colors duration-200"
-                  aria-label="Close search"
+              <div className="relative">
+                <form
+                  onSubmit={handleSearchSubmit}
+                  className="flex items-center bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 overflow-hidden animate-expand"
                 >
-                  <X className="w-4 h-4" />
-                </button>
-              </form>
+                  <input
+                    ref={searchInputRef}
+                    type="text"
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    placeholder="Search articles..."
+                    className="bg-transparent text-white placeholder-white/70 px-4 py-2 outline-none w-48 sm:w-64 text-sm"
+                  />
+                  <button
+                    type="button"
+                    onClick={handleCloseSearch}
+                    className="p-2 text-white hover:bg-white/20 transition-colors duration-200"
+                    aria-label="Close search"
+                  >
+                    <X className="w-4 h-4" />
+                  </button>
+                </form>
+
+                {/* Real-time Search Results */}
+                {searchResults.length > 0 && (
+                  <div
+                    ref={searchResultsRef}
+                    className="absolute top-full right-0 mt-2 w-96 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 max-h-96 overflow-y-auto"
+                  >
+                    <div className="px-4 py-2 border-b border-gray-100">
+                      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        Search Results ({searchResults.length})
+                      </p>
+                    </div>
+                    {searchResults.map((post) => (
+                      <Link
+                        key={post.id}
+                        href={`/blog/${post.slug}`}
+                        onClick={handleResultClick}
+                        className="block px-4 py-3 hover:bg-purple-50 transition-colors duration-150"
+                      >
+                        <h4 className="text-sm font-semibold text-gray-900 mb-1 line-clamp-1">
+                          {post.title}
+                        </h4>
+                        <p className="text-xs text-gray-600 line-clamp-2 mb-2">
+                          {post.description}
+                        </p>
+                        <div className="flex items-center gap-2 text-xs text-gray-500">
+                          <span className="px-2 py-0.5 bg-purple-100 text-purple-700 rounded-full">
+                            {post.category}
+                          </span>
+                          <span>•</span>
+                          <span>{post.readTime}</span>
+                        </div>
+                      </Link>
+                    ))}
+                    {searchQuery.trim().length > 0 && (
+                      <div className="px-4 py-3 border-t border-gray-100">
+                        <button
+                          onClick={handleSearchSubmit}
+                          className="text-sm text-purple-600 hover:text-purple-700 font-medium"
+                        >
+                          View all results for &quot;{searchQuery}&quot; →
+                        </button>
+                      </div>
+                    )}
+                  </div>
+                )}
+
+                {/* No Results Message */}
+                {searchQuery.trim().length > 0 && searchResults.length === 0 && (
+                  <div
+                    ref={searchResultsRef}
+                    className="absolute top-full right-0 mt-2 w-96 bg-white rounded-xl shadow-2xl border border-gray-100 py-4 px-4 z-50"
+                  >
+                    <p className="text-sm text-gray-600 text-center">
+                      No results found for &quot;{searchQuery}&quot;
+                    </p>
+                  </div>
+                )}
+              </div>
             )}
           </div>
         </div>
@@ -217,3 +297,4 @@ const BlogCategoryMenu = () => {
 };
 
 export default BlogCategoryMenu;
+
