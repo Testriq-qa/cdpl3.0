@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import React, { useMemo, useState } from "react";
 import {
   Briefcase,
   Building2,
@@ -55,7 +56,6 @@ export function JobsLiveJobsJobCardSection({
     ? `Posted: ${formatDate(job.postedOn)}`
     : "";
 
-  // Tech tags inferred from copy
   const techFromText = (() => {
     const hay = [job.title, ...(job.highlights || []), ...(job.responsibilities || [])]
       .join(" ")
@@ -72,13 +72,53 @@ export function JobsLiveJobsJobCardSection({
     return Array.from(found).map(t => t.replace("next.js", "Next.js")).map(title).slice(0, 12).sort();
   })();
 
+  const imageBadge =
+    job.type || job.mode || (job.eventDate ? formatDate(job.eventDate) : undefined);
+
+  // ---------- Fallback logic (fixed) ----------
+  const candidateSrcs = useMemo(() => {
+    const hasExt = (p?: string) => !!p && /\.(png|jpe?g|webp|gif|avif|svg)$/i.test(p);
+
+    // order for generic images; your dataset is mostly .jpg
+    const EXT_ORDER_GENERIC = [".jpg", ".jpeg", ".png", ".webp"];
+    // order for the fallback (bag icon is .png)
+    const EXT_ORDER_FALLBACK = [".png", ".jpg", ".jpeg", ".webp"];
+
+    const expand = (base?: string, exts: string[] = EXT_ORDER_GENERIC) => {
+      if (!base) return [] as string[];
+      if (hasExt(base)) return [base];
+      return exts.map((e) => `${base}${e}`);
+    };
+
+    const fallbackBase =
+      job.imageFallback || "/live-jobs_images/jobs_image/cdpl-no-job-image-bag-icon";
+
+    // build and de-duplicate
+    const arr = [
+      ...expand(job.bannerImage, EXT_ORDER_GENERIC),
+      ...expand(fallbackBase, EXT_ORDER_FALLBACK),
+    ];
+    return Array.from(new Set(arr));
+  }, [job.bannerImage, job.imageFallback]);
+
+  const [imgIdx, setImgIdx] = useState(0);
+  const [giveUp, setGiveUp] = useState(false);
+  const currentSrc = candidateSrcs[imgIdx];
+
+  // Bypass optimizer for local assets so onError triggers reliably and we can iterate candidates.
+  const isLocal = !!currentSrc && currentSrc.startsWith("/");
+
+  const handleImgError = () => {
+    if (imgIdx < candidateSrcs.length - 1) setImgIdx((i) => i + 1);
+    else setGiveUp(true);
+  };
+  // --------------------------------------------
+
   return (
     <article className="relative">
-      {/* md+: two columns via flex so right rail stays top-right */}
       <div className="gap-4 md:flex md:flex-row md:items-start md:gap-6">
-        {/* LEFT: Textual content */}
+        {/* LEFT */}
         <div className="min-w-0 md:flex-1">
-          {/* Header */}
           <div className="flex items-start gap-3">
             <div
               className="grid h-10 w-10 shrink-0 place-items-center rounded-xl"
@@ -140,7 +180,6 @@ export function JobsLiveJobsJobCardSection({
             </div>
           </div>
 
-          {/* Pills */}
           <div className="mt-3 flex flex-wrap gap-2">
             {job.tags?.map((t) => <Pill key={t}>{t}</Pill>)}
             {job.type && <Pill>{job.type}</Pill>}
@@ -157,7 +196,6 @@ export function JobsLiveJobsJobCardSection({
             )}
           </div>
 
-          {/* Highlights */}
           {!!job.highlights?.length && (
             <div className="mt-3">
               <h4 className="mb-1 text-sm font-semibold text-slate-900">What we’re looking for</h4>
@@ -171,7 +209,6 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
-          {/* Responsibilities */}
           {!!job.responsibilities?.length && (
             <div className="mt-4">
               <h4 className="mb-1 text-sm font-semibold text-slate-900">Roles & responsibilities</h4>
@@ -185,7 +222,6 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
-          {/* Tech stack */}
           {!!techFromText.length && (
             <div className="mt-4">
               <div className="mb-2 flex items-center gap-2">
@@ -205,7 +241,6 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
-          {/* Venue & schedule */}
           {(job.venue || job.eventDate || job.timeWindow || job.location) && (
             <div className="mt-5 border-t border-slate-100 pt-3">
               <h4 className="text-sm font-semibold text-slate-900">Venue & schedule</h4>
@@ -232,7 +267,6 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
-          {/* Contacts */}
           {Array.isArray(job.contacts) && job.contacts.length > 0 && (
             <div className="mt-5 border-t border-slate-100 pt-3">
               <h4 className="text-sm font-semibold text-slate-900">Contacts</h4>
@@ -246,7 +280,6 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
-          {/* CTAs */}
           <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3">
             {job.applyEmail && (
               <a
@@ -277,7 +310,7 @@ export function JobsLiveJobsJobCardSection({
           </div>
         </div>
 
-        {/* RIGHT RAIL: Share + Image (fixed width on md+) */}
+        {/* RIGHT */}
         <aside className="order-first md:order-none md:w-[320px] lg:w-[360px] md:flex md:flex-col md:items-end md:gap-3 md:self-start">
           <button
             onClick={() => onShare(job)}
@@ -298,21 +331,54 @@ export function JobsLiveJobsJobCardSection({
             )}
           </button>
 
-          <div className="relative mt-2 h-44 w-full overflow-hidden rounded-xl sm:h-56 md:h-48 lg:h-56">
-            {job.bannerImage ? (
-              <Image
-                src={job.bannerImage}
-                alt={job.bannerImageAlt || `${job.company} hiring`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 767px) 100vw, 360px"
-                priority={false}
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center bg-slate-50 text-slate-400">
-                <ImageOff className="h-8 w-8" />
+          <div
+            className="group relative mt-2 w-full overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-orange-50 via-white to-slate-50 shadow-sm"
+            style={{
+              backgroundImage:
+                "linear-gradient(180deg, rgba(255,140,0,0.06), rgba(255,140,0,0)), radial-gradient(1000px 300px at -10% -10%, rgba(255,140,0,0.10), rgba(255,140,0,0)), radial-gradient(600px 200px at 110% 120%, rgba(2,132,199,0.10), rgba(2,132,199,0))",
+            }}
+          >
+            <div className="relative m-2 rounded-xl bg-white/70 p-2 ring-1 ring-white/60 backdrop-blur-sm">
+              <div className="relative aspect-video w-full overflow-hidden rounded-lg ring-1 ring-slate-200">
+                {!giveUp && currentSrc ? (
+                  <Image
+                    key={currentSrc}
+                    src={currentSrc}
+                    alt={job.bannerImageAlt || `${job.company} hiring`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 767px) 100vw, 360px"
+                    priority={false}
+                    unoptimized={isLocal}           // <- bypass optimizer for local paths
+                    onError={handleImgError}
+                    onLoadingComplete={(img) => {
+                      if (!img?.naturalWidth) handleImgError();
+                    }}
+                  />
+                ) : (
+                  <div className="flex h-full w-full items-center justify-center bg-slate-50 text-slate-400">
+                    <ImageOff className="h-8 w-8" />
+                  </div>
+                )}
+
+                <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-b from-transparent via-transparent to-black/[0.03]" />
+
+                {imageBadge && (
+                  <div className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-white/85 px-2 py-1 text-[10.5px] font-semibold text-slate-700 ring-1 ring-slate-200 backdrop-blur-sm">
+                    <Tag className="h-3 w-3 opacity-70" />
+                    <span className="truncate max-w-[160px]">{imageBadge}</span>
+                  </div>
+                )}
+
+                <div
+                  className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    background:
+                      "radial-gradient(600px 200px at -10% -10%, rgba(255,255,255,0.45), transparent 60%)",
+                  }}
+                />
               </div>
-            )}
+            </div>
           </div>
         </aside>
       </div>
