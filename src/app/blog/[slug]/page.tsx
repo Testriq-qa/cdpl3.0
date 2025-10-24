@@ -1,3 +1,5 @@
+'use client';
+
 import dynamic from 'next/dynamic'
 import React from 'react'
 
@@ -6,7 +8,7 @@ const BlogPostHeroSection = dynamic(
     {
         ssr: true,
         loading: () => (
-            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+            <div className="flex items-center justify-center h-screen bg-white">
                 <p className="text-gray-500">Loading...</p>
             </div>
         )
@@ -18,7 +20,7 @@ const BlogPostSection = dynamic(
     {
         ssr: true,
         loading: () => (
-            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+            <div className="flex items-center justify-center h-screen bg-white">
                 <p className="text-gray-500">Loading...</p>
             </div>
         )
@@ -30,21 +32,20 @@ const BlogPostContactSection = dynamic(
     {
         ssr: true,
         loading: () => (
-            <div className="flex items-center justify-center h-screen bg-[theme(color.background)]">
+            <div className="flex items-center justify-center h-screen bg-white">
                 <p className="text-gray-500">Loading...</p>
             </div>
         )
     }
 )
 
-export default function page() {
+export default function BlogPostPage({ params }: { params: { slug: string } }) {
     return (
-        <div>
-            <BlogPostHeroSection />
-            <BlogPostSection />
+        <div className="bg-white">
+            <BlogPostHeroSection slug={params.slug} />
+            <BlogPostSection slug={params.slug} />
             <BlogPostContactSection />
         </div>
     )
 }
-
 
