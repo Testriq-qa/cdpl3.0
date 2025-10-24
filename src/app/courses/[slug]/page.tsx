@@ -1,7 +1,6 @@
 // app/courses/[slug]/page.tsx
 import React from "react";
 import type { Metadata } from "next";
-import { notFound } from "next/navigation";
 import { courseData, type CourseData } from "@/types/courseData";
 
 import HeroSection from "@/components/city-courses/HeroSection";
@@ -12,6 +11,7 @@ import WhyChooseSection from "@/components/city-courses/WhyChooseSection";
 import CareerPathSection from "@/components/city-courses/CareerPathSection";
 import FAQSection from "@/components/city-courses/FAQSection";
 import CTASection from "@/components/city-courses/CTASection";
+import NotFoundPage from "@/components/NotFoundPage";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -31,7 +31,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const data = getByInternalSlug(slug);
   if (!data) {
     return {
-      title: "Course Not Found",
+      title: "Course Not Found | 404",
       description: "The requested course page could not be found.",
     };
   }
@@ -57,18 +57,22 @@ export async function generateStaticParams() {
 export default async function CoursePage({ params }: PageProps) {
   const { slug } = await params;
   const data = getByInternalSlug(slug);
-  if (!data) notFound();
+  
+  // Show custom 404 page if course not found
+  if (!data) {
+    return <NotFoundPage />;
+  }
 
   return (
     <main className="overflow-hidden">
-      <HeroSection data={data!} />
-      <CourseOverviewSection data={data!} />
-      <CurriculumSection data={data!} />
-      <ProjectsSection data={data!} />
-      <WhyChooseSection data={data!} />
-      <CareerPathSection data={data!} />
-      <FAQSection data={data!} />
-      <CTASection data={data!} />
+      <HeroSection data={data} />
+      <CourseOverviewSection data={data} />
+      <CurriculumSection data={data} />
+      <ProjectsSection data={data} />
+      <WhyChooseSection data={data} />
+      <CareerPathSection data={data} />
+      <FAQSection data={data} />
+      <CTASection data={data} />
     </main>
   );
 }
