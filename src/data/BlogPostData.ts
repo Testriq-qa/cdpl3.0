@@ -1,9 +1,8 @@
 // ============================================================================
-// Blog Post Data Management System
+// BLOG POST DATA - MODULAR CONTENT SYSTEM
 // ============================================================================
-// This file centralizes all blog-related data including posts, categories,
-// authors, and sidebar content for easy management and scalability.
-// ============================================================================
+// This file contains blog post metadata. Full content is stored in separate
+// files in the /posts directory for better maintainability and performance.
 
 // ============================================================================
 // TYPE DEFINITIONS
@@ -19,6 +18,7 @@ export interface Author {
     twitter?: string;
     linkedin?: string;
     github?: string;
+    website?: string;
   };
 }
 
@@ -31,7 +31,6 @@ export interface Category {
     bg: string;
     text: string;
   };
-  count?: number;
 }
 
 export interface BlogPost {
@@ -39,7 +38,6 @@ export interface BlogPost {
   slug: string;
   title: string;
   description: string;
-  content?: string;
   excerpt: string;
   featuredImage: string;
   category: string;
@@ -49,9 +47,10 @@ export interface BlogPost {
   publishDate: string;
   lastModified?: string;
   readTime: string;
-  views?: string;
+  views: string;
   tags: string[];
-  featured?: boolean;
+  featured: boolean;
+  contentFile: string; // Path to content file
   seo: {
     metaTitle: string;
     metaDescription: string;
@@ -86,113 +85,119 @@ export const AUTHORS: Record<string, Author> = {
   "sarah-chen": {
     id: "sarah-chen",
     name: "Sarah Chen",
-    bio: "Senior AI/ML Engineer with 10+ years of experience in developing intelligent systems. Former Tech Lead at Google AI, specializing in NLP and computer vision. Passionate about making AI accessible to developers.",
+    bio: "AI/ML expert with 10+ years of experience in machine learning and web development. Passionate about making AI accessible to developers.",
     avatar: "/blog/authors/sarah-chen.jpg",
-    role: "AI/ML Expert",
+    role: "AI/ML Engineer",
     social: {
       twitter: "https://twitter.com/sarahchen",
       linkedin: "https://linkedin.com/in/sarahchen",
-      github: "https://github.com/sarahchen"
-    }
+      github: "https://github.com/sarahchen",
+    },
   },
   "mike-rodriguez": {
     id: "mike-rodriguez",
     name: "Mike Rodriguez",
-    bio: "Full-stack developer and UI/UX enthusiast with a decade of experience building scalable web applications. Contributor to several open-source projects and advocate for modern web standards.",
+    bio: "Full-stack developer specializing in modern web technologies. Creator of popular open-source CSS frameworks.",
     avatar: "/blog/authors/mike-rodriguez.jpg",
-    role: "Senior Full-Stack Developer",
+    role: "Full-Stack Developer",
     social: {
       twitter: "https://twitter.com/mikerodriguez",
-      linkedin: "https://linkedin.com/in/mikerodriguez"
-    }
+      linkedin: "https://linkedin.com/in/mikerodriguez",
+      github: "https://github.com/mikerodriguez",
+    },
   },
   "emily-johnson": {
     id: "emily-johnson",
     name: "Emily Johnson",
-    bio: "React core team contributor and frontend architecture specialist. 8+ years building enterprise-scale applications. Speaker at React Conf and author of 'Modern React Patterns'.",
+    bio: "React specialist and frontend architect. Core contributor to several popular React libraries and tools.",
     avatar: "/blog/authors/emily-johnson.jpg",
-    role: "React Specialist",
+    role: "Frontend Architect",
     social: {
       twitter: "https://twitter.com/emilyjohnson",
       linkedin: "https://linkedin.com/in/emilyjohnson",
-      github: "https://github.com/emilyjohnson"
-    }
+      github: "https://github.com/emilyjohnson",
+    },
   },
   "david-kim": {
     id: "david-kim",
     name: "David Kim",
-    bio: "Database architect and backend performance expert. 12+ years optimizing high-traffic systems at scale. Former Principal Engineer at Amazon Web Services, specializing in distributed systems.",
+    bio: "Backend architect with expertise in database optimization and distributed systems. Author of 'Scalable Backend Design'.",
     avatar: "/blog/authors/david-kim.jpg",
     role: "Backend Architect",
     social: {
-      linkedin: "https://linkedin.com/in/davidkim"
-    }
+      twitter: "https://twitter.com/davidkim",
+      linkedin: "https://linkedin.com/in/davidkim",
+    },
   },
   "alex-green": {
     id: "alex-green",
     name: "Alex Green",
-    bio: "AI researcher and content strategist exploring the intersection of generative AI and digital marketing. PhD in Computer Science, published author with 20+ papers on machine learning applications.",
+    bio: "AI researcher focusing on generative models and their practical applications in content creation.",
     avatar: "/blog/authors/alex-green.jpg",
     role: "AI Researcher",
     social: {
-      twitter: "https://twitter.com/alexgreen",
-      linkedin: "https://linkedin.com/in/alexgreen"
-    }
+      linkedin: "https://linkedin.com/in/alexgreen",
+      github: "https://github.com/alexgreen",
+    },
   },
   "sophia-lee": {
     id: "sophia-lee",
     name: "Sophia Lee",
-    bio: "Accessibility advocate and UX designer with 9+ years creating inclusive digital experiences. WCAG certified expert and consultant for Fortune 500 companies on accessibility compliance.",
+    bio: "UX designer and accessibility advocate. Helping companies build inclusive digital experiences.",
     avatar: "/blog/authors/sophia-lee.jpg",
     role: "UX/Accessibility Expert",
     social: {
       twitter: "https://twitter.com/sophialee",
-      linkedin: "https://linkedin.com/in/sophialee"
-    }
+      linkedin: "https://linkedin.com/in/sophialee",
+      website: "https://sophialee.design",
+    },
   },
   "chris-evans": {
     id: "chris-evans",
     name: "Chris Evans",
-    bio: "DevOps engineer and cloud infrastructure specialist. Kubernetes certified administrator with expertise in CI/CD pipelines, container orchestration, and cloud-native architectures.",
+    bio: "DevOps engineer specializing in Kubernetes and cloud-native technologies. CNCF ambassador.",
     avatar: "/blog/authors/chris-evans.jpg",
     role: "DevOps Engineer",
     social: {
       twitter: "https://twitter.com/chrisevans",
       linkedin: "https://linkedin.com/in/chrisevans",
-      github: "https://github.com/chrisevans"
-    }
+      github: "https://github.com/chrisevans",
+    },
   },
   "jordan-smith": {
     id: "jordan-smith",
     name: "Jordan Smith",
-    bio: "Serverless architecture pioneer and cloud solutions architect. AWS certified professional helping companies transition to modern cloud-native infrastructures with focus on cost optimization.",
+    bio: "Cloud architect with deep expertise in serverless architectures and AWS. AWS Community Builder.",
     avatar: "/blog/authors/jordan-smith.jpg",
     role: "Cloud Architect",
     social: {
-      linkedin: "https://linkedin.com/in/jordansmith"
-    }
+      twitter: "https://twitter.com/jordansmith",
+      linkedin: "https://linkedin.com/in/jordansmith",
+    },
   },
-  "patty-olantern": {
-    id: "patty-olantern",
-    name: "Patty O'Lantern",
-    bio: "State management expert and performance optimization specialist. Creator of popular React libraries with 100K+ downloads. Technical writer and educator passionate about clean code architecture.",
-    avatar: "/blog/authors/patty-olantern.jpg",
+  "patricia-wong": {
+    id: "patricia-wong",
+    name: "Patricia Wong",
+    bio: "Frontend architect passionate about state management and performance optimization in React applications.",
+    avatar: "/blog/authors/patricia-wong.jpg",
     role: "Frontend Architect",
     social: {
-      twitter: "https://twitter.com/pattyolantern",
-      github: "https://github.com/pattyolantern"
-    }
+      twitter: "https://twitter.com/patriciawong",
+      github: "https://github.com/patriciawong",
+    },
   },
   "robert-brown": {
     id: "robert-brown",
     name: "Robert Brown",
-    bio: "Security engineer specializing in API security and authentication systems. 10+ years protecting enterprise applications. CISSP certified with expertise in OAuth, JWT, and zero-trust architectures.",
+    bio: "Security engineer specializing in API security and authentication. OWASP contributor.",
     avatar: "/blog/authors/robert-brown.jpg",
     role: "Security Engineer",
     social: {
-      linkedin: "https://linkedin.com/in/robertbrown"
-    }
-  }
+      twitter: "https://twitter.com/robertbrown",
+      linkedin: "https://linkedin.com/in/robertbrown",
+      github: "https://github.com/robertbrown",
+    },
+  },
 };
 
 // ============================================================================
@@ -204,360 +209,432 @@ export const CATEGORIES: Record<string, Category> = {
     id: "ai-ml",
     name: "AI & Machine Learning",
     slug: "ai-ml",
-    description: "Explore cutting-edge artificial intelligence and machine learning technologies, frameworks, and best practices.",
+    description: "Explore the latest in artificial intelligence and machine learning technologies",
     color: {
       bg: "bg-purple-100",
-      text: "text-purple-700"
-    }
+      text: "text-purple-700",
+    },
   },
   "web-development": {
     id: "web-development",
     name: "Web Development",
     slug: "web-development",
-    description: "Modern web development techniques, frameworks, and tools for building scalable applications.",
+    description: "Modern web development techniques, frameworks, and best practices",
     color: {
       bg: "bg-blue-100",
-      text: "text-blue-700"
-    }
+      text: "text-blue-700",
+    },
   },
   "react": {
     id: "react",
     name: "React",
     slug: "react",
-    description: "React ecosystem, best practices, state management, and advanced patterns for building user interfaces.",
+    description: "Everything about React, from basics to advanced patterns and performance optimization",
     color: {
       bg: "bg-cyan-100",
-      text: "text-cyan-700"
-    }
+      text: "text-cyan-700",
+    },
   },
-  "backend": {
-    id: "backend",
+  "backend-development": {
+    id: "backend-development",
     name: "Backend Development",
-    slug: "backend",
-    description: "Server-side development, databases, APIs, and backend architecture patterns.",
+    slug: "backend-development",
+    description: "Server-side development, databases, APIs, and backend architecture",
     color: {
       bg: "bg-green-100",
-      text: "text-green-700"
-    }
+      text: "text-green-700",
+    },
   },
-  "ui-ux": {
-    id: "ui-ux",
+  "ui-ux-design": {
+    id: "ui-ux-design",
     name: "UI/UX Design",
-    slug: "ui-ux",
-    description: "User interface design, user experience principles, and accessibility best practices.",
+    slug: "ui-ux-design",
+    description: "User interface design, user experience, and accessibility best practices",
     color: {
       bg: "bg-pink-100",
-      text: "text-pink-700"
-    }
+      text: "text-pink-700",
+    },
   },
   "devops": {
     id: "devops",
     name: "DevOps",
     slug: "devops",
-    description: "DevOps practices, CI/CD pipelines, containerization, and infrastructure automation.",
+    description: "DevOps practices, CI/CD, containerization, and infrastructure automation",
     color: {
-      bg: "bg-yellow-100",
-      text: "text-yellow-700"
-    }
+      bg: "bg-amber-100",
+      text: "text-amber-700",
+    },
   },
   "cloud-computing": {
     id: "cloud-computing",
     name: "Cloud Computing",
     slug: "cloud-computing",
-    description: "Cloud platforms, serverless architectures, and cloud-native application development.",
+    description: "Cloud platforms, serverless architecture, and cloud-native development",
     color: {
       bg: "bg-indigo-100",
-      text: "text-indigo-700"
-    }
+      text: "text-indigo-700",
+    },
   },
   "software-testing": {
     id: "software-testing",
     name: "Software Testing",
     slug: "software-testing",
-    description: "Testing strategies, automation frameworks, and quality assurance best practices.",
+    description: "Testing strategies, automation, and quality assurance practices",
     color: {
-      bg: "bg-red-100",
-      text: "text-red-700"
-    }
+      bg: "bg-teal-100",
+      text: "text-teal-700",
+    },
   },
   "data-science": {
     id: "data-science",
     name: "Data Science",
     slug: "data-science",
-    description: "Data analysis, visualization, statistical modeling, and data-driven decision making.",
+    description: "Data analysis, visualization, and data-driven decision making",
     color: {
-      bg: "bg-teal-100",
-      text: "text-teal-700"
-    }
+      bg: "bg-orange-100",
+      text: "text-orange-700",
+    },
   },
   "digital-marketing": {
     id: "digital-marketing",
     name: "Digital Marketing",
     slug: "digital-marketing",
-    description: "SEO, content marketing, analytics, and digital marketing strategies for tech companies.",
+    description: "SEO, content marketing, and digital growth strategies",
     color: {
-      bg: "bg-orange-100",
-      text: "text-orange-700"
-    }
+      bg: "bg-rose-100",
+      text: "text-rose-700",
+    },
   },
   "career-tips": {
     id: "career-tips",
     name: "Career Tips",
     slug: "career-tips",
-    description: "Career development, interview preparation, and professional growth in tech industry.",
+    description: "Career advice, interview tips, and professional development",
     color: {
-      bg: "bg-emerald-100",
-      text: "text-emerald-700"
-    }
+      bg: "bg-violet-100",
+      text: "text-violet-700",
+    },
   },
   "tutorials": {
     id: "tutorials",
     name: "Tutorials",
     slug: "tutorials",
-    description: "Step-by-step guides and hands-on tutorials for learning new technologies.",
+    description: "Step-by-step guides and hands-on tutorials for developers",
     color: {
-      bg: "bg-violet-100",
-      text: "text-violet-700"
-    }
-  }
+      bg: "bg-emerald-100",
+      text: "text-emerald-700",
+    },
+  },
 };
 
 // ============================================================================
-// BLOG POSTS DATA
+// BLOG POSTS METADATA
 // ============================================================================
 
 export const BLOG_POSTS: BlogPost[] = [
   {
     id: "1",
     slug: "future-of-ai-web-development-2025",
-    title: "The Future of AI in Web Development: Trends and Predictions for 2025",
-    description: "Explore how artificial intelligence is revolutionizing web development, from automated code generation to intelligent user experiences. Discover the tools and techniques that will shape the industry.",
-    excerpt: "Artificial intelligence is transforming web development at an unprecedented pace. From AI-powered code assistants to intelligent design systems, discover the trends that will define the future of web development in 2025 and beyond.",
+    title: "The Future of AI in Web Development: 2025 and Beyond",
+    description: "Explore how artificial intelligence is revolutionizing web development, from automated code generation to intelligent user experiences.",
+    excerpt: "Artificial intelligence is transforming the way we build web applications. Discover the latest AI tools, techniques, and trends that are shaping the future of web development in 2025.",
     featuredImage: "/blog/featured-ai.jpg",
     category: "AI & Machine Learning",
     categoryId: "ai-ml",
     author: "Sarah Chen",
     authorId: "sarah-chen",
     publishDate: "2024-10-24",
-    readTime: "8 min read",
-    views: "18.5k",
+    readTime: "12 min read",
+    views: "15.2k",
     tags: ["AI", "Web Development", "Machine Learning", "Automation", "Future Tech"],
     featured: true,
+    contentFile: "future-of-ai-web-development-2025",
     seo: {
-      metaTitle: "The Future of AI in Web Development: 2025 Trends & Predictions",
-      metaDescription: "Discover how AI is revolutionizing web development in 2025. Learn about automated code generation, intelligent UX, and AI-powered tools shaping the future of web development.",
-      keywords: ["AI web development", "artificial intelligence", "web development trends 2025", "AI code generation", "machine learning web apps", "AI-powered development tools"],
-      ogImage: "/blog/featured-ai.jpg"
-    }
+      metaTitle: "The Future of AI in Web Development: 2025 Trends & Tools",
+      metaDescription: "Discover how AI is revolutionizing web development in 2025. Learn about AI-powered tools, automated testing, personalization, and future trends shaping the industry.",
+      keywords: ["AI web development", "artificial intelligence", "machine learning", "AI tools 2025", "automated coding", "GitHub Copilot", "AI testing", "future of web development"],
+      ogImage: "/blog/featured-ai.jpg",
+    },
   },
   {
     id: "2",
     slug: "responsive-layouts-css-grid-flexbox",
     title: "Building Responsive Layouts with CSS Grid and Flexbox",
-    description: "A hands-on guide to crafting responsive layouts with CSS Grid and Flexbox. Explore real patterns, common pitfalls, and shortcuts to production-ready UI.",
-    excerpt: "Master modern CSS layout techniques with this comprehensive guide to CSS Grid and Flexbox. Learn practical patterns, avoid common mistakes, and build responsive designs that work flawlessly across all devices.",
+    description: "Master modern CSS layout techniques to create responsive, flexible designs that work beautifully across all devices.",
+    excerpt: "Learn how to combine CSS Grid and Flexbox to build sophisticated, responsive layouts. This comprehensive guide covers best practices, real-world examples, and common patterns.",
     featuredImage: "/blog/css-grid-flexbox.jpg",
     category: "Web Development",
     categoryId: "web-development",
     author: "Mike Rodriguez",
     authorId: "mike-rodriguez",
     publishDate: "2024-10-20",
-    readTime: "6 min read",
-    views: "14.2k",
+    readTime: "10 min read",
+    views: "12.8k",
     tags: ["CSS", "Flexbox", "CSS Grid", "Responsive Design", "Frontend"],
     featured: false,
+    contentFile: "responsive-layouts-css-grid-flexbox",
     seo: {
       metaTitle: "CSS Grid & Flexbox: Complete Guide to Responsive Layouts",
-      metaDescription: "Learn how to build responsive layouts using CSS Grid and Flexbox. Practical examples, best practices, and common patterns for modern web design.",
-      keywords: ["CSS Grid", "Flexbox", "responsive design", "CSS layout", "modern CSS", "web design patterns"],
-      ogImage: "/blog/css-grid-flexbox.jpg"
-    }
+      metaDescription: "Master CSS Grid and Flexbox to build modern, responsive web layouts. Learn when to use each, best practices, and real-world examples with code.",
+      keywords: ["CSS Grid", "Flexbox", "responsive design", "CSS layouts", "modern CSS", "web design", "frontend development"],
+      ogImage: "/blog/css-grid-flexbox.jpg",
+    },
   },
   {
     id: "3",
     slug: "react-19-whats-new-migration",
-    title: "React 19: What's New and How to Migrate",
-    description: "React 19 is here. See the biggest changes, why they matter, and follow a simple migration plan—tools, checks, and copy-paste snippets included.",
-    excerpt: "React 19 introduces groundbreaking features including the new compiler, server components improvements, and enhanced hooks. This comprehensive guide covers everything you need to know to migrate your applications smoothly.",
+    title: "React 19: What's New and How to Migrate Your Application",
+    description: "Comprehensive guide to React 19's new features, breaking changes, and step-by-step migration strategies for your existing applications.",
+    excerpt: "React 19 brings significant improvements to performance, developer experience, and new features like Server Components and Actions. Learn what's changed and how to upgrade smoothly.",
     featuredImage: "/blog/react-19.jpg",
     category: "React",
     categoryId: "react",
     author: "Emily Johnson",
     authorId: "emily-johnson",
     publishDate: "2024-10-18",
-    readTime: "10 min read",
-    views: "22.1k",
+    readTime: "15 min read",
+    views: "11.5k",
     tags: ["React", "React 19", "Migration", "JavaScript", "Frontend"],
     featured: false,
+    contentFile: "react-19-whats-new-migration",
     seo: {
-      metaTitle: "React 19: New Features, Breaking Changes & Migration Guide",
-      metaDescription: "Complete guide to React 19 features and migration. Learn about the new compiler, server components, hooks improvements, and step-by-step migration process.",
-      keywords: ["React 19", "React migration", "React new features", "React compiler", "React server components", "React hooks"],
-      ogImage: "/blog/react-19.jpg"
-    }
+      metaTitle: "React 19: Complete Migration Guide & New Features Explained",
+      metaDescription: "Learn everything about React 19: new features like Server Components and Actions, breaking changes, migration guide, and best practices for modern React development.",
+      keywords: ["React 19", "React migration", "Server Components", "React Actions", "React upgrade", "React tutorial", "modern React"],
+      ogImage: "/blog/react-19.jpg",
+    },
   },
   {
     id: "4",
     slug: "database-performance-optimization",
     title: "Optimizing Database Performance for High-Traffic Applications",
-    description: "A practical guide to keeping databases fast under heavy load. Learn how to profile queries, choose the right indexes, add caching, tune connections, and scale with replication or sharding.",
-    excerpt: "Database performance can make or break high-traffic applications. Discover proven strategies for query optimization, indexing, caching, connection pooling, and horizontal scaling to handle millions of requests.",
+    description: "Learn advanced techniques to optimize database performance, reduce query times, and scale your application to handle millions of requests.",
+    excerpt: "Database performance is critical for application success. Discover indexing strategies, query optimization, caching techniques, and scaling approaches that handle high traffic efficiently.",
     featuredImage: "/blog/database-optimization.jpg",
     category: "Backend Development",
-    categoryId: "backend",
+    categoryId: "backend-development",
     author: "David Kim",
     authorId: "david-kim",
     publishDate: "2024-10-15",
-    readTime: "12 min read",
-    views: "16.8k",
+    readTime: "14 min read",
+    views: "9.2k",
     tags: ["Database", "Performance", "Optimization", "SQL", "Scaling"],
     featured: false,
+    contentFile: "database-performance-optimization",
     seo: {
-      metaTitle: "Database Performance Optimization: Complete Guide for High-Traffic Apps",
-      metaDescription: "Learn database performance optimization techniques for high-traffic applications. Query optimization, indexing strategies, caching, and scaling solutions.",
-      keywords: ["database optimization", "database performance", "query optimization", "database indexing", "database scaling", "high-traffic applications"],
-      ogImage: "/blog/database-optimization.jpg"
-    }
+      metaTitle: "Database Performance Optimization: Complete Guide for High Traffic",
+      metaDescription: "Master database optimization techniques: indexing strategies, query optimization, caching, connection pooling, and scaling for high-traffic applications.",
+      keywords: ["database optimization", "database performance", "SQL optimization", "database indexing", "query optimization", "database scaling", "high traffic"],
+      ogImage: "/blog/database-optimization.jpg",
+    },
   },
   {
     id: "5",
     slug: "generative-ai-content-creation",
-    title: "The Impact of Generative AI on Content Creation",
-    description: "How generative AI is reshaping content creation—from ideation to editing—boosting speed, scale, and personalization while raising new quality and ethics questions.",
-    excerpt: "Generative AI is transforming how we create content. Explore the latest AI tools, their impact on creative workflows, ethical considerations, and best practices for integrating AI into your content strategy.",
+    title: "Leveraging Generative AI for Content Creation and Marketing",
+    description: "Discover how generative AI tools are transforming content creation, from writing blog posts to generating images and videos.",
+    excerpt: "Generative AI is revolutionizing content marketing. Learn how to use AI tools effectively while maintaining authenticity and quality in your content strategy.",
     featuredImage: "/blog/generative-ai-content.jpg",
     category: "AI & Machine Learning",
     categoryId: "ai-ml",
     author: "Alex Green",
     authorId: "alex-green",
     publishDate: "2024-10-12",
-    readTime: "8 min read",
-    views: "19.3k",
-    tags: ["Generative AI", "Content Creation", "AI Tools", "ChatGPT", "Digital Marketing"],
+    readTime: "11 min read",
+    views: "8.9k",
+    tags: ["Generative AI", "Content Marketing", "AI Tools", "ChatGPT", "Content Strategy"],
     featured: false,
+    contentFile: "generative-ai-content-creation",
     seo: {
-      metaTitle: "Generative AI in Content Creation: Tools, Impact & Best Practices",
-      metaDescription: "Discover how generative AI is revolutionizing content creation. Learn about AI tools, ethical considerations, and strategies for effective AI-assisted content.",
-      keywords: ["generative AI", "AI content creation", "ChatGPT", "AI writing tools", "content marketing AI", "AI ethics"],
-      ogImage: "/blog/generative-ai-content.jpg"
-    }
+      metaTitle: "Generative AI for Content Creation: Complete Marketing Guide",
+      metaDescription: "Learn how to leverage generative AI tools like ChatGPT, Midjourney, and DALL-E for content creation. Best practices, tools, and strategies for marketers.",
+      keywords: ["generative AI", "AI content creation", "ChatGPT", "AI marketing", "content strategy", "AI tools", "automated content"],
+      ogImage: "/blog/generative-ai-content.jpg",
+    },
   },
   {
     id: "6",
-    slug: "accessibility-best-practices",
-    title: "Designing for Accessibility: Best Practices",
-    description: "Practical accessibility best practices: semantic HTML, contrast, keyboard & screen reader support, and inclusive patterns aligned with WCAG.",
-    excerpt: "Creating accessible web experiences is not just a legal requirement—it's a moral imperative. Learn WCAG-compliant best practices for semantic HTML, ARIA, keyboard navigation, and inclusive design patterns.",
+    slug: "web-accessibility-wcag-guide",
+    title: "Web Accessibility: A Comprehensive Guide to WCAG Compliance",
+    description: "Build inclusive web experiences that work for everyone. Learn WCAG guidelines, testing tools, and implementation strategies.",
+    excerpt: "Web accessibility isn't optional—it's essential. This guide covers everything you need to know about creating accessible websites that comply with WCAG standards.",
     featuredImage: "/blog/accessibility.jpg",
     category: "UI/UX Design",
-    categoryId: "ui-ux",
+    categoryId: "ui-ux-design",
     author: "Sophia Lee",
     authorId: "sophia-lee",
     publishDate: "2024-10-10",
-    readTime: "7 min read",
-    views: "13.7k",
+    readTime: "13 min read",
+    views: "7.8k",
     tags: ["Accessibility", "WCAG", "Inclusive Design", "UX", "Web Standards"],
     featured: false,
+    contentFile: "web-accessibility-wcag-guide",
     seo: {
-      metaTitle: "Web Accessibility Best Practices: WCAG Compliance Guide",
-      metaDescription: "Complete guide to web accessibility best practices. Learn WCAG standards, semantic HTML, ARIA, keyboard navigation, and inclusive design principles.",
-      keywords: ["web accessibility", "WCAG", "accessible design", "inclusive design", "ARIA", "screen reader", "keyboard navigation"],
-      ogImage: "/blog/accessibility.jpg"
-    }
+      metaTitle: "Web Accessibility Guide: WCAG Compliance & Best Practices",
+      metaDescription: "Complete guide to web accessibility and WCAG compliance. Learn standards, testing tools, implementation strategies, and best practices for inclusive design.",
+      keywords: ["web accessibility", "WCAG", "accessible design", "inclusive web", "accessibility testing", "ARIA", "screen readers"],
+      ogImage: "/blog/accessibility.jpg",
+    },
   },
   {
     id: "7",
-    slug: "kubernetes-for-developers",
-    title: "Introduction to Kubernetes for Developers",
-    description: "A practical intro to Kubernetes from a developer's viewpoint. Learn Pods, Deployments, Services, and ConfigMaps, then wire up local dev, CI/CD, and debugging to ship reliably.",
-    excerpt: "Kubernetes doesn't have to be intimidating. This developer-focused guide covers essential concepts, practical examples, and real-world workflows for deploying and managing containerized applications.",
+    slug: "kubernetes-production-deployment",
+    title: "Deploying Applications to Production with Kubernetes",
+    description: "Master Kubernetes deployment strategies, scaling, monitoring, and best practices for production environments.",
+    excerpt: "Kubernetes is the industry standard for container orchestration. Learn how to deploy, scale, and manage applications in production with confidence.",
     featuredImage: "/blog/kubernetes.jpg",
     category: "DevOps",
     categoryId: "devops",
     author: "Chris Evans",
     authorId: "chris-evans",
     publishDate: "2024-10-08",
-    readTime: "11 min read",
-    views: "17.9k",
+    readTime: "16 min read",
+    views: "7.5k",
     tags: ["Kubernetes", "DevOps", "Containers", "Docker", "Cloud Native"],
     featured: false,
+    contentFile: "kubernetes-production-deployment",
     seo: {
-      metaTitle: "Kubernetes for Developers: Practical Introduction & Tutorial",
-      metaDescription: "Learn Kubernetes from a developer's perspective. Understand Pods, Deployments, Services, and how to integrate K8s into your development workflow.",
-      keywords: ["Kubernetes tutorial", "Kubernetes for developers", "K8s guide", "container orchestration", "Kubernetes deployment", "DevOps"],
-      ogImage: "/blog/kubernetes.jpg"
-    }
+      metaTitle: "Kubernetes Production Deployment: Complete Guide & Best Practices",
+      metaDescription: "Learn how to deploy applications to production with Kubernetes. Covers deployment strategies, scaling, monitoring, security, and production best practices.",
+      keywords: ["Kubernetes", "K8s deployment", "container orchestration", "production deployment", "Kubernetes tutorial", "DevOps", "cloud native"],
+      ogImage: "/blog/kubernetes.jpg",
+    },
   },
   {
     id: "8",
-    slug: "serverless-architectures",
-    title: "Understanding Serverless Architectures",
-    description: "A practical guide to serverless architectures. Learn core concepts (FaaS, BaaS, events), common trade-offs (cold starts, vendor lock-in), and patterns for scaling, cost control, and observability.",
-    excerpt: "Serverless computing is changing how we build and deploy applications. Explore serverless patterns, AWS Lambda, Azure Functions, cost optimization strategies, and when to choose serverless over traditional architectures.",
+    slug: "serverless-architecture-aws-lambda",
+    title: "Building Serverless Applications with AWS Lambda and API Gateway",
+    description: "Learn how to build scalable, cost-effective serverless applications using AWS Lambda, API Gateway, and other AWS services.",
+    excerpt: "Serverless architecture eliminates infrastructure management and scales automatically. Discover how to build production-ready serverless applications on AWS.",
     featuredImage: "/blog/serverless.jpg",
     category: "Cloud Computing",
     categoryId: "cloud-computing",
     author: "Jordan Smith",
     authorId: "jordan-smith",
     publishDate: "2024-10-05",
-    readTime: "9 min read",
-    views: "15.4k",
-    tags: ["Serverless", "AWS Lambda", "Cloud Computing", "FaaS", "Architecture"],
+    readTime: "14 min read",
+    views: "6.9k",
+    tags: ["Serverless", "AWS Lambda", "API Gateway", "Cloud", "AWS"],
     featured: false,
+    contentFile: "serverless-architecture-aws-lambda",
     seo: {
-      metaTitle: "Serverless Architecture Guide: Patterns, Benefits & Best Practices",
-      metaDescription: "Complete guide to serverless architectures. Learn FaaS, BaaS, AWS Lambda, cost optimization, and when to use serverless computing.",
-      keywords: ["serverless architecture", "AWS Lambda", "serverless computing", "FaaS", "cloud functions", "serverless patterns"],
-      ogImage: "/blog/serverless.jpg"
-    }
+      metaTitle: "Serverless Architecture with AWS Lambda: Complete Guide",
+      metaDescription: "Build scalable serverless applications with AWS Lambda and API Gateway. Learn architecture patterns, best practices, and cost optimization strategies.",
+      keywords: ["serverless", "AWS Lambda", "API Gateway", "serverless architecture", "AWS", "cloud computing", "FaaS"],
+      ogImage: "/blog/serverless.jpg",
+    },
   },
   {
     id: "9",
-    slug: "react-state-management",
-    title: "State Management in React: A Deep Dive",
-    description: "Master React state: local vs context, reducers, Redux Toolkit, Zustand, and React Query—how to choose, structure, and scale without re-renders.",
-    excerpt: "State management is crucial for React applications. Compare different approaches from useState to Redux Toolkit, learn when to use each, and discover performance optimization techniques to prevent unnecessary re-renders.",
+    slug: "react-state-management-2024",
+    title: "Modern React State Management: Redux, Zustand, and Beyond",
+    description: "Compare popular React state management solutions and learn when to use each for optimal application architecture.",
+    excerpt: "State management is crucial for React applications. Explore modern solutions including Redux Toolkit, Zustand, Jotai, and React Query to find the best fit for your project.",
     featuredImage: "/blog/react-state.jpg",
     category: "React",
     categoryId: "react",
-    author: "Patty O'Lantern",
-    authorId: "patty-olantern",
-    publishDate: "2024-10-02",
-    readTime: "13 min read",
-    views: "20.6k",
+    author: "Patricia Wong",
+    authorId: "patricia-wong",
+    publishDate: "2024-10-03",
+    readTime: "12 min read",
+    views: "6.5k",
     tags: ["React", "State Management", "Redux", "Zustand", "React Query"],
     featured: false,
+    contentFile: "react-state-management-2024",
     seo: {
-      metaTitle: "React State Management: Complete Guide to Redux, Zustand & More",
-      metaDescription: "Master React state management. Compare useState, Context, Redux Toolkit, Zustand, and React Query. Learn best practices and performance optimization.",
-      keywords: ["React state management", "Redux", "Zustand", "React Query", "Context API", "React hooks", "state management patterns"],
-      ogImage: "/blog/react-state.jpg"
-    }
+      metaTitle: "React State Management 2024: Redux, Zustand, Jotai Compared",
+      metaDescription: "Complete guide to modern React state management. Compare Redux Toolkit, Zustand, Jotai, and React Query. Learn when to use each solution.",
+      keywords: ["React state management", "Redux", "Zustand", "Jotai", "React Query", "state management comparison", "React hooks"],
+      ogImage: "/blog/react-state.jpg",
+    },
   },
   {
     id: "10",
-    slug: "jwt-authentication-apis",
-    title: "Securing Your APIs with JWT Authentication",
-    description: "Secure APIs with JWTs: signing, expiry, refresh tokens, rotation, revocation, and best practices for storage, scopes, and CSRF/XSS defense.",
-    excerpt: "API security is paramount in modern applications. Learn how to implement JWT authentication correctly, handle refresh tokens, prevent common vulnerabilities, and follow security best practices.",
+    slug: "jwt-api-security",
+    title: "Securing Your APIs with JWT Authentication and Best Practices",
+    description: "Implement secure API authentication using JSON Web Tokens. Learn JWT structure, security best practices, and common pitfalls to avoid.",
+    excerpt: "API security is critical for protecting user data. Master JWT authentication, token management, and security best practices to build secure APIs.",
     featuredImage: "/blog/jwt-security.jpg",
     category: "Backend Development",
-    categoryId: "backend",
+    categoryId: "backend-development",
     author: "Robert Brown",
     authorId: "robert-brown",
-    publishDate: "2024-09-28",
-    readTime: "10 min read",
-    views: "21.2k",
-    tags: ["JWT", "Authentication", "API Security", "OAuth", "Backend"],
+    publishDate: "2024-10-01",
+    readTime: "13 min read",
+    views: "6.2k",
+    tags: ["Security", "JWT", "Authentication", "API", "Backend"],
     featured: false,
+    contentFile: "jwt-api-security",
     seo: {
-      metaTitle: "JWT Authentication Guide: Secure Your APIs with Best Practices",
-      metaDescription: "Learn JWT authentication for APIs. Understand token signing, refresh tokens, security best practices, and how to prevent common vulnerabilities.",
-      keywords: ["JWT authentication", "API security", "JSON Web Token", "refresh tokens", "OAuth", "API authentication", "security best practices"],
-      ogImage: "/blog/jwt-security.jpg"
-    }
-  }
+      metaTitle: "JWT Authentication: Complete API Security Guide & Best Practices",
+      metaDescription: "Learn how to secure APIs with JWT authentication. Covers JWT structure, implementation, security best practices, token refresh, and common vulnerabilities.",
+      keywords: ["JWT", "API security", "authentication", "JSON Web Tokens", "API authentication", "security best practices", "token-based auth"],
+      ogImage: "/blog/jwt-security.jpg",
+    },
+  },
 ];
+
+// ============================================================================
+// HELPER FUNCTIONS
+// ============================================================================
+
+export const getAllPosts = (): BlogPost[] => {
+  return BLOG_POSTS.sort((a, b) => 
+    new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
+  );
+};
+
+export const getFeaturedPost = (): BlogPost | null => {
+  return BLOG_POSTS.find(post => post.featured) || BLOG_POSTS[0];
+};
+
+export const getLatestPosts = (limit: number = 10): BlogPost[] => {
+  const featuredPost = getFeaturedPost();
+  return BLOG_POSTS
+    .filter(post => post.id !== featuredPost?.id)
+    .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime())
+    .slice(0, limit);
+};
+
+export const getPostBySlug = (slug: string): BlogPost | null => {
+  return BLOG_POSTS.find(post => post.slug === slug) || null;
+};
+
+export const getPostsByCategory = (categoryId: string): BlogPost[] => {
+  return BLOG_POSTS
+    .filter(post => post.categoryId === categoryId)
+    .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
+};
+
+export const getCategoryById = (id: string): Category | null => {
+  return CATEGORIES[id] || null;
+};
+
+export const getCategoryBySlug = (slug: string): Category | null => {
+  return Object.values(CATEGORIES).find(cat => cat.slug === slug) || null;
+};
+
+export const getAuthorById = (id: string): Author | null => {
+  return AUTHORS[id] || null;
+};
+
+export const getAllCategories = (): Category[] => {
+  return Object.values(CATEGORIES);
+};
+
+export const getMainCategories = (): Category[] => {
+  return [
+    CATEGORIES["software-testing"],
+    CATEGORIES["data-science"],
+    CATEGORIES["web-development"],
+    CATEGORIES["ai-ml"],
+  ];
+};
+
+export const getDropdownCategories = (): Category[] => {
+  const mainCategoryIds = ["software-testing", "data-science", "web-development", "ai-ml"];
+  return Object.values(CATEGORIES).filter(cat => !mainCategoryIds.includes(cat.id));
+};
 
 // ============================================================================
 // SIDEBAR DATA
@@ -567,206 +644,94 @@ export const POPULAR_POSTS: PopularPost[] = [
   {
     id: "1",
     rank: 1,
-    title: "React 19: What's New and How to Migrate",
-    category: "React",
-    views: "22.1k",
-    slug: "/blog/react-19-whats-new-migration"
+    title: "The Future of AI in Web Development: 2025 and Beyond",
+    category: "AI & ML",
+    views: "15.2k",
+    slug: "/blog/future-of-ai-web-development-2025"
   },
   {
     id: "2",
     rank: 2,
-    title: "Securing Your APIs with JWT Authentication",
-    category: "Backend",
-    views: "21.2k",
-    slug: "/blog/jwt-authentication-apis"
+    title: "Building Responsive Layouts with CSS Grid and Flexbox",
+    category: "Web Dev",
+    views: "12.8k",
+    slug: "/blog/responsive-layouts-css-grid-flexbox"
   },
   {
     id: "3",
     rank: 3,
-    title: "State Management in React: A Deep Dive",
+    title: "React 19: What's New and How to Migrate",
     category: "React",
-    views: "20.6k",
-    slug: "/blog/react-state-management"
+    views: "11.5k",
+    slug: "/blog/react-19-whats-new-migration"
   },
   {
     id: "4",
     rank: 4,
-    title: "The Impact of Generative AI on Content Creation",
-    category: "AI & ML",
-    views: "19.3k",
-    slug: "/blog/generative-ai-content-creation"
+    title: "Optimizing Database Performance for High-Traffic Applications",
+    category: "Backend",
+    views: "9.2k",
+    slug: "/blog/database-performance-optimization"
   },
   {
     id: "5",
     rank: 5,
-    title: "The Future of AI in Web Development: 2025",
+    title: "Leveraging Generative AI for Content Creation",
     category: "AI & ML",
-    views: "18.5k",
-    slug: "/blog/future-of-ai-web-development-2025"
-  }
+    views: "8.9k",
+    slug: "/blog/generative-ai-content-creation"
+  },
 ];
 
 export const SIDEBAR_CATEGORIES: SidebarCategory[] = [
   {
     id: "1",
     name: "AI & Machine Learning",
-    count: 45,
+    count: 2,
     slug: "/blog/category/ai-ml",
     color: "bg-purple-100 text-purple-700"
   },
   {
     id: "2",
-    name: "React",
-    count: 38,
-    slug: "/blog/category/react",
-    color: "bg-cyan-100 text-cyan-700"
-  },
-  {
-    id: "3",
     name: "Web Development",
-    count: 52,
+    count: 1,
     slug: "/blog/category/web-development",
     color: "bg-blue-100 text-blue-700"
   },
   {
-    id: "4",
-    name: "DevOps",
-    count: 28,
-    slug: "/blog/category/devops",
-    color: "bg-yellow-100 text-yellow-700"
+    id: "3",
+    name: "React",
+    count: 2,
+    slug: "/blog/category/react",
+    color: "bg-cyan-100 text-cyan-700"
   },
   {
-    id: "5",
-    name: "Backend",
-    count: 34,
-    slug: "/blog/category/backend",
+    id: "4",
+    name: "Backend Development",
+    count: 2,
+    slug: "/blog/category/backend-development",
     color: "bg-green-100 text-green-700"
   },
   {
-    id: "6",
-    name: "UI/UX",
-    count: 22,
-    slug: "/blog/category/ui-ux",
+    id: "5",
+    name: "UI/UX Design",
+    count: 1,
+    slug: "/blog/category/ui-ux-design",
     color: "bg-pink-100 text-pink-700"
-  }
+  },
+  {
+    id: "6",
+    name: "DevOps",
+    count: 1,
+    slug: "/blog/category/devops",
+    color: "bg-amber-100 text-amber-700"
+  },
+  {
+    id: "7",
+    name: "Cloud Computing",
+    count: 1,
+    slug: "/blog/category/cloud-computing",
+    color: "bg-indigo-100 text-indigo-700"
+  },
 ];
-
-// ============================================================================
-// HELPER FUNCTIONS
-// ============================================================================
-
-/**
- * Get all blog posts sorted by publish date (newest first)
- */
-export const getAllPosts = (): BlogPost[] => {
-  return BLOG_POSTS.sort((a, b) => 
-    new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-  );
-};
-
-/**
- * Get featured post (most recent featured post or most recent post)
- */
-export const getFeaturedPost = (): BlogPost => {
-  const featuredPosts = BLOG_POSTS.filter(post => post.featured);
-  if (featuredPosts.length > 0) {
-    return featuredPosts.sort((a, b) => 
-      new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
-    )[0];
-  }
-  return getAllPosts()[0];
-};
-
-/**
- * Get latest posts excluding the featured one
- */
-export const getLatestPosts = (limit?: number): BlogPost[] => {
-  const featuredPost = getFeaturedPost();
-  const posts = getAllPosts().filter(post => post.id !== featuredPost.id);
-  return limit ? posts.slice(0, limit) : posts;
-};
-
-/**
- * Get post by slug
- */
-export const getPostBySlug = (slug: string): BlogPost | undefined => {
-  return BLOG_POSTS.find(post => post.slug === slug);
-};
-
-/**
- * Get posts by category
- */
-export const getPostsByCategory = (categoryId: string): BlogPost[] => {
-  return BLOG_POSTS.filter(post => post.categoryId === categoryId)
-    .sort((a, b) => new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime());
-};
-
-/**
- * Get category by ID
- */
-export const getCategoryById = (categoryId: string): Category | undefined => {
-  return CATEGORIES[categoryId];
-};
-
-/**
- * Get category by slug
- */
-export const getCategoryBySlug = (slug: string): Category | undefined => {
-  return Object.values(CATEGORIES).find(cat => cat.slug === slug);
-};
-
-/**
- * Get author by ID
- */
-export const getAuthorById = (authorId: string): Author | undefined => {
-  return AUTHORS[authorId];
-};
-
-/**
- * Get all categories as array
- */
-export const getAllCategories = (): Category[] => {
-  return Object.values(CATEGORIES);
-};
-
-/**
- * Get main categories for navigation (first 5)
- */
-export const getMainCategories = (): Category[] => {
-  return [
-    CATEGORIES["software-testing"],
-    CATEGORIES["data-science"],
-    CATEGORIES["web-development"],
-    CATEGORIES["ai-ml"],
-    CATEGORIES["react"]
-  ];
-};
-
-/**
- * Get dropdown categories for navigation
- */
-export const getDropdownCategories = (): Category[] => {
-  return [
-    CATEGORIES["devops"],
-    CATEGORIES["cloud-computing"],
-    CATEGORIES["digital-marketing"],
-    CATEGORIES["ui-ux"],
-    CATEGORIES["career-tips"],
-    CATEGORIES["tutorials"],
-    CATEGORIES["backend"]
-  ];
-};
-
-/**
- * Update category counts based on actual posts
- */
-export const updateCategoryCounts = (): void => {
-  Object.keys(CATEGORIES).forEach(categoryId => {
-    const count = BLOG_POSTS.filter(post => post.categoryId === categoryId).length;
-    CATEGORIES[categoryId].count = count;
-  });
-};
-
-// Initialize category counts
-updateCategoryCounts();
 
