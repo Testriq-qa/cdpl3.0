@@ -295,8 +295,8 @@ export default function ReviewsMarquee() {
                       <Image
                         src={PLATFORM[p].logo.src}
                         alt={PLATFORM[p].logo.alt}
-                        width={50}
-                        height={48}
+                        width={80}
+                        height={68}
                         priority={p === "Google"}
                         className=" md:scale-105"
                       />
