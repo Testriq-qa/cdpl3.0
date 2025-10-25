@@ -135,7 +135,7 @@ function splitHeadingForColoring(input: string): { left: string; right: string }
   }
   const commaIdx = input.indexOf(",");
   if (commaIdx !== -1) {
-    return { left: input.slice(0, commaIdx + 1).trim(), right: input.slice(commaIdx + 1).trim() };
+    return { left: input.slice(0, commaIdx + 1).trim(), right: input.slice(emDashIdx + 1).trim() };
   }
   const words = input.split(/\s+/);
   const mid = Math.floor(words.length / 2);
@@ -156,12 +156,13 @@ function Pill({
   as?: "button";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   if (as === "button") {
+    // ⬇️ Set filter buttons to 14px (0.875rem) without affecting span pills
     return (
       <button
         title={title}
         {...rest}
         className={cx(
-          "inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium transition-colors",
+          "inline-flex items-center px-2.5 py-1 rounded-full text-[0.875rem] font-medium transition-colors",
           LIGHT.chip,
           className
         )}
@@ -173,7 +174,11 @@ function Pill({
   return (
     <span
       title={title}
-      className={cx("inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium", LIGHT.chip, className)}
+      className={cx(
+        "inline-flex items-center px-2.5 py-1 rounded-full text-[11px] font-medium",
+        LIGHT.chip,
+        className
+      )}
     >
       {children}
     </span>
@@ -185,10 +190,12 @@ function ShortsCard({
   v,
   onPlay,
   onShare,
+  cardWidth,
 }: {
   v: VideoTestimonial;
   onPlay: () => void;
   onShare: () => void;
+  cardWidth: number; // px computed to ensure full-fit
 }) {
   const [hovering, setHovering] = useState(false);
   const vidRef = useRef<HTMLVideoElement | null>(null);
@@ -208,10 +215,8 @@ function ShortsCard({
     <div
       id={`video-${v.id}`}
       data-card
-      className={cx(
-        "shrink-0 w-72 sm:w-80 md:w-[24rem] lg:w-[26rem] snap-start rounded-2xl overflow-hidden",
-        LIGHT.card
-      )}
+      className={cx("shrink-0 snap-start rounded-2xl overflow-hidden", LIGHT.card)}
+      style={{ width: `${Math.max(220, Math.round(cardWidth))}px` }}
     >
       {/* Top: title + rating */}
       <div className="p-4 pb-2">
@@ -237,7 +242,7 @@ function ShortsCard({
             src={v.poster}
             alt={`${v.person} — ${v.title}`}
             fill
-            sizes="(max-width: 640px) 75vw, (max-width: 1024px) 33vw, 26rem"
+            sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 26rem"
             className="object-cover"
             priority={false}
           />
@@ -326,6 +331,9 @@ export default function JobsLiveJobsTestimonialSection({
   const [canPrev, setCanPrev] = useState(false);
   const [canNext, setCanNext] = useState(false);
 
+  // dynamic card width state (px)
+  const [cardW, setCardW] = useState<number>(0);
+
   const tags = useMemo(() => {
     const s = new Set<string>();
     videos.forEach((v) => v.tags?.forEach((t) => s.add(t)));
@@ -385,69 +393,80 @@ export default function JobsLiveJobsTestimonialSection({
     });
   }, [videos]);
 
-  // scrolling helpers
-  function getCards(container: HTMLDivElement) {
-    return Array.from(container.querySelectorAll<HTMLDivElement>("[data-card]"));
-  }
-  function getNearestIndex(container: HTMLDivElement) {
-    const cards = getCards(container);
-    const left = container.scrollLeft;
-    let idx = 0;
-    let best = Number.POSITIVE_INFINITY;
-    for (let i = 0; i < cards.length; i++) {
-      const diff = Math.abs(cards[i].offsetLeft - left);
-      if (diff < best) {
-        best = diff;
-        idx = i;
+  // --- sizing helpers: ensure only fully visible cards appear (no peeking) ---
+  const GAP = 16; // gap-4
+
+  function computeCardWidth(containerWidth: number) {
+    if (containerWidth <= 0) return 0;
+    const DEFAULT = 387; // ~24.2rem
+
+    const candidates = [1, 2, 3];
+    let bestCols = 1;
+    let bestLeftover = Number.POSITIVE_INFINITY;
+
+    for (const cols of candidates) {
+      const totalGaps = GAP * (cols - 1);
+      const widthForCards = containerWidth - totalGaps;
+      const perCard = widthForCards / cols;
+      const leftover = Math.abs(perCard - DEFAULT);
+      if (leftover < bestLeftover) {
+        bestLeftover = leftover;
+        bestCols = cols;
       }
     }
-    return idx;
+
+    const exact = (containerWidth - GAP * (bestCols - 1)) / bestCols;
+    const MIN = 260;
+    const MAX = 520;
+    return Math.max(MIN, Math.min(MAX, exact));
   }
-  function scrollToIndex(container: HTMLDivElement, index: number) {
-    const cards = getCards(container);
-    if (!cards.length) return;
-    const target = Math.max(0, Math.min(index, cards.length - 1));
-    const x = cards[target].offsetLeft;
-    container.scrollTo({ left: x, behavior: "smooth" });
-  }
-  function computeScrollAvailable(container: HTMLDivElement) {
-    const canPrev = container.scrollLeft > 0;
-    const max = container.scrollWidth - container.clientWidth - 1;
-    const canNext = container.scrollLeft < max;
-    return { canPrev, canNext };
-  }
-  const refreshArrows = () => {
+
+  const refreshLayout = () => {
     const el = scrollerRef.current;
     if (!el) return;
-    const { canPrev: p, canNext: n } = computeScrollAvailable(el);
-    setCanPrev(p);
-    setCanNext(n);
+    const containerW = el.clientWidth;
+    setCardW(computeCardWidth(containerW));
+    const max = el.scrollWidth - el.clientWidth - 1;
+    setCanPrev(el.scrollLeft > 0);
+    setCanNext(el.scrollLeft < max);
   };
+
   useEffect(() => {
+    refreshLayout();
     const el = scrollerRef.current;
     if (!el) return;
-    refreshArrows();
-    const onScroll = () => refreshArrows();
-    const onResize = () => refreshArrows();
+
+    const onScroll = () => {
+      const max = el.scrollWidth - el.clientWidth - 1;
+      setCanPrev(el.scrollLeft > 0);
+      setCanNext(el.scrollLeft < max);
+    };
+    const onResize = () => refreshLayout();
+
     el.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("resize", onResize);
+
+    const ro = new ResizeObserver(() => refreshLayout());
+    ro.observe(el);
+
     return () => {
       el.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", onResize);
+      ro.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [filtered.length]);
 
   const handlePrev = () => {
     const el = scrollerRef.current;
     if (!el) return;
-    const cur = getNearestIndex(el);
-    scrollToIndex(el, cur - 1);
+    el.scrollBy({ left: -(cardW + GAP), behavior: "smooth" });
   };
+
   const handleNext = () => {
     const el = scrollerRef.current;
     if (!el) return;
-    const cur = getNearestIndex(el);
-    scrollToIndex(el, cur + 1);
+    el.scrollBy({ left: cardW + GAP, behavior: "smooth" });
   };
 
   const split = useMemo(() => splitHeadingForColoring(heading), [heading]);
@@ -462,12 +481,12 @@ export default function JobsLiveJobsTestimonialSection({
             CDPL Success Stories
           </Pill>
 
-          <h2 className="mx-auto font-extrabold tracking-tight leading-tight text-4xl sm:text-5xl lg:text-6xl">
+          <h2 className="mx-auto text-4xl font-bold tracking-tight leading-tight text-slate-900">
             <span className="text-slate-900">{split.left}</span>{" "}
             <span className={BRAND_TEXT}>{split.right}</span>
           </h2>
 
-          <p className="mt-4 text-base sm:text-lg text-slate-600">{subheading}</p>
+          <p className="mt-6 text-base sm:text-base md:text-lg leading-6 text-slate-600">{subheading}</p>
         </div>
 
         {/* Tag Filter */}
@@ -535,7 +554,13 @@ export default function JobsLiveJobsTestimonialSection({
             className="flex gap-4 overflow-x-auto snap-x snap-mandatory pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {filtered.map((v) => (
-              <ShortsCard key={v.id} v={v} onPlay={() => setActive(v)} onShare={() => copyLink(v.id)} />
+              <ShortsCard
+                key={v.id}
+                v={v}
+                onPlay={() => setActive(v)}
+                onShare={() => copyLink(v.id)}
+                cardWidth={cardW || 387}
+              />
             ))}
           </div>
         </div>

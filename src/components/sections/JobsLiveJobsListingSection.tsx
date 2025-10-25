@@ -70,12 +70,10 @@ export function JobsLiveJobsListingSection({ jobs }: { jobs: Job[] }) {
           <JobsLiveJobsFilterBarSection value={filters} onChange={setFilters} locations={locations} />
         </div>
 
-        {/* Non-hero H2 (match AboutStatsSection typography) */}
-        <h2
-          id="jobs-listing"
-          className="text-4xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-sky-500 via-blue-600 to-green-500"
-        >
-          Latest openings
+        {/* Non-hero H2: "Latest" black, "openings" brand color (no gradient) */}
+        <h2 id="jobs-listing" className="text-4xl font-bold tracking-tight">
+          <span className="text-slate-900">Latest</span>{" "}
+          <span className="text-[#ff8c00]">openings</span>
         </h2>
 
         {/* Body text (match AboutStatsSection paragraph scale & color) */}
