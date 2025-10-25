@@ -3,8 +3,9 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaXTwitter, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa6';
-import { getPostBySlug, getLatestPosts, SIDEBAR_CATEGORIES } from '@/data/BlogPostData';
+import { FaXTwitter, FaLinkedin, FaFacebook } from 'react-icons/fa6';
+import { getPostBySlug} from '@/data/BlogPostData';
+import BlogSidebarRelated from '@/components/blog/BlogSidebarRelated';
 import { notFound } from 'next/navigation';
 
 interface BlogPostSectionProps {
@@ -17,8 +18,6 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
     if (!post) {
         notFound();
     }
-
-    const recentPosts = getLatestPosts(5);
 
     return (
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -206,94 +205,39 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent(post.title)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-gray-100 hover:bg-blue-400 hover:text-white rounded-full transition-all duration-200"
+                            className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200"
                         >
                             <FaXTwitter className="w-5 h-5" />
+                            <span className="text-sm font-medium">Twitter</span>
                         </Link>
                         <Link
                             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-gray-100 hover:bg-blue-600 hover:text-white rounded-full transition-all duration-200"
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
                         >
                             <FaLinkedin className="w-5 h-5" />
+                            <span className="text-sm font-medium">LinkedIn</span>
                         </Link>
                         <Link
                             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-gray-100 hover:bg-blue-700 hover:text-white rounded-full transition-all duration-200"
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
                         >
                             <FaFacebook className="w-5 h-5" />
-                        </Link>
-                        <Link
-                            href={`https://www.instagram.com/`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-3 bg-gray-100 hover:bg-pink-600 hover:text-white rounded-full transition-all duration-200"
-                        >
-                            <FaInstagram className="w-5 h-5" />
+                            <span className="text-sm font-medium">Facebook</span>
                         </Link>
                     </div>
                 </div>
             </main>
 
-            {/* Sidebar */}
-            <aside className="lg:col-span-1 space-y-6">
-                {/* Recent Posts */}
-                <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold mb-4 text-gray-700">Recent Posts</h3>
-                    <ul className="space-y-3">
-                        {recentPosts.map((recentPost) => (
-                            <li key={recentPost.id}>
-                                <Link
-                                    href={`/blog/${recentPost.slug}`}
-                                    className="text-gray-800 hover:text-blue-600 transition-all duration-150 line-clamp-2 text-sm"
-                                >
-                                    {recentPost.title}
-                                </Link>
-                                <p className="text-xs text-gray-500 mt-1">
-                                    {new Date(recentPost.publishDate).toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric'
-                                    })}
-                                </p>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                {/* Categories */}
-                <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold mb-4 text-gray-700">Categories</h3>
-                    <ul className="space-y-2 text-sm">
-                        {SIDEBAR_CATEGORIES.map((cat) => (
-                            <li key={cat.id} className="flex justify-between items-center">
-                                <Link href={cat.slug} className="text-gray-800 hover:text-blue-600 transition-all duration-150">
-                                    {cat.name}
-                                </Link>
-                                <span className="text-gray-500">({cat.count})</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                {/* Popular Tags */}
-                <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold mb-4 text-gray-700">Popular Tags</h3>
-                    <div className="flex flex-wrap gap-2">
-                        {post.tags.map((tag) => (
-                            <Link
-                                key={tag}
-                                href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                                className="text-gray-800 bg-gray-200 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all ease-in-out duration-200 text-sm"
-                            >
-                                #{tag}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+            {/* Sidebar with Related Posts */}
+            <aside className="lg:col-span-1">
+                <BlogSidebarRelated 
+                    currentPostId={post.id} 
+                    categoryId={post.categoryId} 
+                />
             </aside>
         </section>
     );

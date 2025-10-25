@@ -106,12 +106,11 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             title: post.seo.metaTitle,
             description: post.seo.metaDescription,
             images: [post.seo.ogImage || post.featuredImage],
-            creator: author?.social?.twitter ? `@${author.social.twitter.split('/').pop()}` : '@yourcompany',
+            creator: author?.social?.twitter,
         },
         robots: {
             index: true,
             follow: true,
-            nocache: false,
             googleBot: {
                 index: true,
                 follow: true,
@@ -119,13 +118,6 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                 'max-image-preview': 'large',
                 'max-snippet': -1,
             },
-        },
-        other: {
-            'article:published_time': publishedTime,
-            'article:modified_time': modifiedTime,
-            'article:author': author?.name || 'Unknown',
-            'article:section': post.category,
-            'article:tag': post.tags.join(', '),
         },
     };
 }
@@ -138,7 +130,9 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         notFound();
     }
 
-    // JSON-LD structured data for SEO
+    const author = getAuthorById(post.authorId);
+
+    // Structured data for SEO
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'BlogPosting',
@@ -146,12 +140,16 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         description: post.description,
         image: post.featuredImage,
         datePublished: new Date(post.publishDate).toISOString(),
-        dateModified: post.lastModified ? new Date(post.lastModified).toISOString() : new Date(post.publishDate).toISOString(),
-        author: {
-            '@type': 'Person',
-            name: post.author,
-            url: `https://yourwebsite.com/author/${post.authorId}`,
-        },
+        dateModified: post.lastModified
+            ? new Date(post.lastModified).toISOString()
+            : new Date(post.publishDate).toISOString(),
+        author: author
+            ? {
+                  '@type': 'Person',
+                  name: author.name,
+                  url: author.social?.website || author.social?.linkedin,
+              }
+            : undefined,
         publisher: {
             '@type': 'Organization',
             name: 'Your Company',
@@ -166,25 +164,29 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
         },
         keywords: post.tags.join(', '),
         articleSection: post.category,
-        wordCount: 1500, // You can calculate this dynamically if you have content
+        wordCount: post.readTime,
     };
 
     return (
         <>
-            {/* JSON-LD structured data */}
+            {/* JSON-LD Structured Data */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
-            
-            {/* Category Navigation Menu */}
+
+            {/* Category Menu - Added as requested */}
             <BlogCategoryMenu />
-            
-            <div className="bg-white">
-                <BlogPostHeroSection slug={slug} />
-                <BlogPostSection slug={slug} />
-                <BlogPostContactSection />
-            </div>
+
+            {/* Blog Post Hero - Pass slug as prop (matches existing component) */}
+            <BlogPostHeroSection slug={slug} />
+
+            {/* Blog Post Content - Pass slug as prop (matches existing component) */}
+            <BlogPostSection slug={slug} />
+
+            {/* Contact Section */}
+            <BlogPostContactSection />
         </>
     );
 }
+

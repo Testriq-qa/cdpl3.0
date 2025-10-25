@@ -1,6 +1,6 @@
-import React from 'react';
 import type { Metadata } from 'next';
-import { BlogCategoryMenu, BlogSidebar } from '@/components/blog';
+import { BlogCategoryMenu } from '@/components/blog';
+import BlogSidebarCategory from '@/components/blog/BlogSidebarCategory';
 import { getCategoryBySlug, getPostsByCategory, getAllCategories } from '@/data/BlogPostData';
 import { notFound } from 'next/navigation';
 import CategoryHero from '@/components/blog/CategoryHero';
@@ -99,11 +99,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
     const posts = getPostsByCategory(category.id);
 
-    if (posts.length === 0) {
-        notFound();
-    }
-
-    // JSON-LD structured data for SEO
+    // Structured data for SEO
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'CollectionPage',
@@ -112,7 +108,8 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         url: `https://yourwebsite.com/blog/category/${category.slug}`,
         mainEntity: {
             '@type': 'ItemList',
-            itemListElement: posts.map((post, index) => ({
+            numberOfItems: posts.length,
+            itemListElement: posts.slice(0, 10).map((post, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
                 item: {
@@ -133,36 +130,36 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
     return (
         <>
-            {/* JSON-LD structured data */}
+            {/* JSON-LD Structured Data */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
             />
 
-            {/* Category Navigation Menu */}
+            {/* Category Menu */}
             <BlogCategoryMenu />
 
-            {/* Hero Section with Featured Article from this category */}
+            {/* Category Hero with Featured Post - Pass correct props */}
             <CategoryHero categoryId={category.id} categoryName={category.name} />
 
-            {/* Main Content Area */}
-            <div className="bg-gradient-to-b from-white to-gray-50">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-                    <div className="grid lg:grid-cols-3 gap-8">
-                        {/* Article List - 2 columns */}
-                        <div className="lg:col-span-2">
-                            <CategoryArticleList categoryId={category.id} categoryName={category.name} />
-                        </div>
+            {/* Main Content with Sidebar */}
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    {/* Main Content - Article List - Pass correct props */}
+                    <div className="lg:col-span-2">
+                        <CategoryArticleList categoryId={category.id} categoryName={category.name} />
+                    </div>
 
-                        {/* Sidebar - 1 column */}
-                        <aside className="lg:col-span-1">
-                            <div className="lg:sticky lg:top-[200px]">
-                                <BlogSidebar />
-                            </div>
-                        </aside>
+                    {/* Sidebar with Category-Specific Latest Posts */}
+                    <div className="lg:col-span-1">
+                        <BlogSidebarCategory 
+                            categoryId={category.id}
+                            categoryName={category.name}
+                        />
                     </div>
                 </div>
             </div>
         </>
     );
 }
+

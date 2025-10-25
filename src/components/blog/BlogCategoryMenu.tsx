@@ -3,7 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { Search, ChevronDown, X } from "lucide-react";
 import Link from "next/link";
-import { getMainCategories, getDropdownCategories, getAllPosts } from "@/data/BlogPostData";
+import { getAllCategories, getAllPosts } from "@/data/BlogPostData";
 
 interface BlogPost {
   id: string;
@@ -14,12 +14,6 @@ interface BlogPost {
   tags: string[];
   slug: string;
   readTime: string;
-}
-
-interface BlogCategory {
-  id: string;
-  name: string;
-  slug: string;
 }
 
 const BlogCategoryMenu = () => {
@@ -33,9 +27,18 @@ const BlogCategoryMenu = () => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const searchResultsRef = useRef<HTMLDivElement>(null);
 
-  // Get categories from data file
-  const mainCategories: BlogCategory[] = getMainCategories();
-  const dropdownCategories: BlogCategory[] = getDropdownCategories();
+  // Define main menu categories (specific order as requested)
+  const mainMenuCategories = [
+    { id: "software-testing", name: "Software Testing", slug: "software-testing" },
+    { id: "data-science", name: "Data Science", slug: "data-science" },
+    { id: "web-development", name: "Web Development", slug: "web-development" },
+    { id: "ai-ml", name: "AI & Machine Learning", slug: "ai-ml" },
+  ];
+
+  // Get all categories and filter out the main ones for "Others" dropdown
+  const allCategories = getAllCategories();
+  const mainCategoryIds = mainMenuCategories.map(cat => cat.id);
+  const dropdownCategories = allCategories.filter(cat => !mainCategoryIds.includes(cat.id));
 
   // Real-time search functionality
   useEffect(() => {
@@ -63,13 +66,10 @@ const BlogCategoryMenu = () => {
       const currentScrollY = window.scrollY;
       
       if (currentScrollY < 100) {
-        // Always show when near top
         setIsVisible(true);
       } else if (currentScrollY > lastScrollY && currentScrollY > 150) {
-        // Scrolling down - hide menu
         setIsVisible(false);
       } else {
-        // Scrolling up - show menu
         setIsVisible(true);
       }
       
@@ -107,7 +107,6 @@ const BlogCategoryMenu = () => {
   const handleSearchSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchQuery.trim()) {
-      // Navigate to search results
       window.location.href = `/blog/search?q=${encodeURIComponent(searchQuery)}`;
     }
   };
@@ -142,8 +141,8 @@ const BlogCategoryMenu = () => {
               All Blogs
             </Link>
 
-            {/* Main Categories */}
-            {mainCategories.map((category) => (
+            {/* Main Menu Categories (Software Testing, Data Science, Web Development, AI & ML) */}
+            {mainMenuCategories.map((category) => (
               <Link
                 key={category.id}
                 href={`/blog/category/${category.slug}`}
@@ -153,41 +152,43 @@ const BlogCategoryMenu = () => {
               </Link>
             ))}
 
-            {/* Others Dropdown */}
-            <div className="relative flex-shrink-0" ref={dropdownRef}>
-              <button
-                onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-                className="whitespace-nowrap px-4 py-2 text-sm font-medium text-white hover:bg-white/20 rounded-lg transition-all duration-200 flex items-center gap-1"
-              >
-                Others
-                <ChevronDown
-                  className={`w-4 h-4 transition-transform duration-200 ${
-                    isDropdownOpen ? "rotate-180" : ""
-                  }`}
-                />
-              </button>
+            {/* Others Dropdown (Remaining Categories) */}
+            {dropdownCategories.length > 0 && (
+              <div className="relative flex-shrink-0" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+                  className="whitespace-nowrap px-4 py-2 text-sm font-medium text-white hover:bg-white/20 rounded-lg transition-all duration-200 flex items-center gap-1"
+                >
+                  Others
+                  <ChevronDown
+                    className={`w-4 h-4 transition-transform duration-200 ${
+                      isDropdownOpen ? "rotate-180" : ""
+                    }`}
+                  />
+                </button>
 
-              {/* Dropdown Menu */}
-              {isDropdownOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 max-h-96 overflow-y-auto">
-                  <div className="px-3 py-2 border-b border-gray-100">
-                    <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
-                      More Categories
-                    </p>
+                {/* Dropdown Menu */}
+                {isDropdownOpen && (
+                  <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-xl shadow-2xl border border-gray-100 py-2 z-50 max-h-96 overflow-y-auto">
+                    <div className="px-3 py-2 border-b border-gray-100">
+                      <p className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+                        More Categories
+                      </p>
+                    </div>
+                    {dropdownCategories.map((category) => (
+                      <Link
+                        key={category.id}
+                        href={`/blog/category/${category.slug}`}
+                        onClick={() => setIsDropdownOpen(false)}
+                        className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors duration-150"
+                      >
+                        {category.name}
+                      </Link>
+                    ))}
                   </div>
-                  {dropdownCategories.map((category) => (
-                    <Link
-                      key={category.id}
-                      href={`/blog/category/${category.slug}`}
-                      onClick={() => setIsDropdownOpen(false)}
-                      className="block px-4 py-2.5 text-sm text-gray-700 hover:bg-purple-50 hover:text-purple-700 transition-colors duration-150"
-                    >
-                      {category.name}
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
+                )}
+              </div>
+            )}
           </nav>
 
           {/* Search Section */}
@@ -314,3 +315,4 @@ const BlogCategoryMenu = () => {
 };
 
 export default BlogCategoryMenu;
+
