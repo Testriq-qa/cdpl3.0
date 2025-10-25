@@ -191,7 +191,7 @@ const courseCategories = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Mega menu
+  // Mega menu state (layout unchanged)
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(courseCategories[0].id);
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
@@ -222,23 +222,35 @@ const Header = () => {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const megaMenuRef = useRef<HTMLDivElement | null>(null);
 
-  const openMega = () => setIsMegaMenuOpen(true);
+  // ---- Hover stability: delayed close, cancel on enter ----
+  const closeTimerRef = useRef<number | null>(null);
+
+  const cancelClose = () => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimerRef.current = window.setTimeout(() => {
+      closeMega();
+    });
+  };
+
+  const openMega = () => {
+    cancelClose();
+    setIsMegaMenuOpen(true);
+  };
+
   const closeMega = () => {
     setIsMegaMenuOpen(false);
     setHoveredCourse(null);
     setHoveredCategory(null);
   };
 
-  // Close if leaving Courses button and NOT entering the mega menu
-  const handleCoursesButtonLeave: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    const next = e.relatedTarget as Node | null;
-    const menuEl = megaMenuRef.current;
-    if (!menuEl || !next || !menuEl.contains(next)) {
-      closeMega();
-    }
-  };
-
-  // Close Jobs/About on outside click / ESC
+  // Close Jobs/About and mega on outside click / ESC
   useEffect(() => {
     const onClickOutside = (e: MouseEvent) => {
       const t = e.target as Node;
@@ -260,6 +272,14 @@ const Header = () => {
       ) {
         setIsAboutOpen(false);
       }
+      // Close mega if click is outside the full mega wrapper
+      if (
+        isMegaMenuOpen &&
+        megaMenuRef.current &&
+        !megaMenuRef.current.contains(t)
+      ) {
+        closeMega();
+      }
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -273,15 +293,16 @@ const Header = () => {
     return () => {
       document.removeEventListener("mousedown", onClickOutside);
       document.removeEventListener("keydown", onKey);
+      cancelClose();
     };
-  }, [isJobsOpen, isAboutOpen]);
+  }, [isJobsOpen, isAboutOpen, isMegaMenuOpen]);
 
   // Mobile toggles
   const toggleMenu = () => {
     setIsMenuOpen((v) => !v);
     if (isMenuOpen) setMobileSections({ courses: false, jobs: false, about: false, openCategoryId: null });
   };
-  
+
   const toggleMobileSection = (key: "courses" | "jobs" | "about") => {
     setMobileSections((s) => {
       const next = { ...s, [key]: !s[key] };
@@ -328,40 +349,32 @@ const Header = () => {
             {/* Mega Menu Trigger */}
             <div className="relative">
               <button
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base"
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base py-6"
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="mega-menu"
                 onMouseEnter={openMega}
-                onMouseLeave={handleCoursesButtonLeave}
+                onMouseLeave={() => scheduleClose()}  // schedule delayed close when leaving trigger
               >
                 Courses
                 <ChevronDown className="ml-1 h-4 w-4" />
               </button>
 
-              {/* Mega Menu Wrapper */}
+              {/* Mega Menu Wrapper (layout unchanged) */}
               {isMegaMenuOpen && (
                 <div
                   id="mega-menu"
                   ref={megaMenuRef}
-                  className="fixed left-0 right-0 top-[72px] lg:top-[55px] z-50"
-                  onMouseEnter={openMega}
-                  onMouseLeave={closeMega} // immediate close on leaving the wrapper
-                  onMouseMove={(e) => {
-                    // Immediate close if pointer goes outside the visible white panel
-                    const p = panelRef.current;
-                    if (!p) return;
-                    const r = p.getBoundingClientRect();
-                    const x = e.clientX;
-                    const y = e.clientY;
-                    const outside = x < r.left || x > r.right || y < r.top || y > r.bottom;
-                    if (outside) closeMega();
-                  }}
+                  className="fixed left-0 right-0 top-[72px] z-50"
+                  onMouseEnter={cancelClose}            // entering wrapper cancels pending close
+                  onMouseLeave={() => scheduleClose()}   // leaving wrapper schedules close
                 >
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div
                       ref={panelRef}
                       className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-blue-600 overflow-hidden"
                       style={{ maxHeight: 520 }}
+                      onMouseEnter={cancelClose}          // inside the white panel: keep open
+                      onMouseLeave={() => scheduleClose()} // leaving panel (into left/right empty area): close soon
                     >
                       <div className="grid grid-cols-12 gap-4 p-4 sm:p-6 lg:p-6">
                         {/* Column 1: Categories */}
@@ -480,6 +493,8 @@ const Header = () => {
                 </div>
               )}
             </div>
+
+            <Link href="/services" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Services</Link>
 
             <Link href="#" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Event

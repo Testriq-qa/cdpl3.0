@@ -1,10 +1,11 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaXTwitter, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa6';
-import { getPostBySlug, getLatestPosts, SIDEBAR_CATEGORIES } from '@/data/BlogPostData';
+import { FaXTwitter, FaLinkedin, FaFacebook } from 'react-icons/fa6';
+import { getPostBySlug} from '@/data/BlogPostData';
+import BlogSidebarRelated from '@/components/blog/BlogSidebarRelated';
 import { notFound } from 'next/navigation';
 
 interface BlogPostSectionProps {
@@ -18,7 +19,33 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
         notFound();
     }
 
-    const recentPosts = getLatestPosts(5);
+    // FIXED: Add smooth scroll with offset for table of contents links
+    useEffect(() => {
+        const handleAnchorClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+                e.preventDefault();
+                const id = target.getAttribute('href')?.slice(1);
+                if (id) {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        // Calculate offset: header (80px) + category menu (52px) + padding (20px) = 152px
+                        const offset = 152;
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('click', handleAnchorClick);
+        return () => document.removeEventListener('click', handleAnchorClick);
+    }, []);
 
     return (
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -39,7 +66,23 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                         { id: 'conclusion', text: 'Conclusion and Next Steps' },
                     ].map((item) => (
                         <li key={item.id}>
-                            <Link href={`#${item.id}`} className="text-blue-600 hover:underline">
+                            <Link 
+                                href={`#${item.id}`} 
+                                className="text-blue-600 hover:underline cursor-pointer"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const element = document.getElementById(item.id);
+                                    if (element) {
+                                        const offset = 152;
+                                        const elementPosition = element.getBoundingClientRect().top;
+                                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+                                        window.scrollTo({
+                                            top: offsetPosition,
+                                            behavior: 'smooth'
+                                        });
+                                    }
+                                }}
+                            >
                                 {item.text}
                             </Link>
                         </li>
@@ -47,7 +90,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </ul>
 
                 {/* Introduction Section */}
-                <h2 id="introduction" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Introduction</h2>
+                <h2 id="introduction" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Introduction</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     {post.excerpt}
                 </p>
@@ -67,7 +110,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </div>
 
                 {/* Key Concepts Section */}
-                <h2 id="key-concepts" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Key Concepts and Fundamentals</h2>
+                <h2 id="key-concepts" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Key Concepts and Fundamentals</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     Understanding the core concepts is essential for mastering any technology or methodology. 
                     Let&apos;s break down the fundamental principles that form the foundation of this topic.
@@ -87,7 +130,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </div>
 
                 {/* Best Practices Section */}
-                <h2 id="best-practices" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Best Practices and Implementation</h2>
+                <h2 id="best-practices" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Best Practices and Implementation</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     Implementing best practices ensures that your work is efficient, maintainable, and scalable. 
                     Here are the industry-standard approaches that professionals use to achieve optimal results.
@@ -101,7 +144,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </ul>
 
                 {/* Common Pitfalls Section */}
-                <h2 id="common-pitfalls" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Common Pitfalls to Avoid</h2>
+                <h2 id="common-pitfalls" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Common Pitfalls to Avoid</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     Learning from common mistakes can save you countless hours of debugging and frustration. 
                     Here are the most frequent pitfalls and how to avoid them.
@@ -111,7 +154,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </p>
 
                 {/* Advanced Techniques Section */}
-                <h2 id="advanced-techniques" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Advanced Techniques</h2>
+                <h2 id="advanced-techniques" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Advanced Techniques</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     Once you&apos;ve mastered the basics, these advanced techniques will help you take your skills to the next level. 
                     These strategies are used by experts to solve complex problems and optimize performance.
@@ -127,7 +170,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </div>
 
                 {/* Tools and Resources Section */}
-                <h2 id="tools-resources" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Tools and Resources</h2>
+                <h2 id="tools-resources" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Tools and Resources</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     Having the right tools can significantly improve your productivity and the quality of your work. 
                     Here are the essential tools and resources that professionals rely on.
@@ -137,7 +180,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </p>
 
                 {/* Real-World Examples Section */}
-                <h2 id="real-world-examples" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Real-World Examples</h2>
+                <h2 id="real-world-examples" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Real-World Examples</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     Theory is important, but seeing how concepts are applied in real-world scenarios helps solidify understanding. 
                     Let&apos;s explore some practical examples that demonstrate these principles in action.
@@ -153,7 +196,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </div>
 
                 {/* Performance Optimization Section */}
-                <h2 id="performance-optimization" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Performance Optimization</h2>
+                <h2 id="performance-optimization" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Performance Optimization</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     Performance is crucial for user satisfaction and system efficiency. Learn how to identify bottlenecks 
                     and implement optimizations that make a real difference.
@@ -163,7 +206,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </p>
 
                 {/* Future Trends Section */}
-                <h2 id="future-trends" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Future Trends and Predictions</h2>
+                <h2 id="future-trends" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Future Trends and Predictions</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     The technology landscape is constantly evolving. Understanding emerging trends helps you stay ahead 
                     and prepare for the future of the industry.
@@ -173,7 +216,7 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                 </p>
 
                 {/* Conclusion Section */}
-                <h2 id="conclusion" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Conclusion and Next Steps</h2>
+                <h2 id="conclusion" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Conclusion and Next Steps</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
                     We&apos;ve covered a comprehensive overview of {post.title.toLowerCase()}. The knowledge and techniques 
                     discussed in this article provide a solid foundation for both beginners and experienced practitioners.
@@ -206,94 +249,39 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent(post.title)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-gray-100 hover:bg-blue-400 hover:text-white rounded-full transition-all duration-200"
+                            className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200"
                         >
                             <FaXTwitter className="w-5 h-5" />
+                            <span className="text-sm font-medium">Twitter</span>
                         </Link>
                         <Link
                             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-gray-100 hover:bg-blue-600 hover:text-white rounded-full transition-all duration-200"
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
                         >
                             <FaLinkedin className="w-5 h-5" />
+                            <span className="text-sm font-medium">LinkedIn</span>
                         </Link>
                         <Link
                             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="p-3 bg-gray-100 hover:bg-blue-700 hover:text-white rounded-full transition-all duration-200"
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
                         >
                             <FaFacebook className="w-5 h-5" />
-                        </Link>
-                        <Link
-                            href={`https://www.instagram.com/`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="p-3 bg-gray-100 hover:bg-pink-600 hover:text-white rounded-full transition-all duration-200"
-                        >
-                            <FaInstagram className="w-5 h-5" />
+                            <span className="text-sm font-medium">Facebook</span>
                         </Link>
                     </div>
                 </div>
             </main>
 
-            {/* Sidebar */}
-            <aside className="lg:col-span-1 space-y-6">
-                {/* Recent Posts */}
-                <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold mb-4 text-gray-700">Recent Posts</h3>
-                    <ul className="space-y-3">
-                        {recentPosts.map((recentPost) => (
-                            <li key={recentPost.id}>
-                                <Link
-                                    href={`/blog/${recentPost.slug}`}
-                                    className="text-gray-800 hover:text-blue-600 transition-all duration-150 line-clamp-2 text-sm"
-                                >
-                                    {recentPost.title}
-                                </Link>
-                                <p className="text-xs text-gray-500 mt-1">
-                                    {new Date(recentPost.publishDate).toLocaleDateString('en-US', {
-                                        year: 'numeric',
-                                        month: 'short',
-                                        day: 'numeric'
-                                    })}
-                                </p>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                {/* Categories */}
-                <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold mb-4 text-gray-700">Categories</h3>
-                    <ul className="space-y-2 text-sm">
-                        {SIDEBAR_CATEGORIES.map((cat) => (
-                            <li key={cat.id} className="flex justify-between items-center">
-                                <Link href={cat.slug} className="text-gray-800 hover:text-blue-600 transition-all duration-150">
-                                    {cat.name}
-                                </Link>
-                                <span className="text-gray-500">({cat.count})</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                {/* Popular Tags */}
-                <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                    <h3 className="text-xl font-bold mb-4 text-gray-700">Popular Tags</h3>
-                    <div className="flex flex-wrap gap-2">
-                        {post.tags.map((tag) => (
-                            <Link
-                                key={tag}
-                                href={`/blog/tag/${tag.toLowerCase().replace(/\s+/g, '-')}`}
-                                className="text-gray-800 bg-gray-200 px-3 py-1 rounded-full hover:bg-blue-600 hover:text-white transition-all ease-in-out duration-200 text-sm"
-                            >
-                                #{tag}
-                            </Link>
-                        ))}
-                    </div>
-                </div>
+            {/* Sidebar with Related Posts */}
+            <aside className="lg:col-span-1">
+                <BlogSidebarRelated 
+                    currentPostId={post.id} 
+                    categoryId={post.categoryId} 
+                />
             </aside>
         </section>
     );

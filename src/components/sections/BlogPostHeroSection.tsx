@@ -55,12 +55,7 @@ export const BlogPostHeroSection: React.FC<BlogPostHeroSectionProps> = ({ slug }
                         <span className="text-xs text-gray-500">{formattedDate}</span>
                         <span className="text-gray-400">•</span>
                         <span className="text-xs text-gray-500">{post.readTime}</span>
-                        {post.views && (
-                            <>
-                                <span className="text-gray-400">•</span>
-                                <span className="text-xs text-gray-500">{post.views} views</span>
-                            </>
-                        )}
+                        
                     </div>
                 </div>
             </div>

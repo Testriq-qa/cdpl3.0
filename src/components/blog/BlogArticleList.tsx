@@ -28,7 +28,7 @@ const BlogArticleList = () => {
                 Latest Articles
               </h2>
               <Link
-                href="/blog"
+                href="/blog/all-posts"
                 className="hidden sm:flex items-center gap-2 px-5 py-2.5 border-2 border-indigo-600 text-indigo-600 rounded-lg font-semibold hover:bg-indigo-50 transition-all duration-200"
               >
                 View All
