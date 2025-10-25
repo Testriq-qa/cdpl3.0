@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Filter, Search, X } from "lucide-react";
+import Image from "next/image";
 
 type Placement = {
   name: string;
@@ -49,11 +50,6 @@ const DOMAINS = ["All", "QA"] as const;
 const DOMAIN_COLORS = {
   QA: { bg: "bg-orange-50", text: "text-[#ff8c00]", ring: "ring-[#ff8c00]/20" },
 };
-
-function companyInitials(name: string) {
-  const parts = name.split(/\s+/).slice(0, 2);
-  return parts.map((p) => p[0]?.toUpperCase() || "").join("");
-}
 
 type Props = {
   contained?: boolean;
@@ -199,9 +195,11 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                         className={`absolute left-0 top-0 h-full w-1.5 rounded-l-2xl ${theme.bg}`}
                       />
                       <div className="flex items-center gap-3">
-                        <img
+                        <Image
                           src={p.image}
                           alt={p.name}
+                          width={40}
+                          height={40}
                           className="h-10 w-10 rounded-xl object-cover ring-4 ring-orange-100"
                         />
                         <div className="min-w-0">

@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import Image from "next/image";
 import dynamic from "next/dynamic";
 
 // ---------- Loader (keep inline) ----------

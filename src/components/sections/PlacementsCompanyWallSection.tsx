@@ -95,6 +95,9 @@ function getTweaks(name: string) {
   return LOGO_TWEAKS[name.trim().toLowerCase()] ?? { scale: 1 };
 }
 
+/** Typed CSSProperties with CSS custom properties support */
+type CSSVar = React.CSSProperties & Record<`--${string}`, string | number>;
+
 function TickerRow({
   items,
   direction,
@@ -118,9 +121,8 @@ function TickerRow({
           } flex gap-4 md:gap-3 sm:gap-2 py-3 md:py-2.5 sm:py-2 will-change-transform`}
           style={
             {
-              // @ts-ignore
               "--dur": `${speedSec}s`,
-            } as React.CSSProperties
+            } as CSSVar
           }
         >
           {loopItems.map((name, i) => {
