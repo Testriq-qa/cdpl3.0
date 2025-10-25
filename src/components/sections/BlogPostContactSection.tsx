@@ -1,18 +1,6 @@
 import React from 'react';
-import Link from 'next/link';
 import {
-  Award,
-  Users,
-  Briefcase,
-  BookOpen,
-  Target,
-  TrendingUp,
-  Globe,
-  HeartHandshake,
-  GraduationCap,
-  Lightbulb,
-  Shield,
-  Zap,
+  Award
 } from "lucide-react";
 
 export const BlogPostContactSection: React.FC = () => {

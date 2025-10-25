@@ -1,9 +1,52 @@
-import React from 'react';
+'use client';
+
+import React, { useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaXTwitter, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa6';
+import { FaXTwitter, FaLinkedin, FaFacebook } from 'react-icons/fa6';
+import { getPostBySlug} from '@/data/BlogPostData';
+import BlogSidebarRelated from '@/components/blog/BlogSidebarRelated';
+import { notFound } from 'next/navigation';
 
-export const BlogPostSection: React.FC = () => {
+interface BlogPostSectionProps {
+    slug: string;
+}
+
+export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
+    const post = getPostBySlug(slug);
+    
+    if (!post) {
+        notFound();
+    }
+
+    // FIXED: Add smooth scroll with offset for table of contents links
+    useEffect(() => {
+        const handleAnchorClick = (e: MouseEvent) => {
+            const target = e.target as HTMLElement;
+            if (target.tagName === 'A' && target.getAttribute('href')?.startsWith('#')) {
+                e.preventDefault();
+                const id = target.getAttribute('href')?.slice(1);
+                if (id) {
+                    const element = document.getElementById(id);
+                    if (element) {
+                        // Calculate offset: header (80px) + category menu (52px) + padding (20px) = 152px
+                        const offset = 152;
+                        const elementPosition = element.getBoundingClientRect().top;
+                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+
+                        window.scrollTo({
+                            top: offsetPosition,
+                            behavior: 'smooth'
+                        });
+                    }
+                }
+            }
+        };
+
+        document.addEventListener('click', handleAnchorClick);
+        return () => document.removeEventListener('click', handleAnchorClick);
+    }, []);
+
     return (
         <section className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <main className="lg:col-span-2">
@@ -11,528 +54,236 @@ export const BlogPostSection: React.FC = () => {
                 <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">Table of Contents</h2>
                 <ul className="list-decimal pl-4 sm:pl-6 mb-8 sm:mb-12 space-y-2 text-sm sm:text-base text-gray-700">
                     {[
-                        { id: 'step1', text: 'Title: Include keyword + SERP research' },
-                        { id: 'step2', text: 'Author Bio showing E-E-A-T' },
-                        { id: 'step3', text: 'Images: 5+ w/ metadata' },
-                        { id: 'step4', text: 'Links: 5+ internal + external' },
-                        { id: 'step5', text: '1500+ words/blog post based on SERP' },
-                        { id: 'step6', text: 'Table of Contents: Easily jump around!' },
-                        { id: 'step7', text: 'E-E-A-T: Show off expertise in the content' },
-                        { id: 'step8', text: 'CTAs: In content, sidebar, conclusion' },
-                        { id: 'step9', text: 'Social share buttons' },
-                        { id: 'step10', text: 'Top notch quality writing' },
-                        { id: 'step11', text: 'URL: Short + includes keyword' },
-                        { id: 'step12', text: 'Optimize for mobile experience' },
-                        { id: 'step13', text: 'Proper spacing: Make it readable' },
-                        { id: 'step14', text: 'Sidebar w/ links + clear Call to Action' },
-                        { id: 'step15', text: 'Font: readable + popular for blogs' },
-                        { id: 'step16', text: 'Color: Easy on the eyes - #333333' },
-                        { id: 'step17', text: 'Exit intent pop up to capture leads' },
-                        { id: 'step18', text: 'Proper use of headings (H1, H2, etc.)' },
-                        { id: 'step19', text: 'Video embed + infographics' },
-                        { id: 'step20', text: 'Quotes from SMEs on the topic' },
+                        { id: 'introduction', text: 'Introduction' },
+                        { id: 'key-concepts', text: 'Key Concepts and Fundamentals' },
+                        { id: 'best-practices', text: 'Best Practices and Implementation' },
+                        { id: 'common-pitfalls', text: 'Common Pitfalls to Avoid' },
+                        { id: 'advanced-techniques', text: 'Advanced Techniques' },
+                        { id: 'tools-resources', text: 'Tools and Resources' },
+                        { id: 'real-world-examples', text: 'Real-World Examples' },
+                        { id: 'performance-optimization', text: 'Performance Optimization' },
+                        { id: 'future-trends', text: 'Future Trends and Predictions' },
+                        { id: 'conclusion', text: 'Conclusion and Next Steps' },
                     ].map((item) => (
                         <li key={item.id}>
-                            <Link href={`#${item.id}`} className="text-blue-600  hover:underline">
+                            <Link 
+                                href={`#${item.id}`} 
+                                className="text-blue-600 hover:underline cursor-pointer"
+                                onClick={(e) => {
+                                    e.preventDefault();
+                                    const element = document.getElementById(item.id);
+                                    if (element) {
+                                        const offset = 152;
+                                        const elementPosition = element.getBoundingClientRect().top;
+                                        const offsetPosition = elementPosition + window.pageYOffset - offset;
+                                        window.scrollTo({
+                                            top: offsetPosition,
+                                            behavior: 'smooth'
+                                        });
+                                    }
+                                }}
+                            >
                                 {item.text}
                             </Link>
                         </li>
                     ))}
                 </ul>
 
-                {/* Step 1 */}
-                <h2 id="step1" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">1. Title: Include keyword + SERP research</h2>
+                {/* Introduction Section */}
+                <h2 id="introduction" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Introduction</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
-                    Your title is the first thing users see in search results, so it must include your primary keyword while being compelling. Start by conducting SERP (Search Engine Results Page) research using tools like Google Keyword Planner or Ahrefs to identify what ranks for your target keyword. Analyze top results for title length (50-60 characters ideal), structure, and emotional hooks. For example, if targeting &quot;SEO blog post checklist,&quot; a title like &quot;The Ultimate 20-Step SEO Blog Post Checklist for 2025&quot; incorporates the keyword naturally and promises value.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-700">
-                    Avoid clickbait—focus on clarity and relevance to reduce bounce rates. A well-researched title can boost click-through rates by 20-30%. Remember, titles also impact social shares and email opens, so test variations with A/B tools if possible.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="SEO Title Optimization Illustration"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-                
-                {/* Step 2 */}
-                <h2 id="step2" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">2. Author Bio showing E-E-A-T</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-700">
-                    Google prioritizes content from credible sources, so include an author bio that highlights experience, expertise, authoritativeness, and trustworthiness (E-E-A-T). Place it at the top or bottom, linking to an author page with credentials, past publications, and social proof like LinkedIn. For instance, mention years in the industry, successful exits, or client results. This builds trust and helps with entity-based SEO.
+                    {post.excerpt}
                 </p>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
-                    A strong bio can improve dwell time as readers feel the content is reliable. Use structured data (JSON-LD) to mark up the author for rich snippets in search results.
+                    In this comprehensive guide, we&apos;ll explore everything you need to know about {post.title.toLowerCase()}. 
+                    Whether you&apos;re a beginner or an experienced professional, this article will provide valuable insights 
+                    and practical knowledge to help you succeed.
                 </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
+                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-8">
                     <Image
-                        src="/images/automation-testing.webp"
-                        alt="Author Bio Example in Blog Structure"
+                        src={post.featuredImage || "/images/automation-testing.webp"}
+                        alt={post.title}
                         fill
                         className="rounded-lg shadow-md object-cover"
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
                     />
                 </div>
 
-
-                {/* Step 3 */}
-                <h2 id="step3" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">3. Images: 5+ w/ metadata</h2>
+                {/* Key Concepts Section */}
+                <h2 id="key-concepts" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Key Concepts and Fundamentals</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
-                    Images enhance engagement and break up text, but for SEO, use at least 5 per post with optimized metadata. Compress images for speed using tools like TinyPNG, add descriptive alt text with keywords (e.g., &quot;SEO blog post checklist infographic&quot;), and include file names like &quot;seo-blog-checklist.jpg&quot;. This helps with image search traffic and accessibility.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-700">
-                    Visuals can increase time on page by 100%. Choose relevant, high-quality images or infographics to illustrate points, and ensure they&apos;re responsive for mobile.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Blog Images with Alt Text Optimization"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-
-                {/* Step 4 */}
-                <h2 id="step4" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">4. Links: 5+ internal + external</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Links build authority and keep users on your site longer. Include at least 5 internal links to related content (e.g., link to your &quot;SEO Strategy Guide&quot;) and 3+ external links to high-authority sites like Moz or Search Engine Journal. Use descriptive anchor text with keywords, but keep it natural to avoid penalties.
+                    Understanding the core concepts is essential for mastering any technology or methodology. 
+                    Let&apos;s break down the fundamental principles that form the foundation of this topic.
                 </p>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
-                    Internal links distribute page authority, while external ones show research depth. Track link performance with Google Analytics to refine your strategy.
+                    The key to success lies in understanding not just the &quot;how&quot; but also the &quot;why&quot; behind each concept. 
+                    This knowledge will enable you to make informed decisions and adapt to changing requirements.
                 </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
+                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-8">
                     <Image
-                        src="/images/automation-testing.webp"
-                        alt="Internal and External Links Illustration"
+                        src={post.featuredImage || "/images/automation-testing.webp"}
+                        alt="Key Concepts Illustration"
                         fill
                         className="rounded-lg shadow-md object-cover"
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
                     />
                 </div>
 
-                {/* Step 5 */}
-                <h2 id="step5" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">5. 1500+ words/blog post based on SERP</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Word count should be 1500+ based on what ranks in SERPs for your keyword—check competitors with tools like Surfer SEO. Focus on depth over fluff: cover subtopics, answer user queries, and provide value. Long-form content ranks better for competitive keywords as it signals comprehensiveness to Google.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Structure with short paragraphs and lists for readability. This post itself aims for 2000+ words to demonstrate the point.
-                </p>
-
-                {/* Step 6 */}
-                <h2 id="step6" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">6. Table of Contents: Easily Jump Around!</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    A table of contents (TOC) is a critical feature for long-form blog posts, especially those exceeding 1500 words like this one. It serves as a navigational roadmap, allowing readers to quickly jump to sections that interest them most, enhancing user experience (UX) and reducing bounce rates. To implement this effectively, place the TOC prominently after the introduction or within the first screen of content, using an HTML element or a styled list with anchor links to each section (e.g., `#step1`, `#step2`). Each entry should mirror the heading structure (H2 for main sections, H3 for subsections) and include concise, keyword-optimized titles that reflect the content below.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    From an SEO perspective, a TOC improves crawlability by providing internal linking opportunities, signaling to search engines the hierarchical structure of your content. Studies suggest that posts with TOCs can increase average session duration by up to 15-20% as readers explore multiple sections. Use clear, actionable language in the links—e.g., &quot;How to Optimize Titles&quot; instead of just &quot;Titles&quot;—to entice clicks. Additionally, ensure the TOC is sticky or collapsible on larger screens (via CSS or JavaScript) for mobile optimization, keeping it accessible without overwhelming the layout. Test its visibility across devices to confirm it enhances rather than detracts from readability.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    For design, style the TOC with a distinct background (e.g., light gray or blue) and sufficient padding to stand out, but avoid clutter. Include a &quot;Back to Top&quot; link at the end of each section to encourage continued engagement. This post’s TOC, located earlier, exemplifies this approach with clickable links to all 20 steps, making it a practical model. Regularly update the TOC if you add or revise sections to maintain accuracy and relevance, ensuring it remains a valuable tool for both users and search engines.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Table of Contents Design Example"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-                {/* Step 7 */}
-                <h2 id="step7" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">7. E-E-A-T: Show off expertise in the content</h2>
+                {/* Best Practices Section */}
+                <h2 id="best-practices" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Best Practices and Implementation</h2>
                 <p className="mb-4 text-sm sm:text-base text-gray-700">
-                    E-E-A-T (Experience, Expertise, Authoritativeness, Trustworthiness) is a cornerstone of Google’s ranking algorithm, especially for YMYL (Your Money or Your Life) topics. Demonstrate expertise by weaving your credentials, case studies, or data-driven insights into the content. For instance, mention specific results—like “increased traffic by 150% for a client using this checklist”—to build trust. Include references to reputable sources or original research to boost authority.
+                    Implementing best practices ensures that your work is efficient, maintainable, and scalable. 
+                    Here are the industry-standard approaches that professionals use to achieve optimal results.
                 </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Use a professional tone and avoid vague claims. Add a section highlighting your process or methodology, such as how you analyzed SERPs for this post. This not only educates readers but also signals to search engines that the content is reliable. Pair this with the author bio for a cohesive narrative.
+                <ul className="list-disc pl-6 mb-4 text-sm sm:text-base text-gray-700 space-y-2">
+                    <li>Follow established coding standards and conventions</li>
+                    <li>Implement comprehensive testing strategies</li>
+                    <li>Document your code and processes thoroughly</li>
+                    <li>Use version control effectively</li>
+                    <li>Optimize for performance and scalability</li>
+                </ul>
+
+                {/* Common Pitfalls Section */}
+                <h2 id="common-pitfalls" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Common Pitfalls to Avoid</h2>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    Learning from common mistakes can save you countless hours of debugging and frustration. 
+                    Here are the most frequent pitfalls and how to avoid them.
                 </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    By being aware of these common issues, you can proactively design solutions that are robust and reliable from the start.
+                </p>
+
+                {/* Advanced Techniques Section */}
+                <h2 id="advanced-techniques" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Advanced Techniques</h2>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    Once you&apos;ve mastered the basics, these advanced techniques will help you take your skills to the next level. 
+                    These strategies are used by experts to solve complex problems and optimize performance.
+                </p>
+                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-8">
                     <Image
-                        src="/images/automation-testing.webp"
-                        alt="E-E-A-T SEO Optimization Example"
+                        src={post.featuredImage || "/images/automation-testing.webp"}
+                        alt="Advanced Techniques"
                         fill
                         className="rounded-lg shadow-md object-cover"
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
                     />
                 </div>
 
+                {/* Tools and Resources Section */}
+                <h2 id="tools-resources" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Tools and Resources</h2>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    Having the right tools can significantly improve your productivity and the quality of your work. 
+                    Here are the essential tools and resources that professionals rely on.
+                </p>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    Stay updated with the latest tools and technologies to maintain a competitive edge in your field.
+                </p>
 
-                {/* Step 8 */}
-                <h2 id="step8" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">8. CTAs: In content, sidebar, conclusion</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Calls to Action (CTAs) guide readers toward desired actions, such as subscribing, booking a call, or downloading a resource. Include at least three CTAs: one in the content (e.g., “Learn more about SEO tools here”), one in the sidebar (e.g., “Hire us for SEO”), and one in the conclusion (e.g., “Book a free call”). Use action-oriented language like “Get Started” or “Discover Now” and make buttons visually distinct with contrasting colors.
+                {/* Real-World Examples Section */}
+                <h2 id="real-world-examples" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Real-World Examples</h2>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    Theory is important, but seeing how concepts are applied in real-world scenarios helps solidify understanding. 
+                    Let&apos;s explore some practical examples that demonstrate these principles in action.
                 </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Place CTAs strategically—after valuable insights or at natural transition points—to avoid disrupting the flow. Test CTA placement and wording with A/B testing to maximize conversion rates, which can improve by 10-20% with optimization.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
+                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-8">
                     <Image
-                        src="/images/automation-testing.webp"
-                        alt="Effective CTA Placement Illustration"
+                        src={post.featuredImage || "/images/automation-testing.webp"}
+                        alt="Real-World Examples"
                         fill
                         className="rounded-lg shadow-md object-cover"
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
                     />
                 </div>
 
+                {/* Performance Optimization Section */}
+                <h2 id="performance-optimization" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Performance Optimization</h2>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    Performance is crucial for user satisfaction and system efficiency. Learn how to identify bottlenecks 
+                    and implement optimizations that make a real difference.
+                </p>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    Continuous monitoring and optimization ensure that your applications remain fast and responsive as they scale.
+                </p>
 
-                {/* Step 9 */}
-                <h2 id="step9" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">9. Social share buttons</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Social share buttons encourage readers to distribute your content, amplifying reach beyond search. Place them in a visible sidebar or at the end of the post, including icons for Twitter, LinkedIn, and Facebook with pre-filled share links (e.g., `https://twitter.com/intent/tweet?url=your-url`). Ensure they’re styled consistently with your site’s design for a seamless look.
+                {/* Future Trends Section */}
+                <h2 id="future-trends" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Future Trends and Predictions</h2>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    The technology landscape is constantly evolving. Understanding emerging trends helps you stay ahead 
+                    and prepare for the future of the industry.
                 </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Sharing increases referral traffic and backlinks, key for SEO. Add a subtle prompt like “Found this helpful? Share it!” to boost engagement. Track shares with analytics tools to identify popular content.
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    By staying informed about upcoming developments, you can position yourself and your projects for long-term success.
                 </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Social Share Buttons Design"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
+
+                {/* Conclusion Section */}
+                <h2 id="conclusion" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700 scroll-mt-40">Conclusion and Next Steps</h2>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    We&apos;ve covered a comprehensive overview of {post.title.toLowerCase()}. The knowledge and techniques 
+                    discussed in this article provide a solid foundation for both beginners and experienced practitioners.
+                </p>
+                <p className="mb-4 text-sm sm:text-base text-gray-700">
+                    To continue your learning journey, explore the related articles below and put these concepts into practice 
+                    through hands-on projects. Remember, mastery comes through consistent practice and continuous learning.
+                </p>
+
+                {/* Tags Section */}
+                <div className="mt-8 mb-8">
+                    <h3 className="text-xl font-bold mb-3 text-gray-700">Tags</h3>
+                    <div className="flex flex-wrap gap-2">
+                        {post.tags.map((tag) => (
+                            <span
+                                key={tag}
+                                className="px-3 py-1 bg-blue-100 text-blue-700 rounded-full text-sm font-medium hover:bg-blue-200 transition-colors duration-200"
+                            >
+                                #{tag}
+                            </span>
+                        ))}
+                    </div>
                 </div>
 
-
-                {/* Step 10 */}
-                <h2 id="step10" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">10. Top notch quality writing</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Quality writing is the backbone of a successful blog post. Use clear, concise language tailored to your audience, avoiding jargon unless explained. Focus on delivering value—answer questions, solve problems, or entertain—while keeping sentences short (15-20 words) for readability. Edit ruthlessly to eliminate fluff, aiming for a Flesch-Kincaid score of 60-70 for broad accessibility.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Incorporate storytelling or real-world examples to engage readers. Use tools like Grammarly or Hemingway to polish grammar and style. High-quality content ranks better and keeps visitors longer, reducing bounce rates by up to 30%.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Quality Writing Infographic"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
+                {/* Share Section */}
+                <div className="border-t border-gray-200 pt-6 mt-8">
+                    <h3 className="text-xl font-bold mb-4 text-gray-700">Share this article</h3>
+                    <div className="flex gap-4">
+                        <Link
+                            href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent(post.title)}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200"
+                        >
+                            <FaXTwitter className="w-5 h-5" />
+                            <span className="text-sm font-medium">Twitter</span>
+                        </Link>
+                        <Link
+                            href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                        >
+                            <FaLinkedin className="w-5 h-5" />
+                            <span className="text-sm font-medium">LinkedIn</span>
+                        </Link>
+                        <Link
+                            href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                        >
+                            <FaFacebook className="w-5 h-5" />
+                            <span className="text-sm font-medium">Facebook</span>
+                        </Link>
+                    </div>
                 </div>
-
-
-                {/* Step 11 */}
-                <h2 id="step11" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">11. URL: Short + includes keyword</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    A well-optimized URL boosts SEO by including the primary keyword and keeping it short (under 60 characters).
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Short URLs are easier for users to remember and type, improving click-through rates from search results. Use hyphens to separate words and maintain consistency with your site’s structure. Update old URLs during content refreshes to align with this standard.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="SEO URL Structure Example"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-
-                {/* Step 12 */}
-                <h2 id="step12" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">12. Optimize for mobile experience</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    With over 60% of web traffic from mobile devices in 2025, optimization is non-negotiable. Use responsive design with flexible images, readable fonts, and touch-friendly buttons. Test on multiple devices (iPhone, Android, tablets) using tools like Google’s Mobile-Friendly Test to ensure no elements are cut off or hard to navigate.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Prioritize fast load times with compressed images and lazy loading. Google uses mobile-first indexing, so a seamless mobile experience directly impacts rankings. Avoid pop-ups that block content, opting for exit-intent ones instead.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Mobile Optimization Infographic"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-
-                {/* Step 13 */}
-                <h2 id="step13" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">13. Proper spacing: Make it readable</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Proper spacing enhances readability by breaking content into digestible chunks. Use short paragraphs (3-4 lines), ample line spacing (1.5-2em), and generous margins. Add horizontal rules or dividers between sections to create visual breaks, making the post skimmable for busy readers.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    This improves user retention—studies show well-spaced content reduces cognitive load by 25%. Pair with bullet points or numbered lists for complex ideas, ensuring the layout feels airy and inviting across all devices.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Readability and Spacing Example"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-                {/* Step 14 */}
-                <h2 id="step14" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">14. Sidebar w/ links + clear Call to Action</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    A sidebar enhances navigation and engagement. Include 5+ internal links to related posts (e.g., “SEO Tools Guide”) and 3+ external links to authority sites. Pair this with a clear CTA, like “Hire us for SEO,” styled as a button for prominence. Keep the sidebar sticky on desktop for constant visibility.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    This keeps readers on-site longer and drives conversions. Use contrasting colors (e.g., blue on white) for CTAs to stand out, and ensure links open in new tabs to retain users on the current page.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Sidebar Design with CTA Example"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-                {/* Step 15 */}
-                <h2 id="step15" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">15. Font: readable + popular for blogs</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Choose a readable, blog-popular font like Open Sans, Lato, or Roboto, with a size of 16-18px for body text. Ensure high contrast with a dark color (e.g., #333333) against a light background. Use bold or italic sparingly for emphasis, keeping the focus on legibility.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Readable fonts reduce eye strain, encouraging longer reads—up to 20% more time on page. Test font pairings with tools like Google Fonts, ensuring compatibility across browsers and devices.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Readable Font Selection Guide"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-
-                {/* Step 16 */}
-                <h2 id="step16" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">16. Color: Easy on the eyes - #333333</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Use a dark gray like #333333 for text to ensure readability without straining eyes, especially on white or light backgrounds. Complement with accent colors (e.g., blue #0066cc) for headings or CTAs, maintaining a clean, professional palette.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    This color choice aligns with web accessibility standards (WCAG) and reduces fatigue, potentially increasing time on page by 15%. Avoid bright or neon colors for body text to keep the focus on content.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Color Psychology for Web Design"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-
-                {/* Step 17 */}
-                <h2 id="step17" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">17. Exit intent pop up to capture leads</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    An exit-intent pop-up triggers when a user is about to leave, offering a last-chance CTA like “Subscribe for SEO tips” or “Get a free audit.” Use a non-intrusive design with a clear close button, ensuring it loads quickly to avoid penalties.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    This can capture 5-10% more leads, especially with incentives like ebooks. Implement with JavaScript and test timing to balance conversion and user experience—too early or frequent pop-ups can annoy visitors.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Exit Intent Pop-Up Example"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-
-                {/* Step 18 */}
-                <h2 id="step18" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">18. Proper use of headings (H1, H2, etc.)</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Headings structure content for readability and SEO. Use one H1 for the title, H2s for main sections (like this one), and H3s for subsections. Incorporate keywords naturally—e.g., “SEO Headings Best Practices”—and keep them concise (under 70 characters).
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    This helps search engines understand content hierarchy and improves skimmability, reducing bounce rates by 10-15%. Use tools like Yoast SEO to ensure proper nesting and keyword distribution.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Proper Heading Structure Example"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-
-                {/* Step 19 */}
-                <h2 id="step19" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">19. Video embed + infographics</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Embed videos and infographics to boost engagement and time on page. Use YouTube embeds for SEO benefits, as Google owns it. Choose relevant videos, like tutorials, and create or source infographics that visualize data. This multimedia approach caters to different learning styles and can reduce bounce rates by 50%.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Ensure videos are optimized with transcripts and keywords in titles. Here’s an embedded video on writing SEO blog posts:
-                </p>
-                <div className="relative w-full aspect-w-16 aspect-h-9 mb-4">
-                    <iframe
-                        src="https://www.youtube.com/embed/w7nmPo1O4Dk"
-                        title="How To Write Blog Posts – AI + SEO Strategy 2025"
-                        allowFullScreen
-                        className="w-full h-full rounded-lg"
-                    ></iframe>
-                </div>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Video Embed and Infographics Example"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
-                {/* Step 20 */}
-                <h2 id="step20" className="text-2xl sm:text-3xl font-bold mb-4 text-gray-700">20. Quotes from SMEs on the topic</h2>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Incorporate quotes from subject matter experts (SMEs) to add credibility and diverse perspectives. Source from interviews, articles, or social media, attributing properly. This enhances E-E-A-T and makes content more authoritative. For example, use quotes in sections to reinforce points, linking to sources for backlinks potential.
-                </p>
-                <p className="mb-4 text-sm sm:text-base text-gray-600">
-                    Quotes break up text and provide social proof. Here’s one: “The best SEO strategy is to focus on the user.” - Marcus Tober. Aim for 2-3 per post.
-                </p>
-                <div className="relative w-full h-48 sm:h-64 md:h-72 mb-4">
-                    <Image
-                        src="/images/automation-testing.webp"
-                        alt="Expert Quotes Graphic"
-                        fill
-                        className="rounded-lg shadow-md object-cover"
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 80vw, 50vw"
-                    />
-                </div>
-
             </main>
 
-            {/* Sidebar */}
-            <aside className="mt-6 lg:mt-0">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:flex lg:flex-col md:gap-4 space-y-6 lg:sticky lg:top-8">
-                    {/* Newsletter Subscription Form */}
-                    <div className="bg-gradient-to-br from-blue-100 to-indigo-100 p-4 sm:p-6 rounded-lg shadow-md">
-                        <h3 className="text-lg sm:text-xl font-bold mb-4 text-gray-800">Subscribe to Our Newsletter</h3>
-                        <p className="text-xs sm:text-sm text-gray-600 mb-4">Stay updated with the latest SEO tips and tricks!</p>
-                        <div className="space-y-4">
-                            <input
-                                type="email"
-                                placeholder="Enter your email"
-                                className="w-full px-3 py-2 border text-gray-800 border-gray-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
-                            />
-                            <button
-                                type="submit"
-                                className="w-full bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out"
-                            >
-                                Subscribe
-                            </button>
-                        </div>
-                    </div>
-
-                    {/* Social Share Buttons */}
-                    <div className="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-md text-center">
-                        <h3 className="text-lg sm:text-xl font-bold mb-2 text-gray-700">Share This Post</h3>
-                        <div className="flex space-x-4 justify-center">
-                            <Link href="https://twitter.com/intent/tweet?url=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality&text=How Does Validation & Optimization Improve Web Application Quality?" aria-label="Share on Twitter">
-                                <FaXTwitter className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 hover:text-blue-600" />
-                            </Link>
-                            <Link href="https://www.linkedin.com/shareArticle?mini=true&url=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality" aria-label="Share on LinkedIn">
-                                <FaLinkedin className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 hover:text-blue-600" />
-                            </Link>
-                            <Link href="https://www.facebook.com/sharer/sharer.php?u=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality" aria-label="Share on Facebook">
-                                <FaFacebook className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 hover:text-blue-600" />
-                            </Link>
-                            <Link href="https://www.instagram.com/sharer/sharer.php?u=https://www.testriq.com/blog/post/how-does-validation-optimization-improve-web-application-quality" aria-label="Share on Instagram">
-                                <FaInstagram className="w-5 h-5 sm:w-6 sm:h-6 text-gray-600 hover:text-blue-600" />
-                            </Link>
-                        </div>
-                    </div>
-
-                    {/* Related Articles */}
-                    <div className="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-md">
-                        <h3 className="text-lg sm:text-xl font-bold mb-2 text-gray-600">Related Articles</h3>
-                        <ul className="space-y-2 text-xs sm:text-sm">
-                            {Array(3).fill(null).map((_, index) => (
-                                <li key={index}>
-                                    <Link href="https://www.testriq.com/blog/post/how-to-test-web-applications" className="flex items-center space-x-3 p-2 hover:bg-gray-200 rounded-lg transition-all duration-200">
-                                        <Image
-                                            src="/images/automation-testing.webp"
-                                            alt="blog-post-image"
-                                            width={48}
-                                            height={48}
-                                            className="rounded-lg object-cover"
-                                            sizes="48px"
-                                        />
-                                        <div>
-                                            <p className="font-semibold text-blue-500">What is Software Testing?</p>
-                                            <div className="flex items-center gap-2 text-xs text-gray-500 mt-1">
-                                                <span>AI Application Testing</span>
-                                                <span>.</span>
-                                                <span>3 min read</span>
-                                            </div>
-                                        </div>
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Categories */}
-                    <div className="bg-gray-100 p-4 sm:p-6 rounded-lg shadow-md">
-                        <h3 className="text-lg sm:text-xl font-bold mb-2 text-gray-700">Categories</h3>
-                        <ul className="space-y-2 text-xs sm:text-sm">
-                            {[
-                                { href: "https://www.testriq.com/blog/post/how-to-test-web-applications", text: "AI Application Testing", count: 52 },
-                                { href: "https://www.testriq.com/blog/post/what-is-software-testing", text: "Automation Testing Services", count: 80 },
-                                { href: "https://www.testriq.com/blog/post/ai-testing-strategies", text: "API Testing", count: 15 },
-                                { href: "https://www.testriq.com/blog/post/automation-testing-best-practices", text: "Best Practices", count: 24 },
-                                { href: "https://www.testriq.com/blog/post/performance-testing-guide", text: "Career Advice in Software Testing", count: 2 },
-                            ].map((category) => (
-                                <li key={category.text} className="flex justify-between">
-                                    <Link href={category.href} className="text-gray-800 hover:text-blue-600 transition-all duration-150">
-                                        {category.text}
-                                    </Link>
-                                    <span>{category.count}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Popular Tags */}
-                    <div className="bg-gray-100 p-6 rounded-lg shadow-md">
-                        <h3 className="text-xl font-bold mb-2 text-gray-700">Popular Tags</h3>
-                        <div className="grid grid-cols-2 text-center items-center space-y-2 space-x-2 text-sm">
-                            {[
-                                "#Automated Testing",
-                                "#appium",
-                                "#Agile Testing",
-                                "#accessibility testing",
-                                "#API Testing Tools",
-                                "#ai in testing",
-                                "#Agile QA",
-                                "#API integration testing",
-                            ].map((tag) => (
-                                <Link
-                                    key={tag}
-                                    href={`https://www.testriq.com/blog/post/performance-testing-guide`}
-                                    className="text-gray-800 bg-gray-200 rounded-full hover:bg-blue-600 hover:text-white hover:rounded-full py-1 transition-all ease-in-out duration-200"
-                                >
-                                    {tag}
-                                </Link>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+            {/* Sidebar with Related Posts */}
+            <aside className="lg:col-span-1">
+                <BlogSidebarRelated 
+                    currentPostId={post.id} 
+                    categoryId={post.categoryId} 
+                />
             </aside>
         </section>
     );
 };
+

@@ -2,9 +2,17 @@
 
 import { TrendingUp, FolderOpen, Mail, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { POPULAR_POSTS, getAllCategories, getAllPosts } from "@/data/BlogPostData";
+import { getAllCategories, getPostsByCategory, getAllPosts } from "@/data/BlogPostData";
 
-const BlogSidebar = () => {
+interface BlogSidebarCategoryProps {
+  categoryId: string;
+  categoryName: string;
+}
+
+const BlogSidebarCategory = ({ categoryId, categoryName }: BlogSidebarCategoryProps) => {
+  // Get latest 5 posts from the current category
+  const categoryPosts = getPostsByCategory(categoryId).slice(0, 5);
+
   // Get ALL categories
   const allCategories = getAllCategories();
   const allPosts = getAllPosts();
@@ -17,37 +25,43 @@ const BlogSidebar = () => {
 
   return (
     <aside className="space-y-6">
-      {/* Popular Posts Section */}
+      {/* Latest Posts from Current Category */}
       <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-6 shadow-sm border border-indigo-100">
         <div className="flex items-center gap-2 mb-5">
           <TrendingUp className="w-5 h-5 text-indigo-600" />
-          <h3 className="text-lg font-bold text-gray-900">Popular Posts</h3>
+          <h3 className="text-lg font-bold text-gray-900">Latest in {categoryName}</h3>
         </div>
-        <div className="space-y-4">
-          {POPULAR_POSTS.map((post) => (
-            <Link
-              key={post.id}
-              href={post.slug}
-              className="group block"
-            >
-              <div className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-lg flex items-center justify-center font-bold text-sm shadow-md">
-                  {post.rank}
-                </span>
-                <div className="flex-1 min-w-0">
-                  <h4 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors duration-200 line-clamp-2 leading-snug">
-                    {post.title}
-                  </h4>
-                  <div className="flex items-center gap-2 mt-1.5 text-xs text-gray-600">
-                    <span className="px-2 py-0.5 bg-white rounded-full font-medium">
-                      {post.category}
-                    </span>
+        
+        {categoryPosts.length > 0 ? (
+          <div className="space-y-4">
+            {categoryPosts.map((post, index) => (
+              <Link
+                key={post.id}
+                href={`/blog/${post.slug}`}
+                className="group block"
+              >
+                <div className="flex items-start gap-3">
+                  <span className="flex-shrink-0 w-8 h-8 bg-indigo-600 text-white rounded-lg flex items-center justify-center font-bold text-sm shadow-md">
+                    {index + 1}
+                  </span>
+                  <div className="flex-1 min-w-0">
+                    <h4 className="text-sm font-semibold text-gray-900 group-hover:text-indigo-600 transition-colors duration-200 line-clamp-2 leading-snug">
+                      {post.title}
+                    </h4>
+                    <div className="flex items-center gap-2 mt-1.5 text-xs text-gray-600">
+                      <span className="px-2 py-0.5 bg-white rounded-full font-medium">
+                        {post.category}
+                      </span>
+                      <span className="text-indigo-600 font-semibold">{post.readTime}</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className="text-sm text-gray-600">No posts found in this category.</p>
+        )}
       </div>
 
       {/* Categories Section - FIXED: No scroll, full height */}
@@ -64,9 +78,17 @@ const BlogSidebar = () => {
             <Link
               key={category.id}
               href={`/blog/category/${category.slug}`}
-              className="group flex items-center justify-between p-3 bg-white hover:bg-purple-50 rounded-lg transition-all duration-200 border border-transparent hover:border-purple-200"
+              className={`group flex items-center justify-between p-3 bg-white hover:bg-purple-50 rounded-lg transition-all duration-200 border ${
+                category.id === categoryId 
+                  ? 'border-purple-400 bg-purple-50' 
+                  : 'border-transparent hover:border-purple-200'
+              }`}
             >
-              <span className="text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors">
+              <span className={`text-sm font-medium transition-colors ${
+                category.id === categoryId 
+                  ? 'text-purple-700 font-bold' 
+                  : 'text-gray-700 group-hover:text-purple-700'
+              }`}>
                 {category.name}
               </span>
               <span className="px-2.5 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">
@@ -115,7 +137,7 @@ const BlogSidebar = () => {
         </p>
       </div>
 
-      {/* Tags Cloud */}
+      {/* Popular Tags */}
       <div className="bg-gradient-to-br from-cyan-50 to-teal-50 rounded-xl p-6 shadow-sm border border-cyan-100">
         <h3 className="text-lg font-bold text-gray-900 mb-4">Popular Tags</h3>
         <div className="flex flex-wrap gap-2">
@@ -134,5 +156,5 @@ const BlogSidebar = () => {
   );
 };
 
-export default BlogSidebar;
+export default BlogSidebarCategory;
 
