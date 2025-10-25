@@ -25,7 +25,7 @@ interface BlogContent {
 const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
   const [content, setContent] = React.useState<BlogContent | null>(null);
   const [loading, setLoading] = React.useState(true);
-  const post = getPostBySlug(slug);
+
 
   React.useEffect(() => {
     async function loadContent() {

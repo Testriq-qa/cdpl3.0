@@ -1,4 +1,3 @@
-import dynamic from 'next/dynamic';
 import React from 'react';
 import type { Metadata } from 'next';
 import { BlogCategoryMenu, BlogSidebar } from '@/components/blog';
@@ -16,8 +15,9 @@ export async function generateStaticParams() {
 }
 
 // Generate dynamic metadata for each category (SEO)
-export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-    const category = getCategoryBySlug(params.slug);
+export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
+    const { slug } = await params;
+    const category = getCategoryBySlug(slug);
 
     if (!category) {
         return {
@@ -89,8 +89,9 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     };
 }
 
-export default function CategoryPage({ params }: { params: { slug: string } }) {
-    const category = getCategoryBySlug(params.slug);
+export default async function CategoryPage({ params }: { params: Promise<{ slug: string }> }) {
+    const { slug } = await params;
+    const category = getCategoryBySlug(slug);
 
     if (!category) {
         notFound();
@@ -165,4 +166,3 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
         </>
     );
 }
-

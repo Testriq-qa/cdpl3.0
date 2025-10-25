@@ -5,10 +5,27 @@ import { Search, ChevronDown, X } from "lucide-react";
 import Link from "next/link";
 import { getMainCategories, getDropdownCategories, getAllPosts } from "@/data/BlogPostData";
 
+interface BlogPost {
+  id: string;
+  title: string;
+  description: string;
+  category: string;
+  author: string;
+  tags: string[];
+  slug: string;
+  readTime: string;
+}
+
+interface BlogCategory {
+  id: string;
+  name: string;
+  slug: string;
+}
+
 const BlogCategoryMenu = () => {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
-  const [searchResults, setSearchResults] = useState<any[]>([]);
+  const [searchResults, setSearchResults] = useState<BlogPost[]>([]);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -17,13 +34,13 @@ const BlogCategoryMenu = () => {
   const searchResultsRef = useRef<HTMLDivElement>(null);
 
   // Get categories from data file
-  const mainCategories = getMainCategories();
-  const dropdownCategories = getDropdownCategories();
+  const mainCategories: BlogCategory[] = getMainCategories();
+  const dropdownCategories: BlogCategory[] = getDropdownCategories();
 
   // Real-time search functionality
   useEffect(() => {
     if (searchQuery.trim().length > 0) {
-      const allPosts = getAllPosts();
+      const allPosts: BlogPost[] = getAllPosts();
       const filtered = allPosts.filter((post) => {
         const searchLower = searchQuery.toLowerCase();
         return (
@@ -297,4 +314,3 @@ const BlogCategoryMenu = () => {
 };
 
 export default BlogCategoryMenu;
-

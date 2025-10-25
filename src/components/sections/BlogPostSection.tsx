@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaXTwitter, FaLinkedin, FaFacebook, FaInstagram } from 'react-icons/fa6';
-import { getPostBySlug, getCategoryById, getLatestPosts, SIDEBAR_CATEGORIES } from '@/data/BlogPostData';
+import { getPostBySlug, getLatestPosts, SIDEBAR_CATEGORIES } from '@/data/BlogPostData';
 import { notFound } from 'next/navigation';
 
 interface BlogPostSectionProps {
@@ -18,7 +18,6 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
         notFound();
     }
 
-    const category = getCategoryById(post.categoryId);
     const recentPosts = getLatestPosts(5);
 
     return (
