@@ -1,4 +1,3 @@
-// components/Sections/JobsLiveJobsJobsTickerSection.tsx
 "use client";
 
 import { MapPin, Calendar } from "lucide-react";
@@ -13,13 +12,12 @@ const formatDate = (iso: string) =>
 
 export function JobsLiveJobsJobsTickerSection({ jobs }: { jobs: Job[] }) {
   return (
-    <div className="w-full border-y border-slate-100 bg-white/70">
+    <div className="w-full border-y border-slate-100 bg-white/70 font-sans">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div
-          className="relative overflow-hidden py-3 text-xs text-slate-700"
+          className="relative overflow-hidden py-3 text-sm text-slate-700" /* 14px = 0.875rem */
           style={{
-            maskImage:
-              "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
+            maskImage: "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
             WebkitMaskImage:
               "linear-gradient(to right, transparent, black 12%, black 88%, transparent)",
           }}

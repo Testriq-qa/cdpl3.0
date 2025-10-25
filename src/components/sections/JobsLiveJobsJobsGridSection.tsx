@@ -10,7 +10,7 @@ import type { Job } from "@/lib/jobsData";
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
   return (
     <div className="flex items-center justify-center py-16">
-      <p className="text-gray-500">{label}</p>
+      <p className="text-slate-500">{label}</p> {/* match About color scale */}
     </div>
   );
 }
@@ -169,7 +169,7 @@ export function JobsLiveJobsJobsGridSection({
   return (
     <>
       {/* Results meta */}
-      <div className="mb-3 mt-2 flex items-center justify-between text-sm text-slate-600">
+      <div className="mb-3 mt-2 flex items-center justify-between text-sm text-slate-600 font-sans">
         <span>
           Showing{" "}
           <span className="font-semibold">
@@ -186,7 +186,7 @@ export function JobsLiveJobsJobsGridSection({
       </div>
 
       {/* Details-only list */}
-      <section aria-label="Job details">
+      <section aria-label="Job details" className="font-sans">
         <ul className="grid grid-cols-1 gap-y-6 md:gap-y-8">
           <AnimatePresence mode="popLayout">
             {visibleItems.map((job) => (
@@ -212,7 +212,7 @@ export function JobsLiveJobsJobsGridSection({
           </AnimatePresence>
 
           {filtered.length === 0 && (
-            <li className="text-sm text-slate-500">
+            <li className="text-sm text-slate-600">
               No matching roles right now. Try clearing filters or broadening your search.
             </li>
           )}

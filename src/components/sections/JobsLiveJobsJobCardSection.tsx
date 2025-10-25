@@ -75,13 +75,9 @@ export function JobsLiveJobsJobCardSection({
   const imageBadge =
     job.type || job.mode || (job.eventDate ? formatDate(job.eventDate) : undefined);
 
-  // ---------- Fallback logic (fixed) ----------
   const candidateSrcs = useMemo(() => {
     const hasExt = (p?: string) => !!p && /\.(png|jpe?g|webp|gif|avif|svg)$/i.test(p);
-
-    // order for generic images; your dataset is mostly .jpg
     const EXT_ORDER_GENERIC = [".jpg", ".jpeg", ".png", ".webp"];
-    // order for the fallback (bag icon is .png)
     const EXT_ORDER_FALLBACK = [".png", ".jpg", ".jpeg", ".webp"];
 
     const expand = (base?: string, exts: string[] = EXT_ORDER_GENERIC) => {
@@ -93,7 +89,6 @@ export function JobsLiveJobsJobCardSection({
     const fallbackBase =
       job.imageFallback || "/live-jobs_images/jobs_image/cdpl-no-job-image-bag-icon";
 
-    // build and de-duplicate
     const arr = [
       ...expand(job.bannerImage, EXT_ORDER_GENERIC),
       ...expand(fallbackBase, EXT_ORDER_FALLBACK),
@@ -104,21 +99,78 @@ export function JobsLiveJobsJobCardSection({
   const [imgIdx, setImgIdx] = useState(0);
   const [giveUp, setGiveUp] = useState(false);
   const currentSrc = candidateSrcs[imgIdx];
-
-  // Bypass optimizer for local assets so onError triggers reliably and we can iterate candidates.
   const isLocal = !!currentSrc && currentSrc.startsWith("/");
 
   const handleImgError = () => {
     if (imgIdx < candidateSrcs.length - 1) setImgIdx((i) => i + 1);
     else setGiveUp(true);
   };
-  // --------------------------------------------
 
   return (
-    <article className="relative">
-      <div className="gap-4 md:flex md:flex-row md:items-start md:gap-6">
-        {/* LEFT */}
-        <div className="min-w-0 md:flex-1">
+    <article className="relative font-sans">
+      <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+        {/* IMAGE: above on small screens, right on md+; narrower on large screens */}
+        <aside
+          className="
+            order-1 md:order-2 md:self-start relative
+            w-full md:w-[300px] lg:w-[340px] xl:w-[380px]
+            md:shrink-0
+          "
+        >
+          {!giveUp && currentSrc ? (
+            <Image
+              key={currentSrc}
+              src={currentSrc}
+              alt={job.bannerImageAlt || `${job.company} hiring`}
+              width={1600}
+              height={900}
+              className="w-full h-auto rounded-2xl object-contain bg-white"
+              priority={false}
+              unoptimized={isLocal}
+              onError={handleImgError}
+              onLoadingComplete={(img) => {
+                if (!img?.naturalWidth) handleImgError();
+              }}
+            />
+          ) : (
+            <div className="flex h-56 w-full items-center justify-center rounded-2xl bg-slate-50 text-slate-400 sm:h-64">
+              <ImageOff className="h-8 w-8" />
+            </div>
+          )}
+
+          {imageBadge && (
+            <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-slate-200 backdrop-blur-sm">
+              <Tag className="h-3.5 w-3.5 opacity-70" />
+              <span className="truncate max-w-[240px] sm:max-w-[300px] md:max-w-[300px]">
+                {imageBadge}
+              </span>
+            </div>
+          )}
+
+          <div className="mt-2 flex justify-end">
+            <button
+              onClick={() => onShare(job)}
+              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              aria-label={`Share ${job.title}`}
+              title={isCopied ? "Link copied!" : "Share"}
+            >
+              {isCopied ? (
+                <>
+                  <Copy className="h-3.5 w-3.5" />
+                  Copied
+                </>
+              ) : (
+                <>
+                  <Share2 className="h-3.5 w-3.5" />
+                  Share
+                </>
+              )}
+            </button>
+          </div>
+        </aside>
+
+        {/* MAIN CONTENT */}
+        <div className="order-2 md:order-1 min-w-0 md:flex-1">
           <div className="flex items-start gap-3">
             <div
               className="grid h-10 w-10 shrink-0 place-items-center rounded-xl"
@@ -135,7 +187,7 @@ export function JobsLiveJobsJobCardSection({
                 {job.title}
               </h3>
 
-              <p className="mt-0.5 flex flex-wrap items-center gap-2 text-[13px] text-slate-600">
+              <p className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-slate-600">
                 <span className="inline-flex items-center">
                   <Building2 className="mr-1 h-3.5 w-3.5" />
                   {job.company}
@@ -201,7 +253,7 @@ export function JobsLiveJobsJobCardSection({
               <h4 className="mb-1 text-sm font-semibold text-slate-900">What we’re looking for</h4>
               <ul className="grid gap-1.5">
                 {job.highlights.slice(0, 6).map((h) => (
-                  <li key={h} className="text-[13.5px] leading-relaxed text-slate-700">
+                  <li key={h} className="text-sm leading-relaxed text-slate-600">
                     • {h}
                   </li>
                 ))}
@@ -214,7 +266,7 @@ export function JobsLiveJobsJobCardSection({
               <h4 className="mb-1 text-sm font-semibold text-slate-900">Roles & responsibilities</h4>
               <ul className="grid gap-1.5">
                 {job.responsibilities.slice(0, 8).map((r, i) => (
-                  <li key={`${i}-${r}`} className="text-[13.5px] leading-relaxed text-slate-700">
+                  <li key={`${i}-${r}`} className="text-sm leading-relaxed text-slate-600">
                     • {r}
                   </li>
                 ))}
@@ -244,7 +296,7 @@ export function JobsLiveJobsJobCardSection({
           {(job.venue || job.eventDate || job.timeWindow || job.location) && (
             <div className="mt-5 border-t border-slate-100 pt-3">
               <h4 className="text-sm font-semibold text-slate-900">Venue & schedule</h4>
-              <div className="mt-2 grid gap-1.5 text-[13.5px] leading-relaxed text-slate-700">
+              <div className="mt-2 grid gap-1.5 text-sm leading-relaxed text-slate-600">
                 {job.venue && (
                   <p className="inline-flex items-start">
                     <MapPin className="mr-1 mt-[2px] h-3.5 w-3.5 text-slate-500" />
@@ -272,7 +324,7 @@ export function JobsLiveJobsJobCardSection({
               <h4 className="text-sm font-semibold text-slate-900">Contacts</h4>
               <ul className="mt-2 grid gap-1.5">
                 {job.contacts.slice(0, 4).map((c, i) => (
-                  <li key={`${i}-${c}`} className="text-[13.5px] leading-relaxed text-slate-700">
+                  <li key={`${i}-${c}`} className="text-sm leading-relaxed text-slate-600">
                     • {c}
                   </li>
                 ))}
@@ -309,78 +361,6 @@ export function JobsLiveJobsJobCardSection({
             )}
           </div>
         </div>
-
-        {/* RIGHT */}
-        <aside className="order-first md:order-none md:w-[320px] lg:w-[360px] md:flex md:flex-col md:items-end md:gap-3 md:self-start">
-          <button
-            onClick={() => onShare(job)}
-            className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300"
-            aria-label={`Share ${job.title}`}
-            title={isCopied ? "Link copied!" : "Share"}
-          >
-            {isCopied ? (
-              <>
-                <Copy className="h-3.5 w-3.5" />
-                Copied
-              </>
-            ) : (
-              <>
-                <Share2 className="h-3.5 w-3.5" />
-                Share
-              </>
-            )}
-          </button>
-
-          <div
-            className="group relative mt-2 w-full overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-orange-50 via-white to-slate-50 shadow-sm"
-            style={{
-              backgroundImage:
-                "linear-gradient(180deg, rgba(255,140,0,0.06), rgba(255,140,0,0)), radial-gradient(1000px 300px at -10% -10%, rgba(255,140,0,0.10), rgba(255,140,0,0)), radial-gradient(600px 200px at 110% 120%, rgba(2,132,199,0.10), rgba(2,132,199,0))",
-            }}
-          >
-            <div className="relative m-2 rounded-xl bg-white/70 p-2 ring-1 ring-white/60 backdrop-blur-sm">
-              <div className="relative aspect-video w-full overflow-hidden rounded-lg ring-1 ring-slate-200">
-                {!giveUp && currentSrc ? (
-                  <Image
-                    key={currentSrc}
-                    src={currentSrc}
-                    alt={job.bannerImageAlt || `${job.company} hiring`}
-                    fill
-                    className="object-contain"
-                    sizes="(max-width: 767px) 100vw, 360px"
-                    priority={false}
-                    unoptimized={isLocal}           // <- bypass optimizer for local paths
-                    onError={handleImgError}
-                    onLoadingComplete={(img) => {
-                      if (!img?.naturalWidth) handleImgError();
-                    }}
-                  />
-                ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-slate-50 text-slate-400">
-                    <ImageOff className="h-8 w-8" />
-                  </div>
-                )}
-
-                <div className="pointer-events-none absolute inset-0 rounded-lg bg-gradient-to-b from-transparent via-transparent to-black/[0.03]" />
-
-                {imageBadge && (
-                  <div className="absolute left-2 top-2 inline-flex items-center gap-1 rounded-full bg-white/85 px-2 py-1 text-[10.5px] font-semibold text-slate-700 ring-1 ring-slate-200 backdrop-blur-sm">
-                    <Tag className="h-3 w-3 opacity-70" />
-                    <span className="truncate max-w-[160px]">{imageBadge}</span>
-                  </div>
-                )}
-
-                <div
-                  className="pointer-events-none absolute inset-0 rounded-lg opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{
-                    background:
-                      "radial-gradient(600px 200px at -10% -10%, rgba(255,255,255,0.45), transparent 60%)",
-                  }}
-                />
-              </div>
-            </div>
-          </div>
-        </aside>
       </div>
     </article>
   );

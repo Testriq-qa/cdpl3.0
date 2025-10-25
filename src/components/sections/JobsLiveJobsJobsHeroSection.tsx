@@ -36,86 +36,81 @@ export default function JobsLiveJobsJobsHeroSection({
   );
 
   return (
-    <section aria-label="CDPL jobs hero" className="bg-white text-neutral-900">
-      {/* Container spacing & breadcrumb position aligned with MentorHeroSection */}
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        {/* Breadcrumb (Jobs is NOT a link) — same placement as mentor page */}
+    <section aria-label="CDPL jobs hero" className="bg-white text-slate-900">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8 font-sans">
+        {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-3">
-          <ol className="flex items-center gap-2 text-sm text-neutral-500">
+          <ol className="flex items-center gap-2 text-sm text-slate-500">
             <li>
               <Link href="/" className="hover:underline">
                 Home
               </Link>
             </li>
-            <li className="text-neutral-400" aria-hidden="true">
+            <li className="text-slate-400" aria-hidden="true">
               /
             </li>
             <li>
-              <span className="text-neutral-600">Jobs</span>
+              <span className="text-slate-600">Jobs</span>
             </li>
-            <li className="text-neutral-400" aria-hidden="true">
+            <li className="text-slate-400" aria-hidden="true">
               /
             </li>
-            <li className="font-semibold text-neutral-700">Live Jobs</li>
+            <li className="font-semibold text-slate-700">Live Jobs</li>
           </ol>
         </nav>
 
-        {/* FLEX on md+: image sits BESIDE content, top-aligned; on small screens image goes below */}
         <div className="flex flex-col gap-8 md:flex-row md:items-start md:gap-8 lg:gap-12">
-          {/* LEFT — content (give it more width at ~1024px to avoid squeeze) */}
+          {/* LEFT — hero copy (matched to About hero) */}
           <div className="order-1 md:order-1 max-w-2xl md:flex-1 md:basis-[60%] lg:basis-[62%]">
             <motion.div
               initial={{ opacity: 0, y: 6 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1"
+              className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur sm:text-xs"
             >
               <Sparkles className="h-3.5 w-3.5 text-[#ff8c00]" />
-              <span className="text-xs font-medium text-neutral-700">
-                CDPL Live Jobs • Verified nearby roles
-              </span>
+              <span>CDPL Live Jobs • Verified nearby roles</span>
             </motion.div>
 
             <motion.h1
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-4 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl lg:text-5xl"
+              className="mt-4 py-1 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.2]"
             >
-              {/* Solid color title (no gradient) */}
-              <span className="text-[#ff8c00]">Jobs & Internships we post</span>{" "}
+              <span className="text-[#ff8c00]">Jobs &amp; Internships we post</span>{" "}
               to help CDPL students get placed
             </motion.h1>
 
+            {/* Hero content — 18px at md, identical to About */}
             <motion.p
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-3 max-w-3xl text-base leading-7 text-neutral-700"
+              className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg"
             >
               {subtitle}
             </motion.p>
 
-            {/* ⬇️ Added SEO-friendly supporting line (kept styling minimal) */}
             <motion.p
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-2 max-w-3xl text-sm leading-6 text-neutral-600"
+              className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg"
             >
-              CDPL connects learners with industry mentors, hiring partners, and nearby openings—offering job alerts, resume help, and interview preparation for faster placements across India.
+              CDPL connects learners with industry mentors, hiring partners, and nearby openings—offering
+              job alerts, resume help, and interview preparation for faster placements across India.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.18, ease: [0.22, 1, 0.36, 1] }}
-              className="mt-7 flex flex-col gap-3 sm:flex-row sm:gap-4"
+              className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
             >
-              {/* Single CTA to contact page — solid color button */}
               <Link
                 href="/contact-us"
-                className="group inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-sm transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                className="inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-sm transition-transform focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
                 style={{ backgroundColor: "#ff8c00" }}
               >
                 Contact us
@@ -124,21 +119,22 @@ export default function JobsLiveJobsJobsHeroSection({
             </motion.div>
           </div>
 
-          {/* RIGHT — illustration BESIDE the copy (top-aligned); below on small screens */}
+          {/* RIGHT — visual */}
           <div className="order-2 md:order-2 relative self-start mt-6 md:mt-0 md:basis-[40%] lg:basis-[38%]">
-            <div className="relative ml-auto mr-0 w-full md:w-[340px] lg:w-[420px] xl:w-[480px]">
+            <div className="relative ml-0 mr-0 w-full max-w-[560px] sm:max-w-[640px] md:ml-auto md:w-[340px] lg:w-[420px] xl:w-[480px]">
               <Image
                 src="/live-jobs_images/live-jobs_hero.png"
                 alt="Live jobs hero"
                 width={960}
                 height={960}
                 priority
+                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 45vw, 480px"
                 className="h-auto w-full select-none"
               />
             </div>
 
-            {/* Floating CDPL shapes (kept, do not overlap content) */}
-            <div aria-hidden className="pointer-events-none absolute inset-0">
+            {/* subtle floating shapes */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 hidden sm:block">
               <motion.svg
                 viewBox="0 0 60 60"
                 className="absolute -right-6 top-6 h-10 w-10"

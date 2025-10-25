@@ -1,13 +1,14 @@
-'use client';
+"use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import dynamic from "next/dynamic";
 
+// ---------- Loader (keep inline) ----------
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
   return (
     <div className="flex items-center justify-center py-16">
-      <p className="text-gray-500">{label}</p>
+      <p className="text-slate-500">{label}</p>
     </div>
   );
 }
@@ -21,13 +22,18 @@ const ReviewsMarquee = dynamic(
   }
 );
 
-
-type Review = { name: string; date: string; source: "Google" | "Sulekha" | "Justdial"; text: string; city?: string; logo: { src: string; alt: string; } };
-
+type Review = {
+  name: string;
+  date: string;
+  source: "Google" | "Sulekha" | "Justdial";
+  text: string;
+  city?: string;
+  logo: { src: string; alt: string };
+};
 type PLATFORM = "Google" | "Sulekha" | "Justdial";
 
 const REVIEWS: Review[] = [
-  // (unchanged) ...
+  // (same data you provided) ...
   {
     name: "Prathik Singh",
     date: "2025-06-27",
@@ -157,35 +163,17 @@ const REVIEWS: Review[] = [
   },
 ];
 
-/** Consistent logo sizing */
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function LogoBox({
-  src, alt,
-  size = "tab",
-  priority = false,
-}: { src: string; alt: string; size?: "tab" | "stat" | "chip"; priority?: boolean }) {
-  const dim = size === "tab" ? "w-24 h-8" : size === "stat" ? "w-5 h-5" : "w-3.5 h-3.5";
-  return (
-    <span className={`relative inline-flex ${dim}`}>
-      <Image src={src} alt={alt} fill sizes="96px" priority={priority} className="object-contain" />
-    </span>
-  );
-}
-
 export default function JobsLiveJobsReviewSection() {
-  // setter not used in this file
   const [tab] = useState<PLATFORM>("Google");
   const filtered = useMemo(() => REVIEWS.filter((r) => r.source === tab), [tab]);
-  // const statLogo = filtered[0]?.logo ?? stat.logo; // unused
 
-  // marquee state
-  // const containerRef = useRef<HTMLDivElement | null>(null); // unused
+  // marquee bits (kept to preserve behavior and sizing from your original)
   const trackRef = useRef<HTMLDivElement | null>(null);
   const offsetRef = useRef(0);
   const halfWidthRef = useRef(0);
   const rafRef = useRef<number | null>(null);
   const lastTsRef = useRef<number | null>(null);
-  const [paused] = useState(false); // setter not used
+  const [paused] = useState(false);
   const [speed, setSpeed] = useState(80);
   const [reduced, setReduced] = useState(false);
 
@@ -198,7 +186,8 @@ export default function JobsLiveJobsReviewSection() {
   }, []);
 
   const measure = () => {
-    const track = trackRef.current; if (!track) return;
+    const track = trackRef.current;
+    if (!track) return;
     halfWidthRef.current = track.scrollWidth / 2;
     if (typeof window !== "undefined") {
       if (window.innerWidth >= 1280) setSpeed(110);
@@ -224,8 +213,15 @@ export default function JobsLiveJobsReviewSection() {
   useEffect(() => {
     if (reduced) return;
     const tick = (ts: number) => {
-      if (!trackRef.current) { rafRef.current = requestAnimationFrame(tick); return; }
-      if (paused) { lastTsRef.current = ts; rafRef.current = requestAnimationFrame(tick); return; }
+      if (!trackRef.current) {
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
+      if (paused) {
+        lastTsRef.current = ts;
+        rafRef.current = requestAnimationFrame(tick);
+        return;
+      }
       if (lastTsRef.current == null) lastTsRef.current = ts;
       const dt = (ts - (lastTsRef.current || ts)) / 1000;
       lastTsRef.current = ts;
@@ -238,7 +234,7 @@ export default function JobsLiveJobsReviewSection() {
     rafRef.current = requestAnimationFrame(tick);
     return () => {
       if (rafRef.current != null) {
-        cancelAnimationFrame(rafRef.current);   // ✅ fixed typo here
+        cancelAnimationFrame(rafRef.current);
         rafRef.current = null;
       }
     };
@@ -248,14 +244,12 @@ export default function JobsLiveJobsReviewSection() {
     <section className="overflow-hidden w-full relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:[color-scheme:light]">
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-10">
         <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-sm">
+          <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1 text-[11px] font-medium text-slate-600 shadow-sm">
             ⭐ Explore Our Reviews
           </span>
           <h2 className="mt-4 text-3xl md:text-4xl font-extrabold tracking-tight text-slate-900">
             What learners say about <span className="text-brand">Cinute Digital</span>
           </h2>
-
-          {/* Tabs */}
         </div>
 
         <ReviewsMarquee />
