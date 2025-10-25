@@ -133,3 +133,4 @@ const CategoryHero: React.FC<CategoryHeroProps> = ({ categoryId, categoryName })
 };
 
 export default CategoryHero;
+

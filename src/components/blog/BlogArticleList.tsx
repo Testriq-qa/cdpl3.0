@@ -18,7 +18,7 @@ const BlogArticleList = () => {
 
   return (
     <section className="bg-gradient-to-b from-white to-gray-50 py-12">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-0">
         <div className="grid lg:grid-cols-2 gap-8">
           {/* Main Content - Article List */}
           <div className="lg:col-span-2">
