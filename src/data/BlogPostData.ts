@@ -560,6 +560,35 @@ export const BLOG_POSTS: BlogPost[] = [
       ogImage: "/blog/jwt-security.jpg",
     },
   },
+
+  // {
+
+  // id: "11",
+  //   slug: "future-of-ai-web-development-2025",
+  //   title: "The Future of AI in Web Development: 2025 and Beyond",
+  //   description: "Explore how artificial intelligence is revolutionizing web development, from automated code generation to intelligent user experiences.",
+  //   excerpt: "Artificial intelligence is transforming the way we build web applications. Discover the latest AI tools, techniques, and trends that are shaping the future of web development in 2025.",
+  //   featuredImage: "/blog/featured-ai.jpg",
+  //   category: "AI & Machine Learning",
+  //   categoryId: "ai-ml",
+  //   author: "Sarah Chen",
+  //   authorId: "sarah-chen",
+  //   publishDate: "2024-10-24",
+  //   readTime: "12 min read",
+  //   tags: ["AI", "Web Development", "Machine Learning", "Automation", "Future Tech"],
+  //   featured: true,
+  //   contentFile: "future-of-ai-web-development-2025",
+  //   seo: {
+  //     metaTitle: "The Future of AI in Web Development: 2025 Trends & Tools",
+  //     metaDescription: "Discover how AI is revolutionizing web development in 2025. Learn about AI-powered tools, automated testing, personalization, and future trends shaping the industry.",
+  //     keywords: ["AI web development", "artificial intelligence", "machine learning", "AI tools 2025", "automated coding", "GitHub Copilot", "AI testing", "future of web development"],
+  //     ogImage: "/blog/featured-ai.jpg",
+  //   },
+  // },
+
+  
+
+  
 ];
 
 // ============================================================================
