@@ -1,10 +1,20 @@
 "use client";
 
-import { TrendingUp, FolderOpen, Mail } from "lucide-react";
+import { TrendingUp, FolderOpen, Mail, ArrowRight } from "lucide-react";
 import Link from "next/link";
-import { POPULAR_POSTS, SIDEBAR_CATEGORIES } from "@/data/BlogPostData";
+import { POPULAR_POSTS, getAllCategories, getAllPosts } from "@/data/BlogPostData";
 
 const BlogSidebar = () => {
+  // Get ALL categories
+  const allCategories = getAllCategories();
+  const allPosts = getAllPosts();
+
+  // Calculate post count for each category dynamically
+  const categoriesWithCounts = allCategories.map(category => ({
+    ...category,
+    postCount: allPosts.filter(post => post.categoryId === category.id).length
+  }));
+
   return (
     <aside className="space-y-6">
       {/* Popular Posts Section */}
@@ -40,27 +50,41 @@ const BlogSidebar = () => {
         </div>
       </div>
 
-      {/* Categories Section */}
+      {/* Categories Section - FIXED: No scroll, full height */}
       <div className="bg-gradient-to-br from-purple-50 to-pink-50 rounded-xl p-6 shadow-sm border border-purple-100">
-        <div className="flex items-center gap-2 mb-5">
-          <FolderOpen className="w-5 h-5 text-purple-600" />
-          <h3 className="text-lg font-bold text-gray-900">Categories</h3>
+        <div className="flex items-center justify-between mb-5">
+          <div className="flex items-center gap-2">
+            <FolderOpen className="w-5 h-5 text-purple-600" />
+            <h3 className="text-lg font-bold text-gray-900">Categories</h3>
+          </div>
         </div>
+        {/* REMOVED: max-h-80 overflow-y-auto - Now shows all categories without scroll */}
         <div className="space-y-2">
-          {SIDEBAR_CATEGORIES.map((category) => (
+          {categoriesWithCounts.map((category) => (
             <Link
               key={category.id}
-              href={category.slug}
+              href={`/blog/category/${category.slug}`}
               className="group flex items-center justify-between p-3 bg-white hover:bg-purple-50 rounded-lg transition-all duration-200 border border-transparent hover:border-purple-200"
             >
               <span className="text-sm font-medium text-gray-700 group-hover:text-purple-700 transition-colors">
                 {category.name}
               </span>
-              <span className={`px-2.5 py-1 ${category.color} text-xs font-semibold rounded-full`}>
-                {category.count}
+              <span className="px-2.5 py-1 bg-purple-100 text-purple-700 text-xs font-semibold rounded-full">
+                {category.postCount}
               </span>
             </Link>
           ))}
+        </div>
+        
+        {/* View All Categories Link */}
+        <div className="mt-4 pt-4 border-t border-purple-200">
+          <Link
+            href="/blog/categories"
+            className="flex items-center justify-center gap-2 w-full py-2.5 px-4 bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-700 hover:to-pink-700 text-white font-semibold rounded-lg shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all duration-200 text-sm"
+          >
+            <span>View All Categories</span>
+            <ArrowRight className="w-4 h-4" />
+          </Link>
         </div>
       </div>
 
@@ -91,14 +115,14 @@ const BlogSidebar = () => {
         </p>
       </div>
 
-      {/* Tags Cloud (Optional) */}
+      {/* Tags Cloud */}
       <div className="bg-gradient-to-br from-cyan-50 to-teal-50 rounded-xl p-6 shadow-sm border border-cyan-100">
         <h3 className="text-lg font-bold text-gray-900 mb-4">Popular Tags</h3>
         <div className="flex flex-wrap gap-2">
           {['React', 'JavaScript', 'TypeScript', 'Next.js', 'AI', 'Web Dev', 'CSS', 'Node.js', 'Python', 'DevOps'].map((tag) => (
             <Link
               key={tag}
-              href={`/blog/tag/${tag.toLowerCase()}`}
+              href={`/blog/search?q=${tag.toLowerCase()}`}
               className="px-3 py-1.5 bg-white hover:bg-cyan-100 text-gray-700 hover:text-cyan-700 text-xs font-medium rounded-full border border-cyan-200 hover:border-cyan-300 transition-all duration-200"
             >
               #{tag}
