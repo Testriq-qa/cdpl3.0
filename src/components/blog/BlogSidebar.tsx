@@ -32,7 +32,6 @@ const BlogSidebar = () => {
                     <span className="px-2 py-0.5 bg-white rounded-full font-medium">
                       {post.category}
                     </span>
-                    <span className="text-indigo-600 font-semibold">{post.views} views</span>
                   </div>
                 </div>
               </div>

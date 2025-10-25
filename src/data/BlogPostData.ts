@@ -47,7 +47,6 @@ export interface BlogPost {
   publishDate: string;
   lastModified?: string;
   readTime: string;
-  views: string;
   tags: string[];
   featured: boolean;
   contentFile: string; // Path to content file
@@ -65,7 +64,6 @@ export interface PopularPost {
   rank: number;
   title: string;
   category: string;
-  views: string;
   slug: string;
 }
 
@@ -345,7 +343,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "sarah-chen",
     publishDate: "2024-10-24",
     readTime: "12 min read",
-    views: "15.2k",
     tags: ["AI", "Web Development", "Machine Learning", "Automation", "Future Tech"],
     featured: true,
     contentFile: "future-of-ai-web-development-2025",
@@ -369,7 +366,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "mike-rodriguez",
     publishDate: "2024-10-20",
     readTime: "10 min read",
-    views: "12.8k",
     tags: ["CSS", "Flexbox", "CSS Grid", "Responsive Design", "Frontend"],
     featured: false,
     contentFile: "responsive-layouts-css-grid-flexbox",
@@ -393,7 +389,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "emily-johnson",
     publishDate: "2024-10-18",
     readTime: "15 min read",
-    views: "11.5k",
     tags: ["React", "React 19", "Migration", "JavaScript", "Frontend"],
     featured: false,
     contentFile: "react-19-whats-new-migration",
@@ -417,7 +412,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "david-kim",
     publishDate: "2024-10-15",
     readTime: "14 min read",
-    views: "9.2k",
     tags: ["Database", "Performance", "Optimization", "SQL", "Scaling"],
     featured: false,
     contentFile: "database-performance-optimization",
@@ -441,7 +435,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "alex-green",
     publishDate: "2024-10-12",
     readTime: "11 min read",
-    views: "8.9k",
     tags: ["Generative AI", "Content Marketing", "AI Tools", "ChatGPT", "Content Strategy"],
     featured: false,
     contentFile: "generative-ai-content-creation",
@@ -465,7 +458,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "sophia-lee",
     publishDate: "2024-10-10",
     readTime: "13 min read",
-    views: "7.8k",
     tags: ["Accessibility", "WCAG", "Inclusive Design", "UX", "Web Standards"],
     featured: false,
     contentFile: "web-accessibility-wcag-guide",
@@ -489,7 +481,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "chris-evans",
     publishDate: "2024-10-08",
     readTime: "16 min read",
-    views: "7.5k",
     tags: ["Kubernetes", "DevOps", "Containers", "Docker", "Cloud Native"],
     featured: false,
     contentFile: "kubernetes-production-deployment",
@@ -513,7 +504,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "jordan-smith",
     publishDate: "2024-10-05",
     readTime: "14 min read",
-    views: "6.9k",
     tags: ["Serverless", "AWS Lambda", "API Gateway", "Cloud", "AWS"],
     featured: false,
     contentFile: "serverless-architecture-aws-lambda",
@@ -537,7 +527,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "patricia-wong",
     publishDate: "2024-10-03",
     readTime: "12 min read",
-    views: "6.5k",
     tags: ["React", "State Management", "Redux", "Zustand", "React Query"],
     featured: false,
     contentFile: "react-state-management-2024",
@@ -561,7 +550,6 @@ export const BLOG_POSTS: BlogPost[] = [
     authorId: "robert-brown",
     publishDate: "2024-10-01",
     readTime: "13 min read",
-    views: "6.2k",
     tags: ["Security", "JWT", "Authentication", "API", "Backend"],
     featured: false,
     contentFile: "jwt-api-security",
@@ -646,7 +634,6 @@ export const POPULAR_POSTS: PopularPost[] = [
     rank: 1,
     title: "The Future of AI in Web Development: 2025 and Beyond",
     category: "AI & ML",
-    views: "15.2k",
     slug: "/blog/future-of-ai-web-development-2025"
   },
   {
@@ -654,7 +641,6 @@ export const POPULAR_POSTS: PopularPost[] = [
     rank: 2,
     title: "Building Responsive Layouts with CSS Grid and Flexbox",
     category: "Web Dev",
-    views: "12.8k",
     slug: "/blog/responsive-layouts-css-grid-flexbox"
   },
   {
@@ -662,7 +648,6 @@ export const POPULAR_POSTS: PopularPost[] = [
     rank: 3,
     title: "React 19: What's New and How to Migrate",
     category: "React",
-    views: "11.5k",
     slug: "/blog/react-19-whats-new-migration"
   },
   {
@@ -670,7 +655,6 @@ export const POPULAR_POSTS: PopularPost[] = [
     rank: 4,
     title: "Optimizing Database Performance for High-Traffic Applications",
     category: "Backend",
-    views: "9.2k",
     slug: "/blog/database-performance-optimization"
   },
   {
@@ -678,7 +662,6 @@ export const POPULAR_POSTS: PopularPost[] = [
     rank: 5,
     title: "Leveraging Generative AI for Content Creation",
     category: "AI & ML",
-    views: "8.9k",
     slug: "/blog/generative-ai-content-creation"
   },
 ];
