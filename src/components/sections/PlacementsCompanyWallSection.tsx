@@ -34,7 +34,7 @@ const COMPANY_LOGOS: Record<string, string> = {
   "tech mahindra": "tech_mahindra.png",
   "accenture": "accenture.png",
   "eclerx": "eclerx.png",
-  "jm financial": "jm_financial3.png",
+  "jm financial": "jm_financial.png",
   "testriq": "testriq.png",
   "i-xl technologies": "i-xl_technologies.png",
   "aryan technologies": "aryan_technologies.png",
@@ -48,7 +48,7 @@ const COMPANY_LOGOS: Record<string, string> = {
   "raw engineering": "raw_engineering.png",
   "tech cryptors": "tech_cryptors.png",
   "codex lancers": "codex_lancers.png",
-  "alif management services": "alif_management_services.png",
+  "alif management services": "alif_management_services2.png",
 };
 
 /** Global downscale (don’t change card box size) */

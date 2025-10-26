@@ -70,7 +70,7 @@ const COMPANY_LOGOS: Record<string, string> = {
   "raw engineering": "raw_engineering.png",
   "tech cryptors": "tech_cryptors.png",
   "codex lancers": "codex_lancers.png",
-  "alif management services": "alif_management_services.png",
+  "alif management services": "alif_management_services2.png",
   "sp ultraflex": "sp_ultraflex.png",
   "xr": "xr.png",
   "ibkr": "ibkr.png",
@@ -215,7 +215,7 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                 initial="hidden"
                 animate="show"
                 variants={{ hidden: { opacity: 1 }, show: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.02 } } }}
-                className="grid justify-center gap-5 sm:grid-cols-2 lg:grid-cols-3"
+                className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
               >
                 {results.map((p, idx) => {
                   const theme = DOMAIN_COLORS[p.domain];
@@ -227,7 +227,7 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                       variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
                       whileHover={{ y: -2 }}
                       transition={{ duration: 0.25 }}
-                      className="relative overflow-visible rounded-2xl border border-slate-200 bg-white p-4 shadow-sm max-w-sm"
+                      className="relative overflow-visible rounded-2xl border border-slate-200 bg-white p-4 shadow-sm w-full"
                     >
                       {/* left accent */}
                       <span aria-hidden className={`absolute left-0 top-0 h-full w-1.5 rounded-l-2xl ${theme.bg}`} />
