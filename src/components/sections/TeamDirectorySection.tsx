@@ -187,7 +187,7 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
             )}
 
             {/* SEO helper copy */}
-            <div className="mt-10 rounded-3xl border border-slate-200 bg-white p-6">
+            <div className="mt-12 md:mt-14 rounded-3xl border border-slate-200 bg-white p-6">
                 <h3 className="text-xl font-bold text-slate-900">Learn with industry mentors at <span className="text-brand">Cinute Digital</span></h3>
                 <p className="mt-2 text-md leading-6 text-slate-600">
                     Our mentor directory brings together{" "}
@@ -265,7 +265,7 @@ function MentorCard({ m }: { m: TeamMember & { avatar?: string } }) {
             {/* Actions */}
             <div className="mt-6 flex items-center gap-2">
                 <a
-                    href="#contact"
+                    href={m.linkedin}
                     className="inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-sm font-semibold text-white bg-blue-800 shadow-sm transition hover:bg-brand focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 >
                     LinkedIn

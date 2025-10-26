@@ -195,7 +195,7 @@ export default function AboutAccreditations() {
               Browse Certifications
             </Link>
             <Link
-              href="/placements"
+              href="/jobs/placements"
               className="inline-flex items-center justify-center rounded-xl border border-brand bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-brand hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-300"
             >
               View Hiring Partners

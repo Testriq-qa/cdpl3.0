@@ -171,7 +171,7 @@ export function ContactHeroSection() {
             {/* --- /NEW buttons --- */}
 
             <p className="mt-5 text-[15px] text-slate-600">
-              Serving learners across India — Mumbai, Pune, Bengaluru &amp; beyond. Talk to our{" "}
+              Serving learners across India - Mumbai, Pune, Bengaluru &amp; beyond. Talk to our{" "}
               <strong>admissions counselors</strong> for <strong>course fees</strong>,{" "}
               <strong>syllabus &amp; roadmaps</strong>, <strong>placement support</strong>, or{" "}
               <strong>custom corporate training</strong>.

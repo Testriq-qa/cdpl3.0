@@ -131,7 +131,7 @@ export const teamData: TeamMember[] = [
         bio: "Leads QA and R&D initiatives, driving innovation, improving testing frameworks, and ensuring high-quality, future-ready software solutions.",
         location: "Pune, India",
         avatar: "/Team/aakash-yadav.webp",
-        linkedin: "https://www.linkedin.com/",
+        linkedin: "https://www.linkedin.com/in/aakashyadav9890/",
     },
     {
         id: "2",
@@ -142,7 +142,7 @@ export const teamData: TeamMember[] = [
         bio: "Designs and implements intelligent automation frameworks, optimizing workflows and ensuring efficient, scalable, and high-quality software delivery.",
         location: "Pune, India",
         avatar: "/Team/siddharth-desai.webp",
-        linkedin: "https://www.linkedin.com/",
+        linkedin: "https://www.linkedin.com/in/siddharth-desai-852996201/",
     },
     {
         id: "3",
@@ -153,6 +153,7 @@ export const teamData: TeamMember[] = [
         bio: "Specializes in ensuring seamless quality across IoT and mobile ecosystems through advanced testing strategies, automation, and performance optimization.",
         location: "Remote, India",
         avatar: "/Team/prathmesh-maske.webp",
+        linkedin: "https://www.linkedin.com/in/prathameshmaske/",
     },
     {
         id: "4",
@@ -163,6 +164,7 @@ export const teamData: TeamMember[] = [
         bio: "Advises on QA strategy, governance, and enterprise-grade testing practices to align outcomes with hiring partner expectations.",
         location: "Bengaluru, India",
         avatar: "/images/",
+        linkedin: "https://www.linkedin.com/in/sujay-ambelkar-ab2770145/",
     },
     {
         id: "5",
@@ -173,6 +175,7 @@ export const teamData: TeamMember[] = [
         bio: "Leads end-to-end testing processes, coordinating teams and strategies to ensure flawless, high-quality software delivery.",
         location: "Mumbai, India",
         avatar: "/images/",
+        linkedin: "https://www.linkedin.com/in/pooja-katkar-737b3525a/",
     },
     {
         id: "6",
@@ -183,6 +186,7 @@ export const teamData: TeamMember[] = [
         bio: "Drives software development initiatives, leading teams to build robust, scalable, and high-performance solutions with a focus on quality and innovation.",
         location: "Mumbai, India",
         avatar: "/images/",
+        linkedin: "https://www.linkedin.com/in/prakashmmishra/",
     },
     {
         id: "7",
@@ -193,6 +197,7 @@ export const teamData: TeamMember[] = [
         bio: "Manages and maintains IT infrastructure, ensuring secure, efficient, and reliable systems that support seamless business operations.",
         location: "Mumbai, India",
         avatar: "/Team/pravin-kodag.jpg",
+        linkedin: "https://www.linkedin.com/in/pravin-kodag-83a717189/",
     },
     {
         id: "8",
@@ -203,6 +208,7 @@ export const teamData: TeamMember[] = [
         bio: "Champions talent acquisition, onboarding, and engagement; streamlines HR operations, ensures compliance, and fosters a positive, high-performance culture.",
         location: "Mumbai, India",
         avatar: "/Team/elvita-gomes.webp",
+        linkedin: "https://www.linkedin.com/in/elvita07/"
     },
     {
         id: "9",
@@ -213,6 +219,7 @@ export const teamData: TeamMember[] = [
         bio: "Oversees financial planning, analysis, and reporting to ensure accuracy, compliance, and strategic growth through effective fiscal management.",
         location: "Mumbai, India",
         avatar: "/Team/neelam-chavan.webp",
+        linkedin: "https://www.linkedin.com/in/neelamchavan9892/",
     },
 
 ];

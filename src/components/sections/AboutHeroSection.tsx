@@ -2,7 +2,7 @@
 
 import { motion, type Transition } from "framer-motion";
 import Image from "next/image";
-import { Sparkles, Star, ShieldCheck, ArrowRight, Check, Play } from "lucide-react";
+import { Sparkles, Star, ShieldCheck, ArrowRight, Check, Play, Home, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 const gradientText =
@@ -14,6 +14,12 @@ const fadeUp = {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.55, ease: easeBezier } as Transition,
 };
+
+const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "About CDPL", href: "/about-us" },
+]
+
 
 export default function AboutHeroSection() {
     return (
@@ -40,17 +46,19 @@ export default function AboutHeroSection() {
             </div>
 
             {/* Breadcrumbs for SEO & UX */}
-            <nav aria-label="Breadcrumb" className="mb-3">
-                <ol className="flex items-center gap-2 text-sm text-slate-500">
-                    <li>
-                        <Link href="/" className="hover:text-slate-700">Home</Link>
-                    </li>
-                    <li aria-hidden="true" className="text-slate-400">/</li>
-                    <li>
-                        <Link href="/about-us" className="font-medium text-slate-700 hover:text-slate-900">
-                            about-us
-                        </Link>
-                    </li>
+            <nav aria-label="Breadcrumb" className="mb-6">
+                <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                    {breadcrumbs.map((c, i) => (
+                        <li key={i} className="flex items-center gap-2">
+                            {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                            <a
+                                href={c.href}
+                                className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                            >
+                                {c.label}
+                            </a>
+                        </li>
+                    ))}
                 </ol>
             </nav>
 
@@ -117,7 +125,7 @@ export default function AboutHeroSection() {
                             Explore Courses <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                         </Link>
                         <Link
-                            href="/contact"
+                            href="/contact-us"
                             className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
                         >
                             Talk to an Advisor

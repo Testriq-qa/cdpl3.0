@@ -249,7 +249,7 @@ const AboutStorySection = memo(function AboutStorySection() {
           {/* CTA */}
           <div className="mt-12 text-center">
             <Link
-              href="/contact"
+              href="/contact-us"
               className="inline-flex items-center rounded-full px-6 py-3 text-base font-semibold text-white shadow-md transition-all focus:outline-none focus-visible:ring-2"
               style={{
                 // Opaque gradient (no fades)

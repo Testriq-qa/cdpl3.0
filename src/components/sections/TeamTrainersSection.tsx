@@ -29,7 +29,7 @@ export default function TeamTrainersSection({
   trainers,
   heading = "Meet Our Expert Trainers",
   subheading = "Mentor-led, job-focused learning from industry practitioners in Quality Engineering, Automation Testing, and DevOps.",
-  ctaHref = "/contact",
+  ctaHref = "/contact-us",
   ctaText = "Book a Free Demo Session",
   className = "",
 }: TrainersSectionProps) {
@@ -142,7 +142,7 @@ export default function TeamTrainersSection({
             aria-label="Filter by expertise"
             value={expertise}
             onChange={(e) => setExpertise(e.target.value)}
-            className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:outline-none"
+            className="rounded-xl w-52 border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:outline-none"
           >
             {allExpertise.map((opt) => (
               <option key={opt} value={opt}>

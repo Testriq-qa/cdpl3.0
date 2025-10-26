@@ -167,7 +167,7 @@ export default function AboutWhyJoinUs() {
             <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
           </Link>
           <Link
-            href="/contact"
+            href="/contact-us"
             className="inline-flex items-center justify-center rounded-2xl ring-1 ring-brand bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300 dark:border-slate-200/70 dark:bg-white/90"
           >
             Talk to an Advisor

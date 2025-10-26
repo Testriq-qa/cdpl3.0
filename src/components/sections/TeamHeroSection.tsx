@@ -10,6 +10,8 @@ import {
   ArrowRight,
   Star,
   Check,
+  Home,
+  ChevronRight,
 } from "lucide-react";
 import { BRAND } from "@/app/our-team/data";
 import Image from "next/image";
@@ -19,10 +21,14 @@ const easeBezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
 
 type Stat = { label: string; value: string; note?: string };
 const stats: Stat[] = [
-  { label: "Expert Mentors", value: "45+", note: "QA, Automation, Data" },
+  { label: "Expert Mentors", value: "15+", note: "QA, Automation, Data" },
   { label: "Learners Mentored", value: "1,000+", note: "Career outcomes" },
-  { label: "Hiring Partners", value: "30+", note: "Industry referrals" },
+  { label: "Hiring Partners", value: "20+", note: "Industry referrals" },
 ];
+const breadcrumbs = [
+  { label: "Home", href: "/" },
+  { label: "Our Team", href: "/our-team" },
+]
 
 const highlights = [
   "Project-based learning with real SDET workflows",
@@ -137,11 +143,11 @@ function BackgroundFuturisticMotion({ brand = "#ff8c00" }: { brand?: string }) {
 
       {/* Floating knowledge tokens — pinned with `right` so they never extend width */}
       {[
-        { txt: "</>",  right: "6%",  top: "16%", size: 48, dur: 12, rot: 22 },
-        { txt: "Σ",    right: "2%",  top: "12%", size: 44, dur: 14, rot: -26 },
+        { txt: "</>", right: "6%", top: "16%", size: 48, dur: 12, rot: 22 },
+        { txt: "Σ", right: "2%", top: "12%", size: 44, dur: 14, rot: -26 },
         { txt: "f(x)", right: "12%", top: "28%", size: 36, dur: 15, rot: 24 },
-        { svg: "db",   right: "4%",  top: "38%", size: 52, dur: 13, rot: -20 },
-        { svg: "cloud",right: "18%", top: "22%", size: 46, dur: 16, rot: 28 },
+        { svg: "db", right: "4%", top: "38%", size: 52, dur: 13, rot: -20 },
+        { svg: "cloud", right: "18%", top: "22%", size: 46, dur: 16, rot: 28 },
         { svg: "bars", right: "10%", top: "26%", size: 44, dur: 17, rot: -30 },
       ].map((t, i) => (
         <motion.div
@@ -218,15 +224,21 @@ export default function TeamHero() {
 
       {/* Your original content */}
       <div className="relative z-10">
-        <nav aria-label="Breadcrumb" className="mb-3">
-          <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li><Link href="/" className="hover:text-slate-700">Home</Link></li>
-            <li aria-hidden="true" className="text-slate-400">/</li>
-            <li>
-              <Link href="/our-team" className="font-medium text-slate-700 hover:text-slate-900">
-                Our Team
-              </Link>
-            </li>
+
+        {/* Breadcrumbs for SEO & UX */}
+        <nav aria-label="Breadcrumb" className="mb-6">
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            {breadcrumbs.map((c, i) => (
+              <li key={i} className="flex items-center gap-2">
+                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <a
+                  href={c.href}
+                  className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                >
+                  {c.label}
+                </a>
+              </li>
+            ))}
           </ol>
         </nav>
 
@@ -274,7 +286,7 @@ export default function TeamHero() {
         >
           <div className="flex gap-3">
             <Link
-              href="#mentors"
+              href="mentors"
               className="inline-flex items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:shadow-xl hover:bg-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
               style={{ "--brand": brand } as CustomCSSProperties}
             >

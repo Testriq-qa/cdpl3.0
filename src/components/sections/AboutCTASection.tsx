@@ -140,27 +140,25 @@ export default function AboutFAQSection() {
                                     Email Syllabus
                                 </Link>
 
-                                <a
-                                    href="https://wa.me/0000000000"
+                                <Link
+                                    href="https://wa.me/9152929342"
                                     target="_blank"
-                                    rel="nofollow noopener"
                                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
                                     aria-label="Chat on WhatsApp"
                                 >
                                     <MessageCircle className="h-4 w-4" aria-hidden />
                                     Chat on WhatsApp
-                                </a>
+                                </Link>
 
-                                <a
+                                <Link
                                     href="https://calendly.com/your-calendly/15min"
                                     target="_blank"
-                                    rel="nofollow noopener"
                                     className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
                                     aria-label="Book a 15-minute counseling slot"
                                 >
                                     <Calendar className="h-4 w-4" aria-hidden />
                                     Book 15-min Slot
-                                </a>
+                                </Link>
                             </div>
 
                             {/* EMI + badge row */}
