@@ -142,7 +142,7 @@ function BackgroundFuturisticMotion({ brand = "#ff8c00" }: { brand?: string }) {
       </motion.svg>
 
       {/* Floating knowledge tokens — pinned with `right` so they never extend width */}
-      {[
+      {/* {[
         { txt: "</>", right: "6%", top: "16%", size: 48, dur: 12, rot: 22 },
         { txt: "Σ", right: "2%", top: "12%", size: 44, dur: 14, rot: -26 },
         { txt: "f(x)", right: "12%", top: "28%", size: 36, dur: 15, rot: 24 },
@@ -202,7 +202,7 @@ function BackgroundFuturisticMotion({ brand = "#ff8c00" }: { brand?: string }) {
             </svg>
           )}
         </motion.div>
-      ))}
+      ))} */}
     </div>
   );
 }
@@ -224,90 +224,105 @@ export default function TeamHero() {
 
       {/* Your original content */}
       <div className="relative z-10">
-
         {/* Breadcrumbs for SEO & UX */}
-        <nav aria-label="Breadcrumb" className="mb-6">
-          <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
-            {breadcrumbs.map((c, i) => (
-              <li key={i} className="flex items-center gap-2">
-                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                <a
-                  href={c.href}
-                  className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+            <nav aria-label="Breadcrumb" className="mb-6">
+              <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                {breadcrumbs.map((c, i) => (
+                  <li key={i} className="flex items-center gap-2">
+                    {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                    <a
+                      href={c.href}
+                      className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                    >
+                      {c.label}
+                    </a>
+                  </li>
+                ))}
+              </ol>
+            </nav>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12">
+          <div className="col-span-8">
+            
+            <motion.div {...fadeUp} className="flex flex-wrap items-center gap-3">
+              <div className="flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><Sparkles className="h-3.5 w-3.5" /> Future-Ready Mentors</div>
+              <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><ShieldCheck className="h-3.5 w-3.5" /> ISO-Aligned Training</div>
+              <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><Users2 className="h-3.5 w-3.5" /> Industry Leaders</div>
+            </motion.div>
+
+            <motion.h1
+              id="our-team-heading"
+              {...fadeUp}
+              transition={{ ...(fadeUp.transition as Transition), delay: 0.06 }}
+              className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500"
+            >
+              Meet the People Behind <span style={{ color: brand } as React.CSSProperties}>Cinute Digital</span>
+            </motion.h1>
+
+            <motion.p
+              {...fadeUp}
+              transition={{ ...(fadeUp.transition as Transition), delay: 0.12 }}
+              className="mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg"
+            >
+              Learn from senior <strong className="text-slate-900">Software Testing</strong>,{" "}
+              <strong className="text-slate-900">Automation</strong>, and{" "}
+              <strong className="text-slate-900">Data Science</strong> practitioners who ship
+              production-grade solutions. Our mentor-led programs blend agile workflows, CI/CD pipelines,
+              API & UI automation, and analytics so you graduate with a job-ready portfolio and
+              interview-ready skills.
+            </motion.p>
+
+            <motion.div
+              {...fadeUp}
+              transition={{ ...(fadeUp.transition as Transition), delay: 0.18 }}
+              className="mt-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm text-orange-800"
+            >
+              <GraduationCap className="h-4 w-4" />
+              1,000+ learners mentored · Hiring partner referrals · Job-ready portfolios
+            </motion.div>
+
+            <motion.div
+              {...fadeUp}
+              transition={{ duration: 0.6, ease: easeBezier, delay: 0.22 }}
+              className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
+            >
+              <div className="flex gap-3">
+                <Link
+                  href="mentors"
+                  className="inline-flex items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:shadow-xl hover:bg-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
+                  style={{ "--brand": brand } as CustomCSSProperties}
                 >
-                  {c.label}
-                </a>
-              </li>
-            ))}
-          </ol>
-        </nav>
+                  Explore Mentors <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+                <Link
+                  href="/become-a-mentor"
+                  className="inline-flex items-center justify-center rounded-2xl border border-brand bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-brand hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
+                  style={{ "--brand": brand } as CustomCSSProperties}
+                >
+                  Become a Mentor
+                </Link>
+              </div>
 
-        <motion.div {...fadeUp} className="flex flex-wrap items-center gap-3">
-          <div className="flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><Sparkles className="h-3.5 w-3.5" /> Future-Ready Mentors</div>
-          <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><ShieldCheck className="h-3.5 w-3.5" /> ISO-Aligned Training</div>
-          <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><Users2 className="h-3.5 w-3.5" /> Industry Leaders</div>
-        </motion.div>
-
-        <motion.h1
-          id="our-team-heading"
-          {...fadeUp}
-          transition={{ ...(fadeUp.transition as Transition), delay: 0.06 }}
-          className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500"
-        >
-          Meet the People Behind <span style={{ color: brand } as React.CSSProperties}>Cinute Digital</span>
-        </motion.h1>
-
-        <motion.p
-          {...fadeUp}
-          transition={{ ...(fadeUp.transition as Transition), delay: 0.12 }}
-          className="mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg"
-        >
-          Learn from senior <strong className="text-slate-900">Software Testing</strong>,{" "}
-          <strong className="text-slate-900">Automation</strong>, and{" "}
-          <strong className="text-slate-900">Data Science</strong> practitioners who ship
-          production-grade solutions. Our mentor-led programs blend agile workflows, CI/CD pipelines,
-          API & UI automation, and analytics so you graduate with a job-ready portfolio and
-          interview-ready skills.
-        </motion.p>
-
-        <motion.div
-          {...fadeUp}
-          transition={{ ...(fadeUp.transition as Transition), delay: 0.18 }}
-          className="mt-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm text-orange-800"
-        >
-          <GraduationCap className="h-4 w-4" />
-          1,000+ learners mentored · Hiring partner referrals · Job-ready portfolios
-        </motion.div>
-
-        <motion.div
-          {...fadeUp}
-          transition={{ duration: 0.6, ease: easeBezier, delay: 0.22 }}
-          className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
-        >
-          <div className="flex gap-3">
-            <Link
-              href="mentors"
-              className="inline-flex items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:shadow-xl hover:bg-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
-              style={{ "--brand": brand } as CustomCSSProperties}
-            >
-              Explore Mentors <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
-            <Link
-              href="/become-a-mentor"
-              className="inline-flex items-center justify-center rounded-2xl border border-brand bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-brand hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
-              style={{ "--brand": brand } as CustomCSSProperties}
-            >
-              Become a Mentor
-            </Link>
+              <div className="flex items-center gap-1 text-sm text-slate-600">
+                <Star className="h-4 w-4 fill-yellow-400 stroke-yellow-400" aria-hidden="true" />
+                <span className="font-semibold text-slate-800">4.9/5</span>
+                <span aria-hidden="true">·</span>
+                <span>Based on verified learner reviews</span>
+              </div>
+            </motion.div>
           </div>
 
-          <div className="flex items-center gap-1 text-sm text-slate-600">
-            <Star className="h-4 w-4 fill-yellow-400 stroke-yellow-400" aria-hidden="true" />
-            <span className="font-semibold text-slate-800">4.9/5</span>
-            <span aria-hidden="true">·</span>
-            <span>Based on verified learner reviews</span>
-          </div>
-        </motion.div>
+
+          <motion.div className="col-span-4 mt-10 lg:mt-0 flex justify-center">
+            <Image
+              src="/our-team-hero.png"
+              alt="team-image"
+              width={410}
+              height={300}
+            />
+          </motion.div>
+
+        </div>
 
         <motion.dl
           {...fadeUp}
