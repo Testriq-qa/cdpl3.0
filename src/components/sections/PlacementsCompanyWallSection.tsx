@@ -97,7 +97,7 @@ function getLogoPath(name: string): string | undefined {
   const key = name.trim().toLowerCase();
   const file = COMPANY_LOGOS[key];
   // return file ? `/placements/companies/${file}` : undefined;
-  return file ? `/placements/companies/temp/${file}` : undefined;
+  return file ? `/placements/companies/${file}` : undefined;
 }
 
 function getTransform(name: string) {

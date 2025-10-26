@@ -112,7 +112,7 @@ function normalizeCompanyName(name: string): string {
 function getCompanyLogoSrc(company: string): string {
   const key = normalizeCompanyName(company);
   const file = COMPANY_LOGOS[key];
-  return file ? `/placements/companies/temp/${file}` : COMPANY_LOGO_FALLBACK;
+  return file ? `/placements/companies/${file}` : COMPANY_LOGO_FALLBACK;
 }
 
 type Props = { contained?: boolean };
