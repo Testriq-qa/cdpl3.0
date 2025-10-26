@@ -10,6 +10,7 @@ import {
   TrendingUp,
   Trophy,
   MapPin,
+  ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
@@ -61,7 +62,14 @@ function FloatingIcon({
 export default function PlacementsHeroSection() {
   return (
     <section
-      className="relative isolate overflow-hidden bg-white text-slate-900"
+      /* Match mentors page behavior:
+         - Compensate for sticky navbar with equal positive padding and negative margin.
+         - Keeps normal hero spacing, and prevents clipping when URL has a hash. */
+      className="
+        relative isolate overflow-hidden bg-white text-slate-900
+        pt-[96px] md:pt-[104px] lg:pt-[112px]
+        -mt-[96px] md:-mt-[104px] lg:-mt-[112px]
+      "
       aria-label="CDPL student placements hero section"
     >
       {/* Background wash (full-bleed) */}
@@ -180,6 +188,23 @@ export default function PlacementsHeroSection() {
               Cinute Digital Pvt Ltd (CDPL).
             </motion.p>
 
+            {/* BRAND BUTTON — CDPL orange, sensible CTA for this page */}
+            <motion.div
+              initial={{ opacity: 0, y: 8 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, delay: 0.18 }}
+              className="mt-6 flex items-center justify-center lg:justify-start"
+            >
+              <Link
+                href="#placements-highlights"
+                className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shadow-sm ring-1 ring-black/5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500 active:translate-y-[1px]"
+                style={{ backgroundColor: "var(--color-brand, #ff8c00)" }}
+              >
+                Explore Placements
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+              </Link>
+            </motion.div>
+
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -195,7 +220,7 @@ export default function PlacementsHeroSection() {
             </motion.div>
           </div>
 
-          {/* RIGHT — image (pulled up to align with text) */}
+          {/* RIGHT — image */}
           <div className="order-2 flex items-center justify-center lg:order-2 lg:justify-end mt-0 lg:mt-0 -translate-y-2 sm:-translate-y-3 lg:-translate-y-4">
             <Image
               src="/placement_images/placements_hero.png"

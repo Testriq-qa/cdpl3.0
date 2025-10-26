@@ -27,8 +27,8 @@ const DATA: Placement[] = [
   { name: "Bhakti Raigawali", company: "Aryan Technologies", domain: "QA", image: "/placements/Bhakti Raigawali.jpg" },
   { name: "Satya Dutt", company: "Tech Mahindra", domain: "QA", image: "/placements/Satya Dutt.jpg" },
   { name: "Mohsin Patel", company: "Testriq", domain: "QA", image: "/placements/Mohsin Patel.jpg" },
-  { name: "Kishore Jha", company: "TransPerfect", domain: "QA", image: "/placements/Kishore Jha.jpg" },
-  { name: "Krutika Penkar", company: "Tech Turmeric", domain: "QA", image: "/placements/Krutika Penkar.jpg" },
+  { name: "Kishore Jha", company: "Raw Engineering", domain: "QA", image: "/placements/Kishore Jha.jpg" }, // fixed
+  { name: "Krutika Penkar", company: "Tech Cryptors", domain: "QA", image: "/placements/Krutika Penkar.jpg" }, // fixed
   { name: "Insha Dosani", company: "Maxwell Energy Systems", domain: "QA", image: "/placements/Insha Dosani.jpg" },
   { name: "Jaynam Shah", company: "IDfy", domain: "QA", image: "/placements/Jaynam Shah.jpg" },
   { name: "Akash Yadav", company: "CVistar", domain: "QA", image: "/placements/Akash Yadav.jpg" },
@@ -51,9 +51,71 @@ const DOMAIN_COLORS = {
   QA: { bg: "bg-orange-50", text: "text-[#ff8c00]", ring: "ring-[#ff8c00]/20" },
 };
 
-type Props = {
-  contained?: boolean;
+/** Logo files present in /placements/companies/temp (from your list) */
+const COMPANY_LOGOS: Record<string, string> = {
+  "tech mahindra": "tech_mahindra.png",
+  "accenture": "accenture.png",
+  "eclerx": "eclerx.png",
+  "jm financial": "jm_financial.png",
+  "testriq": "testriq.png",
+  "i-xl technologies": "i-xl_technologies.png",
+  "aryan technologies": "aryan_technologies.png",
+  "maxwell energy systems": "maxwell.png",
+  "idfy": "idfy.png",
+  "vistaar": "vistaar.png",
+  "rendered ideas": "rendered_ideas.png",
+  "reeble": "reeble.png",
+  "axiom technologies": "axiom_technologies.png",
+  "punon technologies": "punon.png",
+  "raw engineering": "raw_engineering.png",
+  "tech cryptors": "tech_cryptors.png",
+  "codex lancers": "codex_lancers.png",
+  "alif management services": "alif_management_services2.png",
+  "sp ultraflex": "sp_ultraflex.png",
+  "xr": "xr.png",
+  "ibkr": "ibkr.png",
 };
+
+/** SVG fallback (for companies without a file yet) */
+const FALLBACK_SVG = encodeURIComponent(
+  `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="40" viewBox="0 0 180 40">
+    <rect x="0.5" y="0.5" width="179" height="39" rx="6" ry="6" fill="#fafafa" stroke="#e5e7eb"/>
+    <circle cx="20" cy="20" r="6" fill="#cbd5e1"/>
+    <rect x="34" y="14" width="108" height="12" rx="3" fill="#e2e8f0"/>
+  </svg>`
+);
+const COMPANY_LOGO_FALLBACK = `data:image/svg+xml;utf8,${FALLBACK_SVG}`;
+
+/** Aliases/variants → canonical keys (or placeholders) */
+function normalizeCompanyName(name: string): string {
+  const n = name.trim().toLowerCase();
+
+  if (COMPANY_LOGOS[n]) return n;
+
+  // Axiom
+  if (n === "axiom techguru" || n === "axiom tech guru") return "axiom technologies";
+
+  // QodeNext / CodeNext variants → sp_ultraflex.png
+  if (n === "qodenext" || n === "qode next" || n === "qodenext technologies" || n === "codenext" || n === "code next") {
+    return "sp ultraflex";
+  }
+
+  // CVistar variants → xr.png
+  if (n === "cvistar" || n === "c vistar" || n === "c-vistar") return "xr";
+
+  // i-XL short form
+  if (n === "i-xl") return "i-xl technologies";
+
+  return n;
+}
+
+function getCompanyLogoSrc(company: string): string {
+  const key = normalizeCompanyName(company);
+  const file = COMPANY_LOGOS[key];
+  return file ? `/placements/companies/${file}` : COMPANY_LOGO_FALLBACK;
+}
+
+type Props = { contained?: boolean };
 
 export default function PlacementsFiltersGridSection({ contained = false }: Props) {
   const [q, setQ] = useState("");
@@ -61,44 +123,26 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
 
   const results = useMemo(() => {
     return DATA.filter((d) => {
-      const qok =
-        !q ||
-        `${d.name} ${d.company}`.toLowerCase().includes(q.toLowerCase());
+      const qok = !q || `${d.name} ${d.company}`.toLowerCase().includes(q.toLowerCase());
       const dok = domain === "All" || d.domain === domain;
       return qok && dok;
     });
   }, [q, domain]);
 
   const Wrapper = ({ children }: { children: React.ReactNode }) =>
-    contained ? (
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div>
-    ) : (
-      <>{children}</>
-    );
+    contained ? <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">{children}</div> : <>{children}</>;
 
   return (
     <section className="w-full py-10 sm:py-12">
       <Wrapper>
         {/* FILTER BAR */}
         <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-4 sm:p-5">
-          {/* top accent line */}
           <div
             aria-hidden
             className="pointer-events-none absolute left-0 right-0 top-0 h-px"
-            style={{
-              background:
-                "linear-gradient(90deg, rgba(255,140,0,.35), rgba(255,209,158,.35))",
-            }}
+            style={{ background: "linear-gradient(90deg, rgba(255,140,0,.35), rgba(255,209,158,.35))" }}
           />
-
-          <div
-            className="
-              flex flex-col gap-3
-              md:flex-col md:gap-3
-              lg:flex-col lg:gap-3
-              xl:flex-row xl:items-center xl:justify-between
-            "
-          >
+          <div className="flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
             <div className="inline-flex items-center gap-2 text-slate-500">
               <Filter className="h-4 w-4" />
               <span className="text-sm sm:text-base">Filter by domain &amp; search</span>
@@ -149,8 +193,7 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
         <div className="mt-6">
           <div className="mb-3 flex items-center justify-between text-sm text-slate-600">
             <span>
-              Showing <span className="font-semibold">{results.length}</span>{" "}
-              {results.length === 1 ? "result" : "results"}
+              Showing <span className="font-semibold">{results.length}</span> {results.length === 1 ? "result" : "results"}
             </span>
             <span className="hidden sm:inline">Tip: Use search or domain filters.</span>
           </div>
@@ -171,48 +214,53 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                 key="grid"
                 initial="hidden"
                 animate="show"
-                variants={{
-                  hidden: { opacity: 1 },
-                  show: {
-                    opacity: 1,
-                    transition: { staggerChildren: 0.05, delayChildren: 0.02 },
-                  },
-                }}
-                className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 sm:gap-6"
+                variants={{ hidden: { opacity: 1 }, show: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.02 } } }}
+                className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
               >
                 {results.map((p, idx) => {
                   const theme = DOMAIN_COLORS[p.domain];
+                  const logoSrc = getCompanyLogoSrc(p.company);
+
                   return (
                     <motion.div
                       key={`${p.name}-${idx}`}
                       variants={{ hidden: { opacity: 0, y: 10 }, show: { opacity: 1, y: 0 } }}
                       whileHover={{ y: -2 }}
                       transition={{ duration: 0.25 }}
-                      className="relative rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+                      className="relative overflow-visible rounded-2xl border border-slate-200 bg-white p-4 shadow-sm w-full"
                     >
-                      <span
-                        aria-hidden
-                        className={`absolute left-0 top-0 h-full w-1.5 rounded-l-2xl ${theme.bg}`}
+                      {/* left accent */}
+                      <span aria-hidden className={`absolute left-0 top-0 h-full w-1.5 rounded-l-2xl ${theme.bg}`} />
+
+                      {/* AVATAR overlapping card border */}
+                      <Image
+                        src={p.image}
+                        alt={p.name}
+                        width={64}
+                        height={64}
+                        className="absolute -left-3 -top-3 h-16 w-16 rounded-full object-cover border border-slate-200 ring-4 ring-white shadow"
                       />
-                      <div className="flex items-center gap-3">
+
+                      {/* Header spacer + logo bay */}
+                      <div className="h-14 pr-28 sm:pr-32" />
+                      <div className="absolute right-4 top-4 h-12 w-28 sm:w-32 flex items-center justify-center">
                         <Image
-                          src={p.image}
-                          alt={p.name}
-                          width={40}
-                          height={40}
-                          className="h-10 w-10 rounded-xl object-cover ring-4 ring-orange-100"
+                          src={logoSrc}
+                          alt={`${p.company} logo`}
+                          width={112}
+                          height={36}
+                          className="max-h-9 w-auto object-contain"
                         />
-                        <div className="min-w-0">
-                          <p className="truncate text-xs sm:text-sm text-slate-500">{p.company}</p>
-                          <h4 className="truncate text-lg sm:text-xl font-extrabold text-slate-900">
-                            {p.name}
-                          </h4>
-                        </div>
                       </div>
-                      <div className="mt-3">
-                        <span
-                          className={`rounded-md px-2 py-1 text-xs sm:text-sm font-semibold ${theme.bg} ${theme.text}`}
-                        >
+
+                      {/* BODY */}
+                      <div className="min-w-0 mt-0.5">
+                        <p className="truncate text-xs sm:text-sm text-slate-500">{p.company}</p>
+                        <h4 className="truncate text-[1.05rem] sm:text-lg font-extrabold text-slate-900">{p.name}</h4>
+                      </div>
+
+                      <div className="mt-2.5">
+                        <span className={`rounded-md px-2 py-0.5 text-xs sm:text-sm font-semibold ${theme.bg} ${theme.text}`}>
                           {p.domain}
                         </span>
                       </div>
