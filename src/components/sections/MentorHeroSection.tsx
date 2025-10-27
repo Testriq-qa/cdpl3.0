@@ -175,10 +175,10 @@ export default function MentorHeroSection() {
             </p>
           </div>
 
-          {/* RIGHT — image second on mobile; right column on lg+ */}
-          <div className="order-2 lg:order-2 relative top-0 mt-6 lg:mt-8 flex items-center justify-center lg:justify-end">
+          {/* RIGHT — image (lifted up to align with content start; content unchanged) */}
+          <div className="order-2 lg:order-2 relative flex items-start justify-center lg:justify-end mt-6 lg:mt-0 -translate-y-2 sm:-translate-y-3 lg:-translate-y-10 xl:-translate-y-12">
             <Image
-              src="/mentors_images/mentors-hero.png"
+              src="/mentors_images/mentors-hero2.png"
               alt="CDPL Mentors"
               width={1280}
               height={960}

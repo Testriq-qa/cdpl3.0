@@ -1,3 +1,4 @@
+// components/sections/PlacementsHeroSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -62,15 +63,13 @@ function FloatingIcon({
 export default function PlacementsHeroSection() {
   return (
     <section
-      /* Match mentors page behavior:
-         - Compensate for sticky navbar with equal positive padding and negative margin.
-         - Keeps normal hero spacing, and prevents clipping when URL has a hash. */
       className="
         relative isolate overflow-hidden bg-white text-slate-900
         pt-[96px] md:pt-[104px] lg:pt-[112px]
         -mt-[96px] md:-mt-[104px] lg:-mt-[112px]
       "
       aria-label="CDPL student placements hero section"
+      data-scroll-target="placements-hero"
     >
       {/* Background wash (full-bleed) */}
       <div className="absolute inset-0 -z-30">
@@ -83,25 +82,18 @@ export default function PlacementsHeroSection() {
         <FloatingIcon x="6%" y="9%" className="hidden min-[1040px]:grid">
           <Briefcase className="h-6 w-6 text-[#6aa9ff]" />
         </FloatingIcon>
-
         <FloatingIcon x="40%" y="6%" className="hidden min-[1040px]:grid">
           <BadgeCheck className="h-6 w-6 text-[#7ee7ff]" />
         </FloatingIcon>
-
         <FloatingIcon x="28%" y="14%" className="hidden min-[1040px]:grid">
           <Building2 className="h-6 w-6 text-[#6aa9ff]" />
         </FloatingIcon>
-
         <FloatingIcon x="69%" y="12%" className="hidden min-[1040px]:grid">
           <TrendingUp className="h-6 w-6 text-[#b0b9ff]" />
         </FloatingIcon>
-
-        {/* right:9% ≈ left:91% */}
         <FloatingIcon x="91%" y="8%" className="hidden min-[1040px]:grid">
           <Trophy className="h-6 w-6 text-[#9d7bff]" />
         </FloatingIcon>
-
-        {/* right:13% ≈ left:87% */}
         <FloatingIcon x="87%" y="26%" className="hidden min-[1040px]:grid">
           <MapPin className="h-6 w-6 text-[#7ee7ff]" />
         </FloatingIcon>
@@ -125,16 +117,15 @@ export default function PlacementsHeroSection() {
         </svg>
       </div>
 
-      {/* SINGLE CONTAINER (breadcrumb + hero) — matches MentorHeroSection */}
+      {/* SINGLE CONTAINER (breadcrumb + hero) */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        {/* Breadcrumb — keep position as-is */}
+        {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-3">
           <ol className="flex items-center gap-2 text-sm text-slate-500">
             <li>
               <Link href="/" className="hover:text-slate-700">Home</Link>
             </li>
             <li aria-hidden className="text-slate-400">/</li>
-            {/* Jobs is now not clickable */}
             <li>
               <span className="font-medium text-slate-700">Jobs</span>
             </li>
@@ -148,8 +139,8 @@ export default function PlacementsHeroSection() {
         {/* Use gradient constant once (no visual change, satisfies linter) */}
         <span className="sr-only" style={{ backgroundImage: BRAND_ORANGE_GRAD }} />
 
-        {/* Hero grid — same vertical rhythm as Mentor */}
-        <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-2">
+        {/* Hero grid — keep content where it is; lift only the image side */}
+        <div className="grid grid-cols-1 items-start lg:items-start gap-8 sm:gap-10 lg:grid-cols-2">
           {/* LEFT — text */}
           <div className="order-1 text-center lg:order-1 lg:text-left">
             <motion.p
@@ -188,7 +179,7 @@ export default function PlacementsHeroSection() {
               Cinute Digital Pvt Ltd (CDPL).
             </motion.p>
 
-            {/* BRAND BUTTON — CDPL orange, sensible CTA for this page */}
+            {/* CTA */}
             <motion.div
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
@@ -199,6 +190,24 @@ export default function PlacementsHeroSection() {
                 href="#placements-highlights"
                 className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shadow-sm ring-1 ring-black/5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500 active:translate-y-[1px]"
                 style={{ backgroundColor: "var(--color-brand, #ff8c00)" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  // @ts-expect-error CDPLscrollTo is injected globally at runtime
+                  if (typeof window !== "undefined" && window.CDPLscrollTo) {
+                    // @ts-expect-error CDPLscrollTo is injected globally at runtime
+                    window.CDPLscrollTo("placements-highlights");
+                    history.replaceState(null, "", "#placements-highlights");
+                  } else {
+                    const el = document.querySelector(
+                      '[data-scroll-target="placements-highlights"]'
+                    );
+                    if (el)
+                      (el as HTMLElement).scrollIntoView({
+                        behavior: "smooth",
+                        block: "start",
+                      });
+                  }
+                }}
               >
                 Explore Placements
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -220,10 +229,10 @@ export default function PlacementsHeroSection() {
             </motion.div>
           </div>
 
-          {/* RIGHT — image */}
-          <div className="order-2 flex items-center justify-center lg:order-2 lg:justify-end mt-0 lg:mt-0 -translate-y-2 sm:-translate-y-3 lg:-translate-y-4">
+          {/* RIGHT — image (lifted upward; content stays put) */}
+          <div className="order-2 flex items-start justify-center lg:order-2 lg:justify-end lg:self-start mt-0 lg:mt-0 -translate-y-2 sm:-translate-y-3 lg:-translate-y-10 xl:-translate-y-12">
             <Image
-              src="/placement_images/placements_hero.png"
+              src="/placement_images/placments_hero2.png"
               alt="CDPL Student Placements illustration — partner companies & verified outcomes"
               width={1280}
               height={960}

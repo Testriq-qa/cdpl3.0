@@ -3,7 +3,6 @@ import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 import Script from "next/script";
 
-
 /** =========================
  * SEO / Metadata — CDPL
  * ========================= */
@@ -138,44 +137,144 @@ export default function PlacementsPage() {
             <PlacementsHeroSection />
 
             {/* All other sections: full-width wrapper + centered content */}
-            <section className="w-full">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><PlacementsHighlightsStatsSection /></div>
+            {/* NOTE: data-scroll-target + scroll-mt[...] for sticky navbar compensation */}
+            <section
+                className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                data-scroll-target="placements-highlights"
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <PlacementsHighlightsStatsSection />
+                </div>
             </section>
 
-            <section className="w-full">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><PlacementsOffersTickerSection /></div>
+            <section
+                className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                data-scroll-target="placements-offers"
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <PlacementsOffersTickerSection />
+                </div>
             </section>
 
-            <section className="w-full">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><PlacementsFiltersGridSection /></div>
+            <section
+                className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                data-scroll-target="placements-grid"
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <PlacementsFiltersGridSection />
+                </div>
             </section>
 
-            <section className="w-full">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><PlacementsCompanyWallSection /></div>
+            <section
+                className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                data-scroll-target="placements-partners"
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <PlacementsCompanyWallSection />
+                </div>
             </section>
 
-            <section className="w-full">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><PlacementsSuccessStoriesCarousel /></div>
+            <section
+                className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                data-scroll-target="placements-stories"
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <PlacementsSuccessStoriesCarousel />
+                </div>
             </section>
 
-            <section className="w-full">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><PlacementsRolesBreakdownSection /></div>
+            <section
+                className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                data-scroll-target="placements-roles"
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <PlacementsRolesBreakdownSection />
+                </div>
             </section>
 
-            <section className="w-full">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><PlacementsMentorCTASection /></div>
+            <section
+                className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                data-scroll-target="placements-mentor"
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <PlacementsMentorCTASection />
+                </div>
             </section>
 
-            <section className="w-full pb-16">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><PlacementsFAQSection /></div>
+            <section
+                className="w-full pb-16 scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                data-scroll-target="placements-faq"
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <PlacementsFAQSection />
+                </div>
             </section>
 
-            <section className="w-full pb-24">
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8"><PlacementsNewsletterCTASection /></div>
+            <section
+                className="w-full pb-24 scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                data-scroll-target="placements-newsletter"
+            >
+                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                    <PlacementsNewsletterCTASection />
+                </div>
             </section>
 
+            {/* JSON-LD */}
             <Script id="cdpl-placements-jsonld" type="application/ld+json">
                 {JSON.stringify(jsonLd)}
+            </Script>
+
+            {/* Data-attribute scroll manager (hash clicks + hash on load) */}
+            <Script id="cdpl-data-attr-scroll" strategy="afterInteractive">
+                {`
+(function(){
+  function navOffset(){
+    var w = window.innerWidth || 0;
+    if (w >= 1024) return 112;  // lg
+    if (w >= 768)  return 104;  // md
+    return 96;                  // base
+  }
+  function getEl(name){
+    return document.querySelector('[data-scroll-target="'+ CSS.escape(name) +'"]');
+  }
+  function scrollToTarget(name, opts){
+    var el = getEl(name);
+    if(!el) return;
+    var rect = el.getBoundingClientRect();
+    var extra = (opts && opts.extra) || 8; // small breathing room
+    var y = window.scrollY + rect.top - (navOffset() + extra);
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
+  }
+  // expose for inline handlers if needed
+  window.CDPLscrollTo = scrollToTarget;
+
+  function handleHash(){
+    var frag = decodeURIComponent((location.hash || '').replace('#',''));
+    if(!frag) return;
+    if(getEl(frag)){
+      // avoid native jump since no ID exists; do our own scroll
+      requestAnimationFrame(function(){ scrollToTarget(frag, { extra: 0 }); });
+    }
+  }
+
+  // Intercept in-page anchor clicks with href starting '#'
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest && e.target.closest('a[href^="#"]');
+    if(!a) return;
+    var href = a.getAttribute('href') || '';
+    var frag = decodeURIComponent(href.slice(1));
+    if(!frag) return;
+    if(!getEl(frag)) return; // allow normal behavior if no data target
+    e.preventDefault();
+    scrollToTarget(frag);
+    // reflect the hash so back/forward works without native jump
+    history.replaceState(null, '', '#' + frag);
+  }, { capture: true });
+
+  window.addEventListener('hashchange', handleHash);
+  window.addEventListener('DOMContentLoaded', handleHash);
+})();
+        `}
             </Script>
         </main>
     );

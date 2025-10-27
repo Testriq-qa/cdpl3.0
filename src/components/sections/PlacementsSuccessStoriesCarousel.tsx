@@ -206,7 +206,7 @@ export default function PlacementsSuccessStoriesCarousel({ contained = false }: 
     "flex",
     "gap-5",
     "w-max",
-    "animate-[cdpl-marquee_60s_linear_infinite]", // slowed from 28s → 60s
+    "animate-[cdpl-marquee_120s_linear_infinite]", // slowed from 60s → 120s
     "[animation-play-state:running]",
     "group-hover:[animation-play-state:paused]",
     "focus-within:[animation-play-state:paused]",
