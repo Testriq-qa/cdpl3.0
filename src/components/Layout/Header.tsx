@@ -761,6 +761,13 @@ const Header = () => {
                     >
                       • Careers
                     </Link>
+                    <Link
+                      href="/jobs/job-openings"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      • Job Openings
+                    </Link>
                   </div>
                 )}
               </div>

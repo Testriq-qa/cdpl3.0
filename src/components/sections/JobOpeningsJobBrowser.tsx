@@ -1,4 +1,3 @@
-// JobOpeningsJobBrowser.tsx
 "use client";
 
 import React from "react";
@@ -119,7 +118,8 @@ export default function JobOpeningsJobBrowser({
                 (j) =>
                     j.job_title.toLowerCase().includes(term) ||
                     decodeAndStrip(j.description).toLowerCase().includes(term) ||
-                    j.skills?.some((s) => s.skill_name.toLowerCase().includes(term))
+                    j.skills?.some((s) => s.skill_name.toLowerCase().includes(term)
+                    )
             );
         }
         if (locType !== "all") list = list.filter((j) => (j.location_type || "").toLowerCase() === locType);
@@ -179,7 +179,7 @@ export default function JobOpeningsJobBrowser({
     };
 
     return (
-        <section className={`relative ${className ?? ""}`}>
+        <section className={`relative w-full ${className ?? ""}`}>
             <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
                 {/* toolbar (TOP pagination) */}
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
@@ -244,8 +244,8 @@ export default function JobOpeningsJobBrowser({
                                                     key={key}
                                                     onClick={() => setLocType(key)}
                                                     className={`rounded-md px-3 py-1 text-xs transition ${active
-                                                        ? "bg-orange-500 text-white shadow-sm"
-                                                        : "bg-white text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50"
+                                                            ? "bg-orange-500 text-white shadow-sm"
+                                                            : "bg-white text-slate-700 ring-1 ring-slate-300 hover:bg-slate-50"
                                                         }`}
                                                 >
                                                     {key[0].toUpperCase() + key.slice(1)}
@@ -366,7 +366,7 @@ export default function JobOpeningsJobBrowser({
 
                             {filtered.length === 0 && (
                                 <li className="rounded-xl border border-slate-200 bg-white p-10 text-center">
-                                    <p className="text-sm font-medium text-slate-900">{emptyState?.title ?? "No results"}</p>
+                                    <p className="text-sm font-medium text-slate-900">No results</p>
                                     {emptyState?.body && <p className="mt-1 text-sm text-slate-600">{emptyState.body}</p>}
                                 </li>
                             )}

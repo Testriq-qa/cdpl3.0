@@ -1,4 +1,3 @@
-// JobOpeningsJobDetails.tsx (unchanged except your CDPL scrollbar styles)
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
@@ -225,7 +224,9 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
                                                             </div>
                                                         </div>
 
-                                                        <div className="mt-5 flex flex-wrap gap-2">{skillChips}</div>
+                                                        <div className="mt-5 flex flex-wrap gap-2">
+                                                            {skillChips}
+                                                        </div>
                                                     </>
                                                 )}
                                             </div>
@@ -322,47 +323,47 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
 
                     {/* CDPL scrollbar styling (scoped to .cdpl-scroll) */}
                     <style jsx global>{`
-                        .cdpl-scroll {
-                            scrollbar-width: thin;
-                            scrollbar-color: rgba(255, 140, 0, 0.6) transparent; /* Firefox */
-                        }
-                        .cdpl-scroll::-webkit-scrollbar {
-                            width: 12px;
-                        }
-                        .cdpl-scroll::-webkit-scrollbar-track {
-                            background: transparent;
-                        }
-                        .cdpl-scroll::-webkit-scrollbar-thumb {
-                            background: linear-gradient(
-                                180deg,
-                                rgba(255,140,0,0.85),
-                                rgba(255,184,77,0.85) 50%,
-                                rgba(125,211,252,0.9)
-                            );
-                            border-radius: 9999px;
-                            border: 3px solid transparent;
-                            background-clip: padding-box;
-                        }
-                        .cdpl-scroll:hover::-webkit-scrollbar-thumb {
-                            background: linear-gradient(
-                                180deg,
-                                rgba(255,140,0,1),
-                                rgba(255,184,77,1) 50%,
-                                rgba(125,211,252,1)
-                            );
-                        }
-                        .cdpl-scroll::-webkit-scrollbar-thumb:active {
-                            background: linear-gradient(
-                                180deg,
-                                rgba(255,125,0,1),
-                                rgba(255,170,60,1) 50%,
-                                rgba(110,200,250,1)
-                            );
-                        }
-                        .cdpl-scroll::-webkit-scrollbar-corner {
-                            background: transparent;
-                        }
-                    `}</style>
+            .cdpl-scroll {
+              scrollbar-width: thin;
+              scrollbar-color: rgba(255, 140, 0, 0.6) transparent; /* Firefox */
+            }
+            .cdpl-scroll::-webkit-scrollbar {
+              width: 12px;
+            }
+            .cdpl-scroll::-webkit-scrollbar-track {
+              background: transparent;
+            }
+            .cdpl-scroll::-webkit-scrollbar-thumb {
+              background: linear-gradient(
+                180deg,
+                rgba(255,140,0,0.85),
+                rgba(255,184,77,0.85) 50%,
+                rgba(125,211,252,0.9)
+              );
+              border-radius: 9999px;
+              border: 3px solid transparent;
+              background-clip: padding-box;
+            }
+            .cdpl-scroll:hover::-webkit-scrollbar-thumb {
+              background: linear-gradient(
+                180deg,
+                rgba(255,140,0,1),
+                rgba(255,184,77,1) 50%,
+                rgba(125,211,252,1)
+              );
+            }
+            .cdpl-scroll::-webkit-scrollbar-thumb:active {
+              background: linear-gradient(
+                180deg,
+                rgba(255,125,0,1),
+                rgba(255,170,60,1) 50%,
+                rgba(110,200,250,1)
+              );
+            }
+            .cdpl-scroll::-webkit-scrollbar-corner {
+              background: transparent;
+            }
+          `}</style>
                 </motion.div>
             )}
         </AnimatePresence>

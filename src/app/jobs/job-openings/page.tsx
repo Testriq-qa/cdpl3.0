@@ -1,4 +1,3 @@
-// File: src/app/jobs/job-openings/page.tsx
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
 
@@ -135,7 +134,7 @@ function cleanHTML(raw?: string): string {
     .replace(/`([^`]+)`/g, (_m, code) => code)
     .replace(/(\*\*|__)([\s\S]*?)\1/g, (_m, _d, txt) => txt)
     .replace(/(\*|_)([\s\S]*?)\1/g, (_m, _d, txt) => txt)
-    .replace(/~~([\s\S]*?)~~/g, (_m, txt) => txt)
+    .replace(/~~([\\s\S]*?)~~/g, (_m, txt) => txt)
     .replace(/^[ \t]{0,3}#{1,6}[ \t]*/gm, "")
     .replace(/^[ \t]*>[ \t]?/gm, "")
     .replace(/^[ \t]*([-*_]){3,}[ \t]*$/gm, "");
@@ -250,14 +249,18 @@ export default async function JobSharePage() {
 
   return (
     <main className="min-h-screen bg-slate-50 text-slate-800">
-      <JobOpeningsHeroSection
-        title="Discover roles. Share opportunities."
-        subtitle="As part of our commitment to expanding career opportunities for our learners, Cinute Digital Pvt. Ltd. has partnered with OptimHire Software Solutions Pvt. Ltd., a third-party recruitment platform."
-        ctaLabel="Explore jobs"
-        scrollToId="job-browser"
-      />
+      {/* Keep hero as-is; it can manage its own inner width */}
+      <section className="w-full">
+        <JobOpeningsHeroSection
+          title="Discover roles. Share opportunities."
+          subtitle="As part of our commitment to expanding career opportunities for our learners, Cinute Digital Pvt. Ltd. has partnered with OptimHire Software Solutions Pvt. Ltd., a third-party recruitment platform."
+          ctaLabel="Explore jobs"
+          scrollToId="job-browser"
+        />
+      </section>
 
-      <section id="job-browser" className="container mx-auto px-4 pb-28">
+      {/* 100% width section; inner component handles max-w-7xl + padding */}
+      <section id="job-browser" className="w-full">
         <JobOpeningsJobBrowser
           initialJobs={initial?.data?.job ?? []}
           totalCount={initial?.data?.total_count ?? 0}
