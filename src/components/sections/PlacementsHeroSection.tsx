@@ -1,3 +1,4 @@
+// components/sections/PlacementsHeroSection.tsx
 "use client";
 
 import { motion } from "framer-motion";
@@ -71,6 +72,7 @@ export default function PlacementsHeroSection() {
         -mt-[96px] md:-mt-[104px] lg:-mt-[112px]
       "
       aria-label="CDPL student placements hero section"
+      data-scroll-target="placements-hero"
     >
       {/* Background wash (full-bleed) */}
       <div className="absolute inset-0 -z-30">
@@ -199,6 +201,20 @@ export default function PlacementsHeroSection() {
                 href="#placements-highlights"
                 className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shadow-sm ring-1 ring-black/5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500 active:translate-y-[1px]"
                 style={{ backgroundColor: "var(--color-brand, #ff8c00)" }}
+                onClick={(e) => {
+                  e.preventDefault();
+                  // use global helper from page Script
+                  // @ts-ignore
+                  if (typeof window !== "undefined" && window.CDPLscrollTo) {
+                    // @ts-ignore
+                    window.CDPLscrollTo("placements-highlights");
+                    history.replaceState(null, "", "#placements-highlights");
+                  } else {
+                    // fallback: native behavior
+                    const el = document.querySelector('[data-scroll-target="placements-highlights"]');
+                    if (el) (el as HTMLElement).scrollIntoView({ behavior: "smooth", block: "start" });
+                  }
+                }}
               >
                 Explore Placements
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
