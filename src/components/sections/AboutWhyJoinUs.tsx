@@ -128,7 +128,7 @@ export default function AboutWhyJoinUs() {
           {features.map(({ title, desc, icon: Icon, seo }) => (
             <article
               key={title}
-              className="group relative h-auto rounded-2xl leading-relaxed border border-slate-700 bg-white p-6 shadow-md hover:shadow-brand transition-transform hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-200/70 dark:bg-white"
+              className="group relative h-auto rounded-2xl leading-relaxed border border-slate-700 bg-white p-6 shadow-md hover:shadow-orange-200 transition-transform hover:-translate-y-0.5 hover:shadow-lg dark:border-slate-200/70 dark:bg-white"
             >
               {/* Icon */}
               <div className="mb-3 inline-flex h-10 w-10 items-center justify-center rounded-2xl bg-orange-50 ring-1 ring-orange-100">

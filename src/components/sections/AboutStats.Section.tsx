@@ -61,13 +61,14 @@ type Stat = {
     target: number;
     suffix: Suffix;
     desc: string;
+    color: string; // Property for stat color
 };
 
 function StatItem({ stat, shouldStart, reducedMotion }: { stat: Stat; shouldStart: boolean; reducedMotion: boolean }) {
     const animated = useCountUp(shouldStart, stat.target, 1400, reducedMotion);
     return (
         <div className="text-center">
-            <div className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+            <div className="text-3xl font-semibold tracking-tight sm:text-4xl" style={{ color: stat.color }}>
                 {/* Animated number */}
                 <span aria-hidden="true">
                     {applySuffix(animated, stat.suffix)}
@@ -84,14 +85,38 @@ function StatItem({ stat, shouldStart, reducedMotion }: { stat: Stat; shouldStar
 }
 
 export default function AboutStatsSection() {
-    // Define stats with numeric targets and display suffixes
+    // Define stats with numeric targets, display suffixes, and unique colors
     const stats = useMemo(
         () =>
             [
-                { label: "Learners Trained", target: 10000, suffix: "k+" as Suffix, desc: "Upskilled in software testing, data science & AI/ML" },
-                { label: "Hiring Partners", target: 120, suffix: "+" as Suffix, desc: "Product companies, startups & global tech leaders" },
-                { label: "Mentors & SMEs", target: 60, suffix: "+" as Suffix, desc: "Industry experts, QA leads & data scientists" },
-                { label: "Placement Support", target: 100, suffix: "%" as Suffix, desc: "Career guidance, mock interviews & referrals" },
+                { 
+                    label: "Learners Trained", 
+                    target: 10000, 
+                    suffix: "k+" as Suffix, 
+                    desc: "Upskilled in software testing, data science & AI/ML",
+                    color: "#DB2777" // pink-600
+                },
+                { 
+                    label: "Hiring Partners", 
+                    target: 120, 
+                    suffix: "+" as Suffix, 
+                    desc: "Product companies, startups & global tech leaders",
+                    color: "#F59E0B" // amber-500
+                },
+                { 
+                    label: "Mentors & SMEs", 
+                    target: 60, 
+                    suffix: "+" as Suffix, 
+                    desc: "Industry experts, QA leads & data scientists",
+                    color: "#6D28D9" // violet-700
+                },
+                { 
+                    label: "Placement Support", 
+                    target: 100, 
+                    suffix: "%" as Suffix, 
+                    desc: "Career guidance, mock interviews & referrals",
+                    color: "#EA580C" // orange-600
+                },
             ] as const,
         []
     );
@@ -133,7 +158,7 @@ export default function AboutStatsSection() {
         >
             {/* Header */}
             <div className="mb-6 text-center">
-                <p className="text-xs font-medium uppercase tracking-wider text-slate-500">
+                <p className="text-xs w-fit font-medium tracking-wider border border-slate-200 text-slate-700 rounded-full p-1 shadow-sm mx-auto">
                     Outcomes that matter
                 </p>
                 <h2
@@ -150,7 +175,6 @@ export default function AboutStatsSection() {
                     <strong>data science</strong>, and <strong>AI/ML</strong> careers.
                 </p>
             </div>
-
 
             {/* Stats Card */}
             <div

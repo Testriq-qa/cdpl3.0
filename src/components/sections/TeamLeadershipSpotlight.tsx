@@ -64,17 +64,17 @@ export default function LeadershipSpotlight({ }: Props) {
 
                 <h2
                     id="leadership-heading"
-                    className="bg-gradient-to-r from-orange-500 via-orange-400 to-amber-500 bg-clip-text text-4xl font-extrabold tracking-tight text-transparent sm:text-5xl"
+                    className="text-3xl font-bold tracking-tight text-slate-800 sm:text-4xl"
                 >
-                    Meet Our Leaders
+                    Meet Our <span className="text-brand">Leaders</span>
                 </h2>
 
                 <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
                     Learn from industry veterans who architect{" "}
-                    <strong className="text-slate-900">job-ready, mentor-led programs</strong> with{" "}
-                    <strong className="text-slate-900">real-world projects</strong>,{" "}
-                    <strong className="text-slate-900">placement support</strong>, and continuously updated,{" "}
-                    <strong className="text-slate-900">ISO-aligned curriculum</strong>.
+                    <strong className="text-slate-700">job-ready, mentor-led programs</strong> with{" "}
+                    <strong className="text-slate-700">real-world projects</strong>,{" "}
+                    <strong className="text-slate-700">placement support</strong>, and continuously updated,{" "}
+                    <strong className="text-slate-700">ISO-aligned curriculum</strong>.
                 </p>
             </div>
 
