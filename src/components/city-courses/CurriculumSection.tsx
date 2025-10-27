@@ -3,7 +3,7 @@
 import React, { useMemo, useState } from "react";
 import { motion, AnimatePresence, type Variants } from "framer-motion";
 import type { CourseData } from "@/types/courseData";
-import { ChevronDown, CheckCircle2, BookOpen } from "lucide-react";
+import { CheckCircle2, BookOpen } from "lucide-react";
 
 interface Track {
   id?: number | string;
@@ -79,7 +79,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
   const totalWeeks = current?.weeks?.length ?? 0;
 
   return (
-    <section className="relative py-16 sm:py-20 bg-white">
+    <section id="curriculum-section" className="relative py-16 sm:py-20 bg-white">
       {/* Soft background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div className="absolute -top-24 -left-16 h-72 w-72 rounded-full bg-violet-100 blur-3xl opacity-30" />
@@ -151,21 +151,22 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                     title={t.title}
                     className={[
                       // sizing & layout
-                      "inline-flex items-center flex-none",
-                      "whitespace-nowrap", // keep the title on one line (no wrapping)
-                      "px-4 sm:px-5 py-2 rounded-full text-sm font-semibold transition-all",
-                      // gradient background borrowed from card headers
-                      variant.header, // includes text-white
+                      "flex items-center text-center justify-center",
+                      // mobile: compact with truncation, tablet+: full width
+                      "sm:flex-none flex-1 min-w-[100px] sm:min-w-[140px] max-w-[150px] sm:max-w-none",
+                      "px-2 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all",
+                      // gradient background
+                      variant.header,
                       "border border-transparent shadow-sm",
                       // state styles
                       active
                         ? "opacity-100 ring-2 ring-white/40"
                         : "opacity-85 hover:opacity-100 hover:shadow-md",
-                      // small readable text glow on gradients
+                      // text glow
                       "[text-shadow:0_1px_0_rgba(0,0,0,0.25)]",
                     ].join(" ")}
                   >
-                    {t.title}
+                    <span className="sm:whitespace-normal truncate">{t.title}</span>
                   </button>
                 );
               })}
@@ -201,9 +202,9 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                 className="rounded-2xl border border-violet-200 bg-gradient-to-br from-violet-50 to-blue-50 p-4 sm:p-6 lg:p-7 shadow-sm"
               >
                 {/* Table-like card */}
-                <div className="overflow-x-auto rounded-xl border border-slate-200 bg-white">
+                <div className="rounded-xl border border-slate-200 bg-white">
                   {/* Header row */}
-                  <div className="hidden min-w-[720px] md:grid md:grid-cols-12 gap-0 border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-600">
+                  <div className="hidden sm:grid sm:grid-cols-12 gap-0 border-b border-slate-200 bg-slate-50 px-4 py-3 text-xs font-semibold uppercase tracking-wide text-slate-600">
                     <div className="col-span-2">Week</div>
                     <div className="col-span-3">Module</div>
                     <div className="col-span-5">What you&apos;ll learn</div>
@@ -211,11 +212,11 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                   </div>
 
                   {/* Rows */}
-                  <ul className="divide-y divide-slate-200 min-w-[720px]">
+                  <ul className="divide-y divide-slate-200">
                     {current.weeks.map((w: Week, idx: number) => (
-                      <li key={idx} className="md:grid md:grid-cols-12 gap-0 px-4 py-4">
+                      <li key={idx} className="sm:grid sm:grid-cols-12 gap-0 px-4 py-4">
                         {/* Mobile labels */}
-                        <div className="md:hidden mb-2">
+                        <div className="sm:hidden mb-2">
                           <div className="text-xs font-semibold uppercase text-slate-500">Week</div>
                           <div className="mt-0.5 inline-flex items-center rounded-md bg-violet-600/10 text-violet-700 px-2 py-1 text-xs font-semibold">
                             {w.number || String(idx + 1)}
@@ -223,29 +224,29 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                         </div>
 
                         {/* Week */}
-                        <div className="hidden md:block col-span-2">
+                        <div className="hidden sm:block col-span-2">
                           <span className="inline-flex items-center rounded-md bg-violet-600/10 text-violet-700 px-2 py-1 text-xs font-semibold">
                             {w.number || String(idx + 1)}
                           </span>
                         </div>
 
                         {/* Module title */}
-                        <div className="md:col-span-3">
-                          <div className="md:hidden text-xs font-semibold uppercase text-slate-500">Module</div>
-                          <div className="text-base font-semibold text-slate-900">{w.title}</div>
+                        <div className="sm:col-span-3">
+                          <div className="sm:hidden text-xs font-semibold uppercase text-slate-500">Module</div>
+                          <div className="text-base font-semibold text-slate-900 truncate">{w.title}</div>
                         </div>
 
                         {/* Description */}
-                        <div className="mt-2 md:mt-0 md:col-span-5">
-                          <div className="md:hidden text-xs font-semibold uppercase text-slate-500 mb-1">
+                        <div className="mt-2 sm:mt-0 sm:col-span-5">
+                          <div className="sm:hidden text-xs font-semibold uppercase text-slate-500 mb-1">
                             What you&apos;ll learn
                           </div>
-                          <p className="text-sm text-slate-700">{w.description}</p>
+                          <p className="text-sm text-slate-700 line-clamp-3">{w.description}</p>
                         </div>
 
                         {/* Deliverables */}
-                        <div className="mt-3 md:mt-0 md:col-span-2">
-                          <div className="md:hidden text-xs font-semibold uppercase text-slate-500 mb-1">
+                        <div className="mt-3 sm:mt-0 sm:col-span-2">
+                          <div className="sm:hidden text-xs font-semibold uppercase text-slate-500 mb-1">
                             Deliverables
                           </div>
                           {Array.isArray(w.deliverables) && w.deliverables.length > 0 ? (
@@ -253,7 +254,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                               {w.deliverables.map((d: string, i: number) => (
                                 <li key={i} className="flex items-start gap-2 text-sm text-slate-800">
                                   <CheckCircle2 className="mt-0.5 h-4 w-4 text-green-600 flex-shrink-0" />
-                                  <span>{d}</span>
+                                  <span className="line-clamp-2">{d}</span>
                                 </li>
                               ))}
                             </ul>
@@ -264,12 +265,6 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                       </li>
                     ))}
                   </ul>
-                </div>
-
-                {/* Collapsible hint for small screens */}
-                <div className="mt-3 flex items-center justify-center gap-1 text-xs text-slate-500 md:hidden">
-                  <ChevronDown className="h-4 w-4" />
-                  Scroll the card horizontally if content overflows
                 </div>
               </motion.div>
             ) : (

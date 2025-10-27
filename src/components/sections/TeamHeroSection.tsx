@@ -303,7 +303,7 @@ export default function TeamHero() {
                 </Link>
               </div>
 
-              <div className="flex items-center gap-1 text-sm text-slate-600">
+              <div className="flex mt-5 md:mt-0 items-center gap-1 text-sm text-slate-600">
                 <Star className="h-4 w-4 fill-yellow-400 stroke-yellow-400" aria-hidden="true" />
                 <span className="font-semibold text-slate-800">4.9/5</span>
                 <span aria-hidden="true">·</span>
@@ -359,7 +359,7 @@ export default function TeamHero() {
           <p className="text-center text-sm font-medium text-slate-500">
             Trusted by industry & aligned with global standards
           </p>
-          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 items-center justify-items-center gap-18">
+          <div className="mt-6 grid grid-cols-2 md:grid-cols-4 items-center justify-items-center gap-20 md:gap-18">
             {logos.map((l) => (
               <div key={l.alt} className="relative h-8 w-28 opacity-80 transition hover:opacity-100">
                 <Image src={l.src} alt={l.alt} width={100} height={100} className="object-contain" />

@@ -31,7 +31,7 @@ export type TeamMember = {
   bio: string;
   location?: string;
   avatar: string;
-  linkedin?: string;
+  linkedin: string;
   email?: string;
   highlights?: string[];
   src?: string

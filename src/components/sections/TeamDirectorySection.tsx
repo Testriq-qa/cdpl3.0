@@ -13,6 +13,7 @@ import {
     Quote,
     GraduationCap,
 } from "lucide-react";
+import Link from "next/link";
 
 type SortKey = "relevance" | "name-asc" | "name-desc";
 
@@ -122,7 +123,7 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
         <section
             id="directory"
             aria-labelledby={`${id}-directory`}
-            className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 lg:py-12"
+            className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-4 lg:py-12"
             style={{ "--brand": brand } as CustomCSSProperties}
         >
             {/* Decorative halo */}
@@ -159,7 +160,7 @@ export default function TeamDirectory({ data }: { data: TeamMember[] }) {
 
 
             {/* Grid */}
-            <div className="mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="mt-10 md:mt-6 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
                 {filtered.map((m) => (
                     <MentorCard key={m.id} m={m} />
                 ))}
@@ -220,11 +221,11 @@ function MentorCard({ m }: { m: TeamMember & { avatar?: string } }) {
                     <Avatar name={m.name} src={m.avatar} />
                 </div>
 
-                <div className="min-w-0 flex-1">
-                    <h3 className="truncate text-xl font-bold text-slate-900">{m.name}</h3>
-                    <p className="truncate text-md text-slate-600">{m.title}</p>
+                <div className="min-w-0 space-y-1 md:space-y-0 mt-2 md:mt-0 flex-1">
+                    <h3 className="truncate text-xl text-center md:text-start font-bold text-slate-900">{m.name}</h3>
+                    <p className="truncate text-md text-center md:text-start text-wrap text-slate-600">{m.title}</p>
 
-                    <div className="mt-2 flex flex-wrap gap-1.5">
+                    <div className="mt-5 md:mt-2 flex flex-wrap gap-1.5">
                         {m.expertise.slice(0, 4).map((e) => (
                             <span
                                 key={e}
@@ -253,23 +254,23 @@ function MentorCard({ m }: { m: TeamMember & { avatar?: string } }) {
             {/* Metadata strip */}
             <div className="mt-6 flex items-center justify-between gap-2 rounded-2xl border border-slate-200 bg-slate-50/60 px-3 py-2">
                 <span className="inline-flex items-center gap-1.5 text-xs font-medium text-slate-700">
-                    <Shield className="h-3.5 w-3.5 text-slate-500" />
+                    <Shield className="h-3.5 w-3.5 text-slate-500 hidden md:block" />
                     {m.role}
                 </span>
                 <span className="inline-flex items-center gap-1.5 text-xs text-slate-600">
-                    <GraduationCap className="h-3.5 w-3.5 text-slate-500" />
+                    <GraduationCap className="h-3.5 w-3.5 text-slate-500 hidden md:block" />
                     Mentoring for job-readiness
                 </span>
             </div>
 
             {/* Actions */}
-            <div className="mt-6 flex items-center gap-2">
-                <a
-                    href={m.linkedin}
+            <div className="mt-6 flex items-center gap-8">
+                <Link
+                    href={`${m.linkedin}`}
                     className="inline-flex items-center justify-center rounded-xl px-3 py-1.5 text-sm font-semibold text-white bg-blue-800 shadow-sm transition hover:bg-brand focus:outline-none focus:ring-2 focus:ring-[var(--brand)]"
                 >
                     LinkedIn
-                </a>
+                </Link>
                 <span className="ml-auto inline-flex items-center gap-1 text-[12px] text-slate-500">
                     <Quote className="h-3.5 w-3.5" />
                     Industry-aligned teaching

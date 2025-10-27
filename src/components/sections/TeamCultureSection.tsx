@@ -208,7 +208,7 @@ export default function TeamCultureSection() {
                         </p>
                     </div>
                     <div className="flex flex-wrap items-center justify-center gap-3">
-                        <Link href="/contact" className="flex items-center p-3 rounded-xl bg-orange-500 text-white shadow-lg transition-all hover:bg-orange-600 hover:translate-y-1">
+                        <Link href="/contact-us" className="flex items-center p-3 rounded-xl bg-orange-500 text-white shadow-lg transition-all hover:bg-orange-600 hover:translate-y-1">
                             Talk to a mentor <ArrowRight className="ml-2 h-4 w-4" />
                         </Link>
                         <Link href="/programs" className="flex items-center p-3 rounded-xl border-2 border-brand bg-white text-slate-900 hover:bg-brand hover:text-white transition-all ease-in-out">

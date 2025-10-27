@@ -297,7 +297,7 @@ export default function ReviewsMarquee() {
                         width={80}
                         height={68}
                         priority={p === "Google"}
-                        className=" md:scale-105"
+                        className="md:scale-105 h-5 w-13 md:h-6 md:w-15"
                       />
                     </span>
                   </button>
