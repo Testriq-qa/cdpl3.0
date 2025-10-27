@@ -119,17 +119,17 @@ export default function JobsLiveJobsJobsHeroSection({
             </motion.div>
           </div>
 
-          {/* RIGHT — visual */}
-          <div className="order-2 md:order-2 relative self-start mt-6 md:mt-0 md:basis-[40%] lg:basis-[38%]">
-            <div className="relative ml-0 mr-0 w-full max-w-[560px] sm:max-w-[640px] md:ml-auto md:w-[340px] lg:w-[420px] xl:w-[480px]">
+          {/* RIGHT — visual (smaller + raised) */}
+          <div className="order-2 md:order-2 relative self-start mt-6 md:mt-0 md:basis-[40%] lg:basis-[38%] -translate-y-1 sm:-translate-y-2 md:-translate-y-4 lg:-translate-y-8">
+            <div className="relative ml-0 mr-0 w-full md:ml-auto max-w-[24rem] sm:max-w-[26rem] md:w-[300px] lg:w-[360px] xl:w-[400px]">
               <Image
-                src="/live-jobs_images/live-jobs_hero.png"
+                src="/live-jobs_images/live-jobs_hero2.png"
                 alt="Live jobs hero"
                 width={960}
                 height={960}
                 priority
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 45vw, 480px"
-                className="h-auto w-full select-none"
+                sizes="(max-width: 640px) 80vw, (max-width: 1024px) 36vw, 400px"
+                className="h-auto w-full rounded-2xl select-none"
               />
             </div>
 

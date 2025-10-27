@@ -27,8 +27,8 @@ const DATA: Placement[] = [
   { name: "Bhakti Raigawali", company: "Aryan Technologies", domain: "QA", image: "/placements/Bhakti Raigawali.jpg" },
   { name: "Satya Dutt", company: "Tech Mahindra", domain: "QA", image: "/placements/Satya Dutt.jpg" },
   { name: "Mohsin Patel", company: "Testriq", domain: "QA", image: "/placements/Mohsin Patel.jpg" },
-  { name: "Kishore Jha", company: "Raw Engineering", domain: "QA", image: "/placements/Kishore Jha.jpg" }, // fixed
-  { name: "Krutika Penkar", company: "Tech Cryptors", domain: "QA", image: "/placements/Krutika Penkar.jpg" }, // fixed
+  { name: "Kishore Jha", company: "Raw Engineering", domain: "QA", image: "/placements/Kishore Jha.jpg" },
+  { name: "Krutika Penkar", company: "Tech Cryptors", domain: "QA", image: "/placements/Krutika Penkar.jpg" },
   { name: "Insha Dosani", company: "Maxwell Energy Systems", domain: "QA", image: "/placements/Insha Dosani.jpg" },
   { name: "Jaynam Shah", company: "IDfy", domain: "QA", image: "/placements/Jaynam Shah.jpg" },
   { name: "Akash Yadav", company: "CVistar", domain: "QA", image: "/placements/Akash Yadav.jpg" },
@@ -51,7 +51,6 @@ const DOMAIN_COLORS = {
   QA: { bg: "bg-orange-50", text: "text-[#ff8c00]", ring: "ring-[#ff8c00]/20" },
 };
 
-/** Logo files present in /placements/companies/temp (from your list) */
 const COMPANY_LOGOS: Record<string, string> = {
   "tech mahindra": "tech_mahindra.png",
   "accenture": "accenture.png",
@@ -76,7 +75,6 @@ const COMPANY_LOGOS: Record<string, string> = {
   "ibkr": "ibkr.png",
 };
 
-/** SVG fallback (for companies without a file yet) */
 const FALLBACK_SVG = encodeURIComponent(
   `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="40" viewBox="0 0 180 40">
     <rect x="0.5" y="0.5" width="179" height="39" rx="6" ry="6" fill="#fafafa" stroke="#e5e7eb"/>
@@ -86,26 +84,13 @@ const FALLBACK_SVG = encodeURIComponent(
 );
 const COMPANY_LOGO_FALLBACK = `data:image/svg+xml;utf8,${FALLBACK_SVG}`;
 
-/** Aliases/variants → canonical keys (or placeholders) */
 function normalizeCompanyName(name: string): string {
   const n = name.trim().toLowerCase();
-
   if (COMPANY_LOGOS[n]) return n;
-
-  // Axiom
   if (n === "axiom techguru" || n === "axiom tech guru") return "axiom technologies";
-
-  // QodeNext / CodeNext variants → sp_ultraflex.png
-  if (n === "qodenext" || n === "qode next" || n === "qodenext technologies" || n === "codenext" || n === "code next") {
-    return "sp ultraflex";
-  }
-
-  // CVistar variants → xr.png
+  if (["qodenext", "qode next", "qodenext technologies", "codenext", "code next"].includes(n)) return "sp ultraflex";
   if (n === "cvistar" || n === "c vistar" || n === "c-vistar") return "xr";
-
-  // i-XL short form
   if (n === "i-xl") return "i-xl technologies";
-
   return n;
 }
 
@@ -155,11 +140,10 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                   <button
                     key={d}
                     onClick={() => setDomain(d)}
-                    className={`rounded-full border px-3 py-1 text-sm sm:text-base font-medium transition ${
-                      active
+                    className={`rounded-full border px-3 py-1 text-sm sm:text-base font-medium transition ${active
                         ? "border-[#ff8c00] bg-orange-50 text-[#ff8c00]"
                         : "border-slate-200 bg-white text-slate-800 hover:bg-slate-50"
-                    }`}
+                      }`}
                   >
                     {d}
                   </button>
@@ -215,7 +199,7 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                 initial="hidden"
                 animate="show"
                 variants={{ hidden: { opacity: 1 }, show: { opacity: 1, transition: { staggerChildren: 0.05, delayChildren: 0.02 } } }}
-                className="grid grid-cols-1 gap-5 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3"
+                className="grid grid-cols-2 gap-4 max-[400px]:grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 xl:gap-6 2xl:gap-8"
               >
                 {results.map((p, idx) => {
                   const theme = DOMAIN_COLORS[p.domain];
@@ -236,27 +220,27 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                       <Image
                         src={p.image}
                         alt={p.name}
-                        width={64}
-                        height={64}
-                        className="absolute -left-3 -top-3 h-16 w-16 rounded-full object-cover border border-slate-200 ring-4 ring-white shadow"
+                        width={56}
+                        height={56}
+                        className="absolute -left-3 -top-3 h-14 w-14 rounded-full object-cover border border-slate-200 ring-4 ring-white shadow"
                       />
 
                       {/* Header spacer + logo bay */}
-                      <div className="h-14 pr-28 sm:pr-32" />
-                      <div className="absolute right-4 top-4 h-12 w-28 sm:w-32 flex items-center justify-center">
+                      <div className="h-12 pr-24 sm:pr-28 md:pr-32" />
+                      <div className="absolute right-4 top-4 h-10 w-24 sm:w-28 md:w-32 flex items-center justify-center">
                         <Image
                           src={logoSrc}
                           alt={`${p.company} logo`}
                           width={112}
                           height={36}
-                          className="max-h-9 w-auto object-contain"
+                          className="max-h-8 sm:max-h-9 w-auto object-contain"
                         />
                       </div>
 
                       {/* BODY */}
                       <div className="min-w-0 mt-0.5">
                         <p className="truncate text-xs sm:text-sm text-slate-500">{p.company}</p>
-                        <h4 className="truncate text-[1.05rem] sm:text-lg font-extrabold text-slate-900">{p.name}</h4>
+                        <h4 className="truncate text-[1.02rem] sm:text-lg font-extrabold text-slate-900">{p.name}</h4>
                       </div>
 
                       <div className="mt-2.5">

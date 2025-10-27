@@ -5,15 +5,6 @@ import Script from "next/script";
 
 /**
  * MentorsImpactSection — CDPL clean gradient (light-only)
- * Spacing tightened to reduce gap from hero:
- * - container: pt-6 pb-12 (sm:pt-8 sm:pb-16)
- * - header: mb-6 (sm:mb-8)
- * - h2: mt-3
- * - lead p: mt-2
- * - filter group: mt-4
- * - metrics: mb-6
- * - trust strip: mt-8
- * - footer tip: mt-3
  */
 
 type MentorCard = {
@@ -38,70 +29,88 @@ const GRADIENT_OUTLINE = `linear-gradient(90deg, ${CDPL_ORANGE}20 0%, ${CDPL_PEA
 
 const MENTORS: MentorCard[] = [
   {
-    name: "Dr. Aisha Verma",
-    role: "Senior ML Engineer",
-    company: "Google",
-    domain: "AI / Machine Learning",
-    rating: 4.9,
-    sessions: 1200,
-    tags: ["Deep Learning", "NLP", "MLOps", "PyTorch"],
-    img: "https://images.unsplash.com/photo-1544723795-3fb6469f5b39?q=80&w=256&auto=format&fit=crop",
-    keywords: "ai ml machine learning nlp pytorch google research",
-  },
-  {
-    name: "Rohan Mehta",
-    role: "Principal Engineer",
-    company: "Amazon",
-    domain: "Full-Stack",
-    rating: 4.8,
-    sessions: 950,
-    tags: ["System Design", "React", "Node.js", "Scalability"],
-    img: "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=256&auto=format&fit=crop",
-    keywords: "fullstack javascript react node system design amazon aws",
-  },
-  {
-    name: "Sneha Rao",
-    role: "SRE Lead",
-    company: "Microsoft",
-    domain: "Cloud & DevOps",
-    rating: 5.0,
-    sessions: 700,
-    tags: ["Kubernetes", "AWS", "Terraform", "Observability"],
-    img: "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=256&auto=format&fit=crop",
-    keywords: "cloud devops sre reliability kubernetes aws terraform microsoft",
-  },
-  {
-    name: "Arjun Kapoor",
-    role: "Data Scientist",
-    company: "Meta",
+    name: "Pravin Mhaske",
+    role: "Data Science Manager",
+    company: "Infosys (India)",
     domain: "Data Science",
     rating: 4.9,
-    sessions: 820,
-    tags: ["A/B Testing", "Feature Engineering", "SQL", "Dashboards"],
-    img: "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=256&auto=format&fit=crop",
-    keywords: "data science analytics python sql ab testing dashboards meta",
+    sessions: 1200,
+    tags: ["Leadership", "Analytics", "Machine Learning", "Strategy"],
+    img: "/mentors_images/Pravin-Maske.jpg",
+    keywords:
+      "pravin mhaske data science manager infosys analytics machine learning leadership india",
   },
   {
-    name: "Kavya Singh",
-    role: "Product Lead",
-    company: "FinTech Unicorn",
-    domain: "Product Management",
+    name: "Piyali Mondal",
+    role: "Program Leader · M.Sc (Data Science AI & ML)",
+    company: "Exeed College (UAE)",
+    domain: "Data Science",
     rating: 4.8,
-    sessions: 640,
-    tags: ["Roadmapping", "Growth", "User Research", "Monetization"],
-    img: "https://images.unsplash.com/photo-1546539782-6fc531453083?q=80&w=256&auto=format&fit=crop",
-    keywords: "product management pm growth roadmap user research fintech",
+    sessions: 980,
+    tags: ["Academia", "Curriculum Design", "Research", "Python"],
+    img: "/mentors_images/Piyali-Mondal.jpg",
+    keywords:
+      "piyali mondal program leader exeed college uae academia data science ai ml curriculum professor",
   },
   {
-    name: "Neha Kulkarni",
-    role: "Staff Designer",
-    company: "SaaS Scaleup",
-    domain: "UI/UX Design",
+    name: "Revathi Soundarrajan",
+    role: "Data Scientist (PhD)",
+    company: "Electra Vehicles (USA)",
+    domain: "Data Science",
+    rating: 5.0,
+    sessions: 860,
+    tags: ["ML Research", "Time Series", "AutoML", "Python"],
+    img: "/mentors_images/Revathi-Soundarrajan.jpg",
+    keywords:
+      "revathi soundarrajan dr s revathi data scientist phd electra vehicles machine learning research usa",
+  },
+  {
+    name: "Dnyaneshwar Bhabad",
+    role: "Assistant Manager – Technology",
+    company: "Deloitte – Technology Academy (India)",
+    domain: "Full-Stack",
+    rating: 4.7,
+    sessions: 740,
+    tags: ["JavaScript", "Training", "Backend", "System Design"],
+    img: "/mentors_images/Dnyaneshwar-Bhabad.jpg",
+    keywords:
+      "dnyaneshwar bhabad assistant manager technology deloitte training software development full-stack india",
+  },
+  {
+    name: "Abhirupa Manna",
+    role: "Consultant",
+    company: "KPMG (India)",
+    domain: "Data Science",
+    rating: 4.8,
+    sessions: 690,
+    tags: ["SQL", "Tableau", "Power BI", "ETL", "Python"],
+    img: "/mentors_images/Abhirupa-Manna.jpg",
+    keywords:
+      "abhirupa manna consultant kpmg data analytics bi sql tableau power bi qlikview etl python india",
+  },
+  {
+    name: "Urvi Verma",
+    role: "AVP – Data Engineering",
+    company: "Deutsche Bank (Germany)",
+    domain: "Cloud & DevOps",
     rating: 4.9,
-    sessions: 500,
-    tags: ["Design Systems", "Prototyping", "Accessibility", "Figma"],
-    img: "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=256&auto=format&fit=crop",
-    keywords: "ui ux design systems figma prototyping accessibility saas",
+    sessions: 820,
+    tags: ["Big Data", "AWS", "GCP", "Python", "SQL"],
+    img: "/mentors_images/Urvi-Verma.jpg",
+    keywords:
+      "urvi verma avp data engineering deutsche bank germany big data aws gcp cloud services python sql",
+  },
+  {
+    name: "Eshita Gangwar",
+    role: "Application Engineer",
+    company: "Oracle (USA)",
+    domain: "Full-Stack",
+    rating: 4.8,
+    sessions: 610,
+    tags: ["Java", "Python", "Genomic Data", "Software Development"],
+    img: "/mentors_images/Ishita.jpg",
+    keywords:
+      "eshita gangwar application engineer oracle usa masters computer science usc genomic data analysis software development",
   },
 ];
 
@@ -113,6 +122,12 @@ const DOMAINS = [
   "Product Management",
   "UI/UX Design",
 ];
+
+/** Per-mentor photo tweaks (only where needed) */
+const IMG_TWEAKS: Record<string, string> = {
+  // keep rim visible and center face a touch
+  "Dnyaneshwar Bhabad": "object-[50%_30%] scale-[1.06]",
+};
 
 export default function MentorsImpactSection() {
   const [domain, setDomain] = useState<string>("");
@@ -146,7 +161,7 @@ export default function MentorsImpactSection() {
       className="relative isolate overflow-hidden bg-white text-zinc-900"
       data-theme="light"
     >
-      {/* background glows (don’t affect layout) */}
+      {/* background glows */}
       <div
         className="pointer-events-none absolute -top-28 right-[-10%] h-80 w-[48rem] rounded-full blur-[70px] opacity-20"
         style={{ background: CDPL_GLOW }}
@@ -156,7 +171,6 @@ export default function MentorsImpactSection() {
         style={{ background: CDPL_GLOW }}
       />
 
-      {/* tightened vertical padding */}
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 pb-12 sm:pt-8 sm:pb-16">
         {/* Header */}
         <header className="mb-6 sm:mb-8">
@@ -165,7 +179,6 @@ export default function MentorsImpactSection() {
               "Top-rated Industry Experts",
               "1:1 Live Mentorship",
               "Career-Focused Guidance",
-              // "AI-Powered Matching"  // removed per request
             ].map((b) => (
               <span
                 key={b}
@@ -181,9 +194,7 @@ export default function MentorsImpactSection() {
             className="mt-3 text-3xl sm:text-4xl font-extrabold leading-tight"
           >
             Learn Faster with{" "}
-            <span
-              className="drop-shadow-sm text-[var(--color-brand,#ff8c00)]" // brand color, no gradient
-            >
+            <span className="drop-shadow-sm text-[var(--color-brand,#ff8c00)]">
               CDPL World-Class Mentors
             </span>
           </h2>
@@ -196,14 +207,13 @@ export default function MentorsImpactSection() {
             for <strong>job placement</strong> and <strong>promotions</strong>.
           </p>
 
-          {/* Domain filter only */}
+          {/* Domain filter */}
           <div role="group" aria-label="Mentor domain filter" className="mt-4 max-w-sm">
             <label className="block rounded-xl border border-zinc-200 bg-white px-3 py-2.5 shadow-sm">
               <div className="mb-1 text-[12px] font-semibold uppercase tracking-wide text-zinc-500">
                 Filter by Domain
               </div>
 
-              {/* 1) Keep native select for accessibility & forms (screen-readers/SSR) */}
               <select
                 id="mentor-domain"
                 value={domain}
@@ -219,7 +229,6 @@ export default function MentorsImpactSection() {
                 ))}
               </select>
 
-              {/* 2) Styled, accessible custom select that mirrors the native one */}
               <FancySelect
                 value={domain}
                 onChange={setDomain}
@@ -250,83 +259,86 @@ export default function MentorsImpactSection() {
 
         {/* Mentor Cards */}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((m) => (
-            <article
-              key={m.name}
-              className="relative rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
-              aria-label={`${m.name} — ${m.role}, ${m.company}`}
-            >
-              <div
-                className="absolute -inset-px rounded-3xl opacity-35 pointer-events-none"
-                style={{ backgroundImage: GRADIENT_OUTLINE }}
-                aria-hidden="true"
-              />
-              <div className="flex items-start gap-4">
-                <div className="relative">
-                  <span
-                    className="absolute inset-0 -m-[2px] rounded-2xl opacity-55"
+          {filtered.map((m) => {
+            const tweak = IMG_TWEAKS[m.name] || "";
+            return (
+              <article
+                key={m.name}
+                className="relative rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                aria-label={`${m.name} — ${m.role}, ${m.company}`}
+              >
+                <div
+                  className="absolute -inset-px rounded-3xl opacity-35 pointer-events-none"
+                  style={{ backgroundImage: GRADIENT_OUTLINE }}
+                  aria-hidden="true"
+                />
+                <div className="flex items-start gap-4">
+                  {/* Avatar with CONSISTENT size + visible golden rim */}
+                  <div
+                    className="h-[88px] w-[88px] shrink-0 rounded-2xl p-[3px]"
                     style={{ backgroundImage: GRADIENT_BRAND }}
-                    aria-hidden="true"
-                  />
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={m.img}
-                    alt={`Mentor portrait — ${m.domain} ${m.company}`}
-                    width={88}
-                    height={88}
-                    loading="lazy"
-                    className="relative h-22 w-22 rounded-2xl object-cover ring-1 ring-black/5"
-                  />
-                </div>
-                <div className="min-w-0">
-                  <h3 className="truncate text-[16px] font-extrabold leading-tight">{m.name}</h3>
-                  <p className="mt-1 text-[13px] text-zinc-700">
-                    {m.role} · {m.company}
-                  </p>
-                  <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-zinc-700">
-                    <span
-                      className="inline-block h-2 w-2 rounded-full"
-                      style={{ background: CDPL_ORANGE }}
-                      aria-hidden="true"
-                    />
-                    {m.domain}
-                  </div>
-                </div>
-              </div>
-
-              <div className="mt-4 flex flex-wrap gap-1.5">
-                {m.tags.map((t) => (
-                  <span
-                    key={t}
-                    className="rounded-full border border-zinc-200 bg-white px-2 py-1 text-[11px] text-zinc-700"
                   >
-                    {t}
-                  </span>
-                ))}
-              </div>
-
-              <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
-                  <div className="text-[12px] font-extrabold">★ {m.rating.toFixed(1)}</div>
-                  <div className="mt-0.5 text-[11px] text-zinc-600">Avg Rating</div>
-                </div>
-                <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
-                  <div className="text-[12px] font-extrabold">
-                    {m.sessions.toLocaleString()}+
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src={m.img}
+                      alt={`Mentor portrait — ${m.domain} ${m.company}`}
+                      width={88}
+                      height={88}
+                      loading="lazy"
+                      className={`block h-full w-full rounded-[14px] object-cover ring-1 ring-black/5 ${tweak}`}
+                    />
                   </div>
-                  <div className="mt-0.5 text-[11px] text-zinc-600">Sessions</div>
-                </div>
-                <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
-                  <div className="text-[12px] font-extrabold">Job-ready</div>
-                  <div className="mt-0.5 text-[11px] text-zinc-600">Curriculum</div>
-                </div>
-              </div>
 
-              <p className="mt-3 text-[11px] text-zinc-600">
-                Includes roadmap planning, project reviews, and mock interviews. Ideal for career transitions and promotions.
-              </p>
-            </article>
-          ))}
+                  <div className="min-w-0">
+                    <h3 className="truncate text-[16px] font-extrabold leading-tight">{m.name}</h3>
+                    <p className="mt-1 text-[13px] text-zinc-700">
+                      {m.role} · {m.company}
+                    </p>
+                    <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-zinc-700">
+                      <span
+                        className="inline-block h-2 w-2 rounded-full"
+                        style={{ background: CDPL_ORANGE }}
+                        aria-hidden="true"
+                      />
+                      {m.domain}
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-4 flex flex-wrap gap-1.5">
+                  {m.tags.map((t) => (
+                    <span
+                      key={t}
+                      className="rounded-full border border-zinc-200 bg-white px-2 py-1 text-[11px] text-zinc-700"
+                    >
+                      {t}
+                    </span>
+                  ))}
+                </div>
+
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
+                  <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
+                    <div className="text-[12px] font-extrabold">★ {m.rating.toFixed(1)}</div>
+                    <div className="mt-0.5 text-[11px] text-zinc-600">Avg Rating</div>
+                  </div>
+                  <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
+                    <div className="text-[12px] font-extrabold">
+                      {m.sessions.toLocaleString()}+
+                    </div>
+                    <div className="mt-0.5 text-[11px] text-zinc-600">Sessions</div>
+                  </div>
+                  <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
+                    <div className="text-[12px] font-extrabold">Job-ready</div>
+                    <div className="mt-0.5 text-[11px] text-zinc-600">Curriculum</div>
+                  </div>
+                </div>
+
+                <p className="mt-3 text-[11px] text-zinc-600">
+                  Includes roadmap planning, project reviews, and mock interviews. Ideal for career transitions and promotions.
+                </p>
+              </article>
+            );
+          })}
         </div>
 
         <div className="mt-8 flex snap-x gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
@@ -386,7 +398,6 @@ function FancySelect({
   const display = value || "All domains";
   const selectedIndex = options.findIndex((o) => o === display);
 
-  // close on outside click
   useEffect(() => {
     function onDoc(e: MouseEvent) {
       if (!open) return;
@@ -409,7 +420,6 @@ function FancySelect({
     if (e.key === "ArrowDown" || e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       setOpen(true);
-      // focus selected item next tick
       requestAnimationFrame(() => {
         const el = listRef.current?.querySelector<HTMLLIElement>(
           `li[data-index="${Math.max(0, selectedIndex)}"]`
@@ -481,9 +491,8 @@ function FancySelect({
                 tabIndex={0}
                 onKeyDown={(e) => onItemKey(e, i)}
                 onClick={() => choose(opt)}
-                className={`mx-1 flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition hover:bg-[rgba(255,140,0,.08)] ${
-                  active ? "bg-[rgba(255,140,0,.12)] font-semibold text-zinc-900" : "text-zinc-800"
-                }`}
+                className={`mx-1 flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition hover:bg-[rgba(255,140,0,.08)] ${active ? "bg-[rgba(255,140,0,.12)] font-semibold text-zinc-900" : "text-zinc-800"
+                  }`}
               >
                 <span className="truncate">{opt}</span>
                 {active && (
