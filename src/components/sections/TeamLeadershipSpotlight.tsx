@@ -37,7 +37,7 @@ export default function LeadershipSpotlight({ }: Props) {
         <section
             id="leadership"
             aria-labelledby="leadership-heading"
-            className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
+            className="relative mx-auto max-w-7xl px-4 py-6 md:py-16 sm:px-6 lg:px-8"
         >
             {/* Subtle background gradient */}
             <div
@@ -47,7 +47,7 @@ export default function LeadershipSpotlight({ }: Props) {
 
             {/* Header Section */}
             <div className="mb-12 text-center">
-                <div className="mb-6 flex flex-wrap items-center justify-center gap-2">
+                <div className="mb-6 flex flex-wrap items-center justify-center gap-3 md:gap-2">
                     <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm backdrop-blur-sm">
                         <Sparkles className="h-3.5 w-3.5 text-orange-500" aria-hidden="true" />
                         Future-Ready Leadership
@@ -156,11 +156,11 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
             />
 
             <div
-                className={`relative flex flex-col gap-5 p-8 lg:flex-row lg:items-center lg:gap-24 lg:p-12 ${isEven ? "" : "lg:flex-row-reverse"}`}
+                className={`relative flex flex-col gap-5 p-5 lg:flex-row lg:items-center lg:gap-24 lg:p-12 ${isEven ? "" : "lg:flex-row-reverse"}`}
             >
                 {/* Avatar Section with Futuristic Frame */}
                 <div className="relative mx-auto shrink-0 lg:mx-0">
-                    <div className="relative h-64 w-64 lg:h-90 lg:w-90 overflow-hidden rounded-full transition-all duration-500 group-hover:border-orange-300">
+                    <div className="relative h-55 w-55 lg:h-90 lg:w-90 overflow-hidden rounded-full transition-all duration-500 group-hover:border-orange-300">
                         {leader.avatar ? (
                            <Image
                                 src={leader.avatar}
@@ -188,7 +188,7 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
                 <div className="flex-1 space-y-6">
                     {/* Header */}
                     <div className="space-y-3">
-                        <div className="flex items-start justify-between gap-4">
+                        <div className="flex mt-3 items-start justify-between gap-4">
                             <h3 className="text-3xl font-bold leading-tight text-slate-900 lg:text-4xl">
                                 {leader.name}
                             </h3>
@@ -199,7 +199,7 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
                                 {leader.title}
                             </p>
 
-                            <div className="flex flex-row items-center gap-3 text-gray-600">
+                            <div className="flex mt-5 flex-row items-center gap-3 text-gray-600">
                                 <p className="bg-gray-100 px-3 py-1 rounded-full text-xs border border-brand">
                                     {leader.experience}
                                 </p>

@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Script from "next/script";
+import Link from "next/link";
 
 type FAQ = { q: string; a: string; cat: "Admissions" | "Learning" | "Financing" | "Placement" | "Corporate" };
 
@@ -111,7 +112,7 @@ export function ContactFAQSection() {
             "radial-gradient(60% 40% at 12% 0%, rgba(56,189,248,0.10), transparent 60%), radial-gradient(50% 40% at 88% 0%, rgba(167,139,250,0.10), transparent 60%)",
         }}
       />
-      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12">
+      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-6 md:py-12">
         <div className="rounded-3xl bg-white/80 backdrop-blur border border-slate-200 shadow-xl p-6 sm:p-8">
           <div className="text-center max-w-5xl mx-auto">
             <h2 className="text-4xl font-bold text-slate-900">Frequently <span className="text-brand">Asked</span> Questions</h2>
@@ -180,24 +181,24 @@ export function ContactFAQSection() {
               <strong>career pathways</strong>, and <strong>financing options</strong>.
             </p>
             <div className="mt-5 flex flex-wrap items-center justify-center gap-3">
-              <a
-                href="https://wa.me/919999999999"
+              <Link
+                href="https://wa.me/9152929342"
                 className="inline-flex items-center justify-center rounded-full bg-green-600 px-5 py-2.5 text-white text-sm font-medium shadow-md transition hover:bg-sky-700"
               >
                 WhatsApp Us
-              </a>
-              <a
-                href="tel:+919999999999"
+              </Link>
+              <Link
+                href="tel:+91 788-83-83-788"
                 className="inline-flex items-center justify-center rounded-full border border-slate-200 bg-white px-5 py-2.5 text-sky-700 text-sm font-medium shadow-sm transition hover:bg-slate-50"
               >
                 Call Admissions
-              </a>
-              <a
-                href="mailto:admissions@cinutedigital.com"
+              </Link>
+              <Link
+                href="mailto:contact@cinutedigital.com"
                 className="inline-flex items-center justify-center rounded-full bg-indigo-600 px-5 py-2.5 text-white text-sm font-medium shadow-md transition hover:bg-indigo-700"
               >
                 Email Us
-              </a>
+              </Link>
             </div>
           </div>
         </div>

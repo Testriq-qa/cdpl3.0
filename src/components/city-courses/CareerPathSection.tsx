@@ -304,7 +304,13 @@ const CareerPathSection = ({ data = mockData }) => {
               Join our comprehensive program with expert mentorship, real-world projects, and dedicated job placement support. Your future starts now.
             </p>
 
-            <motion.button
+            <motion.button onClick={()=> {
+              const section = document.getElementById('cta-section');
+
+              if (section) {
+                section.scrollIntoView({behavior: 'smooth', block: 'start'});
+              }
+            }}
               className="px-6 md:px-10 py-3 md:py-4 bg-gradient-to-r from-emerald-500 to-cyan-500 text-white font-bold rounded-xl hover:shadow-2xl hover:shadow-cyan-500/30 transition-all duration-300 inline-flex items-center gap-2 text-sm md:text-base group"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
