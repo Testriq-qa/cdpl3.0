@@ -390,16 +390,14 @@ const Header = () => {
                                   setHoveredCourse(null);
                                 }}
                                 onClick={() => setSelectedCategory(category.id)}
-                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${
-                                  selectedCategory === category.id ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-700 hover:bg-gray-50"
-                                }`}
+                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+                                  }`}
                                 aria-current={selectedCategory === category.id ? "true" : "false"}
                               >
                                 <span>{category.name}</span>
                                 <ChevronRight
-                                  className={`h-4 w-4 transition-transform ${
-                                    selectedCategory === category.id ? "text-blue-700" : "text-gray-400"
-                                  }`}
+                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-blue-700" : "text-gray-400"
+                                    }`}
                                 />
                               </button>
                             ))}
@@ -419,15 +417,13 @@ const Header = () => {
                                 key={index}
                                 href={`/courses/${selectedCategory}/${course.name.toLowerCase().replace(/[®\s&]+/g, "-")}`}
                                 onMouseEnter={() => setHoveredCourse(course.name)}
-                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${
-                                  hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
-                                }`}
+                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                                  }`}
                               >
                                 <div className="flex-shrink-0 mt-1">
                                   <div
-                                    className={`w-2 h-2 rounded-full transition-transform ${
-                                      hoveredCourse === course.name ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
-                                    }`}
+                                    className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
+                                      }`}
                                   />
                                 </div>
                                 <div className="ml-3">
@@ -447,8 +443,8 @@ const Header = () => {
                             {hoveredCourse
                               ? "Certified by leading organizations"
                               : hoveredCategory
-                              ? "Certified by leading organizations"
-                              : "Hover over a category or course to see its certifications"}
+                                ? "Certified by leading organizations"
+                                : "Hover over a category or course to see its certifications"}
                           </p>
 
                           <div className="grid grid-rows-2 gap-4">
@@ -494,9 +490,9 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="/services" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Services</Link>
+            <Link href="/events/services" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Services</Link>
 
-            <Link href="#" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/events/past-events" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
               Event
             </Link>
             <Link href="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
