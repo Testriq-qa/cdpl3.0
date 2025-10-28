@@ -231,18 +231,18 @@ export default function JobsCareersHeroSection() {
               initial={{ opacity: 0, y: 8 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.7, delay: 0.2 }}
-              className="mt-6 flex items-center justify-center lg:justify-start"
+              className="mt-6 flex flex-col sm:flex-row items-stretch sm:items-center justify-center lg:justify-start"
             >
               <Link
                 href="#open-roles"
-                className="group inline-flex items-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shadow-sm ring-1 ring-black/5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500 active:translate-y-[1px]"
+                className="group inline-flex items-center justify-center gap-2 rounded-xl px-5 py-3 font-semibold text-white shadow-sm ring-1 ring-black/5 hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-orange-500 active:translate-y-[1px]"
                 style={{ backgroundColor: BRAND_ORANGE }}
               >
                 View open roles
               </Link>
               <Link
                 href="/about-us"
-                className="ml-3 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-gray-900 border border-gray-200 hover:bg-gray-50 transition"
+                className="mt-3 sm:mt-0 sm:ml-3 inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold text-gray-900 border border-gray-200 hover:bg-gray-50 transition"
               >
                 About CDPL
               </Link>
