@@ -101,7 +101,7 @@ export default function AboutStatsSection() {
                     target: 120, 
                     suffix: "+" as Suffix, 
                     desc: "Product companies, startups & global tech leaders",
-                    color: "#F59E0B" // amber-500
+                    color: "#228B22" // amber-500
                 },
                 { 
                     label: "Mentors & SMEs", 

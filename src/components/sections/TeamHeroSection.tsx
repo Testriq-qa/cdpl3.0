@@ -34,10 +34,10 @@ const highlights = [
 ];
 
 const logos = [
-  { src: "/api/placeholder/100/40", alt: "Skill India" },
-  { src: "/api/placeholder/100/40", alt: "ISO Certified" },
-  { src: "/api/placeholder/100/40", alt: "Testriq" },
-  { src: "/api/placeholder/100/40", alt: "GitHub Projects" },
+  { src: "/images/Skill-India-Color.svg", alt: "Skill India" },
+  { src: "/images/ISO-9001.png", alt: "ISO Certified" },
+  { src: "/images/Testriq-Logo-1.webp", alt: "Testriq" },
+  { src: "/", alt: "GitHub Projects" },
 ];
 
 const VIS = {
@@ -166,45 +166,45 @@ export default function TeamHero() {
               id="our-team-heading"
               className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-brand"
             >
-              Meet the People Behind{" "}
+              <span className="text-sky-600">Meet the People Behind</span>{" "}
               <span style={{ color: brand }}>Cinute Digital</span>
             </h1>
 
             <p className="mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
               Learn from senior{" "}
-              <strong className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-indigo-600 font-bold">
+              <strong className="font-bold">
                 Software Testing
               </strong>
               ,{" "}
-              <strong className="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-purple-600 font-bold">
+              <strong className="font-bold">
                 Automation
               </strong>
               , and{" "}
-              <strong className="text-transparent bg-clip-text bg-gradient-to-r from-emerald-600 to-green-600 font-bold">
+              <strong className="font-bold">
                 Data Science
               </strong>{" "}
               practitioners who ship{" "}
-              <strong className="text-transparent bg-clip-text bg-gradient-to-r from-pink-600 to-rose-600 font-bold">
+              <strong className="font-bold">
                 production-grade solutions
               </strong>
               . Our mentor-led programs blend{" "}
-              <strong className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-sky-600 font-bold">
+              <strong className="font-bold">
                 agile workflows
               </strong>
               ,{" "}
-              <strong className="text-transparent bg-clip-text bg-gradient-to-r from-amber-600 to-yellow-600 font-bold">
+              <strong className="font-bold">
                 CI/CD pipelines
               </strong>
               ,{" "}
-              <strong className="text-transparent bg-clip-text bg-gradient-to-r from-teal-600 to-cyan-600 font-bold">
+              <strong className="font-bold">
                 API & UI automation
               </strong>
               , and{" "}
-              <strong className="text-transparent bg-clip-text bg-gradient-to-r from-fuchsia-600 to-pink-600 font-bold">
+              <strong className="font-bold">
                 analytics
               </strong>{" "}
               so you graduate with a{" "}
-              <strong className="text-transparent bg-clip-text bg-gradient-to-r from-red-600 to-orange-600 font-bold">
+              <strong className="font-bold">
                 job-ready portfolio
               </strong>{" "}
               and interview-ready skills.
@@ -308,7 +308,7 @@ export default function TeamHero() {
                 key={l.alt}
                 className="relative h-8 w-28 opacity-80 transition hover:opacity-100"
               >
-                <img src={l.src} alt={l.alt} className="object-contain" />
+                <Image src={l.src} alt={l.alt} className="object-contain" width={100} height={100} />
               </div>
             ))}
           </div>
