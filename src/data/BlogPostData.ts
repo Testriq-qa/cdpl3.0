@@ -331,45 +331,6 @@ export const CATEGORIES: Record<string, Category> = {
 
 export const BLOG_POSTS: BlogPost[] = [
 
-  {
-
-id: "11",
-  slug: "api-testing-mistakes-beginners-guide",
-  title: "15 API Testing Mistakes Beginners Make (And How to Fix Them)",
-  description: "Discover 15 common API testing mistakes beginners make and learn how to avoid them. Includes practical solutions, code examples, and a comprehensive checklist to improve your API testing skills.",
-  excerpt: "73% of API failures in production could have been prevented with proper testing. Learn the 15 most common API testing mistakes beginners make and get practical solutions to fix them. From planning errors to security oversights, this comprehensive guide covers everything you need to know.",
-  featuredImage: "/blog/api-testing-mistakes-featured.jpg",
-  category: "Software Testing",
-  categoryId: "software-testing",
-  author: "Sarah Chen",
-  authorId: "sarah-chen",
-  publishDate: "2024-01-15",
-  readTime: "15 min read",
-  tags: ["API Testing", "Software Testing", "Testing Best Practices", "API Security", "Test Automation", "Quality Assurance"],
-  featured: true,
-  contentFile: "api-testing-mistakes-beginners-guide",
-  seo: {
-    metaTitle: "15 API Testing Mistakes Beginners Make (And How to Fix Them) - 2024",
-    metaDescription: "Discover 15 common API testing mistakes beginners make and learn how to avoid them. Includes practical solutions, code examples, and a comprehensive checklist.",
-    keywords: [
-      "API testing mistakes",
-      "common API testing errors",
-      "API testing best practices",
-      "how to test APIs correctly",
-      "API testing checklist",
-      "avoid API testing failures",
-      "REST API testing",
-      "API test automation",
-      "API security testing",
-      "API performance testing"
-    ],
-    ogImage: "/blog/api-testing-mistakes-featured.jpg",
-    canonical: "https://yourwebsite.com/blog/api-testing-mistakes-beginners-guide",
-  },
-},
-
-
-  
 {
     id: "1",
     slug: "future-of-ai-web-development-2025",
