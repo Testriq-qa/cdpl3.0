@@ -79,7 +79,7 @@ export default function JobsLiveJobsJobsHeroSection({
               className="mt-4 py-1 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.2]"
             >
               <span className="text-[#ff8c00]">Jobs &amp; Internships we post</span>{" "}
-              to help CDPL students get placed
+              <span style={{ color: "#0069A8" }}>to help CDPL students get placed</span>
             </motion.h1>
 
             {/* Hero content — 18px at md, identical to About */}

@@ -191,7 +191,7 @@ export default function JobsCareersHeroSection() {
               transition={{ duration: 0.7, delay: 0.08 }}
               className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl"
             >
-              Build the future of{" "}
+              <span style={{ color: "#0069A8" }}>Build the future of</span>{" "}
               <span style={{ color: BRAND_ORANGE }}>outcomes-first ed-tech</span>
             </motion.h1>
 

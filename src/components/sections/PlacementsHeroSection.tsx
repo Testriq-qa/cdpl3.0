@@ -159,7 +159,7 @@ export default function PlacementsHeroSection() {
               transition={{ duration: 0.7, delay: 0.08 }}
               className="mt-4 text-3xl font-extrabold leading-tight tracking-tight sm:text-5xl"
             >
-              CDPL Student{" "}
+              <span style={{ color: "#0069A8" }}>CDPL Student</span>{" "}
               <span style={{ color: "var(--color-brand, #ff8c00)" }}>
                 Placements
               </span>

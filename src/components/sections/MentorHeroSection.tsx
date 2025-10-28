@@ -116,7 +116,7 @@ export default function MentorHeroSection() {
               One-on-One Mentorship • Resume + Interview Prep • Placement Support
             </p>
 
-            <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-[#0069A8]">
               Meet CDPL’s industry{" "}
               <span style={{ color: "var(--color-brand, #ff8c00)" }}>mentors</span>
             </h1>
