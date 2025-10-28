@@ -330,7 +330,8 @@ export const CATEGORIES: Record<string, Category> = {
 // ============================================================================
 
 export const BLOG_POSTS: BlogPost[] = [
-  {
+
+{
     id: "1",
     slug: "future-of-ai-web-development-2025",
     title: "The Future of AI in Web Development: 2025 and Beyond",
