@@ -1,7 +1,5 @@
 "use client";
 
-import { fadeUp } from "@/app/our-team/ui";
-import { motion, type Transition } from "framer-motion";
 import {
   Sparkles,
   ShieldCheck,
@@ -13,22 +11,20 @@ import {
   Home,
   ChevronRight,
 } from "lucide-react";
-import { BRAND } from "@/app/our-team/data";
 import Image from "next/image";
-import Link from "next/link";
 
-const easeBezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
+const BRAND = "#ff8c00";
 
-type Stat = { label: string; value: string; note?: string };
-const stats: Stat[] = [
+const stats = [
   { label: "Expert Mentors", value: "15+", note: "QA, Automation, Data" },
   { label: "Learners Mentored", value: "1,000+", note: "Career outcomes" },
   { label: "Hiring Partners", value: "20+", note: "Industry referrals" },
 ];
+
 const breadcrumbs = [
   { label: "Home", href: "/" },
   { label: "Our Team", href: "/our-team" },
-]
+];
 
 const highlights = [
   "Project-based learning with real SDET workflows",
@@ -41,10 +37,9 @@ const logos = [
   { src: "/images/Skill-India-Color.svg", alt: "Skill India" },
   { src: "/images/ISO-9001.png", alt: "ISO Certified" },
   { src: "/images/Testriq-Logo-1.webp", alt: "Testriq" },
-  { src: "/images/github-mark.svg", alt: "GitHub Projects" },
+  { src: "/", alt: "GitHub Projects" },
 ];
 
-/** Visibility knobs */
 const VIS = {
   glowOpacity: 0.32,
   circuitOpacity: 0.28,
@@ -53,17 +48,14 @@ const VIS = {
   tokenOpacity: 0.75,
 };
 
-/** Background — mobile-safe, no horizontal overflow */
-function BackgroundFuturisticMotion({ brand = "#ff8c00" }: { brand?: string }) {
+function BackgroundFuturisticMotion({ brand = "#ff8c00" }) {
   return (
     <div
       className="pointer-events-none absolute z-0 overflow-x-hidden"
-      // inset:-1px absorbs blur/filter bleed so it never expands the scroll area
       style={{ inset: "-1px", mixBlendMode: "normal", contain: "layout paint" }}
       aria-hidden="true"
     >
-      {/* Soft brand glow — 100% width, no vw, centered by margins */}
-      <motion.div
+      <div
         style={{
           position: "absolute",
           left: 0,
@@ -78,12 +70,9 @@ function BackgroundFuturisticMotion({ brand = "#ff8c00" }: { brand?: string }) {
           opacity: VIS.glowOpacity,
           background: `radial-gradient(700px 260px at 50% 0%, ${brand}99, ${brand}33 60%, transparent 78%)`,
         }}
-        animate={{ y: [0, 8, -4, 0] }}
-        transition={{ duration: 16, ease: "easeInOut", repeat: Infinity }}
       />
 
-      {/* Circuit lines — responsive, no fixed px width causing overflow */}
-      <motion.svg
+      <svg
         viewBox="0 0 1400 600"
         fill="none"
         preserveAspectRatio="none"
@@ -99,208 +88,162 @@ function BackgroundFuturisticMotion({ brand = "#ff8c00" }: { brand?: string }) {
         }}
       >
         {[
-          { y: 90, amp: 18, delay: 0 },
-          { y: 180, amp: 26, delay: 0.6 },
-          { y: 270, amp: 14, delay: 1.2 },
-          { y: 360, amp: 22, delay: 1.8 },
+          { y: 90, amp: 18 },
+          { y: 180, amp: 26 },
+          { y: 270, amp: 14 },
+          { y: 360, amp: 22 },
         ].map((row, i) => (
-          <motion.path
+          <path
             key={i}
             d={`M0 ${row.y} C 250 ${row.y - row.amp}, 450 ${row.y + row.amp}, 700 ${row.y}
                S 1150 ${row.y - row.amp}, 1400 ${row.y}`}
             stroke={brand}
             strokeOpacity={VIS.strokeOpacity}
             strokeWidth={VIS.strokeWidth}
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: [0, 1, 0] }}
-            transition={{
-              duration: 8,
-              delay: row.delay,
-              ease: "linear",
-              repeat: Infinity,
-            }}
           />
         ))}
 
         {[120, 320, 520, 820, 1080, 1280].map((x, i) => (
-          <motion.circle
+          <circle
             key={i}
             cx={x}
             cy={i % 2 ? 180 : 270}
             r="3.5"
             fill={brand}
-            initial={{ opacity: 0.4 }}
-            animate={{ opacity: [0.4, 1, 0.4] }}
-            transition={{
-              duration: 2.2,
-              delay: i * 0.25,
-              ease: "easeInOut",
-              repeat: Infinity,
-            }}
+            opacity={0.4}
           />
         ))}
-      </motion.svg>
-
-      {/* Floating knowledge tokens — pinned with `right` so they never extend width */}
-      {/* {[
-        { txt: "</>", right: "6%", top: "16%", size: 48, dur: 12, rot: 22 },
-        { txt: "Σ", right: "2%", top: "12%", size: 44, dur: 14, rot: -26 },
-        { txt: "f(x)", right: "12%", top: "28%", size: 36, dur: 15, rot: 24 },
-        { svg: "db", right: "4%", top: "38%", size: 52, dur: 13, rot: -20 },
-        { svg: "cloud", right: "18%", top: "22%", size: 46, dur: 16, rot: 28 },
-        { svg: "bars", right: "10%", top: "26%", size: 44, dur: 17, rot: -30 },
-      ].map((t, i) => (
-        <motion.div
-          key={i}
-          className="hidden lg:block"
-          style={{
-            position: "absolute",
-            right: t.right as string,
-            top: t.top as string,
-            width: `min(${t.size}px, 16vw)`,
-            height: `min(${t.size}px, 16vw)`,
-            color: brand,
-            opacity: VIS.tokenOpacity,
-          }}
-          animate={{ y: [0, 10, 0], rotate: [0, t.rot, 0] }}
-          transition={{
-            y: { duration: t.dur, ease: "easeInOut", repeat: Infinity },
-            rotate: {
-              duration: Math.abs(t.rot) + t.dur,
-              ease: "linear",
-              repeat: Infinity,
-            },
-          }}
-        >
-          {t.txt ? (
-            <svg viewBox="0 0 64 64" width="100%" height="100%">
-              <text
-                x="8"
-                y="44"
-                fontFamily="ui-monospace, SFMono-Regular, Menlo, monospace"
-                fontSize={48 * 0.7}
-                fill="currentColor"
-              >
-                {t.txt}
-              </text>
-            </svg>
-          ) : t.svg === "db" ? (
-            <svg viewBox="0 0 64 64" width="100%" height="100%">
-              <ellipse cx="32" cy="14" rx="18" ry="6" stroke="currentColor" fill="none" strokeWidth="2" />
-              <path d="M14 14 v26 c0 3.5 8 6 18 6 s18-2.5 18-6 V14" stroke="currentColor" strokeWidth="2" fill="none" />
-              <ellipse cx="32" cy="40" rx="18" ry="6" stroke="currentColor" fill="none" strokeWidth="2" />
-            </svg>
-          ) : t.svg === "cloud" ? (
-            <svg viewBox="0 0 64 64" width="100%" height="100%">
-              <path d="M18 40h28a8 8 0 0 0 0-16 12 12 0 0 0-23-3A9 9 0 1 0 18 40Z" stroke="currentColor" fill="none" strokeWidth="2" />
-            </svg>
-          ) : (
-            <svg viewBox="0 0 64 64" width="100%" height="100%">
-              <rect x="12" y="30" width="8" height="18" stroke="currentColor" fill="none" strokeWidth="2" />
-              <rect x="26" y="24" width="8" height="24" stroke="currentColor" fill="none" strokeWidth="2" />
-              <rect x="40" y="18" width="8" height="30" stroke="currentColor" fill="none" strokeWidth="2" />
-            </svg>
-          )}
-        </motion.div>
-      ))} */}
+      </svg>
     </div>
   );
 }
 
-type CustomCSSProperties = React.CSSProperties & { [key: `--${string}`]: string };
-
 export default function TeamHero() {
-  const brand = BRAND || "#ff8c00";
+  const brand = BRAND;
 
   return (
     <section
       aria-labelledby="our-team-heading"
-      // overflow-x-hidden ALWAYS on the section; clip for modern engines to kill sub-pixel scroll
-      className="relative isolate mx-auto max-w-7xl w-full bg-white px-4 pb-14 pt-8 md:pt-16 sm:px-6 lg:px-8"
-      style={{ "--brand": brand, overflowX: "clip" } as CustomCSSProperties}
+      className="relative isolate mx-auto max-w-7xl w-full bg-white px-4 pb-14 pt-8 md:pt-10 sm:px-6 lg:px-8"
+      style={{ overflowX: "clip" }}
     >
-      {/* Background */}
       <BackgroundFuturisticMotion brand={brand} />
 
-      {/* Your original content */}
+      {/* Breadcrumbs for SEO */}
       <div className="relative z-10">
-        {/* Breadcrumbs for SEO & UX */}
-            <nav aria-label="Breadcrumb" className="mb-6">
-              <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
-                {breadcrumbs.map((c, i) => (
-                  <li key={i} className="flex items-center gap-2">
-                    {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                    <a
-                      href={c.href}
-                      className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
-                    >
-                      {c.label}
-                    </a>
-                  </li>
-                ))}
-              </ol>
-            </nav>
+        <nav aria-label="Breadcrumb" className="mb-6">
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            {breadcrumbs.map((c, i) => (
+              <li key={i} className="flex items-center gap-2">
+                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <a
+                  href={c.href}
+                  className={`hover:text-indigo-700 ${
+                    i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""
+                  }`}
+                >
+                  {c.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
 
         <div className="grid grid-cols-1 lg:grid-cols-12">
           <div className="col-span-8">
-            
-            <motion.div {...fadeUp} className="flex flex-wrap items-center gap-3">
-              <div className="flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><Sparkles className="h-3.5 w-3.5" /> Future-Ready Mentors</div>
-              <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><ShieldCheck className="h-3.5 w-3.5" /> ISO-Aligned Training</div>
-              <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs"><Users2 className="h-3.5 w-3.5" /> Industry Leaders</div>
-            </motion.div>
+            <div className="flex flex-wrap mt-3 items-center gap-3">
+              <div className="flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs">
+                <Sparkles className="h-3.5 w-3.5" /> Future-Ready Mentors
+              </div>
+              <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs">
+                <ShieldCheck className="h-3.5 w-3.5" /> ISO-Aligned Training
+              </div>
+              <div className="hidden md:flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs">
+                <Users2 className="h-3.5 w-3.5" /> Industry Leaders
+              </div>
+            </div>
 
-            <motion.h1
+            <h1
               id="our-team-heading"
-              {...fadeUp}
-              transition={{ ...(fadeUp.transition as Transition), delay: 0.06 }}
-              className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500"
+              className="mt-6 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-brand"
             >
-              Meet the People Behind <span style={{ color: brand } as React.CSSProperties}>Cinute Digital</span>
-            </motion.h1>
+              <span className="text-sky-600">Meet the People Behind</span>{" "}
+              <span style={{ color: brand }}>Cinute Digital</span>
+            </h1>
 
-            <motion.p
-              {...fadeUp}
-              transition={{ ...(fadeUp.transition as Transition), delay: 0.12 }}
-              className="mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg"
-            >
-              Learn from senior <strong className="text-slate-900">Software Testing</strong>,{" "}
-              <strong className="text-slate-900">Automation</strong>, and{" "}
-              <strong className="text-slate-900">Data Science</strong> practitioners who ship
-              production-grade solutions. Our mentor-led programs blend agile workflows, CI/CD pipelines,
-              API & UI automation, and analytics so you graduate with a job-ready portfolio and
-              interview-ready skills.
-            </motion.p>
+            <p className="mt-6 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
+              Learn from senior{" "}
+              <strong className="font-bold">
+                Software Testing
+              </strong>
+              ,{" "}
+              <strong className="font-bold">
+                Automation
+              </strong>
+              , and{" "}
+              <strong className="font-bold">
+                Data Science
+              </strong>{" "}
+              practitioners who ship{" "}
+              <strong className="font-bold">
+                production-grade solutions
+              </strong>
+              . Our mentor-led programs blend{" "}
+              <strong className="font-bold">
+                agile workflows
+              </strong>
+              ,{" "}
+              <strong className="font-bold">
+                CI/CD pipelines
+              </strong>
+              ,{" "}
+              <strong className="font-bold">
+                API & UI automation
+              </strong>
+              , and{" "}
+              <strong className="font-bold">
+                analytics
+              </strong>{" "}
+              so you graduate with a{" "}
+              <strong className="font-bold">
+                job-ready portfolio
+              </strong>{" "}
+              and interview-ready skills.
+            </p>
 
-            <motion.div
-              {...fadeUp}
-              transition={{ ...(fadeUp.transition as Transition), delay: 0.18 }}
-              className="mt-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm text-orange-800"
-            >
+            <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm text-orange-800">
               <GraduationCap className="h-4 w-4" />
-              1,000+ learners mentored · Hiring partner referrals · Job-ready portfolios
-            </motion.div>
+              <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
+                1,000+
+              </span>{" "}
+              learners mentored ·{" "}
+              <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">
+                Hiring partner referrals
+              </span>{" "}
+              ·{" "}
+              <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-violet-600">
+                Job-ready portfolios
+              </span>
+            </div>
 
-            <motion.div
-              {...fadeUp}
-              transition={{ duration: 0.6, ease: easeBezier, delay: 0.22 }}
-              className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center"
-            >
+            <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <div className="flex gap-3">
-                <Link
+                <a
                   href="mentors"
-                  className="inline-flex items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:shadow-xl hover:bg-amber-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
-                  style={{ "--brand": brand } as CustomCSSProperties}
+                  className="inline-flex items-center justify-center rounded-2xl px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-orange-200 transition hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-orange-300"
+                  style={{ backgroundColor: brand }}
                 >
                   Explore Mentors <ArrowRight className="ml-2 h-4 w-4" />
-                </Link>
-                <Link
+                </a>
+                <a
                   href="/become-a-mentor"
-                  className="inline-flex items-center justify-center rounded-2xl border border-brand bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:bg-brand hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
-                  style={{ "--brand": brand } as CustomCSSProperties}
+                  className="inline-flex items-center justify-center rounded-2xl border bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
+                  style={{ borderColor: brand }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = brand)}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "white")}
                 >
                   Become a Mentor
-                </Link>
+                </a>
               </div>
 
               <div className="flex mt-5 md:mt-0 items-center gap-1 text-sm text-slate-600">
@@ -309,89 +252,68 @@ export default function TeamHero() {
                 <span aria-hidden="true">·</span>
                 <span>Based on verified learner reviews</span>
               </div>
-            </motion.div>
+            </div>
           </div>
 
-
-          <motion.div className="col-span-4 mt-10 lg:mt-0 flex justify-center">
-            <Image
-              src="/our-team-hero.png"
-              alt="team-image"
-              width={410}
-              height={300}
-            />
-          </motion.div>
-
+          <div className="col-span-4 mt-10 lg:mt-0 flex justify-center">
+            <Image src="/Our-team-hero.png" alt="team-image" width={410} height={300} />
+          </div>
         </div>
 
-        <motion.dl
-          {...fadeUp}
-          transition={{ duration: 0.6, ease: easeBezier, delay: 0.28 }}
-          className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4"
-        >
-          {stats.map((s) => (
-            <div key={s.label} className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">{s.label}</dt>
-              <dd className="mt-1 text-2xl font-bold text-slate-900">{s.value}</dd>
-              {s.note && <p className="mt-0.5 text-xs text-slate-500">{s.note}</p>}
-            </div>
-          ))}
-        </motion.dl>
+        <dl className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+          {stats.map((s, idx) => {
+            const gradients = [
+              'from-rose-600 via-pink-600 to-fuchsia-600',
+              'from-cyan-600 via-sky-600 to-blue-600',
+              'from-amber-600 via-orange-600 to-red-600'
+            ];
+            return (
+              <div
+                key={s.label}
+                className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+              >
+                <dt className="text-xs font-medium uppercase tracking-wide text-slate-500">
+                  {s.label}
+                </dt>
+                <dd className={`mt-1 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-br ${gradients[idx]}`}>
+                  {s.value}
+                </dd>
+                {s.note && <p className="mt-0.5 text-xs text-slate-500">{s.note}</p>}
+              </div>
+            );
+          })}
+        </dl>
 
-        <motion.ul
-          {...fadeUp}
-          transition={{ duration: 0.6, ease: easeBezier, delay: 0.34 }}
-          className="mt-8 grid gap-3 sm:grid-cols-2"
-        >
+        <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {highlights.map((h) => (
-            <li key={h} className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
-              <Check className="mt-0.5 h-5 w-5 shrink-0 text-[--brand]" style={{ "--brand": brand } as CustomCSSProperties} />
+            <li
+              key={h}
+              className="flex items-start gap-3 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm"
+            >
+              <Check
+                className="mt-0.5 h-5 w-5 shrink-0"
+                style={{ color: brand }}
+              />
               <p className="text-slate-700">{h}</p>
             </li>
           ))}
-        </motion.ul>
+        </ul>
 
-        <motion.div
-          {...fadeUp}
-          transition={{ duration: 0.6, ease: easeBezier, delay: 0.4 }}
-          className="mt-10"
-        >
+        <div className="mt-10">
           <p className="text-center text-sm font-medium text-slate-500">
             Trusted by industry & aligned with global standards
           </p>
           <div className="mt-6 grid grid-cols-2 md:grid-cols-4 items-center justify-items-center gap-20 md:gap-18">
             {logos.map((l) => (
-              <div key={l.alt} className="relative h-8 w-28 opacity-80 transition hover:opacity-100">
-                <Image src={l.src} alt={l.alt} width={100} height={100} className="object-contain" />
+              <div
+                key={l.alt}
+                className="relative h-8 w-28 opacity-80 transition hover:opacity-100"
+              >
+                <Image src={l.src} alt={l.alt} className="object-contain" width={100} height={100} />
               </div>
             ))}
           </div>
-        </motion.div>
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "EducationalOrganization",
-              name: "Cinute Digital",
-              url: "https://cinutedigital.com/our-team",
-              brand: { "@type": "Brand", name: "Cinute Digital", logo: "https://cinutedigital.com/logo.png" },
-              department: { "@type": "Organization", name: "Mentor Network" },
-              sameAs: [
-                "https://www.linkedin.com/company/cinutedigital",
-                "https://twitter.com/cinutedigital",
-              ],
-              employee: [
-                { "@type": "Person", name: "Ami Khambata", jobTitle: "Lead SDET Mentor", worksFor: "Cinute Digital" },
-                { "@type": "Person", name: "Rahul Verma", jobTitle: "Automation Architect", worksFor: "Cinute Digital" },
-                { "@type": "Person", name: "Priya Iyer", jobTitle: "Data Science Mentor", worksFor: "Cinute Digital" },
-              ],
-              keywords:
-                "edtech mentors, software testing mentors, automation testing trainers, SDET training, data science mentor-led program, job-ready portfolio, ISO aligned training, placement assistance",
-            }),
-          }}
-        />
+        </div>
       </div>
     </section>
   );

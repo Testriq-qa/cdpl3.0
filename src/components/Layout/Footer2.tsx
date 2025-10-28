@@ -35,10 +35,10 @@ const Footer: React.FC = () => {
               <div className="space-y-4 text-[15px] leading-relaxed">
                 <div className="flex items-start gap-3">
                   <MapPin className="h-5 w-5 text-orange-500 mt-0.5" aria-hidden="true" />
-                  <p>
+                  <Link className="hover:text-brand transition" href="https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D">
                     Office #1, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park,
                     Mira Road East, Mira Bhayandar, Maharashtra 401107
-                  </p>
+                  </Link>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -96,6 +96,15 @@ const Footer: React.FC = () => {
                 </div>
                 <div className="w-32 flex justify-center">
                   <Image
+                    src="/images/Trustpilot.png"
+                    alt="Trustpilot"
+                    width={150}
+                    height={150}
+                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                  />
+                </div>
+                <div className="w-32 flex justify-center">
+                  <Image
                     src="/images/ISO-27001.png"
                     alt="ISO 27001 Certified"
                     width={130}
@@ -112,15 +121,7 @@ const Footer: React.FC = () => {
                     className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
                   />
                 </div>
-                <div className="w-32 flex justify-center">
-                  <Image
-                    src="/images/Trustpilot.png"
-                    alt="Trustpilot"
-                    width={150}
-                    height={150}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
-                  />
-                </div>
+
               </div>
 
               {/* Policies: simple chips */}

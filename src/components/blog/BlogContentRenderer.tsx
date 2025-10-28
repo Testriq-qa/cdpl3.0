@@ -30,8 +30,8 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
   React.useEffect(() => {
     async function loadContent() {
       try {
-        // Dynamically import the content file
-        const contentModule = await import(`@/content/posts/${slug}.tsx`);
+        // FIXED: Updated import path from @/content/posts/ to @/content/
+        const contentModule = await import(`@/content/${slug}.tsx`);
         setContent(contentModule.content || contentModule.default);
       } catch (error) {
         console.error('Error loading blog content:', error);
@@ -265,4 +265,3 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
 };
 
 export default BlogContentRenderer;
-

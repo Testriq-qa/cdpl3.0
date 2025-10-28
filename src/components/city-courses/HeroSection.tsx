@@ -414,7 +414,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
           </div>
 
           {/* RIGHT: Form (desktop only) */}
-          <div className="hidden md:block md:col-span-5 xl:col-span-4">
+          <div className="hidden md:block md:col-span-5 xl:col-span-4 md:-mt-2 lg:-mt-10"> {/* OPTIONAL */}
             <LeadForm />
           </div>
         </motion.div>

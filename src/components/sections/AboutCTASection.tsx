@@ -84,15 +84,15 @@ export default function AboutCTASection() {
                             {/* Social proof / stats */}
                             <div className="mt-5 flex flex-wrap items-center gap-4">
                                 <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center shadow-sm">
-                                    <div className="text-lg font-extrabold text-slate-900">4.8/5</div>
+                                    <div className="text-lg font-extrabold text-violet-500">4.8/5</div>
                                     <div className="text-sm text-slate-600">Learner Satisfaction</div>
                                 </div>
                                 <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center shadow-sm">
-                                    <div className="text-lg font-extrabold text-slate-900">10–24 wks</div>
+                                    <div className="text-lg font-extrabold text-green-700 ">10–24 wks</div>
                                     <div className="text-sm text-slate-600">Job-ready Tracks</div>
                                 </div>
                                 <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center shadow-sm">
-                                    <div className="text-lg font-extrabold text-slate-900">Live + Labs</div>
+                                    <div className="text-lg font-extrabold text-red-700">Live + Labs</div>
                                     <div className="text-sm text-slate-600">Hands-on Projects</div>
                                 </div>
                             </div>

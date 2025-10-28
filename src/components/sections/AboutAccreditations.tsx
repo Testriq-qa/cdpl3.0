@@ -45,10 +45,10 @@ export default function AboutAccreditations() {
   ];
 
   const stats = [
-    { label: "Learner satisfaction", value: "98%" },
-    { label: "Avg. completion rate", value: "91%" },
-    { label: "Hiring partners", value: "50+" },
-    { label: "Capstone projects", value: "200+" },
+    { label: "Learner satisfaction", value: "98%", color: "blue-500" },
+    { label: "Avg. completion rate", value: "91%", color: "green-500" },
+    { label: "Hiring partners", value: "50+", color: "red-500" },
+    { label: "Capstone projects", value: "200+", color: "purple-500" },
   ];
 
   return (
@@ -139,7 +139,7 @@ export default function AboutAccreditations() {
                 <div className="grid grid-cols-2 gap-4">
                   {stats.map((s) => (
                     <div key={s.label} className="rounded-xl bg-slate-50 p-2 lg:p-4 ring-1 ring-inset ring-slate-200">
-                      <div className="text-2xl font-extrabold text-slate-900">{s.value}</div>
+                      <div className={`text-2xl font-extrabold text-${s.color}`}>{s.value}</div>
                       <div className="mt-1 text-sm text-slate-600">{s.label}</div>
                     </div>
                   ))}

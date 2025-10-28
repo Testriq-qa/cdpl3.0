@@ -189,9 +189,9 @@ const AboutStorySection = memo(function AboutStorySection() {
               {/* small stat row */}
               <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 text-center">
                 {[
-                  { label: "Learners", value: "20k+", id: 1 },
-                  { label: "Tracks", value: "4", id: 2 },
-                  { label: "Projects", value: "Capstone+", id: 3 },
+                  { label: "Learners", value: "20k+", color: "sky-700", id: 1 },
+                  { label: "Tracks", value: "4", color: "green-700", id: 2 },
+                  { label: "Projects", value: "Capstone+", color: "purple-700", id: 3 },
                 ].map((s) => (
                   <div
                     key={s.label}
@@ -200,8 +200,8 @@ const AboutStorySection = memo(function AboutStorySection() {
                       s.id === 3 ? "hidden sm:block" : "",
                     ].join(" ")}
                   >
-                    <div className="text-sm font-semibold text-gray-900">{s.value}</div>
-                    <div className="text-[11px] text-gray-500">{s.label}</div>
+                    <div className={`text-lg font-semibold text-${s.color}`}>{s.value}</div>
+                    <div className="text-md text-gray-500">{s.label}</div>
                   </div>
                 ))}
               </div>
