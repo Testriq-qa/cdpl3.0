@@ -145,14 +145,14 @@ export default function AboutHeroSection() {
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.3 }}
                         className="mt-7 flex flex-wrap items-center gap-3 text-sm"
                     >
-                        <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 text-slate-800 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
-                            <Star className="h-4 w-4" aria-hidden="true" />
-                            <span className="font-semibold">4.8/5</span>
+                        <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
+                            <Star className="h-4 w-4 text-amber-500" aria-hidden="true" />
+                            <span className="font-semibold text-amber-500">4.8/5</span>
                             <span className="text-slate-500">&nbsp;avg learner rating</span>
                         </div>
                         <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 text-slate-800 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
-                            <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-                            <span className="font-semibold">Placement Assistance</span>
+                            <ShieldCheck className="h-4 w-4 text-purple-700" aria-hidden="true" />
+                            <span className="font-semibold text-purple-700">Placement Assistance</span>
                         </div>
                         <div className="inline-flex flex-wrap items-center gap-2 text-slate-700">
                             <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
@@ -216,11 +216,11 @@ export default function AboutHeroSection() {
                 <div className="mt-3 grid grid-cols-2 items-center gap-3 opacity-80 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6">
                     {[
                         "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
+                        "/company_images/axiom.webp",
+                        "/company_images/credility.webp",
+                        "/company_images/marqetrix.webp",
+                        "/company_images/raw_engineering.webp",
+                        "/company_images/vistaar.webp",
                     ].map((src, i) => (
                         <div key={i} className="relative mt-1 h-7 w-full grayscale sm:h-8 md:h-9 lg:h-10">
                             <Image src={src} alt="Brand logo" fill sizes="(max-width: 768px) 33vw, 16vw" className="object-contain" />

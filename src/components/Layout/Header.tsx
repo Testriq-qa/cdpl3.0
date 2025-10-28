@@ -9,10 +9,10 @@ import Link from "next/link";
 const courseCategories = [
   {
     id: "software-testing-courses",
-    name: "Sofware Testing Courses",
+    name: "Software Testing Courses",
     description:
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
-    governingBodies: [{ name: "Sofware Testing Courses", logo: "/header_images/Sotware_Testing.png" }],
+    governingBodies: [{ name: "Software Testing Courses", logo: "/header_images/Sotware_Testing.png" }],
     courses: [
       {
         name: "Manual Software Testing",
@@ -88,9 +88,9 @@ const courseCategories = [
         governingBodies: [{ name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" }],
       },
       {
-        name: "Prompt Engneering with Generative AI",
+        name: "Prompt Engineering with Generative AI",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [{ name: "Prompt Engneering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" }],
+        governingBodies: [{ name: "Prompt Engineering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" }],
       },
       {
         name: "Advanced Data Science and Machine Learning Masterclass",
@@ -336,24 +336,24 @@ const Header = () => {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2 sm:space-x-3">
               <div className="rounded-lg">
-                <Image src="/images/cdpl-logo.png" alt="CDPL Logo" width={40} height={40} className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14" />
+                <Image src="/images/cdpl-logo.png" alt="CDPL Logo" width={40} height={40} className="w-10 h-10 sm:w-12 sm:h-12 lg:w-20 lg:h-12 xl:w-14 xl:h-14" />
               </div>
               <span className="text-base sm:text-xl lg:text-2xl font-bold text-brand">Cinute Digital</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Home</Link>
+          <nav className="hidden lg:flex items-center justify-start">
+            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">Home</Link>
 
             {/* Mega Menu Trigger */}
             <div className="relative">
               <button
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base py-6"
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base px-4 py-6"
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="mega-menu"
                 onMouseEnter={openMega}
-                onMouseLeave={() => scheduleClose()}  // schedule delayed close when leaving trigger
+                onMouseLeave={() => scheduleClose()}
               >
                 Courses
                 <ChevronDown className="ml-1 h-4 w-4" />
@@ -365,16 +365,16 @@ const Header = () => {
                   id="mega-menu"
                   ref={megaMenuRef}
                   className="fixed left-0 right-0 top-[72px] z-50"
-                  onMouseEnter={cancelClose}            // entering wrapper cancels pending close
-                  onMouseLeave={() => scheduleClose()}   // leaving wrapper schedules close
+                  onMouseEnter={cancelClose}
+                  onMouseLeave={() => scheduleClose()}
                 >
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div
                       ref={panelRef}
                       className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-blue-600 overflow-hidden"
                       style={{ maxHeight: 520 }}
-                      onMouseEnter={cancelClose}          // inside the white panel: keep open
-                      onMouseLeave={() => scheduleClose()} // leaving panel (into left/right empty area): close soon
+                      onMouseEnter={cancelClose}
+                      onMouseLeave={() => scheduleClose()}
                     >
                       <div className="grid grid-cols-12 gap-4 p-4 sm:p-6 lg:p-6">
                         {/* Column 1: Categories */}
@@ -490,12 +490,12 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="/events/services" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Services</Link>
+            <Link href="/events/services" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">Services</Link>
 
-            <Link href="/events/past-events" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/events/past-events" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
               Event
             </Link>
-            <Link href="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
               Mentors
             </Link>
 
@@ -514,7 +514,7 @@ const Header = () => {
                     });
                   }
                 }}
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base px-4 py-6"
                 aria-haspopup="menu"
                 aria-expanded={isJobsOpen}
                 aria-controls="jobs-menu"
@@ -583,7 +583,7 @@ const Header = () => {
                     });
                   }
                 }}
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base px-4 py-6"
                 aria-haspopup="menu"
                 aria-expanded={isAboutOpen}
                 aria-controls="about-menu"
@@ -623,10 +623,10 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
               Blog
             </Link>
-            <Link href="/contact-us" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/contact-us" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
               Contact
             </Link>
           </nav>
@@ -725,6 +725,15 @@ const Header = () => {
                 )}
               </div>
 
+              {/* Mobile Services Link */}
+              <Link
+                href="/events/services"
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                onClick={toggleMenu}
+              >
+                Services
+              </Link>
+
               {/* Mobile Jobs Accordion */}
               <div className="space-y-2">
                 <button
@@ -792,19 +801,33 @@ const Header = () => {
                       className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
-                      About CDPL
+                      • About CDPL
                     </Link>
                     <Link
                       href="/our-team"
                       className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
-                      Our Team
+                      • Our Team
                     </Link>
                   </div>
                 )}
               </div>
 
+              <Link
+                href="/events/past-events"
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                onClick={toggleMenu}
+              >
+                Event
+              </Link>
+              <Link
+                href="/mentors"
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                onClick={toggleMenu}
+              >
+                Mentors
+              </Link>
               <Link
                 href="/blog"
                 className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
