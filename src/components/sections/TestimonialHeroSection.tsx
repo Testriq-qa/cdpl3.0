@@ -13,6 +13,9 @@ const REVIEWS = [
   { id: "ds1", name: "Zara K.", role: "Data Scientist", quote: "Great balance of product thinking and ML rigor. Loved the review cadence.", avatar: "/testimonial_images/testimonial.jpeg", rating: 4.8 },
 ];
 
+const BRAND_ORANGE = "rgb(255, 140, 0)";
+const BRAND_BLUE = "#0069A8";
+
 export default function TestimonialHeroSection() {
   const prefersReduced = useReducedMotion();
 
@@ -31,8 +34,17 @@ export default function TestimonialHeroSection() {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white" aria-label="Student ratings and reviews">
-      <Script id="cdpl-students-hero-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
+    <section
+      className="relative overflow-hidden bg-white"
+      aria-label="Student ratings and reviews"
+      // define brand CSS variable for all the gradient/accents below
+      style={{ ["--color-brand" as any]: BRAND_ORANGE }}
+    >
+      <Script
+        id="cdpl-students-hero-jsonld"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
       {/* tighter top padding */}
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
@@ -54,7 +66,10 @@ export default function TestimonialHeroSection() {
         {/* title + deck (kept tight) */}
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Rating &amp; Reviews</p>
-          <h1 className="mt-2 text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-5xl">Trusted by students</h1>
+          <h1 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-5xl">
+            <span style={{ color: BRAND_BLUE }}>Trusted by</span>{" "}
+            <span style={{ color: BRAND_ORANGE }}>students</span>
+          </h1>
           <p className="mx-auto mt-2 max-w-2xl text-base text-neutral-700 sm:text-lg">
             Hands-on programs in <span className="font-medium text-neutral-900">Testing</span>,{" "}
             <span className="font-medium text-neutral-900">Digital Marketing</span> and{" "}
@@ -91,7 +106,7 @@ export default function TestimonialHeroSection() {
         {/* ---------- DESKTOP ROW (≥1024px) ---------- */}
         <div className="relative mx-auto mt-10 hidden min-h-[420px] max-w-[1120px] lg:block">
           <div className="pointer-events-none absolute left-1/2 top-4 h-64 w-[680px] -translate-x-1/2 rounded-full bg-[var(--color-brand)]/12 blur-3xl" />
-          <div className="relative mx-auto mt-4 flex w/full max-w-[980px] items-center justify-center gap-10">
+          <div className="relative mx-auto mt-4 flex w-full max-w-[980px] items-center justify-center gap-10">
             <TiltCard review={REVIEWS[0]} color="dark" float={!prefersReduced} className="-translate-y-1 rotate-[-10deg]" />
             <TiltCard review={REVIEWS[1]} color="brandSoft" float={!prefersReduced} className="translate-y-1 rotate-[-4deg]" />
             <TiltCard review={REVIEWS[2]} color="light" float={!prefersReduced} className="-translate-y-2 rotate-[7deg]" />
@@ -139,7 +154,14 @@ function TiltCard({
     <motion.article
       animate={float ? { y: [0, -6, 0], transition: { duration: 6, repeat: Infinity, ease: "easeInOut" } } : undefined}
       whileHover={{ scale: 1.02 }}
-      className={["relative w-[290px] rounded-2xl shadow-[0_24px_80px_-40px_rgba(0,0,0,.45)]", p.bg, p.text, p.ring ?? "", mobile ? "shrink-0 rotate-[-4deg]" : "", className].join(" ")}
+      className={[
+        "relative w-[290px] rounded-2xl shadow-[0_24px_80px_-40px_rgba(0,0,0,.45)]",
+        p.bg,
+        p.text,
+        p.ring ?? "",
+        mobile ? "shrink-0 rotate-[-4deg]" : "",
+        className,
+      ].join(" ")}
     >
       <div className="space-y-4 p-5">
         <div className="flex items-center gap-1">
