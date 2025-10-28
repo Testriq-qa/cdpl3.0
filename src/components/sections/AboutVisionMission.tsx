@@ -64,7 +64,7 @@ export default function AboutMissionVision({
       {/* Header */}
       <header className="mx-auto max-w-5xl text-center">
         <span
-          className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm"
+          className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-2 text-[12px] font-medium text-slate-700 shadow-sm"
           style={{ borderColor: "rgba(15,23,42,0.12)" }}
         >
           <Sparkles className="h-3.5 w-3.5" style={{ color: brand }} />
