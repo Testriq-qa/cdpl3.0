@@ -216,11 +216,11 @@ export default function AboutHeroSection() {
                 <div className="mt-3 grid grid-cols-2 items-center gap-3 opacity-80 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6">
                     {[
                         "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
+                        "/company_images/axiom.webp",
+                        "/company_images/credility.webp",
+                        "/company_images/marqetrix.webp",
+                        "/company_images/raw_engineering.webp",
+                        "/company_images/vistaar.webp",
                     ].map((src, i) => (
                         <div key={i} className="relative mt-1 h-7 w-full grayscale sm:h-8 md:h-9 lg:h-10">
                             <Image src={src} alt="Brand logo" fill sizes="(max-width: 768px) 33vw, 16vw" className="object-contain" />

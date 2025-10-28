@@ -129,6 +129,7 @@ export default function TeamHero() {
     >
       <BackgroundFuturisticMotion brand={brand} />
 
+      {/* Breadcrumbs for SEO */}
       <div className="relative z-10">
         <nav aria-label="Breadcrumb" className="mb-6">
           <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
@@ -150,7 +151,7 @@ export default function TeamHero() {
 
         <div className="grid grid-cols-1 lg:grid-cols-12">
           <div className="col-span-8">
-            <div className="flex flex-wrap items-center gap-3">
+            <div className="flex flex-wrap mt-3 items-center gap-3">
               <div className="flex items-center gap-2 border border-slate-300 rounded-2xl p-1 bg-slate-100 text-slate-800 text-xs">
                 <Sparkles className="h-3.5 w-3.5" /> Future-Ready Mentors
               </div>
@@ -164,13 +165,13 @@ export default function TeamHero() {
 
             <h1
               id="our-team-heading"
-              className="mt-4 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-brand"
+              className="mt-6 text-3xl font-extrabold tracking-tight sm:text-5xl bg-clip-text text-transparent bg-brand"
             >
               <span className="text-sky-600">Meet the People Behind</span>{" "}
               <span style={{ color: brand }}>Cinute Digital</span>
             </h1>
 
-            <p className="mt-4 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
+            <p className="mt-6 max-w-3xl text-base leading-7 text-slate-700 sm:text-lg">
               Learn from senior{" "}
               <strong className="font-bold">
                 Software Testing
@@ -210,7 +211,7 @@ export default function TeamHero() {
               and interview-ready skills.
             </p>
 
-            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm text-orange-800">
+            <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm text-orange-800">
               <GraduationCap className="h-4 w-4" />
               <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
                 1,000+
@@ -225,7 +226,7 @@ export default function TeamHero() {
               </span>
             </div>
 
-            <div className="mt-8 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+            <div className="mt-10 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <div className="flex gap-3">
                 <a
                   href="mentors"
@@ -259,7 +260,7 @@ export default function TeamHero() {
           </div>
         </div>
 
-        <dl className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <dl className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
           {stats.map((s, idx) => {
             const gradients = [
               'from-rose-600 via-pink-600 to-fuchsia-600',
