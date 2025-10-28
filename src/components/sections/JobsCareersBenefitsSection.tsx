@@ -13,8 +13,7 @@ import {
     ArrowRight,
 } from "lucide-react";
 
-const BRAND_GRADIENT =
-    "bg-gradient-to-r from-[#ff8c00] via-[#ffb558] to-[#ffd19e] text-transparent bg-clip-text";
+const BRAND_COLOR = "#ff8c00";
 
 // Typed cubic-bezier to satisfy Easing
 const easeBezier: [number, number, number, number] = [0.22, 1, 0.36, 1];
@@ -157,13 +156,13 @@ export default function JobsCareersBenefitsSection() {
                 <header className="mb-8 sm:mb-10 lg:mb-12">
                     <div className="inline-flex items-center gap-2 rounded-full border border-neutral-200 bg-white px-3 py-1 text-xs font-medium text-neutral-600 shadow-sm">
                         <Sparkles className="h-3.5 w-3.5" />
-                        Life at <span className={BRAND_GRADIENT}>Cinute Digital (CDPL)</span>
+                        Life at <span style={{ color: BRAND_COLOR }}>Cinute Digital (CDPL)</span>
                     </div>
                     <h2
                         id="benefits-title"
-                        className="mt-3 text-2xl sm:text-4xl lg:text-[2.75rem] font-bold leading-tight tracking-tight"
+                        className="brand-title mt-3 text-2xl sm:text-4xl lg:text-[2.75rem] font-bold leading-tight tracking-tight"
                     >
-                        Why <span className={BRAND_GRADIENT}>CDPL</span> is different
+                        Why <span className="brand-word">CDPL</span> is different
                     </h2>
                     <p className="mt-3 max-w-2xl text-[0.95rem] leading-relaxed text-neutral-600">
                         A culture crafted for builders who care about quality, learner impact, and shipping with
@@ -196,46 +195,78 @@ export default function JobsCareersBenefitsSection() {
                                 viewport={{ once: true, amount: 0.4 }}
                                 variants={itemVariants}
                                 transition={transition}
-                                className="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-5 sm:p-6 shadow-sm transition-transform duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                                /* ==== CREATIVE CARD STYLE (only the card changed) ==== */
+                                className="group relative overflow-hidden rounded-2xl border border-neutral-200 bg-white p-0 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg"
                                 itemProp="itemListElement"
                                 itemScope
                                 itemType="https://schema.org/ListItem"
                             >
-                                <div className="absolute inset-x-0 top-0 h-[2px] overflow-hidden">
-                                    <div className="shimmer-line h-[2px] w-1/3 bg-[linear-gradient(90deg,rgba(255,140,0,0)_0%,rgba(255,140,0,0.6)_50%,rgba(255,140,0,0)_100%)]" />
-                                </div>
+                                {/* Animated brand border */}
+                                <span
+                                    aria-hidden
+                                    className="pointer-events-none absolute inset-0 rounded-2xl [mask:linear-gradient(#000_0_0)_content-box,linear-gradient(#000_0_0)] [mask-composite:exclude] p-[1px]"
+                                    style={{
+                                        background:
+                                            "conic-gradient(from 0deg, rgba(255,140,0,0.0), rgba(255,140,0,0.65), rgba(255,209,158,0.6), rgba(255,181,88,0.65), rgba(255,140,0,0.0))",
+                                        animation: "spin-slow 8s linear infinite",
+                                    }}
+                                />
 
-                                <meta itemProp="position" content={`${i + 1}`} />
-                                <div className="flex items-start gap-3">
-                                    <div className="relative shrink-0">
-                                        <div className="grid h-11 w-11 place-items-center rounded-xl border border-neutral-200 bg-white">
-                                            <Icon className="h-5 w-5 text-neutral-800" />
+                                {/* Card body with subtle grid + sheen */}
+                                <div className="relative rounded-[1rem] bg-white p-5 sm:p-6">
+                                    {/* soft patterned bg */}
+                                    <div aria-hidden className="absolute inset-0 rounded-[1rem] pattern-grid opacity-[0.04]" />
+                                    {/* sheen on hover */}
+                                    <span
+                                        aria-hidden
+                                        className="pointer-events-none absolute -inset-x-8 -top-16 h-28 rotate-12 bg-gradient-to-r from-transparent via-white/35 to-transparent opacity-0 transition-opacity duration-500 group-hover:opacity-100"
+                                    />
+
+                                    <div className="flex items-start gap-3">
+                                        {/* Icon badge with brand pulse */}
+                                        <div className="relative shrink-0">
+                                            <div className="grid h-11 w-11 place-items-center rounded-xl border border-neutral-200 bg-white shadow-[0_6px_18px_-10px_rgba(255,140,0,.6)]">
+                                                <Icon className="h-5 w-5 text-neutral-800" />
+                                            </div>
+                                            <span
+                                                aria-hidden
+                                                className="absolute inset-0 -z-10 rounded-xl ring-4 ring-[rgba(255,140,0,.08)] blur-[1px]"
+                                            />
+                                            <span
+                                                aria-hidden
+                                                className="absolute -inset-2 -z-10 rounded-2xl bg-[radial-gradient(closest-side,rgba(255,140,0,.12),transparent_70%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                                            />
                                         </div>
-                                        <div className="pointer-events-none absolute inset-0 rounded-xl opacity-0 transition-opacity duration-300 group-hover:opacity-100">
-                                            <div className="absolute inset-0 rounded-xl ring-4 ring-[#ff8c00]/5" />
+
+                                        <div className="min-w-0">
+                                            <meta itemProp="position" content={`${i + 1}`} />
+                                            <h3
+                                                className="text-base sm:text-lg font-semibold tracking-tight"
+                                                itemProp="name"
+                                                id={b.seoId}
+                                            >
+                                                {b.title}
+                                            </h3>
+                                            <p
+                                                className="mt-1.5 text-sm leading-relaxed text-neutral-700 break-words"
+                                                itemProp="description"
+                                            >
+                                                {b.desc}
+                                            </p>
                                         </div>
                                     </div>
-                                    <div className="min-w-0">
-                                        {/* Title back to neutral color (orange removed) */}
-                                        <h3
-                                            className="text-base sm:text-lg font-semibold tracking-tight"
-                                            itemProp="name"
-                                            id={b.seoId}
-                                        >
-                                            {b.title}
-                                        </h3>
-                                        <p
-                                            className="mt-1.5 text-sm leading-relaxed text-neutral-700 break-words"
-                                            itemProp="description"
-                                        >
-                                            {b.desc}
-                                        </p>
-                                    </div>
-                                </div>
 
-                                <div className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-neutral-600">
-                                    Learn more
-                                    <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                                    {/* footer: animated underline CTA + progress accent */}
+                                    <div className="mt-4 flex items-center justify-between">
+                                        <div className="inline-flex items-center gap-1 text-xs font-medium text-neutral-700">
+                                            Learn more
+                                            <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" />
+                                        </div>
+                                        {/* tiny progress bar accent on hover */}
+                                        <div className="relative h-1 w-16 overflow-hidden rounded-full bg-neutral-100">
+                                            <span className="absolute inset-y-0 left-0 w-0 bg-[rgba(255,140,0,.7)] transition-all duration-500 group-hover:w-full" />
+                                        </div>
+                                    </div>
                                 </div>
                             </motion.li>
                         );
@@ -288,6 +319,37 @@ export default function JobsCareersBenefitsSection() {
             transform: translateX(400%);
           }
         }
+        @keyframes spin-slow {
+          to {
+            transform: rotate(360deg);
+          }
+        }
+        .pattern-grid {
+          background-image: linear-gradient(
+              to right,
+              rgba(2, 6, 23, 0.7) 1px,
+              transparent 1px
+            ),
+            linear-gradient(to bottom, rgba(2, 6, 23, 0.7) 1px, transparent 1px);
+          background-size: 14px 14px;
+          border-radius: 1rem;
+        }
+
+        /* Clean title color treatment */
+        .brand-title {
+          position: relative;
+          color: #0f172a; /* slate-900 for base text */
+        }
+        .brand-title .brand-word {
+          color: ${BRAND_COLOR};
+          position: relative;
+          padding-bottom: 2px;
+          background-image: linear-gradient(${BRAND_COLOR}, ${BRAND_COLOR});
+          background-repeat: no-repeat;
+          background-position: 0 100%;
+          background-size: 100% 2px; /* subtle underline */
+          text-shadow: 0 1px 0 rgba(255, 140, 0, 0.06);
+        }
 
         /* Responsive safety tweaks for very small screens */
         @media (max-width: 360px) {
@@ -304,6 +366,9 @@ export default function JobsCareersBenefitsSection() {
           }
           :global([style*="marquee_"]) {
             animation: none !important;
+          }
+          .pattern-grid {
+            background-image: none;
           }
         }
       `}</style>

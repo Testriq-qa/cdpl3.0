@@ -130,8 +130,8 @@ export default function MentorOutcomesSection() {
                   setActiveIdx(0);
                 }}
                 className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${active
-                    ? "border-zinc-300 text-zinc-900 shadow-sm"
-                    : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
+                  ? "border-zinc-300 text-zinc-900 shadow-sm"
+                  : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
                   }`}
                 style={active ? { backgroundImage: GRADIENT_BRAND } : {}}
                 aria-pressed={active}

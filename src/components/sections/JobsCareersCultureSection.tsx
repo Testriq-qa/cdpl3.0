@@ -10,8 +10,7 @@ import {
     GaugeCircle,
 } from "lucide-react";
 
-const BRAND_GRADIENT =
-    "bg-gradient-to-r from-[#ff8c00] via-[#ffb558] to-[#ffd19e] text-transparent bg-clip-text";
+const BRAND_GRADIENT = "text-[#ff8c00]"; // switched to solid brand color
 const BRAND_RING = "ring-1 ring-[#ffedd5] hover:ring-[#ffd19e] dark:ring-[#ffedd5]";
 const BRAND_BG =
     "bg-gradient-to-b from-white via-white to-[#fff7ed] dark:from-white dark:via-white dark:to-[#fff7ed]";
