@@ -2,6 +2,7 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { Home, ChevronRight } from "lucide-react";
 
 type HeroProps = {
     title: string;
@@ -23,28 +24,28 @@ export default function JobOpeningsHeroSection({
                 <div className="absolute inset-0 bg-[radial-gradient(80%_60%_at_50%_0%,rgba(251,146,60,0.12)_0%,rgba(245,158,11,0.10)_40%,transparent_75%)]" />
             </div>
 
-            {/* Breadcrumb */}
-            <nav aria-label="Breadcrumb" className="border-b border-slate-100/80">
-                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                    <ol className="flex flex-wrap items-center gap-2 py-3 text-sm">
-                        <li>
-                            <Link href="/" className="text-orange-600 hover:text-orange-700">
-                                Home
-                            </Link>
+            {/* Container matches About hero; breadcrumb sits inside with same spacing */}
+            <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+                {/* Breadcrumb (same position/spacing as About) */}
+                <nav aria-label="Breadcrumb" className="mb-6">
+                    <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                        <li className="flex items-center gap-2">
+                            <Home className="h-4 w-4" aria-hidden="true" />
+                            <Link href="/" className="hover:text-indigo-700">Home</Link>
                         </li>
-                        <li className="text-slate-400">›</li>
-                        <li>
-                            <span className="cursor-default text-slate-500">Jobs</span>
+                        <li className="flex items-center gap-2">
+                            <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                            <span className="cursor-default">Jobs</span>
                         </li>
-                        <li className="text-slate-400">›</li>
-                        <li className="font-semibold text-slate-900">Job sharing</li>
+                        <li className="flex items-center gap-2">
+                            <ChevronRight className="h-4 w-4" aria-hidden="true" />
+                            <span className="font-semibold text-slate-900">Job openings</span>
+                        </li>
                     </ol>
-                </div>
-            </nav>
+                </nav>
 
-            {/* Hero content */}
-            <header>
-                <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
+                {/* Hero content */}
+                <header>
                     <motion.h1
                         initial={{ opacity: 0, y: 12 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -87,8 +88,8 @@ export default function JobOpeningsHeroSection({
                             </svg>
                         </a>
                     </motion.div>
-                </div>
-            </header>
+                </header>
+            </div>
         </section>
     );
 }

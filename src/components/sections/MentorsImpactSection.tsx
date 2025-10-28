@@ -27,6 +27,14 @@ const CDPL_GLOW =
 const GRADIENT_BRAND = `linear-gradient(90deg, ${CDPL_ORANGE_DEEP} 0%, ${CDPL_ORANGE} 55%, ${CDPL_PEACH} 100%)`;
 const GRADIENT_OUTLINE = `linear-gradient(90deg, ${CDPL_ORANGE}20 0%, ${CDPL_PEACH}30 100%)`;
 
+/** Different number colors for the metrics (per-card) */
+const METRIC_NUMBER_COLORS = [
+  "#ff8c00", // brand orange
+  "#2563eb", // blue
+  "#10b981", // emerald
+  "#7c3aed", // purple
+];
+
 const MENTORS: MentorCard[] = [
   {
     name: "Pravin Mhaske",
@@ -246,12 +254,17 @@ export default function MentorsImpactSection() {
             { num: "96%", label: "Interview-ready in 8 weeks" },
             { num: "4.9/5", label: "Average mentor rating" },
             { num: "150+", label: "Hiring partners" },
-          ].map((m) => (
+          ].map((m, i) => (
             <div
               key={m.label}
               className="rounded-2xl border border-zinc-200 bg-white p-4 text-center shadow-sm"
             >
-              <div className="text-xl font-extrabold tracking-wide">{m.num}</div>
+              <div
+                className="text-xl font-extrabold tracking-wide"
+                style={{ color: METRIC_NUMBER_COLORS[i % METRIC_NUMBER_COLORS.length] }}
+              >
+                {m.num}
+              </div>
               <div className="mt-1 text-xs text-zinc-700">{m.label}</div>
             </div>
           ))}

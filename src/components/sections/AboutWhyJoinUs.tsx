@@ -13,7 +13,6 @@ import {
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
-import type { ElementType } from "react";
 
 /** Palette keys supported by your data */
 type Tone =

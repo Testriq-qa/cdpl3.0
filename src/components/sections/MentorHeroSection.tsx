@@ -117,7 +117,8 @@ export default function MentorHeroSection() {
             </p>
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-              Meet CDPL’s industry mentors
+              Meet CDPL’s industry{" "}
+              <span style={{ color: "var(--color-brand, #ff8c00)" }}>mentors</span>
             </h1>
 
             <p className="mt-4 mx-auto lg:mx-0 max-w-3xl text-base sm:text-lg text-slate-600">

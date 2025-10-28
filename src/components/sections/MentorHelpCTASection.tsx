@@ -2,24 +2,17 @@
 
 import Link from "next/link";
 
+const BRAND = "#ff8c00";
+
 /**
  * MentorHelpCTASection — CDPL Creative CTA (Light-surface in all modes)
- * - Style: Ribbon headline + flowing gradient lines + subtle motion dots (no cards).
- * - Theme: Always white surface & neutral text for identical look in light/dark.
- * - Content: Tight, CDPL-specific copy with strong primary CTA.
- * - SEO: Minimal JSON-LD block for mentorship offering.
- *
- * Tailwind tips:
- * - This component assumes Tailwind is configured.
- * - No dark: classes — we intentionally lock a light surface for parity in dark mode.
  */
 export default function MentorHelpCTASection({
   title = "CDPL Mentorship: Learn from people who’ve shipped it",
   subtitle = "1:1 guidance for AI/ML, Data Science, Full-Stack, and DevOps — resume reviews, project feedback, and interview prep to accelerate outcomes.",
   ctaText = "Get matched with a CDPL mentor",
-  // default the CTA to the in-page anchor you asked for
   href = "#mentors-impact",
-  bgImageSrc = "/images/cta-helping-hands.png", // soft background artwork
+  bgImageSrc = "/images/cta-helping-hands.png",
   className = "",
 }: {
   title?: string;
@@ -29,18 +22,15 @@ export default function MentorHelpCTASection({
   bgImageSrc?: string;
   className?: string;
 }) {
-  // Smooth-scroll helper that targets #mentors-impact (or any anchor passed via href)
   const handleAnchorClick = (
     e: React.MouseEvent<HTMLAnchorElement, MouseEvent>
   ) => {
     const target = (e.currentTarget.getAttribute("href") || "").trim();
-    // Only intercept in-page anchors, e.g. "#mentors-impact"
     if (target.startsWith("#")) {
       e.preventDefault();
       const el = document.querySelector(target);
       if (el) {
         (el as HTMLElement).scrollIntoView({ behavior: "smooth", block: "start" });
-        // Ensure hash updates for back/forward nav
         history.replaceState(null, "", target);
       }
     }
@@ -84,7 +74,7 @@ export default function MentorHelpCTASection({
           </defs>
         </svg>
 
-        {/* Floating micro-dots (very subtle motion) */}
+        {/* Floating micro-dots */}
         <div className="absolute right-6 top-8 grid gap-2 opacity-70">
           <DotRow />
         </div>
@@ -122,17 +112,17 @@ export default function MentorHelpCTASection({
             </Ribbon>
           </div>
 
-          {/* Main content: headline, subcopy, CTA rail (not cards) */}
+          {/* Main content */}
           <div className="relative px-6 pb-10 pt-6 sm:px-10 md:px-12 lg:px-16">
             <h2 className="max-w-3xl text-2xl font-extrabold leading-tight tracking-tight sm:text-3xl md:text-[34px]">
-              {title}
+              <BrandHighlighted text={title} />
             </h2>
 
             <p className="mt-2 max-w-2xl text-[15px] leading-relaxed text-neutral-700">
               {subtitle}
             </p>
 
-            {/* CTA rail: brand capsule + plain link */}
+            {/* CTA rail */}
             <div className="mt-6 flex flex-col items-start gap-3 sm:flex-row sm:items-center">
               <Link
                 href={href}
@@ -142,7 +132,7 @@ export default function MentorHelpCTASection({
                            text-[13px] leading-none px-4 py-2 min-h-[40px]
                            sm:text-sm sm:leading-normal sm:px-5 sm:py-2"
                 style={{
-                  fontSize: ".74rem", // ← requested change
+                  fontSize: ".74rem",
                   background:
                     "linear-gradient(90deg, #ff8c00 0%, #ffae3a 50%, #ffb84d 100%)",
                   boxShadow: "0 16px 46px -18px rgba(255,140,0,0.6)",
@@ -153,7 +143,6 @@ export default function MentorHelpCTASection({
                 <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
               </Link>
 
-              {/* Also scroll to #mentors-impact for this secondary link */}
               <Link
                 href="#mentors-impact"
                 onClick={handleAnchorClick}
@@ -164,7 +153,7 @@ export default function MentorHelpCTASection({
               </Link>
             </div>
 
-            {/* Curated focus track (inline chips row; still not cards) */}
+            {/* Chips */}
             <ul className="mt-6 flex flex-wrap items-center gap-2 text-[12px] font-medium text-neutral-800">
               <Chip>AI/ML</Chip>
               <Chip>Data Science</Chip>
@@ -175,7 +164,7 @@ export default function MentorHelpCTASection({
             </ul>
           </div>
 
-          {/* Bottom ticker (non-card, thin line with scrolling keywords) */}
+          {/* Bottom ticker */}
           <div className="relative">
             <div className="h-px w-full bg-gradient-to-r from-transparent via-neutral-200 to-transparent" />
             <Ticker />
@@ -232,12 +221,29 @@ export default function MentorHelpCTASection({
   );
 }
 
+/* -------------------- Helpers -------------------- */
+
+function BrandHighlighted({ text }: { text: string }) {
+  const target = "CDPL Mentorship";
+  const i = text.indexOf(target);
+  if (i === -1) return <>{text}</>;
+  const before = text.slice(0, i);
+  const after = text.slice(i + target.length);
+  return (
+    <>
+      {before}
+      <span style={{ color: BRAND }}>{target}</span>
+      {after}
+    </>
+  );
+}
+
 /* -------------------- Decorative bits (no external deps) -------------------- */
 
 function Ribbon({ children }: { children: React.ReactNode }) {
   return (
     <div
-      className="inline-flex select-none items-center rounded-full border border-neutral-200 bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-neutral-700 shadow-sm"
+      className="inline-flex select-none items-center rounded-full border border-neutral-200 bg-white/90 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[#ff8c00] shadow-sm"
       style={{
         background:
           "linear-gradient(180deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9))",
@@ -304,7 +310,6 @@ function Ticker() {
         <span className="mx-3">Placement Support</span>
         <span className="mx-3">CDPL Mentorship</span>
       </div>
-      {/* keyframes inlined to avoid global CSS dependency */}
       <style
         dangerouslySetInnerHTML={{
           __html: `
