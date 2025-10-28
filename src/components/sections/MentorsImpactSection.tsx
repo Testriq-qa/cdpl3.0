@@ -5,6 +5,8 @@ import Script from "next/script";
 
 /**
  * MentorsImpactSection — CDPL clean gradient (light-only)
+ * Update: Reworked ONLY the numeric (metrics) card backgrounds to be neatly blended,
+ * modern conic+radial tints with subtle noise. No chalky whites, just soft color.
  */
 
 type MentorCard = {
@@ -23,17 +25,86 @@ const CDPL_ORANGE = "#ff8c00";
 const CDPL_ORANGE_DEEP = "#ff6a00";
 const CDPL_PEACH = "#ffd19e";
 const CDPL_GLOW =
-  "radial-gradient(closest-side, rgba(255,140,0,.22), rgba(255,140,0,0) 70%)";
+  "radial-gradient(closest-side, rgba(255,140,0,.26), rgba(255,140,0,0) 70%)";
 const GRADIENT_BRAND = `linear-gradient(90deg, ${CDPL_ORANGE_DEEP} 0%, ${CDPL_ORANGE} 55%, ${CDPL_PEACH} 100%)`;
-const GRADIENT_OUTLINE = `linear-gradient(90deg, ${CDPL_ORANGE}20 0%, ${CDPL_PEACH}30 100%)`;
+const GRADIENT_OUTLINE = `linear-gradient(90deg, ${CDPL_ORANGE}35 0%, ${CDPL_PEACH}45 100%)`;
 
-/** Different number colors for the metrics (per-card) */
-const METRIC_NUMBER_COLORS = [
-  "#ff8c00", // brand orange
-  "#2563eb", // blue
-  "#10b981", // emerald
-  "#7c3aed", // purple
+/** Metric number colors */
+const METRIC_NUMBER_COLORS = ["#ff8c00", "#2563eb", "#10b981", "#7c3aed"];
+
+/** Subtle SVG noise (for natural paper-like blend) */
+const NOISE =
+  "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" opacity=\"0.08\" width=\"80\" height=\"80\" viewBox=\"0 0 80 80\"><filter id=\"n\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"2\" stitchTiles=\"stitch\"/></filter><rect width=\"100%\" height=\"100%\" filter=\"url(%23n)\"/></svg>')";
+
+/**
+ * NEW — METRIC card backgrounds:
+ * - conic-gradient gives a premium “sweep” highlight
+ * - radial-gradient adds a soft corner glow
+ * - noise layer ties it together
+ * - No plain white overlays, all color-driven.
+ */
+const METRIC_CARD_BACKGROUNDS = [
+  // ORANGE
+  {
+    border: "border-orange-200",
+    ring: "shadow-[inset_0_0_0_1px_rgba(255,140,0,0.16)]",
+    style: {
+      backgroundImage: [
+        // conic sweep highlight (peach → orange)
+        "conic-gradient(from 220deg at 25% 0%, rgba(255,212,170,0.65), rgba(255,166,77,0.35) 35%, rgba(255,212,170,0.65) 65%, rgba(255,166,77,0.35))",
+        // corner glow
+        "radial-gradient(90% 80% at 100% 0%, rgba(255,176,102,0.45) 0%, rgba(255,176,102,0) 60%)",
+        // texture
+        NOISE,
+      ].join(","),
+      backgroundBlendMode: "screen, soft-light, multiply",
+    } as React.CSSProperties,
+  },
+  // SKY
+  {
+    border: "border-sky-200",
+    ring: "shadow-[inset_0_0_0_1px_rgba(2,132,199,0.16)]",
+    style: {
+      backgroundImage: [
+        "conic-gradient(from 210deg at 25% 0%, rgba(186,230,253,0.65), rgba(125,211,252,0.35) 35%, rgba(186,230,253,0.65) 65%, rgba(125,211,252,0.35))",
+        "radial-gradient(90% 80% at 100% 0%, rgba(148,216,255,0.45) 0%, rgba(148,216,255,0) 60%)",
+        NOISE,
+      ].join(","),
+      backgroundBlendMode: "screen, soft-light, multiply",
+    } as React.CSSProperties,
+  },
+  // EMERALD
+  {
+    border: "border-emerald-200",
+    ring: "shadow-[inset_0_0_0_1px_rgba(16,185,129,0.16)]",
+    style: {
+      backgroundImage: [
+        "conic-gradient(from 225deg at 25% 0%, rgba(187,247,208,0.65), rgba(134,239,172,0.35) 35%, rgba(187,247,208,0.65) 65%, rgba(134,239,172,0.35))",
+        "radial-gradient(90% 80% at 100% 0%, rgba(160,240,195,0.45) 0%, rgba(160,240,195,0) 60%)",
+        NOISE,
+      ].join(","),
+      backgroundBlendMode: "screen, soft-light, multiply",
+    } as React.CSSProperties,
+  },
+  // VIOLET
+  {
+    border: "border-violet-200",
+    ring: "shadow-[inset_0_0_0_1px_rgba(139,92,246,0.16)]",
+    style: {
+      backgroundImage: [
+        "conic-gradient(from 200deg at 25% 0%, rgba(221,214,254,0.68), rgba(196,181,253,0.38) 35%, rgba(221,214,254,0.68) 65%, rgba(196,181,253,0.38))",
+        "radial-gradient(90% 80% at 100% 0%, rgba(210,200,255,0.48) 0%, rgba(210,200,255,0) 60%)",
+        NOISE,
+      ].join(","),
+      backgroundBlendMode: "screen, soft-light, multiply",
+    } as React.CSSProperties,
+  },
 ];
+
+type MentorCardTweak = Record<string, string>;
+const IMG_TWEAKS: MentorCardTweak = {
+  "Dnyaneshwar Bhabad": "object-[50%_30%] scale-[1.06]",
+};
 
 const MENTORS: MentorCard[] = [
   {
@@ -131,12 +202,6 @@ const DOMAINS = [
   "UI/UX Design",
 ];
 
-/** Per-mentor photo tweaks (only where needed) */
-const IMG_TWEAKS: Record<string, string> = {
-  // keep rim visible and center face a touch
-  "Dnyaneshwar Bhabad": "object-[50%_30%] scale-[1.06]",
-};
-
 export default function MentorsImpactSection() {
   const [domain, setDomain] = useState<string>("");
 
@@ -171,11 +236,11 @@ export default function MentorsImpactSection() {
     >
       {/* background glows */}
       <div
-        className="pointer-events-none absolute -top-28 right-[-10%] h-80 w-[48rem] rounded-full blur-[70px] opacity-20"
+        className="pointer-events-none absolute -top-28 right-[-10%] h-80 w-[48rem] rounded-full blur-[70px] opacity-22"
         style={{ background: CDPL_GLOW }}
       />
       <div
-        className="pointer-events-none absolute -bottom-28 left-[-10%] h-80 w-[48rem] rounded-full blur-[70px] opacity-16"
+        className="pointer-events-none absolute -bottom-28 left-[-10%] h-80 w-[48rem] rounded-full blur-[70px] opacity-18"
         style={{ background: CDPL_GLOW }}
       />
 
@@ -247,46 +312,89 @@ export default function MentorsImpactSection() {
           </div>
         </header>
 
-        {/* Metrics */}
+        {/* Metrics — NEW neatly blended backgrounds */}
         <div className="mb-6 grid gap-3 sm:grid-cols-4">
           {[
             { num: "2,400+", label: "1:1 Sessions / month" },
             { num: "96%", label: "Interview-ready in 8 weeks" },
             { num: "4.9/5", label: "Average mentor rating" },
             { num: "150+", label: "Hiring partners" },
-          ].map((m, i) => (
-            <div
-              key={m.label}
-              className="rounded-2xl border border-zinc-200 bg-white p-4 text-center shadow-sm"
-            >
+          ].map((m, i) => {
+            const bg = METRIC_CARD_BACKGROUNDS[i % METRIC_CARD_BACKGROUNDS.length];
+            return (
               <div
-                className="text-xl font-extrabold tracking-wide"
-                style={{ color: METRIC_NUMBER_COLORS[i % METRIC_NUMBER_COLORS.length] }}
+                key={m.label}
+                className={`relative overflow-hidden rounded-2xl border p-4 text-center shadow-sm ${bg.border} ${bg.ring}`}
+                style={bg.style}
               >
-                {m.num}
+                {/* tiny soft sheen arc for premium feel */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-2xl"
+                  style={{
+                    background:
+                      "conic-gradient(from 140deg at 0% 0%, rgba(255,255,255,0.6), transparent 20%, transparent 80%, rgba(255,255,255,0.35))",
+                    opacity: 0.25,
+                    WebkitMask:
+                      "radial-gradient(120% 80% at 0% 0%, black 45%, transparent 70%)",
+                    mask: "radial-gradient(120% 80% at 0% 0%, black 45%, transparent 70%)",
+                  }}
+                />
+
+                <div
+                  className="text-xl font-extrabold tracking-wide"
+                  style={{ color: METRIC_NUMBER_COLORS[i % METRIC_NUMBER_COLORS.length] }}
+                >
+                  {m.num}
+                </div>
+                <div className="mt-1 text-xs text-zinc-800">{m.label}</div>
               </div>
-              <div className="mt-1 text-xs text-zinc-700">{m.label}</div>
-            </div>
-          ))}
+            );
+          })}
         </div>
 
-        {/* Mentor Cards */}
+        {/* Mentor Cards — tinted gradients + noise */}
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {filtered.map((m) => {
+          {filtered.map((m, idx) => {
             const tweak = IMG_TWEAKS[m.name] || "";
+            const hue = [28, 210, 162, 262, 34, 196, 142][idx % 7];
             return (
               <article
                 key={m.name}
-                className="relative rounded-3xl border border-zinc-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="relative rounded-3xl border border-zinc-200 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                 aria-label={`${m.name} — ${m.role}, ${m.company}`}
+                style={{
+                  backgroundImage: [
+                    `linear-gradient(135deg, hsla(${hue}, 90%, 94%, .95) 0%, hsla(${hue}, 98%, 90%, .85) 55%, hsla(${hue}, 98%, 88%, .70) 100%)`,
+                    NOISE,
+                  ].join(","),
+                  backgroundBlendMode: "soft-light, multiply",
+                }}
               >
+                {/* inner glow ring */}
                 <div
-                  className="absolute -inset-px rounded-3xl opacity-35 pointer-events-none"
+                  aria-hidden
+                  className="pointer-events-none absolute -inset-px rounded-3xl opacity-38"
                   style={{ backgroundImage: GRADIENT_OUTLINE }}
-                  aria-hidden="true"
                 />
-                <div className="flex items-start gap-4">
-                  {/* Avatar with CONSISTENT size + visible golden rim */}
+                {/* faint grid mask */}
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 rounded-3xl"
+                  style={{
+                    backgroundImage:
+                      "linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)",
+                    backgroundSize: "12px 12px",
+                    opacity: 0.26,
+                    mixBlendMode: "overlay",
+                    WebkitMask:
+                      "radial-gradient(160% 110% at 0% 0%, black 38%, transparent 72%)",
+                    mask: "radial-gradient(160% 110% at 0% 0%, black 38%, transparent 72%)",
+                  }}
+                />
+
+                <div className="flex items-start gap-4 relative">
+                  {/* Avatar rim */}
                   <div
                     className="h-[88px] w-[88px] shrink-0 rounded-2xl p-[3px]"
                     style={{ backgroundImage: GRADIENT_BRAND }}
@@ -307,7 +415,7 @@ export default function MentorsImpactSection() {
                     <p className="mt-1 text-[13px] text-zinc-700">
                       {m.role} · {m.company}
                     </p>
-                    <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white px-2.5 py-1 text-[11px] font-semibold text-zinc-700">
+                    <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-semibold text-zinc-700">
                       <span
                         className="inline-block h-2 w-2 rounded-full"
                         style={{ background: CDPL_ORANGE }}
@@ -318,35 +426,35 @@ export default function MentorsImpactSection() {
                   </div>
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-1.5">
+                <div className="mt-4 flex flex-wrap gap-1.5 relative">
                   {m.tags.map((t) => (
                     <span
                       key={t}
-                      className="rounded-full border border-zinc-200 bg-white px-2 py-1 text-[11px] text-zinc-700"
+                      className="rounded-full border border-zinc-200 bg-white/90 backdrop-blur px-2 py-1 text-[11px] text-zinc-700"
                     >
                       {t}
                     </span>
                   ))}
                 </div>
 
-                <div className="mt-4 grid grid-cols-3 gap-2 text-center">
-                  <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
+                <div className="mt-4 grid grid-cols-3 gap-2 text-center relative">
+                  <div className="rounded-xl border border-zinc-200 bg-white/90 backdrop-blur px-3 py-2">
                     <div className="text-[12px] font-extrabold">★ {m.rating.toFixed(1)}</div>
                     <div className="mt-0.5 text-[11px] text-zinc-600">Avg Rating</div>
                   </div>
-                  <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
+                  <div className="rounded-xl border border-zinc-200 bg-white/90 backdrop-blur px-3 py-2">
                     <div className="text-[12px] font-extrabold">
                       {m.sessions.toLocaleString()}+
                     </div>
                     <div className="mt-0.5 text-[11px] text-zinc-600">Sessions</div>
                   </div>
-                  <div className="rounded-xl border border-zinc-200 bg-white px-3 py-2">
+                  <div className="rounded-xl border border-zinc-200 bg-white/90 backdrop-blur px-3 py-2">
                     <div className="text-[12px] font-extrabold">Job-ready</div>
                     <div className="mt-0.5 text-[11px] text-zinc-600">Curriculum</div>
                   </div>
                 </div>
 
-                <p className="mt-3 text-[11px] text-zinc-600">
+                <p className="mt-3 text-[11px] text-zinc-600 relative">
                   Includes roadmap planning, project reviews, and mock interviews. Ideal for career transitions and promotions.
                 </p>
               </article>
@@ -445,7 +553,7 @@ function FancySelect({
   function onItemKey(e: React.KeyboardEvent<HTMLLIElement>, i: number) {
     if (e.key === "Escape") {
       setOpen(false);
-      btnRef.current?.focus();
+      btnRef.current!.focus();
       return;
     }
     if (e.key === "Enter" || e.key === " ") {
@@ -489,7 +597,7 @@ function FancySelect({
         <ul
           ref={listRef}
           role="listbox"
-          aria-activedescendant={`opt-${selectedIndex}`}
+          aria-activedescendant={`opt-${Math.max(0, selectedIndex)}`}
           className="absolute z-30 mt-2 max-h-64 w-full overflow-auto rounded-xl border border-zinc-200 bg-white py-1 shadow-lg"
         >
           {options.map((opt, i) => {
@@ -504,12 +612,18 @@ function FancySelect({
                 tabIndex={0}
                 onKeyDown={(e) => onItemKey(e, i)}
                 onClick={() => choose(opt)}
-                className={`mx-1 flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition hover:bg-[rgba(255,140,0,.08)] ${active ? "bg-[rgba(255,140,0,.12)] font-semibold text-zinc-900" : "text-zinc-800"
-                  }`}
+                className={`mx-1 flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition hover:bg-[rgba(255,140,0,.08)] ${
+                  active ? "bg-[rgba(255,140,0,.12)] font-semibold text-zinc-900" : "text-zinc-800"
+                }`}
               >
                 <span className="truncate">{opt}</span>
                 {active && (
-                  <svg className="ml-3 h-4 w-4 text-[var(--color-brand,#ff8c00)]" viewBox="0 0 20 20" fill="currentColor">
+                  <svg
+                    className="ml-3 h-4 w-4 text-[var(--color-brand,#ff8c00)]"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                    aria-hidden="true"
+                  >
                     <path
                       fillRule="evenodd"
                       d="M16.704 5.29a1 1 0 010 1.415l-7.01 7.01a1 1 0 01-1.414 0L3.296 8.72a1 1 0 011.414-1.415l3.154 3.155 6.303-6.303a1 1 0 011.537.133z"

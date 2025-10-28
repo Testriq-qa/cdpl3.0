@@ -100,6 +100,49 @@ function getCompanyLogoSrc(company: string): string {
   return file ? `/placements/companies/${file}` : COMPANY_LOGO_FALLBACK;
 }
 
+/** --- Pattern presets: each card gets a different soft pattern --- */
+type Pattern = {
+  overlay: string; // CSS background-image
+  extra?: string;  // optional extra layer
+};
+const PATTERNS: Pattern[] = [
+  {
+    // Orange dots + corner glow
+    overlay:
+      "radial-gradient(120% 90% at 0% 0%, rgba(255,140,0,.12), transparent 60%), repeating-linear-gradient(45deg, rgba(255,140,0,.10) 0 2px, transparent 2px 6px)",
+  },
+  {
+    // Blue stripes + corner glow
+    overlay:
+      "conic-gradient(from 0deg at 100% 0%, rgba(30,136,229,.14), transparent 40%), repeating-linear-gradient(-45deg, rgba(30,136,229,.10) 0 2px, transparent 2px 6px)",
+  },
+  {
+    // Violet mesh
+    overlay:
+      "radial-gradient(80% 60% at 100% 0%, rgba(157,123,255,.16), transparent 55%), repeating-linear-gradient(90deg, rgba(157,123,255,.10) 0 1px, transparent 1px 5px)",
+  },
+  {
+    // Teal grid
+    overlay:
+      "conic-gradient(from 180deg at 0% 100%, rgba(20,184,166,.14), transparent 45%), repeating-linear-gradient(0deg, rgba(20,184,166,.10) 0 1px, transparent 1px 6px)",
+  },
+  {
+    // Pink diagonals
+    overlay:
+      "radial-gradient(90% 70% at 100% 100%, rgba(236,72,153,.14), transparent 55%), repeating-linear-gradient(135deg, rgba(236,72,153,.10) 0 2px, transparent 2px 7px)",
+  },
+  {
+    // Amber weave
+    overlay:
+      "conic-gradient(from 90deg at 0% 0%, rgba(245,158,11,.14), transparent 40%), repeating-linear-gradient(60deg, rgba(245,158,11,.10) 0 2px, transparent 2px 8px)",
+  },
+  {
+    // Emerald hatch
+    overlay:
+      "radial-gradient(100% 80% at 0% 100%, rgba(16,185,129,.14), transparent 60%), repeating-linear-gradient(30deg, rgba(16,185,129,.10) 0 2px, transparent 2px 6px)",
+  },
+];
+
 type Props = { contained?: boolean };
 
 export default function PlacementsFiltersGridSection({ contained = false }: Props) {
@@ -140,10 +183,11 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                   <button
                     key={d}
                     onClick={() => setDomain(d)}
-                    className={`rounded-full border px-3 py-1 text-sm sm:text-base font-medium transition ${active
+                    className={`rounded-full border px-3 py-1 text-sm sm:text-base font-medium transition ${
+                      active
                         ? "border-[#ff8c00] bg-orange-50 text-[#ff8c00]"
                         : "border-slate-200 bg-white text-slate-800 hover:bg-slate-50"
-                      }`}
+                    }`}
                   >
                     {d}
                   </button>
@@ -204,6 +248,7 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                 {results.map((p, idx) => {
                   const theme = DOMAIN_COLORS[p.domain];
                   const logoSrc = getCompanyLogoSrc(p.company);
+                  const pat = PATTERNS[idx % PATTERNS.length];
 
                   return (
                     <motion.div
@@ -213,10 +258,22 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                       transition={{ duration: 0.25 }}
                       className="relative overflow-visible rounded-2xl border border-slate-200 bg-white p-4 shadow-sm w-full"
                     >
-                      {/* left accent */}
+                      {/* pattern paint (different per-card) */}
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 rounded-2xl opacity-90 [mask-image:radial-gradient(140%_120%_at_0%_0%,#000_40%,transparent_70%)]"
+                        style={{ backgroundImage: pat.overlay }}
+                      />
+                      {/* subtle inner border glow to make patterns feel built-in */}
+                      <span
+                        aria-hidden
+                        className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/5"
+                      />
+
+                      {/* left accent (kept) */}
                       <span aria-hidden className={`absolute left-0 top-0 h-full w-1.5 rounded-l-2xl ${theme.bg}`} />
 
-                      {/* AVATAR overlapping card border */}
+                      {/* AVATAR overlapping card border (kept) */}
                       <Image
                         src={p.image}
                         alt={p.name}
@@ -225,7 +282,7 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                         className="absolute -left-3 -top-3 h-14 w-14 rounded-full object-cover border border-slate-200 ring-4 ring-white shadow"
                       />
 
-                      {/* Header spacer + logo bay */}
+                      {/* Header spacer + logo bay (kept) */}
                       <div className="h-12 pr-24 sm:pr-28 md:pr-32" />
                       <div className="absolute right-4 top-4 h-10 w-24 sm:w-28 md:w-32 flex items-center justify-center">
                         <Image
@@ -237,13 +294,13 @@ export default function PlacementsFiltersGridSection({ contained = false }: Prop
                         />
                       </div>
 
-                      {/* BODY */}
-                      <div className="min-w-0 mt-0.5">
-                        <p className="truncate text-xs sm:text-sm text-slate-500">{p.company}</p>
+                      {/* BODY (kept) */}
+                      <div className="relative min-w-0 mt-0.5">
+                        <p className="truncate text-xs sm:text-sm text-slate-600">{p.company}</p>
                         <h4 className="truncate text-[1.02rem] sm:text-lg font-extrabold text-slate-900">{p.name}</h4>
                       </div>
 
-                      <div className="mt-2.5">
+                      <div className="relative mt-2.5">
                         <span className={`rounded-md px-2 py-0.5 text-xs sm:text-sm font-semibold ${theme.bg} ${theme.text}`}>
                           {p.domain}
                         </span>

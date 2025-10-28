@@ -96,12 +96,12 @@ export default function MentorOutcomesSection() {
     >
       {/* soft background aura */}
       <div
-        className="pointer-events-none absolute -top-24 right-[-12%] h-72 w-[46rem] rounded-full blur-[70px] opacity-25"
+        className="pointer-events-none absolute -top-24 right-[-12%] h-72 w-[46rem] rounded-full blur[70px] opacity-25"
         style={{ background: GRADIENT_ACCENT }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -bottom-24 left-[-12%] h-72 w-[46rem] rounded-full blur-[70px] opacity-20"
+        className="pointer-events-none absolute -bottom-24 left-[-12%] h-72 w-[46rem] rounded-full blur[70px] opacity-20"
         style={{ background: GRADIENT_BRAND }}
         aria-hidden
       />
@@ -114,7 +114,7 @@ export default function MentorOutcomesSection() {
             className="text-3xl font-extrabold leading-tight sm:text-4xl"
           >
             <span style={{ color: BRAND }}>Featured </span>
-            Learner Outcomes {" "}
+            Learner Outcomes{" "}
           </h2>
         </header>
 
@@ -129,10 +129,11 @@ export default function MentorOutcomesSection() {
                   setTab(d);
                   setActiveIdx(0);
                 }}
-                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${active
-                  ? "border-zinc-300 text-zinc-900 shadow-sm"
-                  : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
-                  }`}
+                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
+                  active
+                    ? "border-zinc-300 text-zinc-900 shadow-sm"
+                    : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
+                }`}
                 style={active ? { backgroundImage: GRADIENT_BRAND } : {}}
                 aria-pressed={active}
               >
@@ -142,22 +143,52 @@ export default function MentorOutcomesSection() {
           })}
         </div>
 
-        {/* KPIs (numbers now have distinct colors per card) */}
+        {/* KPIs (each card now has a distinct, clean background) */}
         <div className="mb-8 grid gap-3 sm:grid-cols-4">
           {[
-            { num: "92%", label: "Offer rate post mock rounds", cls: "text-orange-600" },
-            { num: "3.1x", label: "Avg. salary jump (select tracks)", cls: "text-indigo-600" },
-            { num: "15–60d", label: "Typical time-to-offer", cls: "text-emerald-600" },
-            { num: "150+", label: "Active hiring partners", cls: "text-sky-600" },
+            {
+              num: "92%",
+              label: "Offer rate post mock rounds",
+              cls: "text-orange-600",
+              card:
+                "relative overflow-hidden rounded-2xl border border-orange-100 bg-gradient-to-br from-orange-50 to-amber-100 p-4 text-center shadow-sm",
+              deco:
+                "absolute -right-6 -top-6 h-20 w-20 rounded-full bg-orange-200/40",
+            },
+            {
+              num: "3.1x",
+              label: "Avg. salary jump (select tracks)",
+              cls: "text-indigo-600",
+              card:
+                "relative overflow-hidden rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50 to-violet-100 p-4 text-center shadow-sm",
+              deco:
+                "absolute -left-6 -bottom-6 h-24 w-24 rounded-full bg-indigo-200/40",
+            },
+            {
+              num: "15–60d",
+              label: "Typical time-to-offer",
+              cls: "text-emerald-600",
+              card:
+                "relative overflow-hidden rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50 to-teal-100 p-4 text-center shadow-sm",
+              deco:
+                "absolute -right-8 bottom-0 h-24 w-24 rounded-full bg-emerald-200/40",
+            },
+            {
+              num: "150+",
+              label: "Active hiring partners",
+              cls: "text-sky-600",
+              card:
+                "relative overflow-hidden rounded-2xl border border-sky-100 bg-gradient-to-br from-sky-50 to-cyan-100 p-4 text-center shadow-sm",
+              deco:
+                "absolute -left-8 top-0 h-24 w-24 rounded-full bg-sky-200/40",
+            },
           ].map((m) => (
-            <div
-              key={m.label}
-              className="rounded-2xl border border-zinc-200 bg-white p-4 text-center shadow-sm"
-            >
+            <div key={m.label} className={m.card}>
+              <div aria-hidden className={m.deco} />
               <div className={`text-xl font-extrabold tracking-wide ${m.cls}`}>
                 {m.num}
               </div>
-              <div className="mt-1 text-xs text-zinc-700">{m.label}</div>
+              <div className="mt-1 text-xs text-zinc-800">{m.label}</div>
             </div>
           ))}
         </div>
@@ -466,8 +497,9 @@ function Orbit({
                 <img
                   src={c.avatar}
                   alt=""
-                  className={`h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${isActive ? "scale-105" : "scale-100"
-                    }`}
+                  className={`h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${
+                    isActive ? "scale-105" : "scale-100"
+                  }`}
                   loading="lazy"
                 />
               </button>
@@ -493,8 +525,9 @@ function Orbit({
               <img
                 src={c.avatar}
                 alt=""
-                className={`h-16 w-16 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${isActive ? "scale-[1.06]" : "scale-100"
-                  }`}
+                className={`h-16 w-16 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${
+                  isActive ? "scale-[1.06]" : "scale-100"
+                }`}
                 loading="lazy"
                 style={{
                   boxShadow: isActive
