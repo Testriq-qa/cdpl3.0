@@ -1,3 +1,4 @@
+// ./src/components/sections/TestimonialHeroSection.tsx
 "use client";
 
 import Image from "next/image";
@@ -5,6 +6,7 @@ import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import Script from "next/script";
 import { Star } from "lucide-react";
+import type { CSSProperties } from "react";
 
 /* Students only */
 const REVIEWS = [
@@ -15,6 +17,9 @@ const REVIEWS = [
 
 const BRAND_ORANGE = "rgb(255, 140, 0)";
 const BRAND_BLUE = "#0069A8";
+
+/** Allow CSS custom property on style without using `any` */
+type CSSVars = CSSProperties & { ["--color-brand"]?: string };
 
 export default function TestimonialHeroSection() {
   const prefersReduced = useReducedMotion();
@@ -33,12 +38,13 @@ export default function TestimonialHeroSection() {
     })),
   };
 
+  const sectionStyle: CSSVars = { "--color-brand": BRAND_ORANGE };
+
   return (
     <section
       className="relative overflow-hidden bg-white"
       aria-label="Student ratings and reviews"
-      // define brand CSS variable for all the gradient/accents below
-      style={{ ["--color-brand" as any]: BRAND_ORANGE }}
+      style={sectionStyle}
     >
       <Script
         id="cdpl-students-hero-jsonld"
@@ -104,7 +110,7 @@ export default function TestimonialHeroSection() {
         </div>
 
         {/* ---------- DESKTOP ROW (≥1024px) ---------- */}
-        <div className="relative mx-auto mt-10 hidden min-h-[420px] max-w-[1120px] lg:block">
+        <div className="relative mx-auto mt-10 hidden min-h:[420px] max-w-[1120px] lg:block">
           <div className="pointer-events-none absolute left-1/2 top-4 h-64 w-[680px] -translate-x-1/2 rounded-full bg-[var(--color-brand)]/12 blur-3xl" />
           <div className="relative mx-auto mt-4 flex w-full max-w-[980px] items-center justify-center gap-10">
             <TiltCard review={REVIEWS[0]} color="dark" float={!prefersReduced} className="-translate-y-1 rotate-[-10deg]" />
