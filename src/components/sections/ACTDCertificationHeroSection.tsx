@@ -3,6 +3,9 @@
 import Link from "next/link";
 import Image from "next/image";
 
+const BRAND_ORANGE = "rgb(255, 140, 0)";
+const BRAND_BLUE = "#0069A8";
+
 export default function ACTDCertificationHeroSection() {
   return (
     <section className="relative isolate overflow-hidden bg-white text-slate-900">
@@ -20,29 +23,38 @@ export default function ACTDCertificationHeroSection() {
 
         <div className="grid grid-cols-1 items-start gap-8 lg:grid-cols-2">
           <div className="text-center lg:text-left">
-            <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-white px-3 py-1 text-xs font-medium text-slate-700">
-              <span className="h-2 w-2 rounded-full" style={{ backgroundColor: "#ff8c00" }} />
+            <p
+              className="mb-4 inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 text-xs font-medium text-slate-700"
+              style={{ border: `1px solid ${BRAND_ORANGE}` }}
+            >
+              <span
+                className="h-2 w-2 rounded-full"
+                style={{ backgroundColor: BRAND_ORANGE }}
+              />
               ACTD-aligned • Portfolio-first
             </p>
+
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-              ACTD Certification Training by{" "}
-              <span className="bg-gradient-to-r from-[#ff8c00] via-[#ffb558] to-[#ffd19e] bg-clip-text text-transparent">
-                CDPL
-              </span>
+              <span style={{ color: BRAND_BLUE }}>ACTD Certification Training</span>
+              <span style={{ color: BRAND_ORANGE }}> by CDPL</span>
             </h1>
+
             <p className="mt-4 mx-auto max-w-2xl text-base sm:text-lg text-slate-600 lg:mx-0">
               Learn through sprints, labs, mentor reviews, and a capstone that proves your skills to recruiters.
             </p>
+
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center lg:justify-start">
               <Link
                 href="#actd-tracks"
-                className="rounded-full bg-slate-900 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
+                className="rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                style={{ backgroundColor: BRAND_ORANGE, boxShadow: "0 6px 16px rgba(255,140,0,0.25)" }}
               >
                 Explore tracks
               </Link>
               <Link
                 href="/cdpl-certificate-validation"
-                className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 ring-1 ring-slate-200 transition hover:bg-slate-50"
+                className="rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
+                style={{ border: "1px solid #e2e8f0" }}
               >
                 Validate a certificate
               </Link>
