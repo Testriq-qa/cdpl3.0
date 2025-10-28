@@ -113,8 +113,8 @@ export default function MentorOutcomesSection() {
             id="mentor-outcomes-title"
             className="text-3xl font-extrabold leading-tight sm:text-4xl"
           >
-            Proven Outcomes &{" "}
-            <span style={{ color: BRAND }}>Real Placements</span>
+            <span style={{ color: BRAND }}>Featured </span>
+            Learner Outcomes {" "}
           </h2>
         </header>
 
@@ -130,8 +130,8 @@ export default function MentorOutcomesSection() {
                   setActiveIdx(0);
                 }}
                 className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${active
-                    ? "border-zinc-300 text-zinc-900 shadow-sm"
-                    : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
+                  ? "border-zinc-300 text-zinc-900 shadow-sm"
+                  : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
                   }`}
                 style={active ? { backgroundImage: GRADIENT_BRAND } : {}}
                 aria-pressed={active}
@@ -142,19 +142,19 @@ export default function MentorOutcomesSection() {
           })}
         </div>
 
-        {/* KPIs */}
+        {/* KPIs (numbers now have distinct colors per card) */}
         <div className="mb-8 grid gap-3 sm:grid-cols-4">
           {[
-            { num: "92%", label: "Offer rate post mock rounds" },
-            { num: "3.1x", label: "Avg. salary jump (select tracks)" },
-            { num: "15–60d", label: "Typical time-to-offer" },
-            { num: "150+", label: "Active hiring partners" },
+            { num: "92%", label: "Offer rate post mock rounds", cls: "text-orange-600" },
+            { num: "3.1x", label: "Avg. salary jump (select tracks)", cls: "text-indigo-600" },
+            { num: "15–60d", label: "Typical time-to-offer", cls: "text-emerald-600" },
+            { num: "150+", label: "Active hiring partners", cls: "text-sky-600" },
           ].map((m) => (
             <div
               key={m.label}
               className="rounded-2xl border border-zinc-200 bg-white p-4 text-center shadow-sm"
             >
-              <div className="text-xl font-extrabold tracking-wide">
+              <div className={`text-xl font-extrabold tracking-wide ${m.cls}`}>
                 {m.num}
               </div>
               <div className="mt-1 text-xs text-zinc-700">{m.label}</div>
