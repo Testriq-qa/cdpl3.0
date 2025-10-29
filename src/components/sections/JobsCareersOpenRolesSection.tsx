@@ -1,9 +1,27 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Job } from "@/app/jobs/careers/page";
-import JobsCareersJobsGridSection from "./JobsCareersJobsGridSection";
+import dynamic from "next/dynamic";
 import { ChevronsUpDown, Check, X } from "lucide-react";
+
+import type { Job } from "@/app/jobs/careers/page";
+
+
+/* Loader for the dynamic section */
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500 dark:text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+/* ===== Dynamic import (typed) ===== */
+const JobsCareersJobsGridSection = dynamic(
+  () => import("./JobsCareersJobsGridSection").then((m) => m.default),
+  { ssr: false, loading: () => <SectionLoader label="Loading roles..." /> }
+);
+
 
 /* --------------------------- Styled Select (custom) --------------------------- */
 /** Fully styled, accessible-ish custom select with keyboard support.
