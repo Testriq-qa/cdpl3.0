@@ -11,18 +11,18 @@ const long = (t: string) =>
 
 
 const REVIEWS: StudentReview[] = [
-  { id: "r1", name: "Neha R.", role: "QA Engineer", course: "Manual + Automation Testing", rating: 4.9, avatar: "/testimonial_images/testimonial.jpeg", quote: long("CDPL’s mentor cadence and projects sharpened my testing mindset. We didn’t just learn theory—we ran focused exploratory sessions with charters, mapped risks, and compared coverage heuristics. I built API and UI suites that ran on CI for every PR, learned to tame flakiness with better waits/selectors, and used traces to debug fast. Weekly reviews pushed me to justify priorities and document crisp repro steps. By demo day I had a clean repo, a small dashboard for suite health, and the confidence to walk engineers through my approach end-to-end."), span: "big" },
+  { id: "r1", name: "Neha R.", role: "QA Engineer", course: "Manual + Automation Testing", rating: 4.9, avatar: "/testimonial_images/testimonial.jpeg", quote: long("CDPL’s mentor cadence and projects sharpened my testing mindset. We didn’t just learn theory, we ran focused exploratory sessions with charters, mapped risks, and compared coverage heuristics. I built API and UI suites that ran on CI for every PR, learned to tame flakiness with better waits/selectors, and used traces to debug fast. Weekly reviews pushed me to justify priorities and document crisp repro steps. By demo day I had a clean repo, a small dashboard for suite health, and the confidence to walk engineers through my approach end-to-end."), span: "big" },
   { id: "r2", name: "Aarav S.", role: "Digital Marketing", course: "Performance Marketing", rating: 4.8, avatar: "/testimonial_images/testimonial.jpeg", quote: "Practical playbooks and live dashboards meant I could launch, read signals, and iterate fast in my new role.", span: "normal" },
   { id: "r3", name: "Zara K.", role: "Data Scientist", course: "ML & MLOps", rating: 4.7, avatar: "/testimonial_images/testimonial.jpeg", quote: long("The product-first approach to ML made evaluation and deployment feel natural."), span: "tall" },
   { id: "r4", name: "Ishaan P.", role: "Data Analyst", course: "Analytics + BI", rating: 4.6, avatar: "/testimonial_images/testimonial.jpeg", quote: "From SQL to stakeholder storytelling, the reps made interviews feel like a recap of class work.", span: "normal" },
   { id: "r5", name: "Priya D.", role: "Software Testing", course: "API + Postman + Cypress", rating: 5.0, avatar: "/testimonial_images/testimonial.jpeg", quote: long("Real-world bug bashes and CI integrations helped me ship with quality."), span: "wide" },
   { id: "r6", name: "Kabir M.", role: "Digital Marketing", course: "SEO + Content Systems", rating: 4.5, avatar: "/testimonial_images/testimonial.jpeg", quote: "Strategy plus systems thinking: we built calendars, briefs, and reporting that finally scaled.", span: "normal" },
-  { id: "r7", name: "Mira S.", role: "Data Analyst", course: "Advanced SQL + dbt", rating: 4.8, avatar: "/testimonial_images/testimonial.jpeg", quote: "Modeled real pipelines, added tests, and delivered clear dashboards—day-1 impact at work.", span: "normal" },
+  { id: "r7", name: "Mira S.", role: "Data Analyst", course: "Advanced SQL + dbt", rating: 4.8, avatar: "/testimonial_images/testimonial.jpeg", quote: "Modeled real pipelines, added tests, and delivered clear dashboards, day-1 impact at work.", span: "normal" },
   { id: "r8", name: "Sanjay V.", role: "Software Testing", course: "Playwright + Test Strategy", rating: 4.9, avatar: "/testimonial_images/testimonial.jpeg", quote: long("We stabilized flaky suites and added trace-based debugging that saved hours each week."), span: "tall" },
 
-  { id: "r9", name: "Rhea K.", role: "Data Scientist", course: "GenAI for Product", rating: 4.6, avatar: "/testimonial_images/testimonial.jpeg", quote: "Loved the focus on measurable product impact—offline metrics tied to real user outcomes.", span: "normal" },
+  { id: "r9", name: "Rhea K.", role: "Data Scientist", course: "GenAI for Product", rating: 4.6, avatar: "/testimonial_images/testimonial.jpeg", quote: "Loved the focus on measurable product impact offline metrics tied to real user outcomes.", span: "normal" },
   { id: "r10", name: "Tanmay G.", role: "Digital Marketing", course: "Analytics for Growth", rating: 4.7, avatar: "/testimonial_images/testimonial.jpeg", quote: long("Attribution, cohorts, and experimentation finally clicked with templates I still reuse."), span: "wide" },
-  { id: "r11", name: "Ananya B.", role: "Software Testing", course: "Test Design + Strategy", rating: 4.8, avatar: "/testimonial_images/testimonial.jpeg", quote: "Industry mentors, practical reviews, and real deliverables—exactly what hiring managers asked about.", span: "normal" },
+  { id: "r11", name: "Ananya B.", role: "Software Testing", course: "Test Design + Strategy", rating: 4.8, avatar: "/testimonial_images/testimonial.jpeg", quote: "Industry mentors, practical reviews, and real deliverables, exactly what hiring managers asked about.", span: "normal" },
   { id: "r12", name: "Dev S.", role: "Data Analyst", course: "Power BI + Storytelling", rating: 4.7, avatar: "/testimonial_images/testimonial.jpeg", quote: "Critical feedback on my dashboards improved clarity and decision speed for business users.", span: "normal" },
   { id: "r13", name: "Meera T.", role: "Data Scientist", course: "End-to-End ML Projects", rating: 5.0, avatar: "/testimonial_images/testimonial.jpeg", quote: long("Shipping real ML with code reviews made interviews feel like show-and-tell. We framed problems with measurable metrics, versioned data properly, and wrote evals that matched business goals—not just leaderboard scores. I practiced PR hygiene, paired reviews, and safe rollouts with monitoring and guardrails. The capstone shipped as a tiny service with docs and a post-mortem template, so I could clearly explain objectives, trade-offs, and results to recruiters."), span: "big" },
   { id: "r14", name: "Nikhil A.", role: "Digital Marketing", course: "Lifecycle + CRM", rating: 4.6, avatar: "/testimonial_images/testimonial.jpeg", quote: "Mapped journeys, built experiments, and learned to read retention like a scientist.", span: "normal" },
@@ -146,13 +146,13 @@ export default function TestimonialFeedbackSection() {
 
       <Script id="cdpl-students-grid-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <header className="mx-auto mb-6 max-w-3xl text-center">
+      <header className="mx-auto mb-6 pt-4 max-w-3xl text-center">
         <h2 className="text-3xl font-extrabold tracking-tight text-neutral-900 sm:text-4xl">What our alumni say</h2>
         <p className="mt-2 text-sm text-neutral-600 sm:text-base">
           All reviewers are ex-students from <span className="font-medium text-neutral-900">Testing</span>,{" "}
           <span className="font-medium text-neutral-900">Data Analyst</span>,{" "}
           <span className="font-medium text-neutral-900">Data Science</span>, and{" "}
-          <span className="font-medium text-neutral-900">Marketing</span> programs—sharing how CDPL prepared them for industry.
+          <span className="font-medium text-neutral-900">Marketing</span> programs, sharing how CDPL prepared them for industry.
         </p>
       </header>
 

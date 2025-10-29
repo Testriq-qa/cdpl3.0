@@ -43,7 +43,7 @@ export default function PlacementsNewsletterCTASection({ contained = false }: Pr
                             </h3>
                             {/* Non-hero body scale */}
                             <p className="mt-1 text-sm sm:text-base text-slate-700">
-                                New offers, partner companies, and cohort invites—straight to your inbox.
+                                New offers, partner companies, and cohort invites, straight to your inbox.
                             </p>
                         </div>
 

@@ -273,7 +273,7 @@ export default function JobsCareersOpenRolesSection({ jobs }: { jobs: Job[] }) {
           {/* Match non-hero heading scale used above (list section): strong but not oversized */}
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Open roles</h2>
           <p className="mt-2 text-[0.95rem] leading-relaxed text-slate-600">
-            If impact, ownership, and craft excite you—there’s a seat for you here.
+            If impact, ownership, and craft excite you, there’s a seat for you here.
           </p>
         </header>
 

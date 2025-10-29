@@ -224,7 +224,7 @@ export function JobsCareersJobCardSection({ job }: { job: Job }) {
               • Outcomes over vanity; small, fast teams.
             </li>
             <li className="text-[13.5px] leading-relaxed text-slate-700">
-              • Written culture — clear docs beat meetings.
+              • Written culture, clear docs beat meetings.
             </li>
             <li className="text-[13.5px] leading-relaxed text-slate-700">
               • Accessibility, stability & quality first.
@@ -247,7 +247,7 @@ export function JobsCareersJobCardSection({ job }: { job: Job }) {
             <li>Intro call (30 mins): expectations &amp; fit.</li>
             <li>Craft exercise aligned to real CDPL work.</li>
             <li>Panel deep-dive; async doc review.</li>
-            <li>Offer — we move fast.</li>
+            <li>Offer, we move fast.</li>
           </ol>
         </div>
       </div>

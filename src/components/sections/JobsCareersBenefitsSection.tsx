@@ -32,10 +32,10 @@ export default function JobsCareersBenefitsSection() {
     const benefits: Benefit[] = useMemo(
         () => [
             { title: "Outcomes over vanity", desc: "We optimize for learner outcomes and business value, not dashboards that just look pretty.", icon: Gauge, seoId: "outcomes-over-vanity" },
-            { title: "Ownership & speed", desc: "Small teams, tight loops, clean interfaces—so you can ship, learn, and iterate fast.", icon: Rocket, seoId: "ownership-and-speed" },
+            { title: "Ownership & speed", desc: "Small teams, tight loops, clean interfaces, so you can ship, learn, and iterate fast.", icon: Rocket, seoId: "ownership-and-speed" },
             { title: "Mentor ecosystem", desc: "Access to expert mentors & hiring partners across QA, Data, Full-Stack, and DevOps.", icon: Users, seoId: "mentor-ecosystem" },
             { title: "Hybrid flexibility", desc: "Collaborative in-office rhythms with remote-friendly space for deep work when it matters.", icon: Laptop, seoId: "hybrid-flexibility" },
-            { title: "Learning budget", desc: "Courses, books, conferences—grow your craft with a dedicated L&D stipend and peer reviews.", icon: BookOpenCheck, seoId: "learning-budget" },
+            { title: "Learning budget", desc: "Courses, books, conferences, grow your craft with a dedicated L&D stipend and peer reviews.", icon: BookOpenCheck, seoId: "learning-budget" },
             { title: "Competitive comp", desc: "We pay for impact and potential. ESOPs available for critical, high-leverage roles.", icon: Coins, seoId: "competitive-comp" },
         ],
         []

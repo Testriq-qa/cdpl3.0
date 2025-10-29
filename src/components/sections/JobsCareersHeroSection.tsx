@@ -212,9 +212,9 @@ export default function JobsCareersHeroSection() {
               transition={{ duration: 0.7, delay: 0.18 }}
               className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4"
             >
-              <div className="flex items-center gap-2 rounded-xl bg-slate-50 px-4 py-2 ring-1 ring-slate-200">
-                <BadgeCheck className="h-4 w-4 text-slate-700" />
-                <span className="text-sm text-slate-700">Product-first team</span>
+              <div className="flex items-center gap-2 rounded-xl bg-green-50 px-4 py-2 ring-1 ring-green-200">
+                <BadgeCheck className="h-4 w-4 text-green-700" />
+                <span className="text-sm text-green-700">Product-first team</span>
               </div>
               <div className="flex items-center gap-2 rounded-xl bg-sky-50 px-4 py-2 ring-1 ring-sky-200">
                 <Sparkles className="h-4 w-4 text-sky-700" />

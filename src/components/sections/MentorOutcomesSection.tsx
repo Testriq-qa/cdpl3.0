@@ -44,7 +44,7 @@ const CASES: Case[] = [
     company: "IDfy",
     before: "CDPL Trainee",
     after: "Quality Assurance",
-    outcome: "Joined IDfy — July 2023",
+    outcome: "Joined IDfy: July 2023",
     domain: "QA",
     avatar: "/placements/Jaynam Shah.jpg",
   },
@@ -129,11 +129,10 @@ export default function MentorOutcomesSection() {
                   setTab(d);
                   setActiveIdx(0);
                 }}
-                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
-                  active
-                    ? "border-zinc-300 text-zinc-900 shadow-sm"
-                    : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
-                }`}
+                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${active
+                  ? "border-zinc-300 text-zinc-900 shadow-sm"
+                  : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
+                  }`}
                 style={active ? { backgroundImage: GRADIENT_BRAND } : {}}
                 aria-pressed={active}
               >
@@ -444,7 +443,7 @@ function Orbit({
                   />
                   <div>
                     <div className="text-sm font-extrabold leading-tight">
-                      {active.name} — {active.role}
+                      {active.name} - {active.role}
                     </div>
                     <div className="text-xs text-zinc-700">{active.company}</div>
                   </div>
@@ -497,9 +496,8 @@ function Orbit({
                 <img
                   src={c.avatar}
                   alt=""
-                  className={`h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${
-                    isActive ? "scale-105" : "scale-100"
-                  }`}
+                  className={`h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${isActive ? "scale-105" : "scale-100"
+                    }`}
                   loading="lazy"
                 />
               </button>
@@ -525,9 +523,8 @@ function Orbit({
               <img
                 src={c.avatar}
                 alt=""
-                className={`h-16 w-16 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${
-                  isActive ? "scale-[1.06]" : "scale-100"
-                }`}
+                className={`h-16 w-16 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${isActive ? "scale-[1.06]" : "scale-100"
+                  }`}
                 loading="lazy"
                 style={{
                   boxShadow: isActive

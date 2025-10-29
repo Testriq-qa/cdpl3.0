@@ -30,7 +30,7 @@ export default function CTAJoinSection() {
 
               <div className="mt-4 sm:mt-5 lg:mt-6 flex flex-wrap items-center gap-3">
                 <Link
-                  href="/contact"
+                  href="/contact-us"
                   className="inline-flex items-center justify-center rounded-full px-5 py-2.5 text-sm sm:px-6 sm:py-3 sm:text-sm lg:px-7 lg:py-4 lg:text-sm bg-[var(--color-brand)] text-white font-semibold shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
                 >
                   Join 1000+ Successful Students

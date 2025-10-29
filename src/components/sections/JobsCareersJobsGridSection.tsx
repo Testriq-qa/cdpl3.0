@@ -128,12 +128,12 @@ export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
         {/* RIGHT: detail (padding removed; handle inside) */}
         {showDetail && (
           <section
-            className="relative rounded-2xl border border-slate-200 bg-white p-0 shadow-sm overflow-hidden lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-auto nice-scroll"
+            className="relative rounded-2xl border border-slate-200 bg-white p-0 shadow-sm overflow-visible lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-auto nice-scroll"
             aria-label="Role details"
           >
             {/* Mobile sticky back header */}
             {!isLg && (
-              <div className="sticky top-16 z-20 mb-3 flex items-center gap-2 border-b border-slate-100 bg-white px-4 py-2 shadow-sm">
+              <div className="sticky top-0 z-20 mb-3 flex items-center gap-2 border-b border-slate-100 bg-white px-4 py-2 shadow-sm">
                 <button
                   onClick={() => setSelectedId(null)}
                   className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-900"
