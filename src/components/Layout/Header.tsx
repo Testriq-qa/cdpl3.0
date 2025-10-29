@@ -22,7 +22,7 @@ const courseCategories = [
       {
         name: "API Testing using POSTMAN and RestAPIs",
         description: "Master product backlog management and stakeholder collaboration.",
-        governingBodies: [{ name: "API Testing", logo: "/header_images/API_Testing_Postman.png" }],
+        governingBodies: [{ name: "API Testing", logo: "/header_images/API_POSTMAN.png" }],
       },
       {
         name: "Database Management System using MySQL",
@@ -458,7 +458,7 @@ const Header = () => {
                                     src={body.logo}
                                     alt={body.name}
                                     className="object-contain h-full w-auto rounded-md"
-                                    width={300}
+                                    width={400}
                                     height={128}
                                   />
                                 </div>
