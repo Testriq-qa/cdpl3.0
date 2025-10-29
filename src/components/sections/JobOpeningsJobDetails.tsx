@@ -1,7 +1,7 @@
 "use client";
 
 import { AnimatePresence, motion } from "framer-motion";
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useRef, useState, useEffect } from "react";
 
 type Skill = { skill_name: string; years?: string | number | null; level?: string | null };
 
@@ -24,11 +24,7 @@ type APIMessage = { Message: string };
 
 export type JobDetailsProps = {
     getJobByIdAction: (job_id: string) => Promise<{ status: number; data: JobDetail }>;
-    verifyCandidateAction: (p: {
-        email: string;
-        mobile: string;
-        mobile_country_code: number | string;
-    }) => Promise<APIMessage>;
+    verifyCandidateAction: (p: { email: string; mobile: string; mobile_country_code: number | string }) => Promise<APIMessage>;
     createCandidateAction: (p: {
         first_name?: string;
         last_name?: string;
@@ -39,7 +35,11 @@ export type JobDetailsProps = {
     }) => Promise<APIMessage>;
 };
 
-type InternalProps = JobDetailsProps & { jobId?: string | null; open: boolean; onClose: () => void };
+type InternalProps = JobDetailsProps & {
+    jobId?: string | null;
+    open: boolean;
+    onClose: () => void;
+};
 
 const decodeAndStrip = (raw?: string) => {
     if (!raw) return "";
@@ -47,7 +47,14 @@ const decodeAndStrip = (raw?: string) => {
     return decoded.replace(/<[^>]*>/g, "");
 };
 
-export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions }: InternalProps) {
+export default function JobOpeningsJobDetails({
+    jobId,
+    open,
+    onClose,
+    getJobByIdAction,
+    verifyCandidateAction,
+    createCandidateAction,
+}: InternalProps) {
     const [loading, setLoading] = useState(false);
     const [detail, setDetail] = useState<JobDetail | null>(null);
     const [error, setError] = useState<string | null>(null);
@@ -58,26 +65,48 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
     const [resume, setResume] = useState("");
     const [submitting, setSubmitting] = useState(false);
 
-    React.useEffect(() => {
-        let ignore = false;
-        async function run() {
-            if (!open || !jobId) return;
-            setLoading(true);
-            setError(null);
-            try {
-                const res = await actions.getJobByIdAction(jobId);
-                if (!ignore) setDetail(res.data);
-            } catch (e: unknown) {
-                if (!ignore) setError(e instanceof Error ? e.message : "Failed to load job");
-            } finally {
-                if (!ignore) setLoading(false);
+    // fetch guards
+    const lastFetchedIdRef = useRef<string | null>(null);
+    const actionRef = useRef(getJobByIdAction);
+    useEffect(() => { actionRef.current = getJobByIdAction; }, [getJobByIdAction]);
+
+    useEffect(() => {
+        if (!open || !jobId) return;
+
+        // If we already fetched this id and we have details for it, skip
+        if (lastFetchedIdRef.current === jobId && detail?.job_id === jobId) return;
+
+        let active = true;
+        setLoading(true);
+        setError(null);
+        lastFetchedIdRef.current = jobId;
+
+        const timeout = setTimeout(() => {
+            if (active) {
+                setLoading(false);
+                setError("The request is taking too long. Please try again.");
             }
-        }
-        run();
+        }, 20000);
+
+        (async () => {
+            try {
+                const res = await actionRef.current(jobId);
+                if (!active) return;
+                setDetail(res.data);
+            } catch (e: unknown) {
+                if (!active) return;
+                setError(e instanceof Error ? e.message : "Failed to load job");
+            } finally {
+                if (active) setLoading(false);
+                clearTimeout(timeout);
+            }
+        })();
+
         return () => {
-            ignore = true;
+            active = false;
+            clearTimeout(timeout);
         };
-    }, [open, jobId, actions]);
+    }, [open, jobId, detail]); // include `detail` to satisfy eslint rule; guard prevents extra fetch
 
     const skillChips = useMemo(() => {
         const names = Array.from(new Set((detail?.skills ?? []).map((s) => s.skill_name)));
@@ -106,23 +135,12 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
 
         try {
             setSubmitting(true);
-
-            const verify = await actions.verifyCandidateAction({
-                email,
-                mobile,
-                mobile_country_code: dial,
-            });
-
+            const verify = await verifyCandidateAction({ email, mobile, mobile_country_code: dial });
             const msg = (verify?.Message ?? "").toLowerCase();
             const exists = msg.includes("exist in our database") && !msg.includes("dose not exist");
 
             if (!exists) {
-                await actions.createCandidateAction({
-                    email,
-                    mobile,
-                    mobile_country_code: dial,
-                    resume,
-                });
+                await createCandidateAction({ email, mobile, mobile_country_code: dial, resume });
             }
 
             window.open(detail.job_referral_url, "_blank", "noopener,noreferrer");
@@ -155,7 +173,7 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
                             <div className="flex flex-col items-start justify-between gap-3 border-b border-slate-200 p-4 sm:flex-row sm:items-center">
                                 <div>
                                     <h2 className="text-lg font-semibold text-slate-900 sm:text-xl">
-                                        {detail?.job_title ?? "Job details"}
+                                        {detail?.job_title ?? (loading ? "Loading…" : "Job details")}
                                     </h2>
                                     {detail?.location && (
                                         <p className="mt-1 text-sm text-slate-600">
@@ -169,11 +187,11 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
                                         <a
                                             href={detail.job_referral_url}
                                             target="_blank"
-                                            rel="noreferrer"
+                                            rel="noopener noreferrer"
                                             className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-orange-500 via-orange-500 to-amber-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95"
                                         >
                                             Apply
-                                            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+                                            <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                                                 <path d="M7 17L17 7" />
                                                 <path d="M10 7h7v7" />
                                             </svg>
@@ -188,7 +206,7 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
                                 </div>
                             </div>
 
-                            {/* CDPL-styled scroll area */}
+                            {/* Scrollable content */}
                             <div className="cdpl-scroll max-h-[85vh] overflow-y-auto p-5">
                                 <div className="flex flex-col gap-6 md:flex-row">
                                     <div className="flex-1">
@@ -198,36 +216,31 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
                                             </div>
                                             <div className="px-4 py-4">
                                                 {loading && <p>Loading…</p>}
-                                                {error && (
-                                                    <p className="rounded-md border border-rose-200 bg-rose-50 p-3 text-rose-700">
-                                                        {error}
-                                                    </p>
-                                                )}
-                                                {!loading && !error && (
+                                                {error && <p className="rounded-md border border-rose-200 bg-rose-50 p-3 text-rose-700">{error}</p>}
+                                                {!loading && !error && detail && (
                                                     <>
-                                                        <p className="whitespace-pre-line text-slate-800">
-                                                            {decodeAndStrip(detail?.description)}
-                                                        </p>
+                                                        <p className="whitespace-pre-line text-slate-800">{decodeAndStrip(detail.description)}</p>
 
                                                         <div className="mt-4 grid grid-cols-1 gap-3 text-sm sm:grid-cols-2">
                                                             <div className="rounded-md border border-slate-200 bg-slate-50 p-3">
                                                                 <span className="block text-xs text-slate-500">Experience</span>
                                                                 <span className="font-medium text-slate-800">
-                                                                    {detail?.min_experience}–{detail?.max_experience} yrs
+                                                                    {detail.min_experience}–{detail.max_experience} yrs
                                                                 </span>
                                                             </div>
                                                             <div className="rounded-md border border-slate-200 bg-slate-50 p-3">
                                                                 <span className="block text-xs text-slate-500">Comp</span>
                                                                 <span className="font-medium text-slate-800">
-                                                                    {detail?.min_charge} – {detail?.max_charge}
+                                                                    {detail.min_charge} – {detail.max_charge}
                                                                 </span>
                                                             </div>
                                                         </div>
 
-                                                        <div className="mt-5 flex flex-wrap gap-2">
-                                                            {skillChips}
-                                                        </div>
+                                                        <div className="mt-5 flex flex-wrap gap-2">{skillChips}</div>
                                                     </>
+                                                )}
+                                                {!loading && !error && !detail && (
+                                                    <p className="text-sm text-slate-600">No details available.</p>
                                                 )}
                                             </div>
                                         </section>
@@ -278,7 +291,7 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
                                                         className="inline-flex items-center gap-2 rounded-md bg-gradient-to-r from-orange-500 via-orange-500 to-amber-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95 disabled:opacity-60"
                                                     >
                                                         {submitting ? "Processing…" : "Verify & Continue"}
-                                                        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2">
+                                                        <svg viewBox="0 0 24 24" className="h-4 w-4" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
                                                             <path d="M7 17L17 7" />
                                                             <path d="M10 7h7v7" />
                                                         </svg>
@@ -321,48 +334,22 @@ export default function JobOpeningsJobDetails({ jobId, open, onClose, ...actions
                         </div>
                     </motion.div>
 
-                    {/* CDPL scrollbar styling (scoped to .cdpl-scroll) */}
+                    {/* CDPL scrollbar styling */}
                     <style jsx global>{`
-            .cdpl-scroll {
-              scrollbar-width: thin;
-              scrollbar-color: rgba(255, 140, 0, 0.6) transparent; /* Firefox */
-            }
-            .cdpl-scroll::-webkit-scrollbar {
-              width: 12px;
-            }
-            .cdpl-scroll::-webkit-scrollbar-track {
-              background: transparent;
-            }
+            .cdpl-scroll { scrollbar-width: thin; scrollbar-color: rgba(255, 140, 0, 0.6) transparent; }
+            .cdpl-scroll::-webkit-scrollbar { width: 12px; }
+            .cdpl-scroll::-webkit-scrollbar-track { background: transparent; }
             .cdpl-scroll::-webkit-scrollbar-thumb {
-              background: linear-gradient(
-                180deg,
-                rgba(255,140,0,0.85),
-                rgba(255,184,77,0.85) 50%,
-                rgba(125,211,252,0.9)
-              );
-              border-radius: 9999px;
-              border: 3px solid transparent;
-              background-clip: padding-box;
+              background: linear-gradient(180deg, rgba(255,140,0,0.85), rgba(255,184,77,0.85) 50%, rgba(125,211,252,0.9));
+              border-radius: 9999px; border: 3px solid transparent; background-clip: padding-box;
             }
             .cdpl-scroll:hover::-webkit-scrollbar-thumb {
-              background: linear-gradient(
-                180deg,
-                rgba(255,140,0,1),
-                rgba(255,184,77,1) 50%,
-                rgba(125,211,252,1)
-              );
+              background: linear-gradient(180deg, rgba(255,140,0,1), rgba(255,184,77,1) 50%, rgba(125,211,252,1));
             }
             .cdpl-scroll::-webkit-scrollbar-thumb:active {
-              background: linear-gradient(
-                180deg,
-                rgba(255,125,0,1),
-                rgba(255,170,60,1) 50%,
-                rgba(110,200,250,1)
-              );
+              background: linear-gradient(180deg, rgba(255,125,0,1), rgba(255,170,60,1) 50%, rgba(110,200,250,1));
             }
-            .cdpl-scroll::-webkit-scrollbar-corner {
-              background: transparent;
-            }
+            .cdpl-scroll::-webkit-scrollbar-corner { background: transparent; }
           `}</style>
                 </motion.div>
             )}
