@@ -194,19 +194,19 @@ export default function AboutMissionVision({
         <h3 className="text-sm font-semibold">Core Values</h3>
         <div className="mt-3 flex flex-wrap gap-2">
           {[
-            "Industry-aligned curriculum",
-            "Live projects & capstones",
-            "Mentor feedback loops",
-            "Ethics & quality",
-            "Lifelong learning",
-            "Inclusive community",
+            { value: "Industry-aligned curriculum", bgcolor: "bg-blue-50", textColor: "text-blue-500" },
+            { value: "Live projects & capstones", bgcolor: "bg-red-50", textColor: "text-red-500" },
+            { value: "Mentor feedback loops", bgcolor: "bg-green-50", textColor: "text-green-500" },
+            { value: "Ethics & quality", bgcolor: "bg-yellow-50", textColor: "text-yellow-500" },
+            { value: "Lifelong learning", bgcolor: "bg-pink-50", textColor: "text-pink-500" },
+            { value: "Inclusive community", bgcolor: "bg-purple-50", textColor: "text-purple-500" },
           ].map((v) => (
             <span
-              key={v}
-              className="rounded-full border bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
+              key={v.value}
+              className={`rounded-full border ${v.bgcolor} px-3 py-1 text-xs font-medium ${v.textColor} shadow-sm`}
               style={{ borderColor: "rgba(15,23,42,0.12)" }}
             >
-              {v}
+              {v.value}
             </span>
           ))}
         </div>
