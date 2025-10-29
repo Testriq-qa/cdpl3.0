@@ -47,7 +47,7 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
 
   if (loading) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="animate-pulse space-y-8">
           <div className="h-4 bg-gray-200 rounded w-3/4"></div>
           <div className="h-4 bg-gray-200 rounded"></div>
@@ -60,17 +60,18 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
 
   if (!content) {
     return (
-      <div className="max-w-4xl mx-auto px-4 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <p className="text-gray-600">Content not found.</p>
       </div>
     );
   }
 
   return (
-    <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+    <article className="max-w-7xl mx-auto py-0">
       {/* Introduction */}
+      <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
       <div 
-        className="prose prose-lg max-w-none mb-12 text-gray-700 leading-relaxed"
+        className="prose prose-lg max-w-none mb-12 text-base sm:text-lg leading-relaxed text-gray-700"
         dangerouslySetInnerHTML={{ __html: content.introduction }}
       />
 
@@ -115,7 +116,7 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
 
           {/* Section Content */}
           <div
-            className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
+            className="prose prose-lg max-w-none text-base sm:text-lg leading-relaxed text-gray-700"
             dangerouslySetInnerHTML={{ __html: section.content }}
           />
         </section>
@@ -125,7 +126,7 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
       <div className="mt-16 pt-8 border-t-2 border-gray-200">
         <h2 className="text-3xl font-bold text-gray-900 mb-6">Conclusion</h2>
         <div
-          className="prose prose-lg max-w-none text-gray-700 leading-relaxed"
+          className="prose prose-lg max-w-none text-base sm:text-lg leading-relaxed text-gray-700"
           dangerouslySetInnerHTML={{ __html: content.conclusion }}
         />
       </div>
@@ -169,24 +170,6 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
           </div>
         </div>
       )}
-
-      {/* Share & Engagement */}
-      <div className="mt-16 pt-8 border-t-2 border-gray-200">
-        <div className="flex flex-wrap items-center justify-between gap-4">
-          <div>
-            <h3 className="text-lg font-bold text-gray-900 mb-2">Found this helpful?</h3>
-            <p className="text-gray-600">Share it with your network!</p>
-          </div>
-          <div className="flex gap-3">
-            <button className="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors font-medium">
-              Share on Twitter
-            </button>
-            <button className="px-4 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 transition-colors font-medium">
-              Share on LinkedIn
-            </button>
-          </div>
-        </div>
-      </div>
 
       {/* Custom Styles for Content */}
       <style jsx global>{`
