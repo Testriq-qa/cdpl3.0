@@ -12,7 +12,6 @@ import {
   Link as LinkIcon,
   Tag,
   Mail,
-  ImageOff,
   Share2,
   Copy,
 } from "lucide-react";
@@ -21,10 +20,10 @@ import type { Job } from "@/lib/jobsData";
 const formatDate = (iso?: string) =>
   iso
     ? new Date(iso).toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    })
     : "";
 
 type AnyJob = Job & {
@@ -53,32 +52,65 @@ export function JobsLiveJobsJobCardSection({
   const dateText = job.eventDate
     ? `Event: ${formatDate(job.eventDate)}`
     : job.postedOn
-    ? `Posted: ${formatDate(job.postedOn)}`
-    : "";
+      ? `Posted: ${formatDate(job.postedOn)}`
+      : "";
 
   const techFromText = (() => {
     const hay = [job.title, ...(job.highlights || []), ...(job.responsibilities || [])]
       .join(" ")
       .toLowerCase();
     const DICT = [
-      "jmeter","selenium","postman","restassured","rest assured","cypress","playwright","appium",
-      "java","python","javascript","typescript","sql","mysql","postgres","mongodb",
-      "jenkins","docker","kubernetes","aws","azure","gcp","react","node","next.js","ci/cd"
+      "jmeter",
+      "selenium",
+      "postman",
+      "restassured",
+      "rest assured",
+      "cypress",
+      "playwright",
+      "appium",
+      "java",
+      "python",
+      "javascript",
+      "typescript",
+      "sql",
+      "mysql",
+      "postgres",
+      "mongodb",
+      "jenkins",
+      "docker",
+      "kubernetes",
+      "aws",
+      "azure",
+      "gcp",
+      "react",
+      "node",
+      "next.js",
+      "ci/cd",
     ];
     const found = new Set<string>();
     for (const k of DICT) if (hay.includes(k)) found.add(k.replace(/\brest assured\b/, "Rest Assured"));
     const title = (s: string) =>
-      s.split(/[\s/]+/).map(w => (w.length <= 3 ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1))).join(" ");
-    return Array.from(found).map(t => t.replace("next.js", "Next.js")).map(title).slice(0, 12).sort();
+      s
+        .split(/[\s/]+/)
+        .map((w) => (w.length <= 3 ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1)))
+        .join(" ");
+    return Array.from(found)
+      .map((t) => t.replace("next.js", "Next.js"))
+      .map(title)
+      .slice(0, 12)
+      .sort();
   })();
 
-  const imageBadge =
-    job.type || job.mode || (job.eventDate ? formatDate(job.eventDate) : undefined);
+  // --- IMAGE HANDLING ---
+  // Only attempt to render an image if a bannerImage is explicitly provided.
+  const hasBanner = Boolean(job.bannerImage);
 
+  // Build candidate sources ONLY from bannerImage (no generic fallback),
+  // so if it fails, we won't render any image area or badge.
   const candidateSrcs = useMemo(() => {
+    if (!hasBanner) return [] as string[];
     const hasExt = (p?: string) => !!p && /\.(png|jpe?g|webp|gif|avif|svg)$/i.test(p);
     const EXT_ORDER_GENERIC = [".jpg", ".jpeg", ".png", ".webp"];
-    const EXT_ORDER_FALLBACK = [".png", ".jpg", ".jpeg", ".webp"];
 
     const expand = (base?: string, exts: string[] = EXT_ORDER_GENERIC) => {
       if (!base) return [] as string[];
@@ -86,15 +118,8 @@ export function JobsLiveJobsJobCardSection({
       return exts.map((e) => `${base}${e}`);
     };
 
-    const fallbackBase =
-      job.imageFallback || "/live-jobs_images/jobs_image/cdpl-no-job-image-bag-icon";
-
-    const arr = [
-      ...expand(job.bannerImage, EXT_ORDER_GENERIC),
-      ...expand(fallbackBase, EXT_ORDER_FALLBACK),
-    ];
-    return Array.from(new Set(arr));
-  }, [job.bannerImage, job.imageFallback]);
+    return expand(job.bannerImage);
+  }, [hasBanner, job.bannerImage]);
 
   const [imgIdx, setImgIdx] = useState(0);
   const [giveUp, setGiveUp] = useState(false);
@@ -106,18 +131,21 @@ export function JobsLiveJobsJobCardSection({
     else setGiveUp(true);
   };
 
+  const imageBadge =
+    job.type || job.mode || (job.eventDate ? formatDate(job.eventDate) : undefined);
+
   return (
     <article className="relative font-sans">
       <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
-        {/* IMAGE: above on small screens, right on md+; narrower on large screens */}
-        <aside
-          className="
-            order-1 md:order-2 md:self-start relative
-            w-full md:w-[300px] lg:w-[340px] xl:w-[380px]
-            md:shrink-0
-          "
-        >
-          {!giveUp && currentSrc ? (
+        {/* IMAGE — render ONLY if bannerImage exists AND successfully loads */}
+        {hasBanner && !giveUp && currentSrc && (
+          <aside
+            className="
+              order-1 md:order-2 md:self-start relative
+              w-full md:w-[300px] lg:w-[340px] xl:w-[380px]
+              md:shrink-0
+            "
+          >
             <Image
               key={currentSrc}
               src={currentSrc}
@@ -132,42 +160,39 @@ export function JobsLiveJobsJobCardSection({
                 if (!img?.naturalWidth) handleImgError();
               }}
             />
-          ) : (
-            <div className="flex h-56 w-full items-center justify-center rounded-2xl bg-slate-50 text-slate-400 sm:h-64">
-              <ImageOff className="h-8 w-8" />
-            </div>
-          )}
 
-          {imageBadge && (
-            <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-slate-200 backdrop-blur-sm">
-              <Tag className="h-3.5 w-3.5 opacity-70" />
-              <span className="truncate max-w-[240px] sm:max-w-[300px] md:max-w-[300px]">
-                {imageBadge}
-              </span>
-            </div>
-          )}
+            {/* Badge/label ONLY if image rendered */}
+            {imageBadge && (
+              <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-slate-200 backdrop-blur-sm">
+                <Tag className="h-3.5 w-3.5 opacity-70" />
+                <span className="truncate max-w-[240px] sm:max-w-[300px] md:max-w-[300px]">
+                  {imageBadge}
+                </span>
+              </div>
+            )}
 
-          <div className="mt-2 flex justify-end">
-            <button
-              onClick={() => onShare(job)}
-              className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300"
-              aria-label={`Share ${job.title}`}
-              title={isCopied ? "Link copied!" : "Share"}
-            >
-              {isCopied ? (
-                <>
-                  <Copy className="h-3.5 w-3.5" />
-                  Copied
-                </>
-              ) : (
-                <>
-                  <Share2 className="h-3.5 w-3.5" />
-                  Share
-                </>
-              )}
-            </button>
-          </div>
-        </aside>
+            <div className="mt-2 flex justify-end">
+              <button
+                onClick={() => onShare(job)}
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                aria-label={`Share ${job.title}`}
+                title={isCopied ? "Link copied!" : "Share"}
+              >
+                {isCopied ? (
+                  <>
+                    <Copy className="h-3.5 w-3.5" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="h-3.5 w-3.5" />
+                    Share
+                  </>
+                )}
+              </button>
+            </div>
+          </aside>
+        )}
 
         {/* MAIN CONTENT */}
         <div className="order-2 md:order-1 min-w-0 md:flex-1">
@@ -232,6 +257,7 @@ export function JobsLiveJobsJobCardSection({
             </div>
           </div>
 
+          {/* Tags / meta */}
           <div className="mt-3 flex flex-wrap gap-2">
             {job.tags?.map((t) => <Pill key={t}>{t}</Pill>)}
             {job.type && <Pill>{job.type}</Pill>}
@@ -248,6 +274,7 @@ export function JobsLiveJobsJobCardSection({
             )}
           </div>
 
+          {/* Highlights */}
           {!!job.highlights?.length && (
             <div className="mt-3">
               <h4 className="mb-1 text-sm font-semibold text-slate-900">What we’re looking for</h4>
@@ -261,6 +288,7 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
+          {/* Responsibilities */}
           {!!job.responsibilities?.length && (
             <div className="mt-4">
               <h4 className="mb-1 text-sm font-semibold text-slate-900">Roles & responsibilities</h4>
@@ -274,6 +302,7 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
+          {/* Tech stack (derived) */}
           {!!techFromText.length && (
             <div className="mt-4">
               <div className="mb-2 flex items-center gap-2">
@@ -293,6 +322,7 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
+          {/* Venue & schedule */}
           {(job.venue || job.eventDate || job.timeWindow || job.location) && (
             <div className="mt-5 border-t border-slate-100 pt-3">
               <h4 className="text-sm font-semibold text-slate-900">Venue & schedule</h4>
@@ -319,6 +349,7 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
+          {/* Contacts */}
           {Array.isArray(job.contacts) && job.contacts.length > 0 && (
             <div className="mt-5 border-t border-slate-100 pt-3">
               <h4 className="text-sm font-semibold text-slate-900">Contacts</h4>
@@ -332,6 +363,7 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
+          {/* Apply actions */}
           <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3">
             {job.applyEmail && (
               <a

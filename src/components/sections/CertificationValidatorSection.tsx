@@ -3,9 +3,23 @@
 import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
-import { CertificationPreviewSection } from "./CertificationPreviewSection";
 import { Certificate, getCertificateById } from "@/data/certificates/registry";
 import { CheckCircle2, AlertCircle, Link as LinkIcon, Copy } from "lucide-react";
+import dynamic from "next/dynamic";
+
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-8">
+      <p className="text-gray-500 dark:text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+/* Dynamic import of the named export */
+const CertificationPreviewSection = dynamic(
+  () => import("./CertificationPreviewSection").then((m) => m.CertificationPreviewSection),
+  { ssr: false, loading: () => <SectionLoader label="Loading preview..." /> }
+);
 
 export default function CertificationValidatorSection() {
   const [query, setQuery] = useState("");
@@ -69,8 +83,8 @@ export default function CertificationValidatorSection() {
     result && typeof window !== "undefined"
       ? `${window.location.origin}${pathname}?id=${encodeURIComponent(result.id)}`
       : result
-      ? `${pathname}?id=${encodeURIComponent(result.id)}`
-      : null;
+        ? `${pathname}?id=${encodeURIComponent(result.id)}`
+        : null;
 
   const copyShare = async () => {
     if (!shareUrl) return;

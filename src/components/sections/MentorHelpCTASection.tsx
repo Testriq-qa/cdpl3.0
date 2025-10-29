@@ -9,7 +9,7 @@ const BRAND = "#ff8c00";
  */
 export default function MentorHelpCTASection({
   title = "CDPL Mentorship: Learn from people who’ve shipped it",
-  subtitle = "1:1 guidance for AI/ML, Data Science, Full-Stack, and DevOps — resume reviews, project feedback, and interview prep to accelerate outcomes.",
+  subtitle = "1:1 guidance for AI/ML, Data Science, Full-Stack, and DevOps, resume reviews, project feedback, and interview prep to accelerate outcomes.",
   ctaText = "Get matched with a CDPL mentor",
   href = "#mentors-impact",
   bgImageSrc = "/images/cta-helping-hands.png",
@@ -177,7 +177,7 @@ export default function MentorHelpCTASection({
               <span>Real projects • Code reviews • Placement support</span>
             </div>
             <DotDivider />
-            <div>CDPL Mentorship — built in India, outcomes focused</div>
+            <div>CDPL Mentorship: built in India, outcomes focused</div>
           </div>
 
           {/* Decorative bottom glow */}
