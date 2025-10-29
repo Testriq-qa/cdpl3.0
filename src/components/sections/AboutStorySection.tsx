@@ -11,21 +11,7 @@ type Milestone = {
   bgColor: string;
   textColor: string;
 };
-
-type Tone = 
-   'blue' | 'red' | 'green';
-
-const PALETTE: Record<
-  Tone,
-  {
-    circleBg: string;
-    circleText: string;
-  }
-> = {
-  blue: { circleBg: "bg-blue-50", circleText: "text-blue-600" },
-  red: { circleBg: "bg-red-50", circleText: "text-red-600" },
-  green: { circleBg: "bg-green-50", circleText: "text-green-600" }
-}
+ 
 
 // Opaque, visible colors (no alpha fades)
 const ACCENT = "#6366f1";        // indigo-500
