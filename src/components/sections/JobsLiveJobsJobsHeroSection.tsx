@@ -16,7 +16,7 @@ type CDPLHeroProps = {
 };
 
 export default function JobsLiveJobsJobsHeroSection({
-  subtitle = "Verified nearby roles across QA Automation, Data Science, Full-Stack, and DevOps — posted by CDPL so students can apply faster.",
+  subtitle = "Verified nearby roles across QA Automation, Data Science, Full-Stack, and DevOps, posted by CDPL so students can apply faster.",
 }: CDPLHeroProps) {
   const jsonLd = useMemo(
     () => ({

@@ -37,14 +37,14 @@ const STORIES: Story[] = [
   { name: "Shrey Gupta", role: "Rendered Ideas · QA", text: "Portfolio reviews and mocks helped me convert quickly.", src: "/placements/Shrey Gupta.jpg" },
 ];
 
-/** Distinct, visible skins per card (base tint + subtle pattern) */
+/** Softer, eye-friendly skins (reduced alpha + wider spacing) */
 const CARD_SKINS: { tint: string; overlay: string }[] = [
-  { tint: "rgba(255,140,0,0.12)", overlay: "repeating-linear-gradient(45deg, rgba(255,140,0,.16) 0 2px, transparent 2px 6px)" }, // brand orange
-  { tint: "rgba(14,165,233,0.12)", overlay: "repeating-linear-gradient(-45deg, rgba(14,165,233,.14) 0 2px, transparent 2px 6px)" }, // sky
-  { tint: "rgba(157,123,255,0.12)", overlay: "repeating-linear-gradient(90deg, rgba(157,123,255,.14) 0 1px, transparent 1px 5px)" }, // violet
-  { tint: "rgba(16,185,129,0.12)", overlay: "repeating-linear-gradient(30deg, rgba(16,185,129,.14) 0 2px, transparent 2px 6px)" }, // emerald
-  { tint: "rgba(236,72,153,0.12)", overlay: "repeating-linear-gradient(135deg, rgba(236,72,153,.14) 0 2px, transparent 2px 7px)" }, // rose
-  { tint: "rgba(245,158,11,0.12)", overlay: "repeating-linear-gradient(60deg, rgba(245,158,11,.14) 0 2px, transparent 2px 8px)" }, // amber
+  { tint: "rgba(255,140,0,0.08)", overlay: "repeating-linear-gradient(45deg, rgba(255,140,0,.06) 0 1px, transparent 1px 16px)" }, // brand orange
+  { tint: "rgba(14,165,233,0.08)", overlay: "repeating-linear-gradient(-45deg, rgba(14,165,233,.06) 0 1px, transparent 1px 18px)" }, // sky
+  { tint: "rgba(157,123,255,0.08)", overlay: "repeating-linear-gradient(90deg, rgba(157,123,255,.06) 0 1px, transparent 1px 20px)" }, // violet
+  { tint: "rgba(16,185,129,0.08)", overlay: "repeating-linear-gradient(30deg, rgba(16,185,129,.06) 0 1px, transparent 1px 18px)" }, // emerald
+  { tint: "rgba(236,72,153,0.08)", overlay: "repeating-linear-gradient(135deg, rgba(236,72,153,.06) 0 1px, transparent 1px 20px)" }, // rose
+  { tint: "rgba(245,158,11,0.08)", overlay: "repeating-linear-gradient(60deg, rgba(245,158,11,.06) 0 1px, transparent 1px 18px)" }, // amber
 ];
 
 type Props = { contained?: boolean };
@@ -92,10 +92,14 @@ export default function PlacementsSuccessStoriesCarousel({ contained = false }: 
                 const skin = CARD_SKINS[i % CARD_SKINS.length];
                 return (
                   <article key={`${s.name}-${i}`} className={cardClasses}>
-                    {/* Base tint to ensure visible color */}
+                    {/* Base tint (softened) */}
                     <span aria-hidden className="absolute inset-0" style={{ backgroundColor: skin.tint }} />
-                    {/* Pattern overlay to add texture */}
-                    <span aria-hidden className="absolute inset-0 opacity-90" style={{ backgroundImage: skin.overlay }} />
+                    {/* Subtle pattern overlay (very low opacity) */}
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 opacity-20"
+                      style={{ backgroundImage: skin.overlay }}
+                    />
                     {/* Soft inner ring for polish */}
                     <span aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/5" />
 

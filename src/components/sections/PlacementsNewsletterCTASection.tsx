@@ -29,7 +29,7 @@ export default function PlacementsNewsletterCTASection({ contained = false }: Pr
                 <div
                     className={[
                         "rounded-3xl border border-gray-200/60 shadow-sm",
-                        "bg-[linear-gradient(135deg,#f8fbff_0%,#ffffff_55%,#f6f2ff_100%)]",
+                        "bg-white", // gradient removed
                         "p-6 sm:p-8",
                     ].join(" ")}
                 >
@@ -37,10 +37,9 @@ export default function PlacementsNewsletterCTASection({ contained = false }: Pr
                         {/* Copy */}
                         <div>
                             {/* Non-hero title scale */}
-                            <h3 className="text-xl sm:text-2xl font-bold tracking-tight text-slate-900">
-                                <span className="bg-gradient-to-r from-[#ff8c00] via-[#ffb558] to-[#9d7bff] bg-clip-text text-transparent">
-                                    Get Placement Updates
-                                </span>
+                            <h3 className="text-xl sm:text-2xl font-bold tracking-tight">
+                                <span className="text-[rgb(0,105,168)]">Get Placement </span>
+                                <span className="text-[rgb(255,140,0)]">Updates</span>
                             </h3>
                             {/* Non-hero body scale */}
                             <p className="mt-1 text-sm sm:text-base text-slate-700">

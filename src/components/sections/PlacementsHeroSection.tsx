@@ -118,7 +118,7 @@ export default function PlacementsHeroSection() {
       </div>
 
       {/* SINGLE CONTAINER (breadcrumb + hero) */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pt-10 pb-0 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-3">
           <ol className="flex items-center gap-2 text-sm text-slate-500">
@@ -187,7 +187,7 @@ export default function PlacementsHeroSection() {
               className="mt-4 mx-auto max-w-3xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg lg:mx-0"
             >
               We work closely with mentors and hiring partners to guide profiles, refine resumes,
-              and prep for interviews—so students move faster from training to{" "}
+              and prep for interviews, so students move faster from training to{" "}
               <span className="font-semibold text-slate-900">real offers</span>.
             </motion.p>
 
@@ -198,9 +198,9 @@ export default function PlacementsHeroSection() {
               transition={{ duration: 0.7, delay: 0.18 }}
               className="mt-5 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4"
             >
-              <div className="flex items-center gap-2 rounded-xl bg-slate-50 px-4 py-2 ring-1 ring-slate-200">
-                <BadgeCheck className="h-4 w-4 text-slate-700" />
-                <span className="text-sm text-slate-700">Verified outcomes</span>
+              <div className="flex items-center gap-2 rounded-xl bg-green-50 px-4 py-2 ring-1 ring-green-200">
+                <BadgeCheck className="h-4 w-4 text-green-700" />
+                <span className="text-sm text-green-700">Verified outcomes</span>
               </div>
               <div className="flex items-center gap-2 rounded-xl bg-sky-50 px-4 py-2 ring-1 ring-sky-200">
                 <GraduationCap className="h-4 w-4 text-sky-700" />
