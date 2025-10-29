@@ -67,7 +67,7 @@ export function JobsLiveJobsSubscribeCTASection() {
                 <strong className="text-slate-900">QA</strong>,{" "}
                 <strong className="text-slate-900">Automation</strong>,{" "}
                 <strong className="text-slate-900">Data</strong>, and{" "}
-                <strong className="text-slate-900">Engineering</strong> roles — only verified openings from CDPL.
+                <strong className="text-slate-900">Engineering</strong> roles, only verified openings from CDPL.
               </p>
 
               {/* links */}
