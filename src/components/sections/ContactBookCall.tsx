@@ -37,9 +37,14 @@ export function ContactBookCallSection() {
               </p>
 
               <div className="mt-5 flex flex-wrap items-center justify-center gap-2">
-                {["15–20 mins on Zoom/Phone","Free advisory call","Live mentor-led courses","Placement assistance"].map((t) => (
-                  <span key={t} className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
-                    {t}
+                {[
+                  {title: "15–20 mins on Zoom/Phone", bgColor: "bg-purple-50", textColor: "text-purple-500"},
+                  {title: "Free advisory call", bgColor: "bg-orange-50", textColor: "text-orange-500"},
+                  {title: "Live mentor-led courses", bgColor: "bg-indigo-50", textColor: "text-indigo-500"},
+                  {title: "Placement assistance", bgColor: "bg-emerald-50", textColor: "text-emerald-600"}
+                ].map((t) => (
+                  <span key={t.title} className={`rounded-full border border-slate-200 ${t.bgColor} px-3 py-1 text-xs font-medium ${t.textColor} shadow-sm`}>
+                    {t.title}
                   </span>
                 ))}
               </div>

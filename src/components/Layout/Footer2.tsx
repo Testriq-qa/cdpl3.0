@@ -33,12 +33,26 @@ const Footer: React.FC = () => {
               </h2>
 
               <div className="space-y-4 text-[15px] leading-relaxed">
-                <div className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 text-orange-500 mt-0.5" aria-hidden="true" />
-                  <Link className="hover:text-brand transition" href="https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D">
-                    Office #1, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park,
-                    Mira Road East, Mira Bhayandar, Maharashtra 401107
-                  </Link>
+
+                <div>
+                  <p className="font-bold">Head Office (<span className="text-brand">CDPL</span>)</p>
+                  <div className="flex items-start mt-1 gap-3">
+                    <MapPin className="h-5 w-5 text-orange-500 mt-0.5" aria-hidden="true" />
+                    <Link className="hover:text-brand transition" href="https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D">
+                      Office #1, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park,
+                      Mira Road East, Mira Bhayandar, Maharashtra 401107
+                    </Link>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-bold">Study Center <span className="text-red-800">MeghMehul Classes</span> (<span className="text-brand">Vasai</span>)</p>
+                  <div className="flex items-start mt-1 gap-3">
+                    <MapPin className="h-5 w-5 text-orange-500 mt-0.5" aria-hidden="true" />
+                    <Link className="hover:text-brand transition" href="https://maps.app.goo.gl/SACPou6JCdRZh5j98">
+                      Shop No 7, Laxmi Palace, Opposite Vidhyavardhini Degree Engineering College, Gurunanak Nagar, Vasai West, Mumbai, Maharashtra - 401202
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-3">
