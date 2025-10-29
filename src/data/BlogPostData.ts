@@ -79,122 +79,99 @@ export interface SidebarCategory {
 // ============================================================================
 
 export const AUTHORS: Record<string, Author> = {
-  "sarah-chen": {
-    id: "sarah-chen",
-    name: "Sarah Chen",
-    bio: "AI/ML expert with 10+ years of experience in machine learning and web development. Passionate about making AI accessible to developers.",
-    avatar: "/blog/authors/sarah-chen.jpg",
-    role: "AI/ML Engineer",
+  "shoeb-shaikh": {
+    id: "shoeb-shaikh",
+    name: "Shoeb Shaikh",
+    bio: "Shoeb Shaikh is a seasoned Software Testing and Data Science Expert and a Mentor with over 14 years of experience in the field. Specialist in designing and managing processes, and leading high-performing teams to deliver impactful results.",
+    avatar: "/blog/authors/shoeb-shaikh.png",
+    role: "Test Automation Engineer & Data Science Enthusiast",
     social: {
-      twitter: "https://twitter.com/sarahchen",
-      linkedin: "https://linkedin.com/in/sarahchen",
-      github: "https://github.com/sarahchen",
+      linkedin: "https://www.linkedin.com/in/ishaikhshoeb/",
     },
   },
-  "mike-rodriguez": {
-    id: "mike-rodriguez",
-    name: "Mike Rodriguez",
-    bio: "Full-stack developer specializing in modern web technologies. Creator of popular open-source CSS frameworks.",
-    avatar: "/blog/authors/mike-rodriguez.jpg",
-    role: "Full-Stack Developer",
+  "ashish-shetty": {
+    id: "ashish-shetty",
+    name: "Ashish Shetty",
+    bio: "Seasoned Business Intelligence and learning and development professional with over 11 years of experience empowering students and professionals to unlock career success through data-driven skills. Specializing in Power BI, Tableau, and Prompt Engineering, Ashish is known for delivering practical, high-impact workshops and training programs across academic and corporate sectors.",
+    avatar: "/blog/authors/ashish-shetty.png",
+    role: "Business Intelligence & Data Analytics Specialist",
     social: {
-      twitter: "https://twitter.com/mikerodriguez",
-      linkedin: "https://linkedin.com/in/mikerodriguez",
-      github: "https://github.com/mikerodriguez",
+
+      linkedin: "https://www.linkedin.com/in/profashishshetty/"
+
     },
   },
-  "emily-johnson": {
-    id: "emily-johnson",
-    name: "Emily Johnson",
-    bio: "React specialist and frontend architect. Core contributor to several popular React libraries and tools.",
-    avatar: "/blog/authors/emily-johnson.jpg",
-    role: "Frontend Architect",
+  "teshoo-rai": {
+    id: "teshoo-rai",
+    name: "Teshoo Rai",
+    bio: "A highly skilled Quality Analysis Engineer and Corporate Trainer, specialising in Software Development Life Cycle (SDLC) and Software Testing.",
+    avatar: "/blog/authors/teshoo-rai.png",
+    role: "Quality Analysis Engineer",
     social: {
-      twitter: "https://twitter.com/emilyjohnson",
-      linkedin: "https://linkedin.com/in/emilyjohnson",
-      github: "https://github.com/emilyjohnson",
+      linkedin: "linkedin.com/in/teshoo-rai-b56179237"
     },
   },
-  "david-kim": {
-    id: "david-kim",
-    name: "David Kim",
-    bio: "Backend architect with expertise in database optimization and distributed systems. Author of 'Scalable Backend Design'.",
-    avatar: "/blog/authors/david-kim.jpg",
-    role: "Backend Architect",
+  "vaibhav-kakade": {
+    id: "vaibhav-kakade",
+    name: "Vaibhav Kakade",
+    bio: "A Manual Tester in TESTRIQ QA LLP and also as Corporate Trainer with CDPL. With a focused career in training and development.",
+    avatar: "/blog/authors/vaibhav-kakade.png",
+    role: "Quality Analysis Engineer",
     social: {
-      twitter: "https://twitter.com/davidkim",
-      linkedin: "https://linkedin.com/in/davidkim",
+      linkedin: "https://www.linkedin.com/in/vaibhav-kakade-565bb6207/",
     },
   },
-  "alex-green": {
-    id: "alex-green",
-    name: "Alex Green",
-    bio: "AI researcher focusing on generative models and their practical applications in content creation.",
-    avatar: "/blog/authors/alex-green.jpg",
-    role: "AI Researcher",
+  "rehmat-shaikh": {
+    id: "rehmat-shaikh",
+    name: "Rehmat Shaikh",
+    bio: "A visionary data scientist dedicated to unlocking the potential of data to drive informed decision-making and spark innovation. With a strong foundation in Data Science.",
+    avatar: "/blog/authors/rehmat-shaikh.png",
+    role: "Data Science Trainer",
     social: {
-      linkedin: "https://linkedin.com/in/alexgreen",
-      github: "https://github.com/alexgreen",
+      linkedin: "https://www.linkedin.com/in/rehmat-shaikh-60a023324"
     },
   },
-  "sophia-lee": {
-    id: "sophia-lee",
-    name: "Sophia Lee",
-    bio: "UX designer and accessibility advocate. Helping companies build inclusive digital experiences.",
-    avatar: "/blog/authors/sophia-lee.jpg",
-    role: "UX/Accessibility Expert",
+  "cezzane-khan": {
+    id: "cezzane-khan",
+    name: "Cezzane Khan",
+    bio: "Cezzane Khan is a dedicated and innovative Data Science Trainer committed to empowering individuals and organizations.",
+    avatar: "/blog/authors/cezzane-khan.png",
+    role: "Data Science Trainer",
     social: {
-      twitter: "https://twitter.com/sophialee",
-      linkedin: "https://linkedin.com/in/sophialee",
-      website: "https://sophialee.design",
+      linkedin: "https://www.linkedin.com/in/khan-cezzane"
     },
   },
-  "chris-evans": {
-    id: "chris-evans",
-    name: "Chris Evans",
-    bio: "DevOps engineer specializing in Kubernetes and cloud-native technologies. CNCF ambassador.",
-    avatar: "/blog/authors/chris-evans.jpg",
-    role: "DevOps Engineer",
+  "prakash-mishra": {
+    id: "prakash-mishra",
+    name: "Prakash Mishra",
+    bio: "Drives software development initiatives, leading teams to build robust, scalable, and high-performance solutions with latest tools and technologies.",
+    avatar: "/blog/authors/prakash-mishra.png",
+    role: "Lead Software Engineer",
     social: {
-      twitter: "https://twitter.com/chrisevans",
-      linkedin: "https://linkedin.com/in/chrisevans",
-      github: "https://github.com/chrisevans",
+      linkedin: "https://www.linkedin.com/in/prakashmmishra/"
     },
   },
-  "jordan-smith": {
-    id: "jordan-smith",
-    name: "Jordan Smith",
-    bio: "Cloud architect with deep expertise in serverless architectures and AWS. AWS Community Builder.",
-    avatar: "/blog/authors/jordan-smith.jpg",
-    role: "Cloud Architect",
+  "jayesh-mistry": {
+    id: "jayesh-mistry",
+    name: "Jayesh Mistry",
+    bio: "A passionate and detail-oriented frontend developer with a strong knowledge in Web Development and strong foundation in HTML, CSS, JavaScript, and React.js.",
+    avatar: "/blog/authors/jayesh-mistry.png",
+    role: "Frontend Developer",
     social: {
-      twitter: "https://twitter.com/jordansmith",
-      linkedin: "https://linkedin.com/in/jordansmith",
+      linkedin: "https://www.linkedin.com/in/jayesh-mistry-53300235b/"
     },
   },
-  "patricia-wong": {
-    id: "patricia-wong",
-    name: "Patricia Wong",
-    bio: "Frontend architect passionate about state management and performance optimization in React applications.",
-    avatar: "/blog/authors/patricia-wong.jpg",
-    role: "Frontend Architect",
+  "sushma-pal": {
+    id: "sushma-pal",
+    name: "Sushma Pal",
+    bio: "SEO Analyst & Digital Marketing Specialist helping brands grow organically through smart strategy, data-driven insights, and powerful content.",
+    avatar: "/blog/authors/sushma-pal.png",
+    role: "SEO Analyst & Digital Marketing Specialist",
     social: {
-      twitter: "https://twitter.com/patriciawong",
-      github: "https://github.com/patriciawong",
-    },
+      linkedin: "https://www.linkedin.com/in/sushma-pal-a1557b1b1/"
+    }
   },
-  "robert-brown": {
-    id: "robert-brown",
-    name: "Robert Brown",
-    bio: "Security engineer specializing in API security and authentication. OWASP contributor.",
-    avatar: "/blog/authors/robert-brown.jpg",
-    role: "Security Engineer",
-    social: {
-      twitter: "https://twitter.com/robertbrown",
-      linkedin: "https://linkedin.com/in/robertbrown",
-      github: "https://github.com/robertbrown",
-    },
-  },
+  
 };
 
 // ============================================================================
@@ -222,56 +199,56 @@ export const CATEGORIES: Record<string, Category> = {
       text: "text-blue-700",
     },
   },
-  "react": {
-    id: "react",
-    name: "React",
-    slug: "react",
-    description: "Everything about React, from basics to advanced patterns and performance optimization",
-    color: {
-      bg: "bg-cyan-100",
-      text: "text-cyan-700",
-    },
-  },
-  "backend-development": {
-    id: "backend-development",
-    name: "Backend Development",
-    slug: "backend-development",
-    description: "Server-side development, databases, APIs, and backend architecture",
-    color: {
-      bg: "bg-green-100",
-      text: "text-green-700",
-    },
-  },
-  "ui-ux-design": {
-    id: "ui-ux-design",
-    name: "UI/UX Design",
-    slug: "ui-ux-design",
-    description: "User interface design, user experience, and accessibility best practices",
-    color: {
-      bg: "bg-pink-100",
-      text: "text-pink-700",
-    },
-  },
-  "devops": {
-    id: "devops",
-    name: "DevOps",
-    slug: "devops",
-    description: "DevOps practices, CI/CD, containerization, and infrastructure automation",
-    color: {
-      bg: "bg-amber-100",
-      text: "text-amber-700",
-    },
-  },
-  "cloud-computing": {
-    id: "cloud-computing",
-    name: "Cloud Computing",
-    slug: "cloud-computing",
-    description: "Cloud platforms, serverless architecture, and cloud-native development",
-    color: {
-      bg: "bg-indigo-100",
-      text: "text-indigo-700",
-    },
-  },
+  // "react": {
+  //   id: "react",
+  //   name: "React",
+  //   slug: "react",
+  //   description: "Everything about React, from basics to advanced patterns and performance optimization",
+  //   color: {
+  //     bg: "bg-cyan-100",
+  //     text: "text-cyan-700",
+  //   },
+  // },
+  // "backend-development": {
+  //   id: "backend-development",
+  //   name: "Backend Development",
+  //   slug: "backend-development",
+  //   description: "Server-side development, databases, APIs, and backend architecture",
+  //   color: {
+  //     bg: "bg-green-100",
+  //     text: "text-green-700",
+  //   },
+  // },
+  // "ui-ux-design": {
+  //   id: "ui-ux-design",
+  //   name: "UI/UX Design",
+  //   slug: "ui-ux-design",
+  //   description: "User interface design, user experience, and accessibility best practices",
+  //   color: {
+  //     bg: "bg-pink-100",
+  //     text: "text-pink-700",
+  //   },
+  // },
+  // "devops": {
+  //   id: "devops",
+  //   name: "DevOps",
+  //   slug: "devops",
+  //   description: "DevOps practices, CI/CD, containerization, and infrastructure automation",
+  //   color: {
+  //     bg: "bg-amber-100",
+  //     text: "text-amber-700",
+  //   },
+  // },
+  // "cloud-computing": {
+  //   id: "cloud-computing",
+  //   name: "Cloud Computing",
+  //   slug: "cloud-computing",
+  //   description: "Cloud platforms, serverless architecture, and cloud-native development",
+  //   color: {
+  //     bg: "bg-indigo-100",
+  //     text: "text-indigo-700",
+  //   },
+  // },
   "software-testing": {
     id: "software-testing",
     name: "Software Testing",
@@ -302,26 +279,26 @@ export const CATEGORIES: Record<string, Category> = {
       text: "text-rose-700",
     },
   },
-  "career-tips": {
-    id: "career-tips",
-    name: "Career Tips",
-    slug: "career-tips",
-    description: "Career advice, interview tips, and professional development",
-    color: {
-      bg: "bg-violet-100",
-      text: "text-violet-700",
-    },
-  },
-  "tutorials": {
-    id: "tutorials",
-    name: "Tutorials",
-    slug: "tutorials",
-    description: "Step-by-step guides and hands-on tutorials for developers",
-    color: {
-      bg: "bg-emerald-100",
-      text: "text-emerald-700",
-    },
-  },
+  // "career-tips": {
+  //   id: "career-tips",
+  //   name: "Career Tips",
+  //   slug: "career-tips",
+  //   description: "Career advice, interview tips, and professional development",
+  //   color: {
+  //     bg: "bg-violet-100",
+  //     text: "text-violet-700",
+  //   },
+  // },
+  // "tutorials": {
+  //   id: "tutorials",
+  //   name: "Tutorials",
+  //   slug: "tutorials",
+  //   description: "Step-by-step guides and hands-on tutorials for developers",
+  //   color: {
+  //     bg: "bg-emerald-100",
+  //     text: "text-emerald-700",
+  //   },
+  // },
 };
 
 // ============================================================================
@@ -339,8 +316,8 @@ export const BLOG_POSTS: BlogPost[] = [
     featuredImage: "/blog/featured/data-science-trends-2025.jpg",
     category: "Data Science",
     categoryId: "data-science",
-author: "Sarah Chen",
-    authorId: "sarah-chen",
+    author: "Shoeb Shaikh",
+    authorId: "shoeb-shaikh",
     publishDate: "2025-10-29",
     lastModified: "2025-10-29",
     readTime: "13 min read",
@@ -372,8 +349,8 @@ author: "Sarah Chen",
     featuredImage: "/blog/featured/testing.png",
     category: "Software Testing",
     categoryId: "software-testing",
-    author: "Sarah Chen",
-    authorId: "sarah-chen",
+    author: "Shoeb Shaikh",
+    authorId: "shoeb-shaikh",
     publishDate: "2025-01-15",
     lastModified: "2025-01-15",
     readTime: "14 min read",
@@ -503,55 +480,55 @@ export const POPULAR_POSTS: PopularPost[] = [
   },
 ];
 
-export const SIDEBAR_CATEGORIES: SidebarCategory[] = [
-  {
-    id: "1",
-    name: "AI & Machine Learning",
-    count: 2,
-    slug: "/blog/category/ai-ml",
-    color: "bg-purple-100 text-purple-700"
-  },
-  {
-    id: "2",
-    name: "Web Development",
-    count: 1,
-    slug: "/blog/category/web-development",
-    color: "bg-blue-100 text-blue-700"
-  },
-  {
-    id: "3",
-    name: "React",
-    count: 2,
-    slug: "/blog/category/react",
-    color: "bg-cyan-100 text-cyan-700"
-  },
-  {
-    id: "4",
-    name: "Backend Development",
-    count: 2,
-    slug: "/blog/category/backend-development",
-    color: "bg-green-100 text-green-700"
-  },
-  {
-    id: "5",
-    name: "UI/UX Design",
-    count: 1,
-    slug: "/blog/category/ui-ux-design",
-    color: "bg-pink-100 text-pink-700"
-  },
-  {
-    id: "6",
-    name: "DevOps",
-    count: 1,
-    slug: "/blog/category/devops",
-    color: "bg-amber-100 text-amber-700"
-  },
-  {
-    id: "7",
-    name: "Cloud Computing",
-    count: 1,
-    slug: "/blog/category/cloud-computing",
-    color: "bg-indigo-100 text-indigo-700"
-  },
-];
+// export const SIDEBAR_CATEGORIES: SidebarCategory[] = [
+//   {
+//     id: "1",
+//     name: "AI & Machine Learning",
+//     count: 2,
+//     slug: "/blog/category/ai-ml",
+//     color: "bg-purple-100 text-purple-700"
+//   },
+//   {
+//     id: "2",
+//     name: "Web Development",
+//     count: 1,
+//     slug: "/blog/category/web-development",
+//     color: "bg-blue-100 text-blue-700"
+//   },
+//   {
+//     id: "3",
+//     name: "React",
+//     count: 2,
+//     slug: "/blog/category/react",
+//     color: "bg-cyan-100 text-cyan-700"
+//   },
+//   {
+//     id: "4",
+//     name: "Backend Development",
+//     count: 2,
+//     slug: "/blog/category/backend-development",
+//     color: "bg-green-100 text-green-700"
+//   },
+//   {
+//     id: "5",
+//     name: "UI/UX Design",
+//     count: 1,
+//     slug: "/blog/category/ui-ux-design",
+//     color: "bg-pink-100 text-pink-700"
+//   },
+//   {
+//     id: "6",
+//     name: "DevOps",
+//     count: 1,
+//     slug: "/blog/category/devops",
+//     color: "bg-amber-100 text-amber-700"
+//   },
+//   {
+//     id: "7",
+//     name: "Cloud Computing",
+//     count: 1,
+//     slug: "/blog/category/cloud-computing",
+//     color: "bg-indigo-100 text-indigo-700"
+//   },
+// ];
 

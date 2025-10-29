@@ -38,9 +38,11 @@ const BlogHero = () => {
               </span>
 
               {/* Title - Optimized for readability */}
+              <Link href={`/blog/${featuredPost.slug}`}>
               <h1 className="text-3xl md:text-4xl font-bold text-gray-900 leading-tight">
                 {featuredPost.title}
               </h1>
+              </Link>
 
               {/* Description - Optimal reading color */}
               <p className="text-gray-700 text-lg leading-relaxed">
@@ -83,7 +85,7 @@ const BlogHero = () => {
                     alt={featuredPost.title}
                     width={600}
                     height={400}
-                    className="w-full h-full object-cover"
+                    className="w-full h-full object-contain bg-gray-100"
                     priority
                   />
                 ) : (
