@@ -163,7 +163,7 @@ export default function AboutStatsSection() {
         >
             {/* Header */}
             <div className="mb-6 text-center">
-                <p className="text-xs w-fit font-medium tracking-wider border border-slate-200 text-slate-700 rounded-full p-1 shadow-sm mx-auto">
+                <p className="text-xs w-fit font-medium tracking-wider border border-slate-200 text-slate-700 rounded-full p-2 shadow-sm mx-auto">
                     Outcomes that matter
                 </p>
                 <h2
@@ -202,13 +202,13 @@ export default function AboutStatsSection() {
 
                 {/* Top badges */}
                 <div className="my-5 flex flex-wrap items-center justify-center gap-5">
-                    <span className="rounded-full border border-red-500 bg-red-50 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm">
+                    <span className="rounded-full border border-red-500 bg-red-50 px-3 py-1 text-sm font-medium text-slate-700 shadow-sm">
                         Job-Oriented Curriculum
                     </span>
-                    <span className="rounded-full border border-blue-500 bg-blue-50 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm">
+                    <span className="rounded-full border border-blue-500 bg-blue-50 px-3 py-1 text-sm font-medium text-slate-700 shadow-sm">
                         Live Projects & Capstones
                     </span>
-                    <span className="rounded-full border border-yellow-500 bg-yellow-50 px-3 py-2 text-sm font-medium text-slate-700 shadow-sm">
+                    <span className="rounded-full border border-yellow-500 bg-yellow-50 px-3 py-1 text-sm font-medium text-slate-700 shadow-sm">
                         Mentor-Led Learning
                     </span>
                 </div>

@@ -26,7 +26,7 @@ type Tone =
   | "indigo";
 
 /** Static Tailwind class sets (kept literal so Tailwind includes them at build) */
-const PALETTE: Record<
+export const PALETTE: Record<
   Tone,
   {
     cardBg: string;       // e.g., bg-blue-50
@@ -135,7 +135,7 @@ export default function AboutWhyJoinUs() {
     >
       {/* Header */}
       <div className="mb-8 text-center">
-        <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm">
+        <p className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/90 px-3 py-2 text-[12px] font-medium text-slate-700 shadow-sm">
           <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
           Future-Ready EdTech • Job-Oriented
         </p>

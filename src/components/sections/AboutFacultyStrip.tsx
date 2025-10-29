@@ -104,7 +104,7 @@ export default function AboutFacultyStrip({
       <header className="mb-8 text-center">
 
 
-        <span className="inline-flex items-center gap-2 mb-2 rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm">
+        <span className="inline-flex items-center gap-2 mb-2 rounded-full border border-slate-300 bg-white px-3 py-2 text-[12px] font-medium text-slate-700 shadow-sm">
           <Sparkles className="h-4 w-4" style={{ color: brand }} />
           Industry-Aligned Mentors
         </span>

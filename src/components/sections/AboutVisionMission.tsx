@@ -8,6 +8,7 @@ type Pillar = {
   title: string;
   body: string;
   seo: string[];
+  bgColor: string;
 };
 
 type Props = {
@@ -21,24 +22,29 @@ const PILLARS: Pillar[] = [
     body:
       "Mentor-led, collaborative learning that pairs real-world practice with constructive feedback to build confidence and capability.",
     seo: ["mentor-led learning", "peer collaboration"],
+    bgColor: "bg-blue-50",
+
   },
   {
     title: "Readiness",
     body:
       "Job-ready training with live projects, interview preparation, and portfolio building aligned to hiring needs.",
     seo: ["job-ready skills", "interview preparation"],
+    bgColor: "bg-red-50",
   },
   {
     title: "Innovation",
     body:
       "Continuously updated content and tools—Manual & Automation Testing, API Testing, Data, AI/ML—reflecting industry workflows.",
     seo: ["industry tools", "modern workflows"],
+    bgColor: "bg-purple-50",
   },
   {
     title: "Outcomes",
     body:
       "Placement-focused guidance, hiring partner referrals, and a clear path from practice to offers for high-growth roles.",
     seo: ["career outcomes", "hiring partners"],
+    bgColor: "bg-green-50",
   },
 ];
 
@@ -58,7 +64,7 @@ export default function AboutMissionVision({
       {/* Header */}
       <header className="mx-auto max-w-5xl text-center">
         <span
-          className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm"
+          className="inline-flex items-center gap-2 rounded-full border bg-white px-3 py-2 text-[12px] font-medium text-slate-700 shadow-sm"
           style={{ borderColor: "rgba(15,23,42,0.12)" }}
         >
           <Sparkles className="h-3.5 w-3.5" style={{ color: brand }} />
@@ -163,12 +169,12 @@ export default function AboutMissionVision({
 
       {/* Pillars */}
       <div className="mt-10">
-        <h3 className="text-xl font-bold">Our Pillars</h3>
+        <h3 className="text-xl text-blue-500 font-bold">Our Pillars</h3>
         <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
           {PILLARS.map((p) => (
             <div
               key={p.title}
-              className="rounded-xl border bg-white p-5 shadow-sm"
+              className={`rounded-xl border p-5 shadow-sm ${p.bgColor}`}
               style={{ borderColor: "rgba(15,23,42,0.12)" }}
             >
               <h4 className="text-lg font-bold">{p.title}</h4>
@@ -188,19 +194,19 @@ export default function AboutMissionVision({
         <h3 className="text-sm font-semibold">Core Values</h3>
         <div className="mt-3 flex flex-wrap gap-2">
           {[
-            "Industry-aligned curriculum",
-            "Live projects & capstones",
-            "Mentor feedback loops",
-            "Ethics & quality",
-            "Lifelong learning",
-            "Inclusive community",
+            { value: "Industry-aligned curriculum", bgcolor: "bg-blue-50", textColor: "text-blue-500" },
+            { value: "Live projects & capstones", bgcolor: "bg-red-50", textColor: "text-red-500" },
+            { value: "Mentor feedback loops", bgcolor: "bg-green-50", textColor: "text-green-500" },
+            { value: "Ethics & quality", bgcolor: "bg-yellow-50", textColor: "text-yellow-500" },
+            { value: "Lifelong learning", bgcolor: "bg-pink-50", textColor: "text-pink-500" },
+            { value: "Inclusive community", bgcolor: "bg-purple-50", textColor: "text-purple-500" },
           ].map((v) => (
             <span
-              key={v}
-              className="rounded-full border bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm"
+              key={v.value}
+              className={`rounded-full border ${v.bgcolor} px-3 py-1 text-xs font-medium ${v.textColor} shadow-sm`}
               style={{ borderColor: "rgba(15,23,42,0.12)" }}
             >
-              {v}
+              {v.value}
             </span>
           ))}
         </div>

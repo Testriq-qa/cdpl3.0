@@ -66,7 +66,7 @@ export default function AboutHeroSection() {
                 {/* LEFT — first on all viewports */}
                 <div className="order-1 lg:order-1">
                     <motion.div {...fadeUp}>
-                        <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur dark:border-slate-200/60 dark:bg-white/85 sm:text-xs">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur dark:border-slate-200/60 dark:bg-white/85 sm:text-xs">
                             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                             Future-Ready EdTech
                         </span>
@@ -153,18 +153,7 @@ export default function AboutHeroSection() {
                         <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 text-slate-800 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
                             <ShieldCheck className="h-4 w-4 text-purple-700" aria-hidden="true" />
                             <span className="font-semibold text-purple-700">Placement Assistance</span>
-                        </div>
-                        <div className="inline-flex flex-wrap items-center gap-2 text-slate-700">
-                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
-                                10k+ Learners
-                            </span>
-                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
-                                Job-Ready Skills
-                            </span>
-                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
-                                Mentor-Led
-                            </span>
-                        </div>
+                        </div>                        
                     </motion.div>
                 </div>
 
