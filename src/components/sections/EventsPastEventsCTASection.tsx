@@ -29,7 +29,6 @@ export default function EventsPastEventsCTASection({
     { label: "Reporting & outcomes", sub: "Pre/post assessments with skill deltas" },
   ],
   badges = ["On-site", "Virtual", "Hybrid"],
-  children,
 }: PropsWithChildren<{
   title?: string;
   subtitle?: string;
@@ -116,9 +115,6 @@ export default function EventsPastEventsCTASection({
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                   </a>
                 </div>
-
-                {/* Slot for external CTA button */}
-                {children ? <div className="mt-4">{children}</div> : null}
               </div>
 
               {/* Right column */}
