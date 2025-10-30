@@ -329,7 +329,6 @@ export default function ComparisonSection({
         {showSchema && (
           <script
             type="application/ld+json"
-            // @ts-ignore - safe JSON string
             dangerouslySetInnerHTML={{ __html: schema }}
           />
         )}

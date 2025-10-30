@@ -1,3 +1,8 @@
+// app/manual-software-testing/page.tsx
+"use client";
+
+import StickyNav from "@/components/manual-testing-course/StickyNav";
+
 import CareerSection from "@/components/manual-testing-course/CareerSection";
 import ComparisonSection from "@/components/manual-testing-course/ComparisonSection";
 import CurriculumSection from "@/components/manual-testing-course/CurriculumSection";
@@ -14,19 +19,27 @@ import WhyLearnSection from "@/components/manual-testing-course/WhyLearnSection"
 
 export default function ContactPage() {
   return (
-    <main className="relative min-h-[220vh]">
+    <main className="relative">
+      {/* HERO (no id) */}
       <HeroManualTesting />
-      <WhyLearnSection />
-      <CurriculumSection />
-      <ToolsSection />
-      <ProjectsSection />
-      <LearningPath />
-      <InstructorSection />
-      <CareerSection />
-      <TrustSection />
-      <ComparisonSection />
-      <OtherCoursesSection />
-      <FaqSection />
+
+      {/* Sticky nav must appear right after hero */}
+      <div className="sticky top-20 z-20">
+        <StickyNav />
+      </div>
+
+      {/* Ensure each subsequent section wrapper has the correct id */}
+      <section id="why-learn"><WhyLearnSection /></section>
+      <section id="curriculum"><CurriculumSection /></section>
+      <section id="tools"><ToolsSection /></section>
+      <section id="projects"><ProjectsSection /></section>
+      <section id="learning-path"><LearningPath /></section>
+      <section id="instructor"><InstructorSection /></section>
+      <section id="career"><CareerSection /></section>
+      <section id="trust"><TrustSection /></section>
+      <section id="comparison"><ComparisonSection /></section>
+      <section id="other-courses"><OtherCoursesSection /></section>
+      <section id="faq"><FaqSection /></section>
     </main>
   );
 }

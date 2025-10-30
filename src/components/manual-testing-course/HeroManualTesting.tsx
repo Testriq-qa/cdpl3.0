@@ -12,11 +12,19 @@ import {
     ShieldCheck,
     PlayCircle,
     Sparkles,
+    Home,
 } from "lucide-react";
 import type { ReactNode, ReactElement } from "react";
 import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
+
+const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "software-testing" },
+    { label: "Manual Testing", href: "/about-us" },
+]
+
 
 export default function HeroManualTesting() {
     return (
@@ -28,10 +36,28 @@ export default function HeroManualTesting() {
                 <div className="absolute bottom-12 right-6 h-28 w-28 rounded-2xl bg-emerald-50 border border-emerald-100 shadow-sm" />
             </div>
 
-            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-14 md:py-18 lg:py-22">
+            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 md:py-12">
+
+                {/* Breadcrumbs for SEO & UX */}
+                <nav aria-label="Breadcrumb" className="mb-6">
+                    <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                        {breadcrumbs.map((c, i) => (
+                            <li key={i} className="flex items-center gap-2">
+                                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                                <a
+                                    href={c.href}
+                                    className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                                >
+                                    {c.label}
+                                </a>
+                            </li>
+                        ))}
+                    </ol>
+                </nav>
+
                 <div className="grid items-center gap-10 lg:gap-16 lg:grid-cols-[1.05fr_.95fr]">
                     {/* LEFT */}
-                    <div>
+                    <div className="-mt-40">
                         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
                             <Sparkles className="h-4 w-4 text-amber-500" />
                             <span>ISTQB Foundation Aligned • Job-Oriented</span>
@@ -69,7 +95,7 @@ export default function HeroManualTesting() {
                         <div className="mt-8 flex flex-col sm:flex-row gap-3">
                             <Link
                                 href="#apply"
-                                className="group inline-flex items-center justify-center rounded-xl bg-indigo-700 px-7 py-4 text-base font-bold text-white shadow-md transition-transform hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                                className="group inline-flex items-center justify-center rounded-xl bg-indigo-700 px-3 py-4 text-base font-bold text-white shadow-md transition-transform hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                                 aria-label="Enroll in Manual Testing Course"
                             >
                                 Enroll Now
@@ -78,7 +104,7 @@ export default function HeroManualTesting() {
 
                             <Link
                                 href="#syllabus"
-                                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-7 py-4 text-base font-semibold text-slate-900 shadow-sm transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
+                                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-2 py-4 text-base font-semibold text-slate-900 shadow-sm transition hover:shadow-md hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
                                 aria-label="Download Manual Testing syllabus"
                             >
                                 <Download className="mr-2 h-5 w-5 text-slate-700" />
@@ -87,7 +113,7 @@ export default function HeroManualTesting() {
 
                             <Link
                                 href="#demo"
-                                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-slate-900 px-6 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 sm:ml-1"
+                                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-slate-900 px-3 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-black hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 sm:ml-1"
                                 aria-label="Book a free demo class"
                             >
                                 <PlayCircle className="mr-2 h-5 w-5" />
@@ -124,112 +150,120 @@ export default function HeroManualTesting() {
 
                     {/* RIGHT */}
                     <div className="relative">
-                        <div className="rounded-3xl border border-slate-200 bg-white p-6 shadow-xl md:p-8">
-                            <div className="mb-6 flex items-center justify-between">
-                                <h3 className="text-2xl md:text-3xl font-bold text-slate-900">Course Snapshot</h3>
-                                <Award className="h-8 w-8 text-amber-500" />
-                            </div>
-
-                            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                                <SnapshotItem
-                                    color="bg-sky-50 text-sky-700"
-                                    icon={<Users className="h-6 w-6 text-sky-700" />}
-                                    label="Students Placed"
-                                    value="500+"
-                                />
-                                <SnapshotItem
-                                    color="bg-indigo-50 text-indigo-700"
-                                    icon={<Clock className="h-6 w-6 text-indigo-700" />}
-                                    label="Training Hours"
-                                    value="100+"
-                                />
-                                <SnapshotItem
-                                    color="bg-emerald-50 text-emerald-700"
-                                    icon={<BriefcaseBusiness className="h-6 w-6 text-emerald-700" />}
-                                    label="Real Projects"
-                                    value="5"
-                                />
-                                <SnapshotItem
-                                    color="bg-amber-50 text-amber-700"
-                                    icon={<GraduationCap className="h-6 w-6 text-amber-700" />}
-                                    label="ISTQB Included"
-                                    value="Yes"
-                                />
-                                <SnapshotItem
-                                    color="bg-rose-50 text-rose-700"
-                                    icon={<Globe2 className="h-6 w-6 text-rose-700" />}
-                                    label="Learning Access"
-                                    value="Lifetime"
-                                />
-                                <SnapshotItem
-                                    color="bg-violet-50 text-violet-700"
-                                    icon={<ShieldCheck className="h-6 w-6 text-violet-700" />}
-                                    label="Placement Support"
-                                    value="100%"
-                                />
-                            </div>
-
-                            {/* Next Batch */}
-                            <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
-                                <div className="flex items-center justify-between">
-                                    <div>
-                                        <p className="text-sm text-slate-600">Next Batch</p>
-                                        <p className="text-lg font-bold text-slate-900">Nov 15, 2025</p>
-                                    </div>
-                                    <div className="text-right">
-                                        <p className="text-sm text-slate-600">Seats Left</p>
-                                        <p className="text-lg font-bold text-rose-700">Only 8</p>
-                                    </div>
+                        <div className="rounded-3xl flex flex-col-reverse gap-5 border border-slate-200 bg-white p-6 shadow-xl md:p-8">
+                            <div className="border border-slate-300 p-5 shadow-md shadow-purple-300 rounded-2xl">
+                                <div className="mb-6 flex items-center justify-between">
+                                    <h3 className="text-2xl md:text-3xl font-bold text-slate-900">Course Snapshot</h3>
+                                    <Award className="h-8 w-8 text-amber-500" />
                                 </div>
-                            </div>
 
-                            {/* Lead Form */}
-                            <form id="apply" className="mt-6 space-y-3" onSubmit={(e) => e.preventDefault()} aria-label="Apply for Manual Testing course">
-                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                                    <Field label="Full Name">
-                                        <input
-                                            type="text"
-                                            required
-                                            placeholder="Enter your name"
-                                            className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-600"
-                                        />
-                                    </Field>
-                                    <Field label="Mobile Number">
-                                        <input
-                                            type="tel"
-                                            required
-                                            placeholder="+91-XXXXXXXXXX"
-                                            className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-emerald-600"
-                                        />
-                                    </Field>
-                                </div>
-                                <Field label="Email">
-                                    <input
-                                        type="email"
-                                        required
-                                        placeholder="you@example.com"
-                                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-sky-600"
+                                <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                                    <SnapshotItem
+                                        color="bg-sky-50 text-sky-700"
+                                        icon={<Users className="h-6 w-6 text-sky-700" />}
+                                        label="Students Placed"
+                                        value="500+"
                                     />
-                                </Field>
+                                    <SnapshotItem
+                                        color="bg-indigo-50 text-indigo-700"
+                                        icon={<Clock className="h-6 w-6 text-indigo-700" />}
+                                        label="Training Hours"
+                                        value="100+"
+                                    />
+                                    <SnapshotItem
+                                        color="bg-emerald-50 text-emerald-700"
+                                        icon={<BriefcaseBusiness className="h-6 w-6 text-emerald-700" />}
+                                        label="Real Projects"
+                                        value="5"
+                                    />
+                                    <SnapshotItem
+                                        color="bg-amber-50 text-amber-700"
+                                        icon={<GraduationCap className="h-6 w-6 text-amber-700" />}
+                                        label="ISTQB Included"
+                                        value="Yes"
+                                    />
+                                    <SnapshotItem
+                                        color="bg-rose-50 text-rose-700"
+                                        icon={<Globe2 className="h-6 w-6 text-rose-700" />}
+                                        label="Learning Access"
+                                        value="Lifetime"
+                                    />
+                                    <SnapshotItem
+                                        color="bg-violet-50 text-violet-700"
+                                        icon={<ShieldCheck className="h-6 w-6 text-violet-700" />}
+                                        label="Placement Support"
+                                        value="100%"
+                                    />
+                                </div>
 
-                                <button
-                                    type="submit"
-                                    className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
-                                >
-                                    Get Call Back
-                                    <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-                                </button>
-                                <p className="mt-2 text-center text-xs text-slate-500">
-                                    By submitting, you agree to our{" "}
-                                    <Link href="/terms" className="underline underline-offset-2 text-slate-700">
-                                        Terms
-                                    </Link>{" "}
-                                    and{" "}
-                                    <Link href="/privacy" className="underline underline-offset-2 text-slate-700">
-                                        Privacy Policy
-                                    </Link>.
-                                </p>
-                            </form>
+                                {/* Next Batch */}
+                                <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-4">
+                                    <div className="flex items-center justify-between">
+                                        <div>
+                                            <p className="text-sm text-slate-600">Next Batch</p>
+                                            <p className="text-lg font-bold text-slate-900">Nov 15, 2025</p>
+                                        </div>
+                                        <div className="text-right">
+                                            <p className="text-sm text-slate-600">Seats Left</p>
+                                            <p className="text-lg font-bold text-rose-700">Only 8</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div className="border border-slate-300 p-5 shadow-md shadow-purple-300 rounded-2xl">
+                                <h2 className="text-slate-800 text-2xl font-bold">Start Your <span className="text-brand">QA</span> Journey</h2>
+                                {/* Lead Form — uses server action, no onSubmit */}
+                                <form id="apply" className="mt-6 space-y-3" aria-label="Apply for Manual Testing course">
+                                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                        <Field label="Full Name">
+                                            <input
+                                                type="text"
+                                                name="fullName"
+                                                required
+                                                placeholder="Enter your name"
+                                                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-600"
+                                            />
+                                        </Field>
+                                        <Field label="Mobile Number">
+                                            <input
+                                                type="tel"
+                                                name="phone"
+                                                required
+                                                placeholder="+91-XXXXXXXXXX"
+                                                className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-emerald-600"
+                                            />
+                                        </Field>
+                                    </div>
+                                    <Field label="Email">
+                                        <input
+                                            type="email"
+                                            name="email"
+                                            required
+                                            placeholder="you@example.com"
+                                            className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-sky-600"
+                                        />
+                                    </Field>
+
+                                    <button
+                                        type="submit"
+                                        className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+                                    >
+                                        Get Call Back
+                                        <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                                    </button>
+                                    <p className="mt-2 text-center text-xs text-slate-500">
+                                        By submitting, you agree to our{" "}
+                                        <Link href="/terms" className="underline underline-offset-2 text-slate-700">
+                                            Terms
+                                        </Link>{" "}
+                                        and{" "}
+                                        <Link href="/privacy" className="underline underline-offset-2 text-slate-700">
+                                            Privacy Policy
+                                        </Link>.
+                                    </p>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>

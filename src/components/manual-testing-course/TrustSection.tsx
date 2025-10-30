@@ -1,5 +1,5 @@
 
-import { GraduationCap, Users2, Star, BadgeCheck, Building2, Briefcase, Award, ShieldCheck, Clock, Globe2, BookOpenCheck } from "lucide-react";
+import { Users2, Star, Building2, Briefcase, Award, ShieldCheck, Clock, BookOpenCheck } from "lucide-react";
 import Image from "next/image";
 import React from "react";
 

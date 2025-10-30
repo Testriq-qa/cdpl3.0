@@ -2,11 +2,13 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { CheckCircle2, Clock, BookOpen, Target, Sparkles, ChevronDown, Download, ShieldCheck, Code2, NotebookPen, FlaskConical, Bug, Workflow, Layers, Trophy, Building2, Brain, Pin } from "lucide-react";
+import { CheckCircle2, Clock, BookOpen, Target, Sparkles, ChevronDown, Download, ShieldCheck, Code2, NotebookPen, FlaskConical, Bug, Layers, Trophy, Brain, Pin } from "lucide-react";
 
 /* ---------- Token: small color map so cards feel lively but not loud ---------- */
 const ACCENTS = ["indigo", "cyan", "emerald", "amber", "rose", "violet"] as const;
 type Accent = typeof ACCENTS[number];
+
+void ACCENTS;
 
 type Module = {
     id: string;

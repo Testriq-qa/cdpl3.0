@@ -402,7 +402,6 @@ export default function OtherCoursesSection() {
       {/* JSON-LD for SEO Rich Results */}
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(itemListJson),
         }}

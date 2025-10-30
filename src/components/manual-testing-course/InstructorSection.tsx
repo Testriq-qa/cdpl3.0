@@ -1,6 +1,6 @@
 "use client";
 
-import { CheckCircle2, Trophy, Users, Building2, BookOpenCheck, ShieldCheck, Sparkles, Video, Clock, Award, ThumbsUp, Quote } from "lucide-react";
+import { CheckCircle2, Users, Building2, BookOpenCheck, ShieldCheck, Sparkles, Video, Clock, Award, ThumbsUp, Quote } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { useMemo } from "react";
@@ -129,7 +129,6 @@ export default function InstructorSection() {
     >
       <script
         type="application/ld+json"
-        // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

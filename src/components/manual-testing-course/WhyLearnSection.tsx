@@ -26,15 +26,15 @@ type BenefitCardProps = {
 
 const accentStyles: Record<NonNullable<BenefitCardProps["accent"]>, string> = {
     indigo:
-        "ring-indigo-200 bg-indigo-50 text-indigo-700 group-hover:ring-indigo-300",
+        "ring-indigo-200 bg-indigo-700",
     emerald:
-        "ring-emerald-200 bg-emerald-50 text-emerald-700 group-hover:ring-emerald-300",
+        "ring-emerald-200 bg-emerald-700",
     amber:
-        "ring-amber-200 bg-amber-50 text-amber-700 group-hover:ring-amber-300",
-    rose: "ring-rose-200 bg-rose-50 text-rose-700 group-hover:ring-rose-300",
-    sky: "ring-sky-200 bg-sky-50 text-sky-700 group-hover:ring-sky-300",
+        "ring-amber-200 bg-amber-700",
+    rose: "ring-rose-200 bg-rose-700",
+    sky: "ring-sky-200 bg-sky-700",
     violet:
-        "ring-violet-200 bg-violet-50 text-violet-700 group-hover:ring-violet-300",
+        "ring-violet-200 bg-violet-700",
 };
 
 function BenefitCard({
@@ -50,7 +50,7 @@ function BenefitCard({
             role="listitem"
         >
             <div
-                className={`inline-flex size-12 items-center justify-center rounded-xl ring-1 ${accentStyles[accent]} transition-colors`}
+                className={`inline-flex w-12 h-12 text-white items-center justify-center rounded-xl ring-1 ${accentStyles[accent]} transition-colors`}
                 aria-hidden="true"
             >
                 {icon}
@@ -75,22 +75,22 @@ function BenefitCard({
 export default function WhyLearnSection() {
     return (
         <section
-            className="py-20 bg-gradient-to-b from-white to-indigo-50"
+            className="py-10 bg-gradient-to-b from-white to-indigo-50"
             id="why-learn"
             aria-labelledby="why-learn-title"
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-14">
-                    <p className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-3 py-1 text-xs font-medium text-indigo-700">
+                    <p className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-3 py-2 text-[13px] font-medium text-indigo-700">
                         <Shield className="h-4 w-4" />
                         Industry-aligned QA career path
                     </p>
                     <h2
                         id="why-learn-title"
-                        className="mt-4 text-4xl md:text-5xl font-bold text-gray-900"
+                        className="mt-4 text-4xl font-bold text-gray-900"
                     >
-                        Why Manual Testing in 2025?
+                        Why <span className="bg-gradient-to-br from-cyan-500 to-blue-600 bg-clip-text text-transparent">Manual Testing</span> in 2025?
                     </h2>
                     <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                         The foundation of <strong>software quality assurance</strong> — high
@@ -298,7 +298,6 @@ export default function WhyLearnSection() {
             {/* JSON-LD FAQ for SEO (rich results) */}
             <script
                 type="application/ld+json"
-                // eslint-disable-next-line react/no-danger
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify({
                         "@context": "https://schema.org",
