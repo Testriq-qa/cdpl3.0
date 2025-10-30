@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
                     alt="MSME"
                     width={120}
                     height={120}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
                 <div className="w-32 flex justify-center">
@@ -105,7 +105,7 @@ const Footer: React.FC = () => {
                     alt="Skill India"
                     width={130}
                     height={130}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
                 <div className="w-32 flex justify-center">
@@ -114,7 +114,7 @@ const Footer: React.FC = () => {
                     alt="Trustpilot"
                     width={150}
                     height={150}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
                 <div className="w-32 flex justify-center">
@@ -123,7 +123,7 @@ const Footer: React.FC = () => {
                     alt="ISO 27001 Certified"
                     width={130}
                     height={130}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
                 <div className="w-32 flex justify-center">
@@ -132,7 +132,7 @@ const Footer: React.FC = () => {
                     alt="ISO 9001 Certified"
                     width={130}
                     height={130}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
 
@@ -181,10 +181,12 @@ const Footer: React.FC = () => {
               <p className="text-xs md:text-sm text-slate-600 text-center md:text-left">
                 © {new Date().getFullYear()} Cinute Digital Pvt. Ltd. — All Rights Reserved.
               </p>
-              <div className="flex items-center gap-2 text-[11px] text-slate-500">
-                <span className="rounded-full bg-red-100 text-red-800 px-2.5 py-2">Quality Training</span>
-                <span className="rounded-full bg-green-100 text-green-800 px-2.5 py-2">Job Assistance</span>
-                <span className="rounded-full bg-blue-100 text-blue-800 px-2.5 py-2">Mentor Support</span>
+              {/* Powered By */}
+              <div className="flex gap-4 space-y-4">
+                <h3 className="text-xl font-semibold text-orange-400">Powered By</h3>
+                <Link href="https://www.testriq.com/" className="text-gray-300 hover:text-blue-400 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  <Image src={'/images/Testriq-Logo-1.webp'} alt='Testriq_logo' width={100} height={100} />
+                </Link>
               </div>
             </div>
           </div>
