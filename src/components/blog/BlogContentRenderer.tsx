@@ -101,14 +101,14 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
             {section.title}
           </h2>
           
-          {/* Section Image - UPDATED: aspect-[2/1] with object-contain */}
+          {/* Section Image - UPDATED: Changed to object-cover to fill container */}
           {section.image && (
-            <div className="relative w-full aspect-[2/1] mb-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl overflow-hidden shadow-lg">
+            <div className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] mb-8 rounded-xl overflow-hidden shadow-lg">
               <Image
                 src={section.image}
                 alt={section.title}
                 fill
-                className="object-contain"
+                className="object-cover"
                 sizes="(max-width: 768px) 100vw, 1200px"
               />
             </div>
