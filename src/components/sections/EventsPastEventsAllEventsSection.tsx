@@ -1,3 +1,4 @@
+// src/components/sections/EventsPastEventsAllEventsSection.tsx
 "use client";
 
 import Link from "next/link";
@@ -37,7 +38,7 @@ export default function EventsPastEventsAllEventsSection({
   cardMinHClass?: string;
 }) {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
       {events.map((event) => {
         const cs = CATEGORY_STYLES[event.category] ?? FALLBACK;
         return (

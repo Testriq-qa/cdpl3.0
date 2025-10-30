@@ -26,7 +26,7 @@ export default function EventsPastEventsHeroSection() {
       </div>
 
       {/* container (relative) so floating lanterns respect max width */}
-      <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         {/* decorative floating lanterns (bounded by max-w-7xl) */}
         <div
           className="pointer-events-none absolute inset-0 z-0 hidden sm:block"
@@ -87,7 +87,7 @@ export default function EventsPastEventsHeroSection() {
         </div>
 
         {/* ✅ Breadcrumb (kept) */}
-        <nav aria-label="Breadcrumb" className="relative z-10 mb-6">
+        <nav aria-label="Breadcrumb" className="relative z-10 mb-4">
           <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
             <li className="flex items-center gap-2">
               <Home className="h-4 w-4" />
@@ -105,7 +105,7 @@ export default function EventsPastEventsHeroSection() {
         </nav>
 
         {/* split */}
-        <div className="relative z-10 grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2">
+        <div className="relative z-10 grid grid-cols-1 items-center gap-6 sm:gap-8 lg:grid-cols-2">
           {/* LEFT — content */}
           <div className="order-1 lg:order-1">
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur sm:text-xs">
@@ -113,18 +113,18 @@ export default function EventsPastEventsHeroSection() {
               Our Training Portfolio
             </span>
 
-            <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
+            <h1 className="mt-3 text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
               <span className="text-[#0069A8]">Past Events</span>{" "}
               <span className="text-slate-900">&amp;</span>{" "}
               <span className="text-[#FF8C00]">Training Programs</span>
             </h1>
 
-            <p className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg">
+            <p className="mt-3 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg">
               Explore our portfolio of successfully conducted training events, workshops, and corporate programs across India.
             </p>
 
             {/* scroll button */}
-            <div className="mt-6">
+            <div className="mt-5">
               <button
                 onClick={handleScrollDown}
                 className="inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-90"
@@ -138,7 +138,7 @@ export default function EventsPastEventsHeroSection() {
           </div>
 
           {/* RIGHT — image */}
-          <div className="order-2 lg:order-2 mt-6 lg:mt-0">
+          <div className="order-2 lg:order-2 mt-4 lg:mt-0">
             <Image
               src="/events/services_past-events-hero.png"
               alt="CDPL training events collage"

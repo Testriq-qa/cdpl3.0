@@ -184,15 +184,11 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
                       <article
                         className={`relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 ${cardHClass} flex flex-col`}
                       >
-                        {/* === FEATURED INDICATORS (solid brand color, no gradient) === */}
+                        {/* === FEATURED INDICATORS === */}
                         {event.featured && (
                           <>
                             <span className="sr-only">Featured</span>
-
-                            {/* 1) Top brand bar */}
                             <div className="absolute inset-x-0 top-0 h-[3px] bg-[#FF8C00] shadow-[0_0_6px_rgba(255,140,0,0.5)]" />
-
-                            {/* 2) Compact badge in header (top-right) */}
                             <div className="absolute right-4 top-4 z-10">
                               <span className="inline-flex items-center gap-1 rounded-full bg-[#FF8C00] px-3 py-1 text-[11px] font-black uppercase tracking-wide text-white shadow-md ring-1 ring-white/60">
                                 <Crown className="h-3.5 w-3.5" />
@@ -202,7 +198,7 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
                           </>
                         )}
 
-                        {/* Header stays 12rem */}
+                        {/* Header (12rem) */}
                         <div className="relative h-48 bg-gradient-to-br from-purple-100 to-blue-100">
                           <div className="absolute inset-0 flex items-center justify-center">
                             <Calendar className="h-16 w-16 text-purple-300" />
@@ -214,7 +210,7 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
                           </div>
                         </div>
 
-                        {/* Body: ONLY title, subtitle, date, location, participants/org, then CTA */}
+                        {/* Body */}
                         <div className="p-6 flex flex-col h-[calc(100%-12rem)] min-h-0">
                           <h3 className="text-xl font-bold text-gray-900 mb-1 line-clamp-2">
                             {event.title}
@@ -284,7 +280,7 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
       )}
 
       {base.length > 1 && (
-        <div className="mt-6 flex items-center justify-center gap-2">
+        <div className="mt-4 flex items-center justify-center gap-2">
           {base.map((_, i) => (
             <button
               key={i}

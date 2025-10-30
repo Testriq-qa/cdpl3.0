@@ -13,7 +13,7 @@ import type { FeaturedEvent } from "@/components/sections/EventsPastEventsFeatur
 // Small inline loader for dynamic sections
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
   return (
-    <div className="flex items-center justify-center py-16">
+    <div className="flex items-center justify-center py-8">
       <p className="text-gray-500">{label}</p>
     </div>
   );
@@ -148,16 +148,15 @@ export default function PastEventsPage() {
 
       {/* Featured */}
       {featuredEvents.length > 0 && (
-        <section className="py-16 w-full">
-          <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-4xl font-bold">
+        <section id="featured-events" className="py-10 w-full">
+          <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+            <h2 className="mb-6 text-4xl font-bold">
               <span style={{ color: "rgb(0, 105, 168)" }}>Featured</span>{" "}
               <span style={{ color: "rgb(255, 140, 0)" }}>Events</span>
             </h2>
             <EventsPastEventsFeaturedEventsSliderSection
               events={featuredEvents}
               autoplayMs={4500}
-              // CHANGED: was cardMinHClass; the slider now uses a fixed height prop name
               cardHClass="h-[480px]"
             />
           </div>
@@ -165,9 +164,9 @@ export default function PastEventsPage() {
       )}
 
       {/* All Past Events */}
-      <section className="py-16 w-full">
-        <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-8">
+      <section id="all-past-events" className="py-10 w-full">
+        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+          <h2 className="text-4xl font-bold text-gray-900 mb-6">
             All Past Events
           </h2>
           <EventsPastEventsAllEventsSection

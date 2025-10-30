@@ -29,6 +29,7 @@ export default function EventsPastEventsCTASection({
     { label: "Reporting & outcomes", sub: "Pre/post assessments with skill deltas" },
   ],
   badges = ["On-site", "Virtual", "Hybrid"],
+  children,
 }: PropsWithChildren<{
   title?: string;
   subtitle?: string;
@@ -37,7 +38,7 @@ export default function EventsPastEventsCTASection({
 }>) {
   return (
     <section className="w-full overflow-x-hidden">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
         <div className="relative overflow-hidden rounded-3xl">
           {/* Gradient border */}
           <div className="absolute inset-0 rounded-3xl bg-gradient-to-r from-sky-300 via-emerald-300 to-fuchsia-300 opacity-70" />
@@ -59,7 +60,7 @@ export default function EventsPastEventsCTASection({
                   {subtitle}
                 </p>
 
-                {/* Badges — wraps cleanly */}
+                {/* Badges */}
                 {badges?.length ? (
                   <div className="mt-4 flex flex-wrap items-center gap-2">
                     {badges.map((b, i) => (
@@ -94,11 +95,10 @@ export default function EventsPastEventsCTASection({
                   ))}
                 </ul>
 
-                {/* Actions — ONLY THIS BUTTON CHANGED FOR MOBILE */}
+                {/* Actions */}
                 <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
                   <a
                     href="/contact-us"
-                    // Mobile: compact height, wraps neatly; Desktop: slimmer still
                     className="group inline-flex w-full max-w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white shadow-md ring-1 ring-black/5 transition hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:w-auto sm:px-5 sm:py-2.5"
                     style={{ backgroundColor: "#0069A8" }}
                   >
@@ -116,6 +116,9 @@ export default function EventsPastEventsCTASection({
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
                   </a>
                 </div>
+
+                {/* Slot for external CTA button */}
+                {children ? <div className="mt-4">{children}</div> : null}
               </div>
 
               {/* Right column */}
@@ -171,7 +174,7 @@ export default function EventsPastEventsCTASection({
                   </div>
 
                   {/* Contact rail */}
-                  <div className="mt-5 rounded-xl border border-slate-200 bg-white p-4">
+                  <div className="mt-4 rounded-xl border border-slate-200 bg-white p-4">
                     <p className="text-sm font-medium text-slate-900">Have an RFP or quick scope?</p>
                     <p className="mt-1 text-xs text-slate-600">
                       Share timelines & goals, we’ll reply with a crisp plan.
