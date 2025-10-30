@@ -19,13 +19,13 @@ export type AllEvent = {
 
 const CATEGORY_STYLES: Record<string, { badgeBg: string; btnBg: string; text: string }> = {
   "AI & Machine Learning": { badgeBg: "bg-purple-600", btnBg: "bg-purple-600", text: "text-purple-600" },
-  "Software Testing":      { badgeBg: "bg-green-600",  btnBg: "bg-green-600",  text: "text-green-600"  },
-  "Data Science":          { badgeBg: "bg-blue-600",   btnBg: "bg-blue-600",   text: "text-blue-600"   },
-  "Academic Training":     { badgeBg: "bg-orange-600", btnBg: "bg-orange-600", text: "text-orange-600" },
-  "Web Development":       { badgeBg: "bg-cyan-600",   btnBg: "bg-cyan-600",   text: "text-cyan-600"   },
-  "Industrial Training":   { badgeBg: "bg-teal-600",   btnBg: "bg-teal-600",   text: "text-teal-600"   },
-  "Corporate Training":    { badgeBg: "bg-pink-600",   btnBg: "bg-pink-600",   text: "text-pink-600"   },
-  Technology:              { badgeBg: "bg-indigo-600", btnBg: "bg-indigo-600", text: "text-indigo-600" },
+  "Software Testing": { badgeBg: "bg-green-600", btnBg: "bg-green-600", text: "text-green-600" },
+  "Data Science": { badgeBg: "bg-blue-600", btnBg: "bg-blue-600", text: "text-blue-600" },
+  "Academic Training": { badgeBg: "bg-orange-600", btnBg: "bg-orange-600", text: "text-orange-600" },
+  "Web Development": { badgeBg: "bg-cyan-600", btnBg: "bg-cyan-600", text: "text-cyan-600" },
+  "Industrial Training": { badgeBg: "bg-teal-600", btnBg: "bg-teal-600", text: "text-teal-600" },
+  "Corporate Training": { badgeBg: "bg-pink-600", btnBg: "bg-pink-600", text: "text-pink-600" },
+  Technology: { badgeBg: "bg-indigo-600", btnBg: "bg-indigo-600", text: "text-indigo-600" },
 };
 const FALLBACK = { badgeBg: "bg-slate-700", btnBg: "bg-slate-700", text: "text-slate-700" };
 

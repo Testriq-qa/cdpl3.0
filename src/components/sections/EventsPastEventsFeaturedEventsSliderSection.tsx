@@ -1,3 +1,4 @@
+// src/components/sections/EventsPastEventsFeaturedEventsSliderSection.tsx
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
@@ -7,9 +8,9 @@ import {
   MapPin,
   Users,
   ArrowRight,
-  Star,
   ChevronLeft,
   ChevronRight,
+  Crown,
 } from "lucide-react";
 import type React from "react";
 
@@ -36,13 +37,13 @@ const CATEGORY_STYLES: Record<
   { badgeBg: string; btnBg: string; text: string }
 > = {
   "AI & Machine Learning": { badgeBg: "bg-purple-600", btnBg: "bg-purple-600", text: "text-purple-600" },
-  "Software Testing":      { badgeBg: "bg-green-600",  btnBg: "bg-green-600",  text: "text-green-600"  },
-  "Data Science":          { badgeBg: "bg-blue-600",   btnBg: "bg-blue-600",   text: "text-blue-600"   },
-  "Academic Training":     { badgeBg: "bg-orange-600", btnBg: "bg-orange-600", text: "text-orange-600" },
-  "Web Development":       { badgeBg: "bg-cyan-600",   btnBg: "bg-cyan-600",   text: "text-cyan-600"   },
-  "Industrial Training":   { badgeBg: "bg-teal-600",   btnBg: "bg-teal-600",   text: "text-teal-600"   },
-  "Corporate Training":    { badgeBg: "bg-pink-600",   btnBg: "bg-pink-600",   text: "text-pink-600"   },
-  Technology:              { badgeBg: "bg-indigo-600", btnBg: "bg-indigo-600", text: "text-indigo-600" },
+  "Software Testing": { badgeBg: "bg-green-600", btnBg: "bg-green-600", text: "text-green-600" },
+  "Data Science": { badgeBg: "bg-blue-600", btnBg: "bg-blue-600", text: "text-blue-600" },
+  "Academic Training": { badgeBg: "bg-orange-600", btnBg: "bg-orange-600", text: "text-orange-600" },
+  "Web Development": { badgeBg: "bg-cyan-600", btnBg: "bg-cyan-600", text: "text-cyan-600" },
+  "Industrial Training": { badgeBg: "bg-teal-600", btnBg: "bg-teal-600", text: "text-teal-600" },
+  "Corporate Training": { badgeBg: "bg-pink-600", btnBg: "bg-pink-600", text: "text-pink-600" },
+  Technology: { badgeBg: "bg-indigo-600", btnBg: "bg-indigo-600", text: "text-indigo-600" },
 };
 const FALLBACK = { badgeBg: "bg-slate-700", btnBg: "bg-slate-700", text: "text-slate-700" };
 
@@ -170,6 +171,7 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
               <div className="flex" style={styleVars}>
                 {looped.map((event, i) => {
                   const cs = CATEGORY_STYLES[event.category] ?? FALLBACK;
+
                   return (
                     <div
                       key={`${event.id}-${i}`}
@@ -180,8 +182,26 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
                       }}
                     >
                       <article
-                        className={`bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 ${cardHClass} flex flex-col`}
+                        className={`relative bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-shadow duration-300 ${cardHClass} flex flex-col`}
                       >
+                        {/* === FEATURED INDICATORS (solid brand color, no gradient) === */}
+                        {event.featured && (
+                          <>
+                            <span className="sr-only">Featured</span>
+
+                            {/* 1) Top brand bar */}
+                            <div className="absolute inset-x-0 top-0 h-[3px] bg-[#FF8C00] shadow-[0_0_6px_rgba(255,140,0,0.5)]" />
+
+                            {/* 2) Compact badge in header (top-right) */}
+                            <div className="absolute right-4 top-4 z-10">
+                              <span className="inline-flex items-center gap-1 rounded-full bg-[#FF8C00] px-3 py-1 text-[11px] font-black uppercase tracking-wide text-white shadow-md ring-1 ring-white/60">
+                                <Crown className="h-3.5 w-3.5" />
+                                Featured
+                              </span>
+                            </div>
+                          </>
+                        )}
+
                         {/* Header stays 12rem */}
                         <div className="relative h-48 bg-gradient-to-br from-purple-100 to-blue-100">
                           <div className="absolute inset-0 flex items-center justify-center">
@@ -192,14 +212,6 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
                               {event.category}
                             </span>
                           </div>
-                          {event.featured && (
-                            <div className="absolute right-4 top-4">
-                              <span className="flex items-center gap-1 rounded-full bg-yellow-400 px-3 py-1 text-xs font-bold text-gray-900 shadow-md">
-                                <Star className="h-3.5 w-3.5 fill-current" />
-                                Featured
-                              </span>
-                            </div>
-                          )}
                         </div>
 
                         {/* Body: ONLY title, subtitle, date, location, participants/org, then CTA */}

@@ -1,19 +1,68 @@
 // app/events/past-events/page.tsx
-import { useState, type ComponentProps } from "react";
+import type { ComponentProps } from "react";
+import dynamic from "next/dynamic";
 
-import EventsPastEventsAllEventsSection from "@/components/sections/EventsPastEventsAllEventsSection";
-import EventsPastEventsFeaturedEventsSliderSection, {
-  FeaturedEvent,
-} from "@/components/sections/EventsPastEventsFeaturedEventsSliderSection";
-import EventsPastEventsFeatureEventsRequestTrainingButton from "@/components/sections/EventsPastEventsFeatureEventsRequestTrainingButton";
 import { pastEvents } from "@/data/eventsData";
 
-import EventsPastEventsHeroSection from "@/components/sections/EventsPastEventsHeroSection";
-import EventsPastEventsCTASection from "@/components/sections/EventsPastEventsCTASection";
+// Type-only imports so we can still infer props and event shape
+import type {
+  default as EventsPastEventsAllEventsSectionType,
+} from "@/components/sections/EventsPastEventsAllEventsSection";
+import type { FeaturedEvent } from "@/components/sections/EventsPastEventsFeaturedEventsSliderSection";
+
+// Small inline loader for dynamic sections
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+// ---------- Dynamic sections (SSR enabled) ----------
+const EventsPastEventsAllEventsSection = dynamic(
+  () => import("@/components/sections/EventsPastEventsAllEventsSection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading events..." />,
+  }
+);
+
+const EventsPastEventsFeaturedEventsSliderSection = dynamic(
+  () => import("@/components/sections/EventsPastEventsFeaturedEventsSliderSection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading featured events..." />,
+  }
+);
+
+const EventsPastEventsFeatureEventsRequestTrainingButton = dynamic(
+  () => import("@/components/sections/EventsPastEventsFeatureEventsRequestTrainingButton"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Preparing CTA..." />,
+  }
+);
+
+const EventsPastEventsHeroSection = dynamic(
+  () => import("@/components/sections/EventsPastEventsHeroSection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading hero..." />,
+  }
+);
+
+const EventsPastEventsCTASection = dynamic(
+  () => import("@/components/sections/EventsPastEventsCTASection"),
+  {
+    ssr: true,
+    loading: () => <SectionLoader label="Loading call-to-action..." />,
+  }
+);
 
 // Infer prop types from the AllEvents section to avoid `any`
 type AllEventsProps = ComponentProps<
-  typeof EventsPastEventsAllEventsSection
+  typeof EventsPastEventsAllEventsSectionType
 >;
 
 const CATEGORY_STYLES: Record<
@@ -92,8 +141,6 @@ export default function PastEventsPage() {
     (e) => !e.featured
   ) as AllEventsProps["events"];
 
-  const [swiperInstance, setSwiperInstance] = useState<SwiperType | null>(null);
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50">
       {/* HERO (separate component) */}
@@ -103,8 +150,9 @@ export default function PastEventsPage() {
       {featuredEvents.length > 0 && (
         <section className="py-16 w-full">
           <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
-            <h2 className="mb-8 text-4xl font-bold text-gray-900">
-              Featured Events
+            <h2 className="mb-8 text-4xl font-bold">
+              <span style={{ color: "rgb(0, 105, 168)" }}>Featured</span>{" "}
+              <span style={{ color: "rgb(255, 140, 0)" }}>Events</span>
             </h2>
             <EventsPastEventsFeaturedEventsSliderSection
               events={featuredEvents}

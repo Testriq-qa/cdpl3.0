@@ -15,7 +15,7 @@ export default function EventsPastEventsHeroSection() {
 
   return (
     <section className="relative w-full overflow-hidden">
-      {/* subtle geometric bg */}
+      {/* subtle geometric bg (full-bleed) */}
       <div className="absolute inset-0 opacity-10 pointer-events-none">
         <div
           className="absolute top-0 left-0 h-full w-full"
@@ -25,10 +25,69 @@ export default function EventsPastEventsHeroSection() {
         />
       </div>
 
-      {/* content */}
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      {/* container (relative) so floating lanterns respect max width */}
+      <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        {/* decorative floating lanterns (bounded by max-w-7xl) */}
+        <div
+          className="pointer-events-none absolute inset-0 z-0 hidden sm:block"
+          aria-hidden="true"
+        >
+          {/* left edge */}
+          <div className="absolute top-10 left-0 md:left-2 lg:left-4 animate-float">
+            <Image
+              src="/events/fire_lantern.png"
+              alt=""
+              width={64}
+              height={64}
+              className="w-8 md:w-10 lg:w-12 h-auto opacity-90"
+            />
+          </div>
+
+          {/* right edge */}
+          <div
+            className="absolute top-6 right-0 md:right-3 lg:right-6 animate-float-slow"
+            style={{ animationDelay: "0.8s" }}
+          >
+            <Image
+              src="/events/fire_lantern.png"
+              alt=""
+              width={64}
+              height={64}
+              className="w-7 md:w-9 lg:w-11 h-auto opacity-90"
+            />
+          </div>
+
+          {/* upper center */}
+          <div
+            className="absolute top-20 left-1/2 -translate-x-1/2 animate-float-slower"
+            style={{ animationDelay: "1.6s" }}
+          >
+            <Image
+              src="/events/fire_lantern.png"
+              alt=""
+              width={56}
+              height={56}
+              className="w-7 md:w-8 lg:w-10 h-auto opacity-80"
+            />
+          </div>
+
+          {/* low right, below CTA */}
+          <div
+            className="absolute bottom-4 right-2 md:bottom-8 md:right-8 animate-float"
+            style={{ animationDelay: "0.3s" }}
+          >
+            <Image
+              src="/events/fire_lantern.png"
+              alt=""
+              width={52}
+              height={52}
+              className="w-6 md:w-7 lg:w-9 h-auto opacity-75"
+            />
+          </div>
+        </div>
+
         {/* ✅ Breadcrumb (kept) */}
-        <nav aria-label="Breadcrumb" className="mb-6">
+        <nav aria-label="Breadcrumb" className="relative z-10 mb-6">
           <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
             <li className="flex items-center gap-2">
               <Home className="h-4 w-4" />
@@ -46,9 +105,9 @@ export default function EventsPastEventsHeroSection() {
         </nav>
 
         {/* split */}
-        <div className="grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2">
-          {/* LEFT */}
-          <div className="order-2 lg:order-1">
+        <div className="relative z-10 grid grid-cols-1 items-center gap-8 sm:gap-10 lg:grid-cols-2">
+          {/* LEFT — content */}
+          <div className="order-1 lg:order-1">
             <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur sm:text-xs">
               <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
               Our Training Portfolio
@@ -78,8 +137,8 @@ export default function EventsPastEventsHeroSection() {
             </div>
           </div>
 
-          {/* RIGHT — plain image (no border/radius/lightness) */}
-          <div className="order-1 lg:order-2 mt-6 lg:mt-0">
+          {/* RIGHT — image */}
+          <div className="order-2 lg:order-2 mt-6 lg:mt-0">
             <Image
               src="/events/services_past-events-hero.png"
               alt="CDPL training events collage"
@@ -92,6 +151,17 @@ export default function EventsPastEventsHeroSection() {
           </div>
         </div>
       </div>
+
+      {/* float animations */}
+      <style jsx>{`
+        @keyframes floatY {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-6px); }
+        }
+        .animate-float { animation: floatY 6s ease-in-out infinite; }
+        .animate-float-slow { animation: floatY 7.5s ease-in-out infinite; }
+        .animate-float-slower { animation: floatY 9s ease-in-out infinite; }
+      `}</style>
     </section>
   );
 }
