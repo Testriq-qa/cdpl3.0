@@ -13,6 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 
 type Mentor = {
   name: string;
@@ -27,25 +28,25 @@ type Props = {
   className?: string;
   brand?: string; // single accent; defaults to warm, engaging orange
   mentors?: Mentor[];
-  heading?: string;
-  subheading?: string;
+  heading?: React.ReactNode;
+  subheading?: React.ReactNode;
   primaryCtaHref?: string;
   secondaryCtaHref?: string;
 };
 
 const DEFAULT_MENTORS: Mentor[] = [
-  { name: "A. Sharma", role: "Senior QA Lead", avatar: "/images/ami-khambata.png", experience: "12+ yrs", tag: "QA", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
-  { name: "R. Patel", role: "Data Scientist", avatar: "/images/ami-khambata.png", experience: "10+ yrs", tag: "Data", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
-  { name: "S. Iyer", role: "Automation Architect", avatar: "/images/ami-khambata.png", experience: "11+ yrs", tag: "Automation", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
-  { name: "N. Khan", role: "AI/ML Engineer", avatar: "/images/ami-khambata.png", experience: "9+ yrs", tag: "AI/ML", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
+  { name: "A. Sharma", role: "Senior QA Lead", avatar: "/images/user1.jpg", experience: "12+ yrs", tag: "QA", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
+  { name: "R. Patel", role: "Data Scientist", avatar: "/images/user1.jpg", experience: "10+ yrs", tag: "Data", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
+  { name: "S. Iyer", role: "Automation Architect", avatar: "/images/user1.jpg", experience: "11+ yrs", tag: "Automation", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
+  { name: "N. Khan", role: "AI/ML Engineer", avatar: "/images/user1.jpg", experience: "9+ yrs", tag: "AI/ML", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
 ];
 
 export default function AboutFacultyStrip({
   className,
   brand = "#ff8c00",
   mentors = DEFAULT_MENTORS,
-  heading = "Learn from Practitioners",
-  subheading = "10+ years average experience across Software Testing, Automation, Data Science & AI/ML.",
+  heading = (<>Learn from <span className="text-brand">Mentors</span> </>),
+  subheading = (<>10+ years average experience across <strong>Software Testing</strong>, <strong>Automation</strong>, <strong>Data Science</strong> & <strong>AI/ML</strong>.</>),
   primaryCtaHref = "/mentors",
   secondaryCtaHref = "/become-a-mentor",
 }: Props) {

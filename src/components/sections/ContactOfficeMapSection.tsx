@@ -7,11 +7,8 @@ import Script from "next/script";
 type Office = {
   id: "mumbai" | "pune" | "bengaluru";
   label: string;
-  addressHtml: string;
-  city: string;
-  state: string;
-  postalCode?: string;
-  landmark?: string;
+  headOffice: string;
+  studyCenter: string;
   phone: string;
   phoneDisplay: string;
   whatsapp?: string;
@@ -25,18 +22,19 @@ const OFFICES: Office[] = [
   {
     id: "mumbai",
     label: "Mumbai",
-    addressHtml: "Office Number 2 & 3, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park, Mira Road East, Mira Bhayandar,",
-    city: "Mumbai",
-    state: "Maharashtra",
-    postalCode: "401107",
-    landmark: "Near Movie Max(Cinemax)",
-    phone: "tel:+918488988984  ",
+    headOffice:
+      "Office Number 2 & 3, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park, Mira Road East, Mira Bhayandar, Mumbai, Maharashtra - 401107",
+    studyCenter:
+      "Shop No 7, Laxmi Palace, Opposite Vidhyavardhini Degree Engineering College, Gurunanak Nagar, Vasai West, Mumbai, Maharashtra - 401202",
+    phone: "tel:+918488988984",
     phoneDisplay: "+91 84-889-889-84",
-    whatsapp: "https://wa.me/9152929342 ",
+    whatsapp: "https://wa.me/9152929342",
     email: "mailto:contact@cinutedigital.com",
     hours: "Mon–Sat • 9:00 AM – 8:00 PM IST",
-    mapSrc: "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.745859738545!2d72.871122!3d19.293415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b1af2b2c5fed%3A0x7104f80b9fec8b9d!2sCinute%20Digital%20Pvt.%20Ltd.%20A%20Premier%20Software%20Training%20Institute%20(CDPL)!5e0!3m2!1sen!2sin!4v1759859933212!5m2!1sen!2sin",
-    directions: "https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D",
+    mapSrc:
+      "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3765.745859738545!2d72.871122!3d19.293415!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7b1af2b2c5fed%3A0x7104f80b9fec8b9d!2sCinute%20Digital%20Pvt.%20Ltd.%20A%20Premier%20Software%20Training%20Institute%20(CDPL)!5e0!3m2!1sen!2sin!4v1759859933212!5m2!1sen!2sin",
+    directions:
+      "https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D",
   },
 ];
 
@@ -53,6 +51,7 @@ export function ContactOfficeMapSection() {
             "radial-gradient(60% 40% at 10% 0%, rgba(56,189,248,0.10), transparent 60%), radial-gradient(50% 40% at 90% 0%, rgba(167,139,250,0.10), transparent 60%)",
         }}
       />
+
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12">
         <div className="mx-auto max-w-5xl text-center">
           <h2 className="text-4xl font-bold tracking-tight text-slate-900">
@@ -76,11 +75,6 @@ export function ContactOfficeMapSection() {
               <div className="flex items-start justify-between gap-4">
                 <div>
                   <h3 className="font-bold text-2xl text-slate-900">{active.label}</h3>
-                  {active.landmark && (
-                    <p className="mt-1 text-md text-slate-700">
-                      Landmark: <span className="">{active.landmark}</span>
-                    </p>
-                  )}
                 </div>
                 <span className="rounded-full border border-slate-200 bg-slate-50 px-3 py-2 text-[13px] text-slate-700">
                   Walk-in Friendly
@@ -88,15 +82,20 @@ export function ContactOfficeMapSection() {
               </div>
 
               <div className="mt-4 grid gap-3 text-sm text-slate-700">
+                {/* Address block (single parent wrapper) */}
                 <div className="rounded-xl border border-slate-200 bg-slate-50 p-3">
-                  <div className="font-medium text-lg text-slate-900">Address</div>
-                  <div
-                    className="mt-1 text-base text-slate-800"
-                    dangerouslySetInnerHTML={{ __html: active.addressHtml }}
-                  />
-                  <div className="text-slate-800 text-base">
-                    {active.city}, {active.state}
-                    {active.postalCode ? ` — ${active.postalCode}` : ""}
+                  <div className="font-bold text-lg text-brand">Address</div>
+
+                  <div className="mt-2">
+                    <div className="font-bold text-lg text-slate-900">
+                      Head Office (<span className="text-brand">CDPL</span>)
+                    </div>
+                    <div className="mt-1 text-base text-slate-800">{active.headOffice}</div>
+                  </div>
+
+                  <div className="mt-4">
+                    <div className="font-bold text-lg text-slate-900 mb-1">Study Center <span className="text-red-700">MeghMehul Classes</span> (Vasai)</div>
+                    <Link href="https://maps.app.goo.gl/SACPou6JCdRZh5j98" className="text-base text-slate-800 hover:text-brand transition">{active.studyCenter}</Link>
                   </div>
                 </div>
 
@@ -108,15 +107,16 @@ export function ContactOfficeMapSection() {
                 <div className="grid sm:grid-cols-2 gap-3">
                   <Link
                     href={active.phone}
-                    className="rounded-xl border border-slate-200 bg-white p-3 text-sm shadow-sm hover:shadow-md transition"
+                    className="rounded-xl border border-purple-200 bg-purple-50 p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Call ${active.label} office`}
                   >
                     <div className="font-medium text-base text-slate-900">Admissions Helpline</div>
                     <div className="mt-1 text-[14px] text-slate-700">{active.phoneDisplay}</div>
                   </Link>
+
                   <Link
                     href={active.email}
-                    className="rounded-xl border border-slate-200 bg-white p-3 text-sm shadow-sm hover:shadow-md transition"
+                    className="rounded-xl border border-indigo-200 bg-indigo-50 p-3 text-sm shadow-sm hover:shadow-md transition"
                     aria-label={`Email ${active.label} office`}
                   >
                     <div className="font-medium text-base text-slate-900">Email</div>
@@ -124,6 +124,7 @@ export function ContactOfficeMapSection() {
                       {active.email.replace("mailto:", "")}
                     </div>
                   </Link>
+
                   {active.whatsapp && (
                     <Link
                       href={active.whatsapp}
@@ -136,6 +137,7 @@ export function ContactOfficeMapSection() {
                       <div className="mt-1 text-emerald-700">Instant Responses</div>
                     </Link>
                   )}
+
                   <Link
                     href={active.directions}
                     target="_blank"
@@ -150,17 +152,17 @@ export function ContactOfficeMapSection() {
 
                 <div className="mt-4 flex flex-wrap gap-2">
                   {[
-                    "Software Testing Training",
-                    "Data Science & AI Courses",
-                    "Full-Stack Developer Program",
-                    "Placement Assistance",
-                    "Corporate Upskilling",
+                    {title: "Software Testing Training", bgColor: "bg-blue-50", textColor: "text-blue-500"},
+                    {title: "Data Science & AI Courses", bgColor: "bg-red-50", textColor: "text-red-500"},
+                    {title: "Full-Stack Developer Program", bgColor: "bg-green-50", textColor: "text-green-500"},
+                    {title: "Placement Assistance", bgColor: "bg-purple-50", textColor: "text-purple-500"},
+                    {title: "Corporate Upskilling", bgColor: "bg-indigo-50", textColor: "text-indigo-600"},
                   ].map((chip) => (
                     <span
-                      key={chip}
-                      className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700"
+                      key={chip.title}
+                      className={`rounded-full border border-slate-200 ${chip.bgColor} px-3 py-1 text-xs font-medium ${chip.textColor}`}
                     >
-                      {chip}
+                      {chip.title}
                     </span>
                   ))}
                 </div>
@@ -199,7 +201,11 @@ export function ContactOfficeMapSection() {
           "@type": "Organization",
           name: "Cinute Digital",
           url: "https://www.cinutedigital.com",
-          sameAs: ["https://www.facebook.com/", "https://www.instagram.com/", "https://www.linkedin.com/"],
+          sameAs: [
+            "https://www.facebook.com/",
+            "https://www.instagram.com/",
+            "https://www.linkedin.com/",
+          ],
           contactPoint: OFFICES.map((o) => ({
             "@type": "ContactPoint",
             contactType: "customer support",
@@ -208,14 +214,21 @@ export function ContactOfficeMapSection() {
             areaServed: "IN",
             availableLanguage: ["English", "Hindi"],
           })),
-          address: OFFICES.map((o) => ({
-            "@type": "PostalAddress",
-            streetAddress: o.addressHtml.replace(/<br\/?>/g, ", "),
-            addressLocality: o.city,
-            addressRegion: o.state,
-            postalCode: o.postalCode || "",
-            addressCountry: "IN",
-          })),
+          // Two addresses per office (Head Office + Study Center)
+          address: OFFICES.flatMap((o) => [
+            {
+              "@type": "PostalAddress",
+              name: `${o.label} Head Office`,
+              streetAddress: o.headOffice,
+              addressCountry: "IN",
+            },
+            {
+              "@type": "PostalAddress",
+              name: `${o.label} Study Center`,
+              streetAddress: o.studyCenter,
+              addressCountry: "IN",
+            },
+          ]),
         })}
       </Script>
     </section>

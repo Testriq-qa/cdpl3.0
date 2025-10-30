@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Phone, Mail, CalendarDays } from "lucide-react";
+import { Phone, Mail, CalendarDays, Home, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 type FormState = {
@@ -47,6 +47,11 @@ export function ContactHeroSection() {
     }
   };
 
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Contact Us", href: "/contact-us" },
+  ]
+
   return (
     <section className="relative isolate overflow-hidden bg-white">
       {/* themed blobs ABOVE the white background */}
@@ -71,11 +76,30 @@ export function ContactHeroSection() {
         }}
       />
 
+
       {/* CONTENT on top */}
       <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-8 md:py-10">
+
+        {/* Breadcrumbs for SEO & UX */}
+        <nav aria-label="Breadcrumb" className="mb-6">
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            {breadcrumbs.map((c, i) => (
+              <li key={i} className="flex items-center gap-2">
+                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <a
+                  href={c.href}
+                  className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                >
+                  {c.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
         <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-10 items-start">
           {/* Left column: Main content + Form on mobile */}
-          <div className="md:col-span-6 lg:col-span-7 flex flex-col justify-start md:pt-2">
+          <div className="md:col-span-6 lg:col-span-7 flex flex-col justify-start md:pt-1">
             <span className="md:inline-flex text-center w-fit items-center gap-2 rounded-full border border-sky-200/70 bg-white/70 px-3 py-1 text-[11px] font-medium text-sky-700 shadow-sm backdrop-blur">
               🎓 Industry-recognized • ⚡ Fast Response <span className="opacity-70">under 24 hrs</span>
             </span>
@@ -216,56 +240,74 @@ export function ContactHeroSection() {
             {/* Quick Contact Buttons */}
             <div className="mt-6">
               <div className="mb-2 text-sm font-semibold text-slate-700">Quick Contact Options</div>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 lg:gap-1.5 xl:gap-4">
+
+              {/* Responsive, non-overlapping grid */}
+              <div
+                className="grid gap-4 lg:gap-3 xl:gap-4
+               [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]"
+              >
+                {/* Call Now */}
                 <Link
-                  href="tel:+91 84-889-889-84"
+                  href="tel:+918488988984"
                   aria-label="Call Now"
-                  className="group flex items-center gap-4 lg:gap-2 xl:gap-4 rounded-2xl border border-slate-200 bg-white/90 p-4 lg:p-1.5 xl:p-3 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                  className="group inline-flex w-full items-center gap-4 lg:gap-3 xl:gap-4
+                 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3
+                 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 overflow-hidden"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/90 text-white shadow-sm">
-                    <Phone className="h-6 w-6 lg:w-7" />
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-green-500/90 text-white shadow-sm">
+                    <Phone className="h-6 w-6 lg:h-7 lg:w-7" />
                   </span>
-                  <span className="flex flex-col">
+                  <span className="flex min-w-0 flex-1 flex-col">
                     <span className="text-base font-semibold text-slate-900">Call Now</span>
-                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700">
+                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700 truncate whitespace-nowrap">
                       +91 84-889-889-84
                     </span>
                   </span>
                 </Link>
 
+                {/* Email Us */}
                 <Link
                   href="mailto:contact@cinutedigital.com"
                   aria-label="Email Us"
-                  className="group flex items-center gap-4 lg:gap-2 xl:gap-4 rounded-2xl border border-slate-200 bg-white/90 p-4 lg:p-1.5 xl:p-3 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                  className="group inline-flex w-full items-center gap-4 lg:gap-3 xl:gap-4
+                 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3
+                 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 overflow-hidden"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/90 text-white shadow-sm">
-                    <Mail className="h-6 w-6 lg:w-7" />
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600/90 text-white shadow-sm">
+                    <Mail className="h-6 w-6 lg:h-7 lg:w-7" />
                   </span>
-                  <span className="flex flex-col flex-wrap text-wrap">
+                  <span className="flex min-w-0 flex-1 flex-col">
                     <span className="text-base font-semibold text-slate-900">Email Us</span>
-                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700">
+                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700 truncate whitespace-nowrap">
                       contact@cinutedigital.com
                     </span>
                   </span>
                 </Link>
 
+                {/* Schedule Meeting */}
                 <Link
                   href="/book-a-call"
                   aria-label="Schedule a Meeting"
-                  className="group flex items-center gap-4 lg:gap-2 xl:gap-4 rounded-2xl border border-slate-200 bg-white/90 p-4 lg:p-1.5 xl:p-3 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400"
+                  className="group inline-flex w-full items-center gap-4 lg:gap-3 xl:gap-4
+                 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3
+                 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 overflow-hidden"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-fuchsia-600/90 text-white shadow-sm">
-                    <CalendarDays className="h-6 w-6 lg:w-7" />
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-fuchsia-600/90 text-white shadow-sm">
+                    <CalendarDays className="h-6 w-6 lg:h-7 lg:w-7" />
                   </span>
-                  <span className="flex flex-col">
+                  <span className="flex min-w-0 flex-1 flex-col">
                     <span className="text-base font-semibold text-slate-900">Schedule Meeting</span>
-                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700">
+                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700 truncate whitespace-nowrap">
                       Book a Call
                     </span>
                   </span>
                 </Link>
               </div>
             </div>
+
 
             <p className="mt-5 text-[15px] text-slate-600">
               Serving learners across India - Mumbai, Pune, Bengaluru &amp; beyond. Talk to our{" "}

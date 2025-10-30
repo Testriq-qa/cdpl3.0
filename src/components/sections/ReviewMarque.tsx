@@ -151,7 +151,7 @@ const REVIEWS: Review[] = [
 ];
 
 const SUMMARY_CARDS = [
-  { label: 'Google Reviews', value: '80+', note: 'Public reviews', logo: '/slider_logos/google.svg' },
+  { label: 'Google Reviews', value: '289', note: 'Public reviews', logo: '/slider_logos/google.svg' },
   { label: 'Sulekha Reviews', value: '84', note: '5.0 average', logo: '/slider_logos/sulekha-logo.webp' },
   { label: 'Justdial Ratings', value: '210', note: 'Verified users', logo: '/slider_logos/justdial-logo.png' },
 ];

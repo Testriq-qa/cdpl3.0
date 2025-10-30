@@ -23,32 +23,48 @@ export default function AboutAccreditations() {
       title: "Industry-recognized standards",
       text:
         "Curriculum aligned to ISO 9001:2015 quality practices and Skill India (NSDC) outcomes, ensuring rigorous delivery and assessment.",
+      bgColor: "bg-blue-50",
+      textColor: "text-blue-500",
+      borderColor: "ring-blue-600",
+      iconBg: "bg-blue-500",
     },
     {
       icon: <Award className="h-5 w-5" aria-hidden="true" />,
       title: "Job-ready certifications",
       text:
         "Earn verifiable certificates in Software Testing, Automation, API Testing, Data Science, AI/ML, and Analytics—optimized for employer ATS and LinkedIn.",
+      bgColor: "bg-green-50",
+      textColor: "text-green-500",
+      borderColor: "ring-green-600",
+      iconBg: "bg-green-500",
     },
     {
       icon: <Users className="h-5 w-5" aria-hidden="true" />,
       title: "Hiring partner network",
       text:
         "Screened placement pipeline with product companies, startups, and consulting partners for internships and full‑time roles.",
+      bgColor: "bg-red-50",
+      textColor: "text-red-500",
+      borderColor: "ring-red-600",
+      iconBg: "bg-red-500",
     },
     {
       icon: <Sparkles className="h-5 w-5" aria-hidden="true" />,
       title: "Modern tooling",
       text:
         "Hands-on projects with Selenium, Playwright, Postman, Git, CI/CD, Python, SQL, and cloud sandboxes that mirror real engineering workflows.",
+      bgColor: "bg-purple-50",
+      textColor: "text-purple-500",
+      borderColor: "ring-purple-600",
+      iconBg: "bg-purple-500",
     },
   ];
 
   const stats = [
-    { label: "Learner satisfaction", value: "98%", color: "blue-500" },
-    { label: "Avg. completion rate", value: "91%", color: "green-500" },
-    { label: "Hiring partners", value: "50+", color: "red-500" },
-    { label: "Capstone projects", value: "200+", color: "purple-500" },
+    { label: "Learner satisfaction", value: "98%", color: "blue-500", bgColor: "bg-blue-50" },
+    { label: "Avg. completion rate", value: "91%", color: "green-500", bgColor: "bg-green-50" },
+    { label: "Hiring partners", value: "50+", color: "red-500", bgColor: "bg-red-50" },
+    { label: "Capstone projects", value: "200+", color: "purple-500", bgColor: "bg-purple-50" },
   ];
 
   return (
@@ -69,7 +85,7 @@ export default function AboutAccreditations() {
         {/* Header */}
         <div className="relative px-6 pb-6 pt-10 sm:px-10">
           <div className="mx-auto max-w-5xl text-center">
-            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
+            <div className="mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-[12px] font-medium text-slate-700 shadow-sm">
               <ShieldCheck className="h-3.5 w-3.5" aria-hidden="true" />
               Verified Quality & Placement Focus
             </div>
@@ -112,10 +128,10 @@ export default function AboutAccreditations() {
               {highlights.map((item) => (
                 <li
                   key={item.title}
-                  className="group rounded-2xl border border-slate-200 bg-white p-4 shadow-sm transition hover:shadow-md"
+                  className={`group rounded-2xl ${item.bgColor} ring-2 ${item.borderColor} p-4 shadow-sm transition-all duration-300 ease-in-out hover:shadow-md hover:translate-x-2`}
                 >
                   <div className="flex items-start gap-3">
-                    <span className="mt-0.5 inline-flex h-8 w-8 items-center justify-center rounded-full bg-gradient-to-br from-sky-100 to-indigo-100 text-slate-700 ring-1 ring-inset ring-slate-200">
+                    <span className={`mt-0.5 inline-flex h-12 w-12 items-center px-3 py-2 justify-center rounded-full ${item.iconBg} text-white`}>
                       {item.icon}
                     </span>
                     <div>
@@ -138,7 +154,7 @@ export default function AboutAccreditations() {
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {stats.map((s) => (
-                    <div key={s.label} className="rounded-xl bg-slate-50 p-2 lg:p-4 ring-1 ring-inset ring-slate-200">
+                    <div key={s.label} className={`rounded-xl ${s.bgColor} p-2 lg:p-4 ring-1 ring-inset ring-slate-300`}>
                       <div className={`text-2xl font-extrabold text-${s.color}`}>{s.value}</div>
                       <div className="mt-1 text-sm text-slate-600">{s.label}</div>
                     </div>
