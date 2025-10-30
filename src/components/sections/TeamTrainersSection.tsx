@@ -37,17 +37,8 @@ export default function TeamTrainersSection({
   const [expertise, setExpertise] = useState<string>("All");
   const [lang, setLang] = useState<string>("All");
 
-  const allExpertise = useMemo(() => {
-    const s = new Set<string>();
-    trainers.forEach((t) => t.specialties.forEach((sp) => s.add(sp)));
-    return ["All", ...Array.from(s).sort()];
-  }, [trainers]);
-
-  const allLanguages = useMemo(() => {
-    const s = new Set<string>();
-    trainers.forEach((t) => (t.languages ?? []).forEach((l) => s.add(l)));
-    return ["All", ...Array.from(s).sort()];
-  }, [trainers]);
+  void setExpertise;
+  void setLang;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -112,7 +103,7 @@ export default function TeamTrainersSection({
           className="mt-6 md:mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
         >
           {heading}{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500" style={{ backgroundImage: `linear-gradient(90deg, ${BRAND}, #ffb86b)` }}>
+          <span className="text-brand">
             at Cinute Digital
           </span>
         </h2>
@@ -135,34 +126,6 @@ export default function TeamTrainersSection({
             className="w-full rounded-2xl border border-slate-200 bg-white pl-10 pr-3 py-2.5 text-sm text-slate-900 placeholder:text-slate-500 shadow-sm focus:border-transparent focus:outline-none"
             style={brandRing}
           />
-        </div>
-
-        <div className="flex flex-wrap gap-2">
-          <select
-            aria-label="Filter by expertise"
-            value={expertise}
-            onChange={(e) => setExpertise(e.target.value)}
-            className="rounded-xl w-52 border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:outline-none"
-          >
-            {allExpertise.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt === "All" ? "All Expertise" : opt}
-              </option>
-            ))}
-          </select>
-
-          <select
-            aria-label="Filter by language"
-            value={lang}
-            onChange={(e) => setLang(e.target.value)}
-            className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:outline-none"
-          >
-            {allLanguages.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt === "All" ? "All Languages" : opt}
-              </option>
-            ))}
-          </select>
         </div>
       </div>
 
