@@ -85,7 +85,7 @@ const BlogHero = () => {
                     alt={featuredPost.title}
                     width={600}
                     height={400}
-                    className="w-full h-full object-contain bg-gray-100"
+                    className="rounded-lg shadow-lg object-cover"
                     priority
                   />
                 ) : (

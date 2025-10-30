@@ -313,7 +313,7 @@ export const BLOG_POSTS: BlogPost[] = [
     title: "Top Data Science Trends 2025: AI, Automation, and Ethical Insights",
     description: "Explore the top data science trends shaping 2025, from generative AI and automated ML to ethical practices and edge computing. A complete guide for professionals and businesses.",
     excerpt: "As data volumes explode in 2025, staying ahead of trends like agentic AI and augmented analytics is crucial. Learn how these innovations drive smarter decisions, boost efficiency, and address ethical challenges in data science.",
-    featuredImage: "/blog/featured/data-science-trends-2025.jpg",
+    featuredImage: "/blog/featured/data-science-trends-2025.webp",
     category: "Data Science",
     categoryId: "data-science",
     author: "Shoeb Shaikh",

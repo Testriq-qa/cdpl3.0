@@ -60,8 +60,8 @@ export const BlogPostHeroSection: React.FC<BlogPostHeroSectionProps> = ({ slug }
                 </div>
             </div>
 
-            {/* Featured Image */}
-            <div className="relative w-full h-64 sm:h-80 md:h-96 lg:h-[400px] mb-6 sm:mb-8">
+            {/* Featured Image - UPDATED: aspect-[16/9] with object-contain */}
+            <div className="relative w-full aspect-[16/9] mb-6 sm:mb-8 bg-gradient-to-br from-gray-50 to-gray-100 rounded-lg overflow-hidden">
                 <Image
                     src={post.featuredImage || "/images/automation-testing.webp"}
                     alt={post.title}
@@ -84,4 +84,3 @@ export const BlogPostHeroSection: React.FC<BlogPostHeroSectionProps> = ({ slug }
         </section>
     );
 };
-
