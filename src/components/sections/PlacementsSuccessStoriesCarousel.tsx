@@ -10,7 +10,7 @@ const STORIES: Story[] = [
   { name: "Dakshali Merya", role: "Tech Mahindra · QA", text: "Hands-on QA practice + mock interviews made offer-day feel easy.", src: "/placements/Dakshali Merya.jpg" },
   { name: "Sheetal Singh", role: "Accenture · QA", text: "Structured QA sprints and feedback loops boosted my interview confidence.", src: "/placements/Sheetal Singh.jpg" },
   { name: "Shrikanth Suri", role: "eClerx · QA", text: "Bug-hunting drills and real projects helped me crack eClerx.", src: "/placements/Shrikanth Suri.jpg" },
-  { name: "Kartik Bomble", role: "JM Financial · QA", text: "Test design + scenario writing clicked for me—sealed the JM offer.", src: "/placements/Kartik Bomble.jpg" },
+  { name: "Kartik Bomble", role: "JM Financial · QA", text: "Test design + scenario writing clicked for me-sealed the JM offer.", src: "/placements/Kartik Bomble.jpg" },
   { name: "Bhagyesh Mahadik", role: "Tech Mahindra · QA", text: "From basics to job-ready quickly with focused QA mentoring.", src: "/placements/Bhagyesh Mahadik.jpg" },
   { name: "Latesh Kamble", role: "Testriq · QA", text: "Automation primers and reviews turned interviews into conversations.", src: "/placements/Latesh Kamble.jpg" },
   { name: "Tejal More", role: "i-XL · QA", text: "Portfolio-ready test cases and clarity on SDLC gave me the edge.", src: "/placements/Tejal More.jpg" },
@@ -31,20 +31,20 @@ const STORIES: Story[] = [
   { name: "Abdul Mateen", role: "QodeNext · QA", text: "Scenario-based QA prep matched the interview perfectly.", src: "/placements/Abdul Mateen.jpg" },
   { name: "Muthukumaran Iyer", role: "Axiom TechGuru · QA", text: "Clear QA frameworks and live feedback built confidence.", src: "/placements/Muthukumaran Iyer.jpg" },
   { name: "Aaditya Bobade", role: "Punon Technologies · QA", text: "Project-first learning kept me interview-ready throughout.", src: "/placements/Aaditya Bobade.jpg" },
-  { name: "Sunil Pillai", role: "Tech Mahindra · QA", text: "From practice to placement—consistent QA coaching worked.", src: "/placements/Sunil Pillai.jpg" },
+  { name: "Sunil Pillai", role: "Tech Mahindra · QA", text: "From practice to placement, consistent QA coaching worked.", src: "/placements/Sunil Pillai.jpg" },
   { name: "Ashwini Badgujar", role: "Testriq · QA", text: "Strong fundamentals + practical labs = confident interviews.", src: "/placements/Ashwini Badgujar.jpg" },
   { name: "Faiz Khan", role: "Rendered Ideas · QA", text: "Exploratory testing sessions mapped to real interview tasks.", src: "/placements/Faiz Khan.jpg" },
   { name: "Shrey Gupta", role: "Rendered Ideas · QA", text: "Portfolio reviews and mocks helped me convert quickly.", src: "/placements/Shrey Gupta.jpg" },
 ];
 
-/** Distinct, visible skins per card (base tint + subtle pattern) */
+/** Softer, eye-friendly skins (reduced alpha + wider spacing) */
 const CARD_SKINS: { tint: string; overlay: string }[] = [
-  { tint: "rgba(255,140,0,0.12)", overlay: "repeating-linear-gradient(45deg, rgba(255,140,0,.16) 0 2px, transparent 2px 6px)" }, // brand orange
-  { tint: "rgba(14,165,233,0.12)", overlay: "repeating-linear-gradient(-45deg, rgba(14,165,233,.14) 0 2px, transparent 2px 6px)" }, // sky
-  { tint: "rgba(157,123,255,0.12)", overlay: "repeating-linear-gradient(90deg, rgba(157,123,255,.14) 0 1px, transparent 1px 5px)" }, // violet
-  { tint: "rgba(16,185,129,0.12)", overlay: "repeating-linear-gradient(30deg, rgba(16,185,129,.14) 0 2px, transparent 2px 6px)" }, // emerald
-  { tint: "rgba(236,72,153,0.12)", overlay: "repeating-linear-gradient(135deg, rgba(236,72,153,.14) 0 2px, transparent 2px 7px)" }, // rose
-  { tint: "rgba(245,158,11,0.12)", overlay: "repeating-linear-gradient(60deg, rgba(245,158,11,.14) 0 2px, transparent 2px 8px)" }, // amber
+  { tint: "rgba(255,140,0,0.08)", overlay: "repeating-linear-gradient(45deg, rgba(255,140,0,.06) 0 1px, transparent 1px 16px)" }, // brand orange
+  { tint: "rgba(14,165,233,0.08)", overlay: "repeating-linear-gradient(-45deg, rgba(14,165,233,.06) 0 1px, transparent 1px 18px)" }, // sky
+  { tint: "rgba(157,123,255,0.08)", overlay: "repeating-linear-gradient(90deg, rgba(157,123,255,.06) 0 1px, transparent 1px 20px)" }, // violet
+  { tint: "rgba(16,185,129,0.08)", overlay: "repeating-linear-gradient(30deg, rgba(16,185,129,.06) 0 1px, transparent 1px 18px)" }, // emerald
+  { tint: "rgba(236,72,153,0.08)", overlay: "repeating-linear-gradient(135deg, rgba(236,72,153,.06) 0 1px, transparent 1px 20px)" }, // rose
+  { tint: "rgba(245,158,11,0.08)", overlay: "repeating-linear-gradient(60deg, rgba(245,158,11,.06) 0 1px, transparent 1px 18px)" }, // amber
 ];
 
 type Props = { contained?: boolean };
@@ -92,10 +92,14 @@ export default function PlacementsSuccessStoriesCarousel({ contained = false }: 
                 const skin = CARD_SKINS[i % CARD_SKINS.length];
                 return (
                   <article key={`${s.name}-${i}`} className={cardClasses}>
-                    {/* Base tint to ensure visible color */}
+                    {/* Base tint (softened) */}
                     <span aria-hidden className="absolute inset-0" style={{ backgroundColor: skin.tint }} />
-                    {/* Pattern overlay to add texture */}
-                    <span aria-hidden className="absolute inset-0 opacity-90" style={{ backgroundImage: skin.overlay }} />
+                    {/* Subtle pattern overlay (very low opacity) */}
+                    <span
+                      aria-hidden
+                      className="absolute inset-0 opacity-20"
+                      style={{ backgroundImage: skin.overlay }}
+                    />
                     {/* Soft inner ring for polish */}
                     <span aria-hidden className="pointer-events-none absolute inset-0 rounded-2xl ring-1 ring-inset ring-black/5" />
 

@@ -53,7 +53,7 @@ export default function TestimonialHeroSection() {
       />
 
       {/* tighter top padding */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-8">
+      <div className="max-w-7xl mx-auto px-4 pb-8 sm:px-6 lg:px-8 pt-8">
         {/* Breadcrumbs for SEO & UX (Home > Testimonials) */}
         <nav aria-label="Breadcrumb" className="mb-3">
           <ol className="flex items-center gap-2 text-sm text-slate-500">

@@ -43,7 +43,7 @@ preds = aml.predict(test)</code></pre>
       <p>Edge computing processes data near its origin, reducing latency for IoT applications. In 2025, it integrates with data science for instant insights, like autonomous vehicles analyzing sensor data on-device.</p>
       
       <p>These fundamentals empower scalable, efficient data pipelines. As trends like GenAI and AutoML mature, they form the bedrock for innovative applications.</p>`,
-      image: "/blog/content/fundamentals-data-trends.jpg"
+      image: "/blog/section/fundamentals-data-trends.png"
     },
     {
       title: "Best Practices for Implementing Data Science Trends",

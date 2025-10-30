@@ -152,7 +152,7 @@ export default function JobsLiveJobsWhyWePostJobsSection() {
             <strong className="text-slate-900">Data Science</strong>,{" "}
             <strong className="text-slate-900">Full-Stack</strong> and{" "}
             <strong className="text-slate-900">DevOps</strong>, and pairs them with mentor guidance
-            and hiring-partner referrals—so you can apply confidently and get to interview faster.
+            and hiring-partner referrals, so you can apply confidently and get to interview faster.
           </p>
         </div>
 

@@ -490,7 +490,7 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="/events/services" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">Services</Link>
+            <Link href="/services" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">Services</Link>
 
             <Link href="/events/past-events" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
               Event
@@ -727,7 +727,7 @@ const Header = () => {
 
               {/* Mobile Services Link */}
               <Link
-                href="/events/services"
+                href="/services"
                 className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
                 onClick={toggleMenu}
               >

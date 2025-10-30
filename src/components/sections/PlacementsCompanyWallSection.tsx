@@ -6,7 +6,7 @@ import Image from "next/image";
 
 /**
  * CDPL — Hiring Partners Ticker (Logos Only)
- * Old card size + subtle padding; visual centering per logo.
+ * Seamless continuous marquee (no gap at start or loop).
  */
 
 const COMPANIES: string[] = [
@@ -52,7 +52,7 @@ const COMPANY_LOGOS: Record<string, string> = {
 };
 
 /** Global downscale (don’t change card box size) */
-const BASE_SCALE = 0.70;
+const BASE_SCALE = 0.7;
 
 /**
  * Per-logo visual tweaks:
@@ -90,13 +90,11 @@ type TickerRowProps = {
   items: string[];
   direction: "ltr" | "rtl"; // ltr = right→left, rtl = left→right
   speedSec?: number;
-  startOffsetPct?: number;
 };
 
 function getLogoPath(name: string): string | undefined {
   const key = name.trim().toLowerCase();
   const file = COMPANY_LOGOS[key];
-  // return file ? `/placements/companies/${file}` : undefined;
   return file ? `/placements/companies/${file}` : undefined;
 }
 
@@ -114,76 +112,67 @@ function TickerRow({
   items,
   direction,
   speedSec = 26,
-  startOffsetPct = 0,
 }: TickerRowProps) {
+  // Duplicate items exactly twice; track animates -50% (or +50%) for a perfect loop.
   const loopItems = useMemo(() => [...items, ...items], [items]);
-
-  const wrapperStyle =
-    direction === "ltr"
-      ? ({ transform: `translate3d(${startOffsetPct}%,0,0)` } as React.CSSProperties)
-      : ({ transform: `translate3d(-${startOffsetPct}%,0,0)` } as React.CSSProperties);
 
   return (
     <div className="group relative isolate overflow-hidden rounded-2xl bg-transparent">
-      <div className="marquee-start" style={wrapperStyle}>
-        <div
-          className={`marquee-track ${
-            direction === "ltr" ? "marquee-ltr" : "marquee-rtl"
+      <div
+        className={`marquee-track ${direction === "ltr" ? "marquee-ltr" : "marquee-rtl"
           } flex gap-4 md:gap-3 sm:gap-2 py-3 md:py-2.5 sm:py-2 will-change-transform`}
-          style={{ "--dur": `${speedSec}s` } as CSSVar}
-        >
-          {loopItems.map((name, i) => {
-            const logoSrc = getLogoPath(name);
-            if (!logoSrc) return null;
+        style={{ "--dur": `${speedSec}s` } as CSSVar}
+      >
+        {loopItems.map((name, i) => {
+          const logoSrc = getLogoPath(name);
+          if (!logoSrc) return null;
 
-            const { scale, tx, ty } = getTransform(name);
+          const { scale, tx, ty } = getTransform(name);
 
-            return (
+          return (
+            <div
+              key={`${name}-${i}`}
+              className={`
+                shrink-0
+                w-[220px] md:w-[180px] sm:w-[150px] max-[425px]:w-[140px]
+                rounded-2xl border border-black/10 bg-white
+                shadow-sm transition-shadow hover:shadow-md
+                p-3 md:p-2.5 sm:p-2 max-[425px]:p-2
+              `}
+              title={name}
+            >
               <div
-                key={`${name}-${i}`}
                 className={`
-                  shrink-0
-                  w-[220px] md:w-[180px] sm:w-[150px] max-[425px]:w-[140px]
-                  rounded-2xl border border-black/10 bg-white
-                  shadow-sm transition-shadow hover:shadow-md
-                  p-3 md:p-2.5 sm:p-2 max-[425px]:p-2
+                  mx-auto overflow-hidden rounded-xl
+                  w-full
+                  h-20 md:h-16 sm:h-14 max-[425px]:h-12
+                  relative
                 `}
-                title={name}
               >
-                {/* Inner frame now uses FULL width of the card's content area */}
                 <div
-                  className={`
-                    mx-auto overflow-hidden rounded-xl
-                    w-full
-                    h-20 md:h-16 sm:h-14 max-[425px]:h-12
-                    relative
-                  `}
+                  className="absolute inset-0 grid place-items-center"
+                  style={{
+                    transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`,
+                    transformOrigin: "center",
+                  }}
                 >
-                  {/* Absolute center, then apply per-logo translate + scale */}
-                  <div
-                    className="absolute inset-0 grid place-items-center"
-                    style={{
-                      transform: `translate3d(${tx}px, ${ty}px, 0) scale(${scale})`,
-                      transformOrigin: "center",
-                    }}
-                  >
-                    <Image
-                      src={logoSrc}
-                      alt={`${name} logo`}
-                      fill
-                      className="object-contain"
-                      sizes="(max-width: 425px) 100vw, (max-width: 640px) 100vw, (max-width: 768px) 100vw, 100vw"
-                      priority={false}
-                    />
-                  </div>
+                  <Image
+                    src={logoSrc}
+                    alt={`${name} logo`}
+                    fill
+                    className="object-contain"
+                    sizes="(max-width: 425px) 100vw, (max-width: 640px) 100vw, (max-width: 768px) 100vw, 100vw"
+                    priority={false}
+                  />
                 </div>
               </div>
-            );
-          })}
-        </div>
+            </div>
+          );
+        })}
       </div>
 
       <style jsx>{`
+        /* Pause on hover */
         .group:hover .marquee-track,
         .group .marquee-track:hover {
           animation-play-state: paused;
@@ -193,6 +182,8 @@ function TickerRow({
           animation-timing-function: linear;
           animation-iteration-count: infinite;
           transform: translate3d(0, 0, 0);
+          /* Prevent line wrapping and shrink issues at the seam */
+          white-space: nowrap;
         }
         .marquee-ltr {
           animation-name: cdpl-marquee-ltr;
@@ -240,21 +231,25 @@ export default function PlacementsCompanyWallSection({ contained = false }: Prop
           <div
             aria-hidden
             className="hidden sm:block h-[3px] w-40 rounded-full"
-            style={{ background: "linear-gradient(90deg,#ff8c00 0%,#ffb558 50%,#ffd19e 100%)" }}
+            style={{
+              background:
+                "linear-gradient(90deg,#ff8c00 0%,#ffb558 50%,#ffd19e 100%)",
+            }}
           />
         </div>
 
         <div className="mt-5 space-y-4">
           {/* Row 1: right → left */}
-          <TickerRow items={rows[0]} direction="ltr" speedSec={28} startOffsetPct={0} />
+          <TickerRow items={rows[0]} direction="ltr" speedSec={28} />
           {/* Row 2: left → right */}
-          <TickerRow items={rows[1]} direction="rtl" speedSec={26} startOffsetPct={12} />
+          <TickerRow items={rows[1]} direction="rtl" speedSec={26} />
           {/* Row 3: right → left */}
-          <TickerRow items={rows[2]} direction="ltr" speedSec={30} startOffsetPct={24} />
+          <TickerRow items={rows[2]} direction="ltr" speedSec={30} />
         </div>
       </Wrapper>
 
       <style jsx global>{`
+        /* Move exactly one "list width" (50% of the doubled track) for a perfect loop */
         @keyframes cdpl-marquee-ltr {
           0% {
             transform: translate3d(0%, 0, 0);

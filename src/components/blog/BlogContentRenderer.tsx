@@ -101,15 +101,15 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
             {section.title}
           </h2>
           
-          {/* Section Image */}
+          {/* Section Image - UPDATED: Changed to object-cover to fill container */}
           {section.image && (
-            <div className="mb-8 rounded-xl overflow-hidden shadow-lg">
+            <div className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] mb-8 rounded-xl overflow-hidden shadow-lg">
               <Image
                 src={section.image}
                 alt={section.title}
-                width={1200}
-                height={600}
-                className="w-full h-auto"
+                fill
+                className="object-cover"
+                sizes="(max-width: 768px) 100vw, 1200px"
               />
             </div>
           )}

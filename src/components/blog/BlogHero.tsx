@@ -76,20 +76,20 @@ const BlogHero = () => {
               </div>
             </div>
 
-            {/* Right Column - Featured Image */}
+            {/* Right Column - Featured Image - FIXED for mobile */}
             <div className="flex items-center justify-center">
-              <div className="w-full h-80 bg-gradient-to-br from-gray-50 to-gray-100 rounded-xl shadow-md overflow-hidden flex items-center justify-center border border-gray-200">
+              <div className="relative w-full h-64 sm:h-72 md:h-80 rounded-xl shadow-md overflow-hidden border border-gray-200">
                 {featuredPost.featuredImage ? (
                   <Image
                     src={featuredPost.featuredImage}
                     alt={featuredPost.title}
-                    width={600}
-                    height={400}
-                    className="w-full h-full object-contain bg-gray-100"
+                    fill
+                    className="object-cover"
+                    sizes="(max-width: 768px) 100vw, 50vw"
                     priority
                   />
                 ) : (
-                  <div className="flex flex-col items-center justify-center text-gray-400">
+                  <div className="flex flex-col items-center justify-center h-full bg-gradient-to-br from-gray-50 to-gray-100 text-gray-400">
                     <svg
                       className="w-20 h-20 mb-4"
                       fill="none"
@@ -116,4 +116,3 @@ const BlogHero = () => {
 };
 
 export default BlogHero;
-

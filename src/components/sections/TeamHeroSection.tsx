@@ -36,8 +36,8 @@ const highlights = [
 const logos = [
   { src: "/images/Skill-India-Color.svg", alt: "Skill India" },
   { src: "/images/ISO-9001.png", alt: "ISO Certified" },
+  { src: "/images/ISO-27001.png", alt: "ISO Certified" },
   { src: "/images/Testriq-Logo-1.webp", alt: "Testriq" },
-  { src: "/", alt: "GitHub Projects" },
 ];
 
 const VIS = {
@@ -138,9 +138,8 @@ export default function TeamHero() {
                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
                 <a
                   href={c.href}
-                  className={`hover:text-indigo-700 ${
-                    i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""
-                  }`}
+                  className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""
+                    }`}
                 >
                   {c.label}
                 </a>

@@ -16,7 +16,7 @@ type CDPLHeroProps = {
 };
 
 export default function JobsLiveJobsJobsHeroSection({
-  subtitle = "Verified nearby roles across QA Automation, Data Science, Full-Stack, and DevOps — posted by CDPL so students can apply faster.",
+  subtitle = "Verified nearby roles across QA Automation, Data Science, Full-Stack, and DevOps, posted by CDPL so students can apply faster.",
 }: CDPLHeroProps) {
   const jsonLd = useMemo(
     () => ({
@@ -98,7 +98,7 @@ export default function JobsLiveJobsJobsHeroSection({
               transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg"
             >
-              CDPL connects learners with industry mentors, hiring partners, and nearby openings—offering
+              CDPL connects learners with industry mentors, hiring partners, and nearby openings/offering
               job alerts, resume help, and interview preparation for faster placements across India.
             </motion.p>
 

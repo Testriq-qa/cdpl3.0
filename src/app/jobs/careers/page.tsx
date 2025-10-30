@@ -121,7 +121,7 @@ const JOBS: Job[] = [
         type: "Full-time",
         experience: "5–8 yrs",
         summary:
-            "Own learner outcomes—define roadmap, validate bets, and ship value every sprint.",
+            "Own learner outcomes, define roadmap, validate bets, and ship value every sprint.",
         responsibilities: [
             "Craft PRDs, align cross-functional teams, and ship",
             "Measure impact and iterate ruthlessly",

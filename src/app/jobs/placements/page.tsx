@@ -8,7 +8,7 @@ import Script from "next/script";
  * ========================= */
 export const metadata: Metadata = {
     title:
-        "Student Placements — Cinute Digital Pvt Ltd (CDPL) | Real Hiring Outcomes & Success Stories",
+        "Student Placements: Cinute Digital Pvt Ltd (CDPL) | Real Hiring Outcomes & Success Stories",
     description:
         "Explore CDPL student placements across top companies. See roles, packages, locations, partner companies, and success stories driven by our product-led, mentor-first training.",
     keywords: [
@@ -91,10 +91,7 @@ const PlacementsSuccessStoriesCarousel = dynamic(
     () => import("@/components/sections/PlacementsSuccessStoriesCarousel"),
     { ssr: true, loading: () => <SectionLoader label="Loading stories…" /> }
 );
-const PlacementsRolesBreakdownSection = dynamic(
-    () => import("@/components/sections/PlacementsRolesBreakdownSection"),
-    { ssr: true, loading: () => <SectionLoader label="Rendering roles…" /> }
-);
+
 const PlacementsMentorCTASection = dynamic(
     () => import("@/components/sections/PlacementsMentorCTASection"),
     { ssr: true, loading: () => <SectionLoader label="Setting up CTA…" /> }
@@ -185,21 +182,13 @@ export default function PlacementsPage() {
 
             <section
                 className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
-                data-scroll-target="placements-roles"
-            >
-                <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-                    <PlacementsRolesBreakdownSection />
-                </div>
-            </section>
-
-            <section
-                className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
                 data-scroll-target="placements-mentor"
             >
                 <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                     <PlacementsMentorCTASection />
                 </div>
             </section>
+
 
             <section
                 className="w-full pb-16 scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"

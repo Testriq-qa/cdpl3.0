@@ -7,15 +7,15 @@ type Group = { title: string; bullets: string[] };
 export default function AAACertificationCurriculumSection() {
   const groups: Group[] = [
     {
-      title: "Module 1 — Foundations & Blueprint",
+      title: "Module 1 - Foundations & Blueprint",
       bullets: ["AAA exam format & policies", "Core concepts & terminology", "Study plan & milestones"],
     },
     {
-      title: "Module 2 — Practical Labs",
+      title: "Module 2 - Practical Labs",
       bullets: ["Hands-on exercises", "Mentor-reviewed checkpoints", "Mini-capstone with rubric"],
     },
     {
-      title: "Module 3 — Capstone & Review",
+      title: "Module 3 - Capstone & Review",
       bullets: ["End-to-end project", "Critique sessions", "Final readiness checklist"],
     },
   ];
