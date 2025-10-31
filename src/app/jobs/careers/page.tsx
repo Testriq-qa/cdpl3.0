@@ -1,32 +1,32 @@
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
+import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
-// ====== SEO / Metadata ======
-export const metadata: Metadata = {
-    title:
-        "Careers at Cinute Digital Pvt Ltd (CDPL) — Join our product-led ed-tech team",
-    description:
-        "Explore open roles at CDPL across engineering, data, product, growth, and student success. Work on high-impact ed-tech products, ship fast, learn faster.",
-    openGraph: {
-        title:
-            "Careers at Cinute Digital Pvt Ltd (CDPL) — Join our product-led ed-tech team",
-        description:
-            "Explore open roles at CDPL across engineering, data, product, growth, and student success.",
-        url: "https://www.cinutedigital.com/jobs/careers",
-        siteName: "Cinute Digital Pvt Ltd (CDPL)",
-        images: [
-            {
-                url: "/og/cdpl-careers-1536x1024.png",
-                width: 1536,
-                height: 1024,
-                alt: "CDPL Careers — Build the future of outcomes-first ed-tech",
-            },
-        ],
-        type: "website",
-    },
-    alternates: { canonical: "https://www.cinutedigital.com/jobs/careers" },
-    robots: { index: true, follow: true },
-};
+
+// SEO METADATA - Enhanced for Careers Page
+// ============================================================================
+export const metadata: Metadata = generateSEO({
+    title: "Careers at CDPL - Join Our EdTech Team | Software, Data, Product Roles",
+    description: "Explore career opportunities at Cinute Digital (CDPL) across Engineering, Data Science, Product Management, Growth, and Student Success. Work on high-impact EdTech products, ship fast, learn faster. Join our product-led team building the future of tech education.",
+    keywords: [
+        "CDPL careers",
+        "Cinute Digital jobs",
+        "EdTech jobs",
+        "software engineer jobs",
+        "data scientist jobs",
+        "product manager jobs",
+        "growth marketing jobs",
+        "student success jobs",
+        "tech jobs India",
+        "startup jobs",
+        "work at CDPL",
+    ],
+    url: "/jobs/careers",
+    image: "/og/cdpl-careers-1536x1024.png",
+    imageAlt: "Careers at CDPL - Build the future of outcomes-first EdTech",
+});
+
+
 
 // ====== Shared Types / Data ======
 export type Job = {
@@ -240,8 +240,15 @@ const JobsCareersCTASection = dynamic(
     { ssr: true, loading: () => <SectionLoader label="Loading CTA..." /> }
 );
 
-// ====== Page ======
+// ====== Page =====
 export default function Page() {
+
+    
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Jobs", url: "/jobs/careers" },
+        { name: "Careers", url: "/jobs/careers" },
+    ]);
     return (
         <>
             <script
@@ -249,6 +256,11 @@ export default function Page() {
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify(jobPostingJsonLd(JOBS)),
                 }}
+            />
+
+             <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             <main className="w-full bg-white text-neutral-900 dark:bg-white dark:text-neutral-900">
                 {/* Sections now manage their own inner container (max-w-7xl px-4 py-12 sm:px-6 lg:px-8) */}
