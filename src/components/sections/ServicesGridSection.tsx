@@ -71,7 +71,7 @@ export default function ServicesGridSection() {
 
                   {/* CTA */}
                   <Link
-                    href={`/events/services/${service.slug}`}
+                    href={`/services/${service.slug}`}
                     className="block mt-auto"
                   >
                     <button
