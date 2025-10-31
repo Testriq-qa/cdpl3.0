@@ -16,6 +16,7 @@ const courseCategories = [
     courses: [
       {
         name: "Manual Software Testing",
+        slug: "manual-testing-course",
         description: "Learn to facilitate Scrum teams and drive Agile projects effectively.",
         governingBodies: [{ name: "Manual Testing", logo: "/header_images/Manual-Testing.png" }],
       },
@@ -415,7 +416,7 @@ const Header = () => {
                             {selectedCategoryData?.courses.map((course, index) => (
                               <a
                                 key={index}
-                                href={`/courses/${selectedCategory}/${course.name.toLowerCase().replace(/[®\s&]+/g, "-")}`}
+                                href={course.slug}
                                 onMouseEnter={() => setHoveredCourse(course.name)}
                                 className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
                                   }`}
@@ -702,7 +703,7 @@ const Header = () => {
                               {category.courses.map((course, idx) => (
                                 <a
                                   key={idx}
-                                  href={`/courses/${category.id}/${course.name.toLowerCase().replace(/[®\s&]+/g, "-")}`}
+                                  href={course.slug}
                                   className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
                                   onClick={toggleMenu}
                                 >
