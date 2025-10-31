@@ -1,4 +1,26 @@
-export function getFlatLocations(states: typeof statesData) {
+// src/data/cities/citiesData.ts
+
+export type City = {
+    name: string;
+    lat: number;
+    lng: number;
+    courseType?: string;
+    link?: string;
+};
+
+export type District = {
+    district: string;
+    description?: string;
+    cities: City[];
+};
+
+export type State = {
+    state: string;
+    description?: string;
+    districts: District[];
+};
+
+export function getFlatLocations(states: State[]) {
     const flat: { name: string; lat: number; lng: number; type: string; link?: string }[] = [];
     states.forEach((state) => {
         state.districts.forEach((district) => {
@@ -17,7 +39,7 @@ export function getFlatLocations(states: typeof statesData) {
 }
 
 
-export const statesData = [
+export const statesData: State[] = [
     {
         "state": "Maharashtra",
         "description": "Premier courses in Maharashtra, including Data Science, General, Programming, Software Testing. Find top-rated training and bootcamps in major cities across the state. Keywords: data science, general, programming, software testing courses Maharashtra, training Maharashtra.",

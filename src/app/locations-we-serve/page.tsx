@@ -1,7 +1,8 @@
 // src/app/locations-we-serve/page.tsx
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
-import { getFlatLocations, statesData } from "@/data/cities/citiesData";
+import { statesData } from "@/data/cities/citiesData";
+import LocationsClientMapSection from "@/components/sections/LocationsClientMapSection";
 
 // Server-only tiny loader
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -24,10 +25,8 @@ const HierarchicalLocationsSection = dynamic(
   { ssr: true, loading: () => <SectionLoader label="Loading locations..." /> }
 );
 
-const LocationsInteractiveMapSection = dynamic(
-  () => import("@/components/sections/LocationsInteractiveMapSection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading map..." /> }
-);
+// Remove this — moved to LocationsClientMapSection
+// const LocationsInteractiveMapSection = dynamic(...)
 
 const LocationsBenefitsSection = dynamic(
   () => import("@/components/sections/LocationsBenefitsSection"),
@@ -39,11 +38,6 @@ const LocationsCTASection = dynamic(
   { ssr: true, loading: () => <SectionLoader label="Loading CTA..." /> }
 );
 
-export type MapProps = {
-  locations: Array<{ name: string; lat: number; lng: number; type: string; link?: string }>;
-};
-
-// ✅ Safe to export metadata here (server file)
 export const metadata: Metadata = {
   title: "Locations We Serve | Software Testing & Programming Courses Across India",
   description:
@@ -61,25 +55,19 @@ export const metadata: Metadata = {
 export default function LocationsWeServePage() {
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-slate-50 to-blue-50 transition-colors duration-300">
-      {/* HERO — already full-width; inner layout handled inside component */}
       <LocationsHeroSection />
 
-      {/* Hierarchical Locations — 100% width */}
       <section className="w-full mt-10">
         <HierarchicalLocationsSection data={statesData} />
       </section>
 
-      {/* Interactive Map — 100% width */}
-      <section className="w-full mt-10">
-        <LocationsInteractiveMapSection locations={getFlatLocations(statesData)} />
-      </section>
+      {/* Now safe: LocationsClientMapSection handles ssr: false */}
+      <LocationsClientMapSection />
 
-      {/* Benefits — 100% width */}
       <section className="w-full mt-10">
         <LocationsBenefitsSection />
       </section>
 
-      {/* CTA — 100% width */}
       <section className="w-full mt-10">
         <LocationsCTASection />
       </section>

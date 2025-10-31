@@ -1,12 +1,13 @@
 "use client";
 
+import { useEffect, useMemo, useRef, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet";
 import type { LatLngExpression, LatLngBoundsLiteral } from "leaflet";
 import L from "leaflet";
-import { useEffect, useMemo } from "react";
 import "leaflet/dist/leaflet.css";
+import type { FlatLocation } from "./LocationsInteractiveMapSection";
 
-/** ── Marker icon fix for Next/ESM (handles StaticImageData | string) ───────── */
+/** ── Marker icon fix ─────────────────────────────────────────────────────── */
 import iconRetinaUrl from "leaflet/dist/images/marker-icon-2x.png";
 import iconUrl from "leaflet/dist/images/marker-icon.png";
 import shadowUrl from "leaflet/dist/images/marker-shadow.png";
@@ -14,36 +15,88 @@ import shadowUrl from "leaflet/dist/images/marker-shadow.png";
 type MaybeImage = string | { src: string };
 const toUrl = (u: MaybeImage): string => (typeof u === "string" ? u : u.src);
 
-// Extract string URLs (works for string or StaticImageData-like objects)
-const iconRetina = toUrl(iconRetinaUrl as unknown as MaybeImage);
-const icon = toUrl(iconUrl as unknown as MaybeImage);
-const shadow = toUrl(shadowUrl as unknown as MaybeImage);
-
-// Build a default icon with explicit sizes/anchors
 const DefaultIcon = L.icon({
-    iconRetinaUrl: iconRetina,
-    iconUrl: icon,
-    shadowUrl: shadow,
+    iconRetinaUrl: toUrl(iconRetinaUrl as unknown as MaybeImage),
+    iconUrl: toUrl(iconUrl as unknown as MaybeImage),
+    shadowUrl: toUrl(shadowUrl as unknown as MaybeImage),
     iconSize: [25, 41],
     iconAnchor: [12, 41],
     popupAnchor: [1, -34],
     tooltipAnchor: [16, -28],
     shadowSize: [41, 41],
 });
-
-// Apply globally to all markers
 L.Marker.prototype.options.icon = DefaultIcon;
-/* ──────────────────────────────────────────────────────────────────────────── */
+/* ─────────────────────────────────────────────────────────────────────────── */
 
-export type FlatLocation = {
-    name: string;
-    lat: number;
-    lng: number;
-    type?: string;
-    link?: string;
-};
+L.Map.addInitHook(function () {
+    // @ts-expect-error internal flag still respected
+    this.options.preferCanvas = true;
+});
 
-/** Re-fit/lock to India and keep the view clamped */
+/** Safe map checks */
+function isMapReady(map: L.Map | undefined | null): map is L.Map {
+    if (!map) return false;
+    // Accessing private fields is okay here for runtime safety; guard with ts-ignore.
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const m: any = map;
+    return !!m._loaded && !!m._mapPane && !!map.getCenter;
+}
+
+/** Throttled clamp using rAF — attaches only after 'load' to avoid _leaflet_pos errors */
+function useThrottledClamp(map: L.Map, bounds: L.LatLngBounds, minZoom: number) {
+    const tickingRef = useRef(false);
+
+    useEffect(() => {
+        let mounted = true;
+
+        const clamp = () => {
+            if (!mounted) return;
+            if (tickingRef.current) return;
+            tickingRef.current = true;
+
+            requestAnimationFrame(() => {
+                tickingRef.current = false;
+
+                if (!mounted || !isMapReady(map)) return;
+
+                // All calls below are now safe
+                const within = bounds.contains(map.getCenter());
+                const tooFarOut = map.getZoom() < minZoom;
+
+                if (!within || tooFarOut) {
+                    map.panInsideBounds(bounds, { animate: true, duration: 0.3 });
+                    if (tooFarOut) map.setZoom(minZoom + 1, { animate: true });
+                }
+            });
+        };
+
+        const attach = () => {
+            if (!mounted) return;
+            map.on("dragend", clamp);
+            map.on("moveend", clamp);
+            map.on("zoomend", clamp);
+            // initial clamp after load
+            clamp();
+        };
+
+        // Attach after the map has finished loading its first view
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        const alreadyLoaded = (map as any)._loaded;
+        if (alreadyLoaded) {
+            attach();
+        } else {
+            map.once("load", attach);
+        }
+
+        return () => {
+            mounted = false;
+            map.off("dragend", clamp);
+            map.off("moveend", clamp);
+            map.off("zoomend", clamp);
+        };
+    }, [map, bounds, minZoom]);
+}
+
 function EnforceIndia({
     bounds,
     minZoom,
@@ -56,64 +109,75 @@ function EnforceIndia({
     useEffect(() => {
         const lb = bounds instanceof L.LatLngBounds ? bounds : L.latLngBounds(bounds);
 
-        map.setMaxBounds(lb);
-        map.options.minZoom = minZoom;
-
-        // First fit; cap zoom so it doesn't zoom too far out
-        map.fitBounds(lb, { padding: [20, 20], maxZoom: Math.max(minZoom + 1, 5) });
-
-        const clamp = () => {
-            const within = lb.contains(map.getCenter());
-            const tooFarOut = map.getZoom() < minZoom;
-            if (!within || tooFarOut) {
-                map.flyToBounds(lb, {
-                    duration: 0.35,
-                    maxZoom: Math.max(minZoom + 1, 5),
-                });
-            }
+        const apply = () => {
+            if (!isMapReady(map)) return;
+            map.setMaxBounds(lb);
+            map.options.minZoom = minZoom;
+            map.fitBounds(lb, { padding: [20, 20], maxZoom: Math.max(minZoom + 1, 5) });
         };
 
-        map.on("dragend", clamp);
-        map.on("moveend", clamp);
-        map.on("zoomend", clamp);
-        return () => {
-            map.off("dragend", clamp);
-            map.off("moveend", clamp);
-            map.off("zoomend", clamp);
-        };
+        // Ensure we only call once the map is ready
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        if ((map as any)._loaded) apply();
+        else map.once("load", apply);
     }, [map, bounds, minZoom]);
 
+    const lb = bounds instanceof L.LatLngBounds ? bounds : L.latLngBounds(bounds);
+    useThrottledClamp(map, lb, minZoom);
     return null;
 }
 
-/** Invalidate size after mount & whenever the container is resized */
 function InvalidateOnResize() {
     const map = useMap();
+    const [isClient, setIsClient] = useState(false);
 
     useEffect(() => {
-        const once = () => map.invalidateSize({ animate: false });
-        // run a few times to catch CSS transitions/transforms
-        once();
-        const t1 = setTimeout(once, 50);
-        const t2 = setTimeout(once, 200);
-        const t3 = setTimeout(once, 500);
+        setIsClient(true);  // Set to true after the component is mounted in the client
 
-        const ro = new ResizeObserver(() => map.invalidateSize({ animate: false }));
-        ro.observe(map.getContainer());
+        if (typeof window === "undefined") {
+            return;
+        }
 
-        const onVisibility = () => map.invalidateSize({ animate: false });
+        let mounted = true;
+
+        const invalidate = () => {
+            if (!mounted || !map) return;
+            map.invalidateSize({ animate: false });
+        };
+
+        // Kick a few times after mount to cover transitions/layout shifts
+        invalidate();
+        const t1 = setTimeout(invalidate, 50);
+        const t2 = setTimeout(invalidate, 200);
+        const t3 = setTimeout(invalidate, 500);
+
+        // Guard container existence (can be undefined during unmount)
+        const container = map?.getContainer?.();
+        let ro: ResizeObserver | undefined;
+        if (container) {
+            ro = new ResizeObserver(invalidate);
+            ro.observe(container);
+        }
+
+        const onVisibility = invalidate;
         window.addEventListener("orientationchange", onVisibility);
         window.addEventListener("resize", onVisibility);
 
         return () => {
+            mounted = false;
             clearTimeout(t1);
             clearTimeout(t2);
             clearTimeout(t3);
-            ro.disconnect();
+            ro?.disconnect();
             window.removeEventListener("orientationchange", onVisibility);
             window.removeEventListener("resize", onVisibility);
         };
     }, [map]);
+
+    // Only render the component on the client
+    if (!isClient) {
+        return null;
+    }
 
     return null;
 }
@@ -129,16 +193,35 @@ export default function LocationsLeafletMapInnerSection({
 }: {
     locations: FlatLocation[];
     center: LatLngExpression;
-    bounds: L.LatLngBounds | LatLngBoundsLiteral; // e.g., [[6,66],[38,100]]
+    bounds: L.LatLngBounds | LatLngBoundsLiteral;
     height?: number;
     minZoom?: number;
     maxZoom?: number;
     className?: string;
 }) {
-    // Build a concrete LatLngBounds once and reuse it (avoids TS mismatch)
     const lb = useMemo(
         () => (bounds instanceof L.LatLngBounds ? bounds : L.latLngBounds(bounds)),
         [bounds]
+    );
+
+    const markerNodes = useMemo(
+        () =>
+            locations.map((loc, i) => (
+                <Marker key={`${loc.name}-${loc.lat}-${loc.lng}-${i}`} position={[loc.lat, loc.lng]}>
+                    <Popup>
+                        <div className="text-sm">
+                            <div className="font-medium text-slate-900">{loc.name}</div>
+                            {loc.type && <div className="text-slate-600">{loc.type}</div>}
+                            {loc.link && (
+                                <a className="text-indigo-600 underline" href={loc.link}>
+                                    View details
+                                </a>
+                            )}
+                        </div>
+                    </Popup>
+                </Marker>
+            )),
+        [locations]
     );
 
     return (
@@ -153,8 +236,13 @@ export default function LocationsLeafletMapInnerSection({
                 className="rounded-2xl"
                 maxBounds={lb}
                 maxBoundsViscosity={1.0}
-                worldCopyJump={false}
-                zoomControl={true}
+                zoomControl
+                // valid Map options
+                preferCanvas
+                zoomAnimation
+                fadeAnimation
+                markerZoomAnimation={false}
+                wheelPxPerZoomLevel={180}
             >
                 <InvalidateOnResize />
                 <EnforceIndia bounds={lb} minZoom={minZoom} />
@@ -162,25 +250,16 @@ export default function LocationsLeafletMapInnerSection({
                 <TileLayer
                     attribution="&copy; OpenStreetMap contributors"
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    noWrap={true}
-                    updateWhenIdle={true}
+                    noWrap
+                    // valid GridLayer/TileLayer options:
+                    updateWhenIdle
+                    keepBuffer={1}
+                    detectRetina={false}
+                    maxZoom={18}
+                    maxNativeZoom={18}
                 />
 
-                {locations.map((loc, i) => (
-                    <Marker key={`${loc.name}-${i}`} position={[loc.lat, loc.lng]}>
-                        <Popup>
-                            <div className="text-sm">
-                                <div className="font-medium text-slate-900">{loc.name}</div>
-                                {loc.type && <div className="text-slate-600">{loc.type}</div>}
-                                {loc.link && (
-                                    <a className="text-indigo-600 underline" href={loc.link}>
-                                        View details
-                                    </a>
-                                )}
-                            </div>
-                        </Popup>
-                    </Marker>
-                ))}
+                {markerNodes}
             </MapContainer>
         </div>
     );

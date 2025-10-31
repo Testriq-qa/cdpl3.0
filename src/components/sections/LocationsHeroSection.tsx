@@ -1,26 +1,61 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getFlatLocations, statesData } from "@/data/cities/citiesData";
-import InteractiveMapSection from "./LocationsInteractiveMapSection";
 
-// simple responsive height hook for the map
+/* --------------------------------------------------------------
+   Dynamic import of the map – **ssr:false** so Leaflet never runs
+   on the server.  The loading component is passed in the options
+   object, **not** as `<dynamic.loading>`.
+   -------------------------------------------------------------- */
+const InteractiveMapSection = dynamic(
+  () => import("./LocationsInteractiveMapSection"),
+  {
+    ssr: false,
+    loading: () => <MapPlaceholder height={420} />,
+  }
+);
+
+/* --------------------------------------------------------------
+   SSR-safe responsive height hook
+   -------------------------------------------------------------- */
 function useResponsiveMapHeight() {
-  const [h, setH] = useState(420);
+  const [height, setHeight] = useState(420);
+
   useEffect(() => {
     const update = () => {
       const w = window.innerWidth;
-      // <640 = mobile, <1024 = tablet, else desktop
-      setH(w < 640 ? 280 : w < 1024 ? 360 : 420);
+      setHeight(w < 640 ? 280 : w < 1024 ? 360 : 420);
     };
     update();
     window.addEventListener("resize", update);
     return () => window.removeEventListener("resize", update);
   }, []);
-  return h;
+
+  return height;
 }
 
+/* --------------------------------------------------------------
+   Placeholder rendered on the server (initial height 420 px)
+   -------------------------------------------------------------- */
+function MapPlaceholder({ height }: { height: number }) {
+  return (
+    <div
+      className="w-full overflow-hidden rounded-2xl bg-transparent ring-0 shadow-none"
+      style={{ height }}
+    >
+      <div className="flex h-full w-full items-center justify-center bg-slate-50/70 backdrop-blur-sm">
+        <p className="text-sm text-gray-600">Loading map…</p>
+      </div>
+    </div>
+  );
+}
+
+/* --------------------------------------------------------------
+   Hero component
+   -------------------------------------------------------------- */
 export default function LocationsHeroSection() {
   const mapHeight = useResponsiveMapHeight();
 
@@ -34,18 +69,16 @@ export default function LocationsHeroSection() {
 
   return (
     <section className="relative isolate w-full overflow-hidden bg-white text-slate-900">
-      {/* background */}
+      {/* … background layers … */}
       <div className="absolute inset-0 -z-30">
         <div className="absolute inset-0 bg-gradient-to-b from-slate-50 to-white" />
         <div className="absolute left-1/2 top-[-6rem] h-[30rem] w-[60rem] -translate-x-1/2 rounded-full blur-3xl opacity-30 bg-[radial-gradient(circle_at_center,theme(colors.indigo.200)_0,transparent_60%)]" />
       </div>
 
-      {/* decorative layer */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <svg className="absolute left-0 top-0 h-full w-full" aria-hidden />
       </div>
 
-      {/* inner container */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         {/* breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-3">
@@ -61,11 +94,11 @@ export default function LocationsHeroSection() {
         </nav>
 
         <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-2">
-          {/* LEFT */}
+          {/* LEFT – copy */}
           <div className="order-1 lg:order-1 text-center lg:text-left">
             <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600 backdrop-blur">
               <span className="hidden h-2 w-2 rounded-full sm:inline-block" style={{ backgroundColor: "var(--color-brand, #ff8c00)" }} />
-              India-wide presence • State → District → City
+              India-wide presence
             </p>
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-[#0069A8]">
@@ -102,9 +135,8 @@ export default function LocationsHeroSection() {
             </div>
           </div>
 
-          {/* RIGHT — Map, responsive and above overlays */}
+          {/* RIGHT – map */}
           <div className="order-2 lg:order-2 relative mt-4 flex items-start justify-center sm:mt-6 lg:justify-end lg:mt-0 -translate-y-0 sm:-translate-y-1 lg:-translate-y-8 xl:-translate-y-10">
-            {/* soft halo */}
             <div aria-hidden className="pointer-events-none absolute -inset-x-4 -inset-y-6 sm:-inset-x-6 sm:-inset-y-8 rounded-[2rem] bg-gradient-to-b from-indigo-100/40 to-white/0 blur-xl" />
             <div className="relative z-20 w-full max-w-full sm:max-w-[32rem] lg:max-w-[40rem]">
               <InteractiveMapSection

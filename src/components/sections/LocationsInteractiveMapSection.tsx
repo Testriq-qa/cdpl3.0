@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from "next/dynamic";
-import { useMemo } from "react";
+import { useMemo, useEffect, useRef, useState } from "react";
 
 const LocationsLeafletMapInnerSection = dynamic(
   () => import("./LocationsLeafletMapInnerSection"),
@@ -16,6 +16,44 @@ export type FlatLocation = {
   link?: string;
 };
 
+/* --------------------------------------------------------------
+   Lazy-show (intersection observer) – keeps the map off-screen
+   until it enters the viewport.
+   -------------------------------------------------------------- */
+function LazyShow({
+  children,
+  rootMargin = "200px",
+  minHeight = 280,
+}: {
+  children: React.ReactNode;
+  rootMargin?: string;
+  minHeight?: number;
+}) {
+  const [show, setShow] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!ref.current || show) return;
+    const io = new IntersectionObserver(
+      ([e]) => {
+        if (e.isIntersecting) {
+          setShow(true);
+          io.disconnect();
+        }
+      },
+      { rootMargin }
+    );
+    io.observe(ref.current);
+    return () => io.disconnect();
+  }, [show, rootMargin]);
+
+  return <div ref={ref} style={{ minHeight }}>{show ? children : null}</div>;
+}
+
+/* --------------------------------------------------------------
+   Props interface – **no `simplePopup`** (it was only used for the
+   hero “bare” variant, but the inner component does not need it).
+   -------------------------------------------------------------- */
 export default function LocationsInteractiveMapSection({
   locations,
   variant = "default",
@@ -33,8 +71,8 @@ export default function LocationsInteractiveMapSection({
 
   const indiaBounds = useMemo<[[number, number], [number, number]]>(
     () => [
-      [6.0, 66.0],   // SW
-      [38.0, 100.0], // NE
+      [6.0, 66.0],
+      [38.0, 100.0],
     ],
     []
   );
@@ -47,7 +85,9 @@ export default function LocationsInteractiveMapSection({
   const Top = constrained
     ? ({ children }: { children: React.ReactNode }) => (
       <section className="w-full bg-transparent">
-        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">{children}</div>
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+          {children}
+        </div>
       </section>
     )
     : ({ children }: { children: React.ReactNode }) => <div className="w-full">{children}</div>;
@@ -55,15 +95,17 @@ export default function LocationsInteractiveMapSection({
   return (
     <Top>
       <div className="relative z-20" style={{ height }}>
-        <LocationsLeafletMapInnerSection
-          locations={locations}
-          center={indiaCenter}
-          bounds={indiaBounds}
-          height={height}
-          className={mapShellClasses}
-          minZoom={4}
-          maxZoom={12}
-        />
+        <LazyShow minHeight={height}>
+          <LocationsLeafletMapInnerSection
+            locations={locations}
+            center={indiaCenter}
+            bounds={indiaBounds}
+            height={height}
+            className={mapShellClasses}
+            minZoom={4}
+            maxZoom={12}
+          />
+        </LazyShow>
       </div>
     </Top>
   );
