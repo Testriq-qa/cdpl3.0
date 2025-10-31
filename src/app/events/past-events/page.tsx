@@ -1,14 +1,38 @@
 // app/events/past-events/page.tsx
+import type { Metadata } from "next";
 import type { ComponentProps } from "react";
 import dynamic from "next/dynamic";
-
 import { pastEvents } from "@/data/eventsData";
+import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
 // Type-only imports so we can still infer props and event shape
 import type {
   default as EventsPastEventsAllEventsSectionType,
 } from "@/components/sections/EventsPastEventsAllEventsSection";
 import type { FeaturedEvent } from "@/components/sections/EventsPastEventsFeaturedEventsSliderSection";
+
+// ============================================================================
+// SEO METADATA - Optimized for Past Events Page
+// ============================================================================
+export const metadata: Metadata = generateSEO({
+  title: "Past Events - Workshops, Webinars & Training Sessions | CDPL",
+  description: "Explore CDPL's past events including corporate training workshops, technical webinars, industry conferences, and hands-on training sessions on Software Testing, Data Science, AI/ML, and Automation. See highlights, attendees, and success stories from our events.",
+  keywords: [
+    "CDPL past events",
+    "software testing workshops",
+    "data science webinars",
+    "technical training sessions",
+    "corporate training events",
+    "AI ML workshops",
+    "automation testing events",
+    "industry conferences",
+    "CDPL events gallery",
+    "training highlights",
+  ],
+  url: "/events/past-events",
+  image: "/og-image-events.jpg",
+  imageAlt: "CDPL Past Events - Workshops, Webinars & Training Sessions",
+});
 
 // Small inline loader for dynamic sections
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -117,6 +141,9 @@ const FALLBACK = {
   text: "text-slate-700",
 };
 
+// ============================================================================
+// PAST EVENTS PAGE COMPONENT
+// ============================================================================
 export default function PastEventsPage() {
   const featuredEvents: FeaturedEvent[] = pastEvents
     .filter((e) => e.featured)
@@ -141,45 +168,139 @@ export default function PastEventsPage() {
     (e) => !e.featured
   ) as AllEventsProps["events"];
 
-  return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50">
-      {/* HERO (separate component) */}
-      <EventsPastEventsHeroSection />
+  // Breadcrumb Schema
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Events", url: "/events/past-events" },
+    { name: "Past Events", url: "/events/past-events" },
+  ]);
 
-      {/* Featured */}
-      {featuredEvents.length > 0 && (
-        <section id="featured-events" className="py-10 w-full">
+  // CollectionPage Schema with Events
+  const collectionPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://www.cinutedigital.com/events/past-events#collectionpage",
+    url: "https://www.cinutedigital.com/events/past-events",
+    name: "CDPL Past Events",
+    description: "Browse our past workshops, webinars, and training events",
+    inLanguage: "en-IN",
+    mainEntity: {
+      "@type": "ItemList",
+      itemListElement: pastEvents.slice(0, 10).map((event, index) => ({
+        "@type": "ListItem",
+        position: index + 1,
+        item: {
+          "@type": "Event",
+          name: event.title,
+          description: event.subtitle || event.purpose,
+          startDate: event.date,
+          location: {
+            "@type": "Place",
+            name: event.location,
+          },
+          organizer: {
+            "@type": "Organization",
+            name: event.organization || "CDPL - Cinute Digital",
+          },
+          ...(event.attendees && {
+            attendee: {
+              "@type": "AudienceCount",
+              audienceSize: event.attendees,
+            },
+          }),
+        },
+      })),
+    },
+  };
+
+  // Organization Schema
+  const organizationSchema = {
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "@id": "https://www.cinutedigital.com/#organization",
+    name: "CDPL - Cinute Digital Pvt. Ltd.",
+    url: "https://www.cinutedigital.com",
+    event: pastEvents.slice(0, 5).map((event) => ({
+      "@type": "Event",
+      name: event.title,
+      description: event.subtitle || event.purpose,
+      startDate: event.date,
+      location: {
+        "@type": "Place",
+        name: event.location,
+      },
+      organizer: {
+        "@type": "Organization",
+        name: "CDPL - Cinute Digital",
+      },
+    })),
+  };
+
+  return (
+    <>
+      {/* Structured Data - Multiple Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+
+      {/* Main Content - Semantic HTML Structure */}
+      <div 
+        className="min-h-screen bg-gradient-to-br from-purple-50 via-blue-50 to-indigo-50"
+        itemScope 
+        itemType="https://schema.org/CollectionPage"
+      >
+        {/* Hidden metadata for schema.org */}
+        <meta itemProp="name" content="CDPL Past Events" />
+        <meta itemProp="description" content="Browse our past workshops, webinars, and training events" />
+        <meta itemProp="url" content="https://www.cinutedigital.com/events/past-events" />
+
+        {/* HERO (separate component) */}
+        <EventsPastEventsHeroSection />
+
+        {/* Featured */}
+        {featuredEvents.length > 0 && (
+          <section id="featured-events" className="py-10 w-full">
+            <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
+              <h2 className="mb-6 text-4xl font-bold">
+                <span style={{ color: "rgb(0, 105, 168)" }}>Featured</span>{" "}
+                <span style={{ color: "rgb(255, 140, 0)" }}>Events</span>
+              </h2>
+              <EventsPastEventsFeaturedEventsSliderSection
+                events={featuredEvents}
+                autoplayMs={4500}
+                cardHClass="h-[480px]"
+              />
+            </div>
+          </section>
+        )}
+
+        {/* All Past Events */}
+        <section id="all-past-events" className="py-10 w-full">
           <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-            <h2 className="mb-6 text-4xl font-bold">
-              <span style={{ color: "rgb(0, 105, 168)" }}>Featured</span>{" "}
-              <span style={{ color: "rgb(255, 140, 0)" }}>Events</span>
+            <h2 className="text-4xl font-bold text-gray-900 mb-6">
+              All Past Events
             </h2>
-            <EventsPastEventsFeaturedEventsSliderSection
-              events={featuredEvents}
-              autoplayMs={4500}
-              cardHClass="h-[480px]"
+            <EventsPastEventsAllEventsSection
+              events={regularEvents}
+              cardMinHClass="min-h-[480px]"
             />
           </div>
         </section>
-      )}
 
-      {/* All Past Events */}
-      <section id="all-past-events" className="py-10 w-full">
-        <div className="max-w-7xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
-            All Past Events
-          </h2>
-          <EventsPastEventsAllEventsSection
-            events={regularEvents}
-            cardMinHClass="min-h-[480px]"
-          />
-        </div>
-      </section>
-
-      {/* CTA (separate component) */}
-      <EventsPastEventsCTASection>
-        <EventsPastEventsFeatureEventsRequestTrainingButton />
-      </EventsPastEventsCTASection>
-    </div>
+        {/* CTA (separate component) */}
+        <EventsPastEventsCTASection>
+          <EventsPastEventsFeatureEventsRequestTrainingButton />
+        </EventsPastEventsCTASection>
+      </div>
+    </>
   );
 }

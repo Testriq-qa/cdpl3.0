@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
+import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
 // Dynamic imports with SSR enabled
 const AboutHeroSection = dynamic(
