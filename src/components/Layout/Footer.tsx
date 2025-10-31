@@ -216,6 +216,10 @@ const Footer = () => {
                 <Link href="/courses/software-testing-course-in-bhubaneswar" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Bhubaneswar
                 </Link>
+
+                <Link href="/locations-we-serve" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  View All Cities
+                </Link>
               </li>
             </ul>
           </div>

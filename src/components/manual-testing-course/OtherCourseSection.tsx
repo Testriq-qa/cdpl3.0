@@ -15,6 +15,7 @@ import {
   BarChart3,
   Smartphone,
   ArrowRight,
+  Link,
 } from "lucide-react";
 
 type Course = {
@@ -221,7 +222,7 @@ const CourseCard = ({ course }: { course: Course }) => {
 
       {/* Removed Price Section */}
       <div className="mt-auto">
-        <a
+        <Link
           href={`/courses/${course.slug}`}
           className={cx(
             "inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white",
@@ -232,7 +233,7 @@ const CourseCard = ({ course }: { course: Course }) => {
         >
           View Syllabus
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </a>
+        </Link>
       </div>
     </article>
   );
@@ -338,13 +339,13 @@ export default function OtherCoursesSection() {
           <p className="mt-2 text-neutral-700">
             Talk to a mentor for a personalized **career roadmap** based on your experience and goals.
           </p>
-          <a
+          <Link
             href="/counselling"
             className="mt-4 inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-3 text-sm font-semibold text-white hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-700 focus-visible:ring-offset-2"
           >
             Get Free Counselling
             <ArrowRight className="h-4 w-4" aria-hidden="true" />
-          </a>
+          </Link>
         </div>
       </div>
 

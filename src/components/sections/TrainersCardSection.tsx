@@ -86,7 +86,7 @@ export default function TrainersCardSection({ t }: { t: Trainer }) {
                             </Link>
                         )}
                         {t.socials?.website && (
-                            <Link   
+                            <Link
                                 href={t.socials.website}
                                 aria-label={`Website of ${t.name}`}
                                 className="inline-flex items-center rounded-lg border border-slate-200 bg-white p-1.5 text-slate-800 hover:bg-slate-50"
