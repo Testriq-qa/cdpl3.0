@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
             <div className="space-y-5">
               <div className="flex items-center gap-3">
                 <Image
-                  src="/images/cdpl-logo.png"
+                  src="/cdpl-logo.png"
                   alt="Cinute Digital logo"
                   width={48}
                   height={48}
@@ -33,12 +33,26 @@ const Footer: React.FC = () => {
               </h2>
 
               <div className="space-y-4 text-[15px] leading-relaxed">
-                <div className="flex items-start gap-3">
-                  <MapPin className="h-5 w-5 text-orange-500 mt-0.5" aria-hidden="true" />
-                  <p>
-                    Office #1, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park,
-                    Mira Road East, Mira Bhayandar, Maharashtra 401107
-                  </p>
+
+                <div>
+                  <p className="font-bold">Head Office (<span className="text-brand">CDPL</span>)</p>
+                  <div className="flex items-start mt-1 gap-3">
+                    <MapPin className="h-5 w-5 text-orange-500 mt-0.5" aria-hidden="true" />
+                    <Link className="hover:text-brand transition" href="https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D">
+                      Office #1, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park,
+                      Mira Road East, Mira Bhayandar, Maharashtra 401107
+                    </Link>
+                  </div>
+                </div>
+
+                <div>
+                  <p className="font-bold">Study Center <span className="text-red-800">MeghMehul Classes</span> (<span className="text-brand">Vasai</span>)</p>
+                  <div className="flex items-start mt-1 gap-3">
+                    <MapPin className="h-5 w-5 text-orange-500 mt-0.5" aria-hidden="true" />
+                    <Link className="hover:text-brand transition" href="https://maps.app.goo.gl/SACPou6JCdRZh5j98">
+                      Shop No 7, Laxmi Palace, Opposite Vidhyavardhini Degree Engineering College, Gurunanak Nagar, Vasai West, Mumbai, Maharashtra - 401202
+                    </Link>
+                  </div>
                 </div>
 
                 <div className="flex items-center gap-3">
@@ -82,7 +96,7 @@ const Footer: React.FC = () => {
                     alt="MSME"
                     width={120}
                     height={120}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
                 <div className="w-32 flex justify-center">
@@ -91,25 +105,7 @@ const Footer: React.FC = () => {
                     alt="Skill India"
                     width={130}
                     height={130}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
-                  />
-                </div>
-                <div className="w-32 flex justify-center">
-                  <Image
-                    src="/images/ISO-27001.png"
-                    alt="ISO 27001 Certified"
-                    width={130}
-                    height={130}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
-                  />
-                </div>
-                <div className="w-32 flex justify-center">
-                  <Image
-                    src="/images/ISO-9001.png"
-                    alt="ISO 9001 Certified"
-                    width={130}
-                    height={130}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
                 <div className="w-32 flex justify-center">
@@ -118,9 +114,28 @@ const Footer: React.FC = () => {
                     alt="Trustpilot"
                     width={150}
                     height={150}
-                    className="h-16 md:h-20 w-auto object-contain opacity-80 hover:opacity-100 transition-opacity"
+                    className="h-16 md:h-20 w-auto object-contain"
                   />
                 </div>
+                <div className="w-32 flex justify-center">
+                  <Image
+                    src="/images/ISO-27001.png"
+                    alt="ISO 27001 Certified"
+                    width={130}
+                    height={130}
+                    className="h-16 md:h-20 w-auto object-contain"
+                  />
+                </div>
+                <div className="w-32 flex justify-center">
+                  <Image
+                    src="/images/ISO-9001.png"
+                    alt="ISO 9001 Certified"
+                    width={130}
+                    height={130}
+                    className="h-16 md:h-20 w-auto object-contain"
+                  />
+                </div>
+
               </div>
 
               {/* Policies: simple chips */}
@@ -166,10 +181,12 @@ const Footer: React.FC = () => {
               <p className="text-xs md:text-sm text-slate-600 text-center md:text-left">
                 © {new Date().getFullYear()} Cinute Digital Pvt. Ltd. — All Rights Reserved.
               </p>
-              <div className="flex items-center gap-2 text-[11px] text-slate-500">
-                <span className="rounded-full bg-red-100 text-red-800 px-2.5 py-2">Quality Training</span>
-                <span className="rounded-full bg-green-100 text-green-800 px-2.5 py-2">Job Assistance</span>
-                <span className="rounded-full bg-blue-100 text-blue-800 px-2.5 py-2">Mentor Support</span>
+              {/* Powered By */}
+              <div className="flex gap-4 space-y-4">
+                <h3 className="text-xl font-semibold text-orange-400">Powered By</h3>
+                <Link href="https://www.testriq.com/" className="text-gray-300 hover:text-blue-400 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  <Image src={'/images/Testriq-Logo-1.webp'} alt='Testriq_logo' width={100} height={100} />
+                </Link>
               </div>
             </div>
           </div>

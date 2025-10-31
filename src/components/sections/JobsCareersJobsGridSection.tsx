@@ -3,22 +3,37 @@
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, Briefcase, Building2, Calendar, MapPin } from "lucide-react";
-import type { Job } from "@/app/jobs/careers/page";
 import { JobsCareersJobCardSection } from "./JobsCareersJobCardSection";
 
-function norm(s: string) {
-  return s.toLowerCase();
-}
+// Define Job type locally to avoid import issues
+type Job = {
+  id: string;
+  title: string;
+  team:
+    | "Engineering"
+    | "Data"
+    | "Product"
+    | "Growth"
+    | "Student Success"
+    | "Operations";
+  location: "Bengaluru" | "Pune" | "Remote (India)" | "Hybrid (Bengaluru)";
+  type: "Full-time" | "Contract" | "Internship";
+  experience: "0–1 yrs" | "1–3 yrs" | "3–5 yrs" | "5–8 yrs" | "8+ yrs";
+  summary: string;
+  responsibilities: string[];
+  requirements: string[];
+  applyEmail?: string;
+  applyLink?: string;
+};
 
+
+function norm(s: string) { return s.toLowerCase(); }
 function formatLoc(iso?: string) {
   return iso ? new Date(iso).toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }) : "";
 }
-
-// Mark as intentionally referenced to satisfy no-unused-vars
 void norm; void formatLoc;
 
 export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
-  // Master-detail responsiveness
   const [isLg, setIsLg] = useState(false);
   useEffect(() => {
     const mql = window.matchMedia("(min-width: 1024px)");
@@ -28,16 +43,11 @@ export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
     return () => mql.removeEventListener("change", handler);
   }, []);
 
-  // Sort stable (leave given order or apply a light sort by team)
-  const sorted = useMemo(() => {
-    return [...jobs].sort((a, b) => a.team.localeCompare(b.team));
-  }, [jobs]);
-
+  const sorted = useMemo(() => [...jobs].sort((a, b) => a.team.localeCompare(b.team)), [jobs]);
   const [visible, setVisible] = useState<number>(Math.min(12, sorted.length));
   const canLoad = visible < sorted.length;
   const list = sorted.slice(0, visible);
 
-  // Selection
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const selectedJob = useMemo(
     () => (selectedId ? sorted.find((j) => j.id === selectedId) ?? null : null),
@@ -47,13 +57,9 @@ export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
   useEffect(() => {
     if (isLg) {
       if (!selectedId && list.length) setSelectedId(list[0].id);
-      if (selectedId && !sorted.some((j) => j.id === selectedId)) {
-        setSelectedId(list[0]?.id ?? null);
-      }
+      if (selectedId && !sorted.some((j) => j.id === selectedId)) setSelectedId(list[0]?.id ?? null);
     } else {
-      if (selectedId && !sorted.some((j) => j.id === selectedId)) {
-        setSelectedId(null);
-      }
+      if (selectedId && !sorted.some((j) => j.id === selectedId)) setSelectedId(null);
     }
   }, [isLg, sorted, list, selectedId]);
 
@@ -84,24 +90,18 @@ export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
                     >
                       <button
                         onClick={() => setSelectedId(job.id)}
-                        className={`group grid w-full grid-cols-[auto,1fr] gap-3 p-4 text-left transition ${active ? "bg-orange-50/40" : "hover:bg-slate-50 focus:bg-slate-50"
-                          }`}
+                        className={`group grid w-full grid-cols-[auto,1fr] gap-3 p-4 text-left transition ${active ? "bg-orange-50/40" : "hover:bg-slate-50 focus:bg-slate-50"}`}
                       >
                         <div
                           className="grid h-10 w-10 shrink-0 place-items-center rounded-xl"
-                          style={{
-                            background: "linear-gradient(180deg, rgba(255,140,0,0.12), rgba(255,140,0,0.06))",
-                            boxShadow: "inset 0 0 0 1px rgba(15, 23, 42, 0.06)",
-                          }}
+                          style={{ background: "linear-gradient(180deg, rgba(255,140,0,0.12), rgba(255,140,0,0.06))", boxShadow: "inset 0 0 0 1px rgba(15, 23, 42, 0.06)" }}
                         >
                           <Briefcase className="h-5 w-5" style={{ color: "#ff8c00" }} />
                         </div>
 
                         <div className="min-w-0">
                           <div className="flex items-start justify-between gap-2">
-                            <h3 className="truncate text-[15px] font-extrabold leading-tight text-slate-900">
-                              {job.title}
-                            </h3>
+                            <h3 className="truncate text-[15px] font-extrabold leading-tight text-slate-900">{job.title}</h3>
                             {active && (
                               <span className="shrink-0 rounded-full border border-orange-200 bg-orange-50 px-2 py-0.5 text-[10px] font-semibold text-orange-700">
                                 Selected
@@ -110,26 +110,15 @@ export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
                           </div>
 
                           <p className="mt-0.5 flex flex-wrap items-center gap-x-2 gap-y-1 text-[12.5px] text-slate-600">
-                            <span className="inline-flex items-center">
-                              <Building2 className="mr-1 h-3.5 w-3.5" />
-                              {job.team}
-                            </span>
+                            <span className="inline-flex items-center"><Building2 className="mr-1 h-3.5 w-3.5" />{job.team}</span>
                             <span className="text-slate-300">•</span>
-                            <span className="inline-flex items-center">
-                              <MapPin className="mr-1 h-3.5 w-3.5" />
-                              {job.location}
-                            </span>
+                            <span className="inline-flex items-center"><MapPin className="mr-1 h-3.5 w-3.5" />{job.location}</span>
                             <span className="text-slate-300">•</span>
-                            <span className="inline-flex items-center">
-                              <Calendar className="mr-1 h-3.5 w-3.5" />
-                              {job.type} • {job.experience}
-                            </span>
+                            <span className="inline-flex items-center"><Calendar className="mr-1 h-3.5 w-3.5" />{job.type} • {job.experience}</span>
                           </p>
 
                           {job.summary ? (
-                            <p className="mt-2 line-clamp-2 text-[12.5px] leading-relaxed text-slate-700">
-                              {job.summary}
-                            </p>
+                            <p className="mt-2 line-clamp-2 text-[12.5px] leading-relaxed text-slate-700">{job.summary}</p>
                           ) : null}
                         </div>
                       </button>
@@ -157,17 +146,17 @@ export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
           </section>
         )}
 
-        {/* RIGHT: detail */}
+        {/* RIGHT: detail (padding removed; handle inside) */}
         {showDetail && (
           <section
-            className="relative rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:sticky lg:top-24 lg:max-h:[calc(100vh-7rem)] lg:max-h-[calc(100vh-7rem)] lg:overflow-auto nice-scroll"
+            className="relative rounded-2xl border border-slate-200 bg-white p-0 shadow-sm overflow-visible lg:sticky lg:top-24 lg:max-h-[calc(100vh-7rem)] lg:overflow-auto nice-scroll"
             aria-label="Role details"
           >
             {/* Mobile sticky back header */}
             {!isLg && (
-              <div className="sticky top-16 z-20 -mx-4 mb-3 flex items-center gap-2 border-b border-slate-100 bg-white px-4 py-2 shadow-sm">
+              <div className="sticky top-0 z-20 mb-3 flex items-center gap-2 border-b border-slate-100 bg-white px-4 py-2 shadow-sm">
                 <button
-                  onClick={() => (setSelectedId(null))}
+                  onClick={() => setSelectedId(null)}
                   className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-sm font-semibold text-slate-900"
                 >
                   <ArrowLeft className="h-4 w-4" />
@@ -182,7 +171,8 @@ export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
                 <p className="text-sm text-slate-600">Select a role from the list to see details.</p>
               </div>
             ) : (
-              <div className="relative">
+              // inner padding only for the scrollable content under the sticky header
+              <div className="px-4 pb-4 pt-0">
                 <div
                   aria-hidden
                   className="pointer-events-none absolute -right-2 -top-2 h-24 w-24 rounded-full opacity-30 blur-2xl"
@@ -195,7 +185,6 @@ export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
         )}
       </div>
 
-      {/* Scrollbar polish (and hide Chrome arrow buttons) */}
       <style jsx global>{`
         .nice-scroll { scrollbar-width: thin; scrollbar-color: rgba(255,140,0,0.45) transparent; }
         .nice-scroll::-webkit-scrollbar { width: 10px; }
@@ -210,18 +199,7 @@ export default function JobsCareersJobsGridSection({ jobs }: { jobs: Job[] }) {
         .nice-scroll::-webkit-scrollbar-thumb:active {
           background: linear-gradient(180deg, rgba(255,140,0,0.95), rgba(255,184,77,0.95));
         }
-        .nice-scroll::-webkit-scrollbar-button,
-        .nice-scroll::-webkit-scrollbar-button:single-button,
-        .nice-scroll::-webkit-scrollbar-button:double-button,
-        .nice-scroll::-webkit-scrollbar-button:start:decrement,
-        .nice-scroll::-webkit-scrollbar-button:end:increment,
-        .nice-scroll::-webkit-scrollbar-button:vertical:decrement,
-        .nice-scroll::-webkit-scrollbar-button:vertical:increment,
-        .nice-scroll::-webkit-scrollbar-button:horizontal:decrement,
-        .nice-scroll::-webkit-scrollbar-button:horizontal:increment {
-          display: none !important; width: 0 !important; height: 0 !important; background: transparent !important;
-          -webkit-appearance: none !important;
-        }
+        .nice-scroll::-webkit-scrollbar-button { display: none !important; width:0 !important; height:0 !important; }
         .nice-scroll::-webkit-scrollbar-corner { background: transparent; }
       `}</style>
     </>

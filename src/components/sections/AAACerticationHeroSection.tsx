@@ -27,10 +27,8 @@ export default function AAACerticationHeroSection() {
             </p>
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-              AAA Certification Course by{" "}
-              <span className="bg-gradient-to-r from-[#ff8c00] via-[#ffb558] to-[#ffd19e] bg-clip-text text-transparent">
-                CDPL
-              </span>
+              <span style={{ color: "#0069A8" }}>AAA Certification Course </span>
+              <span style={{ color: "rgb(255, 140, 0)" }}>by CDPL</span>
             </h1>
 
             <p className="mt-4 mx-auto max-w-2xl text-base sm:text-lg text-slate-600 lg:mx-0">
@@ -55,7 +53,7 @@ export default function AAACerticationHeroSection() {
 
           <div className="flex items-center justify-center lg:justify-end">
             <Image
-            // /certifications_images/aaa_certifications/aaa_certificate_cinute
+              // /certifications_images/aaa_certifications/aaa_certificate_cinute
               src="/certifications_images/aaa_certifications/aaa_certificate_cinute.jpg"
               alt="AAA certification illustration"
               width={1280}

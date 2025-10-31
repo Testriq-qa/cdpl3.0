@@ -16,7 +16,7 @@ type CDPLHeroProps = {
 };
 
 export default function JobsLiveJobsJobsHeroSection({
-  subtitle = "Verified nearby roles across QA Automation, Data Science, Full-Stack, and DevOps — posted by CDPL so students can apply faster.",
+  subtitle = "Verified nearby roles across QA Automation, Data Science, Full-Stack, and DevOps, posted by CDPL so students can apply faster.",
 }: CDPLHeroProps) {
   const jsonLd = useMemo(
     () => ({
@@ -79,7 +79,7 @@ export default function JobsLiveJobsJobsHeroSection({
               className="mt-4 py-1 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.2]"
             >
               <span className="text-[#ff8c00]">Jobs &amp; Internships we post</span>{" "}
-              to help CDPL students get placed
+              <span style={{ color: "#0069A8" }}>to help CDPL students get placed</span>
             </motion.h1>
 
             {/* Hero content — 18px at md, identical to About */}
@@ -98,7 +98,7 @@ export default function JobsLiveJobsJobsHeroSection({
               transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg"
             >
-              CDPL connects learners with industry mentors, hiring partners, and nearby openings—offering
+              CDPL connects learners with industry mentors, hiring partners, and nearby openings/offering
               job alerts, resume help, and interview preparation for faster placements across India.
             </motion.p>
 
@@ -119,17 +119,17 @@ export default function JobsLiveJobsJobsHeroSection({
             </motion.div>
           </div>
 
-          {/* RIGHT — visual */}
-          <div className="order-2 md:order-2 relative self-start mt-6 md:mt-0 md:basis-[40%] lg:basis-[38%]">
-            <div className="relative ml-0 mr-0 w-full max-w-[560px] sm:max-w-[640px] md:ml-auto md:w-[340px] lg:w-[420px] xl:w-[480px]">
+          {/* RIGHT — visual (smaller + raised) */}
+          <div className="order-2 md:order-2 relative self-start mt-6 md:mt-0 md:basis-[40%] lg:basis-[38%] -translate-y-1 sm:-translate-y-2 md:-translate-y-4 lg:-translate-y-8">
+            <div className="relative ml-0 mr-0 w-full md:ml-auto max-w-[24rem] sm:max-w-[26rem] md:w-[300px] lg:w-[360px] xl:w-[400px]">
               <Image
-                src="/live-jobs_images/live-jobs_hero.png"
+                src="/live-jobs_images/live-jobs_hero2.png"
                 alt="Live jobs hero"
                 width={960}
                 height={960}
                 priority
-                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 45vw, 480px"
-                className="h-auto w-full select-none"
+                sizes="(max-width: 640px) 80vw, (max-width: 1024px) 36vw, 400px"
+                className="h-auto w-full rounded-2xl select-none"
               />
             </div>
 

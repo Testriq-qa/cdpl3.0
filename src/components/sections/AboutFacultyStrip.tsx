@@ -13,6 +13,7 @@ import {
   Sparkles,
 } from "lucide-react";
 import Link from "next/link";
+import React from "react";
 
 type Mentor = {
   name: string;
@@ -27,25 +28,25 @@ type Props = {
   className?: string;
   brand?: string; // single accent; defaults to warm, engaging orange
   mentors?: Mentor[];
-  heading?: string;
-  subheading?: string;
+  heading?: React.ReactNode;
+  subheading?: React.ReactNode;
   primaryCtaHref?: string;
   secondaryCtaHref?: string;
 };
 
 const DEFAULT_MENTORS: Mentor[] = [
-  { name: "A. Sharma", role: "Senior QA Lead", avatar: "/images/ami-khambata.png", experience: "12+ yrs", tag: "QA", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
-  { name: "R. Patel", role: "Data Scientist", avatar: "/images/ami-khambata.png", experience: "10+ yrs", tag: "Data", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
-  { name: "S. Iyer", role: "Automation Architect", avatar: "/images/ami-khambata.png", experience: "11+ yrs", tag: "Automation", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
-  { name: "N. Khan", role: "AI/ML Engineer", avatar: "/images/ami-khambata.png", experience: "9+ yrs", tag: "AI/ML", desc: "A. Sharma is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
+  { name: "Pravin Mhaske", role: "Data Science Manager at Infosys(India)", avatar: "/mentors_images/Pravin-Maske.jpg", experience: "12+ yrs", tag: "Data", desc: "Pravin Maske is a seasoned professional with over two decades of comprehensive experience in the realm of data science, analytics, and machine learning." },
+  { name: "Piyali Mondal", role: "Program Leader | M.Sc (Data science AI & ML) at Exeed College (UAE)", avatar: "/mentors_images/Piyali-Mondal.jpg", experience: "10+ yrs", tag: "Data", desc: "Piyali Mondal is an accomplished academician, engineering professor, and Ph.D. scholar with a wealth of experience in the field." },
+  { name: "Revathi Soundarrajan", role: "Data Scientist (PHD) at Electra vehicles (USA)", avatar: "/mentors_images/Revathi-Soundarrajan.jpg", experience: "11+ yrs", tag: "Automation", desc: "Dr. S. Revathi, an accomplished Data Scientist, brings over a decade of expertise in research, teaching, and practical application of machine learning across diverse domains." },
+  { name: "Urvi Verma", role: "AVP – Data engineering at Deutsche bank (Germany)", avatar: "/mentors_images/Urvi-Verma.jpg", experience: "9+ yrs", tag: "AI/ML", desc: "I work as Data engineer in deutsche bank. I have experience with big data technologies, java, python, SQL and cloud services like AWS, GCP. I have experience of 5+ years in the industry." },
 ];
 
 export default function AboutFacultyStrip({
   className,
   brand = "#ff8c00",
   mentors = DEFAULT_MENTORS,
-  heading = "Learn from Practitioners",
-  subheading = "10+ years average experience across Software Testing, Automation, Data Science & AI/ML.",
+  heading = (<>Learn from <span className="text-brand">Mentors</span> </>),
+  subheading = (<>10+ years average experience across <strong>Software Testing</strong>, <strong>Automation</strong>, <strong>Data Science</strong> & <strong>AI/ML</strong>.</>),
   primaryCtaHref = "/mentors",
   secondaryCtaHref = "/become-a-mentor",
 }: Props) {
@@ -104,7 +105,7 @@ export default function AboutFacultyStrip({
       <header className="mb-8 text-center">
 
 
-        <span className="inline-flex items-center gap-2 mb-2 rounded-full border border-slate-300 bg-white px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm">
+        <span className="inline-flex items-center gap-2 mb-2 rounded-full border border-slate-300 bg-white px-3 py-2 text-[12px] font-medium text-slate-700 shadow-sm">
           <Sparkles className="h-4 w-4" style={{ color: brand }} />
           Industry-Aligned Mentors
         </span>
@@ -224,7 +225,7 @@ export default function AboutFacultyStrip({
         <Link
           href={primaryCtaHref}
           className="inline-flex items-center gap-2 rounded-full px-3.5 py-2 text-sm font-medium bg-brand text-slate-900 shadow-sm transition hover:bg-amber-600 hover:text-white"
-          
+
         >
           Meet the Mentors
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -236,7 +237,7 @@ export default function AboutFacultyStrip({
             "inline-flex items-center border-brand gap-2 rounded-full border-2 bg-white px-3.5 py-2 text-sm font-medium text-slate-900 hover:bg-brand hover:text-white",
             "transition focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           )}
-          
+
         >
           Become a Mentor
         </Link>

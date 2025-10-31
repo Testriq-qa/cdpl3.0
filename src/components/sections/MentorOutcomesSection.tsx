@@ -26,70 +26,57 @@ const GRADIENT_BRAND =
   "linear-gradient(90deg, #ff8c00 0%, #ffb558 55%, #ffd19e 100%)";
 const GRADIENT_ACCENT = "linear-gradient(90deg,#e0f2ff 0%,#efe9ff 100%)";
 
-const DOMAINS = [
-  "All",
-  "AI / ML",
-  "Data Science",
-  "Full-Stack",
-  "Cloud & DevOps",
-  "Product",
-];
+/** Updated filters per request */
+const DOMAINS = ["All", "QA", "Full-Stack", "Cloud & DevOps"];
 
+/** Anonymous fallback avatar */
+const ANONYMOUS = "/placement_images/anonymous_student.png";
+
+/**
+ * Keep Jaynam Shah (has real image) — now QA
+ * Add 1 QA person with real image (Shrikanth Suri — eClerx)
+ * Avatars for Avdhut and Asifali set to anonymous image
+ */
 const CASES: Case[] = [
   {
-    name: "Ananya S.",
-    role: "Machine Learning Engineer",
-    company: "NVIDIA",
-    before: "Manual QA",
-    after: "ML Engineer",
-    outcome: "CTC +140% in 5 months",
-    domain: "AI / ML",
-    avatar:
-      "https://images.unsplash.com/photo-1544005313-94ddf0286df2?q=80&w=160&auto=format&fit=crop",
+    name: "Jaynam Shah",
+    role: "QA (Business Delivery)",
+    company: "IDfy",
+    before: "CDPL Trainee",
+    after: "Quality Assurance",
+    outcome: "Joined IDfy: July 2023",
+    domain: "QA",
+    avatar: "/placements/Jaynam Shah.jpg",
   },
   {
-    name: "Rahul K.",
-    role: "Data Scientist",
-    company: "Swiggy",
-    before: "Operations Analyst",
-    after: "Data Scientist",
-    outcome: "Offer in 10 weeks",
-    domain: "Data Science",
-    avatar:
-      "https://images.unsplash.com/photo-1511367461989-f85a21fda167?q=80&w=160&auto=format&fit=crop",
+    name: "Shrikanth Suri",
+    role: "Junior Manual Tester",
+    company: "eClerx",
+    before: "CDPL Trainee",
+    after: "QA / Manual Tester",
+    outcome: "Hired at eClerx",
+    domain: "QA",
+    avatar: "/placements/Shrikanth Suri.jpg",
   },
   {
-    name: "Meera T.",
-    role: "SDE II",
-    company: "Flipkart",
-    before: "Frontend Dev",
-    after: "SDE II",
-    outcome: "Level jump + onsite",
+    name: "Asifali Sayed",
+    role: "Full Stack Developer",
+    company: "Marqetrix Web Solutions",
+    before: "CDPL Trainee",
+    after: "Full Stack Developer",
+    outcome: "Offer at Marqetrix",
     domain: "Full-Stack",
-    avatar:
-      "https://images.unsplash.com/photo-1547425260-76bcadfb4f2c?q=80&w=160&auto=format&fit=crop",
+    avatar: ANONYMOUS,
   },
   {
-    name: "Zaid I.",
-    role: "DevOps Engineer",
-    company: "Paytm",
-    before: "SysAdmin",
-    after: "DevOps",
-    outcome: "K8s + Terraform in prod",
+    name: "Avdhut Patil",
+    role: "Software Deployment Executive",
+    company: "Mediventurz",
+    before: "CDPL Trainee",
+    after: "Deployment / Ops",
+    outcome: "22,000 per month",
     domain: "Cloud & DevOps",
-    avatar:
-      "https://images.unsplash.com/photo-1527980965255-d3b416303d12?q=80&w=160&auto=format&fit=crop",
-  },
-  {
-    name: "Priya V.",
-    role: "Product Manager",
-    company: "Razorpay",
-    before: "Business Analyst",
-    after: "PM",
-    outcome: "Referral hire via mentor",
-    domain: "Product",
-    avatar:
-      "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=160&auto=format&fit=crop",
+    avatar: ANONYMOUS,
   },
 ];
 
@@ -109,12 +96,12 @@ export default function MentorOutcomesSection() {
     >
       {/* soft background aura */}
       <div
-        className="pointer-events-none absolute -top-24 right-[-12%] h-72 w-[46rem] rounded-full blur-[70px] opacity-25"
+        className="pointer-events-none absolute -top-24 right-[-12%] h-72 w-[46rem] rounded-full blur[70px] opacity-25"
         style={{ background: GRADIENT_ACCENT }}
         aria-hidden
       />
       <div
-        className="pointer-events-none absolute -bottom-24 left-[-12%] h-72 w-[46rem] rounded-full blur-[70px] opacity-20"
+        className="pointer-events-none absolute -bottom-24 left-[-12%] h-72 w-[46rem] rounded-full blur[70px] opacity-20"
         style={{ background: GRADIENT_BRAND }}
         aria-hidden
       />
@@ -126,14 +113,9 @@ export default function MentorOutcomesSection() {
             id="mentor-outcomes-title"
             className="text-3xl font-extrabold leading-tight sm:text-4xl"
           >
-            Proven Outcomes &{" "}
-            <span style={{ color: BRAND }}>Real Placements</span>
+            <span style={{ color: BRAND }}>Featured </span>
+            Learner Outcomes{" "}
           </h2>
-          <p className="mt-2 max-w-3xl text-[15px] text-zinc-700 sm:text-base">
-            CDPL mentorship drives tangible career moves across AI/ML, Data
-            Science, Full-Stack, Cloud & DevOps, and Product with structured
-            guidance and interview prep.
-          </p>
         </header>
 
         {/* Tabs */}
@@ -147,11 +129,10 @@ export default function MentorOutcomesSection() {
                   setTab(d);
                   setActiveIdx(0);
                 }}
-                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
-                  active
-                    ? "border-zinc-300 text-zinc-900 shadow-sm"
-                    : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
-                }`}
+                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${active
+                  ? "border-zinc-300 text-zinc-900 shadow-sm"
+                  : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
+                  }`}
                 style={active ? { backgroundImage: GRADIENT_BRAND } : {}}
                 aria-pressed={active}
               >
@@ -161,22 +142,52 @@ export default function MentorOutcomesSection() {
           })}
         </div>
 
-        {/* KPIs */}
+        {/* KPIs (each card now has a distinct, clean background) */}
         <div className="mb-8 grid gap-3 sm:grid-cols-4">
           {[
-            { num: "92%", label: "Offer rate post mock rounds" },
-            { num: "3.1x", label: "Avg. salary jump (select tracks)" },
-            { num: "15–60d", label: "Typical time-to-offer" },
-            { num: "150+", label: "Active hiring partners" },
+            {
+              num: "92%",
+              label: "Offer rate post mock rounds",
+              cls: "text-orange-600",
+              card:
+                "relative overflow-hidden rounded-2xl border border-orange-100 bg-gradient-to-br from-orange-50 to-amber-100 p-4 text-center shadow-sm",
+              deco:
+                "absolute -right-6 -top-6 h-20 w-20 rounded-full bg-orange-200/40",
+            },
+            {
+              num: "3.1x",
+              label: "Avg. salary jump (select tracks)",
+              cls: "text-indigo-600",
+              card:
+                "relative overflow-hidden rounded-2xl border border-indigo-100 bg-gradient-to-br from-indigo-50 to-violet-100 p-4 text-center shadow-sm",
+              deco:
+                "absolute -left-6 -bottom-6 h-24 w-24 rounded-full bg-indigo-200/40",
+            },
+            {
+              num: "15–60d",
+              label: "Typical time-to-offer",
+              cls: "text-emerald-600",
+              card:
+                "relative overflow-hidden rounded-2xl border border-emerald-100 bg-gradient-to-br from-emerald-50 to-teal-100 p-4 text-center shadow-sm",
+              deco:
+                "absolute -right-8 bottom-0 h-24 w-24 rounded-full bg-emerald-200/40",
+            },
+            {
+              num: "150+",
+              label: "Active hiring partners",
+              cls: "text-sky-600",
+              card:
+                "relative overflow-hidden rounded-2xl border border-sky-100 bg-gradient-to-br from-sky-50 to-cyan-100 p-4 text-center shadow-sm",
+              deco:
+                "absolute -left-8 top-0 h-24 w-24 rounded-full bg-sky-200/40",
+            },
           ].map((m) => (
-            <div
-              key={m.label}
-              className="rounded-2xl border border-zinc-200 bg-white p-4 text-center shadow-sm"
-            >
-              <div className="text-xl font-extrabold tracking-wide">
+            <div key={m.label} className={m.card}>
+              <div aria-hidden className={m.deco} />
+              <div className={`text-xl font-extrabold tracking-wide ${m.cls}`}>
                 {m.num}
               </div>
-              <div className="mt-1 text-xs text-zinc-700">{m.label}</div>
+              <div className="mt-1 text-xs text-zinc-800">{m.label}</div>
             </div>
           ))}
         </div>
@@ -432,7 +443,7 @@ function Orbit({
                   />
                   <div>
                     <div className="text-sm font-extrabold leading-tight">
-                      {active.name} — {active.role}
+                      {active.name} - {active.role}
                     </div>
                     <div className="text-xs text-zinc-700">{active.company}</div>
                   </div>
@@ -485,9 +496,8 @@ function Orbit({
                 <img
                   src={c.avatar}
                   alt=""
-                  className={`h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${
-                    isActive ? "scale-105" : "scale-100"
-                  }`}
+                  className={`h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${isActive ? "scale-105" : "scale-100"
+                    }`}
                   loading="lazy"
                 />
               </button>
@@ -513,9 +523,8 @@ function Orbit({
               <img
                 src={c.avatar}
                 alt=""
-                className={`h-16 w-16 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${
-                  isActive ? "scale-[1.06]" : "scale-100"
-                }`}
+                className={`h-16 w-16 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${isActive ? "scale-[1.06]" : "scale-100"
+                  }`}
                 loading="lazy"
                 style={{
                   boxShadow: isActive

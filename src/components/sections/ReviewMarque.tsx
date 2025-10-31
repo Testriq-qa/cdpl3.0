@@ -151,7 +151,7 @@ const REVIEWS: Review[] = [
 ];
 
 const SUMMARY_CARDS = [
-  { label: 'Google Reviews', value: '80+', note: 'Public reviews', logo: '/slider_logos/google.svg' },
+  { label: 'Google Reviews', value: '289', note: 'Public reviews', logo: '/slider_logos/google.svg' },
   { label: 'Sulekha Reviews', value: '84', note: '5.0 average', logo: '/slider_logos/sulekha-logo.webp' },
   { label: 'Justdial Ratings', value: '210', note: 'Verified users', logo: '/slider_logos/justdial-logo.png' },
 ];
@@ -297,7 +297,7 @@ export default function ReviewsMarquee() {
                         width={80}
                         height={68}
                         priority={p === "Google"}
-                        className=" md:scale-105"
+                        className="md:scale-105 h-5 w-13 md:h-6 md:w-15"
                       />
                     </span>
                   </button>

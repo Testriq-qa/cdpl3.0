@@ -1,6 +1,6 @@
-// File: src/app/jobs/job-openings/page.tsx
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
+import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
 // ---- Types ---------------------------------------------------------------
 export type Skill = { skill_name: string; years?: string | number | null; level?: string | null };
@@ -86,21 +86,21 @@ function cleanHTML(raw?: string): string {
     amp: "&",
     lt: "<",
     gt: ">",
-    quot: '"',
+    quot: "\"",
     apos: "'",
-    rsquo: "’",
-    lsquo: "‘",
-    ldquo: "“",
-    rdquo: "”",
-    ndash: "–",
-    mdash: "—",
-    hellip: "…",
-    middot: "·",
-    bull: "•",
-    copy: "©",
-    reg: "®",
-    trade: "™",
-    euro: "€",
+    rsquo: "\u2019",
+    lsquo: "\u2018",
+    ldquo: "\u201C",
+    rdquo: "\u201D",
+    ndash: "\u2013",
+    mdash: "\u2014",
+    hellip: "\u2026",
+    middot: "\u00B7",
+    bull: "\u2022",
+    copy: "\u00A9",
+    reg: "\u00AE",
+    trade: "\u2122",
+    euro: "\u20AC",
   };
 
   let s = raw.replace(/&([a-zA-Z]+);/g, function (_m, name) {
@@ -135,7 +135,7 @@ function cleanHTML(raw?: string): string {
     .replace(/`([^`]+)`/g, (_m, code) => code)
     .replace(/(\*\*|__)([\s\S]*?)\1/g, (_m, _d, txt) => txt)
     .replace(/(\*|_)([\s\S]*?)\1/g, (_m, _d, txt) => txt)
-    .replace(/~~([\s\S]*?)~~/g, (_m, txt) => txt)
+    .replace(/~~([\\s\S]*?)~~/g, (_m, txt) => txt)
     .replace(/^[ \t]{0,3}#{1,6}[ \t]*/gm, "")
     .replace(/^[ \t]*>[ \t]?/gm, "")
     .replace(/^[ \t]*([-*_]){3,}[ \t]*$/gm, "");
@@ -210,12 +210,30 @@ async function verifyCandidateServer(payload: VerifyPayload) {
   });
 }
 
-// ---- Metadata ------------------------------------------------------------
-export const metadata: Metadata = {
-  title: "Job Share | Partner Jobs",
-  description:
-    "Browse and share partner jobs. Filter by skills and experience, then preview rich job details with smooth transitions.",
-};
+// ============================================================================
+// SEO METADATA - Enhanced for Job Openings Page
+// ============================================================================
+export const metadata: Metadata = generateSEO({
+  title: "Job Openings - Apply to Latest Tech Jobs | CDPL Partner Jobs",
+  description: "Browse and apply to latest job openings curated by CDPL through OptimHire. QA, Automation, Data Science, Full-Stack, and DevOps roles from top companies. Filter by skills and experience, then apply directly with resume upload.",
+  keywords: [
+    "job openings",
+    "apply jobs",
+    "tech jobs",
+    "QA jobs",
+    "automation jobs",
+    "data science jobs",
+    "software developer jobs",
+    "job applications",
+    "career opportunities",
+    "OptimHire jobs",
+    "partner jobs",
+    "CDPL job portal",
+  ],
+  url: "/jobs/job-openings",
+  image: "/og-image-job-openings.jpg",
+  imageAlt: "CDPL Job Openings - Apply to Latest Tech Jobs",
+});
 
 // ---- Loader for dynamic sections ----------------------------------------
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
@@ -248,31 +266,132 @@ const JobOpeningsJobBrowser = dynamic(
 export default async function JobSharePage() {
   const initial = await getJobsServer({ page: 1, size: 20 });
 
-  return (
-    <main className="min-h-screen bg-slate-50 text-slate-800">
-      <JobOpeningsHeroSection
-        title="Discover roles. Share opportunities."
-        subtitle="As part of our commitment to expanding career opportunities for our learners, Cinute Digital Pvt. Ltd. has partnered with OptimHire Software Solutions Pvt. Ltd., a third-party recruitment platform."
-        ctaLabel="Explore jobs"
-        scrollToId="job-browser"
-      />
+  // Breadcrumb Schema
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Jobs", url: "/jobs/job-openings" },
+    { name: "Job Openings", url: "/jobs/job-openings" },
+  ]);
 
-      <section id="job-browser" className="container mx-auto px-4 pb-28">
-        <JobOpeningsJobBrowser
-          initialJobs={initial?.data?.job ?? []}
-          totalCount={initial?.data?.total_count ?? 0}
-          pageSize={20}
-          getJobsAction={getJobsServer}
-          getJobByIdAction={getJobByIdServer}
-          verifyCandidateAction={verifyCandidateServer}
-          createCandidateAction={createCandidateServer}
-          emptyState={{
-            title: "No results",
-            body: "Try adjusting filters like skills, experience, or location.",
-          }}
-          className=""
+  // CollectionPage Schema
+  const collectionPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": "https://www.cinutedigital.com/jobs/job-openings#collectionpage",
+    url: "https://www.cinutedigital.com/jobs/job-openings",
+    name: "Job Openings",
+    description: "Browse and apply to latest job openings curated by CDPL",
+    inLanguage: "en-IN",
+  };
+
+  // JobPosting ItemList Schema (using JobSummary type)
+  const jobListSchema = initial?.data?.job && initial.data.job.length > 0 ? {
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "@id": "https://www.cinutedigital.com/jobs/job-openings#itemlist",
+    name: "CDPL Partner Job Openings",
+    description: "Latest job openings available through CDPL's partnership with OptimHire",
+    numberOfItems: initial.data.total_count || initial.data.job.length,
+    itemListElement: initial.data.job.slice(0, 10).map((job, index) => ({
+      "@type": "ListItem",
+      position: index + 1,
+      item: {
+        "@type": "JobPosting",
+        "@id": `https://www.cinutedigital.com/jobs/job-openings#job-${job.job_id}`,
+        title: job.job_title,
+        description: job.description || `${job.job_title} position`,
+        hiringOrganization: {
+          "@type": "Organization",
+          name: "CDPL Partner Companies",
+        },
+        employmentType: job.job_type || "FULL_TIME",
+        ...(job.location && {
+          jobLocation: {
+            "@type": "Place",
+            address: {
+              "@type": "PostalAddress",
+              addressLocality: job.location,
+              addressCountry: "IN",
+            },
+          },
+        }),
+        ...(job.location_type && {
+          jobLocationType: job.location_type === "remote" ? "TELECOMMUTE" : undefined,
+        }),
+        ...(job.min_experience && job.max_experience && {
+          experienceRequirements: {
+            "@type": "OccupationalExperienceRequirements",
+            description: `${job.min_experience}-${job.max_experience} years`,
+          },
+        }),
+        ...(job.job_referral_url && {
+          directApply: true,
+          applicationContact: {
+            "@type": "ContactPoint",
+            url: job.job_referral_url,
+          },
+        }),
+      },
+    })),
+  } : null;
+
+  return (
+    <>
+      {/* Structured Data - Multiple Schemas */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(collectionPageSchema) }}
+      />
+      {jobListSchema && (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jobListSchema) }}
         />
-      </section>
-    </main>
+      )}
+
+      {/* Main Content - Semantic HTML Structure */}
+      <main 
+        className="min-h-screen bg-slate-50 text-slate-800"
+        itemScope 
+        itemType="https://schema.org/CollectionPage"
+      >
+        {/* Hidden metadata for schema.org */}
+        <meta itemProp="name" content="Job Openings" />
+        <meta itemProp="description" content="Browse and apply to latest job openings" />
+        <meta itemProp="url" content="https://www.cinutedigital.com/jobs/job-openings" />
+
+        {/* Keep hero as-is; it can manage its own inner width */}
+        <section className="w-full">
+          <JobOpeningsHeroSection
+            title="Discover roles. Share opportunities."
+            subtitle="As part of our commitment to expanding career opportunities for our learners, Cinute Digital Pvt. Ltd. has partnered with OptimHire Software Solutions Pvt. Ltd., a third-party recruitment platform."
+            ctaLabel="Explore jobs"
+            scrollToId="job-browser"
+          />
+        </section>
+
+        {/* 100% width section; inner component handles max-w-7xl + padding */}
+        <section id="job-browser" className="w-full">
+          <JobOpeningsJobBrowser
+            initialJobs={initial?.data?.job ?? []}
+            totalCount={initial?.data?.total_count ?? 0}
+            pageSize={20}
+            getJobsAction={getJobsServer}
+            getJobByIdAction={getJobByIdServer}
+            verifyCandidateAction={verifyCandidateServer}
+            createCandidateAction={createCandidateServer}
+            emptyState={{
+              title: "No results",
+              body: "Try adjusting filters like skills, experience, or location.",
+            }}
+            className=""
+          />
+        </section>
+      </main>
+    </>
   );
 }

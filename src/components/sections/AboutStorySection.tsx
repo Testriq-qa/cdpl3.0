@@ -8,7 +8,10 @@ type Milestone = {
   year: string;
   title: string;
   text: string;
+  bgColor: string;
+  textColor: string;
 };
+ 
 
 // Opaque, visible colors (no alpha fades)
 const ACCENT = "#6366f1";        // indigo-500
@@ -20,9 +23,9 @@ const SHADOW = "0 16px 38px -16px rgba(99,102,241,0.6)"; // shadow for depth (no
 const AboutStorySection = memo(function AboutStorySection() {
   const milestones: Milestone[] = useMemo(
     () => [
-      { year: "2020", title: "The Spark", text: "Launched with a vision to revolutionize tech education." },
-      { year: "2022", title: "Scaling Impact", text: "Expanded to include AI/ML and Automation pathways." },
-      { year: "2025", title: "Global Reach", text: "Empowering 20k+ learners with innovative learning tools." },
+      { year: "2020", title: "The Spark", text: "Launched with a vision to revolutionize tech education.", bgColor: "blue-50", textColor: "blue-500" },
+      { year: "2022", title: "Scaling Impact", text: "Expanded to include AI/ML and Automation pathways.", bgColor: "red-50", textColor: "red-500" },
+      { year: "2025", title: "Global Reach", text: "Empowering 20k+ learners with innovative learning tools.", bgColor: "green-50", textColor: "green-500" },
     ],
     []
   );
@@ -53,14 +56,7 @@ const AboutStorySection = memo(function AboutStorySection() {
       {/* Header */}
       <div className="mb-14 text-center relative">
         <span
-          className="inline-flex items-center gap-2 rounded-full px-2 py-1 text-xs shadow-sm ring-1 ring-inset"
-          style={{
-            backgroundColor: ACCENT_LIGHT, // opaque
-            color: ACCENT,
-            boxShadow: "0 8px 20px -12px rgba(99,102,241,0.6)",
-            borderColor: ACCENT_RING,
-          }}
-        >
+          className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-xs text-slate-800 shadow-sm ring-1 ring-slate-200">
           <Rocket className="h-4 w-4" aria-hidden="true" />
           Our Journey Began
         </span>
@@ -69,16 +65,10 @@ const AboutStorySection = memo(function AboutStorySection() {
           id="about-story-heading"
           className="mt-4 text-4xl font-bold tracking-tight text-gray-900"
         >
-          Our Story{" "}
-          <span
-            className="bg-clip-text text-transparent"
-            style={{
-              // Opaque gradient (no transparency)
-              backgroundImage: `linear-gradient(90deg, ${ACCENT}, ${ACCENT})`,
-            }}
-          >
-            of Impact
-          </span>
+          <span className="text-brand">Our Story</span>{" "}
+
+          of Impact
+
         </h2>
 
         <p className="mx-auto mt-4 max-w-5xl text-lg leading-8 text-gray-700">
@@ -150,10 +140,8 @@ const AboutStorySection = memo(function AboutStorySection() {
             <div className="rounded-3xl bg-white p-7 sm:p-8">
               <h3 className="text-2xl font-semibold text-gray-900 mb-2 flex items-center gap-2">
                 <span
-                  className="grid h-9 w-9 place-items-center rounded-lg"
-                  style={{ backgroundColor: ACCENT_LIGHT, color: ACCENT }}
-                >
-                  <Users className="h-5 w-5" aria-hidden="true" />
+                  className="grid h-10 w-10 place-items-center bg-indigo-500 text-white rounded-lg">
+                  <Users className="h-6 w-6" aria-hidden="true" />
                 </span>
                 Our Journey Milestones
               </h3>
@@ -165,12 +153,7 @@ const AboutStorySection = memo(function AboutStorySection() {
                 {milestones.map((m) => (
                   <li key={m.title} className="flex items-start gap-4">
                     <div
-                      className="flex h-10 w-15 md:h-13 md:w-13 items-center justify-center rounded-full font-bold shadow-sm ring-1 ring-inset"
-                      style={{
-                        backgroundColor: ACCENT_LIGHT,
-                        color: ACCENT,
-                        borderColor: ACCENT_RING,
-                      }}
+                      className={`flex h-10 w-15 md:h-13 md:w-13 items-center justify-center bg-${m.bgColor} text-${m.textColor} rounded-full font-bold shadow-sm ring-1 ring-inset`}
                       aria-hidden="true"
                     >
                       {m.year}
@@ -189,9 +172,9 @@ const AboutStorySection = memo(function AboutStorySection() {
               {/* small stat row */}
               <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 text-center">
                 {[
-                  { label: "Learners", value: "20k+", id: 1 },
-                  { label: "Tracks", value: "4", id: 2 },
-                  { label: "Projects", value: "Capstone+", id: 3 },
+                  { label: "Learners", value: "20k+", color: "yellow-500", id: 1 },
+                  { label: "Tracks", value: "4", color: "pink-600", id: 2 },
+                  { label: "Projects", value: "Capstone+", color: "purple-500", id: 3 },
                 ].map((s) => (
                   <div
                     key={s.label}
@@ -200,8 +183,8 @@ const AboutStorySection = memo(function AboutStorySection() {
                       s.id === 3 ? "hidden sm:block" : "",
                     ].join(" ")}
                   >
-                    <div className="text-sm font-semibold text-gray-900">{s.value}</div>
-                    <div className="text-[11px] text-gray-500">{s.label}</div>
+                    <div className={`text-lg font-semibold text-${s.color}`}>{s.value}</div>
+                    <div className="text-md text-gray-500">{s.label}</div>
                   </div>
                 ))}
               </div>
@@ -214,19 +197,16 @@ const AboutStorySection = memo(function AboutStorySection() {
         <div className="px-6 pb-8 sm:px-8 lg:px-10">
           <div className="mt-4 grid gap-6 sm:grid-cols-3">
             {[
-              { icon: <Users className="h-5 w-5" aria-hidden="true" />, h: "20k+ Learners", p: "Building a global community" },
-              { icon: <Rocket className="h-5 w-5" aria-hidden="true" />, h: "Job-Ready Skills", p: "Hands-on projects & mentorship" },
-              { icon: <Sparkles className="h-5 w-5" aria-hidden="true" />, h: "Innovative Pathways", p: "Tailored for tech’s future" },
-            ].map(({ icon, h, p }) => (
+              { icon: <Users className="h-5 w-5" aria-hidden="true" />, h: "20k+ Learners", p: "Building a global community", bgColor: "purple-500", iconColor: "lime-600" },
+              { icon: <Rocket className="h-5 w-5" aria-hidden="true" />, h: "Job-Ready Skills", p: "Hands-on projects & mentorship", bgColor: "orange-500", iconColor: "orange-600" },
+              { icon: <Sparkles className="h-5 w-5" aria-hidden="true" />, h: "Innovative Pathways", p: "Tailored for tech’s future", bgColor: "yellow-500", iconColor: "teal-600" },
+            ].map(({ icon, h, p, bgColor }) => (
               <div
                 key={h}
-                className="relative rounded-2xl border-2 text-center"
-                style={{ borderColor: ACCENT_RING, boxShadow: SHADOW }}
-              >
+                className={`relative rounded-2xl border-2 border-${bgColor} text-center`}>
                 <div className="rounded-2xl bg-white p-6 ring-1 ring-gray-200">
                   <div
-                    className="mx-auto flex h-12 w-12 items-center justify-center rounded-full"
-                    style={{ backgroundColor: ACCENT_LIGHT, color: ACCENT }}
+                    className={`mx-auto flex h-12 w-12 items-center bg-${bgColor} text-white justify-center rounded-full`}
                     aria-hidden="true"
                   >
                     {icon}
@@ -249,7 +229,7 @@ const AboutStorySection = memo(function AboutStorySection() {
           {/* CTA */}
           <div className="mt-12 text-center">
             <Link
-              href="/contact"
+              href="/contact-us"
               className="inline-flex items-center rounded-full px-6 py-3 text-base font-semibold text-white shadow-md transition-all focus:outline-none focus-visible:ring-2"
               style={{
                 // Opaque gradient (no fades)

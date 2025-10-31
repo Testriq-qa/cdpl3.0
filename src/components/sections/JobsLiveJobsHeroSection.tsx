@@ -82,7 +82,10 @@ export default function JobsLiveJobsHeroSection() {
             <strong>QA, SDET, Automation</strong>, <strong>Full-Stack</strong>,{" "}
             <strong>Data</strong>, and <strong>DevOps</strong>. Apply with
             <span className="font-medium"> mentor guidance</span> and build a
-            job-ready portfolio.
+            job-ready portfolio.{" "}
+            <span style={{ color: "#0069A8" }}>
+              to help CDPL students get placed
+            </span>
           </p>
 
           <div className="mt-1 flex flex-wrap gap-2">

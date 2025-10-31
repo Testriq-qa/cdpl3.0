@@ -16,7 +16,7 @@ import Link from "next/link";
  */
 
 type Pillar = {
-  key: string;
+  key: "verified" | "mentor" | "faster";
   title: string;
   desc: string;
   points: string[];
@@ -62,25 +62,72 @@ const PILLARS: Pillar[] = [
   },
 ];
 
+const THEMES: Record<
+  Pillar["key"],
+  {
+    cardBg: string;
+    border: string;
+    iconWrapBg: string;
+    iconColor: string;
+    titleColor: string;
+    bodyColor: string;
+    listBulletColor: string;
+    focusRing: string;
+    detailsBtnBorder: string;
+  }
+> = {
+  verified: {
+    cardBg: "bg-orange-50",
+    border: "border-orange-200",
+    iconWrapBg: "bg-orange-100",
+    iconColor: "text-[#ff8c00]",
+    titleColor: "text-slate-900",
+    bodyColor: "text-slate-800",
+    listBulletColor: "text-slate-800",
+    focusRing: "focus:ring-orange-300",
+    detailsBtnBorder: "border-orange-200",
+  },
+  mentor: {
+    cardBg: "bg-indigo-50",
+    border: "border-indigo-200",
+    iconWrapBg: "bg-indigo-100",
+    iconColor: "text-indigo-600",
+    titleColor: "text-slate-900",
+    bodyColor: "text-slate-800",
+    listBulletColor: "text-slate-800",
+    focusRing: "focus:ring-indigo-300",
+    detailsBtnBorder: "border-indigo-200",
+  },
+  faster: {
+    cardBg: "bg-emerald-50",
+    border: "border-emerald-200",
+    iconWrapBg: "bg-emerald-100",
+    iconColor: "text-emerald-600",
+    titleColor: "text-slate-900",
+    bodyColor: "text-slate-800",
+    listBulletColor: "text-slate-800",
+    focusRing: "focus:ring-emerald-300",
+    detailsBtnBorder: "border-emerald-200",
+  },
+};
+
 export default function JobsLiveJobsWhyWePostJobsSection() {
   const [open, setOpen] = useState<Record<string, boolean>>({});
   const toggle = (k: string) => setOpen((s) => ({ ...s, [k]: !s[k] }));
 
   return (
     <section aria-labelledby="why-cdpl-posts-jobs" className="relative overflow-hidden bg-white font-sans">
-      {/* Brand wash + flare */}
+      {/* page backdrop */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div
           className="absolute inset-0"
           style={{
-            background: "linear-gradient(120deg, rgba(125,211,252,.18), rgba(157,123,255,.16))",
+            background: "linear-gradient(120deg, rgba(125,211,252,.12), rgba(157,123,255,.10))",
           }}
         />
         <div
-          className="absolute left-1/2 top-[-12rem] h-[32rem] w-[32rem] -translate-x-1/2 rounded-full blur-3xl opacity-70"
-          style={{
-            background: "radial-gradient(closest-side, rgba(255,140,0,.20), rgba(255,140,0,0))",
-          }}
+          className="absolute left-1/2 top-[-12rem] h-[32rem] w-[32rem] -translate-x-1/2 rounded-full blur-3xl opacity-60"
+          style={{ background: "rgba(255,140,0,.12)" }}
         />
       </div>
 
@@ -99,36 +146,30 @@ export default function JobsLiveJobsWhyWePostJobsSection() {
           >
             Why CDPL posts <span className="text-[#ff8c00]">verified nearby jobs</span> for students
           </h2>
-          {/* Lead paragraph must be 18px -> text-lg */}
           <p className="mt-3 text-lg text-slate-700">
             We make job search simpler: CDPL curates active roles across{" "}
             <strong className="text-slate-900">QA Automation</strong>,{" "}
             <strong className="text-slate-900">Data Science</strong>,{" "}
             <strong className="text-slate-900">Full-Stack</strong> and{" "}
             <strong className="text-slate-900">DevOps</strong>, and pairs them with mentor guidance
-            and hiring-partner referrals—so you can apply confidently and get to interview faster.
+            and hiring-partner referrals, so you can apply confidently and get to interview faster.
           </p>
         </div>
 
-        {/* KPIs */}
+        {/* KPIs (numbers have different colors per card) */}
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            ["45+", "Expert mentors"],
-            ["1,000+", "Learners guided"],
-            ["30+", "Hiring partners"],
-            ["4.9/5", "Avg. mentor rating"],
-          ].map(([v, l]) => (
+            { v: "45+", l: "Expert mentors", cls: "text-orange-600" },
+            { v: "1,000+", l: "Learners guided", cls: "text-indigo-600" },
+            { v: "30+", l: "Hiring partners", cls: "text-emerald-600" },
+            { v: "4.9/5", l: "Avg. mentor rating", cls: "text-sky-600" },
+          ].map(({ v, l, cls }) => (
             <div
               key={l}
               className="rounded-2xl border border-slate-200 bg-white p-4 text-center shadow-sm"
             >
-              <div
-                className="mx-auto h-1 w-16 rounded-full"
-                style={{
-                  background: "linear-gradient(90deg, #ff8c00, #ffd19e)",
-                }}
-              />
-              <p className="mt-3 text-xl font-extrabold text-slate-900">{v}</p>
+              <div className="mx-auto h-1 w-16 rounded-full bg-[#ff8c00]" />
+              <p className={`mt-3 text-xl font-extrabold ${cls}`}>{v}</p>
               <p className="text-sm text-slate-600">{l}</p>
             </div>
           ))}
@@ -138,6 +179,8 @@ export default function JobsLiveJobsWhyWePostJobsSection() {
         <ul className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {PILLARS.map(({ key, title, desc, points, Icon }) => {
             const isOpen = !!open[key];
+            const t = THEMES[key];
+
             return (
               <motion.li
                 key={key}
@@ -145,47 +188,25 @@ export default function JobsLiveJobsWhyWePostJobsSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.4 }}
                 transition={{ duration: 0.35, ease: "easeOut" }}
-                className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-within:-translate-y-0.5"
+                className={`relative overflow-hidden rounded-2xl border ${t.border} ${t.cardBg} p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md focus-within:-translate-y-0.5`}
               >
-                {/* brand veil */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-2xl opacity-0 transition group-hover:opacity-100"
-                  style={{
-                    background: "linear-gradient(180deg, rgba(255,140,0,.08), rgba(255,140,0,0))",
-                    maskImage: "linear-gradient(black, transparent 65%)",
-                    WebkitMaskImage: "linear-gradient(black, transparent 65%)",
-                  }}
-                />
                 <div className="flex items-start gap-3">
-                  <div
-                    className="grid h-10 w-10 shrink-0 place-items-center rounded-xl"
-                    style={{
-                      background:
-                        "linear-gradient(180deg, rgba(255,140,0,0.12), rgba(255,140,0,0.06))",
-                      boxShadow: "inset 0 0 0 1px rgba(15,23,42,0.06)",
-                    }}
-                  >
-                    <Icon className="h-5 w-5" style={{ color: "#ff8c00" }} />
+                  <div className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ring-1 ring-black/5 ${t.iconWrapBg}`}>
+                    <Icon className={`h-5 w-5 ${t.iconColor}`} />
                   </div>
                   <div className="min-w-0">
-                    {/* Card title -> 16px */}
-                    <h3 className="text-base font-extrabold leading-snug text-slate-900">{title}</h3>
-                    {/* Card body -> 14px */}
-                    <p className="mt-1 text-sm leading-relaxed text-slate-700">{desc}</p>
+                    <h3 className={`text-base font-extrabold leading-snug ${t.titleColor}`}>{title}</h3>
+                    <p className={`mt-1 text-sm leading-relaxed ${t.bodyColor}`}>{desc}</p>
                   </div>
                 </div>
 
-                {/* Expand */}
                 <button
                   onClick={() => toggle(key)}
                   aria-expanded={isOpen}
-                  className="mt-3 inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-900 transition hover:-translate-y-[1px] hover:shadow-sm focus:outline-none focus:ring-2 focus:ring-orange-200"
+                  className={`mt-3 inline-flex items-center gap-1 rounded-full border ${t.detailsBtnBorder} bg-white px-3 py-1.5 text-xs font-semibold text-slate-900 transition hover:-translate-y-[1px] hover:shadow-sm focus:outline-none focus:ring-2 ${t.focusRing}`}
                 >
                   Details
-                  <ChevronDown
-                    className={`h-3.5 w-3.5 transition-transform ${isOpen ? "rotate-180" : ""}`}
-                  />
+                  <ChevronDown className={`h-3.5 w-3.5 transition-transform ${isOpen ? "rotate-180" : ""}`} />
                 </button>
 
                 <motion.ul
@@ -194,9 +215,9 @@ export default function JobsLiveJobsWhyWePostJobsSection() {
                   transition={{ duration: 0.25, ease: "easeOut" }}
                   className="overflow-hidden"
                 >
-                  <div className="mt-3 border-t border-slate-100 pt-3">
+                  <div className="mt-3 border-t border-black/5 pt-3">
                     {points.map((p) => (
-                      <li key={p} className="text-sm leading-relaxed text-slate-700">
+                      <li key={p} className={`text-sm leading-relaxed ${t.listBulletColor}`}>
                         • {p}
                       </li>
                     ))}

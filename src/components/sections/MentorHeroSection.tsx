@@ -116,8 +116,9 @@ export default function MentorHeroSection() {
               One-on-One Mentorship • Resume + Interview Prep • Placement Support
             </p>
 
-            <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-              Meet CDPL’s industry mentors
+            <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-[#0069A8]">
+              Meet CDPL’s industry{" "}
+              <span style={{ color: "var(--color-brand, #ff8c00)" }}>mentors</span>
             </h1>
 
             <p className="mt-4 mx-auto lg:mx-0 max-w-3xl text-base sm:text-lg text-slate-600">
@@ -175,10 +176,10 @@ export default function MentorHeroSection() {
             </p>
           </div>
 
-          {/* RIGHT — image second on mobile; right column on lg+ */}
-          <div className="order-2 lg:order-2 relative top-0 mt-6 lg:mt-8 flex items-center justify-center lg:justify-end">
+          {/* RIGHT — image (lifted up to align with content start; content unchanged) */}
+          <div className="order-2 lg:order-2 relative flex items-start justify-center lg:justify-end mt-6 lg:mt-0 -translate-y-2 sm:-translate-y-3 lg:-translate-y-10 xl:-translate-y-12">
             <Image
-              src="/mentors_images/mentors-hero.png"
+              src="/mentors_images/mentors-hero2.png"
               alt="CDPL Mentors"
               width={1280}
               height={960}

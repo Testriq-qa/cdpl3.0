@@ -2,7 +2,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { Phone, Mail, CalendarDays } from "lucide-react";
+import { Phone, Mail, CalendarDays, Home, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 type FormState = {
@@ -47,8 +47,12 @@ export function ContactHeroSection() {
     }
   };
 
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "Contact Us", href: "/contact-us" },
+  ]
+
   return (
-    // isolate creates a new stacking context so z-0 / z-10 behave predictably
     <section className="relative isolate overflow-hidden bg-white">
       {/* themed blobs ABOVE the white background */}
       <div
@@ -72,12 +76,31 @@ export function ContactHeroSection() {
         }}
       />
 
+
       {/* CONTENT on top */}
-      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-14">
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-10 items-start">
-          {/* Left */}
-          <div className="md:col-span-7 flex flex-col justify-start md:pt-2">
-            <span className="inline-flex w-fit items-center gap-2 rounded-full border border-sky-200/70 bg-white/70 px-3 py-1 text-[11px] font-medium text-sky-700 shadow-sm backdrop-blur">
+      <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-8 md:py-10">
+
+        {/* Breadcrumbs for SEO & UX */}
+        <nav aria-label="Breadcrumb" className="mb-6">
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            {breadcrumbs.map((c, i) => (
+              <li key={i} className="flex items-center gap-2">
+                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <a
+                  href={c.href}
+                  className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                >
+                  {c.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4 lg:gap-10 items-start">
+          {/* Left column: Main content + Form on mobile */}
+          <div className="md:col-span-6 lg:col-span-7 flex flex-col justify-start md:pt-1">
+            <span className="md:inline-flex text-center w-fit items-center gap-2 rounded-full border border-sky-200/70 bg-white/70 px-3 py-1 text-[11px] font-medium text-sky-700 shadow-sm backdrop-blur">
               🎓 Industry-recognized • ⚡ Fast Response <span className="opacity-70">under 24 hrs</span>
             </span>
 
@@ -85,7 +108,109 @@ export function ContactHeroSection() {
               Contact <span className="text-brand">Cinute Digital</span>
             </h1>
 
-            <p className="mt-4 text-lg text-slate-600 max-w-prose">
+            {/* Form: Display below h1 on mobile only */}
+            <div className="md:hidden mt-6">
+              {/* gradient outer skin + 1px border */}
+              <div className="rounded-3xl p-[1px] bg-gradient-to-br from-sky-100/70 via-indigo-100/60 to-orange-100/70 shadow-2xl">
+                {/* inner glass panel */}
+                <div className="rounded-[calc(1.5rem-1px)] backdrop-blur p-6 sm:p-8">
+                  <h2 className="text-2xl font-bold text-slate-900">Get in Touch</h2>
+                  <p className="mt-1.5 text-slate-600">
+                    Share your goals — we’ll help you find the perfect course or training plan.
+                  </p>
+
+                  <form onSubmit={onSubmit} className="mt-6 space-y-5">
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700">Full Name</label>
+                      <input
+                        type="text"
+                        value={form.name}
+                        onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+                        className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-slate-900 outline-none transition focus:border-brand focus:ring-1 focus:ring-brand"
+                        placeholder="e.g., Priya Sharma"
+                      />
+                      {errors.name && <p className="text-xs text-red-500 mt-1">{errors.name}</p>}
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700">Email</label>
+                      <input
+                        type="email"
+                        value={form.email}
+                        onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+                        className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-slate-900 outline-none transition focus:border-brand focus:ring-1 focus:ring-brand"
+                        placeholder="you@example.com"
+                      />
+                      {errors.email && <p className="text-xs text-red-500 mt-1">{errors.email}</p>}
+                    </div>
+
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700">Phone</label>
+                        <input
+                          type="text"
+                          value={form.phone}
+                          onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+                          className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-slate-900 outline-none transition focus:border-brand focus:ring-1 focus:ring-brand"
+                          placeholder="+91 98XXXXXXXX"
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-slate-700">Area of Interest</label>
+                        <select
+                          value={form.interest}
+                          onChange={(e) => setForm((f) => ({ ...f, interest: e.target.value }))}
+                          className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-slate-900 outline-none transition focus:border-brand focus:ring-1 focus:ring-brand"
+                        >
+                          <option value="">Select…</option>
+                          <option value="Software Testing">Software Testing</option>
+                          <option value="Data Science & AI">Data Science & AI</option>
+                          <option value="Full Stack Development">Full Stack Development</option>
+                          <option value="Corporate Training">Corporate Training</option>
+                        </select>
+                      </div>
+                    </div>
+
+                    <div>
+                      <label className="block text-sm font-medium text-slate-700">Message</label>
+                      <textarea
+                        value={form.message}
+                        onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
+                        rows={3}
+                        className="mt-1 w-full rounded-lg border border-slate-200 bg-slate-50 px-3 py-2 text-slate-900 outline-none transition focus:border-brand focus:ring-1 focus:ring-brand"
+                        placeholder="Tell us how we can help..."
+                      />
+                      {errors.message && <p className="text-xs text-red-500 mt-1">{errors.message}</p>}
+                    </div>
+
+                    <button
+                      type="submit"
+                      disabled={status === "submitting"}
+                      className="group relative mt-2 w-full overflow-hidden rounded-xl bg-brand py-3 font-semibold text-white shadow-md transition hover:brightness-110 disabled:opacity-70"
+                    >
+                      <span className="relative z-[1]">
+                        {status === "submitting" ? "Sending..." : "Submit Message"}
+                      </span>
+                      <span
+                        aria-hidden
+                        className="absolute inset-0 -translate-x-full bg-[linear-gradient(120deg,transparent,rgba(255,255,255,0.45),transparent)] transition-transform duration-700 group-hover:translate-x-full"
+                      />
+                    </button>
+
+                    {status === "success" && (
+                      <p className="text-green-600 text-sm mt-2">Thank you! We’ll get back to you soon.</p>
+                    )}
+                  </form>
+
+                  <p className="mt-4 text-[12px] text-slate-500">
+                    By submitting, you agree to be contacted about admissions and courses. We respect your privacy.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <p className="mt-8 text-lg text-slate-600 max-w-prose">
               Reach India’s leading ed-tech institute for <strong>Software Testing</strong>,{" "}
               <strong>Data Science &amp; AI</strong>, and <strong>Full-Stack Development</strong>. Get{" "}
               <strong>job-ready training</strong>, <strong>placement assistance</strong>, and{" "}
@@ -112,66 +237,80 @@ export function ContactHeroSection() {
               ))}
             </ul>
 
-            {/* --- NEW: Quick Contact Buttons (replaces the old 3 cards) --- */}
+            {/* Quick Contact Buttons */}
             <div className="mt-6">
               <div className="mb-2 text-sm font-semibold text-slate-700">Quick Contact Options</div>
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+
+              {/* Responsive, non-overlapping grid */}
+              <div
+                className="grid gap-4 lg:gap-3 xl:gap-4
+               [grid-template-columns:repeat(auto-fit,minmax(260px,1fr))]"
+              >
                 {/* Call Now */}
                 <Link
-                  href="tel:+919152929343"
+                  href="tel:+918488988984"
                   aria-label="Call Now"
-                  className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400"
+                  className="group inline-flex w-full items-center gap-4 lg:gap-3 xl:gap-4
+                 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3
+                 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 overflow-hidden"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-green-500/90 text-white shadow-sm">
-                    <Phone className="h-6 w-6" />
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-green-500/90 text-white shadow-sm">
+                    <Phone className="h-6 w-6 lg:h-7 lg:w-7" />
                   </span>
-                  <span className="flex flex-col">
+                  <span className="flex min-w-0 flex-1 flex-col">
                     <span className="text-base font-semibold text-slate-900">Call Now</span>
-                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700">
-                      (+91) 915-2929-343
+                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700 truncate whitespace-nowrap">
+                      +91 84-889-889-84
                     </span>
                   </span>
                 </Link>
 
                 {/* Email Us */}
-                <a
-                  href="mailto:contact@testriq.com"
+                <Link
+                  href="mailto:contact@cinutedigital.com"
                   aria-label="Email Us"
-                  className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400"
+                  className="group inline-flex w-full items-center gap-4 lg:gap-3 xl:gap-4
+                 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3
+                 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-400 overflow-hidden"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-600/90 text-white shadow-sm">
-                    <Mail className="h-6 w-6" />
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-blue-600/90 text-white shadow-sm">
+                    <Mail className="h-6 w-6 lg:h-7 lg:w-7" />
                   </span>
-                  <span className="flex flex-col">
+                  <span className="flex min-w-0 flex-1 flex-col">
                     <span className="text-base font-semibold text-slate-900">Email Us</span>
-                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700">
-                      contact@testriq.com
+                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700 truncate whitespace-nowrap">
+                      contact@cinutedigital.com
                     </span>
                   </span>
-                </a>
+                </Link>
 
                 {/* Schedule Meeting */}
-                <a
+                <Link
                   href="/book-a-call"
                   aria-label="Schedule a Meeting"
-                  className="group flex items-center gap-4 rounded-2xl border border-slate-200 bg-white/90 p-4 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400"
+                  className="group inline-flex w-full items-center gap-4 lg:gap-3 xl:gap-4
+                 rounded-2xl border border-slate-200 bg-white/90 px-4 py-3
+                 shadow-sm transition hover:shadow-lg hover:-translate-y-0.5
+                 focus:outline-none focus-visible:ring-2 focus-visible:ring-fuchsia-400 overflow-hidden"
                 >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-xl bg-fuchsia-600/90 text-white shadow-sm">
-                    <CalendarDays className="h-6 w-6" />
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-fuchsia-600/90 text-white shadow-sm">
+                    <CalendarDays className="h-6 w-6 lg:h-7 lg:w-7" />
                   </span>
-                  <span className="flex flex-col">
+                  <span className="flex min-w-0 flex-1 flex-col">
                     <span className="text-base font-semibold text-slate-900">Schedule Meeting</span>
-                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700">
+                    <span className="text-[12px] text-slate-600 group-hover:text-slate-700 truncate whitespace-nowrap">
                       Book a Call
                     </span>
                   </span>
-                </a>
+                </Link>
               </div>
             </div>
-            {/* --- /NEW buttons --- */}
+
 
             <p className="mt-5 text-[15px] text-slate-600">
-              Serving learners across India — Mumbai, Pune, Bengaluru &amp; beyond. Talk to our{" "}
+              Serving learners across India - Mumbai, Pune, Bengaluru &amp; beyond. Talk to our{" "}
               <strong>admissions counselors</strong> for <strong>course fees</strong>,{" "}
               <strong>syllabus &amp; roadmaps</strong>, <strong>placement support</strong>, or{" "}
               <strong>custom corporate training</strong>.
@@ -182,8 +321,8 @@ export function ContactHeroSection() {
             </p>
           </div>
 
-          {/* Right: gradient-glass form card (narrower) */}
-          <div className="md:col-span-5 relative">
+          {/* Right column: Form on desktop only */}
+          <div className="hidden md:block md:col-span-6 lg:col-span-5 relative">
             {/* gradient outer skin + 1px border */}
             <div className="rounded-3xl p-[1px] bg-gradient-to-br from-sky-100/70 via-indigo-100/60 to-orange-100/70 shadow-2xl">
               {/* inner glass panel — constrained width */}
@@ -283,7 +422,6 @@ export function ContactHeroSection() {
               </div>
             </div>
           </div>
-          {/* /Right */}
         </div>
       </div>
     </section>
