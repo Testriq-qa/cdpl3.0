@@ -2,7 +2,7 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { Check, Building2, Sparkles, ArrowRight } from "lucide-react";
+import { Check, Building2, Sparkles, ArrowRight, Link } from "lucide-react";
 
 type Bullet = { label: string; sub?: string };
 
@@ -96,7 +96,7 @@ export default function EventsPastEventsCTASection({
 
                 {/* Actions */}
                 <div className="mt-6 flex w-full flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
-                  <a
+                  <Link
                     href="/contact-us"
                     className="group inline-flex w-full max-w-full items-center justify-center gap-2 rounded-full px-4 py-2.5 text-sm font-semibold text-white shadow-md ring-1 ring-black/5 transition hover:opacity-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 sm:w-auto sm:px-5 sm:py-2.5"
                     style={{ backgroundColor: "#0069A8" }}
@@ -105,15 +105,15 @@ export default function EventsPastEventsCTASection({
                       Request Training for Your Organization
                     </span>
                     <ArrowRight className="h-4 w-4 flex-shrink-0 transition group-hover:translate-x-0.5" />
-                  </a>
+                  </Link>
 
-                  <a
+                  <Link
                     href="/mentors"
                     className="group inline-flex w-full items-center justify-center gap-2 rounded-full border border-slate-200 bg-white px-4 py-3 text-sm font-medium text-slate-700 shadow-sm transition hover:bg-slate-50 sm:w-auto sm:py-2.5"
                   >
                     Learn more
                     <ArrowRight className="h-4 w-4 transition group-hover:translate-x-0.5" />
-                  </a>
+                  </Link>
                 </div>
               </div>
 
@@ -176,12 +176,12 @@ export default function EventsPastEventsCTASection({
                       Share timelines & goals, we’ll reply with a crisp plan.
                     </p>
                     <div className="mt-3 flex flex-col gap-2 sm:flex-row">
-                      <a
+                      <Link
                         href="/contact-us"
                         className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-slate-900 px-4 py-3 text-sm font-medium text-white shadow-sm transition hover:opacity-95 sm:w-auto sm:py-2.5"
                       >
                         Book a call
-                      </a>
+                      </Link>
                     </div>
                   </div>
                 </div>

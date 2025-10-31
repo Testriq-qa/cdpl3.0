@@ -11,6 +11,7 @@ import {
     Coins,
     Sparkles,
     ArrowRight,
+    Link,
 } from "lucide-react";
 
 const BRAND_COLOR = "#ff8c00";
@@ -184,7 +185,7 @@ export default function JobsCareersBenefitsSection() {
 
                                 <div className="mt-4 sm:mt-6 lg:mt-8" />
 
-                                <a href="/about-us" className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-neutral-600">
+                                <Link href="/about-us" className="mt-auto inline-flex items-center gap-1 text-xs font-medium text-neutral-600">
                                     <span className="relative">
                                         <span className="relative z-10">Learn more</span>
                                         <span
@@ -193,7 +194,7 @@ export default function JobsCareersBenefitsSection() {
                                         />
                                     </span>
                                     <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" color={accent} />
-                                </a>
+                                </Link>
 
                                 <span
                                     aria-hidden
