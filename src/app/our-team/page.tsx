@@ -209,7 +209,7 @@ export default function Page() {
   } : null;
 
   return (
-    <>
+    <>   
       {/* Structured Data - Multiple Schemas */}
       <script
         type="application/ld+json"
