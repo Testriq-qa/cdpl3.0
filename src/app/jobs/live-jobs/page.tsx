@@ -5,7 +5,6 @@ import dynamic from "next/dynamic";
 import { JOBS } from "@/lib/jobsData";
 import type { Job } from "@/lib/jobsData";
 
-// ---------- Loader ----------
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
   return (
     <div className="flex items-center justify-center py-16">
@@ -14,34 +13,27 @@ function SectionLoader({ label = "Loading..." }: { label?: string }) {
   );
 }
 
-// Types used elsewhere
-
-
 export const metadata: Metadata = {
-    title: "Live Jobs & Placement Alerts | Cinute Digital Pvt. Ltd (CDPL)",
-    description:
-        "Verified live jobs and walk-in drives curated by CDPL. QA, Automation, Data, and Engineering roles across India.",
-    alternates: { canonical: "https://cinutedigital.com/jobs/live-jobs" },
-    openGraph: {
-        title: "Live Jobs & Placement Alerts | CDPL",
-        description:
-            "Verified openings, walk-ins, and trainee roles curated by Cinute Digital.",
-        url: "https://cinutedigital.com/jobs/live-jobs",
-        siteName: "Cinute Digital",
-        type: "website",
-    },
-    twitter: {
-        card: "summary_large_image",
-        title: "Live Jobs & Placement Alerts | CDPL",
-        description: "Verified openings curated by Cinute Digital.",
-    },
-    robots: { index: true, follow: true },
+  title: "Live Jobs & Placement Alerts | Cinute Digital Pvt. Ltd (CDPL)",
+  description:
+    "Verified live jobs and walk-in drives curated by CDPL. QA, Automation, Data, and Engineering roles across India.",
+  alternates: { canonical: "https://cinutedigital.com/jobs/live-jobs" },
+  openGraph: {
+    title: "Live Jobs & Placement Alerts | CDPL",
+    description: "Verified openings, walk-ins, and trainee roles curated by Cinute Digital.",
+    url: "https://cinutedigital.com/jobs/live-jobs",
+    siteName: "Cinute Digital",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Live Jobs & Placement Alerts | CDPL",
+    description: "Verified openings curated by Cinute Digital.",
+  },
+  robots: { index: true, follow: true },
 };
 
-// Example SSR data (unchanged except shareKey added)
-
-
-// ---------- Dynamic sections ----------
+// Dynamic sections
 const JobsLiveJobsJobsHeroSection = dynamic(
   () => import("@/components/sections/JobsLiveJobsJobsHeroSection").then((m) => m.default),
   { ssr: true, loading: () => <SectionLoader label="Loading hero..." /> }
@@ -86,13 +78,7 @@ const JobsLiveJobsSubscribeCTASection = dynamic(
   { ssr: true, loading: () => <SectionLoader label="Loading subscribe..." /> }
 );
 
-
-// ---------------- Your JOBS array (unchanged) ----------------
-// ... keep your big JOBS array exactly as you posted above ...
-// -------------------------------------------------------------
-
-// 👉 Default banner for all jobs (unless a job already has bannerImage)
-// C:\Users\Administrator\Documents\GitHub\cdpl3.0\public\testimonial_images\job_image.jpg
+// Default banner
 const DEFAULT_BANNER = "/testimonial_images/job_image.jpg";
 const JOBS_WITH_BANNER: Job[] = JOBS.map((j) => ({
   ...j,
@@ -131,7 +117,6 @@ export default function Page() {
 
   return (
     <main className="bg-white text-slate-900 relative">
-      {/* soft site-wide background */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
         <div
           className="absolute inset-0"

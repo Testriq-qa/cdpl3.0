@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import React, { useMemo, useState } from "react";
 import {
   Briefcase,
   Building2,
@@ -11,7 +12,6 @@ import {
   Link as LinkIcon,
   Tag,
   Mail,
-  ImageOff,
   Share2,
   Copy,
 } from "lucide-react";
@@ -20,10 +20,10 @@ import type { Job } from "@/lib/jobsData";
 const formatDate = (iso?: string) =>
   iso
     ? new Date(iso).toLocaleDateString("en-IN", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-      })
+      day: "2-digit",
+      month: "short",
+      year: "numeric",
+    })
     : "";
 
 type AnyJob = Job & {
@@ -52,33 +52,150 @@ export function JobsLiveJobsJobCardSection({
   const dateText = job.eventDate
     ? `Event: ${formatDate(job.eventDate)}`
     : job.postedOn
-    ? `Posted: ${formatDate(job.postedOn)}`
-    : "";
+      ? `Posted: ${formatDate(job.postedOn)}`
+      : "";
 
-  // Tech tags inferred from copy
   const techFromText = (() => {
     const hay = [job.title, ...(job.highlights || []), ...(job.responsibilities || [])]
       .join(" ")
       .toLowerCase();
     const DICT = [
-      "jmeter","selenium","postman","restassured","rest assured","cypress","playwright","appium",
-      "java","python","javascript","typescript","sql","mysql","postgres","mongodb",
-      "jenkins","docker","kubernetes","aws","azure","gcp","react","node","next.js","ci/cd"
+      "jmeter",
+      "selenium",
+      "postman",
+      "restassured",
+      "rest assured",
+      "cypress",
+      "playwright",
+      "appium",
+      "java",
+      "python",
+      "javascript",
+      "typescript",
+      "sql",
+      "mysql",
+      "postgres",
+      "mongodb",
+      "jenkins",
+      "docker",
+      "kubernetes",
+      "aws",
+      "azure",
+      "gcp",
+      "react",
+      "node",
+      "next.js",
+      "ci/cd",
     ];
     const found = new Set<string>();
     for (const k of DICT) if (hay.includes(k)) found.add(k.replace(/\brest assured\b/, "Rest Assured"));
     const title = (s: string) =>
-      s.split(/[\s/]+/).map(w => (w.length <= 3 ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1))).join(" ");
-    return Array.from(found).map(t => t.replace("next.js", "Next.js")).map(title).slice(0, 12).sort();
+      s
+        .split(/[\s/]+/)
+        .map((w) => (w.length <= 3 ? w.toUpperCase() : w[0].toUpperCase() + w.slice(1)))
+        .join(" ");
+    return Array.from(found)
+      .map((t) => t.replace("next.js", "Next.js"))
+      .map(title)
+      .slice(0, 12)
+      .sort();
   })();
 
+  // --- IMAGE HANDLING ---
+  // Only attempt to render an image if a bannerImage is explicitly provided.
+  const hasBanner = Boolean(job.bannerImage);
+
+  // Build candidate sources ONLY from bannerImage (no generic fallback),
+  // so if it fails, we won't render any image area or badge.
+  const candidateSrcs = useMemo(() => {
+    if (!hasBanner) return [] as string[];
+    const hasExt = (p?: string) => !!p && /\.(png|jpe?g|webp|gif|avif|svg)$/i.test(p);
+    const EXT_ORDER_GENERIC = [".jpg", ".jpeg", ".png", ".webp"];
+
+    const expand = (base?: string, exts: string[] = EXT_ORDER_GENERIC) => {
+      if (!base) return [] as string[];
+      if (hasExt(base)) return [base];
+      return exts.map((e) => `${base}${e}`);
+    };
+
+    return expand(job.bannerImage);
+  }, [hasBanner, job.bannerImage]);
+
+  const [imgIdx, setImgIdx] = useState(0);
+  const [giveUp, setGiveUp] = useState(false);
+  const currentSrc = candidateSrcs[imgIdx];
+  const isLocal = !!currentSrc && currentSrc.startsWith("/");
+
+  const handleImgError = () => {
+    if (imgIdx < candidateSrcs.length - 1) setImgIdx((i) => i + 1);
+    else setGiveUp(true);
+  };
+
+  const imageBadge =
+    job.type || job.mode || (job.eventDate ? formatDate(job.eventDate) : undefined);
+
   return (
-    <article className="relative">
-      {/* md+: two columns via flex so right rail stays top-right */}
-      <div className="gap-4 md:flex md:flex-row md:items-start md:gap-6">
-        {/* LEFT: Textual content */}
-        <div className="min-w-0 md:flex-1">
-          {/* Header */}
+    <article className="relative font-sans">
+      <div className="flex flex-col md:flex-row md:items-start gap-4 md:gap-6">
+        {/* IMAGE — render ONLY if bannerImage exists AND successfully loads */}
+        {hasBanner && !giveUp && currentSrc && (
+          <aside
+            className="
+              order-1 md:order-2 md:self-start relative
+              w-full md:w-[300px] lg:w-[340px] xl:w-[380px]
+              md:shrink-0
+            "
+          >
+            <Image
+              key={currentSrc}
+              src={currentSrc}
+              alt={job.bannerImageAlt || `${job.company} hiring`}
+              width={1600}
+              height={900}
+              className="w-full h-auto rounded-2xl object-contain bg-white"
+              priority={false}
+              unoptimized={isLocal}
+              onError={handleImgError}
+              onLoadingComplete={(img) => {
+                if (!img?.naturalWidth) handleImgError();
+              }}
+            />
+
+            {/* Badge/label ONLY if image rendered */}
+            {imageBadge && (
+              <div className="absolute left-3 top-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold text-slate-700 ring-1 ring-slate-200 backdrop-blur-sm">
+                <Tag className="h-3.5 w-3.5 opacity-70" />
+                <span className="truncate max-w-[240px] sm:max-w-[300px] md:max-w-[300px]">
+                  {imageBadge}
+                </span>
+              </div>
+            )}
+
+            <div className="mt-2 flex justify-end">
+              <button
+                onClick={() => onShare(job)}
+                className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300"
+                aria-label={`Share ${job.title}`}
+                title={isCopied ? "Link copied!" : "Share"}
+              >
+                {isCopied ? (
+                  <>
+                    <Copy className="h-3.5 w-3.5" />
+                    Copied
+                  </>
+                ) : (
+                  <>
+                    <Share2 className="h-3.5 w-3.5" />
+                    Share
+                  </>
+                )}
+              </button>
+            </div>
+          </aside>
+        )}
+
+        {/* MAIN CONTENT */}
+        <div className="order-2 md:order-1 min-w-0 md:flex-1">
           <div className="flex items-start gap-3">
             <div
               className="grid h-10 w-10 shrink-0 place-items-center rounded-xl"
@@ -95,7 +212,7 @@ export function JobsLiveJobsJobCardSection({
                 {job.title}
               </h3>
 
-              <p className="mt-0.5 flex flex-wrap items-center gap-2 text-[13px] text-slate-600">
+              <p className="mt-0.5 flex flex-wrap items-center gap-2 text-sm text-slate-600">
                 <span className="inline-flex items-center">
                   <Building2 className="mr-1 h-3.5 w-3.5" />
                   {job.company}
@@ -140,7 +257,7 @@ export function JobsLiveJobsJobCardSection({
             </div>
           </div>
 
-          {/* Pills */}
+          {/* Tags / meta */}
           <div className="mt-3 flex flex-wrap gap-2">
             {job.tags?.map((t) => <Pill key={t}>{t}</Pill>)}
             {job.type && <Pill>{job.type}</Pill>}
@@ -163,7 +280,7 @@ export function JobsLiveJobsJobCardSection({
               <h4 className="mb-1 text-sm font-semibold text-slate-900">What we’re looking for</h4>
               <ul className="grid gap-1.5">
                 {job.highlights.slice(0, 6).map((h) => (
-                  <li key={h} className="text-[13.5px] leading-relaxed text-slate-700">
+                  <li key={h} className="text-sm leading-relaxed text-slate-600">
                     • {h}
                   </li>
                 ))}
@@ -177,7 +294,7 @@ export function JobsLiveJobsJobCardSection({
               <h4 className="mb-1 text-sm font-semibold text-slate-900">Roles & responsibilities</h4>
               <ul className="grid gap-1.5">
                 {job.responsibilities.slice(0, 8).map((r, i) => (
-                  <li key={`${i}-${r}`} className="text-[13.5px] leading-relaxed text-slate-700">
+                  <li key={`${i}-${r}`} className="text-sm leading-relaxed text-slate-600">
                     • {r}
                   </li>
                 ))}
@@ -185,7 +302,7 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
-          {/* Tech stack */}
+          {/* Tech stack (derived) */}
           {!!techFromText.length && (
             <div className="mt-4">
               <div className="mb-2 flex items-center gap-2">
@@ -209,7 +326,7 @@ export function JobsLiveJobsJobCardSection({
           {(job.venue || job.eventDate || job.timeWindow || job.location) && (
             <div className="mt-5 border-t border-slate-100 pt-3">
               <h4 className="text-sm font-semibold text-slate-900">Venue & schedule</h4>
-              <div className="mt-2 grid gap-1.5 text-[13.5px] leading-relaxed text-slate-700">
+              <div className="mt-2 grid gap-1.5 text-sm leading-relaxed text-slate-600">
                 {job.venue && (
                   <p className="inline-flex items-start">
                     <MapPin className="mr-1 mt-[2px] h-3.5 w-3.5 text-slate-500" />
@@ -238,7 +355,7 @@ export function JobsLiveJobsJobCardSection({
               <h4 className="text-sm font-semibold text-slate-900">Contacts</h4>
               <ul className="mt-2 grid gap-1.5">
                 {job.contacts.slice(0, 4).map((c, i) => (
-                  <li key={`${i}-${c}`} className="text-[13.5px] leading-relaxed text-slate-700">
+                  <li key={`${i}-${c}`} className="text-sm leading-relaxed text-slate-600">
                     • {c}
                   </li>
                 ))}
@@ -246,7 +363,7 @@ export function JobsLiveJobsJobCardSection({
             </div>
           )}
 
-          {/* CTAs */}
+          {/* Apply actions */}
           <div className="mt-5 flex flex-wrap items-center gap-2 border-t border-slate-100 pt-3">
             {job.applyEmail && (
               <a
@@ -276,45 +393,6 @@ export function JobsLiveJobsJobCardSection({
             )}
           </div>
         </div>
-
-        {/* RIGHT RAIL: Share + Image (fixed width on md+) */}
-        <aside className="order-first md:order-none md:w-[320px] lg:w-[360px] md:flex md:flex-col md:items-end md:gap-3 md:self-start">
-          <button
-            onClick={() => onShare(job)}
-            className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/90 px-3 py-1 text-xs font-semibold text-slate-700 shadow-sm hover:bg-orange-50 focus:outline-none focus:ring-2 focus:ring-orange-300"
-            aria-label={`Share ${job.title}`}
-            title={isCopied ? "Link copied!" : "Share"}
-          >
-            {isCopied ? (
-              <>
-                <Copy className="h-3.5 w-3.5" />
-                Copied
-              </>
-            ) : (
-              <>
-                <Share2 className="h-3.5 w-3.5" />
-                Share
-              </>
-            )}
-          </button>
-
-          <div className="relative mt-2 h-44 w-full overflow-hidden rounded-xl sm:h-56 md:h-48 lg:h-56">
-            {job.bannerImage ? (
-              <Image
-                src={job.bannerImage}
-                alt={job.bannerImageAlt || `${job.company} hiring`}
-                fill
-                className="object-cover"
-                sizes="(max-width: 767px) 100vw, 360px"
-                priority={false}
-              />
-            ) : (
-              <div className="flex h-full w-full items-center justify-center bg-slate-50 text-slate-400">
-                <ImageOff className="h-8 w-8" />
-              </div>
-            )}
-          </div>
-        </aside>
       </div>
     </article>
   );

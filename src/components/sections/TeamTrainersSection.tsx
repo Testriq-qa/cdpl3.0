@@ -29,7 +29,7 @@ export default function TeamTrainersSection({
   trainers,
   heading = "Meet Our Expert Trainers",
   subheading = "Mentor-led, job-focused learning from industry practitioners in Quality Engineering, Automation Testing, and DevOps.",
-  ctaHref = "/contact",
+  ctaHref = "/contact-us",
   ctaText = "Book a Free Demo Session",
   className = "",
 }: TrainersSectionProps) {
@@ -37,17 +37,8 @@ export default function TeamTrainersSection({
   const [expertise, setExpertise] = useState<string>("All");
   const [lang, setLang] = useState<string>("All");
 
-  const allExpertise = useMemo(() => {
-    const s = new Set<string>();
-    trainers.forEach((t) => t.specialties.forEach((sp) => s.add(sp)));
-    return ["All", ...Array.from(s).sort()];
-  }, [trainers]);
-
-  const allLanguages = useMemo(() => {
-    const s = new Set<string>();
-    trainers.forEach((t) => (t.languages ?? []).forEach((l) => s.add(l)));
-    return ["All", ...Array.from(s).sort()];
-  }, [trainers]);
+  void setExpertise;
+  void setLang;
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -96,7 +87,7 @@ export default function TeamTrainersSection({
   return (
     <section
       aria-labelledby="trainers-heading"
-      className={`mx-auto max-w-7xl py-6 px-4 sm:px-6 lg:px-8 ${className}`}
+      className={`mx-auto max-w-7xl py-10 md:py-6 px-4 sm:px-6 lg:px-8 ${className}`}
     >
       {/* SEO Headings */}
       <div className="mx-auto max-w-5xl text-center">
@@ -109,10 +100,10 @@ export default function TeamTrainersSection({
         </span>
         <h2
           id="trainers-heading"
-          className="mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
+          className="mt-6 md:mt-4 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl"
         >
           {heading}{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-orange-500 via-amber-500 to-rose-500" style={{ backgroundImage: `linear-gradient(90deg, ${BRAND}, #ffb86b)` }}>
+          <span className="text-brand">
             at Cinute Digital
           </span>
         </h2>
@@ -136,34 +127,6 @@ export default function TeamTrainersSection({
             style={brandRing}
           />
         </div>
-
-        <div className="flex flex-wrap gap-2">
-          <select
-            aria-label="Filter by expertise"
-            value={expertise}
-            onChange={(e) => setExpertise(e.target.value)}
-            className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:outline-none"
-          >
-            {allExpertise.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt === "All" ? "All Expertise" : opt}
-              </option>
-            ))}
-          </select>
-
-          <select
-            aria-label="Filter by language"
-            value={lang}
-            onChange={(e) => setLang(e.target.value)}
-            className="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm focus:outline-none"
-          >
-            {allLanguages.map((opt) => (
-              <option key={opt} value={opt}>
-                {opt === "All" ? "All Languages" : opt}
-              </option>
-            ))}
-          </select>
-        </div>
       </div>
 
       {/* Grid */}
@@ -185,10 +148,10 @@ export default function TeamTrainersSection({
                 />
               </div>
               <div className="min-w-0 flex-1">
-                <h3 className="truncate text-lg font-bold text-slate-900">
+                <h3 className="truncate text-lg text-center md:text-start font-bold text-slate-900">
                   {t.name}
                 </h3>
-                <p className="truncate text-md text-slate-600">{t.role}</p>
+                <p className="truncate text-md text-center md:text-start text-slate-600">{t.role}</p>
                 <div className="mt-2 flex flex-wrap items-center gap-2 text-xs">
                   <span className="inline-flex items-center gap-1 rounded-full bg-orange-50 px-2 py-0.5 font-medium text-orange-700 ring-1 ring-inset ring-orange-200">
                     <GraduationCap className="h-3.5 w-3.5" />
@@ -238,7 +201,7 @@ export default function TeamTrainersSection({
               {t.certifications && t.certifications.length > 0 && (
                 <div className="rounded-2xl border border-slate-200 bg-white p-3">
                   <div className="flex items-center gap-2 text-sm font-bold text-slate-800">
-                    <BadgeCheck className="h-4 w-4" style={{ color: BRAND }} />
+                    <BadgeCheck className="h-4 w-4 hidden md:block text-brand" />
                     Certifications
                   </div>
                   <ul className="mt-1.5 list-inside space-y-1">
@@ -286,13 +249,13 @@ export default function TeamTrainersSection({
         <h3 className="text-lg font-semibold text-slate-900">
           Learn from mentors who’ve shipped and tested real products.
         </h3>
-        <p className="mt-1 text-sm text-slate-700">
+        <p className="mt-4 md:mt-1 text-sm text-slate-700">
           Get hands-on with <strong>Automation Testing</strong>, <strong>API Testing</strong>,{" "}
           <strong>Playwright</strong>, <strong>Cypress</strong>, and <strong>DevOps fundamentals</strong>.
         </p>
         <Link
           href={ctaHref}
-          className="mt-4 inline-flex items-center justify-center rounded-2xl px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
+          className="mt-6 md:mt-4 inline-flex items-center justify-center rounded-2xl px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           style={{ backgroundColor: BRAND }}
         >
           {ctaText}

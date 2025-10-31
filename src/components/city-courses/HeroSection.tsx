@@ -2,11 +2,22 @@
 
 import React, { useMemo, useState } from "react";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Star, MapPin, Home, ChevronRight } from "lucide-react";
+import { ArrowRight, Star, MapPin, Home, ChevronRight, X } from "lucide-react";
 import type { CourseData } from "@/types/courseData";
+import Link from "next/link";
 
 interface HeroSectionProps {
   data: CourseData;
+}
+
+interface PopupFormProps {
+  isOpen: boolean;
+  onClose: () => void;
+  onSubmit: (formData: { name: string; email: string; phone: string }) => void;
+  formData: { name: string; email: string; phone: string };
+  setFormData: React.Dispatch<
+    React.SetStateAction<{ name: string; email: string; phone: string }>
+  >;
 }
 
 const containerVariants: Variants = {
@@ -26,8 +37,128 @@ const itemVariants: Variants = {
   },
 };
 
+const popupVariants: Variants = {
+  hidden: { opacity: 0, scale: 0.8 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } },
+};
+
+// Extracted and exported PopupForm component
+export const PopupForm: React.FC<PopupFormProps> = ({
+  isOpen,
+  onClose,
+  onSubmit,
+  formData,
+  setFormData,
+}) => {
+  if (!isOpen) return null;
+
+  return (
+    <motion.div
+      variants={popupVariants}
+      initial="hidden"
+      animate="visible"
+      exit="exit"
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
+      onClick={onClose}
+    >
+      <div
+        className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <button
+          onClick={onClose}
+          className="absolute top-4 right-4 text-slate-500 hover:text-slate-700"
+          aria-label="Close popup"
+        >
+          <X className="h-5 w-5" />
+        </button>
+        <h2 className="text-xl font-bold text-slate-900">Enroll Now</h2>
+        <p className="mt-1 text-sm text-slate-600">
+          Fill in your details to start your journey with us.
+        </p>
+
+        <form onSubmit={(e) => {
+          e.preventDefault();
+          onSubmit(formData);
+        }} className="mt-6 space-y-4">
+          <div>
+            <label htmlFor="popup-name" className="mb-1 block text-sm font-medium text-slate-700">
+              Full Name *
+            </label>
+            <input
+              id="popup-name"
+              name="popup-name"
+              type="text"
+              required
+              value={formData.name}
+              onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))}
+              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+              placeholder="Enter your name"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="popup-email" className="mb-1 block text-sm font-medium text-slate-700">
+              Email *
+            </label>
+            <input
+              id="popup-email"
+              name="popup-email"
+              type="email"
+              required
+              value={formData.email}
+              onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))}
+              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="popup-phone" className="mb-1 block text-sm font-medium text-slate-700">
+              Phone *
+            </label>
+            <input
+              id="popup-phone"
+              name="popup-phone"
+              type="tel"
+              required
+              pattern="^[0-9+\\-\\s()]{7,15}$"
+              value={formData.phone}
+              onChange={(e) => setFormData((f) => ({ ...f, phone: e.target.value }))}
+              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+              placeholder="+91 98765 43210"
+            />
+          </div>
+
+          <button
+            type="submit"
+            className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
+          >
+            Submit Enrollment
+          </button>
+
+          <p className="text-xs text-slate-500">
+            By submitting, you agree to be contacted about courses and placements.
+          </p>
+        </form>
+      </div>
+    </motion.div>
+  );
+};
+
 const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
   const { heroContent, location } = data;
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [popupForm, setPopupForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+  });
 
   const crumbs = useMemo(() => {
     if (data.breadcrumbs?.length) return data.breadcrumbs;
@@ -52,6 +183,112 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
       `Submitted:\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nTrack: ${form.track}`
     );
   };
+
+  const onPopupSubmit = (formData: { name: string; email: string; phone: string }) => {
+    alert(
+      `Enroll Now Submitted:\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}`
+    );
+    setIsPopupOpen(false);
+    setPopupForm({ name: "", email: "", phone: "" });
+  };
+
+  // Form component extracted for reuse
+  const LeadForm = () => (
+    <motion.div variants={itemVariants} className="mt-6">
+      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl max-w-md w-full">
+        <h2 id="enroll" className="text-xl font-bold text-slate-900">
+          Get a Free Counseling Session
+        </h2>
+        <p className="mt-1 text-sm text-slate-600">
+          Tell us a bit about you, and we’ll share the best track & syllabus.
+        </p>
+
+        <form onSubmit={onSubmit} className="mt-6 space-y-4">
+          <div>
+            <label htmlFor="name" className="mb-1 block text-sm font-medium text-slate-700">
+              Full Name *
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              required
+              value={form.name}
+              onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
+              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+              placeholder="Enter your name"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-700">
+              Email *
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              required
+              value={form.email}
+              onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
+              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+              placeholder="you@example.com"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="phone" className="mb-1 block text-sm font-medium text-slate-700">
+              Phone *
+            </label>
+            <input
+              id="phone"
+              name="phone"
+              type="tel"
+              required
+              pattern="^[0-9+\\-\\s()]{7,15}$"
+              value={form.phone}
+              onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
+              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+              placeholder="+91 98765 43210"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="track" className="mb-1 block text-sm font-medium text-slate-700">
+              Select Track *
+            </label>
+            <select
+              id="track"
+              name="track"
+              required
+              value={form.track}
+              onChange={(e) => setForm((f) => ({ ...f, track: e.target.value }))}
+              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
+            >
+              {(data.specializations?.length ? data.specializations : ["General"]).map(
+                (opt) => (
+                  <option key={opt} value={opt}>
+                    {opt}
+                  </option>
+                )
+              )}
+            </select>
+          </div>
+
+          <button
+            type="submit"
+            className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
+          >
+            Request Syllabus PDF
+          </button>
+
+          <p className="text-xs text-slate-500">
+            By submitting, you agree to be contacted about courses and placements.
+          </p>
+        </form>
+      </div>
+    </motion.div>
+  );
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-indigo-50">
@@ -80,14 +317,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
         </nav>
 
         <motion.div
-          // CHANGED: use 12-column grid on large screens to control widths precisely
-          className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12"
+          className="grid grid-cols-1 items-start gap-10 md:grid-cols-12"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          {/* LEFT: Heading + Description + (moved) Stats */}
-          <div className="lg:col-span-7">
+          {/* LEFT: Heading + Form (mobile) + Description + Stats */}
+          <div className="md:col-span-7 xl:col-span-8">
             {/* Location chip */}
             <motion.div
               variants={itemVariants}
@@ -101,14 +337,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
 
             <motion.h1
               variants={itemVariants}
-              className="text-4xl font-extrabold tracking-tight text-slate-900 sm:text-5xl"
+              className="text-4xl font-extrabold leading-12 tracking-tight text-slate-900 sm:text-5xl"
             >
               {heroContent.title}
             </motion.h1>
 
+            {/* Form on mobile only */}
+            <div className="md:hidden">
+              <LeadForm />
+            </div>
+
             <motion.p
               variants={itemVariants}
-              className="mt-3 text-lg font-semibold text-indigo-700"
+              className="mt-7 md:mt-3 text-lg font-semibold text-indigo-700"
             >
               {heroContent.subtitle}
             </motion.p>
@@ -120,10 +361,9 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
               {heroContent.description}
             </motion.p>
 
-            {/* (MOVED) Stats under description */}
             <motion.div
               variants={itemVariants}
-              className="mt-6 grid grid-cols-2 gap-4 sm:grid-cols-4"
+              className="mt-6 grid grid-cols-2 gap-4 lg:grid-cols-4"
             >
               {heroContent.stats.map((stat, idx) => (
                 <div
@@ -139,7 +379,6 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
               ))}
             </motion.div>
 
-            {/* Certifications row */}
             <motion.div variants={itemVariants} className="mt-6 space-y-2">
               <p className="text-xs font-semibold uppercase tracking-wider text-slate-600">
                 Certifications & Benefits
@@ -157,122 +396,29 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
               </div>
             </motion.div>
 
-            {/* CTAs */}
             <motion.div variants={itemVariants} className="mt-8 flex flex-col gap-3 sm:flex-row">
-              <a
-                href="#enroll"
+              <button
+                onClick={() => setIsPopupOpen(true)}
                 className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
               >
                 Enroll Now
                 <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-0.5" />
-              </a>
-              <a
-                href="#learn-more"
+              </button>
+              <Link
+                href="/contact-us"
                 className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-6 py-3 font-semibold text-slate-800 shadow-sm transition hover:border-slate-400 hover:shadow-md"
               >
                 Learn More
-              </a>
+              </Link>
             </motion.div>
           </div>
 
-          {/* RIGHT: Lead Form (narrower) */}
-          <motion.div variants={itemVariants} className="lg:col-span-5">
-            <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl max-w-md w-full lg:ml-auto">
-              <h2 id="enroll" className="text-xl font-bold text-slate-900">
-                Get a Free Counseling Session
-              </h2>
-              <p className="mt-1 text-sm text-slate-600">
-                Tell us a bit about you, and we’ll share the best track & syllabus.
-              </p>
-
-              <form onSubmit={onSubmit} className="mt-6 space-y-4">
-                <div>
-                  <label htmlFor="name" className="mb-1 block text-sm font-medium text-slate-700">
-                    Full Name *
-                  </label>
-                  <input
-                    id="name"
-                    name="name"
-                    type="text"
-                    required
-                    value={form.name}
-                    onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-                    className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-                    placeholder="Enter your name"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-700">
-                    Email *
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    required
-                    value={form.email}
-                    onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-                    className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-                    placeholder="you@example.com"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="phone" className="mb-1 block text-sm font-medium text-slate-700">
-                    Phone *
-                  </label>
-                  <input
-                    id="phone"
-                    name="phone"
-                    type="tel"
-                    required
-                    pattern="^[0-9+\\-\\s()]{7,15}$"
-                    value={form.phone}
-                    onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-                    className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-                    placeholder="+91 98765 43210"
-                  />
-                </div>
-
-                <div>
-                  <label htmlFor="track" className="mb-1 block text-sm font-medium text-slate-700">
-                    Select Track *
-                  </label>
-                  <select
-                    id="track"
-                    name="track"
-                    required
-                    value={form.track}
-                    onChange={(e) => setForm((f) => ({ ...f, track: e.target.value }))}
-                    className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-                  >
-                    {(data.specializations?.length ? data.specializations : ["General"]).map(
-                      (opt) => (
-                        <option key={opt} value={opt}>
-                          {opt}
-                        </option>
-                      )
-                    )}
-                  </select>
-                </div>
-
-                <button
-                  type="submit"
-                  className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
-                >
-                  Request Syllabus PDF
-                </button>
-
-                <p className="text-xs text-slate-500">
-                  By submitting, you agree to be contacted about courses and placements.
-                </p>
-              </form>
-            </div>
-          </motion.div>
+          {/* RIGHT: Form (desktop only) */}
+          <div className="hidden md:block md:col-span-5 xl:col-span-4 md:-mt-2 lg:-mt-10"> {/* OPTIONAL */}
+            <LeadForm />
+          </div>
         </motion.div>
 
-        {/* Landmarks */}
         {heroContent.landmarks?.length ? (
           <motion.div variants={itemVariants} className="mt-14 border-t border-slate-200 pt-10">
             <p className="mb-4 text-xs font-semibold uppercase tracking-wider text-slate-600">
@@ -291,6 +437,15 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
           </motion.div>
         ) : null}
       </div>
+
+      {/* Popup */}
+      <PopupForm
+        isOpen={isPopupOpen}
+        onClose={() => setIsPopupOpen(false)}
+        onSubmit={onPopupSubmit}
+        formData={popupForm}
+        setFormData={setPopupForm}
+      />
     </section>
   );
 };

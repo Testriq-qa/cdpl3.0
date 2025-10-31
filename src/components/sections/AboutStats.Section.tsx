@@ -61,13 +61,15 @@ type Stat = {
     target: number;
     suffix: Suffix;
     desc: string;
+    color: string; // Property for stat color
+    bgColor: string;
 };
 
 function StatItem({ stat, shouldStart, reducedMotion }: { stat: Stat; shouldStart: boolean; reducedMotion: boolean }) {
     const animated = useCountUp(shouldStart, stat.target, 1400, reducedMotion);
     return (
-        <div className="text-center">
-            <div className="text-3xl font-semibold tracking-tight text-slate-900 sm:text-4xl">
+        <div className={`text-center mt-5 p-5 rounded-2xl border-2 hover:translate-y-1.5 transition-all bg-${stat.bgColor}`} style={{ borderColor: stat.color }}>
+            <div className="text-3xl font-semibold tracking-tight sm:text-4xl" style={{ color: stat.color }}>
                 {/* Animated number */}
                 <span aria-hidden="true">
                     {applySuffix(animated, stat.suffix)}
@@ -84,14 +86,42 @@ function StatItem({ stat, shouldStart, reducedMotion }: { stat: Stat; shouldStar
 }
 
 export default function AboutStatsSection() {
-    // Define stats with numeric targets and display suffixes
+    // Define stats with numeric targets, display suffixes, and unique colors
     const stats = useMemo(
         () =>
             [
-                { label: "Learners Trained", target: 10000, suffix: "k+" as Suffix, desc: "Upskilled in software testing, data science & AI/ML" },
-                { label: "Hiring Partners", target: 120, suffix: "+" as Suffix, desc: "Product companies, startups & global tech leaders" },
-                { label: "Mentors & SMEs", target: 60, suffix: "+" as Suffix, desc: "Industry experts, QA leads & data scientists" },
-                { label: "Placement Support", target: 100, suffix: "%" as Suffix, desc: "Career guidance, mock interviews & referrals" },
+                {
+                    label: "Learners Trained",
+                    target: 10000,
+                    suffix: "k+" as Suffix,
+                    desc: "Upskilled in software testing, data science & AI/ML",
+                    color: "#DB2777", // pink-600
+                    bgColor: "pink-50"
+                },
+                {
+                    label: "Hiring Partners",
+                    target: 120,
+                    suffix: "+" as Suffix,
+                    desc: "Product companies, startups & global tech leaders",
+                    color: "#228B22", // amber-500
+                    bgColor: "green-50"
+                },
+                {
+                    label: "Mentors & SMEs",
+                    target: 60,
+                    suffix: "+" as Suffix,
+                    desc: "Industry experts, QA leads & data scientists",
+                    color: "#6D28D9", // violet-700
+                    bgColor: "violet-50"
+                },
+                {
+                    label: "Placement Support",
+                    target: 100,
+                    suffix: "%" as Suffix,
+                    desc: "Career guidance, mock interviews & referrals",
+                    color: "#EA580C", // orange-600
+                    bgColor: "orange-50"
+                },
             ] as const,
         []
     );
@@ -133,7 +163,7 @@ export default function AboutStatsSection() {
         >
             {/* Header */}
             <div className="mb-6 text-center">
-                <p className="text-xs font-medium uppercase tracking-wider text-slate-500">
+                <p className="text-xs w-fit font-medium tracking-wider border border-slate-200 text-slate-700 rounded-full p-2 shadow-sm mx-auto">
                     Outcomes that matter
                 </p>
                 <h2
@@ -151,10 +181,9 @@ export default function AboutStatsSection() {
                 </p>
             </div>
 
-
             {/* Stats Card */}
             <div
-                className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white/92 p-6 shadow-sm ring-1 ring-transparent backdrop-blur
+                className="relative overflow-hidden rounded-3xl border border-slate-200 bg-white/92 p-6 shadow-md hover:shadow-2xl transition-all ring-1 ring-transparent
                    sm:p-8 dark:bg-white/92"
             >
                 {/* Subtle futuristic glow contained inside the card */}
@@ -172,14 +201,14 @@ export default function AboutStatsSection() {
                 />
 
                 {/* Top badges */}
-                <div className="mb-5 flex flex-wrap items-center justify-center gap-2">
-                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
+                <div className="my-5 flex flex-wrap items-center justify-center gap-5">
+                    <span className="rounded-full border border-red-500 bg-red-50 px-3 py-1 text-sm font-medium text-slate-700 shadow-sm">
                         Job-Oriented Curriculum
                     </span>
-                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
+                    <span className="rounded-full border border-blue-500 bg-blue-50 px-3 py-1 text-sm font-medium text-slate-700 shadow-sm">
                         Live Projects & Capstones
                     </span>
-                    <span className="rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-700 shadow-sm">
+                    <span className="rounded-full border border-yellow-500 bg-yellow-50 px-3 py-1 text-sm font-medium text-slate-700 shadow-sm">
                         Mentor-Led Learning
                     </span>
                 </div>
@@ -197,16 +226,16 @@ export default function AboutStatsSection() {
                 </div>
 
                 {/* Bottom CTA line (SEO-friendly anchor) */}
-                <div className="mt-7 flex flex-wrap items-center justify-center gap-3 text-center">
+                <div className="mt-12 flex flex-wrap items-center justify-center gap-3 text-center">
                     <Link
-                        href="/placements"
-                        className="inline-flex items-center justify-center rounded-xl ring-1 ring-brand bg-white px-4 py-2 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300"
+                        href="/jobs/placements"
+                        className="inline-flex items-center justify-center rounded-xl ring-1 ring-brand bg-white px-4 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300"
                     >
                         Explore Placements
                     </Link>
                     <Link
                         href="/reviews"
-                        className="inline-flex items-center justify-center rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:translate-y-[-1px] hover:shadow-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
+                        className="inline-flex items-center justify-center rounded-xl bg-brand px-4 py-3 text-sm font-semibold text-white shadow-sm transition hover:translate-y-[-1px] hover:shadow-md hover:bg-amber-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-900"
                     >
                         Read Learner Reviews
                     </Link>

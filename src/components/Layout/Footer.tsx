@@ -2,7 +2,6 @@
 
 import Link from 'next/link';
 import { Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
-import Image from 'next/image';
 import dynamic from 'next/dynamic';
 
 const Footer2 = dynamic(
@@ -30,31 +29,31 @@ const Footer = () => {
                 <Link href="/courses/data-science-master" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Comprehensive Data Science and AI - Master Program
                 </Link>
-             
+
                 <Link href="/courses/data-analysis-bi" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Data Analysis with BI & Big Data Engineering
                 </Link>
-             
+
                 <Link href="/courses/ml-python" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Machine Learning and Data Science with Python
                 </Link>
-              
+
                 <Link href="/courses/deep-learning-nlp" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Deep Learning, NLP and Generative AI
                 </Link>
-              
+
                 <Link href="/courses/business-analyst" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Business Analyst
                 </Link>
-              
+
                 <Link href="/courses/big-data" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Big Data Engineering
                 </Link>
-              
+
                 <Link href="/courses/prompt-engineering" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Prompt Engineering with Gen AI
                 </Link>
-              
+
                 <Link href="/courses/advanced-data-science" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Data Science & Machine Learning Masterclass
                 </Link>
@@ -93,23 +92,23 @@ const Footer = () => {
                 <Link href="/courses/manual-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Manual Software Testing
                 </Link>
-              
+
                 <Link href="/courses/api-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   API Testing
                 </Link>
-              
+
                 <Link href="/courses/database-management" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Database Management System
                 </Link>
-              
+
                 <Link href="/courses/advanced-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Software Testing
                 </Link>
-              
+
                 <Link href="/courses/advanced-automation" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Automation Testing
                 </Link>
-              
+
                 <Link href="/courses/manual-automation" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Manual and Automation Testing
                 </Link>
@@ -136,7 +135,7 @@ const Footer = () => {
                   <Link href="/courses/python" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     Python Programming
                   </Link>
-                
+
                   <Link href="/courses/java" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     Java Programming
                   </Link>
@@ -145,48 +144,180 @@ const Footer = () => {
             </div>
           </div>
 
+          {/* City Pages */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-orange-400">Cities</h3>
+            <ul>
+              <li className='flex flex-col space-y-2'>
+                <Link href="/courses/software-testing-course-in-mumbai" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Mumbai
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-chennai" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Chennai
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-kolkata" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Kolkata
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-bengaluru" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Bengaluru
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-hyderabad" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Hyderabad
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-pune" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Pune
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-delhi" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Delhi
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-ahmedabad" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Ahmedabad
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-surat" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Surat
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-jodhpur" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Jodhpur
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-jaipur" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Jaipur
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-aurangabad" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Aurangabad
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-kochi" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Kochi
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-chandigarh" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Chandigarh
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-patna" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Patna
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-indore" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Indore
+                </Link>
+
+                <Link href="/courses/software-testing-course-in-bhubaneswar" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Bhubaneswar
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Blogs and Categories */}
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold text-orange-400">Blogs</h3>
+            <ul>
+              <li className='flex flex-col space-y-2'>
+                <Link href="/blog" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Blogs
+                </Link>
+
+                <Link href="/blog/category/software-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Software Testing
+                </Link>
+
+                <Link href="/blog/category/data-science" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Data Science
+                </Link>
+
+                <Link href="/blog/category/web-development" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Web Development
+                </Link>
+
+                <Link href="/blog/category/ai-ml" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  AI & Machine Learning
+                </Link>
+              </li>
+            </ul>
+          </div>
+
           {/* Institute */}
           <div className="space-y-4">
             <h3 className="text-lg font-semibold text-orange-400">Institute</h3>
             <ul>
               <li className='flex flex-col space-y-2'>
-                <Link href="/institute/services" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/services" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Services
                 </Link>
-              
-                <Link href="/institute/job-openings" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Job Openings
+
+                <Link href="/events/past-events" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Events
                 </Link>
-              
-                <Link href="/institute/placements" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Placements
-                </Link>
-              
-                <Link href="/institute/placement-news" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Placement News
-                </Link>
-              
-                <Link href="/institute/affiliate-program" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Affiliate Program
-                </Link>
-              
-                <Link href="/institute/mentors" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+
+                <Link href="/mentors" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Mentors
                 </Link>
-              
-                <Link href="/institute/about-us" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  About Us
+
+                <Link href="/jobs/placements" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Placements
                 </Link>
-              
-                <Link href="/institute/contact-us" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+
+                <Link href="/jobs/live-jobs" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Live Jobs
+                </Link>
+
+                <Link href="/jobs/job-openings" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Job Openings
+                </Link>
+
+                <Link href="/jobs/careers" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Careers
+                </Link>
+
+                <Link href="/about-us" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  About CDPL
+                </Link>
+
+                <Link href="/our-team" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Our Team
+                </Link>
+
+                <Link href="/#" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Affiliate Program
+                </Link>
+
+                <Link href="/contact-us" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Contact Us
-                </Link>
-              
-                <Link href="/institute/validate-certificate" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Validate your Certificate
                 </Link>
               </li>
             </ul>
+
+            {/* Certifications and Accreditation */}
+            <div className="space-y-4">
+              <h3 className="text-lg font-semibold text-orange-400">Certifications and Accreditation</h3>
+              <ul>
+                <li className='flex flex-col space-y-2'>
+                  <Link href="/aaa-certification-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                    AAA Certification Course
+                  </Link>
+
+                  <Link href="/actd-certification-training" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                    ACTD Certification Course
+                  </Link>
+
+                  <Link href="/cdpl-certificate-validation" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                    Validate Your Certificate
+                  </Link>
+                </li>
+              </ul>
+            </div>
 
             <div className="space-y-4 lg:hidden">
               <h3 className="text-lg font-semibold text-orange-400">Follow Us On</h3>
@@ -206,18 +337,6 @@ const Footer = () => {
 
                   <Link href="/courses/digital-marketing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     <Instagram />
-                  </Link>
-                </li>
-              </ul>
-            </div>
-
-            {/* Powered By */}
-            <div className="space-y-4">
-              <h3 className="text-lg font-semibold text-orange-400">Powered By</h3>
-              <ul className="space-y-2">
-                <li>
-                  <Link href="https://www.testriq.com/" className="text-gray-300 hover:text-blue-400 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                    <Image src={'/images/Testriq-Logo-1.webp'} alt='Testriq_logo' width={100} height={100} />
                   </Link>
                 </li>
               </ul>

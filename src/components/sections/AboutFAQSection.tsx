@@ -77,7 +77,7 @@ const faqs: FAQ[] = [
     },
     {
         q: "Where can I view the full syllabus and upcoming cohorts?",
-        a: "Visit the program pages for detailed syllabi, start dates, and application steps. You can also request a personalized counseling call.",
+        a: "Visit the program pages for detailed syllabus, start dates, and application steps. You can also request a personalized counseling call.",
         tags: ["syllabus", "cohorts", "apply"],
     },
 ];

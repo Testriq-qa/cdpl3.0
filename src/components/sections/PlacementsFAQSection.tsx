@@ -15,7 +15,7 @@ const FAQS = [
     },
     {
         q: "Do you provide referrals?",
-        a: "Yes—based on performance and project quality, mentors put you forward to partner companies.",
+        a: "Yes, based on performance and project quality, mentors put you forward to partner companies.",
     },
     {
         q: "Is prior experience required?",
@@ -77,8 +77,8 @@ export default function PlacementsFAQSection({ contained = false }: Props) {
                                         role="region"
                                         aria-labelledby={buttonId}
                                         className={`grid overflow-hidden px-5 pt-0 transition-all duration-300 ease-out ${isOpen
-                                                ? "grid-rows-[1fr] opacity-100 pb-4"
-                                                : "grid-rows-[0fr] opacity-0 pb-0"
+                                            ? "grid-rows-[1fr] opacity-100 pb-4"
+                                            : "grid-rows-[0fr] opacity-0 pb-0"
                                             }`}
                                     >
                                         <div className="min-h-0">

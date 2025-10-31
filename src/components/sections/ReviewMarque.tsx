@@ -151,7 +151,7 @@ const REVIEWS: Review[] = [
 ];
 
 const SUMMARY_CARDS = [
-  { label: 'Google Reviews', value: '80+', note: 'Public reviews', logo: '/slider_logos/google.svg' },
+  { label: 'Google Reviews', value: '289', note: 'Public reviews', logo: '/slider_logos/google.svg' },
   { label: 'Sulekha Reviews', value: '84', note: '5.0 average', logo: '/slider_logos/sulekha-logo.webp' },
   { label: 'Justdial Ratings', value: '210', note: 'Verified users', logo: '/slider_logos/justdial-logo.png' },
 ];
@@ -235,7 +235,8 @@ export default function ReviewsMarquee() {
 
   return (
     <div className="w-full relative bg-gradient-to-b from-sky-50 via-white to-violet-50 dark:[color-scheme:light]">
-      <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-10">
+      {/* ⬇️ Container now matches /apply: max-w-7xl px-4 py-10 sm:px-6 lg:px-8 */}
+      <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
         {/* Tabs + stat header */}
         <div className="mx-auto max-w-3xl text-center">
           <div className="mt-1 flex items-center justify-center gap-3 text-sm text-slate-600">
@@ -249,7 +250,6 @@ export default function ReviewsMarquee() {
             </span>
           </div>
 
-          {/* Tabs */}
           {/* Tabs */}
           <div className="mt-6 -mx-4 sm:mx-0">
             <div
@@ -281,7 +281,6 @@ export default function ReviewsMarquee() {
                       "flex items-center justify-center rounded-xl",
                       "px-3 sm:px-4 py-2 sm:py-2.5",
                       "ring-1 ring-transparent transition",
-                      ,
                       // states
                       isActive
                         ? "bg-gradient-to-r from-blue-200 to-orange-200 text-white shadow-lg ring-sky-300/40"
@@ -295,10 +294,10 @@ export default function ReviewsMarquee() {
                       <Image
                         src={PLATFORM[p].logo.src}
                         alt={PLATFORM[p].logo.alt}
-                        width={50}
-                        height={48}
+                        width={80}
+                        height={68}
                         priority={p === "Google"}
-                        className=" md:scale-105"
+                        className="md:scale-105 h-5 w-13 md:h-6 md:w-15"
                       />
                     </span>
                   </button>
@@ -307,9 +306,8 @@ export default function ReviewsMarquee() {
             </div>
           </div>
 
-          {/* Example tab panel wrapper (ensure ids match if you use panels) */}
+          {/* Example tab panel wrapper */}
           {/* <div id={`panel-${tab}`} role="tabpanel" aria-labelledby={`tab-${tab}`} className="mt-4"> ... </div> */}
-
         </div>
 
         {/* Marquee */}
@@ -394,7 +392,6 @@ export default function ReviewsMarquee() {
             ))}
           </div>
         </div>
-
 
         {/* Bottom summary cards */}
         <div className="mt-10 grid gap-4 sm:grid-cols-3">

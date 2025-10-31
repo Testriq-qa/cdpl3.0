@@ -1,9 +1,27 @@
 "use client";
 
 import { useEffect, useMemo, useRef, useState } from "react";
-import type { Job } from "@/app/jobs/careers/page";
-import JobsCareersJobsGridSection from "./JobsCareersJobsGridSection";
+import dynamic from "next/dynamic";
 import { ChevronsUpDown, Check, X } from "lucide-react";
+
+import type { Job } from "@/app/jobs/careers/page";
+
+
+/* Loader for the dynamic section */
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+  return (
+    <div className="flex items-center justify-center py-16">
+      <p className="text-gray-500 dark:text-gray-500">{label}</p>
+    </div>
+  );
+}
+
+/* ===== Dynamic import (typed) ===== */
+const JobsCareersJobsGridSection = dynamic(
+  () => import("./JobsCareersJobsGridSection").then((m) => m.default),
+  { ssr: false, loading: () => <SectionLoader label="Loading roles..." /> }
+);
+
 
 /* --------------------------- Styled Select (custom) --------------------------- */
 /** Fully styled, accessible-ish custom select with keyboard support.
@@ -196,6 +214,75 @@ export default function JobsCareersOpenRolesSection({ jobs }: { jobs: Job[] }) {
     [jobs, team, location]
   );
 
+  /** Force the job-detail header to be sticky by discovering the scroll pane
+   *  and first heading block dynamically (no child edits).
+   */
+  useEffect(() => {
+    const NAV_TOP =
+      Number(
+        getComputedStyle(document.documentElement)
+          .getPropertyValue("--nav-height")
+          .replace("px", "")
+          .trim()
+      ) || 72;
+
+    const section = document.getElementById("open-roles");
+    if (!section) return;
+
+    // Find the right-pane scroll container (the one that actually scrolls)
+    const candidates = Array.from(
+      section.querySelectorAll<HTMLElement>("*")
+    ).filter((el) => {
+      const cs = getComputedStyle(el);
+      const canScroll =
+        (cs.overflowY === "auto" || cs.overflowY === "scroll") &&
+        el.scrollHeight > el.clientHeight &&
+        el.clientHeight > 200; // avoid tiny elements
+      return canScroll;
+    });
+
+    const scrollPane = candidates[0];
+    if (!scrollPane) return;
+
+    // Find the header block: closest block ancestor around the first H1/H2/H3
+    const heading =
+      scrollPane.querySelector<HTMLElement>("h1, h2, h3") ||
+      scrollPane.querySelector<HTMLElement>("[data-title], [itemprop='title']");
+    if (!heading) return;
+
+    let headerBlock: HTMLElement | null = heading;
+    // climb a few levels to catch the padded container wrapping the title & meta
+    for (let i = 0; i < 4 && headerBlock; i++) {
+      const cs = getComputedStyle(headerBlock);
+      const hasPadding =
+        parseFloat(cs.paddingTop) + parseFloat(cs.paddingBottom) > 0;
+      const isBlocky =
+        ["block", "flex", "grid"].includes(cs.display) && headerBlock.clientHeight > 40;
+      if (hasPadding && isBlocky) break;
+      headerBlock = headerBlock.parentElement as HTMLElement | null;
+    }
+    if (!headerBlock) return;
+
+    // Apply sticky styles
+    Object.assign(headerBlock.style, {
+      position: "sticky",
+      top: `${NAV_TOP}px`,
+      zIndex: "30",
+      background: headerBlock.style.background || "white",
+      // subtle separator to indicate stickiness without changing layout
+      borderBottom: headerBlock.style.borderBottom || "1px solid rgba(148,163,184,0.25)",
+    });
+
+    // Ensure the pane itself establishes the sticky containing block
+    const prev = scrollPane.style.overflowY;
+    if (!prev) scrollPane.style.overflowY = "auto";
+
+    // Cleanup not required (styles are idempotent), but keep for safety
+    return () => {
+      // no-op: we intentionally keep styles while component is mounted
+    };
+  }, []);
+
   return (
     <section id="open-roles" className="py-10 sm:py-12 lg:py-16">
       {/* ⬇️ Content container only; section itself stays full-bleed */}
@@ -204,7 +291,7 @@ export default function JobsCareersOpenRolesSection({ jobs }: { jobs: Job[] }) {
           {/* Match non-hero heading scale used above (list section): strong but not oversized */}
           <h2 className="text-2xl sm:text-3xl font-bold tracking-tight">Open roles</h2>
           <p className="mt-2 text-[0.95rem] leading-relaxed text-slate-600">
-            If impact, ownership, and craft excite you—there’s a seat for you here.
+            If impact, ownership, and craft excite you, there’s a seat for you here.
           </p>
         </header>
 

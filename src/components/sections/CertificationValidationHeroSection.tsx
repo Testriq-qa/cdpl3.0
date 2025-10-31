@@ -26,8 +26,10 @@ export default function CertificationValidationHeroSection() {
             </p>
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl">
-              CDPL Certificate Validation
+              <span style={{ color: "rgb(255, 140, 0)" }}>CDPL</span>{" "}
+              <span style={{ color: "#0069A8" }}>Certificate Validation</span>
             </h1>
+
             <p className="mt-4 mx-auto max-w-2xl text-base sm:text-lg text-slate-600 lg:mx-0">
               Enter the unique certificate ID to confirm authenticity, program details, and holder information.
             </p>

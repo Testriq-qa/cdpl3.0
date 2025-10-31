@@ -9,10 +9,10 @@ import Link from "next/link";
 const courseCategories = [
   {
     id: "software-testing-courses",
-    name: "Sofware Testing Courses",
+    name: "Software Testing Courses",
     description:
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
-    governingBodies: [{ name: "Sofware Testing Courses", logo: "/header_images/Sotware_Testing.png" }],
+    governingBodies: [{ name: "Software Testing Courses", logo: "/header_images/Sotware_Testing.png" }],
     courses: [
       {
         name: "Manual Software Testing",
@@ -22,7 +22,7 @@ const courseCategories = [
       {
         name: "API Testing using POSTMAN and RestAPIs",
         description: "Master product backlog management and stakeholder collaboration.",
-        governingBodies: [{ name: "API Testing", logo: "/header_images/API_Testing_Postman.png" }],
+        governingBodies: [{ name: "API Testing", logo: "/header_images/API_POSTMAN.png" }],
       },
       {
         name: "Database Management System using MySQL",
@@ -88,9 +88,9 @@ const courseCategories = [
         governingBodies: [{ name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" }],
       },
       {
-        name: "Prompt Engneering with Generative AI",
+        name: "Prompt Engineering with Generative AI",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [{ name: "Prompt Engneering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" }],
+        governingBodies: [{ name: "Prompt Engineering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" }],
       },
       {
         name: "Advanced Data Science and Machine Learning Masterclass",
@@ -191,7 +191,7 @@ const courseCategories = [
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  // Mega menu
+  // Mega menu state (layout unchanged)
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(courseCategories[0].id);
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
@@ -222,23 +222,35 @@ const Header = () => {
   const panelRef = useRef<HTMLDivElement | null>(null);
   const megaMenuRef = useRef<HTMLDivElement | null>(null);
 
-  const openMega = () => setIsMegaMenuOpen(true);
+  // ---- Hover stability: delayed close, cancel on enter ----
+  const closeTimerRef = useRef<number | null>(null);
+
+  const cancelClose = () => {
+    if (closeTimerRef.current !== null) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const scheduleClose = () => {
+    cancelClose();
+    closeTimerRef.current = window.setTimeout(() => {
+      closeMega();
+    });
+  };
+
+  const openMega = () => {
+    cancelClose();
+    setIsMegaMenuOpen(true);
+  };
+
   const closeMega = () => {
     setIsMegaMenuOpen(false);
     setHoveredCourse(null);
     setHoveredCategory(null);
   };
 
-  // Close if leaving Courses button and NOT entering the mega menu
-  const handleCoursesButtonLeave: React.MouseEventHandler<HTMLButtonElement> = (e) => {
-    const next = e.relatedTarget as Node | null;
-    const menuEl = megaMenuRef.current;
-    if (!menuEl || !next || !menuEl.contains(next)) {
-      closeMega();
-    }
-  };
-
-  // Close Jobs/About on outside click / ESC
+  // Close Jobs/About and mega on outside click / ESC
   useEffect(() => {
     const onClickOutside = (e: MouseEvent) => {
       const t = e.target as Node;
@@ -260,6 +272,14 @@ const Header = () => {
       ) {
         setIsAboutOpen(false);
       }
+      // Close mega if click is outside the full mega wrapper
+      if (
+        isMegaMenuOpen &&
+        megaMenuRef.current &&
+        !megaMenuRef.current.contains(t)
+      ) {
+        closeMega();
+      }
     };
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
@@ -273,15 +293,16 @@ const Header = () => {
     return () => {
       document.removeEventListener("mousedown", onClickOutside);
       document.removeEventListener("keydown", onKey);
+      cancelClose();
     };
-  }, [isJobsOpen, isAboutOpen]);
+  }, [isJobsOpen, isAboutOpen, isMegaMenuOpen]);
 
   // Mobile toggles
   const toggleMenu = () => {
     setIsMenuOpen((v) => !v);
     if (isMenuOpen) setMobileSections({ courses: false, jobs: false, about: false, openCategoryId: null });
   };
-  
+
   const toggleMobileSection = (key: "courses" | "jobs" | "about") => {
     setMobileSections((s) => {
       const next = { ...s, [key]: !s[key] };
@@ -315,53 +336,45 @@ const Header = () => {
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2 sm:space-x-3">
               <div className="rounded-lg">
-                <Image src="/images/cdpl-logo.png" alt="CDPL Logo" width={40} height={40} className="w-10 h-10 sm:w-12 sm:h-12 lg:w-14 lg:h-14" />
+                <Image src="/cdpl-logo.png" alt="CDPL Logo" width={40} height={40} className="w-10 h-10 sm:w-12 sm:h-12 lg:w-20 lg:h-12 xl:w-14 xl:h-14" />
               </div>
               <span className="text-base sm:text-xl lg:text-2xl font-bold text-brand">Cinute Digital</span>
             </Link>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className="hidden lg:flex items-center space-x-6 xl:space-x-8">
-            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">Home</Link>
+          <nav className="hidden lg:flex items-center justify-start">
+            <Link href="/" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">Home</Link>
 
             {/* Mega Menu Trigger */}
             <div className="relative">
               <button
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base"
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base px-4 py-6"
                 aria-expanded={isMegaMenuOpen}
                 aria-controls="mega-menu"
                 onMouseEnter={openMega}
-                onMouseLeave={handleCoursesButtonLeave}
+                onMouseLeave={() => scheduleClose()}
               >
                 Courses
                 <ChevronDown className="ml-1 h-4 w-4" />
               </button>
 
-              {/* Mega Menu Wrapper */}
+              {/* Mega Menu Wrapper (layout unchanged) */}
               {isMegaMenuOpen && (
                 <div
                   id="mega-menu"
                   ref={megaMenuRef}
-                  className="fixed left-0 right-0 top-[72px] lg:top-[55px] z-50"
-                  onMouseEnter={openMega}
-                  onMouseLeave={closeMega} // immediate close on leaving the wrapper
-                  onMouseMove={(e) => {
-                    // Immediate close if pointer goes outside the visible white panel
-                    const p = panelRef.current;
-                    if (!p) return;
-                    const r = p.getBoundingClientRect();
-                    const x = e.clientX;
-                    const y = e.clientY;
-                    const outside = x < r.left || x > r.right || y < r.top || y > r.bottom;
-                    if (outside) closeMega();
-                  }}
+                  className="fixed left-0 right-0 top-[72px] z-50"
+                  onMouseEnter={cancelClose}
+                  onMouseLeave={() => scheduleClose()}
                 >
                   <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div
                       ref={panelRef}
                       className="bg-white rounded-b-2xl shadow-2xl border-t-4 border-blue-600 overflow-hidden"
                       style={{ maxHeight: 520 }}
+                      onMouseEnter={cancelClose}
+                      onMouseLeave={() => scheduleClose()}
                     >
                       <div className="grid grid-cols-12 gap-4 p-4 sm:p-6 lg:p-6">
                         {/* Column 1: Categories */}
@@ -377,16 +390,14 @@ const Header = () => {
                                   setHoveredCourse(null);
                                 }}
                                 onClick={() => setSelectedCategory(category.id)}
-                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${
-                                  selectedCategory === category.id ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-700 hover:bg-gray-50"
-                                }`}
+                                className={`w-full text-left px-3 py-2 rounded-lg transition-all duration-200 flex items-center justify-between group text-sm ${selectedCategory === category.id ? "bg-blue-50 text-blue-700 font-medium" : "text-gray-700 hover:bg-gray-50"
+                                  }`}
                                 aria-current={selectedCategory === category.id ? "true" : "false"}
                               >
                                 <span>{category.name}</span>
                                 <ChevronRight
-                                  className={`h-4 w-4 transition-transform ${
-                                    selectedCategory === category.id ? "text-blue-700" : "text-gray-400"
-                                  }`}
+                                  className={`h-4 w-4 transition-transform ${selectedCategory === category.id ? "text-blue-700" : "text-gray-400"
+                                    }`}
                                 />
                               </button>
                             ))}
@@ -406,15 +417,13 @@ const Header = () => {
                                 key={index}
                                 href={`/courses/${selectedCategory}/${course.name.toLowerCase().replace(/[®\s&]+/g, "-")}`}
                                 onMouseEnter={() => setHoveredCourse(course.name)}
-                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${
-                                  hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
-                                }`}
+                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                                  }`}
                               >
                                 <div className="flex-shrink-0 mt-1">
                                   <div
-                                    className={`w-2 h-2 rounded-full transition-transform ${
-                                      hoveredCourse === course.name ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
-                                    }`}
+                                    className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
+                                      }`}
                                   />
                                 </div>
                                 <div className="ml-3">
@@ -434,8 +443,8 @@ const Header = () => {
                             {hoveredCourse
                               ? "Certified by leading organizations"
                               : hoveredCategory
-                              ? "Certified by leading organizations"
-                              : "Hover over a category or course to see its certifications"}
+                                ? "Certified by leading organizations"
+                                : "Hover over a category or course to see its certifications"}
                           </p>
 
                           <div className="grid grid-rows-2 gap-4">
@@ -449,7 +458,7 @@ const Header = () => {
                                     src={body.logo}
                                     alt={body.name}
                                     className="object-contain h-full w-auto rounded-md"
-                                    width={300}
+                                    width={400}
                                     height={128}
                                   />
                                 </div>
@@ -481,10 +490,12 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="#" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/services" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">Services</Link>
+
+            <Link href="/events/past-events" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
               Event
             </Link>
-            <Link href="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/mentors" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
               Mentors
             </Link>
 
@@ -503,7 +514,7 @@ const Header = () => {
                     });
                   }
                 }}
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base px-4 py-6"
                 aria-haspopup="menu"
                 aria-expanded={isJobsOpen}
                 aria-controls="jobs-menu"
@@ -572,7 +583,7 @@ const Header = () => {
                     });
                   }
                 }}
-                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center py-6 text-sm xl:text-base"
+                className="text-gray-700 hover:text-blue-600 transition-colors flex items-center text-sm xl:text-base px-4 py-6"
                 aria-haspopup="menu"
                 aria-expanded={isAboutOpen}
                 aria-controls="about-menu"
@@ -612,10 +623,10 @@ const Header = () => {
               )}
             </div>
 
-            <Link href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/blog" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
               Blog
             </Link>
-            <Link href="/contact-us" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base">
+            <Link href="/contact-us" className="text-gray-700 hover:text-blue-600 transition-colors text-sm xl:text-base px-4 py-6">
               Contact
             </Link>
           </nav>
@@ -714,6 +725,15 @@ const Header = () => {
                 )}
               </div>
 
+              {/* Mobile Services Link */}
+              <Link
+                href="/services"
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                onClick={toggleMenu}
+              >
+                Services
+              </Link>
+
               {/* Mobile Jobs Accordion */}
               <div className="space-y-2">
                 <button
@@ -750,6 +770,13 @@ const Header = () => {
                     >
                       • Careers
                     </Link>
+                    <Link
+                      href="/jobs/job-openings"
+                      className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                      onClick={toggleMenu}
+                    >
+                      • Job Openings
+                    </Link>
                   </div>
                 )}
               </div>
@@ -774,19 +801,33 @@ const Header = () => {
                       className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
-                      About CDPL
+                      • About CDPL
                     </Link>
                     <Link
                       href="/our-team"
                       className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
                       onClick={toggleMenu}
                     >
-                      Our Team
+                      • Our Team
                     </Link>
                   </div>
                 )}
               </div>
 
+              <Link
+                href="/events/past-events"
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                onClick={toggleMenu}
+              >
+                Event
+              </Link>
+              <Link
+                href="/mentors"
+                className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"
+                onClick={toggleMenu}
+              >
+                Mentors
+              </Link>
               <Link
                 href="/blog"
                 className="block px-4 py-3 text-gray-700 hover:text-blue-600 hover:bg-white rounded-lg transition-colors text-sm sm:text-base"

@@ -1,26 +1,10 @@
-// JobOpeningsJobBrowser.tsx
 "use client";
 
-import React from "react";
+import * as React from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import dynamic from "next/dynamic";
 
-import { JobDetailsProps } from "./JobOpeningsJobDetails";
-
-function SectionLoader({ label = "Loading..." }: { label?: string }) {
-    return (
-        <div className="flex items-center justify-center py-16">
-            <p className="text-gray-500 dark:text-gray-500">{label}</p>
-        </div>
-    );
-}
-
-// ✅ dynamic lazy import (typed via the source file), with loader
-const JobOpeningsJobDetails = dynamic(
-    () => import("./JobOpeningsJobDetails"),
-    { ssr: true, loading: () => <SectionLoader label="Loading job details..." /> }
-);
-
+/* ---------- Shared types (no `any`) ---------- */
 type Skill = { skill_name: string; years?: string | number | null; level?: string | null };
 
 export type JobSummary = {
@@ -43,6 +27,61 @@ export type JobSummary = {
 export type JobListResponse = { status: number; data: { job: JobSummary[]; total_count: number } };
 export type FetchJobsArgs = { page?: number; size?: number; q?: string };
 
+/* Match details signatures used by the server actions */
+export type JobDetail = {
+    job_id: string;
+    job_title: string;
+    description: string;
+    location: string | null | "";
+    location_type: string;
+    job_type: string;
+    min_charge: string | number;
+    max_charge: string | number;
+    min_experience: string | number;
+    max_experience: string | number;
+    job_referral_url: string;
+    skills: Skill[];
+};
+
+export type JobDetailResponse = { status: number; data: JobDetail };
+
+export type VerifyPayload = { email: string; mobile: string; mobile_country_code: number | string };
+export type CandidatePayload = {
+    first_name?: string;
+    last_name?: string;
+    resume: string;
+    mobile: string;
+    mobile_country_code: number | string;
+    email: string;
+};
+export type APIMessage = { Message: string };
+
+/* ---------- Loader (placeholder) ---------- */
+function SectionLoader({ label = "Loading..." }: { label?: string }) {
+    return (
+        <div className="flex items-center justify-center py-16">
+            <p className="text-gray-500 dark:text-gray-500">{label}</p>
+        </div>
+    );
+}
+
+/* Client-only details to avoid hydration thrash */
+const JobOpeningsJobDetails = dynamic(() => import("./JobOpeningsJobDetails"), {
+    ssr: false,
+    loading: () => <SectionLoader label="Loading job details..." />,
+});
+
+/* ---------- Props (no `any`) ---------- */
+export type JobDetailsProps = {
+    jobId: string | null;
+    open: boolean;
+    onClose: () => void;
+    getJobByIdAction: (job_id: string) => Promise<JobDetailResponse>;
+    verifyCandidateAction: (payload: VerifyPayload) => Promise<APIMessage>;
+    createCandidateAction: (payload: CandidatePayload) => Promise<APIMessage>; // ← angle brackets
+};
+
+
 type Props = {
     initialJobs: JobSummary[];
     totalCount: number;
@@ -58,6 +97,7 @@ type Props = {
 
 type CustomCSSProperties = React.CSSProperties & { [key: `--${string}`]: string };
 
+/* ---------- Component ---------- */
 export default function JobOpeningsJobBrowser({
     initialJobs,
     totalCount,
@@ -85,7 +125,7 @@ export default function JobOpeningsJobBrowser({
     // Share UI feedback
     const [copiedId, setCopiedId] = React.useState<string | null>(null);
 
-    // Open details automatically if the URL has ?job=<id> (or ?id=<id>)
+    // Deep link (?job= / ?id=) open-on-load
     React.useEffect(() => {
         if (typeof window === "undefined") return;
         const params = new URLSearchParams(window.location.search);
@@ -104,7 +144,6 @@ export default function JobOpeningsJobBrowser({
         window.scrollTo({ top: 0, behavior: "smooth" });
     }
 
-    // kept to preserve flow; data is already clean so this simply returns text
     const decodeAndStrip = (raw?: string) => {
         if (!raw) return "";
         const decoded = raw.replaceAll("&lt;", "<").replaceAll("&gt;", ">").replaceAll("&amp;", "&");
@@ -119,7 +158,8 @@ export default function JobOpeningsJobBrowser({
                 (j) =>
                     j.job_title.toLowerCase().includes(term) ||
                     decodeAndStrip(j.description).toLowerCase().includes(term) ||
-                    j.skills?.some((s) => s.skill_name.toLowerCase().includes(term))
+                    j.skills?.some((s) => s.skill_name.toLowerCase().includes(term)
+                    )
             );
         }
         if (locType !== "all") list = list.filter((j) => (j.location_type || "").toLowerCase() === locType);
@@ -152,20 +192,16 @@ export default function JobOpeningsJobBrowser({
         );
     };
 
-    // *** Sticky offset (header + breadcrumb + margin). Adjust if your header changes. ***
     const stickyStyle: CustomCSSProperties = { "--sticky-top": "96px" };
 
-    // Copy a deep link (?job=<id>) to clipboard
     const handleShare = async (jobId: string) => {
         const { origin, pathname, search } = window.location;
         const params = new URLSearchParams(search);
         params.set("job", jobId);
         const url = `${origin}${pathname}?${params.toString()}`;
-
         try {
             await navigator.clipboard.writeText(url);
         } catch {
-            // fallback
             const tmp = document.createElement("input");
             tmp.value = url;
             document.body.appendChild(tmp);
@@ -178,10 +214,12 @@ export default function JobOpeningsJobBrowser({
         }
     };
 
+    const onClose = React.useCallback(() => setDrawerOpen(false), []);
+
     return (
-        <section className={`relative ${className ?? ""}`}>
+        <section className={`relative w-full ${className ?? ""}`}>
             <div className="max-w-7xl mx-auto px-4 py-10 sm:px-6 lg:px-8">
-                {/* toolbar (TOP pagination) */}
+                {/* toolbar */}
                 <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
                     <p className="text-sm text-slate-600">
                         Showing <span className="font-medium text-slate-900">{filtered.length}</span> of{" "}
@@ -296,18 +334,13 @@ export default function JobOpeningsJobBrowser({
                                             exit={{ opacity: 0, y: -8 }}
                                             transition={{ duration: 0.2 }}
                                         >
-                                            {/* card */}
                                             <div className="grid grid-cols-1 gap-4 rounded-xl border border-slate-200 bg-white p-5 shadow-sm sm:grid-cols-[72px,1fr] xl:grid-cols-[72px,1fr,180px]">
-                                                {/* logo */}
                                                 <div className="sm:pt-1">
                                                     <Logo title={job.job_title} />
                                                 </div>
 
-                                                {/* content */}
                                                 <div className="min-w-0">
-                                                    <h3 className="truncate text-[15px] font-semibold text-slate-900">
-                                                        {job.job_title}
-                                                    </h3>
+                                                    <h3 className="truncate text-[15px] font-semibold text-slate-900">{job.job_title}</h3>
                                                     <div className="mt-1 flex flex-wrap items-center gap-x-5 gap-y-1 text-xs text-slate-600">
                                                         <span className="flex items-center gap-1">
                                                             <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
@@ -337,19 +370,17 @@ export default function JobOpeningsJobBrowser({
                                                     </div>
                                                 </div>
 
-                                                {/* right action */}
                                                 <div className="flex items-center justify-start gap-2 sm:justify-end">
                                                     <button
                                                         onClick={() => {
                                                             setSelected(job.job_id);
-                                                            setDrawerOpen(true);
+                                                            requestAnimationFrame(() => setDrawerOpen(true));
                                                         }}
                                                         className="inline-flex items-center justify-center rounded-md bg-gradient-to-r from-orange-500 via-orange-500 to-amber-500 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:opacity-95"
                                                     >
                                                         View »
                                                     </button>
 
-                                                    {/* Share button — copies deep link to clipboard */}
                                                     <button
                                                         onClick={() => handleShare(job.job_id)}
                                                         className="inline-flex items-center justify-center rounded-md border border-slate-300 bg-white px-3 py-2 text-sm font-medium text-slate-700 hover:bg-slate-50"
@@ -372,7 +403,7 @@ export default function JobOpeningsJobBrowser({
                             )}
                         </ul>
 
-                        {/* pagination at BOTTOM as well */}
+                        {/* pagination at bottom */}
                         <div className="mt-6 flex flex-wrap items-center justify-center gap-2 text-xs">
                             <button
                                 disabled={page <= 1}
@@ -396,15 +427,17 @@ export default function JobOpeningsJobBrowser({
                 </div>
             </div>
 
-            {/* details overlay (outside container so it can be full-screen/modal if needed) */}
-            <JobOpeningsJobDetails
-                jobId={selected}
-                open={drawerOpen}
-                onClose={() => setDrawerOpen(false)}
-                getJobByIdAction={getJobByIdAction}
-                verifyCandidateAction={verifyCandidateAction}
-                createCandidateAction={createCandidateAction}
-            />
+            {/* details overlay — NO key prop (prevents remount/fetch loops) */}
+            {drawerOpen && selected && (
+                <JobOpeningsJobDetails
+                    jobId={selected}
+                    open={drawerOpen}
+                    onClose={onClose}
+                    getJobByIdAction={getJobByIdAction}
+                    verifyCandidateAction={verifyCandidateAction}
+                    createCandidateAction={createCandidateAction}
+                />
+            )}
         </section>
     );
 }

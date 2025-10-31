@@ -2,7 +2,7 @@
 
 import { motion, type Transition } from "framer-motion";
 import Image from "next/image";
-import { Sparkles, Star, ShieldCheck, ArrowRight, Check, Play } from "lucide-react";
+import { Sparkles, Star, ShieldCheck, ArrowRight, Check, Play, Home, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 const gradientText =
@@ -14,6 +14,12 @@ const fadeUp = {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.55, ease: easeBezier } as Transition,
 };
+
+const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "About CDPL", href: "/about-us" },
+]
+
 
 export default function AboutHeroSection() {
     return (
@@ -40,17 +46,19 @@ export default function AboutHeroSection() {
             </div>
 
             {/* Breadcrumbs for SEO & UX */}
-            <nav aria-label="Breadcrumb" className="mb-3">
-                <ol className="flex items-center gap-2 text-sm text-slate-500">
-                    <li>
-                        <Link href="/" className="hover:text-slate-700">Home</Link>
-                    </li>
-                    <li aria-hidden="true" className="text-slate-400">/</li>
-                    <li>
-                        <Link href="/about-us" className="font-medium text-slate-700 hover:text-slate-900">
-                            about-us
-                        </Link>
-                    </li>
+            <nav aria-label="Breadcrumb" className="mb-6">
+                <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+                    {breadcrumbs.map((c, i) => (
+                        <li key={i} className="flex items-center gap-2">
+                            {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                            <a
+                                href={c.href}
+                                className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                            >
+                                {c.label}
+                            </a>
+                        </li>
+                    ))}
                 </ol>
             </nav>
 
@@ -58,7 +66,7 @@ export default function AboutHeroSection() {
                 {/* LEFT — first on all viewports */}
                 <div className="order-1 lg:order-1">
                     <motion.div {...fadeUp}>
-                        <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-1 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur dark:border-slate-200/60 dark:bg-white/85 sm:text-xs">
+                        <span className="inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/80 px-3 py-2 text-[11px] font-medium text-slate-700 shadow-sm backdrop-blur dark:border-slate-200/60 dark:bg-white/85 sm:text-xs">
                             <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
                             Future-Ready EdTech
                         </span>
@@ -117,7 +125,7 @@ export default function AboutHeroSection() {
                             Explore Courses <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
                         </Link>
                         <Link
-                            href="/contact"
+                            href="/contact-us"
                             className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
                         >
                             Talk to an Advisor
@@ -137,26 +145,15 @@ export default function AboutHeroSection() {
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.3 }}
                         className="mt-7 flex flex-wrap items-center gap-3 text-sm"
                     >
-                        <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 text-slate-800 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
-                            <Star className="h-4 w-4" aria-hidden="true" />
-                            <span className="font-semibold">4.8/5</span>
+                        <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
+                            <Star className="h-4 w-4 text-amber-500" aria-hidden="true" />
+                            <span className="font-semibold text-amber-500">4.8/5</span>
                             <span className="text-slate-500">&nbsp;avg learner rating</span>
                         </div>
                         <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 text-slate-800 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
-                            <ShieldCheck className="h-4 w-4" aria-hidden="true" />
-                            <span className="font-semibold">Placement Assistance</span>
-                        </div>
-                        <div className="inline-flex flex-wrap items-center gap-2 text-slate-700">
-                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
-                                10k+ Learners
-                            </span>
-                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
-                                Job-Ready Skills
-                            </span>
-                            <span className="rounded-full bg-white/90 px-2 py-0.5 text-xs font-medium shadow-sm dark:bg-white/90 whitespace-nowrap">
-                                Mentor-Led
-                            </span>
-                        </div>
+                            <ShieldCheck className="h-4 w-4 text-purple-700" aria-hidden="true" />
+                            <span className="font-semibold text-purple-700">Placement Assistance</span>
+                        </div>                        
                     </motion.div>
                 </div>
 
@@ -208,11 +205,11 @@ export default function AboutHeroSection() {
                 <div className="mt-3 grid grid-cols-2 items-center gap-3 opacity-80 xs:grid-cols-3 sm:grid-cols-4 md:grid-cols-6">
                     {[
                         "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
-                        "/images/Testriq-Logo-1.webp",
+                        "/company_images/axiom.webp",
+                        "/company_images/credility.webp",
+                        "/company_images/marqetrix.webp",
+                        "/company_images/raw_engineering.webp",
+                        "/company_images/vistaar.webp",
                     ].map((src, i) => (
                         <div key={i} className="relative mt-1 h-7 w-full grayscale sm:h-8 md:h-9 lg:h-10">
                             <Image src={src} alt="Brand logo" fill sizes="(max-width: 768px) 33vw, 16vw" className="object-contain" />

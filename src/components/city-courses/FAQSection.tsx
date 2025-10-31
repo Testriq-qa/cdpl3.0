@@ -3,6 +3,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence, easeOut } from "framer-motion";
 import { ChevronDown, HelpCircle, MessageCircle, Calendar, Sparkles } from "lucide-react";
+import Link from "next/link";
 
 // Mock data for demonstration
 const mockData = {
@@ -209,10 +210,10 @@ const FAQSection: React.FC<FAQSectionProps> = ({ data = mockData }) => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <button className="group px-8 py-4 bg-white text-emerald-600 font-semibold rounded-xl hover:bg-emerald-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2">
+                <Link href="/contact-us" className="group px-8 py-4 bg-white text-emerald-600 font-semibold rounded-xl hover:bg-emerald-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2">
                   <MessageCircle className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                   <span>Contact Support</span>
-                </button>
+                </Link>
                 
                 <button className="group px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2">
                   <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" />

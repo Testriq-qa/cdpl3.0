@@ -1,6 +1,7 @@
 "use client";
 
-import { ShieldCheck, Phone, Mail, Calendar, MessageCircle, Star, Check, Link } from "lucide-react";
+import { ShieldCheck, Phone, Mail, Calendar, MessageCircle, Star, Check } from "lucide-react";
+import Link from "next/link";
 
 /**
  * CTA-only section — light, sleek, slightly futuristic
@@ -9,7 +10,7 @@ import { ShieldCheck, Phone, Mail, Calendar, MessageCircle, Star, Check, Link } 
  * - No FAQ content
  */
 
-export default function AboutFAQSection() {
+export default function AboutCTASection() {
     return (
         <section
             className="mx-auto max-w-7xl px-4 py-8 md:py-14 sm:px-6 lg:px-8"
@@ -82,16 +83,16 @@ export default function AboutFAQSection() {
 
                             {/* Social proof / stats */}
                             <div className="mt-5 flex flex-wrap items-center gap-4">
-                                <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center shadow-sm">
-                                    <div className="text-lg font-extrabold text-slate-900">4.8/5</div>
+                                <div className="rounded-xl border-2 border-purple-500 bg-purple-50 px-4 py-3 text-center shadow-sm">
+                                    <div className="text-lg font-extrabold text-violet-500">4.8/5</div>
                                     <div className="text-sm text-slate-600">Learner Satisfaction</div>
                                 </div>
-                                <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center shadow-sm">
-                                    <div className="text-lg font-extrabold text-slate-900">10–24 wks</div>
+                                <div className="rounded-xl border-2 border-green-500 bg-green-50 px-4 py-3 text-center shadow-sm">
+                                    <div className="text-lg font-extrabold text-green-700 ">10–24 wks</div>
                                     <div className="text-sm text-slate-600">Job-ready Tracks</div>
                                 </div>
-                                <div className="rounded-xl border border-slate-200 bg-white px-4 py-3 text-center shadow-sm">
-                                    <div className="text-lg font-extrabold text-slate-900">Live + Labs</div>
+                                <div className="rounded-xl border-2 border-red-500 bg-red-50 px-4 py-3 text-center shadow-sm">
+                                    <div className="text-lg font-extrabold text-red-700">Live + Labs</div>
                                     <div className="text-sm text-slate-600">Hands-on Projects</div>
                                 </div>
                             </div>
@@ -116,15 +117,15 @@ export default function AboutFAQSection() {
 
                             <div className="mt-4 grid gap-3">
                                 <Link
-                                    href="/contact"
-                                    className="inline-flex items-center justify-center rounded-xl bg-[#ff8c00] px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-110 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/40"
+                                    href="/contact-us"
+                                    className="inline-flex w-full items-center justify-center rounded-xl bg-orange-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:brightness-90 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/40"
                                 >
                                     Get Counseling
                                 </Link>
 
                                 <Link
-                                    href="tel:+0000000000"
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
+                                    href="tel:++91 84-889-889-84"
+                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-blue-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
                                     aria-label="Call our admissions team"
                                 >
                                     <Phone className="h-4 w-4" aria-hidden />
@@ -132,35 +133,33 @@ export default function AboutFAQSection() {
                                 </Link>
 
                                 <Link
-                                    href="mailto:admissions@cinutedigital.com"
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
+                                    href="mailto:contact@cinutedigital.com"
+                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-yellow-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-yellow-600 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
                                     aria-label="Email our admissions team"
                                 >
                                     <Mail className="h-4 w-4" aria-hidden />
                                     Email Syllabus
                                 </Link>
 
-                                <a
-                                    href="https://wa.me/0000000000"
+                                <Link
+                                    href="https://wa.me/9152929342"
                                     target="_blank"
-                                    rel="nofollow noopener"
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
+                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-green-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-green-500 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
                                     aria-label="Chat on WhatsApp"
                                 >
                                     <MessageCircle className="h-4 w-4" aria-hidden />
                                     Chat on WhatsApp
-                                </a>
+                                </Link>
 
-                                <a
+                                <Link
                                     href="https://calendly.com/your-calendly/15min"
                                     target="_blank"
-                                    rel="nofollow noopener"
-                                    className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
+                                    className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-200 bg-purple-500 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-purple-600 focus:outline-none focus:ring-2 focus:ring-[#ff8c00]/30"
                                     aria-label="Book a 15-minute counseling slot"
                                 >
                                     <Calendar className="h-4 w-4" aria-hidden />
                                     Book 15-min Slot
-                                </a>
+                                </Link>
                             </div>
 
                             {/* EMI + badge row */}

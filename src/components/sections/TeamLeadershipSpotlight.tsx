@@ -13,6 +13,7 @@ import Image from "next/image";
 // ⬇️ NEW: import the TeamLeaders type and the dataset
 import type { TeamLeaders as TeamLeaderType } from "@/app/our-team/types";
 import { teamLeaders } from "@/app/our-team/data";
+import { ReactNode } from "react";
 
 type TeamMember = {
     id: string;
@@ -31,15 +32,13 @@ type Props = { data: TeamMember[] };
 
 export default function LeadershipSpotlight({ }: Props) {
     // ⬇️ Source now comes from teamLeaders; filter to Leadership (keeps section semantics)
-    const leaders: TeamLeaderType[] = teamLeaders.filter((m) => m.role === "Leadership" || m.role === "Faculty" || m.role === "Advisory" || m.role === "Operations");
-
-    if (leaders.length === 0) return null;
+    const leaders = teamLeaders;
 
     return (
         <section
             id="leadership"
             aria-labelledby="leadership-heading"
-            className="relative mx-auto max-w-7xl px-4 py-16 sm:px-6 lg:px-8"
+            className="relative mx-auto max-w-7xl px-4 py-6 md:py-16 sm:px-6 lg:px-8"
         >
             {/* Subtle background gradient */}
             <div
@@ -49,7 +48,7 @@ export default function LeadershipSpotlight({ }: Props) {
 
             {/* Header Section */}
             <div className="mb-12 text-center">
-                <div className="mb-6 flex flex-wrap items-center justify-center gap-2">
+                <div className="mb-6 flex flex-wrap items-center justify-center gap-3 md:gap-2">
                     <span className="inline-flex items-center gap-1.5 rounded-full border border-slate-200 bg-white/80 px-3 py-1.5 text-xs font-medium text-slate-700 shadow-sm backdrop-blur-sm">
                         <Sparkles className="h-3.5 w-3.5 text-orange-500" aria-hidden="true" />
                         Future-Ready Leadership
@@ -73,35 +72,48 @@ export default function LeadershipSpotlight({ }: Props) {
 
                 <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-slate-600">
                     Learn from industry veterans who architect{" "}
-                    <strong className="text-slate-900">job-ready, mentor-led programs</strong> with{" "}
-                    <strong className="text-slate-900">real-world projects</strong>,{" "}
-                    <strong className="text-slate-900">placement support</strong>, and continuously updated,{" "}
-                    <strong className="text-slate-900">ISO-aligned curriculum</strong>.
+                    <strong className="text-slate-700">job-ready, mentor-led programs</strong> with{" "}
+                    <strong className="text-slate-700">real-world projects</strong>,{" "}
+                    <strong className="text-slate-700">placement support</strong>, and continuously updated,{" "}
+                    <strong className="text-slate-700">ISO-aligned curriculum</strong>.
                 </p>
             </div>
 
             {/* Stats Grid */}
             <div className="mb-16 grid gap-4 sm:grid-cols-3">
                 <StatCard
-                    icon={Users2}
-                    value="10k+"
+                    icon={<Users2 className="text-blue-800 w-10 h-10"/>}
+                    value={
+                        <span className="bg-gradient-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent">
+                            10k+
+                        </span>
+                    }
                     label="Learners mentored"
                     description="Live cohorts & 1:1 guidance"
                 />
+
                 <StatCard
-                    icon={ShieldCheck}
-                    value="75+"
+                    icon={<ShieldCheck className="text-emerald-800 w-10 h-10"/>}
+                    value={
+                        <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
+                            75+
+                        </span>
+                    }
                     label="Hiring partner touchpoints"
                     description="Referrals & interview prep"
                 />
+
                 <StatCard
-                    icon={GraduationCap}
-                    value="94%"
+                    icon={<GraduationCap className="text-lime-800 w-10 h-10"/>}
+                    value={
+                        <span className="text-lime-600">
+                            94%
+                        </span>
+                    }
                     label="Capstone success rate"
                     description="Portfolio-first outcomes"
                 />
             </div>
-
             {/* Leader Cards - Full Width (from teamLeaders) */}
             <div className="space-y-16">
                 {leaders.map((leader, index) => (
@@ -116,22 +128,22 @@ export default function LeadershipSpotlight({ }: Props) {
 
 // Stat Card Component
 function StatCard({
-    icon: Icon,
+    icon,
     value,
     label,
     description,
 }: {
-    icon: React.ElementType;
-    value: string;
+    icon: React.ReactNode;
+    value: ReactNode;
     label: string;
     description: string;
 }) {
     return (
         <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:shadow-lg">
             <div className="flex items-start gap-4">
-                <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-orange-200 bg-gradient-to-br from-orange-50 to-orange-100">
-                    <Icon className="h-6 w-6 text-orange-600" />
-                </div>
+               <div>
+                {icon}
+               </div>
                 <div className="flex-1">
                     <p className="text-3xl font-bold text-slate-900">{value}</p>
                     <p className="mt-1 font-semibold text-slate-800">{label}</p>
@@ -158,17 +170,17 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
             />
 
             <div
-                className={`relative flex flex-col gap-5 p-8 lg:flex-row lg:items-center lg:gap-24 lg:p-12 ${isEven ? "" : "lg:flex-row-reverse"}`}
+                className={`relative flex flex-col gap-5 p-5 lg:flex-row lg:items-center lg:gap-24 lg:p-12 ${isEven ? "" : "lg:flex-row-reverse"}`}
             >
                 {/* Avatar Section with Futuristic Frame */}
                 <div className="relative mx-auto shrink-0 lg:mx-0">
-                    <div className="relative h-64 w-64 lg:h-[360px] lg:w-[360px] overflow-hidden rounded-full transition-all duration-500 group-hover:scale-110 group-hover:border-orange-300">
+                    <div className="relative h-55 w-55 lg:h-90 lg:w-90 overflow-hidden rounded-full transition-all duration-500 group-hover:border-orange-300">
                         {leader.avatar ? (
-                           <Image
+                            <Image
                                 src={leader.avatar}
                                 alt={`${leader.name} - ${leader.title}`}
                                 fill
-                                className="object-cover transition-transform duration-500"
+                                className="object-cover transition-transform duration-500 hover:scale-105"
                                 loading="lazy"
                                 sizes="(max-width: 1024px) 256px, 360px"
                             />
@@ -190,7 +202,7 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
                 <div className="flex-1 space-y-6">
                     {/* Header */}
                     <div className="space-y-3">
-                        <div className="flex items-start justify-between gap-4">
+                        <div className="flex mt-3 items-start justify-between gap-4">
                             <h3 className="text-3xl font-bold leading-tight text-slate-900 lg:text-4xl">
                                 {leader.name}
                             </h3>
@@ -201,7 +213,7 @@ function LeaderCard({ leader, index }: { leader: TeamLeaderType; index: number }
                                 {leader.title}
                             </p>
 
-                            <div className="flex flex-row items-center gap-3 text-gray-600">
+                            <div className="flex mt-5 flex-row items-center gap-3 text-gray-600">
                                 <p className="bg-gray-100 px-3 py-1 rounded-full text-xs border border-brand">
                                     {leader.experience}
                                 </p>
