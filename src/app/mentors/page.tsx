@@ -1,7 +1,7 @@
 // app/mentors/page.tsx
 import type { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO, generateBreadcrumbSchema, generatePersonSchema } from "@/lib/seo";
+import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
 // ============================================================================
 // SEO METADATA - Optimized for Mentors Page
