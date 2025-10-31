@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import dynamic from "next/dynamic";
-import { generateSEO, generateBreadcrumbSchema, generateFAQSchema } from "@/lib/seo";
+import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
 // Dynamic imports with SSR enabled
 const AboutHeroSection = dynamic(
@@ -167,11 +167,11 @@ export default function AboutPage() {
     description: "Leading EdTech institute offering industry-aligned training in Software Testing, Data Science, AI/ML, and Automation with live projects, expert mentorship, and placement assistance.",
     foundingDate: "2015", // Update with actual founding year
     slogan: "Transform Your Career with Industry-Ready Skills",
-    
+
     // Contact Information
     email: "contact@cinutedigital.com",
     telephone: "+91-788-83-83-788",
-    
+
     // Address
     address: {
       "@type": "PostalAddress",
@@ -179,7 +179,7 @@ export default function AboutPage() {
       addressRegion: "Maharashtra",
       addressCountry: "IN",
     },
-    
+
     // Area Served
     areaServed: [
       {
@@ -199,7 +199,7 @@ export default function AboutPage() {
         name: "Maharashtra",
       },
     ],
-    
+
     // Social Media Profiles
     sameAs: [
       "https://www.linkedin.com/company/cinutedigital",
@@ -208,7 +208,7 @@ export default function AboutPage() {
       "https://www.instagram.com/cinutedigital",
       "https://www.youtube.com/@cinutedigital",
     ],
-    
+
     // Departments/Programs
     department: [
       {
@@ -232,16 +232,16 @@ export default function AboutPage() {
         description: "Full-Stack Development, Digital Marketing, Cloud Computing",
       },
     ],
-    
+
     // Accreditations & Certifications
     accreditationStatus: "ISTQB Certified Training Partner", // Update if applicable
-    
+
     // Number of employees (update with actual)
     numberOfEmployees: {
       "@type": "QuantitativeValue",
       value: "50-100",
     },
-    
+
     // Alumni count (update with actual)
     alumni: {
       "@type": "QuantitativeValue",

@@ -1,10 +1,18 @@
 // src/app/locations-we-serve/page.tsx
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
-import { statesData } from "@/data/cities/citiesData";
-import LocationsClientMapSection from "@/components/sections/LocationsClientMapSection";
 
-// Server-only tiny loader
+import LocationsClientMapSection from "@/components/sections/LocationsClientMapSection";
+import { buildLocationsHierarchy } from "@/data/courseData/buildLocationsHierarchy";
+
+// Types
+import type { CourseData } from "@/types/courseData";
+
+// Your data (currently a Record<string, CourseData>)
+import { courseData } from "@/types/courseData";
+
+/* -------------------------------- Loaders -------------------------------- */
+
 function SectionLoader({ label = "Loading..." }: { label?: string }) {
   const color = label.includes("hero") ? "text-gray-500" : "text-blue-500";
   return (
@@ -14,7 +22,8 @@ function SectionLoader({ label = "Loading..." }: { label?: string }) {
   );
 }
 
-// Dynamic sections (client components allowed here)
+/* -------------------------- Dynamic (client) sections -------------------------- */
+
 const LocationsHeroSection = dynamic(
   () => import("@/components/sections/LocationsHeroSection"),
   { ssr: true, loading: () => <SectionLoader label="Loading hero..." /> }
@@ -24,9 +33,6 @@ const HierarchicalLocationsSection = dynamic(
   () => import("@/components/sections/LocationsHierarchicalLocationsSection"),
   { ssr: true, loading: () => <SectionLoader label="Loading locations..." /> }
 );
-
-// Remove this — moved to LocationsClientMapSection
-// const LocationsInteractiveMapSection = dynamic(...)
 
 const LocationsBenefitsSection = dynamic(
   () => import("@/components/sections/LocationsBenefitsSection"),
@@ -38,10 +44,12 @@ const LocationsCTASection = dynamic(
   { ssr: true, loading: () => <SectionLoader label="Loading CTA..." /> }
 );
 
+/* --------------------------------- Metadata --------------------------------- */
+
 export const metadata: Metadata = {
-  title: "Locations We Serve | Software Testing & Programming Courses Across India",
+  title: "Locations We Serve | Software Testing & Programming Courses in India & UAE",
   description:
-    "Discover all our course locations in India for software testing and programming training. From Mumbai to Delhi, find the nearest center in Maharashtra, Karnataka, Delhi NCR, and more.",
+    "Explore our course locations across India and the UAE. Find the nearest center in Maharashtra, Karnataka, Delhi NCR, Dubai, Abu Dhabi, and more.",
   alternates: { canonical: "/locations-we-serve" },
   robots: { index: true, follow: true },
   keywords: [
@@ -49,19 +57,43 @@ export const metadata: Metadata = {
     "programming training centers Maharashtra",
     "QA testing institutes Bangalore",
     "coding bootcamps Delhi NCR",
+    "software testing courses UAE",
+    "programming training Dubai Abu Dhabi",
   ],
 };
 
+/* ------------------------------- Utilities ------------------------------- */
+
+function normalizeCourses(
+  raw: CourseData[] | Record<string, CourseData> | undefined | null
+): CourseData[] {
+  if (!raw) return [];
+  // If already an array, return as-is
+  if (Array.isArray(raw)) return raw;
+  // If it's a record keyed by slug/id, take values
+  if (typeof raw === "object") return Object.values(raw);
+  return [];
+}
+
+/* --------------------------------- Page --------------------------------- */
+
 export default function LocationsWeServePage() {
+  // Normalize your dataset to CourseData[]
+  const courses: CourseData[] = normalizeCourses(courseData);
+
+  // Build Country → State → District("Cities") → City hierarchy
+  const countriesData = buildLocationsHierarchy(courses);
+
   return (
     <div className="min-h-screen w-full bg-gradient-to-br from-slate-50 to-blue-50 transition-colors duration-300">
       <LocationsHeroSection />
 
       <section className="w-full mt-10">
-        <HierarchicalLocationsSection data={statesData} />
+        {/* Pass the derived Country[] so both India and UAE render as top-level cards */}
+        <HierarchicalLocationsSection data={countriesData} />
       </section>
 
-      {/* Now safe: LocationsClientMapSection handles ssr: false */}
+      {/* Client-side interactive map */}
       <LocationsClientMapSection />
 
       <section className="w-full mt-10">
@@ -74,3 +106,12 @@ export default function LocationsWeServePage() {
     </div>
   );
 }
+
+/* ---------------------------------------------------------------------------
+   Notes:
+   - `courseData` was a Record<string, CourseData>; we now convert it using
+     `Object.values()` in `normalizeCourses(...)`.
+   - If you later switch to an array export (e.g. `export default [...]`), the
+     same normalization works without code changes.
+   - `buildLocationsHierarchy` maps state→country to place India & UAE correctly.
+--------------------------------------------------------------------------- */
