@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
             <div className="space-y-5">
               <div className="flex items-center gap-3">
                 <Image
-                  src="/images/cdpl-logo.png"
+                  src="/cdpl-logo.png"
                   alt="Cinute Digital logo"
                   width={48}
                   height={48}
