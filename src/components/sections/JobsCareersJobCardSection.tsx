@@ -12,7 +12,27 @@ import {
   Star,
   Tag,
 } from "lucide-react";
-import type { Job } from "@/app/jobs/careers/page";
+
+// Define Job type locally to avoid import issues
+type Job = {
+  id: string;
+  title: string;
+  team:
+    | "Engineering"
+    | "Data"
+    | "Product"
+    | "Growth"
+    | "Student Success"
+    | "Operations";
+  location: "Bengaluru" | "Pune" | "Remote (India)" | "Hybrid (Bengaluru)";
+  type: "Full-time" | "Contract" | "Internship";
+  experience: "0–1 yrs" | "1–3 yrs" | "3–5 yrs" | "5–8 yrs" | "8+ yrs";
+  summary: string;
+  responsibilities: string[];
+  requirements: string[];
+  applyEmail?: string;
+  applyLink?: string;
+};
 
 export function JobsCareersJobCardSection({ job }: { job: Job }) {
   return (
@@ -106,7 +126,7 @@ export function JobsCareersJobCardSection({ job }: { job: Job }) {
               </h4>
             </div>
             <ul className="grid gap-1.5">
-              {job.responsibilities.slice(0, 8).map((r, i) => (
+              {job.responsibilities.slice(0, 8).map((r: string, i: number) => (
                 <li
                   key={`${r}-${i}`}
                   className="text-[13.5px] leading-relaxed text-slate-700"
@@ -127,7 +147,7 @@ export function JobsCareersJobCardSection({ job }: { job: Job }) {
               </h4>
             </div>
             <ul className="grid gap-1.5">
-              {job.requirements.slice(0, 8).map((r, i) => (
+              {job.requirements.slice(0, 8).map((r: string, i: number) => (
                 <li
                   key={`${r}-${i}`}
                   className="text-[13.5px] leading-relaxed text-slate-700"
@@ -296,7 +316,7 @@ export function JobsCareersJobCardSection({ job }: { job: Job }) {
           </p>
         </div>
         <p className="text-[12.5px] text-slate-500">
-          We’re an equal-opportunity employer. We value diversity and are
+          We&apos;re an equal-opportunity employer. We value diversity and are
           committed to an inclusive, respectful workplace.
         </p>
       </div>
