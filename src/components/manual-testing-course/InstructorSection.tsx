@@ -125,7 +125,7 @@ export default function InstructorSection() {
   return (
     <section
       id="instructor"
-      className="py-16 md:py-5 bg-white"
+      className="py-16 md:py-2 bg-white"
       itemScope
       itemType="https://schema.org/CourseInstructor"
       aria-label="Learn from Industry Leaders"

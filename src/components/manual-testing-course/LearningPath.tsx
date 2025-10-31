@@ -142,7 +142,7 @@ export default function LearningPath() {
         </div>
 
         {/* Phases */}
-        <ol className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" itemScope itemType="https://schema.org/ItemList">
+        <ol className="grid grid-cols-1 md:grid-cols-2 gap-6" itemScope itemType="https://schema.org/ItemList">
           {phases.map((p, i) => {
             const colors = COLOR_MAP[p.accent];
 

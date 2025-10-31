@@ -232,7 +232,7 @@ export default function WhyLearnSection() {
                                 View curriculum <ArrowRight className="h-4 w-4" />
                             </Link>
                             <Link
-                                href="#apply"
+                                href="contact-us"
                                 className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-4 py-2 text-sm font-semibold text-white hover:bg-indigo-700"
                             >
                                 Apply now
