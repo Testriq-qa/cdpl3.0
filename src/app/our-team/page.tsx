@@ -29,7 +29,7 @@ export const metadata: Metadata = generateSEO({
     "meet our trainers",
   ],
   url: "/our-team",
-  image: "/og-image-team.jpg",
+  image: "/og-images/og-image-team.webp",
   imageAlt: "Our Team - Expert Trainers and Mentors at CDPL Cinute Digital",
 });
 

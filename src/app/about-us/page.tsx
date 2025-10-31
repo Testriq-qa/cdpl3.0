@@ -134,7 +134,7 @@ export const metadata: Metadata = generateSEO({
     "Mumbai Pune India",
   ],
   url: "/about-us",
-  image: "/og-image-about.jpg",
+  image: "/og-images/og-image-about.webp",
   imageAlt: "About CDPL - Cinute Digital | Leading EdTech Training Institute",
 });
 
@@ -174,7 +174,7 @@ export default function AboutPage() {
     
     // Address
     address: {
-      "@type": "PostalAddress",
+      "@type": "Office # 1, 2nd Floor, Ashley Towers, Kanakia Rd, Vagad Nagar, Beverly Park, Mira Road East, Mira Bhayandar, Maharashtra 401107dress",
       addressLocality: "Mumbai",
       addressRegion: "Maharashtra",
       addressCountry: "IN",
