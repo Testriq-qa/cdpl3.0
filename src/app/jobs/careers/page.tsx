@@ -27,6 +27,7 @@ export const metadata: Metadata = generateSEO({
 });
 
 
+
 // ====== Shared Types / Data ======
 export type Job = {
     id: string;
@@ -239,8 +240,15 @@ const JobsCareersCTASection = dynamic(
     { ssr: true, loading: () => <SectionLoader label="Loading CTA..." /> }
 );
 
-// ====== Page ======
+// ====== Page =====
 export default function Page() {
+
+    
+    const breadcrumbSchema = generateBreadcrumbSchema([
+        { name: "Home", url: "/" },
+        { name: "Jobs", url: "/jobs/careers" },
+        { name: "Careers", url: "/jobs/careers" },
+    ]);
     return (
         <>
             <script
@@ -248,6 +256,11 @@ export default function Page() {
                 dangerouslySetInnerHTML={{
                     __html: JSON.stringify(jobPostingJsonLd(JOBS)),
                 }}
+            />
+
+             <script
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
             />
             <main className="w-full bg-white text-neutral-900 dark:bg-white dark:text-neutral-900">
                 {/* Sections now manage their own inner container (max-w-7xl px-4 py-12 sm:px-6 lg:px-8) */}
