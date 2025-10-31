@@ -1,3 +1,5 @@
+"use client";
+
 import {
     CheckCircle2,
     ChevronRight,
@@ -14,11 +16,14 @@ import {
     Sparkles,
     Home,
 } from "lucide-react";
-import type { ReactNode, ReactElement } from "react";
+import React, { type ReactNode, type ReactElement, useState } from "react";
 import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
-import { PopupForm } from "../city-courses/HeroSection";
+import { EnrollPopup, type EnrollFormData } from "@/components/EnrollForms";
+import { DownloadFormModal } from "../DownloadForm";
+
+
 
 const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -28,6 +33,19 @@ const breadcrumbs = [
 
 
 export default function HeroManualTesting() {
+
+    const [isDownloadOpen, setIsDownloadOpen] = React.useState(false);
+    const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+
+    const handleEnrollSubmit = (enroll: EnrollFormData) => {
+        alert(
+            `Enroll Now Submitted:\nName: ${enroll.name}\nEmail: ${enroll.email}\nPhone: ${enroll.phone}`
+        );
+        setIsPopupOpen(false);
+    };
+
+
     return (
         <section className="relative mx-auto max-w-full xl:max-w-7xl px-4 py-10 sm:px-6 lg:px-8 md:py-12 bg-white" aria-labelledby="manual-testing-hero">
             {/* Background (no color gradients) */}
@@ -65,8 +83,8 @@ export default function HeroManualTesting() {
                         </div>
 
                         <h1 id="manual-testing-hero" className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900">
-                            Best <span className="text-indigo-700">Manual Testing Course</span>{" "}
-                            with <span className="whitespace-nowrap text-emerald-700">100% Placement <br className="md:hidden" /> Support</span>
+                            Best <span className="text-brand">Manual Testing Course</span>{" "}
+                            with <span className="whitespace-nowrap text-sky-700">100% Placement <br className="md:hidden" /> Support</span>
                         </h1>
 
                         <p className="mt-4 max-w-2xl text-base sm:text-lg md:text-xl text-slate-600">
@@ -113,7 +131,7 @@ export default function HeroManualTesting() {
 
                                 <button
                                     type="submit"
-                                    className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+                                    className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-green-700 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
                                 >
                                     Get Call Back
                                     <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
@@ -152,27 +170,27 @@ export default function HeroManualTesting() {
 
                         {/* CTAs */}
                         <div className="mt-8 flex flex-col sm:flex-row gap-3">
-                            <Link
-                                href="#apply"
-                                className="group inline-flex items-center justify-center rounded-xl bg-indigo-700 px-3 py-4 text-base font-bold text-white shadow-md transition-transform hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                            <button
+                                onClick={() => setIsPopupOpen(true)}
+                                className="group inline-flex items-center justify-center rounded-xl bg-brand px-3 py-4 text-base font-bold text-white shadow-md transition-transform hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                                 aria-label="Enroll in Manual Testing Course"
                             >
                                 Enroll Now
                                 <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-                            </Link>
+                            </button>
 
-                            <Link
-                                href="#syllabus"
+                            <button
+                                onClick={() => setIsDownloadOpen(true)}
                                 className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-2 py-4 text-base font-semibold text-slate-900 shadow-sm transition hover:shadow-md hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500"
                                 aria-label="Download Manual Testing syllabus"
                             >
                                 <Download className="mr-2 h-5 w-5 text-slate-700" />
                                 Download Syllabus (PDF)
-                            </Link>
+                            </button>
 
                             <Link
                                 href="#demo"
-                                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-slate-900 px-3 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-black hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 sm:ml-1"
+                                className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-sky-700 px-3 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-sky-800 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 sm:ml-1"
                                 aria-label="Book a free demo class"
                             >
                                 <PlayCircle className="mr-2 h-5 w-5" />
@@ -307,7 +325,7 @@ export default function HeroManualTesting() {
 
                                     <button
                                         type="submit"
-                                        className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+                                        className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-green-700 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
                                     >
                                         Get Call Back
                                         <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
@@ -327,6 +345,23 @@ export default function HeroManualTesting() {
                         </div>
                     </div>
                 </div>
+
+                {/* Popup now uses reusable EnrollPopup */}
+                <EnrollPopup
+                    isOpen={isPopupOpen}
+                    onClose={() => setIsPopupOpen(false)}
+                    onSubmit={handleEnrollSubmit}
+                />
+
+                <DownloadFormModal
+                    isOpen={isDownloadOpen}
+                    onClose={() => setIsDownloadOpen(false)}
+                    onSubmit={() => {
+                        console.log("Download form submitted:");
+                        // trigger your download or API call here
+                    }}
+                />
+
 
                 {/* SEO helper text */}
                 <div className="mx-auto mt-10 max-w-4xl text-center">
