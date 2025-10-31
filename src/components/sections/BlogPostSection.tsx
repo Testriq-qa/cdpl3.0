@@ -68,36 +68,36 @@ export const BlogPostSection: React.FC<BlogPostSectionProps> = ({ slug }) => {
                     </div>
                 </div>
 
-                {/* Share Section */}
+                {/* Share Section - FIXED: Responsive layout for mobile */}
                 <div className="border-t border-gray-200 pt-6 mt-8">
-                    <h3 className="text-xl font-bold mb-4 text-gray-700">Share this article</h3>
-                    <div className="flex gap-4">
+                    <h3 className="text-lg sm:text-xl font-bold mb-4 text-gray-700">Share this article</h3>
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
                         <Link
                             href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}&text=${encodeURIComponent(post.title)}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200"
+                            className="flex items-center justify-center gap-2 px-4 py-2.5 bg-gray-900 text-white rounded-lg hover:bg-gray-800 transition-colors duration-200 text-sm sm:text-base"
                         >
-                            <FaXTwitter className="w-5 h-5" />
-                            <span className="text-sm font-medium">Twitter</span>
+                            <FaXTwitter className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                            <span className="font-medium">Twitter</span>
                         </Link>
                         <Link
                             href={`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                            className="flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors duration-200 text-sm sm:text-base"
                         >
-                            <FaLinkedin className="w-5 h-5" />
-                            <span className="text-sm font-medium">LinkedIn</span>
+                            <FaLinkedin className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                            <span className="font-medium">LinkedIn</span>
                         </Link>
                         <Link
                             href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(typeof window !== 'undefined' ? window.location.href : '')}`}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="flex items-center gap-2 px-4 py-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200"
+                            className="flex items-center justify-center gap-2 px-4 py-2.5 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors duration-200 text-sm sm:text-base"
                         >
-                            <FaFacebook className="w-5 h-5" />
-                            <span className="text-sm font-medium">Facebook</span>
+                            <FaFacebook className="w-4 h-4 sm:w-5 sm:h-5 flex-shrink-0" />
+                            <span className="font-medium">Facebook</span>
                         </Link>
                     </div>
                 </div>

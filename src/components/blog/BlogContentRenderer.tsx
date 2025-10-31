@@ -30,7 +30,6 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
   React.useEffect(() => {
     async function loadContent() {
       try {
-        // FIXED: Updated import path to match posts subdirectory
         const contentModule = await import(`@/content/posts/${slug}.tsx`);
         setContent(contentModule.content || contentModule.default);
       } catch (error) {
@@ -69,22 +68,22 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
   return (
     <article className="max-w-7xl mx-auto py-0">
       {/* Introduction */}
-      <h2 className="text-3xl font-bold text-gray-900 mb-6">Introduction</h2>
+      <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">Introduction</h2>
       <div 
-        className="prose prose-lg max-w-none mb-12 text-base sm:text-lg leading-relaxed text-gray-700"
+        className="prose prose-lg max-w-none mb-8 sm:mb-12 text-base sm:text-lg leading-relaxed text-gray-700"
         dangerouslySetInnerHTML={{ __html: content.introduction }}
       />
 
       {/* Table of Contents */}
       {content.sections && content.sections.length > 0 && (
-        <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-6 mb-12 border border-indigo-100">
-          <h2 className="text-xl font-bold text-gray-900 mb-4">Table of Contents</h2>
+        <div className="bg-gradient-to-br from-indigo-50 to-blue-50 rounded-xl p-4 sm:p-6 mb-8 sm:mb-12 border border-indigo-100">
+          <h2 className="text-lg sm:text-xl font-bold text-gray-900 mb-3 sm:mb-4">Table of Contents</h2>
           <ul className="space-y-2">
             {content.sections.map((section, index) => (
               <li key={index}>
                 <a
                   href={`#section-${index}`}
-                  className="text-indigo-600 hover:text-indigo-700 font-medium transition-colors"
+                  className="text-sm sm:text-base text-indigo-600 hover:text-indigo-700 font-medium transition-colors"
                 >
                   {section.title}
                 </a>
@@ -96,20 +95,21 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
 
       {/* Content Sections */}
       {content.sections && content.sections.map((section, index) => (
-        <section key={index} id={`section-${index}`} className="mb-16">
-          <h2 className="text-3xl font-bold text-gray-900 mb-6">
+        <section key={index} id={`section-${index}`} className="mb-12 sm:mb-16">
+          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">
             {section.title}
           </h2>
           
-          {/* Section Image - UPDATED: Changed to object-cover to fill container */}
+          {/* Section Image - OPTIMIZED: Smaller, responsive heights for better blog layout */}
           {section.image && (
-            <div className="relative w-full h-[400px] sm:h-[450px] md:h-[500px] mb-8 rounded-xl overflow-hidden shadow-lg">
+            <div className="relative w-full h-48 sm:h-56 md:h-64 lg:h-72 mb-6 sm:mb-8 rounded-xl overflow-hidden shadow-lg">
               <Image
                 src={section.image}
                 alt={section.title}
                 fill
                 className="object-cover"
-                sizes="(max-width: 768px) 100vw, 1200px"
+                sizes="(max-width: 640px) 100vw, (max-width: 768px) 90vw, (max-width: 1024px) 85vw, 1200px"
+                priority={index === 0}
               />
             </div>
           )}
@@ -123,8 +123,8 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
       ))}
 
       {/* Conclusion */}
-      <div className="mt-16 pt-8 border-t-2 border-gray-200">
-        <h2 className="text-3xl font-bold text-gray-900 mb-6">Conclusion</h2>
+      <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t-2 border-gray-200">
+        <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4 sm:mb-6">Conclusion</h2>
         <div
           className="prose prose-lg max-w-none text-base sm:text-lg leading-relaxed text-gray-700"
           dangerouslySetInnerHTML={{ __html: content.conclusion }}
@@ -133,9 +133,9 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
 
       {/* Related Posts */}
       {content.relatedPosts && content.relatedPosts.length > 0 && (
-        <div className="mt-16 pt-8 border-t-2 border-gray-200">
-          <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Articles</h2>
-          <div className="grid md:grid-cols-3 gap-6">
+        <div className="mt-12 sm:mt-16 pt-6 sm:pt-8 border-t-2 border-gray-200">
+          <h2 className="text-xl sm:text-2xl font-bold text-gray-900 mb-4 sm:mb-6">Related Articles</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
             {content.relatedPosts.map((relatedSlug) => {
               const relatedPost = getPostBySlug(relatedSlug);
               if (!relatedPost) return null;
@@ -147,7 +147,7 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
                   className="group block bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden border border-gray-100"
                 >
                   {relatedPost.featuredImage && (
-                    <div className="relative h-40 bg-gray-100">
+                    <div className="relative h-32 sm:h-40 bg-gray-100">
                       <Image
                         src={relatedPost.featuredImage}
                         alt={relatedPost.title}
@@ -156,11 +156,11 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
                       />
                     </div>
                   )}
-                  <div className="p-4">
-                    <h3 className="font-bold text-gray-900 group-hover:text-indigo-600 transition-colors line-clamp-2 mb-2">
+                  <div className="p-3 sm:p-4">
+                    <h3 className="text-sm sm:text-base font-bold text-gray-900 group-hover:text-indigo-600 transition-colors line-clamp-2 mb-2">
                       {relatedPost.title}
                     </h3>
-                    <p className="text-sm text-gray-600 line-clamp-2">
+                    <p className="text-xs sm:text-sm text-gray-600 line-clamp-2">
                       {relatedPost.excerpt}
                     </p>
                   </div>
@@ -174,11 +174,19 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
       {/* Custom Styles for Content */}
       <style jsx global>{`
         .prose h3 {
-          font-size: 1.5rem;
+          font-size: 1.25rem;
           font-weight: 700;
           color: #1f2937;
-          margin-top: 2rem;
-          margin-bottom: 1rem;
+          margin-top: 1.5rem;
+          margin-bottom: 0.75rem;
+        }
+
+        @media (min-width: 640px) {
+          .prose h3 {
+            font-size: 1.5rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+          }
         }
 
         .prose ul {
@@ -198,39 +206,70 @@ const BlogContentRenderer: React.FC<BlogContentRendererProps> = ({ slug }) => {
         }
 
         .code-block {
-          margin: 2rem 0;
+          margin: 1.5rem 0;
           border-radius: 0.75rem;
           overflow: hidden;
           box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
         }
 
+        @media (min-width: 640px) {
+          .code-block {
+            margin: 2rem 0;
+          }
+        }
+
         .code-block pre {
           margin: 0;
-          padding: 1.5rem;
+          padding: 1rem;
           background: #1e293b;
           overflow-x: auto;
+        }
+
+        @media (min-width: 640px) {
+          .code-block pre {
+            padding: 1.5rem;
+          }
         }
 
         .code-block code {
           color: #e2e8f0;
           font-family: 'Fira Code', 'Consolas', monospace;
-          font-size: 0.875rem;
+          font-size: 0.8125rem;
           line-height: 1.7;
         }
 
+        @media (min-width: 640px) {
+          .code-block code {
+            font-size: 0.875rem;
+          }
+        }
+
         .code-caption {
-          padding: 0.75rem 1.5rem;
+          padding: 0.5rem 1rem;
           background: #f1f5f9;
           color: #475569;
-          font-size: 0.875rem;
+          font-size: 0.8125rem;
           font-style: italic;
           margin: 0;
           border-top: 1px solid #e2e8f0;
         }
 
+        @media (min-width: 640px) {
+          .code-caption {
+            padding: 0.75rem 1.5rem;
+            font-size: 0.875rem;
+          }
+        }
+
         .prose p {
-          margin: 1.25rem 0;
+          margin: 1rem 0;
           line-height: 1.8;
+        }
+
+        @media (min-width: 640px) {
+          .prose p {
+            margin: 1.25rem 0;
+          }
         }
 
         .prose a {
