@@ -22,14 +22,6 @@ import {
     FileSpreadsheet,
 } from "lucide-react";
 
-/* --------------------------------------------------------------------------
-   Tools Section — Light theme, responsive, sleek (no heavy gradients)
-   • SEO-first copy with high-intent keywords for an EdTech/QA institute
-   • Clean, slightly futuristic cards with subtle borders, soft shadows, rings
-   • Filter chips to explore categories (no external libs required)
-   • JSON-LD ItemList injected for SEO rich results
-   -------------------------------------------------------------------------- */
-
 /* ============================== Types ============================== */
 interface Category {
     id: "plan" | "test-mgmt" | "api-auto" | "perf" | "cross" | "data" | "devops" | "utils";
@@ -42,11 +34,11 @@ interface Tool {
     desc: string;
     category: Category["id"];
     tags?: string[];
+    color?: Accent; // Will be assigned
 }
 
 interface ToolCardProps {
     tool: Tool;
-    colorClass: string;
 }
 
 interface FilterChipProps {
@@ -55,7 +47,38 @@ interface FilterChipProps {
     onClick: () => void;
 }
 
-/** Utility to map a tool to an icon */
+/* ============================== Color System ============================== */
+const ACCENTS = ["indigo", "cyan", "emerald", "amber", "rose", "violet", "sky", "lime", "pink", "teal"] as const;
+type Accent = typeof ACCENTS[number];
+
+const COLOR_MAP: Record<Accent, { 
+    iconBg: string; 
+    cardBg: string; 
+    border: string; 
+    accentBorder: string;
+    ring: string;
+}> = {
+    indigo: { iconBg: "bg-indigo-600", cardBg: "bg-indigo-50", border: "border-indigo-200", accentBorder: "border-indigo-600", ring: "ring-indigo-200" },
+    cyan: { iconBg: "bg-cyan-600", cardBg: "bg-cyan-50", border: "border-cyan-200", accentBorder: "border-cyan-600", ring: "ring-cyan-200" },
+    emerald: { iconBg: "bg-emerald-600", cardBg: "bg-emerald-50", border: "border-emerald-200", accentBorder: "border-emerald-600", ring: "ring-emerald-200" },
+    amber: { iconBg: "bg-amber-600", cardBg: "bg-amber-50", border: "border-amber-200", accentBorder: "border-amber-600", ring: "ring-amber-200" },
+    rose: { iconBg: "bg-rose-600", cardBg: "bg-rose-50", border: "border-rose-200", accentBorder: "border-rose-600", ring: "ring-rose-200" },
+    violet: { iconBg: "bg-violet-600", cardBg: "bg-violet-50", border: "border-violet-200", accentBorder: "border-violet-600", ring: "ring-violet-200" },
+    sky: { iconBg: "bg-sky-600", cardBg: "bg-sky-50", border: "border-sky-200", accentBorder: "border-sky-600", ring: "ring-sky-200" },
+    lime: { iconBg: "bg-lime-600", cardBg: "bg-lime-50", border: "border-lime-200", accentBorder: "border-lime-600", ring: "ring-lime-200" },
+    pink: { iconBg: "bg-pink-600", cardBg: "bg-pink-50", border: "border-pink-200", accentBorder: "border-pink-600", ring: "ring-pink-200" },
+    teal: { iconBg: "bg-teal-600", cardBg: "bg-teal-50", border: "border-teal-200", accentBorder: "border-teal-600", ring: "ring-teal-200" },
+};
+
+/** Assign unique accent to each tool */
+const assignColors = (tools: Tool[]): Tool[] => {
+    return tools.map((tool, i) => ({
+        ...tool,
+        color: ACCENTS[i % ACCENTS.length] as Accent,
+    }));
+};
+
+/** Icon mapping */
 const iconFor = (tool: string): LucideIcon => {
     const map: Record<string, LucideIcon> = {
         Jira: Kanban,
@@ -97,7 +120,7 @@ const CATEGORIES: Category[] = [
     { id: "utils", label: "Utilities & Debugging" },
 ];
 
-const TOOL_DATA: Tool[] = [
+const TOOL_DATA: Tool[] = assignColors([
     {
         name: "Jira",
         tagline: "Agile Issue Tracking",
@@ -245,16 +268,7 @@ const TOOL_DATA: Tool[] = [
         category: "utils",
         tags: ["throttle", "rewrite"],
     },
-];
-
-const colorRing = [
-    "ring-indigo-200",
-    "ring-cyan-200",
-    "ring-emerald-200",
-    "ring-amber-200",
-    "ring-fuchsia-200",
-    "ring-sky-200",
-];
+]);
 
 const ToolsSection: FC = () => {
     const [active, setActive] = useState<string | "all">("all");
@@ -282,12 +296,12 @@ const ToolsSection: FC = () => {
     }, []);
 
     return (
-        <section id="tools" aria-labelledby="tools-heading" className="py-20 bg-white">
+        <section id="tools" aria-labelledby="tools-heading" className="py-2 md:py-20 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Headline */}
                 <div className="text-center mb-12 md:mb-16">
-                    <h2 id="tools-heading" className="text-4xl md:text-5xl font-bold text-gray-900 tracking-tight">
-                        Tools You’ll Master in Our QA Certification Course
+                    <h2 id="tools-heading" className="text-4xl font-bold text-gray-900 tracking-tight">
+                        Tools You’ll Master in Our <span className="text-sky-800">QA Certification Course</span>
                     </h2>
                     <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                         Learn industry‑standard <strong>software testing tools</strong> used by top product teams — from
@@ -306,15 +320,15 @@ const ToolsSection: FC = () => {
 
                 {/* Grid */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 sm:gap-6">
-                    {filtered.map((tool, i) => (
-                        <ToolCard key={tool.name} tool={tool} colorClass={colorRing[i % colorRing.length]} />
+                    {filtered.map((tool) => (
+                        <ToolCard key={tool.name} tool={tool} />
                     ))}
                 </div>
 
                 {/* SEO JSON-LD */}
                 <script
                     type="application/ld+json"
-                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) as unknown as string }}
+                    dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
                 />
             </div>
         </section>
@@ -324,23 +338,23 @@ const ToolsSection: FC = () => {
 export default ToolsSection;
 
 /* --------------------------------- Cards --------------------------------- */
-
-const ToolCard: FC<ToolCardProps> = ({ tool, colorClass }) => {
+const ToolCard: FC<ToolCardProps> = ({ tool }) => {
     const Icon = iconFor(tool.name);
+    const color = tool.color!;
+    const colors = COLOR_MAP[color];
+
     return (
         <article
-            className={`group relative h-full overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 sm:p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-within:ring-2 focus-within:ring-indigo-300`}
+            className={`group relative h-full overflow-hidden rounded-2xl ${colors.cardBg} border ${colors.border} border-l-4 ${colors.accentBorder} p-5 sm:p-6 shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:shadow-md focus-within:ring-2 focus-within:ring-offset-2 ${colors.ring}`}
             aria-label={`${tool.name} — ${tool.tagline}`}
         >
-            <div className={`absolute inset-0 pointer-events-none ring-1 ${colorClass} rounded-2xl`} />
-
             <div className="flex items-start gap-3">
-                <span className="inline-flex items-center justify-center rounded-xl border bg-gray-50 border-gray-200 p-2.5">
-                    <Icon className="h-6 w-6 text-gray-700" aria-hidden="true" />
-                </span>
+                <div className={`${colors.iconBg} rounded-xl p-2.5`}>
+                    <Icon className="h-6 w-6 text-white" aria-hidden="true" />
+                </div>
                 <div>
                     <h3 className="text-lg font-semibold text-gray-900 leading-tight">{tool.name}</h3>
-                    <p className="text-sm text-indigo-700 mt-0.5">{tool.tagline}</p>
+                    <p className="text-sm font-medium text-gray-700 mt-0.5">{tool.tagline}</p>
                 </div>
             </div>
 
@@ -351,7 +365,7 @@ const ToolCard: FC<ToolCardProps> = ({ tool, colorClass }) => {
                     {tool.tags.map((t) => (
                         <span
                             key={t}
-                            className="inline-flex items-center rounded-full border border-gray-200 bg-gray-50 px-2.5 py-1 text-xs text-gray-700"
+                            className="inline-flex items-center rounded-full border border-gray-200 bg-white px-2.5 py-1 text-xs font-medium text-gray-700"
                         >
                             #{t}
                         </span>
@@ -370,8 +384,11 @@ const FilterChip: FC<FilterChipProps> = ({ label, active, onClick }) => {
         <button
             type="button"
             onClick={onClick}
-            className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-sm transition-colors ${active ? "border-indigo-600 bg-indigo-600 text-white" : "border-gray-200 bg-white text-gray-700 hover:bg-gray-50"
-                }`}
+            className={`inline-flex items-center rounded-full border px-3.5 py-1.5 text-sm font-medium transition-colors ${
+                active
+                    ? "border-indigo-600 bg-indigo-600 text-white shadow-sm"
+                    : "border-gray-300 bg-white text-gray-700 hover:bg-gray-50"
+            }`}
             aria-pressed={active}
             aria-label={`Filter: ${label}`}
         >

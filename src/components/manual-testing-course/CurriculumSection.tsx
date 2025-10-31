@@ -108,6 +108,51 @@ const MODULES: Module[] = [
     }
 ];
 
+/* ---------- Color Mapping System ---------- */
+const COLOR_MAP: Record<Accent, { 
+    iconBg: string; 
+    cardBg: string; 
+    borderColor: string; 
+    accentBorder: string 
+}> = {
+    indigo: {
+        iconBg: "bg-indigo-600",
+        cardBg: "bg-indigo-50",
+        borderColor: "border-indigo-200",
+        accentBorder: "border-indigo-600"
+    },
+    cyan: {
+        iconBg: "bg-cyan-600",
+        cardBg: "bg-cyan-50",
+        borderColor: "border-cyan-200",
+        accentBorder: "border-cyan-600"
+    },
+    emerald: {
+        iconBg: "bg-emerald-600",
+        cardBg: "bg-emerald-50",
+        borderColor: "border-emerald-200",
+        accentBorder: "border-emerald-600"
+    },
+    amber: {
+        iconBg: "bg-amber-600",
+        cardBg: "bg-amber-50",
+        borderColor: "border-amber-200",
+        accentBorder: "border-amber-600"
+    },
+    rose: {
+        iconBg: "bg-rose-600",
+        cardBg: "bg-rose-50",
+        borderColor: "border-rose-200",
+        accentBorder: "border-rose-600"
+    },
+    violet: {
+        iconBg: "bg-violet-600",
+        cardBg: "bg-violet-50",
+        borderColor: "border-violet-200",
+        accentBorder: "border-violet-600"
+    }
+};
+
 /* ---------- UI Bits ---------- */
 function Badge({ children }: { children: string }) {
     return (
@@ -127,40 +172,41 @@ function TopicPill({ label }: { label: string }) {
 }
 
 function AccentBar({ accent }: { accent: Accent }) {
-    const map: Record<Accent, string> = {
-        indigo: "border-l-4 border-indigo-500",
-        cyan: "border-l-4 border-cyan-500",
-        emerald: "border-l-4 border-emerald-500",
-        amber: "border-l-4 border-amber-500",
-        rose: "border-l-4 border-rose-500",
-        violet: "border-l-4 border-violet-500",
-    };
-    return <div className={map[accent]} aria-hidden />;
+    return <div className={COLOR_MAP[accent].accentBorder} aria-hidden />;
 }
 
-function IconFor(title: string) {
-    if (/fundamentals/i.test(title)) return <BookOpen className="h-5 w-5" />;
-    if (/design/i.test(title)) return <Layers className="h-5 w-5" />;
-    if (/cases/i.test(title)) return <NotebookPen className="h-5 w-5" />;
-    if (/defect/i.test(title)) return <Bug className="h-5 w-5" />;
-    if (/types|environments/i.test(title)) return <FlaskConical className="h-5 w-5" />;
-    if (/projects|ISTQB/i.test(title)) return <Trophy className="h-5 w-5" />;
-    return <Sparkles className="h-5 w-5" />;
+function IconFor(title: string, accent: Accent) {
+    const IconComponent = 
+        /fundamentals/i.test(title) ? BookOpen :
+        /design/i.test(title) ? Layers :
+        /cases/i.test(title) ? NotebookPen :
+        /defect/i.test(title) ? Bug :
+        /types|environments/i.test(title) ? FlaskConical :
+        /projects|ISTQB/i.test(title) ? Trophy :
+        Sparkles;
+
+    return (
+        <div className={`${COLOR_MAP[accent].iconBg} p-2.5 rounded-lg`}>
+            <IconComponent className="h-5 w-5 text-white" aria-hidden />
+        </div>
+    );
 }
 
 /* ---------- Module Card ---------- */
 function CurriculumCard({ mod }: { mod: Module }) {
+    const colors = COLOR_MAP[mod.accent];
+    
     return (
         <article
-            className="group relative rounded-2xl bg-white ring-1 ring-gray-200 shadow-sm hover:shadow-md transition-shadow"
+            className={`group mx-auto relative rounded-2xl ${colors.cardBg} ring-1 ring-inset ${colors.borderColor} shadow-sm hover:shadow-md transition-shadow border-l-4 ${colors.accentBorder}`}
             aria-label={`${mod.weeks}: ${mod.title}`}
         >
             <AccentBar accent={mod.accent} />
-            <div className="p-6 md:p-7">
+            <div className="mx-auto p-2 md:p-7">
                 <div className="mb-3 flex items-center justify-between gap-3">
                     <div className="flex items-center gap-2 text-gray-900">
-                        {IconFor(mod.title)}
-                        <h3 className="text-lg md:text-xl font-semibold">{mod.title}</h3>
+                        {IconFor(mod.title, mod.accent)}
+                        <h3 className="text-lg md:text-xl font-semibold text-gray-900">{mod.title}</h3>
                     </div>
                     <Badge>{mod.weeks}</Badge>
                 </div>
@@ -247,7 +293,7 @@ export default function CurriculumSection() {
     };
 
     return (
-        <section className="py-20 bg-white" id="curriculum" aria-label="Manual Software Testing 12-Week Curriculum">
+        <section className="py-15 md:py-20 bg-white" id="curriculum" aria-label="Manual Software Testing 12-Week Curriculum">
             {/* JSON-LD */}
             <script
                 type="application/ld+json"
@@ -257,8 +303,8 @@ export default function CurriculumSection() {
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-16">
-                    <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-                        12-Week Curriculum: Manual Software Testing & ISTQB Prep
+                    <h2 className="text-4xl font-bold text-gray-900 mb-4">
+                        12-Week Curriculum: <span className="bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent">Manual Testing</span> & <span className="text-brand">ISTQB</span> Prep
                     </h2>
                     <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                         Industry-ready, project-based learning—covering QA fundamentals, test design, defect lifecycle,
@@ -267,10 +313,10 @@ export default function CurriculumSection() {
 
                     {/* Trust mini-stats for credibility & SEO */}
                     <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
-                        <Stat icon={<ShieldCheck className="h-4 w-4" />} label="ISTQB-Aligned" value="Yes" />
-                        <Stat icon={<Clock className="h-4 w-4" />} label="Duration" value="12 Weeks" />
-                        <Stat icon={<Target className="h-4 w-4" />} label="Capstone Projects" value="5" />
-                        <Stat icon={<Brain className="h-4 w-4" />} label="Interview Prep" value="Included" />
+                        <Stat icon={<ShieldCheck className="h-4 w-4 text-blue-800" />} label="ISTQB-Aligned" value="Yes" />
+                        <Stat icon={<Clock className="h-4 w-4 text-red-800" />} label="Duration" value="12 Weeks" />
+                        <Stat icon={<Target className="h-4 w-4 text-purple-800" />} label="Capstone Projects" value="5" />
+                        <Stat icon={<Brain className="h-4 w-4 text-green-800" />} label="Interview Prep" value="Included" />
                     </div>
                 </div>
 

@@ -21,13 +21,12 @@ type Course = {
   slug: string;
   title: string;
   duration: string;
-  price: string;
   originalPrice?: string;
   features: string[];
   level: "Beginner" | "Intermediate" | "Advanced";
   mode: "Online" | "Hybrid" | "Classroom";
   badge?: "Most Popular" | "New" | "Placement Prep";
-  accent: string; // Tailwind color (no gradient)
+  accent: string;
   icon: React.ReactNode;
 };
 
@@ -36,7 +35,6 @@ const COURSES: Course[] = [
     slug: "automation-testing-selenium-java",
     title: "Automation Testing (Selenium + Java)",
     duration: "16 Weeks",
-    price: "₹24,999",
     originalPrice: "₹39,999",
     features: [
       "Selenium WebDriver",
@@ -55,7 +53,6 @@ const COURSES: Course[] = [
     slug: "full-stack-qa-manual-automation",
     title: "Full-Stack QA (Manual + Automation)",
     duration: "20 Weeks",
-    price: "₹34,999",
     originalPrice: "₹49,999",
     features: [
       "Manual + Automation",
@@ -74,7 +71,6 @@ const COURSES: Course[] = [
     slug: "api-testing-postman-restassured",
     title: "API Testing (Postman + RestAssured)",
     duration: "8 Weeks",
-    price: "₹14,999",
     originalPrice: "₹24,999",
     features: [
       "Postman Advanced",
@@ -92,7 +88,6 @@ const COURSES: Course[] = [
     slug: "performance-testing-jmeter",
     title: "Performance Testing (JMeter)",
     duration: "6 Weeks",
-    price: "₹12,499",
     features: [
       "Load/Stress/Soak Testing",
       "Throughput & Latency Analysis",
@@ -110,7 +105,6 @@ const COURSES: Course[] = [
     slug: "mobile-app-testing",
     title: "Mobile App Testing (Android + iOS)",
     duration: "8 Weeks",
-    price: "₹16,999",
     features: [
       "Appium Basics to Advanced",
       "Real Devices & Emulators",
@@ -127,7 +121,6 @@ const COURSES: Course[] = [
     slug: "istqb-foundation",
     title: "ISTQB® Foundation Certification Prep",
     duration: "4 Weeks",
-    price: "₹9,999",
     features: [
       "Syllabus-Aligned Modules",
       "High-Yield Question Bank",
@@ -147,15 +140,15 @@ function cx(...classes: Array<string | false | undefined>) {
 }
 
 function accentClass(accent: Course["accent"]) {
-  // subtle futuristic ring + border without gradients
   return {
     ring: `ring-1 ring-${accent}-200`,
     border: `border border-${accent}-100`,
     topBar: `bg-${accent}-600`,
+    iconBg: `bg-${accent}-600`,
     badge: `bg-${accent}-50 text-${accent}-700`,
-    price: `text-${accent}-700`,
     check: `text-${accent}-600`,
     hover: `hover:shadow-[0_8px_40px_-12px_rgba(0,0,0,0.15)]`,
+    buttonBg: `bg-${accent}-600 hover:bg-${accent}-700 focus:ring-${accent}-500`,
   };
 }
 
@@ -190,13 +183,14 @@ const CourseCard = ({ course }: { course: Course }) => {
       itemScope
       itemType="https://schema.org/Course"
     >
-      {/* top accent bar */}
+      {/* Top accent bar */}
       <div className={cx("absolute inset-x-0 -top-0.5 h-1.5 rounded-t-2xl", a.topBar)} aria-hidden="true" />
 
       <header className="mb-4 flex items-center justify-between">
         <div className="flex items-center gap-3">
-          <div className={cx("grid place-items-center rounded-xl p-2.5 bg-neutral-50 ring-1 ring-neutral-200")}>
-            {course.icon}
+          {/* Icon with matching dark background */}
+          <div className={cx("grid place-items-center rounded-xl p-2.5", a.iconBg)}>
+            <div className="text-white">{course.icon}</div>
           </div>
           <h3 className="text-lg font-semibold text-neutral-900" itemProp="name">
             {course.title}
@@ -225,22 +219,14 @@ const CourseCard = ({ course }: { course: Course }) => {
         ))}
       </ul>
 
-      <div className="mt-auto flex items-end justify-between">
-        <div>
-          <div className={cx("text-2xl font-bold", a.price)} aria-label="Course Price">
-            {course.price}
-          </div>
-          {course.originalPrice && (
-            <div className="text-sm text-neutral-500 line-through">{course.originalPrice}</div>
-          )}
-        </div>
+      {/* Removed Price Section */}
+      <div className="mt-auto">
         <a
           href={`/courses/${course.slug}`}
           className={cx(
-            "inline-flex items-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white",
-            `bg-${course.accent}-700 hover:bg-${course.accent}-800`,
-            "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
-            `focus-visible:ring-${course.accent}-600`
+            "inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white",
+            a.buttonBg,
+            "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           )}
           aria-label={`View syllabus for ${course.title}`}
         >
@@ -274,8 +260,8 @@ export default function OtherCoursesSection() {
   }, []);
 
   return (
-    <section className="py-20 bg-white" id="other-courses" aria-label="Other professional software testing courses">
-      {/* Invisible SEO keywords helper for screen readers and crawlers */}
+    <section className="py-10 md:py-20 bg-white" id="other-courses" aria-label="Other professional software testing courses">
+      {/* Invisible SEO keywords */}
       <p className="sr-only">
         Best software testing courses, automation testing with Selenium Java, full-stack QA training, API testing with
         Postman and RestAssured, performance testing JMeter, mobile app testing Appium, ISTQB Foundation certification.
@@ -286,14 +272,14 @@ export default function OtherCoursesSection() {
         {/* Title block */}
         <div className="text-center mb-12">
           <h2 className="text-4xl md:text-5xl font-bold text-neutral-900 mb-4">
-            Explore <span className="underline decoration-indigo-300 decoration-4 underline-offset-4">Other Courses</span>
+            Explore <span className="text-lime-800">Other Courses</span>
           </h2>
           <p className="text-lg md:text-xl text-neutral-600 max-w-3xl mx-auto">
             Accelerate your career with industry-ready, mentor-led training. Hands-on, project-based and aligned with
             high-demand QA jobs.
           </p>
 
-          {/* trust strip */}
+          {/* Trust strip */}
           <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm">
             <span className="inline-flex items-center gap-1 rounded-full bg-emerald-50 px-3 py-1 font-medium text-emerald-700 ring-1 ring-emerald-200">
               <Star className="h-4 w-4" aria-hidden="true" /> 4.8/5 Learner Rating
@@ -314,7 +300,7 @@ export default function OtherCoursesSection() {
           ))}
         </div>
 
-        {/* Value props (simple, no gradients) */}
+        {/* Value props */}
         <div className="mt-14 grid gap-6 md:grid-cols-3">
           <div className="rounded-2xl border border-neutral-200 bg-white p-6 shadow-sm ring-1 ring-neutral-100">
             <h3 className="mb-2 flex items-center gap-2 text-lg font-semibold text-neutral-900">
@@ -344,43 +330,6 @@ export default function OtherCoursesSection() {
           </div>
         </div>
 
-        {/* FAQ (native details/summary for zero deps) */}
-        <div className="mt-16">
-          <h3 className="text-2xl font-bold text-neutral-900 mb-6">Frequently Asked Questions</h3>
-          <div className="divide-y divide-neutral-200 rounded-2xl border border-neutral-200 bg-white">
-            <details className="group p-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between text-neutral-900">
-                <span className="font-medium">Do I need coding experience for these QA courses?</span>
-                <Chevron />
-              </summary>
-              <p className="mt-3 text-sm text-neutral-700">
-                **No.** Beginner-friendly tracks start with fundamentals. Coding is introduced gradually for automation and
-                API testing.
-              </p>
-            </details>
-            <details className="group p-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between text-neutral-900">
-                <span className="font-medium">Are there live projects and interview preparation?</span>
-                <Chevron />
-              </summary>
-              <p className="mt-3 text-sm text-neutral-700">
-                Yes—each course includes **hands-on projects**, **mock interviews**, **resume reviews**, and **job-oriented
-                assignments**.
-              </p>
-            </details>
-            <details className="group p-6">
-              <summary className="flex cursor-pointer list-none items-center justify-between text-neutral-900">
-                <span className="font-medium">Can I switch between tracks later?</span>
-                <Chevron />
-              </summary>
-              <p className="mt-3 text-sm text-neutral-700">
-                You can upgrade to **Full-Stack QA** or add modules like **Performance** or **Mobile Testing** with
-                prorated pricing.
-              </p>
-            </details>
-          </div>
-        </div>
-
         {/* CTA */}
         <div className="mt-16 rounded-2xl border border-neutral-200 bg-white p-6 text-center shadow-sm ring-1 ring-neutral-100">
           <h3 className="text-2xl font-bold text-neutral-900">
@@ -399,7 +348,7 @@ export default function OtherCoursesSection() {
         </div>
       </div>
 
-      {/* JSON-LD for SEO Rich Results */}
+      {/* JSON-LD */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
@@ -410,17 +359,3 @@ export default function OtherCoursesSection() {
   );
 }
 
-/* ---------- Small inline icons (no dependency bloat) ---------- */
-function Chevron() {
-  return (
-    <svg
-      className="h-5 w-5 text-neutral-400 transition-transform group-open:rotate-180"
-      fill="none"
-      viewBox="0 0 24 24"
-      stroke="currentColor"
-      aria-hidden="true"
-    >
-      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7" />
-    </svg>
-  );
-}

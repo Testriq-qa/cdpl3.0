@@ -75,14 +75,14 @@ function BenefitCard({
 export default function WhyLearnSection() {
     return (
         <section
-            className="py-10 bg-gradient-to-b from-white to-indigo-50"
+            className="py-5 md:py-10 bg-gradient-to-b from-white to-indigo-50"
             id="why-learn"
             aria-labelledby="why-learn-title"
         >
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="text-center mb-14">
-                    <p className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-white px-3 py-2 text-[13px] font-medium text-indigo-700">
+                    <p className="inline-flex items-center gap-2 rounded-full border border-slate-300 shadow-md bg-white px-3 py-2 text-[13px] font-medium text-indigo-700">
                         <Shield className="h-4 w-4" />
                         Industry-aligned QA career path
                     </p>
@@ -102,7 +102,7 @@ export default function WhyLearnSection() {
 
                 {/* KPI Row */}
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mb-10">
-                    <div className="rounded-xl border border-gray-200 bg-white p-4 text-center">
+                    <div className="rounded-xl border-2 border-emerald-600 bg-white p-4 text-center">
                         <div className="flex items-center justify-center gap-2 text-gray-800">
                             <TrendingUp className="h-5 w-5 text-emerald-600" />
                             <span className="text-sm font-semibold">Hiring Demand</span>
@@ -110,7 +110,7 @@ export default function WhyLearnSection() {
                         <p className="mt-1 text-2xl font-bold text-gray-900">10k+/mo</p>
                         <p className="text-xs text-gray-500">QA/Test Engineer roles</p>
                     </div>
-                    <div className="rounded-xl border border-gray-200 bg-white p-4 text-center">
+                    <div className="rounded-xl border-2 border-indigo-600 bg-white p-4 text-center">
                         <div className="flex items-center justify-center gap-2 text-gray-800">
                             <Clock className="h-5 w-5 text-indigo-600" />
                             <span className="text-sm font-semibold">Time to Job</span>
@@ -118,7 +118,7 @@ export default function WhyLearnSection() {
                         <p className="mt-1 text-2xl font-bold text-gray-900">8–12 weeks</p>
                         <p className="text-xs text-gray-500">structured learning track</p>
                     </div>
-                    <div className="rounded-xl border border-gray-200 bg-white p-4 text-center">
+                    <div className="rounded-xl border-2 border-amber-600 bg-white p-4 text-center">
                         <div className="flex items-center justify-center gap-2 text-gray-800">
                             <Briefcase className="h-5 w-5 text-amber-600" />
                             <span className="text-sm font-semibold">Starter CTC</span>
@@ -126,7 +126,7 @@ export default function WhyLearnSection() {
                         <p className="mt-1 text-2xl font-bold text-gray-900">₹3.5–6 LPA</p>
                         <p className="text-xs text-gray-500">India, fresher QA roles</p>
                     </div>
-                    <div className="rounded-xl border border-gray-200 bg-white p-4 text-center">
+                    <div className="rounded-xl border-2 border-rose-600 bg-white p-4 text-center">
                         <div className="flex items-center justify-center gap-2 text-gray-800">
                             <Users className="h-5 w-5 text-rose-600" />
                             <span className="text-sm font-semibold">Beginner-Friendly</span>

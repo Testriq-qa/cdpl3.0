@@ -43,7 +43,7 @@ export default function StickyNav() {
     ref={navRef}
     className={`z-20 transition-all duration-500 ${
       isScrolled
-        ? 'fixed top-20 left-0 right-0 backdrop-blur-xl bg-white/70 shadow-lg border-b border-gray-200/50'
+        ? 'fixed md:top-14 lg:top-18 top-20 left-0 right-0 py-1 backdrop-blur-xl bg-white/70 shadow-lg border-b border-gray-200/50'
         : 'relative mt-8'
     }`}
   >

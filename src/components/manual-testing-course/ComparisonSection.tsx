@@ -148,12 +148,12 @@ export default function ComparisonSection({
   );
 
   return (
-    <section className={`py-20 bg-white ${className}`} id="comparison" aria-labelledby="comparison-heading">
+    <section className={`py-10 md:py-20 bg-white ${className}`} id="comparison" aria-labelledby="comparison-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Heading */}
         <div className="text-center mb-12">
-          <h2 id="comparison-heading" className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-            Compare Our Job-Ready <span className="text-indigo-700">Manual Testing Course</span> vs. Typical Programs
+          <h2 id="comparison-heading" className="text-4xl font-bold text-gray-900 mb-4">
+            Compare Our Job-Ready <span className="text-indigo-700">Manual Testing Course</span> vs. <span className="text-brand">Typical Programs</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
             Transparent comparison to help you choose the best <strong>QA training with placement support</strong>, live
@@ -184,7 +184,7 @@ export default function ComparisonSection({
             </div>
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-2 rounded-lg bg-gray-50 border border-gray-200 px-3 py-2 text-sm text-gray-700">
-                <span className="inline-block h-2.5 w-2.5 rounded-full bg-indigo-600 shadow-[0_0_8px_rgba(79,70,229,0.6)]" />
+                <span className="inline-block animate-pulse h-2.5 w-2.5 rounded-full bg-indigo-600 shadow-[0_0_8px_rgba(79,70,229,0.6)]" />
                 Light, distraction-free UI
               </span>
             </div>
@@ -232,10 +232,10 @@ export default function ComparisonSection({
           {/* Plan Cards */}
           <div className="grid md:grid-cols-2 gap-6 p-6">
             {/* Our Program */}
-            <div className="rounded-2xl border border-indigo-200 bg-indigo-50/60 p-6">
+            <div className="rounded-2xl border border-indigo-200 bg-indigo-50/60 p-4 md:p-6">
               <div className="flex items-center justify-between">
                 <h4 className="text-xl font-semibold text-gray-900">Our Job-Ready QA Program</h4>
-                <span className="text-xs font-semibold px-2.5 py-1 rounded-full bg-indigo-600 text-white shadow-sm">
+                <span className="text-xs font-semibold px-2.5 py-1 animate-pulse rounded-full bg-indigo-600 text-white shadow-sm">
                   Best Value
                 </span>
               </div>

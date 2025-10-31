@@ -28,26 +28,26 @@ function StatCard({
 }) {
     const accents: Record<string, string> = {
         indigo:
-            "text-indigo-700 bg-indigo-50 ring-indigo-100 group-hover:ring-indigo-200",
-        cyan: "text-cyan-700 bg-cyan-50 ring-cyan-100 group-hover:ring-cyan-200",
+            "text-indigo-700 bg-indigo-800 ring-indigo-100 group-hover:ring-indigo-200",
+        cyan: "text-cyan-700 bg-cyan-800 ring-cyan-100 group-hover:ring-cyan-200",
         emerald:
-            "text-emerald-700 bg-emerald-50 ring-emerald-100 group-hover:ring-emerald-200",
+            "text-emerald-700 bg-emerald-800 ring-emerald-100 group-hover:ring-emerald-200",
         violet:
-            "text-violet-700 bg-violet-50 ring-violet-100 group-hover:ring-violet-200",
-        rose: "text-rose-700 bg-rose-50 ring-rose-100 group-hover:ring-rose-200",
-        amber: "text-amber-800 bg-amber-50 ring-amber-100 group-hover:ring-amber-200",
+            "text-violet-700 bg-violet-800 ring-violet-100 group-hover:ring-violet-200",
+        rose: "text-rose-700 bg-rose-800 ring-rose-100 group-hover:ring-rose-200",
+        amber: "text-amber-800 bg-amber-800 ring-amber-100 group-hover:ring-amber-200",
     };
 
     return (
-        <div className="group relative overflow-hidden rounded-2xl border border-gray-200 bg-white p-5 transition-shadow hover:shadow-lg focus-within:shadow-lg">
-            <div className="flex items-start gap-4">
+        <div className="group relative overflow-hidden rounded-2xl border-2 border-gray-300 bg-slate-50 p-3 md:p-5 transition-shadow hover:shadow-lg focus-within:shadow-lg">
+            <div className="gap-4">
                 <div
-                    className={`shrink-0 rounded-xl ring-1 p-2.5 ${accents[accent]} transition-all`}
+                    className={`shrink-0 rounded-xl ring-1 w-fit p-2.5 ${accents[accent]} transition-all`}
                     aria-hidden
                 >
-                    <Icon className="h-6 w-6" />
+                    <Icon className="h-6 w-6 text-white" />
                 </div>
-                <div className="min-w-0">
+                <div className="min-w-0 mt-3">
                     <div className="text-2xl font-semibold tracking-tight text-gray-900">
                         {value}
                     </div>
@@ -100,7 +100,7 @@ export default function TrustSection() {
                 {/* Header copy with SEO keywords */}
                 <div className="mx-auto max-w-3xl text-center">
                     <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-                        Trusted Outcomes for Career-Ready Learning
+                        Trusted Outcomes for <span className="text-emerald-800">Career-Ready Learning</span>
                     </h2>
                     <p className="mt-3 text-gray-600">
                         Outcome-based programs with <strong>placement assistance</strong>,
@@ -112,7 +112,7 @@ export default function TrustSection() {
                 </div>
 
                 {/* Stats grid */}
-                <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3 lg:grid-cols-6">
+                <div className="mt-10 grid grid-cols-2 gap-4 sm:gap-5 md:grid-cols-3">
                     <StatCard
                         icon={Users2}
                         value="5,000+"

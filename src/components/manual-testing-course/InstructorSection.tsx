@@ -12,7 +12,8 @@ type Accent =
   | "emerald"
   | "amber"
   | "rose"
-  | "slate";
+  | "slate"
+  | "purple";
 
 interface StatProps {
   label: string;
@@ -42,6 +43,7 @@ const accentMap: Record<Accent, string> = {
   amber: "text-amber-700 bg-amber-50 ring-amber-100",
   rose: "text-rose-700 bg-rose-50 ring-rose-100",
   slate: "text-slate-700 bg-slate-50 ring-slate-100",
+  purple: "text-purple-700 bg-purple-50 ring-purple-100"
 };
 
 /* ==================== Small UI Primitives ==================== */
@@ -68,12 +70,13 @@ const InstructorFeature: React.FC<FeatureProps> = ({ text, icon }) => (
 const Badge: React.FC<BadgeProps> = ({ text, accent = "slate" }) => {
   const classes = useMemo(() => {
     const m: Record<Accent, string> = {
-      indigo: "bg-indigo-50 text-indigo-700 ring-indigo-100",
+      indigo: "bg-indigo-50 text-indigo-700 ring-indigo-100 py-2 text-[13px] shadow-md",
       cyan: "bg-cyan-50 text-cyan-700 ring-cyan-100",
       emerald: "bg-emerald-50 text-emerald-700 ring-emerald-100",
       amber: "bg-amber-50 text-amber-700 ring-amber-100",
       rose: "bg-rose-50 text-rose-700 ring-rose-100",
       slate: "bg-slate-50 text-slate-700 ring-slate-100",
+      purple: "bg-purple-50 text-purple-700 ring-purple-100"
     };
     return m[accent];
   }, [accent]);
@@ -122,7 +125,7 @@ export default function InstructorSection() {
   return (
     <section
       id="instructor"
-      className="py-20 bg-white"
+      className="py-16 md:py-5 bg-white"
       itemScope
       itemType="https://schema.org/CourseInstructor"
       aria-label="Learn from Industry Leaders"
@@ -135,8 +138,8 @@ export default function InstructorSection() {
         {/* Header */}
         <div className="text-center mb-14">
           <Badge text="Mentor-Led Learning" accent="indigo" />
-          <h2 className="mt-4 text-4xl md:text-5xl font-bold text-slate-900">
-            Learn from Industry Leaders
+          <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">
+            Learn from <span className="text-indigo-800">Industry Leaders</span>
           </h2>
           <p className="mt-3 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
             ISTQB-certified <strong>QA expert</strong> with <strong>15+ years</strong> in Fortune 500 teams.
@@ -175,7 +178,7 @@ export default function InstructorSection() {
                 <Badge text="Fortune 500 Experience" accent="amber" />
                 <Badge text="Placement Support" accent="cyan" />
                 <Badge text="Interview Prep" accent="rose" />
-                <Badge text="Live Doubt Solving" accent="indigo" />
+                <Badge text="Live Doubt Solving" accent="purple" />
               </div>
 
               {/* Features */}
@@ -213,7 +216,7 @@ export default function InstructorSection() {
             {/* Right: Stats + Video + Logos + Reviews */}
             <div className="space-y-6">
               {/* Stats */}
-              <div className="grid grid-cols-2 gap-4">
+              <div className="grid justify-center md:grid-cols-2 gap-4">
                 <Stat label="Students Trained" value="3,000+" sublabel="Across 12 countries" accent="indigo" />
                 <Stat label="Placement Rate" value="95%" sublabel="Interview prep + referrals" accent="emerald" />
                 <Stat label="Avg. Salary Hike" value="2.1×" sublabel="After course completion" accent="amber" />

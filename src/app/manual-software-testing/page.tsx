@@ -1,4 +1,3 @@
-// app/manual-software-testing/page.tsx
 "use client";
 
 import StickyNav from "@/components/manual-testing-course/StickyNav";
@@ -16,15 +15,14 @@ import ToolsSection from "@/components/manual-testing-course/ToolsSection";
 import TrustSection from "@/components/manual-testing-course/TrustSection";
 import WhyLearnSection from "@/components/manual-testing-course/WhyLearnSection";
 
-
 export default function ContactPage() {
   return (
     <main className="relative">
-      {/* HERO (no id) */}
+      {/* HERO (with additional padding-top to prevent overlap with sticky nav) */}
       <HeroManualTesting />
 
       {/* Sticky nav must appear right after hero */}
-      <div className="sticky top-20 z-20">
+      <div className="hidden md:block sticky top-0 z-20">
         <StickyNav />
       </div>
 

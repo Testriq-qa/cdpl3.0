@@ -56,7 +56,7 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             itemScope={true}
             itemType="https://schema.org/CreativeWork"
             aria-label={`${project.title} QA project`}
-            className={`group relative rounded-2xl border bg-white p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg ${colorClass}`}
+            className={`group relative rounded-2xl border-2 bg-white p-6 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg ${colorClass}`}
         >
             {/* Slim top bar accent */}
             <div className="absolute left-0 right-0 top-0 h-1 rounded-t-2xl bg-gradient-to-r from-black/0 via-black/5 to-black/0" />
@@ -262,19 +262,19 @@ export default function ProjectsSection(): JSX.Element {
     };
 
     return (
-        <section className="py-20 bg-white" id="projects" aria-labelledby="projects-heading">
+        <section className="py-16 md:py-5 bg-white" id="projects" aria-labelledby="projects-heading">
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 {/* Header */}
                 <div className="mb-14 text-center">
-                    <div className="mx-auto mb-4 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-1 text-xs font-semibold text-gray-700">
-                        <GraduationCap className="h-3.5 w-3.5" />
+                    <div className="mx-auto mb-6 inline-flex items-center gap-2 rounded-full border border-gray-200 bg-white px-3 py-2 text-[13px] shadow-md font-semibold text-gray-700">
+                        <GraduationCap className="h-4 w-4" />
                         Job-Ready QA Portfolio
                     </div>
                     <h2
                         id="projects-heading"
-                        className="text-4xl font-bold tracking-tight text-gray-900 md:text-5xl"
+                        className="text-4xl font-bold tracking-tight text-gray-900"
                     >
-                        Real-World Projects
+                        Real-World <span className="text-green-800">Projects</span>
                     </h2>
                     <p className="mx-auto mt-3 max-w-3xl text-lg text-gray-600">
                         Build a <strong>job-winning QA portfolio</strong> with hands-on, instructor-reviewed
@@ -284,20 +284,20 @@ export default function ProjectsSection(): JSX.Element {
 
                     {/* Trust mini row */}
                     <div className="mx-auto mt-6 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
-                        <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-center text-sm text-gray-700">
-                            <ShoppingBag className="mx-auto mb-1 h-4 w-4" />
+                        <div className="rounded-lg border-2 border-blue-300 bg-blue-50 px-3 py-2 text-center text-sm text-gray-700">
+                            <ShoppingBag className="mx-auto mb-1 h-5 w-5 text-blue-800" />
                             E-Commerce
                         </div>
-                        <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-center text-sm text-gray-700">
-                            <Building2 className="mx-auto mb-1 h-4 w-4" />
+                        <div className="rounded-lg border-2 border-green-300 bg-green-50 px-3 py-2 text-center text-sm text-gray-700">
+                            <Building2 className="mx-auto mb-1 h-5 w-5 text-green-800" />
                             Banking
                         </div>
-                        <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-center text-sm text-gray-700">
-                            <HeartPulse className="mx-auto mb-1 h-4 w-4" />
+                        <div className="rounded-lg border-2 border-red-300 bg-red-50 px-3 py-2 text-center text-sm text-gray-700">
+                            <HeartPulse className="mx-auto mb-1 h-5 w-5 text-red-800" />
                             Healthcare
                         </div>
-                        <div className="rounded-lg border border-gray-200 bg-gray-50 px-3 py-2 text-center text-sm text-gray-700">
-                            <Network className="mx-auto mb-1 h-4 w-4" />
+                        <div className="rounded-lg border-2 border-purple-300 bg-purple-50 px-3 py-2 text-center text-sm text-gray-700">
+                            <Network className="mx-auto mb-1 h-5 w-5 text-purple-800" />
                             Telecom
                         </div>
                     </div>

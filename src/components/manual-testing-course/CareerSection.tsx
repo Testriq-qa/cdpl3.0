@@ -13,6 +13,7 @@ import {
   ArrowRight,
   ShieldCheck,
   Globe2,
+  PhoneIcon,
 } from "lucide-react";
 import Image from "next/image";
 
@@ -47,7 +48,9 @@ const JobRole = ({ role, salary, keywords = [] }: JobRoleProps) => (
 );
 
 type CompanyBadgeProps = { name: string; logoSrc?: string };
+
 const CompanyBadge = ({ name, logoSrc }: CompanyBadgeProps) => (
+  
   <div
     className="flex items-center justify-center rounded-xl border border-gray-200 bg-white px-3 py-3 hover:shadow-sm hover:border-indigo-300 transition-all"
     aria-label={`Hiring partner ${name}`}
@@ -57,7 +60,7 @@ const CompanyBadge = ({ name, logoSrc }: CompanyBadgeProps) => (
       <Image
         src={logoSrc}
         alt={`${name} logo`}
-        width={80}
+        width={110}
         height={28}
         className="object-contain opacity-90"
       />
@@ -128,12 +131,12 @@ type Company = { name: string; logoSrc?: string };
 
 export default function CareerSection() {
   const companies: Company[] = [
-  { name: "TCS", logoSrc: "/logos/tcs.svg" },
-  { name: "Infosys", logoSrc: "/logos/infosys.svg" },
-  { name: "Wipro", logoSrc: "/logos/wipro.svg" },
-  { name: "Cognizant", logoSrc: "/logos/cognizant.svg" },
-  { name: "Accenture", logoSrc: "/logos/accenture.svg" },
-  { name: "Capgemini", logoSrc: "/logos/capgemini.svg" },
+  { name: "Axiom", logoSrc: "/company_images/axiom.webp" },
+  { name: "Credility", logoSrc: "/company_images/credility.webp" },
+  { name: "Marqetrix", logoSrc: "/company_images/marqetrix.webp" },
+  { name: "Raw Engineering", logoSrc: "/company_images/raw_engineering.webp" },
+  { name: "Vistaar", logoSrc: "/company_images/vistaar.webp" },
+  { name: "Testriq", logoSrc: "/company_images/Testriq-Logo-Black.webp" },
 ];
 
   const cities = [
@@ -153,15 +156,15 @@ export default function CareerSection() {
   ];
 
   const snapshots = [
-    { label: "Avg. Interview Calls", value: "8–12", icon: <PhoneIcon /> },
-    { label: "Offer Conversions", value: "3–5/wk", icon: <Sparkles className="h-4 w-4" /> },
-    { label: "Alumni Network", value: "5,000+", icon: <Users className="h-4 w-4" /> },
-    { label: "Hiring Partners", value: "50+", icon: <Building2 className="h-4 w-4" /> },
+    { label: "Avg. Interview Calls", value: "8–12", icon: <PhoneIcon className="h-5 w-5" />, bgIcon: "bg-sky-800" },
+    { label: "Offer Conversions", value: "3–5/wk", icon: <Sparkles className="h-5 w-5" />, bgIcon: "bg-green-800" },
+    { label: "Alumni Network", value: "5,000+", icon: <Users className="h-5 w-5" />, bgIcon: "bg-red-800" },
+    { label: "Hiring Partners", value: "50+", icon: <Building2 className="h-5 w-5" />, bgIcon: "bg-purple-800" },
   ];
 
   return (
     <section
-      className="relative py-20 bg-white"
+      className="relative py-5 md:py-15 bg-white"
       id="career"
       aria-label="Career outcomes and salary insights for Software Testing"
     >
@@ -175,14 +178,14 @@ export default function CareerSection() {
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <div className="text-center mb-12">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-1 text-indigo-700">
+          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-200 bg-indigo-50 px-3 py-2 text-indigo-700">
             <ShieldCheck className="h-4 w-4" />
-            <span className="text-xs font-medium">
+            <span className="text-[13px] font-medium">
               100% Placement Support • Job-Ready in 12 Weeks
             </span>
           </div>
-          <h2 className="mt-4 text-4xl md:text-5xl font-bold text-gray-900">
-            Career & Salary Outcomes
+          <h2 className="mt-6 text-4xl md:text-5xl font-bold text-gray-900">
+            <span className="text-sky-700">Career</span> & <span className="text-brand">Salary</span> Outcomes
           </h2>
           <p className="mt-3 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
             Land high-growth <strong>QA Engineer</strong> and{" "}
@@ -201,7 +204,7 @@ export default function CareerSection() {
               role="group"
               aria-label={`${s.label} ${s.value}`}
             >
-              <div className="mx-auto mb-2 flex h-8 w-8 items-center justify-center rounded-lg border border-gray-200 bg-gray-50">
+              <div className={`mx-auto mb-2 flex h-10 w-10 items-center text-white ${s.bgIcon} justify-center rounded-lg border border-gray-200 bg-gray-50`}>
                 {s.icon}
               </div>
               <div className="text-2xl font-bold text-gray-900">{s.value}</div>
@@ -271,9 +274,9 @@ export default function CareerSection() {
                 {cities.map(({ city, range }) => (
                   <li
                     key={city}
-                    className="flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-3 py-2"
+                    className="md:flex items-center justify-between rounded-lg border border-gray-200 bg-gray-50 px-3 py-2"
                   >
-                    <span className="text-gray-800">{city}</span>
+                    <span className="text-gray-800">{city}</span><br className="md:hidden" />
                     <span className="font-medium text-gray-900">{range}</span>
                   </li>
                 ))}
@@ -371,22 +374,3 @@ export default function CareerSection() {
   );
 }
 
-/* Small inline icon (no extra import clutter) */
-function PhoneIcon() {
-  return (
-    <svg
-      aria-hidden="true"
-      viewBox="0 0 24 24"
-      className="h-4 w-4"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        d="M3 5a2 2 0 0 1 2-2h2.2a2 2 0 0 1 1.94 1.515l.7 2.622a2 2 0 0 1-.485 1.94L8.2 10.8a12.04 12.04 0 0 0 5 5l1.72-1.16a2 2 0 0 1 1.94-.485l2.62.7A2 2 0 0 1 22 16.6V19a2 2 0 0 1-2 2h-.5C9.61 21 3 14.39 3 6.5V6a2 2 0 0 1 0-.5Z"
-      />
-    </svg>
-  );
-}

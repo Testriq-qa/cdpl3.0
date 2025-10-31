@@ -18,6 +18,7 @@ import type { ReactNode, ReactElement } from "react";
 import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
+import { PopupForm } from "../city-courses/HeroSection";
 
 const breadcrumbs = [
     { label: "Home", href: "/" },
@@ -28,7 +29,7 @@ const breadcrumbs = [
 
 export default function HeroManualTesting() {
     return (
-        <section className="relative overflow-hidden bg-white" aria-labelledby="manual-testing-hero">
+        <section className="relative mx-auto max-w-full xl:max-w-7xl px-4 py-10 sm:px-6 lg:px-8 md:py-12 bg-white" aria-labelledby="manual-testing-hero">
             {/* Background (no color gradients) */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,#e5e7eb_1px,transparent_1px)] [background-size:26px_26px]" />
@@ -36,7 +37,7 @@ export default function HeroManualTesting() {
                 <div className="absolute bottom-12 right-6 h-28 w-28 rounded-2xl bg-emerald-50 border border-emerald-100 shadow-sm" />
             </div>
 
-            <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 md:py-12">
+            <div className="relative overflow-hidden">
 
                 {/* Breadcrumbs for SEO & UX */}
                 <nav aria-label="Breadcrumb" className="mb-6">
@@ -55,23 +56,81 @@ export default function HeroManualTesting() {
                     </ol>
                 </nav>
 
-                <div className="grid items-center gap-10 lg:gap-16 lg:grid-cols-[1.05fr_.95fr]">
+                <div className="grid items-center gap-10 lg:gap-16 lg:grid-cols-[1.05fr_.95fr] grid-cols-1">
                     {/* LEFT */}
-                    <div className="-mt-40">
-                        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
+                    <div className="lg:-mt-32 xl:-mt-40">
+                        <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-0.5 md:py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
                             <Sparkles className="h-4 w-4 text-amber-500" />
                             <span>ISTQB Foundation Aligned • Job-Oriented</span>
                         </div>
 
-                        <h1 id="manual-testing-hero" className="text-3xl sm:text-4xl lg:text-5xl font-extrabold leading-tight tracking-tight text-slate-900">
+                        <h1 id="manual-testing-hero" className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900">
                             Best <span className="text-indigo-700">Manual Testing Course</span>{" "}
-                            with <span className="whitespace-nowrap text-emerald-700">100% Placement Support</span>
+                            with <span className="whitespace-nowrap text-emerald-700">100% Placement <br className="md:hidden" /> Support</span>
                         </h1>
 
                         <p className="mt-4 max-w-2xl text-base sm:text-lg md:text-xl text-slate-600">
                             Upgrade your QA career with hands-on <strong>Software Testing Training</strong>, <strong>ISTQB Prep</strong>, and real-world{" "}
                             <strong>Manual Testing</strong> projects. Live classes, mentor support, interview preparation, and a curated job pipeline.
                         </p>
+
+                        {/* Lead Form For Mobile Screens and Tab Screens */}
+
+                        <div className="lg:hidden border mt-10 border-slate-300 p-5 shadow-md shadow-purple-300 rounded-2xl">
+                            <h2 className="text-slate-800 text-2xl font-bold">Start Your <span className="text-brand">QA</span> Journey</h2>
+
+                            {/* Lead Form */}
+                            <form id="apply" className="mt-6 space-y-3" aria-label="Apply for Manual Testing course">
+                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                    <Field label="Full Name">
+                                        <input
+                                            type="text"
+                                            name="fullName"
+                                            required
+                                            placeholder="Enter your name"
+                                            className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-indigo-600"
+                                        />
+                                    </Field>
+                                    <Field label="Mobile Number">
+                                        <input
+                                            type="tel"
+                                            name="phone"
+                                            required
+                                            placeholder="+91-XXXXXXXXXX"
+                                            className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-emerald-600"
+                                        />
+                                    </Field>
+                                </div>
+                                <Field label="Email">
+                                    <input
+                                        type="email"
+                                        name="email"
+                                        required
+                                        placeholder="you@example.com"
+                                        className="w-full rounded-xl border border-slate-300 bg-white px-3 py-2.5 text-slate-900 outline-none ring-0 transition placeholder:text-slate-400 focus:ring-2 focus:ring-sky-600"
+                                    />
+                                </Field>
+
+                                <button
+                                    type="submit"
+                                    className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-black focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+                                >
+                                    Get Call Back
+                                    <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
+                                </button>
+                                <p className="mt-2 text-center text-xs text-slate-500">
+                                    By submitting, you agree to our{" "}
+                                    <Link href="/terms" className="underline underline-offset-2 text-slate-700">
+                                        Terms
+                                    </Link>{" "}
+                                    and{" "}
+                                    <Link href="/privacy" className="underline underline-offset-2 text-slate-700">
+                                        Privacy Policy
+                                    </Link>.
+                                </p>
+                            </form>
+                        </div>
+
 
                         {/* Trust Bar */}
                         <div className="mt-6 flex flex-wrap items-center gap-x-5 gap-y-3 text-sm">
@@ -139,11 +198,11 @@ export default function HeroManualTesting() {
                         {/* Company logos */}
                         <div className="mt-10">
                             <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">Alumni work at</p>
-                            <div className="mt-4 flex flex-wrap items-center gap-x-6 gap-y-3 opacity-90">
-                                <Image src="/logos/acme.svg" alt="Acme Technologies" width={96} height={24} />
-                                <Image src="/logos/pixelwave.svg" alt="Pixelwave" width={96} height={24} />
-                                <Image src="/logos/groundwork.svg" alt="Groundwork Systems" width={110} height={24} />
-                                <Image src="/logos/nitrosoft.svg" alt="Nitrosoft" width={96} height={24} />
+                            <div className="mt-4 flex flex-wrap items-center gap-x-8 gap-y-3 opacity-90">
+                                <Image src="/company_images/Testriq-Logo-Black.webp" alt="Testriq" width={120} height={24} />
+                                <Image src="/company_images/axiom.webp" alt="Pixelwave" width={120} height={24} />
+                                <Image src="/company_images/credility.webp" alt="Groundwork Systems" width={120} height={24} />
+                                <Image src="/company_images/marqetrix.webp" alt="Nitrosoft" width={120} height={24} />
                             </div>
                         </div>
                     </div>
@@ -211,9 +270,10 @@ export default function HeroManualTesting() {
                                 </div>
                             </div>
 
-                            <div className="border border-slate-300 p-5 shadow-md shadow-purple-300 rounded-2xl">
+                            <div className="hidden lg:block border border-slate-300 p-5 shadow-md shadow-purple-300 rounded-2xl">
                                 <h2 className="text-slate-800 text-2xl font-bold">Start Your <span className="text-brand">QA</span> Journey</h2>
-                                {/* Lead Form — uses server action, no onSubmit */}
+
+                                {/* Lead Form */}
                                 <form id="apply" className="mt-6 space-y-3" aria-label="Apply for Manual Testing course">
                                     <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
                                         <Field label="Full Name">
@@ -310,6 +370,8 @@ export default function HeroManualTesting() {
         </section>
     );
 }
+
+
 
 /* ---------- Reusable components in the same file ---------- */
 function Field({ label, children }: { label: string; children: ReactNode }) {
