@@ -3,8 +3,8 @@
 import React, { useState } from "react";
 import { motion, type Variants } from "framer-motion";
 import { ArrowRight, Phone, Mail, MapPin, Check, Star, Zap } from "lucide-react";
-import { PopupForm } from "./HeroSection";
 import Link from "next/link";
+import { EnrollFormData, EnrollPopup } from "../EnrollForms";
 
 interface CTASectionProps {
   data: {
@@ -42,20 +42,20 @@ const itemVariants: Variants = {
 const CTASection: React.FC<CTASectionProps> = ({ data }) => {
   const { ctaContent } = data;
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  const handleEnrollSubmit = (enroll: EnrollFormData) => {
+    alert(
+      `Enroll Now Submitted:\nName: ${enroll.name}\nEmail: ${enroll.email}\nPhone: ${enroll.phone}`
+    );
+    setIsPopupOpen(false);
+  };
+
   const [form, setForm] = useState({
     name: "",
     email: "",
     phone: "",
   });
-
-  const [isOpen, setIsOpen] = useState(false);
-  const [formData, setFormData] = useState({ name: "", email: "", phone: "" });
-
-  const handleSubmit = (data: { name: string; email: string; phone: string }) => {
-    console.log("Submitted:", data);
-    setIsOpen(false);
-    setFormData({ name: "", email: "", phone: "" });
-  };
 
   const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -143,18 +143,17 @@ const CTASection: React.FC<CTASectionProps> = ({ data }) => {
               className="mt-8 flex flex-col gap-3 sm:flex-row"
             >
               <button
-                onClick={() => setIsOpen(true)}
+                onClick={() => setIsPopupOpen(true)}
                 className="group inline-flex items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-8 py-3.5 font-semibold text-white shadow-lg transition hover:shadow-xl"
               >
                 Enroll Now
                 <ArrowRight className="ml-2 h-5 w-5 transition group-hover:translate-x-0.5" />
               </button>
-              <PopupForm
-                isOpen={isOpen}
-                onClose={() => setIsOpen(false)}
-                onSubmit={handleSubmit}
-                formData={formData}
-                setFormData={setFormData}
+              {/* Popup now uses reusable EnrollPopup */}
+              <EnrollPopup
+                isOpen={isPopupOpen}
+                onClose={() => setIsPopupOpen(false)}
+                onSubmit={handleEnrollSubmit}
               />
               <a
                 href="#demo"

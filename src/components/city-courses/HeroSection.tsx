@@ -1,23 +1,14 @@
 "use client";
 
+import { LeadForm, EnrollPopup, type LeadFormData, type EnrollFormData } from "@/components/EnrollForms";
 import React, { useMemo, useState } from "react";
 import { motion, type Variants } from "framer-motion";
-import { ArrowRight, Star, MapPin, Home, ChevronRight, X } from "lucide-react";
+import { ArrowRight, Star, MapPin, Home, ChevronRight } from "lucide-react";
 import type { CourseData } from "@/types/courseData";
 import Link from "next/link";
 
 interface HeroSectionProps {
   data: CourseData;
-}
-
-interface PopupFormProps {
-  isOpen: boolean;
-  onClose: () => void;
-  onSubmit: (formData: { name: string; email: string; phone: string }) => void;
-  formData: { name: string; email: string; phone: string };
-  setFormData: React.Dispatch<
-    React.SetStateAction<{ name: string; email: string; phone: string }>
-  >;
 }
 
 const containerVariants: Variants = {
@@ -37,128 +28,10 @@ const itemVariants: Variants = {
   },
 };
 
-const popupVariants: Variants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: {
-    opacity: 1,
-    scale: 1,
-    transition: { duration: 0.3, ease: "easeOut" },
-  },
-  exit: { opacity: 0, scale: 0.8, transition: { duration: 0.2 } },
-};
-
-// Extracted and exported PopupForm component
-export const PopupForm: React.FC<PopupFormProps> = ({
-  isOpen,
-  onClose,
-  onSubmit,
-  formData,
-  setFormData,
-}) => {
-  if (!isOpen) return null;
-
-  return (
-    <motion.div
-      variants={popupVariants}
-      initial="hidden"
-      animate="visible"
-      exit="exit"
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50"
-      onClick={onClose}
-    >
-      <div
-        className="relative w-full max-w-md rounded-2xl bg-white p-6 shadow-xl"
-        onClick={(e) => e.stopPropagation()}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-slate-500 hover:text-slate-700"
-          aria-label="Close popup"
-        >
-          <X className="h-5 w-5" />
-        </button>
-        <h2 className="text-xl font-bold text-slate-900">Enroll Now</h2>
-        <p className="mt-1 text-sm text-slate-600">
-          Fill in your details to start your journey with us.
-        </p>
-
-        <form onSubmit={(e) => {
-          e.preventDefault();
-          onSubmit(formData);
-        }} className="mt-6 space-y-4">
-          <div>
-            <label htmlFor="popup-name" className="mb-1 block text-sm font-medium text-slate-700">
-              Full Name *
-            </label>
-            <input
-              id="popup-name"
-              name="popup-name"
-              type="text"
-              required
-              value={formData.name}
-              onChange={(e) => setFormData((f) => ({ ...f, name: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="Enter your name"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="popup-email" className="mb-1 block text-sm font-medium text-slate-700">
-              Email *
-            </label>
-            <input
-              id="popup-email"
-              name="popup-email"
-              type="email"
-              required
-              value={formData.email}
-              onChange={(e) => setFormData((f) => ({ ...f, email: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="you@example.com"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="popup-phone" className="mb-1 block text-sm font-medium text-slate-700">
-              Phone *
-            </label>
-            <input
-              id="popup-phone"
-              name="popup-phone"
-              type="tel"
-              required
-              pattern="^[0-9+\\-\\s()]{7,15}$"
-              value={formData.phone}
-              onChange={(e) => setFormData((f) => ({ ...f, phone: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="+91 98765 43210"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
-          >
-            Submit Enrollment
-          </button>
-
-          <p className="text-xs text-slate-500">
-            By submitting, you agree to be contacted about courses and placements.
-          </p>
-        </form>
-      </div>
-    </motion.div>
-  );
-};
-
 const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
   const { heroContent, location } = data;
+
   const [isPopupOpen, setIsPopupOpen] = useState(false);
-  const [popupForm, setPopupForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
 
   const crumbs = useMemo(() => {
     if (data.breadcrumbs?.length) return data.breadcrumbs;
@@ -170,125 +43,19 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
     ];
   }, [data.breadcrumbs, data.courseName, data.slug, location]);
 
-  const [form, setForm] = useState({
-    name: "",
-    email: "",
-    phone: "",
-    track: data.specializations?.[0] ?? "",
-  });
-
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // Handlers now receive the data object from the reusable components
+  const handleLeadSubmit = (lead: LeadFormData) => {
     alert(
-      `Submitted:\nName: ${form.name}\nEmail: ${form.email}\nPhone: ${form.phone}\nTrack: ${form.track}`
+      `Submitted:\nName: ${lead.name}\nEmail: ${lead.email}\nPhone: ${lead.phone}\nTrack: ${lead.track ?? "(none)"}`
     );
   };
 
-  const onPopupSubmit = (formData: { name: string; email: string; phone: string }) => {
+  const handleEnrollSubmit = (enroll: EnrollFormData) => {
     alert(
-      `Enroll Now Submitted:\nName: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}`
+      `Enroll Now Submitted:\nName: ${enroll.name}\nEmail: ${enroll.email}\nPhone: ${enroll.phone}`
     );
     setIsPopupOpen(false);
-    setPopupForm({ name: "", email: "", phone: "" });
   };
-
-  // Form component extracted for reuse
-  const LeadForm = () => (
-    <motion.div variants={itemVariants} className="mt-6">
-      <div className="rounded-2xl border border-slate-200 bg-white p-6 shadow-xl max-w-md w-full">
-        <h2 id="enroll" className="text-xl font-bold text-slate-900">
-          Get a Free Counseling Session
-        </h2>
-        <p className="mt-1 text-sm text-slate-600">
-          Tell us a bit about you, and we’ll share the best track & syllabus.
-        </p>
-
-        <form onSubmit={onSubmit} className="mt-6 space-y-4">
-          <div>
-            <label htmlFor="name" className="mb-1 block text-sm font-medium text-slate-700">
-              Full Name *
-            </label>
-            <input
-              id="name"
-              name="name"
-              type="text"
-              required
-              value={form.name}
-              onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="Enter your name"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="email" className="mb-1 block text-sm font-medium text-slate-700">
-              Email *
-            </label>
-            <input
-              id="email"
-              name="email"
-              type="email"
-              required
-              value={form.email}
-              onChange={(e) => setForm((f) => ({ ...f, email: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="you@example.com"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="phone" className="mb-1 block text-sm font-medium text-slate-700">
-              Phone *
-            </label>
-            <input
-              id="phone"
-              name="phone"
-              type="tel"
-              required
-              pattern="^[0-9+\\-\\s()]{7,15}$"
-              value={form.phone}
-              onChange={(e) => setForm((f) => ({ ...f, phone: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 placeholder-slate-400 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-              placeholder="+91 98765 43210"
-            />
-          </div>
-
-          <div>
-            <label htmlFor="track" className="mb-1 block text-sm font-medium text-slate-700">
-              Select Track *
-            </label>
-            <select
-              id="track"
-              name="track"
-              required
-              value={form.track}
-              onChange={(e) => setForm((f) => ({ ...f, track: e.target.value }))}
-              className="block w-full rounded-lg border border-slate-300 bg-white px-4 py-3 text-slate-900 shadow-sm outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30"
-            >
-              {(data.specializations?.length ? data.specializations : ["General"]).map(
-                (opt) => (
-                  <option key={opt} value={opt}>
-                    {opt}
-                  </option>
-                )
-              )}
-            </select>
-          </div>
-
-          <button
-            type="submit"
-            className="mt-2 inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-r from-indigo-600 to-violet-600 px-6 py-3 font-semibold text-white shadow-md transition hover:shadow-lg"
-          >
-            Request Syllabus PDF
-          </button>
-
-          <p className="text-xs text-slate-500">
-            By submitting, you agree to be contacted about courses and placements.
-          </p>
-        </form>
-      </div>
-    </motion.div>
-  );
 
   return (
     <section className="relative overflow-hidden bg-gradient-to-br from-white via-slate-50 to-indigo-50">
@@ -342,9 +109,13 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
               {heroContent.title}
             </motion.h1>
 
-            {/* Form on mobile only */}
+            {/* Mobile form uses reusable LeadForm */}
             <div className="md:hidden">
-              <LeadForm />
+              <LeadForm
+                variants={itemVariants}
+                tracks={data.specializations && data.specializations.length ? data.specializations : undefined}
+                onSubmit={handleLeadSubmit}
+              />
             </div>
 
             <motion.p
@@ -396,6 +167,7 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
               </div>
             </motion.div>
 
+            {/* CTA buttons */}
             <motion.div variants={itemVariants} className="mt-8 flex flex-col gap-3 sm:flex-row">
               <button
                 onClick={() => setIsPopupOpen(true)}
@@ -413,9 +185,14 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
             </motion.div>
           </div>
 
-          {/* RIGHT: Form (desktop only) */}
-          <div className="hidden md:block md:col-span-5 xl:col-span-4 md:-mt-2 lg:-mt-10"> {/* OPTIONAL */}
-            <LeadForm />
+          {/* RIGHT column form (desktop only) now reusable */}
+          <div className="hidden md:block md:col-span-5 xl:col-span-4 md:-mt-2 lg:-mt-10">
+            <LeadForm
+              variants={itemVariants}
+              tracks={data.specializations && data.specializations.length ? data.specializations : undefined}
+              onSubmit={handleLeadSubmit}
+              className="mt-6"
+            />
           </div>
         </motion.div>
 
@@ -438,13 +215,11 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
         ) : null}
       </div>
 
-      {/* Popup */}
-      <PopupForm
+      {/* Popup now uses reusable EnrollPopup */}
+      <EnrollPopup
         isOpen={isPopupOpen}
         onClose={() => setIsPopupOpen(false)}
-        onSubmit={onPopupSubmit}
-        formData={popupForm}
-        setFormData={setPopupForm}
+        onSubmit={handleEnrollSubmit}
       />
     </section>
   );

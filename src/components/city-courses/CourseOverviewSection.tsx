@@ -15,8 +15,9 @@ import {
   Users,
   Clock,
   Download,
-  X,
 } from "lucide-react";
+import { DownloadFormButton } from "@/components/DownloadForm";
+
 
 interface CourseOverviewSectionProps {
   data: CourseData;
@@ -79,129 +80,6 @@ const pickVariant = (i: number): Variant => {
 
 const pad = (n: number) => n.toString().padStart(2, "0");
 
-const BrochureFormModal: React.FC<{
-  isOpen: boolean;
-  onClose: () => void;
-  courseTitle: string;
-}> = ({ isOpen, onClose, courseTitle }) => {
-  const [formData, setFormData] = React.useState({
-    name: "",
-    email: "",
-    phone: "",
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log("Form submitted:", { ...formData, courseTitle });
-    onClose();
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
-
-  if (!isOpen) return null;
-
-  return (
-    <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      transition={{ duration: 0.3 }}
-    >
-      <motion.div
-        className="relative bg-white rounded-2xl p-6 sm:p-8 w-full max-w-md mx-4 shadow-2xl"
-        initial={{ scale: 0.8, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        exit={{ scale: 0.8, opacity: 0 }}
-        transition={{ duration: 0.3 }}
-      >
-        <button
-          onClick={onClose}
-          className="absolute top-4 right-4 text-slate-500 hover:text-slate-700"
-          aria-label="Close modal"
-        >
-          <X className="w-6 h-6" />
-        </button>
-
-        <h2 className="text-2xl font-bold text-slate-900 mb-2">
-          Download Brochure
-        </h2>
-        <p className="text-sm text-slate-600 mb-6">
-          Get the {courseTitle} brochure by filling out the form below.
-        </p>
-
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label
-              htmlFor="name"
-              className="block text-sm font-medium text-slate-700 mb-1"
-            >
-              Full Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
-              placeholder="John Doe"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-slate-700 mb-1"
-            >
-              Email Address
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
-              placeholder="john@example.com"
-            />
-          </div>
-
-          <div>
-            <label
-              htmlFor="phone"
-              className="block text-sm font-medium text-slate-700 mb-1"
-            >
-              Phone Number
-            </label>
-            <input
-              type="tel"
-              id="phone"
-              name="phone"
-              value={formData.phone}
-              onChange={handleChange}
-              required
-              className="w-full px-4 py-2 rounded-lg border border-slate-300 focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 outline-none transition-all"
-              placeholder="+1 (123) 456-7890"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full bg-gradient-to-r from-indigo-600 to-fuchsia-600 text-white font-semibold py-3 rounded-lg hover:shadow-lg transition-all duration-300"
-          >
-            Download Now
-          </button>
-        </form>
-      </motion.div>
-    </motion.div>
-  );
-};
-
 const ModuleCard: React.FC<{
   nowMs: number;
   category: {
@@ -220,7 +98,6 @@ const ModuleCard: React.FC<{
   variant: Variant;
   itemVariants: Variants;
 }> = ({ nowMs, category, variant, itemVariants }) => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const fallbackDeadlineRef = React.useRef<Date | null>(null);
   if (!category.offerEndsAt && !fallbackDeadlineRef.current) {
@@ -370,24 +247,27 @@ const ModuleCard: React.FC<{
               <ArrowRight className="w-4 h-4" />
             </button>
 
-            <button
-              onClick={() => setIsModalOpen(true)}
-              className="w-full flex items-center justify-center space-x-2 text-slate-700 font-semibold py-3 rounded-xl border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300"
-            >
-              <Download className="w-5 h-5" />
-              <span>Download Brochure</span>
-            </button>
+            <DownloadFormButton
+              courseTitle={category.title}
+              buttonText={
+                <span className="flex items-center justify-center gap-2">
+                  <Download className="w-5 h-5" />
+                  <span>Download Brochure</span>
+                </span> as unknown as string
+              }
+              // keep existing button styling for a perfect drop-in look
+              buttonClassName="w-full flex items-center justify-center space-x-2 text-slate-700 font-semibold py-3 rounded-xl border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50 transition-all duration-300"
+              onSubmit={(values) => {
+                // your custom submit logic (API call, analytics, start file download, etc.)
+                console.log("Download form submitted:", { ...values, course: category.title });
+              }}
+            />
           </div>
         </div>
 
+
         <div className="absolute inset-0 bg-gradient-to-br from-black/0 to-black/0 group-hover:from-black/0 group-hover:to-black/0 transition-all duration-500 pointer-events-none" />
       </motion.article>
-
-      <BrochureFormModal
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-        courseTitle={category.title}
-      />
     </>
   );
 };

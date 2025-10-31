@@ -296,7 +296,7 @@ const ToolsSection: FC = () => {
     }, []);
 
     return (
-        <section id="tools" aria-labelledby="tools-heading" className="py-2 md:py-20 bg-white">
+        <section id="tools" aria-labelledby="tools-heading" className="py-2 md:py-5 bg-white">
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 {/* Headline */}
                 <div className="text-center mb-12 md:mb-16">
