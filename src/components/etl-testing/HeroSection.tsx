@@ -1,54 +1,93 @@
 'use client';
 
+import { motion } from 'framer-motion';
 import {
-    Database,
+    Shuffle,
     Users,
     Award,
     Briefcase,
     ArrowRight,
-    Star,
-    Globe2,
+    CheckCircle2,
     Home,
     ChevronRight,
-    CheckCircle2,
 } from 'lucide-react';
-import { motion } from 'framer-motion';
-import IconCard from '@/components/ui/IconCard';
+import IconCard from '../ui/IconCard';
 import LeadForm from '../CourseLeadForm';
 
-/** -----------------------------
- * Feature tiles
+
+/* -----------------------------
+ * Feature cards
  * ----------------------------- */
 const features = [
-    { icon: <Database />, title: '80% Hands-On', description: 'Build real databases from scratch', bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-200' },
-    { icon: <Users />, title: 'Expert Faculty', description: '15+ yrs MySQL & Oracle certified', bg: 'bg-indigo-50', iconColor: 'text-indigo-700', border: 'border-indigo-200' },
-    { icon: <Award />, title: 'Global Certification', description: 'MySQL + SQL Certification', bg: 'bg-amber-50', iconColor: 'text-amber-700', border: 'border-amber-200' },
-    { icon: <Briefcase />, title: '100% Placement', description: 'Resume + Interview Prep', bg: 'bg-rose-50', iconColor: 'text-rose-700', border: 'border-rose-200' },
+    {
+        icon: <Shuffle />,
+        title: '80% Hands-On',
+        description: 'Test real ETL/ELT data pipelines end-to-end',
+        bg: 'bg-emerald-50',
+        iconColor: 'text-emerald-700',
+        border: 'border-emerald-200',
+    },
+    {
+        icon: <Users />,
+        title: 'Expert Mentors',
+        description: '15+ yrs in Data Warehousing & BI',
+        bg: 'bg-violet-50',
+        iconColor: 'text-violet-700',
+        border: 'border-violet-200',
+    },
+    {
+        icon: <Award />,
+        title: 'Global Certification',
+        description: 'ETL + SQL certificate with QR verification',
+        bg: 'bg-amber-50',
+        iconColor: 'text-amber-700',
+        border: 'border-amber-200',
+    },
+    {
+        icon: <Briefcase />,
+        title: '100% Placement',
+        description: 'Resume, mock interviews & referrals',
+        bg: 'bg-sky-50',
+        iconColor: 'text-sky-700',
+        border: 'border-sky-200',
+    },
 ];
 
+/* -----------------------------
+ * Hero Section
+ * ----------------------------- */
 export default function HeroSection() {
-    // JSON-LD
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'Course',
-        name: 'Database Management using MySQL',
+        name: 'ETL Testing using SQL & Tools',
         description:
-            'Hands-on MySQL course covering SQL queries, database design, normalization, indexing, transactions, and performance tuning. Includes projects, certification, and placement support.',
-        provider: { '@type': 'Organization', name: 'Think and Do Institute' },
+            'Hands-on ETL testing course covering data validation, SQL for data quality, pipeline automation, and enterprise reporting with job assistance.',
+        provider: {
+            '@type': 'Organization',
+            name: 'Think and Do Institute',
+        },
+        offers: {
+            '@type': 'Offer',
+            availability: 'https://schema.org/InStock',
+            price: '0',
+            priceCurrency: 'INR',
+            category: 'Education',
+        },
     };
 
     const breadcrumbs = [
         { label: 'Home', href: '/' },
         { label: 'Software Testing' },
-        { label: 'MySQL Course', href: '/dbms-course' },
+        { label: 'ETL Testing', href: '/etl-testing' },
     ];
 
     return (
-        <section id="hero" aria-labelledby="mysql-hero" className="relative overflow-hidden">
-            {/* Light, subtle frame */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-                <div className="absolute inset-0 [background-image:radial-gradient(circle_at_20%_10%,rgba(15,23,42,0.05),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(2,132,199,0.06),transparent_35%),linear-gradient(180deg,#fafafa,white)]" />
-                <div className="absolute inset-0 [mask-image:radial-gradient(1200px_600px_at_50%_-10%,black,transparent)]" />
+        <section id="hero" aria-labelledby="etl-hero" className="relative overflow-hidden">
+            {/* Light, subtle background (sleek, non-distracting) */}
+            <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+                <div className="absolute inset-0 [background-image:radial-gradient(circle_at_20%_10%,rgba(15,23,42,0.05),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(59,130,246,0.06),transparent_35%),linear-gradient(180deg,#fafafa,white)]" />
+                <div className="absolute inset-0 [mask-image:radial-gradient(1100px_520px_at_50%_-10%,black,transparent)]" />
             </div>
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-14">
@@ -68,54 +107,45 @@ export default function HeroSection() {
                         ))}
                     </ol>
                 </nav>
-
                 <div className="grid items-start gap-10 md:grid-cols-12">
-                    {/* Left column: copy */}
+                    {/* Left copy */}
                     <motion.div
                         initial={{ opacity: 0, y: 18 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, ease: 'easeOut' }}
                         className="md:col-span-7 lg:col-span-8"
                     >
-                        {/* badges */}
-                        <div className="hidden mb-5 lg:inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1.5 text-xs font-medium text-slate-700 backdrop-blur">
-                            <span className="inline-flex items-center gap-1">
-                                <Star className="h-4 w-4 fill-current text-yellow-500" />
-                                4.9/5 Rated
-                            </span>
-                            <span className="h-3 w-px bg-slate-300" />
-                            <span className="inline-flex items-center gap-1">
-                                <Users className="h-4 w-4 text-indigo-600" />
-                                2,500+ Learners
-                            </span>
-                            <span className="h-3 w-px bg-slate-300" />
-                            <span className="inline-flex items-center gap-1">
-                                <Globe2 className="h-4 w-4 text-emerald-600" />
-                                Live Online & Classroom
-                            </span>
+                        {/* Badge */}
+                        <div className="mb-4 hidden lg:inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1.5 text-xs font-medium text-slate-700 backdrop-blur">
+                            18-Hour Master Program • Weekend & Evening Slots
                         </div>
 
                         {/* H1 */}
                         <h1
-                            id="mysql-hero"
+                            id="etl-hero"
                             className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
                         >
-                            <span className='text-brand'>Database Management</span> System using <span className="text-[#00758F]">MySQL</span>
+                            ETL Testing using{' '}
+                            <span className="text-[#00758F]">SQL</span> &{' '}
+                            <span className="text-amber-700">Enterprise Tools</span>
                         </h1>
 
-                        {/* Mobile form just below H1 */}
+                        {/* Mobile form under H1 */}
                         <div className="mt-6 block md:hidden">
                             <LeadForm variant="elevated" />
                         </div>
 
-                        {/* Supporting copy */}
+                        {/* Sub copy */}
                         <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
-                            Master <strong>SQL queries</strong>, <strong>database design</strong>, <strong>normalization</strong>,{' '}
-                            <strong>indexing</strong>, <strong>transactions</strong>, and <strong>performance tuning</strong>. Build scalable databases for
-                            web apps, analytics, and enterprise systems. Earn a verified certificate and portfolio-ready projects.
+                            Validate data at every stage—<strong>extract</strong>,{' '}
+                            <strong>transform</strong>, and <strong>load</strong>. Learn{' '}
+                            <em>dataset profiling, schema checks, reconciliation, automation,
+                                and reporting</em> to ensure accurate BI & analytics.
                         </p>
                         <p className="mt-3 max-w-3xl text-sm text-slate-600">
-                            Topics include ER modeling, stored procedures, joins, query optimization, backup & recovery, and deployment best practices.
+                            Topics: test design for ETL/ELT, SQL data quality rules, SCD types,
+                            partitioning, orchestration basics, CI/CD integration, and evidence-based
+                            reporting for audits.
                         </p>
 
                         {/* CTAs */}
@@ -123,22 +153,23 @@ export default function HeroSection() {
                             <a
                                 href="#contact"
                                 className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
-                                aria-label="Enroll now in MySQL course"
+                                aria-label="Enroll now in ETL Testing program"
                             >
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </a>
+
                             <a
                                 href="#curriculum"
                                 className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
-                                aria-label="View full MySQL curriculum"
+                                aria-label="View full ETL curriculum"
                             >
                                 View Curriculum
                             </a>
                             <a
                                 href="#demo"
                                 className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
-                                aria-label="Book a free demo for MySQL"
+                                aria-label="Book a free demo for ETL testing"
                             >
                                 Free Demo
                             </a>
@@ -148,11 +179,11 @@ export default function HeroSection() {
                         <ul className="mt-7 grid max-w-3xl grid-cols-1 gap-3 text-sm text-slate-700 sm:grid-cols-2">
                             <li className="flex items-start gap-2">
                                 <CheckCircle2 className="mt-0.5 h-5 w-5 text-emerald-600" />
-                                80% practical labs with project reviews
+                                80% practical labs with real datasets
                             </li>
                             <li className="flex items-start gap-2">
                                 <CheckCircle2 className="mt-0.5 h-5 w-5 text-indigo-600" />
-                                Production-grade schema & indexing
+                                Data quality rules & reconciliation tests
                             </li>
                             <li className="flex items-start gap-2">
                                 <CheckCircle2 className="mt-0.5 h-5 w-5 text-rose-600" />
@@ -163,19 +194,19 @@ export default function HeroSection() {
                                 QR-verified global certification
                             </li>
                         </ul>
-                        {/* Desktop feature grid under the form */}
-                        <div className="mt-6 md:hidden lg:grid lg:grid-cols-4 gap-3">
+
+                        <div className="mt-6 md:hidden grid lg:grid lg:grid-cols-4 gap-3">
                             {features.map((f, i) => (
                                 <IconCard
-                                    key={i}
+                                    key={`desk-${i}`}
                                     {...f}
-                                    className="hover:shadow-md p-4 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-slate-300"
+                                    className="hover:shadow-md p-3 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-slate-300"
                                 />
                             ))}
                         </div>
                     </motion.div>
 
-                    {/* Right column: Desktop Form */}
+                    {/* Right: Desktop Form + Feature cards */}
                     <motion.aside
                         initial={{ opacity: 0, y: 18 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -183,12 +214,11 @@ export default function HeroSection() {
                         className="hidden md:col-span-5 lg:col-span-4 md:block"
                     >
                         <LeadForm variant="elevated" />
-
                     </motion.aside>
                 </div>
             </div>
 
-            {/* JSON-LD */}
+            {/* JSON-LD for SEO */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
