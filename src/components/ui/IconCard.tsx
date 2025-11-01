@@ -17,7 +17,7 @@ export default function IconCard({
   description,
   bgColor = 'bg-blue-50',
   iconColor = 'text-blue-600',
-  borderColor = 'border-blue-200',
+  borderColor = 'border-orange-200',
   className
 }: IconCardProps) {
   return (
