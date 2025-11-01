@@ -1,74 +1,58 @@
 'use client';
 
 import {
-    Code,
+    Database,
     Users,
     Award,
     Briefcase,
     ArrowRight,
     Star,
-    ShieldCheck,
-    Clock,
-    CheckCircle2,
     Globe2,
     Home,
     ChevronRight,
+    CheckCircle2,
 } from 'lucide-react';
 import { motion } from 'framer-motion';
 import IconCard from '@/components/ui/IconCard';
 import LeadForm from '../CourseLeadForm';
 
 /** -----------------------------
- *  Feature cards (unchanged data)
- *  -----------------------------
- */
+ * Feature tiles
+ * ----------------------------- */
 const features = [
-    { icon: <Code />, title: 'Hands-On API Labs', description: 'Postman, REST, GraphQL & auth flows', bg: 'bg-cyan-50', iconColor: 'text-cyan-700', border: 'border-cyan-200' },
-    { icon: <Users />, title: 'Mentor-Led Cohort', description: '13+ yrs industry veterans', bg: 'bg-violet-50', iconColor: 'text-violet-700', border: 'border-violet-200' },
-    { icon: <Award />, title: 'Verified Certificate', description: 'QR-secured, globally recognizable', bg: 'bg-amber-50', iconColor: 'text-amber-700', border: 'border-amber-200' },
-    { icon: <Briefcase />, title: 'Placement Support', description: 'Resume, mock interviews, referrals', bg: 'bg-rose-50', iconColor: 'text-rose-700', border: 'border-rose-200' },
-    { icon: <ShieldCheck />, title: 'API Security', description: 'OWASP API Top-10, OAuth2, JWT', bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-200' },
-    { icon: <Clock />, title: 'Fast-Track', description: '15 hours | weekend & evening slots', bg: 'bg-sky-50', iconColor: 'text-sky-700', border: 'border-sky-200' },
+    { icon: <Database />, title: '80% Hands-On', description: 'Build real databases from scratch', bg: 'bg-emerald-50', iconColor: 'text-emerald-700', border: 'border-emerald-200' },
+    { icon: <Users />, title: 'Expert Faculty', description: '15+ yrs MySQL & Oracle certified', bg: 'bg-indigo-50', iconColor: 'text-indigo-700', border: 'border-indigo-200' },
+    { icon: <Award />, title: 'Global Certification', description: 'MySQL + SQL Certification', bg: 'bg-amber-50', iconColor: 'text-amber-700', border: 'border-amber-200' },
+    { icon: <Briefcase />, title: '100% Placement', description: 'Resume + Interview Prep', bg: 'bg-rose-50', iconColor: 'text-rose-700', border: 'border-rose-200' },
 ];
 
 export default function HeroSection() {
+    // JSON-LD
     const jsonLd = {
         '@context': 'https://schema.org',
         '@type': 'Course',
-        name: 'API Testing Course with Postman & REST',
+        name: 'Database Management using MySQL',
         description:
-            'Hands-on API testing course covering Postman, REST, GraphQL, test automation, CI/CD, and API security with mentor-led projects and job assistance.',
-        provider: {
-            '@type': 'Organization',
-            name: 'Think and Do Institute',
-        },
-        offers: {
-            '@type': 'Offer',
-            availability: 'https://schema.org/InStock',
-            price: '0',
-            priceCurrency: 'INR',
-            category: 'Education',
-        },
+            'Hands-on MySQL course covering SQL queries, database design, normalization, indexing, transactions, and performance tuning. Includes projects, certification, and placement support.',
+        provider: { '@type': 'Organization', name: 'Think and Do Institute' },
     };
 
     const breadcrumbs = [
-        { label: "Home", href: "/" },
-        { label: "Software Testing" },
-        { label: "API Testing with Postman, REST & GraphQL", href: "api-testing" },
-    ]
+        { label: 'Home', href: '/' },
+        { label: 'Databases' },
+        { label: 'MySQL Course', href: '/mysql-course' },
+    ];
 
     return (
-        <section id="hero" aria-labelledby="api-testing-hero" className="relative overflow-hidden">
-            {/* Background */}
+        <section id="hero" aria-labelledby="mysql-hero" className="relative overflow-hidden">
+            {/* Light, subtle frame */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
-                <div className="absolute inset-0 [background-image:radial-gradient(circle_at_20%_10%,rgba(15,23,42,0.05),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(59,130,246,0.06),transparent_35%),linear-gradient(180deg,#fafafa,white)]" />
+                <div className="absolute inset-0 [background-image:radial-gradient(circle_at_20%_10%,rgba(15,23,42,0.05),transparent_40%),radial-gradient(circle_at_80%_10%,rgba(2,132,199,0.06),transparent_35%),linear-gradient(180deg,#fafafa,white)]" />
                 <div className="absolute inset-0 [mask-image:radial-gradient(1200px_600px_at_50%_-10%,black,transparent)]" />
             </div>
 
-
-
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-12 pb-14">
-                {/* Breadcrumbs for SEO & UX */}
+                {/* Breadcrumbs */}
                 <nav aria-label="Breadcrumb" className="mb-8">
                     <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
                         {breadcrumbs.map((c, i) => (
@@ -76,7 +60,7 @@ export default function HeroSection() {
                                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
                                 <a
                                     href={c.href}
-                                    className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                                    className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? 'font-semibold text-slate-900' : ''}`}
                                 >
                                     {c.label}
                                 </a>
@@ -84,8 +68,9 @@ export default function HeroSection() {
                         ))}
                     </ol>
                 </nav>
+
                 <div className="grid items-start gap-10 md:grid-cols-12">
-                    {/* Left: copy */}
+                    {/* Left column: copy */}
                     <motion.div
                         initial={{ opacity: 0, y: 18 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -101,7 +86,7 @@ export default function HeroSection() {
                             <span className="h-3 w-px bg-slate-300" />
                             <span className="inline-flex items-center gap-1">
                                 <Users className="h-4 w-4 text-indigo-600" />
-                                3,000+ Learners
+                                2,500+ Learners
                             </span>
                             <span className="h-3 w-px bg-slate-300" />
                             <span className="inline-flex items-center gap-1">
@@ -112,41 +97,25 @@ export default function HeroSection() {
 
                         {/* H1 */}
                         <h1
-                            id="api-testing-hero"
+                            id="mysql-hero"
                             className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
                         >
-                            Master{" "}
-                            <span className="text-brand">
-                                API Testing
-                            </span>{" "}
-                            with{" "}
-                            <span className="text-[#ff6a00]">
-                                Postman
-                            </span>
-                            ,{" "}
-                            <span className="text-green-800">
-                                REST
-                            </span>{" "}
-                            &{" "}
-                            <span className="text-blue-800">
-                                GraphQL
-                            </span>
+                            <span className='text-brand'>Database Management</span> System using <span className="text-[#00758F]">MySQL</span>
                         </h1>
 
-
-                        {/* FORM — mobile : shown right below H1 */}
+                        {/* Mobile form just below H1 */}
                         <div className="mt-6 block md:hidden">
                             <LeadForm variant="elevated" />
                         </div>
 
                         {/* Supporting copy */}
                         <p className="mt-5 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
-                            Build job-ready skills in <strong>API testing, automation frameworks</strong>, <strong>CI/CD</strong>, and <strong>API security</strong>. Practice with real-world
-                            projects, learn best practices for <em>contract testing, schema validation, mocking, and performance checks</em>, and earn a verified certificate.
+                            Master <strong>SQL queries</strong>, <strong>database design</strong>, <strong>normalization</strong>,{' '}
+                            <strong>indexing</strong>, <strong>transactions</strong>, and <strong>performance tuning</strong>. Build scalable databases for
+                            web apps, analytics, and enterprise systems. Earn a verified certificate and portfolio-ready projects.
                         </p>
                         <p className="mt-3 max-w-3xl text-sm text-slate-600">
-                            Topics include Postman Collections & Newman, REST principles, GraphQL queries & mutations, Swagger/OpenAPI, OAuth2 & JWT, data-driven tests, Jenkins/GitHub Actions,
-                            and reporting with evidence for enterprise-grade QA.
+                            Topics include ER modeling, stored procedures, joins, query optimization, backup & recovery, and deployment best practices.
                         </p>
 
                         {/* CTAs */}
@@ -154,23 +123,22 @@ export default function HeroSection() {
                             <a
                                 href="#contact"
                                 className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
-                                aria-label="Enroll now in API Testing program"
+                                aria-label="Enroll now in MySQL course"
                             >
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
                             </a>
-
                             <a
                                 href="#curriculum"
                                 className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
-                                aria-label="View full API testing curriculum"
+                                aria-label="View full MySQL curriculum"
                             >
                                 View Curriculum
                             </a>
                             <a
                                 href="#demo"
                                 className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
-                                aria-label="Book a free demo for API testing"
+                                aria-label="Book a free demo for MySQL"
                             >
                                 Free Demo
                             </a>
@@ -184,7 +152,7 @@ export default function HeroSection() {
                             </li>
                             <li className="flex items-start gap-2">
                                 <CheckCircle2 className="mt-0.5 h-5 w-5 text-indigo-600" />
-                                CI/CD integration (Jenkins, GitHub Actions)
+                                Production-grade schema & indexing
                             </li>
                             <li className="flex items-start gap-2">
                                 <CheckCircle2 className="mt-0.5 h-5 w-5 text-rose-600" />
@@ -195,31 +163,19 @@ export default function HeroSection() {
                                 QR-verified global certification
                             </li>
                         </ul>
-
-                        {/* Feature cards can stay below the form on desktop if desired */}
-                        <div className="mt-6 grid md:hidden lg:grid-cols-4 gap-3">
-                            {features.slice(0, 4).map((f, i) => (
-                                <IconCard
-                                    key={i}
-                                    {...f}
-                                    className="hover:shadow-md focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-slate-300"
-                                />
-                            ))}
-                        </div>
-
-                        {/* Optional: feature cards can remain below on mobile/tablet */}
-                        <div className="mt-8 md:hidden grid grid-cols-1 gap-3 sm:grid-cols-2 lg:hidden">
+                        {/* Desktop feature grid under the form */}
+                        <div className="mt-6 md:hidden lg:grid lg:grid-cols-4 gap-3">
                             {features.map((f, i) => (
                                 <IconCard
                                     key={i}
                                     {...f}
-                                    className="hover:shadow-md focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-slate-300"
+                                    className="hover:shadow-md p-4 focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-slate-300"
                                 />
                             ))}
                         </div>
                     </motion.div>
 
-                    {/* Right: Desktop Form */}
+                    {/* Right column: Desktop Form */}
                     <motion.aside
                         initial={{ opacity: 0, y: 18 }}
                         animate={{ opacity: 1, y: 0 }}
@@ -232,7 +188,7 @@ export default function HeroSection() {
                 </div>
             </div>
 
-            {/* JSON-LD for SEO */}
+            {/* JSON-LD */}
             <script
                 type="application/ld+json"
                 dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}

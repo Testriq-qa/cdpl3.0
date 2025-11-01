@@ -1,6 +1,6 @@
 'use client';
 import { Users, GraduationCap, Briefcase, Target, BadgeCheck } from 'lucide-react';
-import IconCard from '@/components/api-testing/ui/IconCard';
+import IconCard from '@/components/ui/IconCard';
 import { motion } from 'framer-motion';
 import { JSX } from 'react';
 
