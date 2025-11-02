@@ -106,12 +106,13 @@ const courseCategories = [
       },
       {
         name: "Advanced Data Science and Machine Learning Masterclass",
-        
+        slug: "data-science-course",
         description: "Master coding challenges and technical questions.",
         governingBodies: [{ name: "Advanced Data Science and Machine Learning Masterclass", logo: "/header_images/Advance_DS_and_ML.png" }],
       },
       {
         name: "Comprehensive Data Science and AI - Master Program",
+        slug: "ai-course",
         description: "Master coding challenges and technical questions.",
         governingBodies: [{ name: "Comprehensive Data Science and AI - Master Program", logo: "/header_images/Comprehensive_DS_and_AI.png" }],
       },
