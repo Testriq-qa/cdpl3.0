@@ -1,17 +1,17 @@
 // pages/python-programming.tsx
 import type { NextPage } from "next";
 import Head from "next/head";
-import HeroSection from "@/components/python-programming/HeroSection";
-import StatsSection from "@/components/python-programming/StatsSection";
-import WhyPythonProgram from "@/components/python-programming/WhyPythonProgram";
-import CurriculumSection from "@/components/python-programming/CurriculumSection";
-import ProjectsSection from "@/components/python-programming/ProjectsSection";
-import CareerSection from "@/components/python-programming/CareerSection";
-import WhoShouldEnroll from "@/components/python-programming/WhoShouldEnroll";
-import ToolsSection from "@/components/python-programming/ToolsSection";
-import CareerRoadmapSection from "@/components/python-programming/CareerRoadmapSection";
-import FaqSection from "@/components/python-programming/FaqSection";
-import CtaSection from "@/components/python-programming/CtaSection";
+import HeroSection from "@/components/python-course/HeroSection";
+import StatsSection from "@/components/python-course/StatsSection";
+import WhyPythonProgram from "@/components/python-course/WhyPythonProgram";
+import CurriculumSection from "@/components/python-course/CurriculumSection";
+import ProjectsSection from "@/components/python-course/ProjectsSection";
+import CareerSection from "@/components/python-course/CareerSection";
+import WhoShouldEnroll from "@/components/python-course/WhoShouldEnroll";
+import ToolsSection from "@/components/python-course/ToolsSection";
+import CareerRoadmapSection from "@/components/python-course/CareerRoadmapSection";
+import FaqSection from "@/components/python-course/FaqSection";
+import CtaSection from "@/components/python-course/CtaSection";
 
 const PythonPage: NextPage = () => {
   return (

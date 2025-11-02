@@ -1,17 +1,17 @@
 // pages/digital-marketing.tsx
 import type { NextPage } from "next";
 import Head from "next/head";
-import HeroSection from "@/components/digital-marketing-analytics/HeroSection";
-import StatsSection from "@/components/digital-marketing-analytics/StatsSection";
-import WhyMasterProgram from "@/components/digital-marketing-analytics/WhyMasterProgram";
-import CurriculumSection from "@/components/digital-marketing-analytics/CurriculumSection";
-import ProjectsSection from "@/components/digital-marketing-analytics/ProjectsSection";
-import TestimonialsSection from "@/components/digital-marketing-analytics/TestimonialsSection";
-import CareerSection from "@/components/digital-marketing-analytics/CareerSection";
-import WhoShouldEnroll from "@/components/digital-marketing-analytics/WhoShouldEnroll";
-import ToolsSection from "@/components/digital-marketing-analytics/ToolsSection";
-import FaqSection from "@/components/digital-marketing-analytics/FaqSection";
-import CtaSection from "@/components/digital-marketing-analytics/CtaSection";
+import HeroSection from "@/components/digital-marketing-course/HeroSection";
+import StatsSection from "@/components/digital-marketing-course/StatsSection";
+import WhyMasterProgram from "@/components/digital-marketing-course/WhyMasterProgram";
+import CurriculumSection from "@/components/digital-marketing-course/CurriculumSection";
+import ProjectsSection from "@/components/digital-marketing-course/ProjectsSection";
+import TestimonialsSection from "@/components/digital-marketing-course/TestimonialsSection";
+import CareerSection from "@/components/digital-marketing-course/CareerSection";
+import WhoShouldEnroll from "@/components/digital-marketing-course/WhoShouldEnroll";
+import ToolsSection from "@/components/digital-marketing-course/ToolsSection";
+import FaqSection from "@/components/digital-marketing-course/FaqSection";
+import CtaSection from "@/components/digital-marketing-course/CtaSection";
 
 const DigitalMarketingPage: NextPage = () => {
   return (
