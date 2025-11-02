@@ -1,63 +1,187 @@
 // components/sections/HeroSection.tsx
-import Image from "next/image";
+// Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
+// Assumes you have a client LeadForm at "../CourseLeadForm" (same API-testing style).
+
+import LeadForm from "../CourseLeadForm";
+import { ChevronRight, Home } from "lucide-react";
 
 export default function HeroSection() {
+  // JSON-LD for SEO (Course)
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Course",
+    name: "Master Program in Prompt Engineering with Generative AI",
+    description:
+      "Hands-on program covering prompt design, chain-of-thought scaffolding, RAG workflows, function/tool calling, agents, guardrails, evaluation, and deployment. Mentor-led labs, live projects, and placement assistance included.",
+    provider: { "@type": "Organization", name: "Cinute Digital Pvt. Ltd. (CDPL)" },
+    educationalCredentialAwarded: "CDPL Verified Certificate (QR-enabled)",
+    timeRequired: "PT20H",
+    keywords:
+      "prompt engineering course, generative AI training, LLM fine-tuning, RAG pipelines, OpenAI prompt design, AI agent workflows, evaluation guardrails",
+  };
+
+  const breadcrumbs = [
+    { label: "Home", href: "/" },
+    { label: "AI & ML" },
+    { label: "Prompt Engineering with Generative AI", href: "/prompt-engineering" },
+  ];
+
   return (
-    <section className="bg-gradient-to-br from-blue-50 via-white to-green-50 py-20">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
-        <div className="text-center mb-10">
-          <div className="flex justify-center items-center gap-3 mb-4">
-            <div className="w-16 h-16 bg-green-500 rounded-full flex items-center justify-center text-white font-bold text-xl">cdpl</div>
-            <div className="text-left">
-              <h2 className="text-2xl font-bold text-gray-900">Cinute Digital Pvt. Ltd.</h2>
-              <p className="text-green-600 font-semibold">A Premier EdTech Company</p>
+    <section id="hero" aria-labelledby="pe-hero" className="relative overflow-hidden">
+      {/* Subtle futuristic frame (thin grid + soft radial glow; minimal gradient) */}
+      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
+        <div className="absolute inset-0 [background-image:radial-gradient(700px_220px_at_18%_0%,rgba(22,163,74,0.10),transparent_60%),radial-gradient(800px_260px_at_92%_0%,rgba(34,197,94,0.10),transparent_60%),linear-gradient(180deg,#fafafa,white)]" />
+        <div className="absolute inset-0 [mask-image:radial-gradient(1200px_600px_at_50%_-12%,black,transparent)]" />
+      </div>
+
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-10 pb-12 md:pt-12 md:pb-16">
+        {/* Breadcrumbs */}
+        <nav aria-label="Breadcrumb" className="mb-8">
+          <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+            {breadcrumbs.map((c, i) => (
+              <li key={i} className="flex items-center gap-2">
+                {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
+                <a
+                  href={c.href}
+                  className={`hover:text-green-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                >
+                  {c.label}
+                </a>
+              </li>
+            ))}
+          </ol>
+        </nav>
+
+        <div className="grid items-start gap-10 md:grid-cols-12">
+          {/* Left column: Copy */}
+          <div className="md:col-span-7 lg:col-span-8">
+            {/* Micro-badges (distinct colors, no repeats) */}
+            <div className="mb-4 hidden lg:flex w-fit items-center gap-2 text-[11px] font-semibold text-slate-700">
+              <span className="rounded-full bg-green-50 px-2 py-0.5 text-green-800 border border-green-200">Live Online + Classroom</span>
+              <span className="rounded-full bg-sky-50 px-2 py-0.5 text-sky-800 border border-sky-200">20 Hours</span>
+              <span className="rounded-full bg-amber-50 px-2 py-0.5 text-amber-900 border border-amber-200">Project-based</span>
+              <span className="rounded-full bg-violet-50 px-2 py-0.5 text-violet-800 border border-violet-200">Placement Support</span>
+            </div>
+
+            <h1
+              id="pe-hero"
+              className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
+            >
+              Master Program in <span className="text-green-700">Prompt Engineering</span> with{" "}
+              <span className="text-emerald-700">Generative AI</span>
+            </h1>
+
+            {/* Mobile form directly under headline */}
+            <div className="mt-5 block md:hidden">
+              <LeadForm variant="elevated" />
+            </div>
+
+            <p className="mt-4 max-w-3xl text-base leading-relaxed text-slate-700 sm:text-lg">
+              Learn <strong>prompt patterns</strong> (rewrite, critique, tree-of-thought), build <strong>RAG pipelines</strong>, leverage{" "}
+              <strong>function/tool calling & agents</strong>, add <strong>guardrails & evaluation</strong>, and deploy real apps. Earn a{" "}
+              <strong>QR-verified certificate</strong> and a recruiter-proof portfolio.
+            </p>
+            <p className="mt-2 max-w-3xl text-sm text-slate-600">
+              Includes prompt optimization, embeddings, vector DBs, safety best practices, latency/cost tuning, and CI/CD for LLM apps.
+            </p>
+
+            {/* CTAs */}
+            <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
+              <a
+                href="#contact"
+                className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-green-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-green-200"
+                aria-label="Enroll now in Prompt Engineering course"
+              >
+                Enroll Now
+                <svg className="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
+                  <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
+                </svg>
+              </a>
+              <a
+                href="#curriculum"
+                className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
+                aria-label="View full Prompt Engineering curriculum"
+              >
+                View Curriculum
+              </a>
+              <a
+                href="#demo"
+                className="inline-flex items-center justify-center rounded-xl border border-amber-300 bg-white px-6 py-3 text-base font-semibold text-amber-800 shadow-sm transition hover:bg-amber-50 focus:outline-none focus:ring-4 focus:ring-amber-200"
+                aria-label="Book a free demo for Prompt Engineering"
+              >
+                Free Demo
+              </a>
+            </div>
+
+            {/* Quick highlights (distinct accent colors, no repeats) */}
+            <ul className="mt-6 grid max-w-3xl grid-cols-1 gap-3 text-sm text-slate-700 sm:grid-cols-2">
+              <li className="flex items-start gap-2">
+                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-green-600" />
+                Prompt patterns, structure & guardrails (safety-first design)
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-sky-600" />
+                RAG with embeddings & vector DBs (Faiss/PGVector)
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-amber-600" />
+                Tool/function calling, agents & workflows
+              </li>
+              <li className="flex items-start gap-2">
+                <span className="mt-1 inline-block h-2 w-2 rounded-full bg-violet-600" />
+                Eval & monitoring • latency/cost optimization • CI/CD
+              </li>
+            </ul>
+
+            {/* Trust strip */}
+            <div className="mt-6 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white/70 px-3 py-1 text-[11px] font-semibold text-slate-700 backdrop-blur">
+              <span className="text-yellow-600">★★★★★</span>
+              <span>#1 Mumbai’s Premium Training Institute</span>
             </div>
           </div>
-          <h3 className="text-lg text-green-600 font-bold uppercase tracking-wider">Leaders in Professional Training Programs</h3>
-        </div>
 
-        <div className="relative max-w-4xl mx-auto">
-          <Image
-            src="/prompt-classroom.jpg"
-            alt="Prompt Engineering with Generative AI Training in Mumbai - CDPL"
-            width={1200}
-            height={600}
-            className="rounded-2xl shadow-2xl"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-green-900/70 to-transparent rounded-2xl"></div>
-          <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 text-center text-white">
-            <h1 className="text-3xl md:text-5xl font-bold mb-3">
-              MASTER PROGRAM IN <span className="text-green-300">Prompt Engineering with Generative AI</span>
-            </h1>
-            <div className="flex justify-center items-center gap-4 mt-6">
-              <div className="bg-green-500 text-white px-6 py-3 rounded-full font-bold flex items-center gap-2">
-                <span>Duration</span> 20 Hours
+          {/* Right column: Desktop form & visual */}
+          <aside className="md:col-span-5 lg:col-span-4 hidden md:block">
+            <div className="relative overflow-hidden rounded-2xl border border-slate-200 bg-white shadow-lg">
+              
+              <div className="p-4 sm:p-5">
+                <LeadForm variant="elevated" />
               </div>
             </div>
-          </div>
+          </aside>
         </div>
 
-        <div className="mt-10 text-center">
-          <div className="flex justify-center items-center gap-2 mb-4">
-            <div className="text-yellow-500 text-3xl">*****</div>
-            <span className="text-yellow-600 font-bold">#1 Mumbai's Premium Training Institute</span>
-          </div>
-          <div className="flex flex-col sm:flex-row justify-center gap-4 mt-6">
-            <a href="tel:+917888383788" className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition">
+        {/* Alt contact links */}
+        <div className="mt-8 text-center">
+          <div className="flex flex-wrap justify-center gap-3 text-sm">
+            <a href="tel:+917888383788" className="underline underline-offset-4 text-slate-800">
               +91 788-83-83-788
             </a>
-            <a href="tel:+918488988984" className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition">
+            <span className="text-slate-400">•</span>
+            <a href="tel:+918488988984" className="underline underline-offset-4 text-slate-800">
               +91 84-889-889-84
             </a>
-            <a href="tel:+918062785870" className="bg-green-500 text-white px-6 py-3 rounded-lg font-semibold hover:bg-green-600 transition">
+            <span className="text-slate-400">•</span>
+            <a href="tel:+918062785870" className="underline underline-offset-4 text-slate-800">
               +91 806-27-85-870
             </a>
           </div>
-          <a href="https://www.cinutedigital.com" className="block mt-4 text-green-600 hover:underline">
+          <a
+            href="https://www.cinutedigital.com"
+            className="mt-3 block text-sm text-green-700 hover:underline"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             www.cinutedigital.com
           </a>
         </div>
       </div>
+
+      {/* JSON-LD */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
     </section>
   );
 }
