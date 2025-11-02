@@ -32,79 +32,44 @@ export type JobsLiveJobsVideoTestimonialsSectionProps = {
 // ----------------------------- Sample Data ---------------------------
 const DEFAULT_VIDEOS: VideoTestimonial[] = [
   {
-    id: "cdpl-prathik",
-    title: "CDPL helped me land interviews in 30 days",
-    person: "Prathik Singh",
-    role: "Data Analyst Intern",
-    company: "CDPL",
-    city: "Bengaluru",
-    src: "/testimonial_images/video_testimonial.mp4",
-    poster: "/testimonial_images/video_testimonial_thumbnail.png",
-    duration: "2:31",
-    tags: ["Live Jobs", "Analytics"],
+    id: "bhagyesh-suresh-mahadik",
+    title: "Placed as Manual Tester at Interactive Brokers",
+    person: "Bhagyesh Suresh Mahadik",
+    role: "Manual Tester",
+    company: "Interactive Brokers",
+    src: "/live-jobs_images/bhagyesh_suresh_mahadik.mp4",
+    poster: "/live-jobs_images/video_testimonial_thumbnail.png",
+    // duration: "2:10",
+    tags: ["Live Jobs", "Manual Testing"],
     rating: 5,
     transcript:
-      "I learned job-ready skills with CDPL's live projects—dashboards, workflows, and mock interviews that boosted my confidence.",
+      "Secured a Manual Testing role after hands-on practice with test cases, bug reports, and mentor feedback.",
   },
   {
-    id: "cdpl-swathi-qa",
-    title: "From zero to QA automation in 6 weeks",
-    person: "Swathi K",
-    role: "QA Engineer",
-    company: "Product Startup",
-    city: "Hyderabad",
-    src: "/testimonial_images/video_testimonial.mp4",
-    poster: "/testimonial_images/video_testimonial_thumbnail.png",
-    duration: "3:12",
-    tags: ["Software Testing", "Automation"],
-    rating: 4.8,
+    id: "rucha-arun-pawar",
+    title: "Placed in Manual & Automation Testing",
+    person: "Rucha Arun Pawar",
+    role: "QA Engineer (Manual & Automation)",
+    src: "/live-jobs_images/rucha_arun_pawar.mp4",
+    poster: "/live-jobs_images/video_testimonial_thumbnail.png",
+    // duration: "2:25",
+    tags: ["Live Jobs", "Manual Testing", "Automation"],
+    rating: 5,
     transcript:
-      "Mentor-led sprints, bug tracking, and interview prep turned theory into daily habits.",
+      "From fundamentals to frameworks—built test suites and automation scripts that impressed interviewers.",
   },
   {
-    id: "cdpl-yash-walkin",
-    title: "Walk-in success: showcasing real project work",
-    person: "Yash V",
-    role: "Associate QA",
-    company: "IT Services",
-    city: "Pune",
-    src: "/testimonial_images/video_testimonial.mp4",
-    poster: "/testimonial_images/video_testimonial_thumbnail.png",
-    duration: "1:58",
-    tags: ["Walk-in", "Interview"],
-    rating: 4.9,
+    id: "vidhi-gohil",
+    title: "Placed as Manual Software Tester",
+    person: "Vidhi Gohil",
+    role: "Manual Software Tester",
+    src: "/live-jobs_images/vidhi_gohil.mp4",
+    poster: "/live-jobs_images/video_testimonial_thumbnail.png",
+    // duration: "1:58",
+    tags: ["Live Jobs", "Manual Testing"],
+    rating: 5,
     transcript:
-      "The CDPL portfolio checklist and recruiter-ready resume made the difference in the final round.",
-  },
-  {
-    id: "cdpl-aman-devops",
-    title: "DevOps live projects gave me real-world confidence",
-    person: "Aman R",
-    role: "DevOps Trainee",
-    company: "Cloud Services",
-    city: "Noida",
-    src: "/testimonial_images/video_testimonial.mp4",
-    poster: "/testimonial_images/video_testimonial_thumbnail.png",
-    duration: "2:05",
-    tags: ["DevOps", "Live Projects"],
-    rating: 4.7,
-    transcript:
-      "Pipelines, CI/CD, and infra-as-code with mentors made interviews feel like demos of what I already do.",
-  },
-  {
-    id: "cdpl-neha-analytics",
-    title: "Analytics portfolio that recruiters loved",
-    person: "Neha S",
-    role: "Business Analyst",
-    company: "FinTech",
-    city: "Mumbai",
-    src: "/testimonial_images/video_testimonial.mp4",
-    poster: "/testimonial_images/video_testimonial_thumbnail.png",
-    duration: "2:44",
-    tags: ["Analytics", "Portfolio"],
-    rating: 4.9,
-    transcript:
-      "Dashboard storytelling, case studies, and mock interviews helped me stand out in panel rounds.",
+      "Gained confidence through real defect triage, test planning, and interview prep with mentors.",
   },
 ];
 
@@ -135,7 +100,7 @@ function splitHeadingForColoring(input: string): { left: string; right: string }
   }
   const commaIdx = input.indexOf(",");
   if (commaIdx !== -1) {
-    return { left: input.slice(0, commaIdx + 1).trim(), right: input.slice(emDashIdx + 1).trim() };
+    return { left: input.slice(0, commaIdx + 1).trim(), right: input.slice(commaIdx + 1).trim() };
   }
   const words = input.split(/\s+/);
   const mid = Math.floor(words.length / 2);
@@ -156,7 +121,6 @@ function Pill({
   as?: "button";
 } & React.ButtonHTMLAttributes<HTMLButtonElement>) {
   if (as === "button") {
-    // ⬇️ Set filter buttons to 14px (0.875rem) without affecting span pills
     return (
       <button
         title={title}
@@ -204,7 +168,7 @@ function ShortsCard({
   useEffect(() => {
     if (!vidRef.current) return;
     if (hovering) {
-      vidRef.current.play().catch(() => { });
+      vidRef.current.play().catch(() => {});
     } else {
       vidRef.current.pause();
       vidRef.current.currentTime = 0;
@@ -215,16 +179,16 @@ function ShortsCard({
     <div
       id={`video-${v.id}`}
       data-card
-      className={cx("shrink-0 snap-start rounded-2xl overflow-hidden", LIGHT.card)}
+      className={cx("shrink-0 snap-start rounded-2xl overflow-hidden flex flex-col", LIGHT.card)}
       style={{ width: `${Math.max(220, Math.round(cardWidth))}px` }}
     >
-      {/* Top: title + rating */}
+      {/* Top: title + rating — reserve fixed height for consistent card heights */}
       <div className="p-4 pb-2">
-        <div className="flex items-start justify-between gap-2">
+        <div className="flex items-start justify-between gap-2 min-h-14 sm:min-h-[3.25rem]">
           <h3 className="text-sm font-semibold leading-tight line-clamp-2 text-slate-900">
             {v.title}
           </h3>
-          <span className="inline-flex items-center gap-1 text-amber-500">
+          <span className="inline-flex items-center gap-1 text-amber-500 shrink-0">
             <Star className="h-4 w-4 fill-current" />
             <span className="text-xs font-medium">{(v.rating ?? 4.8).toFixed(1)}</span>
           </span>
@@ -243,7 +207,7 @@ function ShortsCard({
             alt={`${v.person} — ${v.title}`}
             fill
             sizes="(max-width: 640px) 90vw, (max-width: 1024px) 45vw, 26rem"
-            className="object-cover"
+            className="object-cover pointer-events-none"  // ensure taps pass through
             priority={false}
           />
 
@@ -255,7 +219,7 @@ function ShortsCard({
               loop
               playsInline
               preload="none"
-              className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 hover:opacity-100"
+              className="absolute inset-0 h-full w-full object-cover opacity-0 transition-opacity duration-300 hover:opacity-100 pointer-events-none" // ensure taps pass through
             />
           )}
 
@@ -267,11 +231,11 @@ function ShortsCard({
           )}
 
           {/* Right action rail */}
-          <div className="absolute right-2 bottom-3 flex flex-col gap-2">
+          <div className="absolute right-2 bottom-3 flex flex-col gap-2 z-10">
             <button
               type="button"
               aria-label="Share"
-              className={cx("h-10 w-10 rounded-full shadow", LIGHT.iconBtn)}
+              className={cx("h-10 w-10 rounded-full shadow pointer-events-auto", LIGHT.iconBtn)}
               onClick={onShare}
             >
               <Share2 className="h-4 w-4 mx-auto" />
@@ -279,7 +243,7 @@ function ShortsCard({
             <button
               type="button"
               aria-label="Play"
-              className={cx("h-10 w-10 rounded-full shadow", LIGHT.iconBtn)}
+              className={cx("h-10 w-10 rounded-full shadow pointer-events-auto", LIGHT.iconBtn)}
               onClick={onPlay}
             >
               <Play className="h-4 w-4 mx-auto" />
@@ -300,19 +264,21 @@ function ShortsCard({
         </div>
       </div>
 
-      {/* Bottom: tags */}
-      {v.tags?.length ? (
-        <div className="px-4 py-2 flex flex-wrap gap-1.5">
-          {v.tags.slice(0, 3).map((t) => (
-            <span
-              key={t}
-              className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 border border-black/10 text-slate-700 transition-colors hover:bg-orange-100 active:bg-orange-200"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
-      ) : null}
+      {/* Bottom: tags — always render with fixed min height to normalize card heights */}
+      <div className="px-4 py-2 min-h-10">
+        {v.tags?.length ? (
+          <div className="flex flex-wrap gap-1.5">
+            {v.tags.slice(0, 3).map((t) => (
+              <span
+                key={t}
+                className="text-[11px] px-2 py-0.5 rounded-full bg-slate-100 border border-black/10 text-slate-700 transition-colors hover:bg-orange-100 active:bg-orange-200"
+              >
+                {t}
+              </span>
+            ))}
+          </div>
+        ) : null}
+      </div>
     </div>
   );
 }
@@ -321,7 +287,7 @@ function ShortsCard({
 export default function JobsLiveJobsTestimonialSection({
   heading = "CDPL Learner Shorts: Real Outcomes, Live Jobs",
   subheading =
-  "Swipe through short, vertical stories from learners who used CDPL's mentor-led tracks and live projects to secure interviews and offers.",
+    "Swipe through short, vertical stories from learners who used CDPL's mentor-led tracks and live projects to secure interviews and offers.",
   videos = DEFAULT_VIDEOS,
   defaultTag = null,
 }: JobsLiveJobsVideoTestimonialsSectionProps) {
@@ -366,7 +332,7 @@ export default function JobsLiveJobsTestimonialSection({
         "fixed bottom-4 left-1/2 -translate-x-1/2 z-[70] px-3 py-1.5 rounded-full text-sm bg-black/80 text-white";
       document.body.appendChild(el);
       setTimeout(() => el.remove(), 1200);
-    } catch { }
+    } catch {}
   };
 
   // JSON-LD
@@ -516,7 +482,8 @@ export default function JobsLiveJobsTestimonialSection({
 
         {/* Shorts Carousel */}
         <div className="mt-8 relative">
-          <div className="absolute left-2 top-1/2 -translate-y-1/2 z-10">
+          {/* Prev: half in/out on lg+ */}
+          <div className="absolute left-2 lg:left-0 top-1/2 -translate-y-1/2 lg:-translate-x-1/2 z-10">
             <button
               type="button"
               aria-label="Previous"
@@ -531,7 +498,8 @@ export default function JobsLiveJobsTestimonialSection({
               ‹
             </button>
           </div>
-          <div className="absolute right-2 top-1/2 -translate-y-1/2 z-10">
+          {/* Next: half in/out on lg+ */}
+          <div className="absolute right-2 lg:right-0 top-1/2 -translate-y-1/2 lg:translate-x-1/2 z-10">
             <button
               type="button"
               aria-label="Next"

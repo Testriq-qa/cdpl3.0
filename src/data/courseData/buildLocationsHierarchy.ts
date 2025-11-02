@@ -68,7 +68,7 @@ const COUNTRY_BY_STATE: Record<string, "India" | "UAE"> = {
 };
 
 /** Build a link for a course/location chip. Customize if your routing differs. */
-const makeCourseLink = (slug: string) => `/courses/${slug}`;
+const makeCourseLink = (slug: string) => `/${slug}`;
 
 /**
  * Convert CourseData[] -> Country[] (Country -> State -> District("Cities") -> City)

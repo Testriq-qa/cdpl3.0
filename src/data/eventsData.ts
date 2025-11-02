@@ -23,9 +23,16 @@ export interface PastEvent {
   keyTakeaways: string[];
   highlights: string[];
   imageUrl?: string;
+  heroImageUrl?: string;
   featured?: boolean;
   galleryCount?: number;
   videoUrl?: string;
+
+  gallery?: string[];          // For Image Gallery section
+  organizerDetails?: string;   // Extra organizer info (optional)
+  venue?: string;              // Venue name (falls back to `location`)
+  venueAddress?: string;       // Address (optional)
+  mapUrl?: string;
 }
 
 export const pastEvents: PastEvent[] = [
@@ -430,6 +437,12 @@ export const pastEvents: PastEvent[] = [
     ],
     featured: true,
     galleryCount: 67,
+    heroImageUrl: "/events/industrial-visit-tata-motors/hero.png",
+    gallery: [
+      "/events/industrial-visit-tata-motors/1.jpg",
+      "/events/industrial-visit-tata-motors/2.jpg",
+      "/events/industrial-visit-tata-motors/3.jpg",
+    ],
   },
   {
     id: "7",
