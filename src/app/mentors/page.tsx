@@ -24,7 +24,7 @@ export const metadata: Metadata = generateSEO({
     "tech career mentorship",
   ],
   url: "/mentors",
-  image: "/og-image-mentors.jpg",
+  image: "og-images/og-image-mentors.webp",
   imageAlt: "CDPL Mentors - 1:1 Career Mentorship & Guidance",
 });
 

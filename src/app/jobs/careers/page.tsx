@@ -6,7 +6,7 @@ import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 // SEO METADATA - Enhanced for Careers Page
 // ============================================================================
 export const metadata: Metadata = generateSEO({
-    title: "Careers at CDPL - Join Our EdTech Team | Software, Data, Product Roles",
+    title: "CDPL Careers | Join Our EdTech Team: Software, Data, Product",
     description: "Explore career opportunities at Cinute Digital (CDPL) across Engineering, Data Science, Product Management, Growth, and Student Success. Work on high-impact EdTech products, ship fast, learn faster. Join our product-led team building the future of tech education.",
     keywords: [
         "CDPL careers",
@@ -22,7 +22,7 @@ export const metadata: Metadata = generateSEO({
         "work at CDPL",
     ],
     url: "/jobs/careers",
-    image: "/og/cdpl-careers-1536x1024.png",
+    image: "/og-images/cdpl-careers-images.webp",
     imageAlt: "Careers at CDPL - Build the future of outcomes-first EdTech",
 });
 
