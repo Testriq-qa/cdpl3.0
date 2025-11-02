@@ -82,25 +82,25 @@ const courseCategories = [
       },
       {
         name: "Deep Learning, NLP and GenerativeAI",
-        
+        slug: "generative-ai-course",
         description: "Practice real-world interview scenarios with feedback.",
         governingBodies: [{ name: "Deep Learning, NLP and GenerativeAI", logo: "/header_images/DeepLearning_and_NLP.png" }],
       },
       {
         name: "Advanced Data Analytics - Hero Program",
-        
+        slug: "data-analytics",
         description: "Craft a standout resume to impress recruiters.",
         governingBodies: [{ name: "Advanced Data Analytics - Hero Program", logo: "/header_images/Advance_Data_Analytics.png" }],
       },
       {
         name: "Big Data Engineering",
-        
+        slug: "data-engineering-course",
         description: "Master coding challenges and technical questions.",
         governingBodies: [{ name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" }],
       },
       {
         name: "Prompt Engineering with Generative AI",
-        
+        slug: "prompt-engineering-course",
         description: "Master coding challenges and technical questions.",
         governingBodies: [{ name: "Prompt Engineering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" }],
       },
