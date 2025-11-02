@@ -139,6 +139,8 @@ export default function CareerSection() {
                   <Image
                     src={b.src}
                     alt={b.alt}
+                    width={100}
+                    height={100}
                     className="max-h-10 sm:max-h-12 w-auto object-contain opacity-90 transition group-hover:opacity-100"
                     loading="lazy"
                   />
