@@ -22,31 +22,37 @@ const courseCategories = [
       },
       {
         name: "API Testing using POSTMAN and RestAPIs",
+        slug: "api-testing",
         description: "Master product backlog management and stakeholder collaboration.",
         governingBodies: [{ name: "API Testing", logo: "/header_images/API_POSTMAN.png" }],
       },
       {
         name: "Database Management System using MySQL",
+        slug: "dbms-course",
         description: "Gain advanced Scrum knowledge to lead high-performing teams.",
         governingBodies: [{ name: "Database Management", logo: "/header_images/Database_Management_MySQL.png" }],
       },
       {
         name: "ETL Testing Course",
+        slug: "etl-testing",
         description: "Learn to lead Agile transformations using the SAFe framework.",
         governingBodies: [{ name: "ETL Testing", logo: "/header_images/ETL_Testing.png" }],
       },
       {
         name: "Advanced Software Testing",
+        slug: "advance-software-testing",
         description: "Facilitate SAFe practices for scaled Agile environments.",
         governingBodies: [{ name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" }],
       },
       {
         name: "Advanced Automation Testing",
+        slug: "automation-testing-course",
         description: "Drive product vision and delivery in SAFe settings.",
         governingBodies: [{ name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" }],
       },
       {
         name: "Advanced Manual and Automation Testing - Master Program",
+        slug: "advance-manual-automation-testing",
         description: "Blend Agile principles with PMI project management standards.",
         governingBodies: [
           {
@@ -65,6 +71,7 @@ const courseCategories = [
     courses: [
       {
         name: "Machine Learning and Data Science with Python - Hero Program",
+        slug: "machine-learning-course",
         description: "Build strategies to ace behavioral and technical interviews.",
         governingBodies: [
           {
@@ -75,26 +82,31 @@ const courseCategories = [
       },
       {
         name: "Deep Learning, NLP and GenerativeAI",
+        
         description: "Practice real-world interview scenarios with feedback.",
         governingBodies: [{ name: "Deep Learning, NLP and GenerativeAI", logo: "/header_images/DeepLearning_and_NLP.png" }],
       },
       {
         name: "Advanced Data Analytics - Hero Program",
+        
         description: "Craft a standout resume to impress recruiters.",
         governingBodies: [{ name: "Advanced Data Analytics - Hero Program", logo: "/header_images/Advance_Data_Analytics.png" }],
       },
       {
         name: "Big Data Engineering",
+        
         description: "Master coding challenges and technical questions.",
         governingBodies: [{ name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" }],
       },
       {
         name: "Prompt Engineering with Generative AI",
+        
         description: "Master coding challenges and technical questions.",
         governingBodies: [{ name: "Prompt Engineering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" }],
       },
       {
         name: "Advanced Data Science and Machine Learning Masterclass",
+        
         description: "Master coding challenges and technical questions.",
         governingBodies: [{ name: "Advanced Data Science and Machine Learning Masterclass", logo: "/header_images/Advance_DS_and_ML.png" }],
       },
@@ -123,6 +135,7 @@ const courseCategories = [
     courses: [
       {
         name: "Digital Marketing and Analytics - Master Program",
+        slug: "digital-marketing-course",
         description: "Earn the globally recognized PMP certification.",
         governingBodies: [
           {
@@ -141,11 +154,13 @@ const courseCategories = [
     courses: [
       {
         name: "Python Programming",
+        slug: "python-course",
         description: "Master containerization and orchestration technologies.",
         governingBodies: [{ name: "Python Programming", logo: "/header_images/Python_Programming.png" }],
       },
       {
         name: "Java Programming",
+        slug: "java-course",
         description: "Automate CI/CD pipelines with Jenkins.",
         governingBodies: [{ name: "Java Programming", logo: "/header_images/Java_Programming.png" }],
       },
