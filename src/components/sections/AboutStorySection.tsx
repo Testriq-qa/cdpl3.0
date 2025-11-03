@@ -11,7 +11,7 @@ type Milestone = {
   bgColor: string;
   textColor: string;
 };
- 
+
 
 // Opaque, visible colors (no alpha fades)
 const ACCENT = "#6366f1";        // indigo-500
@@ -25,7 +25,7 @@ const AboutStorySection = memo(function AboutStorySection() {
     () => [
       { year: "2020", title: "The Spark", text: "Launched with a vision to revolutionize tech education.", bgColor: "blue-50", textColor: "blue-500" },
       { year: "2022", title: "Scaling Impact", text: "Expanded to include AI/ML and Automation pathways.", bgColor: "red-50", textColor: "red-500" },
-      { year: "2025", title: "Global Reach", text: "Empowering 20k+ learners with innovative learning tools.", bgColor: "green-50", textColor: "green-500" },
+      { year: "2025", title: "Global Reach", text: "Empowering 5k+ learners with innovative learning tools.", bgColor: "green-50", textColor: "green-500" },
     ],
     []
   );
@@ -172,9 +172,9 @@ const AboutStorySection = memo(function AboutStorySection() {
               {/* small stat row */}
               <div className="mt-6 grid grid-cols-2 sm:grid-cols-3 gap-3 text-center">
                 {[
-                  { label: "Learners", value: "20k+", color: "yellow-500", id: 1 },
+                  { label: "Learners", value: "5k+", color: "yellow-500", id: 1 },
                   { label: "Tracks", value: "4", color: "pink-600", id: 2 },
-                  { label: "Projects", value: "Capstone+", color: "purple-500", id: 3 },
+                  { label: "Capstone Projects", value: "90+", color: "purple-500", id: 3 },
                 ].map((s) => (
                   <div
                     key={s.label}
@@ -197,7 +197,7 @@ const AboutStorySection = memo(function AboutStorySection() {
         <div className="px-6 pb-8 sm:px-8 lg:px-10">
           <div className="mt-4 grid gap-6 sm:grid-cols-3">
             {[
-              { icon: <Users className="h-5 w-5" aria-hidden="true" />, h: "20k+ Learners", p: "Building a global community", bgColor: "purple-500", iconColor: "lime-600" },
+              { icon: <Users className="h-5 w-5" aria-hidden="true" />, h: "5k+ Learners", p: "Building a global community", bgColor: "purple-500", iconColor: "lime-600" },
               { icon: <Rocket className="h-5 w-5" aria-hidden="true" />, h: "Job-Ready Skills", p: "Hands-on projects & mentorship", bgColor: "orange-500", iconColor: "orange-600" },
               { icon: <Sparkles className="h-5 w-5" aria-hidden="true" />, h: "Innovative Pathways", p: "Tailored for tech’s future", bgColor: "yellow-500", iconColor: "teal-600" },
             ].map(({ icon, h, p, bgColor }) => (

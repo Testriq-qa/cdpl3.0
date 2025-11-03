@@ -83,35 +83,35 @@ const specialties: Array<{
   tags: string[];
   tone: PaletteKey;
 }> = [
-  {
-    title: "Manual & Automation Testing",
-    desc: "Selenium, Playwright, Cypress, and BDD frameworks aligned with enterprise QA.",
-    icon: ShieldCheck,
-    tags: ["Selenium", "Playwright", "Cypress", "BDD", "Jest"],
-    tone: "red",
-  },
-  {
-    title: "API Testing & Tooling",
-    desc: "Postman, REST & GraphQL testing, contract tests, and CI automation.",
-    icon: BookOpen,
-    tags: ["Postman", "REST", "GraphQL", "Newman", "Pact"],
-    tone: "blue",
-  },
-  {
-    title: "Performance & Reliability",
-    desc: "Load, stress, and soak testing with stakeholder-ready reporting.",
-    icon: Target,
-    tags: ["k6", "JMeter", "APM", "SLOs"],
-    tone: "green",
-  },
-  {
-    title: "Data & GenAI in QA",
-    desc: "Data validation, test data design, and safe GenAI-assisted authoring.",
-    icon: Cpu,
-    tags: ["Python", "Pandas", "Prompting", "RAG", "Security"],
-    tone: "purple",
-  },
-];
+    {
+      title: "Manual & Automation Testing",
+      desc: "Selenium, Playwright, Cypress, and BDD frameworks aligned with enterprise QA.",
+      icon: ShieldCheck,
+      tags: ["Selenium", "Playwright", "Cypress", "BDD", "Jest"],
+      tone: "red",
+    },
+    {
+      title: "API Testing & Tooling",
+      desc: "Postman, REST & GraphQL testing, contract tests, and CI automation.",
+      icon: BookOpen,
+      tags: ["Postman", "REST", "GraphQL", "Newman", "Pact"],
+      tone: "blue",
+    },
+    {
+      title: "Performance & Reliability",
+      desc: "Load, stress, and soak testing with stakeholder-ready reporting.",
+      icon: Target,
+      tags: ["k6", "JMeter", "APM", "SLOs"],
+      tone: "green",
+    },
+    {
+      title: "Data & GenAI in QA",
+      desc: "Data validation, test data design, and safe GenAI-assisted authoring.",
+      icon: Cpu,
+      tags: ["Python", "Pandas", "Prompting", "RAG", "Security"],
+      tone: "purple",
+    },
+  ];
 
 // =============================
 // Component
@@ -191,12 +191,12 @@ export default function TeamCultureSection() {
         style={{ boxShadow: "0 30px 80px -30px rgba(255,140,0,0.18)" }}
       >
         <div className="text-center rounded-2xl shadow-xl p-1 border border-pink-700">
-          <p className="text-3xl font-bold text-pink-700">20k+</p>
+          <p className="text-3xl font-bold text-pink-700">5k+</p>
           <p className="text-slate-700">Learners Trained</p>
         </div>
 
         <div className="text-center rounded-2xl shadow-xl p-1 border border-purple-700">
-          <p className="text-3xl font-bold text-purple-700">250+</p>
+          <p className="text-3xl font-bold text-purple-700">50+</p>
           <p className="text-slate-700">Hiring Partner Referrals</p>
         </div>
 

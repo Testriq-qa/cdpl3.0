@@ -92,7 +92,7 @@ export default function AboutStatsSection() {
             [
                 {
                     label: "Learners Trained",
-                    target: 10000,
+                    target: 5000,
                     suffix: "k+" as Suffix,
                     desc: "Upskilled in software testing, data science & AI/ML",
                     color: "#DB2777", // pink-600
@@ -100,7 +100,7 @@ export default function AboutStatsSection() {
                 },
                 {
                     label: "Hiring Partners",
-                    target: 120,
+                    target: 50,
                     suffix: "+" as Suffix,
                     desc: "Product companies, startups & global tech leaders",
                     color: "#228B22", // amber-500

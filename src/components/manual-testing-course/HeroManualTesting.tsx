@@ -245,7 +245,7 @@ export default function HeroManualTesting() {
                                         color="bg-indigo-50 text-indigo-700"
                                         icon={<Clock className="h-6 w-6 text-indigo-700" />}
                                         label="Training Hours"
-                                        value="100+"
+                                        value="Refer Branches"
                                     />
                                     <SnapshotItem
                                         color="bg-emerald-50 text-emerald-700"
@@ -257,7 +257,7 @@ export default function HeroManualTesting() {
                                         color="bg-amber-50 text-amber-700"
                                         icon={<GraduationCap className="h-6 w-6 text-amber-700" />}
                                         label="ISTQB Included"
-                                        value="Yes"
+                                        value="Yes (with additonial fees)"
                                     />
                                     <SnapshotItem
                                         color="bg-rose-50 text-rose-700"

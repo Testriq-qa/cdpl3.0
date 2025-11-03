@@ -120,11 +120,10 @@ export default function MentorOutcomesSection() {
                   setTab(d);
                   setActiveIdx(0);
                 }}
-                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
-                  active
-                    ? "border-zinc-300 text-zinc-900 shadow-sm"
-                    : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
-                }`}
+                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${active
+                  ? "border-zinc-300 text-zinc-900 shadow-sm"
+                  : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
+                  }`}
                 style={active ? { backgroundImage: GRADIENT_BRAND } : {}}
                 aria-pressed={active}
               >
@@ -147,7 +146,7 @@ export default function MentorOutcomesSection() {
                 "absolute -right-6 -top-6 h-20 w-20 rounded-full bg-orange-200/40",
             },
             {
-              num: "3.1x",
+              num: "1.5x",
               label: "Avg. salary jump (select tracks)",
               cls: "text-indigo-600",
               card:
@@ -156,7 +155,7 @@ export default function MentorOutcomesSection() {
                 "absolute -left-6 -bottom-6 h-24 w-24 rounded-full bg-indigo-200/40",
             },
             {
-              num: "15–60d",
+              num: "30–90d",
               label: "Typical time-to-offer",
               cls: "text-emerald-600",
               card:
@@ -165,7 +164,7 @@ export default function MentorOutcomesSection() {
                 "absolute -right-8 bottom-0 h-24 w-24 rounded-full bg-emerald-200/40",
             },
             {
-              num: "150+",
+              num: "50+",
               label: "Active hiring partners",
               cls: "text-sky-600",
               card:
@@ -427,9 +426,8 @@ function Orbit({
                 <img
                   src={c.avatar}
                   alt=""
-                  className={`h-14 w-14 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${
-                    isActive ? "scale-105" : "scale-100"
-                  }`}
+                  className={`h-14 w-14 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${isActive ? "scale-105" : "scale-100"
+                    }`}
                   loading="lazy"
                 />
               </button>
@@ -455,9 +453,8 @@ function Orbit({
               <img
                 src={c.avatar}
                 alt=""
-                className={`h-20 w-20 lg:h-24 lg:w-24 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${
-                  isActive ? "scale-[1.06]" : "scale-100"
-                }`}
+                className={`h-20 w-20 lg:h-24 lg:w-24 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${isActive ? "scale-[1.06]" : "scale-100"
+                  }`}
                 loading="lazy"
                 style={{
                   boxShadow: isActive

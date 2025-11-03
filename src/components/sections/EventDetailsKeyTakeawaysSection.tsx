@@ -5,7 +5,7 @@ export default function EventDetailsKeyTakeawaysSection({ takeaways, fullWidth =
   const wrap = fullWidth ? "max-w-none px-0" : "max-w-7xl px-4 sm:px-6 lg:px-8";
 
   return (
-    <section className="w-full bg-gradient-to-br from-neutral-50 to-white text-neutral-900">
+    <section className="w-full text-neutral-900">
       <div className={`mx-auto ${wrap} py-10`}>
         {/* Clean filled gradient (emerald → teal), dark text for legibility */}
         <div

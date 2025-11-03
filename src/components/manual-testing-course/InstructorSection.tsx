@@ -217,9 +217,9 @@ export default function InstructorSection() {
             <div className="space-y-6">
               {/* Stats */}
               <div className="grid justify-center md:grid-cols-2 gap-4">
-                <Stat label="Students Trained" value="3,000+" sublabel="Across 12 countries" accent="indigo" />
-                <Stat label="Placement Rate" value="95%" sublabel="Interview prep + referrals" accent="emerald" />
-                <Stat label="Avg. Salary Hike" value="2.1×" sublabel="After course completion" accent="amber" />
+                <Stat label="Students Trained" value="5,000+" sublabel="Across 12 countries" accent="indigo" />
+                <Stat label="Placement Rate" value="92%" sublabel="Interview prep + referrals" accent="emerald" />
+                <Stat label="Avg. Salary Hike" value="1.5×" sublabel="After course completion" accent="amber" />
                 <Stat label="Industry Projects" value="10+" sublabel="E-com • BFSI • HealthTech" accent="cyan" />
               </div>
 

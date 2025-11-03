@@ -243,19 +243,19 @@ const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ data = mockData }) 
                 {/* Author */}
                 {(whyChooseContent.testimonial?.author ||
                   whyChooseContent.testimonial?.role) && (
-                  <motion.div className="space-y-1 sm:space-y-2" variants={itemVariants}>
-                    {whyChooseContent.testimonial?.author && (
-                      <p className="text-base sm:text-lg font-bold text-white">
-                        {whyChooseContent.testimonial.author}
-                      </p>
-                    )}
-                    {whyChooseContent.testimonial?.role && (
-                      <p className="text-sm sm:text-base text-emerald-100">
-                        {whyChooseContent.testimonial.role}
-                      </p>
-                    )}
-                  </motion.div>
-                )}
+                    <motion.div className="space-y-1 sm:space-y-2" variants={itemVariants}>
+                      {whyChooseContent.testimonial?.author && (
+                        <p className="text-base sm:text-lg font-bold text-white">
+                          {whyChooseContent.testimonial.author}
+                        </p>
+                      )}
+                      {whyChooseContent.testimonial?.role && (
+                        <p className="text-sm sm:text-base text-emerald-100">
+                          {whyChooseContent.testimonial.role}
+                        </p>
+                      )}
+                    </motion.div>
+                  )}
               </div>
             </div>
           </motion.div>
@@ -270,8 +270,8 @@ const WhyChooseSection: React.FC<WhyChooseSectionProps> = ({ data = mockData }) 
           viewport={{ once: true, margin: "-50px" }}
         >
           {[
-            { number: "500+", label: "Students Trained" },
-            { number: "95%", label: "Job Placement" },
+            { number: "5000+", label: "Students Trained" },
+            { number: "92%", label: "Job Placement" },
             { number: "10+", label: "Years Experience" },
             { number: "24/7", label: "Mentor Support" },
           ].map((stat, index) => (

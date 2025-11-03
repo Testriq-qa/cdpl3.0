@@ -4,10 +4,10 @@ import { motion, Variants } from "framer-motion";
 import { Users, TrendingUp, MapPin, ShieldCheck } from "lucide-react";
 
 const stats = [
-  { icon: Users, label: "Learners Placed", value: "1,000+" },
-  { icon: TrendingUp, label: "Avg Package Growth", value: "2.1×" },
-  { icon: MapPin, label: "Cities Covered", value: "30+" },
-  { icon: ShieldCheck, label: "Hiring Partners", value: "120+" },
+  { icon: Users, label: "Learners Placed", value: "500+" },
+  { icon: TrendingUp, label: "Avg Package Growth", value: "1.5×" },
+  { icon: MapPin, label: "Cities Covered", value: "50+" },
+  { icon: ShieldCheck, label: "Hiring Partners", value: "50+" },
 ];
 
 // micro-interactions

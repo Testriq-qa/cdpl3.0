@@ -159,9 +159,9 @@ export default function JobsLiveJobsWhyWePostJobsSection() {
         {/* KPIs (numbers have different colors per card) */}
         <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
-            { v: "45+", l: "Expert mentors", cls: "text-orange-600" },
-            { v: "1,000+", l: "Learners guided", cls: "text-indigo-600" },
-            { v: "30+", l: "Hiring partners", cls: "text-emerald-600" },
+            { v: "60+", l: "Expert mentors", cls: "text-orange-600" },
+            { v: "5000+", l: "Learners guided", cls: "text-indigo-600" },
+            { v: "50+", l: "Hiring partners", cls: "text-emerald-600" },
             { v: "4.9/5", l: "Avg. mentor rating", cls: "text-sky-600" },
           ].map(({ v, l, cls }) => (
             <div
