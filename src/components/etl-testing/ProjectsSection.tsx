@@ -75,7 +75,7 @@ export default function ProjectsSection() {
           className="text-center mb-10 sm:mb-14"
         >
           <h2 id="projects-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-            Test Real <span className="text-[#00758F]">ETL Pipelines</span>
+            Test Real <span className="text-ST">ETL Pipelines</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Work on <strong>enterprise-grade data flows</strong> used by banks, e-commerce leaders, and healthcare providers.

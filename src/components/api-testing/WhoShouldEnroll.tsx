@@ -78,7 +78,7 @@ export default function WhoShouldEnroll() {
             Beginner-friendly • No coding required
           </p>
           <h2 id="enroll-heading" className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-            Who Is This <span className="text-brand">For?</span>
+            Who Is This <span className="text-ST">For</span>?
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Ideal for <strong>career switchers</strong>, <strong>fresh graduates</strong>, <strong>job seekers</strong>, and

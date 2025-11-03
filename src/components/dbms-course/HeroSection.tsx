@@ -98,9 +98,9 @@ export default function HeroSection() {
                         {/* H1 */}
                         <h1
                             id="mysql-hero"
-                            className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
+                            className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
                         >
-                            <span className='text-brand'>Database Management</span> System using <span className="text-[#00758F]">MySQL</span>
+                            Database Management System using <span className="text-ST">MySQL</span>
                         </h1>
 
                         {/* Mobile form just below H1 */}

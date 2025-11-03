@@ -48,19 +48,19 @@ export default function CtaSection() {
           className="text-center"
         >
           {/* trust chip */}
-          <p className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700">
+          <p className="mx-auto mb-6 inline-flex items-center gap-2 shadow-md rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700">
             <BadgeCheck className="h-4 w-4 text-emerald-600" />
             Mentor-led • Job Assistance • QR-Verified Certificate
           </p>
 
           <h2
             id="cta-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Become an <span className="text-[#00758F]">ETL Testing</span> Expert
+            Become an <span className="text-ST">ETL Testing</span> Expert
           </h2>
 
-          <p className="mt-3 text-sm sm:text-base text-slate-600">
+          <p className="mt-6 text-sm sm:text-base text-slate-600">
             Next cohort starts in <strong>3 days</strong>. Limited seats—talk to our admissions team or email us for the
             detailed syllabus, fees, and batch timings.
           </p>

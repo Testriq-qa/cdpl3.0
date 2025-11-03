@@ -74,7 +74,7 @@ export default function CareerSection() {
                         1,50,000+ openings • ₹5–12 LPA (India)
                     </p>
                     <h2 id="career-heading" className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-                        High-Paying <span className="text-[#00758F]">MySQL</span> Careers
+                        High-Paying <span className="text-ST">MySQL</span> Careers
                     </h2>
                     <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
                         Target roles across <strong>Data</strong>, <strong>Backend</strong>, and <strong>BI</strong> tracks.

@@ -59,8 +59,8 @@ export default function WhyMysqlSection() {
             <BadgeCheck className="h-4 w-4 text-emerald-600" />
             Beginner-friendly • Industry-relevant
           </p>
-          <h2 id="why-mysql-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-            Why Master <span className="text-[#00758F]">MySQL</span> in 2025?
+          <h2 id="why-mysql-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+            Why Master <span className="text-ST">MySQL</span> in 2025?
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Build production-ready skills for <strong>backend engineering</strong>, <strong>QA automation</strong>,{' '}

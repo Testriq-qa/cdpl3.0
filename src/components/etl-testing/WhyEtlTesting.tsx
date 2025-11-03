@@ -59,8 +59,8 @@ export default function WhyEtlTesting() {
             <BadgeCheck className="h-4 w-4 text-emerald-600" />
             2025 Ready • Industry-Validated Skills
           </p>
-          <h2 id="why-etl-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-            Why Master <span className="text-[#00758F]">ETL Testing</span> in 2025?
+          <h2 id="why-etl-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+            Why Master <span className="text-ST">ETL Testing</span> in 2025?
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Data powers every decision. <strong>ETL Testing</strong> ensures your datasets are{' '}

@@ -56,7 +56,7 @@ export default function TestimonialsSection() {
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <h2 id="projects-heading" className="text-3xl md:text-4xl text-center font-bold tracking-tight text-slate-900">
-                    Student Success <span className='text-brand'>Stories</span>
+                    Student Success <span className='text-ST'>Stories</span>
                 </h2>
 
                 {/* small SEO line */}

@@ -50,7 +50,7 @@ export default function CurriculumSection() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-4xl text-slate-900 text-center font-bold mb-4">
-        Industry-Ready <span className='text-[#00758F]'>MySQL</span> <span className='text-brand'>Curriculum</span>
+        Industry-Ready <span className='text-ST'>MySQL Curriculum</span>
       </h2>
 
         {/* SEO-supportive intro */}

@@ -87,8 +87,8 @@ export default function ProjectsSection() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="text-center mb-10 sm:mb-14"
         >
-          <h2 id="projects-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-            Build Your <span className='text-blue-700'>Portfolio</span> with <span className='text-orange-500'>Real Projects</span>
+          <h2 id="projects-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+            Build Your <span className='text-ST'>Portfolio</span> with <span className='text-ST'>Real Projects</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Practice <strong>API testing</strong>, <strong>automation</strong>, and <strong>security</strong> on realistic services.

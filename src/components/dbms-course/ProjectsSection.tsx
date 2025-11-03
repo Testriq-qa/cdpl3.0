@@ -90,7 +90,7 @@ export default function ProjectsSection() {
             Portfolio-ready • Industry use cases
           </p>
           <h2 id="projects-heading" className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-            Build <span className="text-brand">Real Databases</span>
+            Build <span className="text-ST">Real Databases</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Design, optimize, and deploy <strong>production-grade MySQL</strong> schemas. Practice{' '}

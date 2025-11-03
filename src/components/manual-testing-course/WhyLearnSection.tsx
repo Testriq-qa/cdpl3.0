@@ -90,7 +90,7 @@ export default function WhyLearnSection() {
                         id="why-learn-title"
                         className="mt-4 text-4xl font-bold text-gray-900"
                     >
-                        Why <span className="bg-gradient-to-br from-cyan-500 to-blue-600 bg-clip-text text-transparent">Manual Testing</span> in 2025?
+                        Why <span className="text-blue-700">Manual Testing</span> in 2025?
                     </h2>
                     <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                         The foundation of <strong>software quality assurance</strong> — high

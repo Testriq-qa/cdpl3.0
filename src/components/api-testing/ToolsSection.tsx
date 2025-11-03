@@ -131,7 +131,7 @@ export default function ToolsSection() {
                     className="text-center mb-10 sm:mb-14"
                 >
                     <h2 id="tools-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-                        Tools You’ll Master
+                        <span className='text-ST'>Tools</span> You’ll Master
                     </h2>
                     <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
                         Practice with industry-standard tools used by <strong>Fortune 500</strong> teams—perfect for{' '}

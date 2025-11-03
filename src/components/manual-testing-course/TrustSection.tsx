@@ -100,7 +100,7 @@ export default function TrustSection() {
                 {/* Header copy with SEO keywords */}
                 <div className="mx-auto max-w-3xl text-center">
                     <h2 className="text-3xl sm:text-4xl font-bold tracking-tight text-gray-900">
-                        Trusted Outcomes for <span className="text-emerald-800">Career-Ready Learning</span>
+                        Trusted Outcomes for <span className="text-blue-700">Career-Ready Learning</span>
                     </h2>
                     <p className="mt-3 text-gray-600">
                         Outcome-based programs with <strong>placement assistance</strong>,

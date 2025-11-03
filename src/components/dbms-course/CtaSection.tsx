@@ -56,7 +56,7 @@ export default function CtaSection() {
             id="cta-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Become a <span className="text-[#00758F]">MySQL</span> Expert Today
+            Become a <span className="text-ST">MySQL</span> Expert Today
           </h2>
 
           <p className="mt-3 text-sm sm:text-base text-slate-600">
