@@ -67,7 +67,7 @@ export default function WhyAdvancedTesting() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="text-center"
         >
-          <p className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700">
+          <p className="mx-auto mb-3 inline-flex items-center gap-2 shadow-md rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700">
             <BadgeCheck className="h-4 w-4 text-emerald-600" />
             Industry-ready • CI/CD-first • Automation-focused
           </p>
@@ -76,7 +76,7 @@ export default function WhyAdvancedTesting() {
             id="why-advanced-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Why Master <span className="text-[#00758F]">Advanced Software Testing</span> in 2025?
+            Why Master <span className="text-ST">Advanced Software Testing</span> in 2025?
           </h2>
 
           <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600 max-w-3xl mx-auto">

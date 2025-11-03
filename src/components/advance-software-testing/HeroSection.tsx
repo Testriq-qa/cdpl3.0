@@ -132,15 +132,9 @@ export default function HeroSection() {
                         {/* H1 */}
                         <h1
                             id="software-testing-hero"
-                            className="text-3xl font-bold leading-tight text-slate-900 md:text-4xl lg:text-5xl"
+                            className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
                         >
-                            Advanced{' '}
-                            <span className="text-brand">Software Testing</span>{' '}
-                            with <span className="text-[#7c3aed]">Selenium</span>,{' '}
-                            <span className="text-[#065f46]">Appium</span>,{' '}
-                            <span className="text-[#0ea5e9]">API</span>,{' '}
-                            <span className="text-[#1e3a8a]">Cypress</span> &{' '}
-                            <span className="text-[#b45309]">Performance</span>
+                           Advanced Software Testing with <span className='text-ST'>Selenium, Appium, API, Cypress & Performance</span>
                         </h1>
 
                         {/* FORM on mobile: directly below title */}
