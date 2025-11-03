@@ -29,7 +29,7 @@ export default function CtaSection() {
     <section
       id="contact"
       aria-labelledby="cta-heading"
-      className="relative py-14 sm:py-16 md:py-20"
+      className="relative py-14 md:py-10"
     >
       {/* Clean, light backdrop with subtle accents (no heavy/dark gradient) */}
       <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
@@ -52,7 +52,7 @@ export default function CtaSection() {
             id="cta-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Become a <span className="text-indigo-700">Full-Stack SDET</span>
+            Become a <span className="text-ST">Full-Stack SDET</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             Next cohort starts in <strong>2 days</strong>. Limited seats—mentor-led, project-driven learning with

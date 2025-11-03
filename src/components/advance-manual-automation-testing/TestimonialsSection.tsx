@@ -94,7 +94,7 @@ export default function TestimonialsSection() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl text-center text-slate-900 font-bold mb-4">
-          Student Success Stories
+          Student <span className='text-ST'>Success Stories</span>
         </h2>
 
         <p className='text-slate-600 text-center text-lg'>Join 6000+ QA engineers placed in top firms</p>

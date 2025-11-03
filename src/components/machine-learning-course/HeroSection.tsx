@@ -67,10 +67,9 @@ export default function HeroSection() {
 
             <h1
               id="ml-hero"
-              className="font-bold md:font-extrabold md:leading-14 text-slate-900 text-4xl md:text-5xl"
+              className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
             >
-              Master Program in{" "}
-              <span className="text-brand">Machine Learning </span> & <span className="text-blue-700">Data Science</span> with <span className="text-green-700">Python</span>
+              Master Program in <span className="text-DS">Machine Learning</span> & <span className="text-DS">Data Science</span> with <span className="text-DS">Python</span>
             </h1>
 
             {/* Mobile form directly under headline */}

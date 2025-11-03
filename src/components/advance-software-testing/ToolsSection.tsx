@@ -68,9 +68,9 @@ export default function ToolsSection() {
         >
           <h2
             id="tools-heading"
-            className="text-[1.65rem] sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Tools You’ll <span className="text-[#00758F]">Master</span>
+            <span className='text-ST'>Tools</span> You’ll Master
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Master an industry-proven <strong>SDET toolchain</strong> — build stable frameworks, integrate with{' '}

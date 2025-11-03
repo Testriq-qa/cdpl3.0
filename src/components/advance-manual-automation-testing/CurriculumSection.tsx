@@ -55,7 +55,7 @@ export default function CurriculumSection() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl text-slate-900 text-center font-bold mb-4">
-        Complete QA Master Curriculum
+        Complete <span className='text-ST'>QA Master Curriculum</span>
       </h2>
 
       <p className='text-slate-600 text-lg text-center'>Manual to Automation - 40 hours of elite, job-ready training</p>

@@ -70,10 +70,7 @@ export default function ToolsSection() {
             id="tools-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Tools & Technologies{" "}
-            <span className="underline decoration-[.18rem] underline-offset-4 decoration-indigo-400">
-              You’ll Master
-            </span>
+            <span className="text-DS">Tools</span> & <span className="text-DS">Technologies</span> You’ll Master
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             A job-ready <strong>AI/ML stack</strong> for real projects: modeling, MLOps, APIs, and

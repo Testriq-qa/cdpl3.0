@@ -12,6 +12,7 @@ import {
   Cpu,
   LineChart,
 } from "lucide-react";
+import Link from "next/link";
 import { useMemo } from "react";
 
 export default function WhyGenAIProgram() {
@@ -151,7 +152,7 @@ export default function WhyGenAIProgram() {
             id="why-genai-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
           >
-            Deep Learning, NLP &amp; Generative AI with Python
+            <span className="text-DS">Deep Learning</span>, <span className="text-DS">NLP</span> & <span className="text-DS">Generative AI</span> with <span className="text-DS">Python</span>
           </h1>
           <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-4xl mx-auto">
             An advanced, practical program to{" "}
@@ -256,15 +257,15 @@ export default function WhyGenAIProgram() {
             </dl>
 
             <div className="mt-6 border-t border-gray-200 pt-6">
-              <a
-                href="#apply"
+              <Link
+                href="contact-us"
                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
                            bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                 aria-label="Apply now for Deep Learning, NLP & Generative AI with Python"
               >
                 Apply Now
                 <Rocket className="w-4 h-4 text-white" aria-hidden="true" />
-              </a>
+              </Link>
               <p className="mt-3 text-xs text-gray-600">
                 You’ll receive a detailed syllabus and a readiness checklist to ensure
                 the best learning path for your background.

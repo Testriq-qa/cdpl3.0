@@ -57,7 +57,7 @@ export default function StatsSection() {
             id="stats-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Real-World <span className="text-brand">QA</span> & <span className='text-indigo-700'>SDET</span> Metrics
+            Real-World <span className="text-ST">QA</span> & <span className='text-ST'>SDET</span> Metrics
           </h2>
           <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600">
             Up-to-date insights on <strong>QA jobs in India</strong>, typical <strong>SDET salaries</strong>,{" "}

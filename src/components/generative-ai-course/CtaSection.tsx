@@ -1,6 +1,8 @@
 // components/sections/CtaSection.tsx
 // Server component — clean, modern CTA with subtle futuristic accents and SEO.
 
+import Link from "next/link";
+
 export default function CtaSection() {
   const seoKeywords =
     "enroll deep learning course, generative ai certification, nlp training india, machine learning jobs assistance, python ai program, data science placement support, llm course with projects";
@@ -24,9 +26,10 @@ export default function CtaSection() {
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
             Ready to Master{" "}
-            <span className="underline decoration-[.18rem] underline-offset-4 decoration-indigo-400">
-              Deep Learning & AI
-            </span>
+            <span className="text-DS">
+              Deep Learning
+            </span> &{" "}
+            <span className="text-DS">AI</span>
             ?
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
@@ -65,7 +68,7 @@ export default function CtaSection() {
 
         {/* Primary CTAs (unique colors, accessible focus states) */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
+          <Link
             href="tel:+917888383788"
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-indigo-700 bg-indigo-700 px-5 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.25)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-indigo-300 sm:w-auto"
             aria-label="Call to enroll in the Deep Learning & AI course"
@@ -81,9 +84,9 @@ export default function CtaSection() {
               />
             </svg>
             Call: +91 788-83-83-788
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="mailto:contact@cinutedigital.com"
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-900 bg-white px-5 py-3 text-base font-semibold text-slate-900 shadow-[0_2px_0_0_rgba(15,23,42,0.15)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300 sm:w-auto"
             aria-label="Email to request the Deep Learning & AI brochure"
@@ -94,10 +97,10 @@ export default function CtaSection() {
               <path d="m22 6-10 7L2 6" stroke="currentColor" strokeWidth="2" />
             </svg>
             Email Us
-          </a>
+          </Link>
 
-          <a
-            href="#apply"
+          <Link
+            href="contact-us"
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-600 bg-emerald-600 px-5 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.2)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-emerald-300 sm:w-auto"
             aria-label="Apply now for the Deep Learning & AI program"
           >
@@ -111,7 +114,7 @@ export default function CtaSection() {
               />
             </svg>
             Apply Now
-          </a>
+          </Link>
         </div>
 
         {/* Micro trust note + WhatsApp */}
@@ -120,12 +123,12 @@ export default function CtaSection() {
         </p>
         <address className="mx-auto mt-6 max-w-3xl not-italic text-center text-xs text-slate-500">
           Prefer WhatsApp? Message{" "}
-          <a
+          <Link
             href="https://wa.me/917888383788"
             className="font-medium text-sky-700 underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-sky-300 rounded"
           >
             +91 788-83-83-788
-          </a>
+          </Link>
         </address>
       </div>
 

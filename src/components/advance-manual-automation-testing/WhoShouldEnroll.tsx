@@ -89,9 +89,9 @@ export default function WhoShouldEnroll() {
         >
           <h2
             id="who-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Who Should <span className="text-slate-700">Enroll</span>?
+            Who Should <span className="text-ST">Enroll</span>?
           </h2>
           <p className="mx-auto mt-3 max-w-3xl text-sm sm:text-base text-slate-600">
             No prior experience required. Ideal for <strong>career switchers</strong>,{' '}
