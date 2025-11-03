@@ -1,9 +1,11 @@
+// app/services/[slug]/page.tsx
 import { getServiceBySlug } from '@/data/servicesData';
 import { getEventsByService } from '@/data/eventsData';
 import dynamic from 'next/dynamic';
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import type { ServiceClient } from '@/types/service';
+import { generateSEO, generateBreadcrumbSchema } from '@/lib/seo';
 
 // --- infer the concrete service type from your data function ---
 type TrainingService = ReturnType<typeof getServiceBySlug> extends infer T
@@ -86,28 +88,64 @@ const ServiceDetailCTASection = dynamic(
   { ssr: true, loading: () => <SectionLoader label="Loading call-to-action..." /> }
 );
 
-// ---------- Metadata for SEO ----------
+// ============================================================================
+// ENHANCED METADATA GENERATION FOR SEO
+// ============================================================================
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> }
 ): Promise<Metadata> {
   const { slug } = await params;
   const service = getServiceBySlug(slug);
-  if (!service) return { title: 'Service Not Found | Cinute Digital', robots: { index: false } };
+  
+  if (!service) {
+    return { 
+      title: 'Service Not Found | 404 - CDPL',
+      description: 'The requested service page could not be found. Browse our available training services and corporate programs.',
+      robots: { 
+        index: false,
+        follow: true 
+      }
+    };
+  }
 
-  const title = `${service.title} Training & Corporate Programs | Cinute Digital`;
-  const description = `${service.tagline} — ${service.shortDescription} Learn ${service.title} with industry projects, mentor-led classes, and job-ready skills.`;
-  const url = `/services/${slug}`;
+  // Extract keywords from service data
+  const extras = service as unknown as { keywords?: string[] };
+  const serviceKeywords = extras.keywords || [];
 
-  return {
-    title,
-    description,
-    alternates: { canonical: url },
-    openGraph: { title, description, url, type: 'article', siteName: 'Cinute Digital' },
-    twitter: { card: 'summary_large_image', title, description },
-  };
+  // Build comprehensive keywords array
+  const keywords = [
+    service.title,
+    `${service.title} training`,
+    `${service.title} course`,
+    `${service.title} corporate training`,
+    `${service.title} workshop`,
+    `${service.title} certification`,
+    ...serviceKeywords,
+    'CDPL training',
+    'corporate training India',
+    'professional development',
+    'skill development',
+    'industry training',
+    'hands-on training',
+    'mentor-led training',
+    'job-ready skills',
+    'Cinute Digital training'
+  ];
+
+  // Generate enhanced metadata using SEO utility
+  return generateSEO({
+    title: `${service.title} Training & Corporate Programs | CDPL`,
+    description: `${service.tagline} — ${service.shortDescription} Learn ${service.title} with industry projects, mentor-led classes, and job-ready skills at CDPL.`,
+    keywords,
+    url: `/services/${slug}`,
+    image: `/og-images/og-service-${slug}.webp`,
+    type: 'article'
+  });
 }
 
-// ---------- Page (server component) ----------
+// ============================================================================
+// PAGE COMPONENT WITH ENHANCED STRUCTURED DATA
+// ============================================================================
 export default async function ServiceDetailPage(
   { params }: { params: Promise<{ slug: string }> }
 ) {
@@ -120,31 +158,177 @@ export default async function ServiceDetailPage(
   // map to client-safe shape (no Record<string, unknown> cast; no destructuring of icon)
   const serviceForClient = toClientService(service);
 
-  // JSON-LD structured data for SEO
+  // ============================================================================
+  // ENHANCED STRUCTURED DATA (JSON-LD)
+  // ============================================================================
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Services", url: "/services" },
+    { name: service.title, url: `/services/${slug}` }
+  ]);
+
   const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Course',
-    name: service.title,
-    description: service.fullDescription || service.shortDescription,
-    provider: { '@type': 'Organization', name: 'Cinute Digital', sameAs: 'https://cinutedigital.com' },
+    "@context": "https://schema.org",
+    "@graph": [
+      // BreadcrumbList Schema
+      breadcrumbSchema,
+      
+      // Course Schema - Enhanced
+      {
+        "@type": "Course",
+        "@id": `https://www.cinutedigital.com/services/${slug}#course`,
+        "name": service.title,
+        "description": service.fullDescription || service.shortDescription,
+        "provider": {
+          "@type": "Organization",
+          "name": "CDPL - Cinute Digital Pvt. Ltd.",
+          "url": "https://www.cinutedigital.com",
+          "logo": {
+            "@type": "ImageObject",
+            "url": "https://www.cinutedigital.com/logo.png",
+            "width": 250,
+            "height": 60
+          },
+          "sameAs": [
+            "https://www.cinutedigital.com",
+            "https://twitter.com/cinutedigital"
+          ]
+        },
+        "url": `https://www.cinutedigital.com/services/${slug}`,
+        "image": `https://www.cinutedigital.com/og-images/og-service-${slug}.webp`,
+        "courseCode": slug.toUpperCase(),
+        "educationalLevel": "Professional Development",
+        "teaches": service.title,
+        "inLanguage": "en-IN",
+        "availableLanguage": ["en-IN", "hi-IN"],
+        "coursePrerequisites": "Basic understanding of professional concepts",
+        "occupationalCredentialAwarded": {
+          "@type": "EducationalOccupationalCredential",
+          "credentialCategory": "Certificate",
+          "name": `${service.title} Training Certificate`
+        },
+        ...(service.outcomes && service.outcomes.length > 0 && {
+          "courseOutcome": service.outcomes.map(outcome => ({
+            "@type": "DefinedTerm",
+            "name": outcome
+          }))
+        })
+      },
+
+      // Service Schema
+      {
+        "@type": "Service",
+        "@id": `https://www.cinutedigital.com/services/${slug}#service`,
+        "serviceType": service.title,
+        "name": `${service.title} Training`,
+        "description": service.fullDescription || service.shortDescription,
+        "provider": {
+          "@id": "https://www.cinutedigital.com/#organization"
+        },
+        "areaServed": {
+          "@type": "Country",
+          "name": "India"
+        },
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "serviceUrl": `https://www.cinutedigital.com/services/${slug}`,
+          "servicePhone": "+91-XXXXXXXXXX",
+          "availableLanguage": ["en-IN", "hi-IN"]
+        },
+        ...(service.features && service.features.length > 0 && {
+          "hasOfferCatalog": {
+            "@type": "OfferCatalog",
+            "name": `${service.title} Features`,
+            "itemListElement": service.features.map((feature, index) => ({
+              "@type": "Offer",
+              "position": index + 1,
+              "itemOffered": {
+                "@type": "Service",
+                "name": feature
+              }
+            }))
+          }
+        })
+      },
+
+      // WebPage Schema
+      {
+        "@type": "WebPage",
+        "@id": `https://www.cinutedigital.com/services/${slug}`,
+        "url": `https://www.cinutedigital.com/services/${slug}`,
+        "name": `${service.title} Training & Corporate Programs`,
+        "description": service.shortDescription,
+        "isPartOf": {
+          "@id": "https://www.cinutedigital.com/#website"
+        },
+        "breadcrumb": {
+          "@id": `https://www.cinutedigital.com/services/${slug}#breadcrumb`
+        },
+        "inLanguage": "en-IN",
+        "potentialAction": {
+          "@type": "ReadAction",
+          "target": `https://www.cinutedigital.com/services/${slug}`
+        }
+      },
+
+      // Organization Schema
+      {
+        "@type": "Organization",
+        "@id": "https://www.cinutedigital.com/#organization",
+        "name": "CDPL - Cinute Digital Pvt. Ltd.",
+        "url": "https://www.cinutedigital.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.cinutedigital.com/logo.png",
+          "width": 250,
+          "height": 60
+        },
+        "description": "Leading provider of professional training and corporate programs in technology and business skills.",
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://twitter.com/cinutedigital"
+        ]
+      }
+    ]
   };
 
   return (
     <>
-      <ServiceDetailHeroSection service={serviceForClient} />
-      <ServiceDetailAboutSection service={serviceForClient} />
-      <ServiceDetailStatsSection service={serviceForClient} />
-      <ServiceDetailFeaturesBenefitsSection service={serviceForClient} />
-      <ServiceDetailAudienceSection service={serviceForClient} />
-      <ServiceDetailOutcomesSection service={serviceForClient} />
-      <ServiceDetailMethodologySection service={serviceForClient} />
-      {pastEvents?.length > 0 && <ServiceDetailPastEventsSection events={pastEvents} />}
-      <ServiceDetailCTASection service={serviceForClient} />
+      {/* Enhanced JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
-      {/* JSON-LD script */}
-      <script type="application/ld+json" suppressHydrationWarning>
-        {JSON.stringify(jsonLd)}
-      </script>
+      {/* Semantic HTML Structure */}
+      <main 
+        className="overflow-hidden" 
+        itemScope 
+        itemType="https://schema.org/Course"
+      >
+        {/* Hidden metadata for schema.org */}
+        <meta itemProp="name" content={service.title} />
+        <meta itemProp="description" content={service.shortDescription} />
+        <meta itemProp="provider" content="CDPL - Cinute Digital Pvt. Ltd." />
+
+        {/* SEO-friendly H1 - Hidden visually but available for SEO */}
+        <h1 className="sr-only">
+          {service.title} Training & Corporate Programs by CDPL - {service.tagline}
+        </h1>
+
+        <ServiceDetailHeroSection service={serviceForClient} />
+        <ServiceDetailAboutSection service={serviceForClient} />
+        <ServiceDetailStatsSection service={serviceForClient} />
+        <ServiceDetailFeaturesBenefitsSection service={serviceForClient} />
+        <ServiceDetailAudienceSection service={serviceForClient} />
+        <ServiceDetailOutcomesSection service={serviceForClient} />
+        <ServiceDetailMethodologySection service={serviceForClient} />
+        {pastEvents?.length > 0 && <ServiceDetailPastEventsSection events={pastEvents} />}
+        <ServiceDetailCTASection service={serviceForClient} />
+      </main>
     </>
   );
 }

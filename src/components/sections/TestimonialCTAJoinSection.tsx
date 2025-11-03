@@ -56,7 +56,7 @@ export default function CTAJoinSection() {
 
             <div className="lg:col-span-5">
               <div className="grid grid-cols-2 gap-3 sm:gap-4">
-                <StatCard kpi="1000+" label="alumni placed" tone="orange" />
+                <StatCard kpi="500+" label="alumni placed" tone="orange" />
                 <StatCard kpi="94%" label="job-ready projects" tone="sky" />
                 <StatCard kpi="6–12w" label="to first offer" tone="emerald" />
                 <StatCard kpi="1:1" label="mentor reviews" tone="violet" />

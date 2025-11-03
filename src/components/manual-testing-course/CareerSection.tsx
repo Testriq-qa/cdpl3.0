@@ -8,7 +8,6 @@ import {
   Building2,
   Star,
   TrendingUp,
-  Sparkles,
   IndianRupee,
   ArrowRight,
   ShieldCheck,
@@ -50,7 +49,7 @@ const JobRole = ({ role, salary, keywords = [] }: JobRoleProps) => (
 type CompanyBadgeProps = { name: string; logoSrc?: string };
 
 const CompanyBadge = ({ name, logoSrc }: CompanyBadgeProps) => (
-  
+
   <div
     className="flex items-center justify-center rounded-xl border border-gray-200 bg-white px-3 py-3 hover:shadow-sm hover:border-indigo-300 transition-all"
     aria-label={`Hiring partner ${name}`}
@@ -131,13 +130,13 @@ type Company = { name: string; logoSrc?: string };
 
 export default function CareerSection() {
   const companies: Company[] = [
-  { name: "Axiom", logoSrc: "/company_images/axiom.webp" },
-  { name: "Credility", logoSrc: "/company_images/credility.webp" },
-  { name: "Marqetrix", logoSrc: "/company_images/marqetrix.webp" },
-  { name: "Raw Engineering", logoSrc: "/company_images/raw_engineering.webp" },
-  { name: "Vistaar", logoSrc: "/company_images/vistaar.webp" },
-  { name: "Testriq", logoSrc: "/company_images/Testriq-Logo-Black.webp" },
-];
+    { name: "Axiom", logoSrc: "/company_images/axiom.webp" },
+    { name: "Credility", logoSrc: "/company_images/credility.webp" },
+    { name: "Marqetrix", logoSrc: "/company_images/marqetrix.webp" },
+    { name: "Raw Engineering", logoSrc: "/company_images/raw_engineering.webp" },
+    { name: "Vistaar", logoSrc: "/company_images/vistaar.webp" },
+    { name: "Testriq", logoSrc: "/company_images/Testriq-Logo-Black.webp" },
+  ];
 
   const cities = [
     { city: "Bengaluru", range: "₹6–11 LPA" },
@@ -156,8 +155,7 @@ export default function CareerSection() {
   ];
 
   const snapshots = [
-    { label: "Avg. Interview Calls", value: "8–12", icon: <PhoneIcon className="h-5 w-5" />, bgIcon: "bg-sky-800" },
-    { label: "Offer Conversions", value: "3–5/wk", icon: <Sparkles className="h-5 w-5" />, bgIcon: "bg-green-800" },
+    { label: "Avg. Interview Calls", value: "5–10", icon: <PhoneIcon className="h-5 w-5" />, bgIcon: "bg-sky-800" },
     { label: "Alumni Network", value: "5,000+", icon: <Users className="h-5 w-5" />, bgIcon: "bg-red-800" },
     { label: "Hiring Partners", value: "50+", icon: <Building2 className="h-5 w-5" />, bgIcon: "bg-purple-800" },
   ];
@@ -196,7 +194,7 @@ export default function CareerSection() {
         </div>
 
         {/* KPI Snapshot */}
-        <div className="mb-12 grid grid-cols-2 sm:grid-cols-4 gap-3">
+        <div className="mb-12 grid grid-cols-2 md:grid-cols-3 gap-3">
           {snapshots.map((s) => (
             <div
               key={s.label}

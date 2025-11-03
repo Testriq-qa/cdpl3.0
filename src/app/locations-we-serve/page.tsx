@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 
 import LocationsClientMapSection from "@/components/sections/LocationsClientMapSection";
 import { buildLocationsHierarchy } from "@/data/courseData/buildLocationsHierarchy";
+import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
 // Types
 import type { CourseData } from "@/types/courseData";
@@ -13,45 +14,35 @@ import { courseData } from "@/types/courseData";
 
 /* -------------------------------- Loaders -------------------------------- */
 
-function SectionLoader({ label = "Loading..." }: { label?: string }) {
-  const color = label.includes("hero") ? "text-gray-500" : "text-blue-500";
-  return (
-    <div className="flex items-center justify-center py-16">
-      <p className={color}>{label}</p>
-    </div>
-  );
-}
+
 
 /* -------------------------- Dynamic (client) sections -------------------------- */
 
 const LocationsHeroSection = dynamic(
-  () => import("@/components/sections/LocationsHeroSection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading hero..." /> }
+  () => import("@/components/sections/LocationsHeroSection")
 );
 
 const HierarchicalLocationsSection = dynamic(
-  () => import("@/components/sections/LocationsHierarchicalLocationsSection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading locations..." /> }
+  () => import("@/components/sections/LocationsHierarchicalLocationsSection")
 );
 
 const LocationsBenefitsSection = dynamic(
-  () => import("@/components/sections/LocationsBenefitsSection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading benefits..." /> }
+  () => import("@/components/sections/LocationsBenefitsSection")
 );
 
 const LocationsCTASection = dynamic(
-  () => import("@/components/sections/LocationsCTASection"),
-  { ssr: true, loading: () => <SectionLoader label="Loading CTA..." /> }
+  () => import("@/components/sections/LocationsCTASection")
 );
 
 /* --------------------------------- Metadata --------------------------------- */
 
-export const metadata: Metadata = {
-  title: "Locations We Serve | Software Testing & Programming Courses in India & UAE",
+// ============================================================================
+// ENHANCED METADATA FOR SEO
+// ============================================================================
+export const metadata: Metadata = generateSEO({
+  title: "Locations We Serve | Software Testing & Programming Courses in India & UAE - CDPL",
   description:
-    "Explore our course locations across India and the UAE. Find the nearest center in Maharashtra, Karnataka, Delhi NCR, Dubai, Abu Dhabi, and more.",
-  alternates: { canonical: "/locations-we-serve" },
-  robots: { index: true, follow: true },
+    "Explore CDPL training centers across India and the UAE. Find the nearest software testing, programming, and QA courses in Maharashtra, Karnataka, Delhi NCR, Dubai, Abu Dhabi, and more. 50+ cities served.",
   keywords: [
     "software testing courses locations India",
     "programming training centers Maharashtra",
@@ -59,8 +50,23 @@ export const metadata: Metadata = {
     "coding bootcamps Delhi NCR",
     "software testing courses UAE",
     "programming training Dubai Abu Dhabi",
+    "CDPL training centers",
+    "Cinute Digital locations",
+    "software testing Mumbai",
+    "programming courses Pune",
+    "QA training Bangalore",
+    "coding courses Delhi",
+    "tech training Hyderabad",
+    "software courses Chennai",
+    "IT training Dubai",
+    "programming training Abu Dhabi",
+    "training centers India",
+    "course locations near me"
   ],
-};
+  url: "/locations-we-serve",
+  image: "/og-images/og-locations-we-serve.webp",
+  type: "website"
+});
 
 /* ------------------------------- Utilities ------------------------------- */
 
@@ -84,34 +90,177 @@ export default function LocationsWeServePage() {
   // Build Country → State → District("Cities") → City hierarchy
   const countriesData = buildLocationsHierarchy(courses);
 
+  // Extract unique locations for structured data
+  const uniqueStates = new Set<string>();
+  const uniqueCities = new Set<string>();
+  
+  courses.forEach(course => {
+    if (course.state) uniqueStates.add(course.state);
+    if (course.location) uniqueCities.add(course.location);
+  });
+
+  const statesArray = Array.from(uniqueStates);
+  const citiesArray = Array.from(uniqueCities);
+
+  // ============================================================================
+  // ENHANCED STRUCTURED DATA (JSON-LD)
+  // ============================================================================
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Locations We Serve", url: "/locations-we-serve" }
+  ]);
+
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@graph": [
+      // BreadcrumbList Schema
+      breadcrumbSchema,
+
+      // WebPage Schema
+      {
+        "@type": "WebPage",
+        "@id": "https://www.cinutedigital.com/locations-we-serve",
+        "url": "https://www.cinutedigital.com/locations-we-serve",
+        "name": "Locations We Serve | Software Testing & Programming Courses",
+        "description": "Explore CDPL training centers across India and the UAE. Find the nearest software testing, programming, and QA courses in 50+ cities.",
+        "isPartOf": {
+          "@id": "https://www.cinutedigital.com/#website"
+        },
+        "breadcrumb": {
+          "@id": "https://www.cinutedigital.com/locations-we-serve#breadcrumb"
+        },
+        "inLanguage": "en-IN",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://www.cinutedigital.com/locations-we-serve?search={search_term}",
+          "query-input": "required name=search_term"
+        }
+      },
+
+      // Organization Schema with Multiple Locations
+      {
+        "@type": "Organization",
+        "@id": "https://www.cinutedigital.com/#organization",
+        "name": "CDPL - Cinute Digital Pvt. Ltd.",
+        "url": "https://www.cinutedigital.com",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://www.cinutedigital.com/logo.png",
+          "width": 250,
+          "height": 60
+        },
+        "description": "Leading provider of software testing, programming, and professional training across India and UAE with 50+ locations.",
+        "areaServed": [
+          {
+            "@type": "Country",
+            "name": "India",
+            "containsPlace": statesArray.map(state => ({
+              "@type": "State",
+              "name": state
+            }))
+          },
+          {
+            "@type": "Country",
+            "name": "United Arab Emirates"
+          }
+        ],
+        "address": {
+          "@type": "PostalAddress",
+          "addressCountry": "IN"
+        },
+        "sameAs": [
+          "https://twitter.com/cinutedigital"
+        ]
+      },
+
+      // ItemList Schema for Locations
+      {
+        "@type": "ItemList",
+        "@id": "https://www.cinutedigital.com/locations-we-serve#locationlist",
+        "name": "CDPL Training Locations",
+        "description": "Complete list of cities where CDPL offers software testing and programming courses",
+        "numberOfItems": citiesArray.length,
+        "itemListElement": citiesArray.slice(0, 20).map((city, index) => ({
+          "@type": "ListItem",
+          "position": index + 1,
+          "item": {
+            "@type": "Place",
+            "name": city,
+            "address": {
+              "@type": "PostalAddress",
+              "addressLocality": city,
+              "addressCountry": "IN"
+            }
+          }
+        }))
+      },
+
+      // Service Schema
+      {
+        "@type": "Service",
+        "@id": "https://www.cinutedigital.com/locations-we-serve#service",
+        "serviceType": "Professional Training Services",
+        "name": "Software Testing & Programming Training",
+        "description": "Comprehensive training programs in software testing, programming, and professional development across multiple locations in India and UAE.",
+        "provider": {
+          "@id": "https://www.cinutedigital.com/#organization"
+        },
+        "areaServed": [
+          { "@type": "Country", "name": "India" },
+          { "@type": "Country", "name": "United Arab Emirates" }
+        ],
+        "availableChannel": {
+          "@type": "ServiceChannel",
+          "serviceUrl": "https://www.cinutedigital.com/locations-we-serve",
+          "availableLanguage": ["en-IN", "hi-IN", "en-AE", "ar-AE"]
+        }
+      }
+    ]
+  };
+
   return (
-    <div className="min-h-screen w-full bg-gradient-to-br from-slate-50 to-blue-50 transition-colors duration-300">
-      <LocationsHeroSection />
+    <>
+      {/* Enhanced JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
 
-      <section className="w-full mt-10">
-        {/* Pass the derived Country[] so both India and UAE render as top-level cards */}
-        <HierarchicalLocationsSection data={countriesData} />
-      </section>
+      {/* Semantic HTML Structure */}
+      <div 
+        className="min-h-screen w-full bg-gradient-to-br from-slate-50 to-blue-50 transition-colors duration-300"
+        itemScope
+        itemType="https://schema.org/WebPage"
+      >
+        {/* Hidden metadata for schema.org */}
+        <meta itemProp="name" content="Locations We Serve | CDPL Training Centers" />
+        <meta itemProp="description" content="Explore CDPL training centers across India and the UAE in 50+ cities." />
 
-      {/* Client-side interactive map */}
-      <LocationsClientMapSection />
+        {/* SEO-friendly H1 - Hidden visually but available for SEO */}
+        <h1 className="sr-only">
+          CDPL Locations We Serve - Software Testing & Programming Courses in India & UAE
+        </h1>
 
-      <section className="w-full mt-10">
-        <LocationsBenefitsSection />
-      </section>
+        <LocationsHeroSection />
 
-      <section className="w-full mt-10">
-        <LocationsCTASection />
-      </section>
-    </div>
+        <section className="w-full mt-10" aria-label="Training Locations by Country and State">
+          {/* Pass the derived Country[] so both India and UAE render as top-level cards */}
+          <HierarchicalLocationsSection data={countriesData} />
+        </section>
+
+        {/* Client-side interactive map */}
+        <section aria-label="Interactive Location Map">
+          <LocationsClientMapSection />
+        </section>
+
+        <section className="w-full mt-10" aria-label="Benefits of Our Locations">
+          <LocationsBenefitsSection />
+        </section>
+
+        <section className="w-full mt-10" aria-label="Contact Us">
+          <LocationsCTASection />
+        </section>
+      </div>
+    </>
   );
 }
-
-/* ---------------------------------------------------------------------------
-   Notes:
-   - `courseData` was a Record<string, CourseData>; we now convert it using
-     `Object.values()` in `normalizeCourses(...)`.
-   - If you later switch to an array export (e.g. `export default [...]`), the
-     same normalization works without code changes.
-   - `buildLocationsHierarchy` maps state→country to place India & UAE correctly.
---------------------------------------------------------------------------- */

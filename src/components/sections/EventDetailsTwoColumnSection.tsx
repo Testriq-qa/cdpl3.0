@@ -2,7 +2,6 @@
 import type { PastEvent } from "@/data/eventsData";
 
 // Reused sections
-import EventDetailsMetaSection from "./EventDetailsMetaSection";
 import EventDetailsStatsSection from "./EventDetailsStatsSection";
 import EventDetailsHighlightsSection from "./EventDetailsHighlightsSection";
 import EventDetailsKeyTakeawaysSection from "./EventDetailsKeyTakeawaysSection";
@@ -27,7 +26,6 @@ export default function EventDetailsTwoColumnSection({
       <div className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-10 sm:px-6 lg:grid-cols-3 lg:px-8">
         {/* LEFT: All content blocks */}
         <div className="lg:col-span-2 space-y-8">
-          <EventDetailsMetaSection event={event} fullWidth />
           <EventDetailsStatsSection
             attendees={Number(event.attendees) || 0}
             sessions={totalSessions}

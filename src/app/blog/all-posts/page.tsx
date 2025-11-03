@@ -4,20 +4,22 @@ import { getAllPosts, getAllCategories } from "@/data/BlogPostData";
 import Link from "next/link";
 import Image from "next/image";
 import { Calendar, Clock, User, ArrowRight } from "lucide-react";
+import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
 // ============================================================================
 // SEO METADATA - ENHANCED
 // ============================================================================
-export const metadata: Metadata = {
-  title: "All Blog Posts | Comprehensive Software Testing & Development Resources - 100+ Expert Articles",
-  description: "Explore our complete collection of 100+ expert articles on software testing, data science, web development, AI & machine learning, DevOps, and more. In-depth tutorials, best practices, and actionable insights from industry professionals. Updated weekly with fresh content.",
+export const metadata: Metadata = generateSEO({
+  title: "All Blog Posts | 100+ Software Testing & Development Resources - CDPL",
+  description: "Explore CDPL's complete collection of 100+ expert articles on software testing, data science, web development, AI & machine learning, DevOps, and more. In-depth tutorials, best practices, and actionable insights from industry professionals. Updated weekly with fresh content.",
   keywords: [
+    "CDPL blog",
     "software testing blog",
     "web development articles",
     "AI machine learning tutorials",
     "data science guides",
     "DevOps best practices",
-    "tech blog",
+    "tech blog India",
     "programming tutorials",
     "software development",
     "quality assurance",
@@ -31,53 +33,10 @@ export const metadata: Metadata = {
     "agile development",
     "software engineering blog"
   ],
-  authors: [{ name: 'Tech Experts Team', url: 'https://yoursite.com/about' }],
-  creator: 'Your Company',
-  publisher: 'Your Company',
-  metadataBase: new URL('https://yoursite.com'),
-  openGraph: {
-    title: "All Blog Posts | 100+ Software Testing & Development Resources",
-    description: "Comprehensive collection of expert articles covering software testing, web development, AI/ML, data science, and modern development practices. Learn from industry professionals.",
-    type: "website",
-    url: "https://yoursite.com/blog/all-posts",
-    siteName: 'Your Company Tech Blog',
-    images: [
-      {
-        url: '/blog/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'All Blog Posts - Software Testing and Development Resources',
-      },
-    ],
-    locale: 'en_US',
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "All Blog Posts | Software Testing & Development Resources",
-    description: "100+ expert articles on software testing, web development, AI/ML, and more.",
-    images: ['/blog/og-image.jpg'],
-    creator: '@yourcompany',
-    site: '@yourcompany',
-  },
-  alternates: {
-    canonical: "https://yoursite.com/blog/all-posts",
-    languages: {
-      'en-US': '/blog/all-posts',
-    },
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  category: 'Technology',
-};
+  url: "/blog/all-posts",
+  image: "/blog/og-image.jpg",
+  type: "website"
+});
 
 // ============================================================================
 // ALL POSTS PAGE COMPONENT
@@ -95,43 +54,52 @@ export default function AllPostsPage() {
   // ============================================================================
   // ENHANCED STRUCTURED DATA (JSON-LD)
   // ============================================================================
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Blog", url: "/blog" },
+    { name: "All Posts", url: "/blog/all-posts" }
+  ]);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
+      // BreadcrumbList Schema
+      breadcrumbSchema,
       // CollectionPage Schema
       {
         "@type": "CollectionPage",
-        "@id": "https://yoursite.com/blog/all-posts#collectionpage",
-        "url": "https://yoursite.com/blog/all-posts",
-        "name": "All Blog Posts - Software Testing & Development Resources",
-        "description": "Comprehensive collection of expert articles on software testing, web development, AI, data science, and modern development practices",
+        "@id": "https://www.cinutedigital.com/blog/all-posts#collectionpage",
+        "url": "https://www.cinutedigital.com/blog/all-posts",
+        "name": "All Blog Posts - Software Testing & Development Resources | CDPL",
+        "description": "Comprehensive collection of expert articles on software testing, web development, AI, data science, and modern development practices from CDPL",
         "isPartOf": {
-          "@id": "https://yoursite.com/blog#blog"
+          "@id": "https://www.cinutedigital.com/blog#blog"
         },
         "mainEntity": {
-          "@id": "https://yoursite.com/blog/all-posts#itemlist"
+          "@id": "https://www.cinutedigital.com/blog/all-posts#itemlist"
         },
         "breadcrumb": {
-          "@id": "https://yoursite.com/blog/all-posts#breadcrumb"
-        }
+          "@id": "https://www.cinutedigital.com/blog/all-posts#breadcrumb"
+        },
+        "inLanguage": "en-IN"
       },
       // ItemList Schema - All Posts
       {
         "@type": "ItemList",
-        "@id": "https://yoursite.com/blog/all-posts#itemlist",
-        "name": "All Blog Posts",
-        "description": `Collection of ${allPosts.length} expert articles`,
+        "@id": "https://www.cinutedigital.com/blog/all-posts#itemlist",
+        "name": "All Blog Posts - CDPL",
+        "description": `Collection of ${allPosts.length} expert articles from CDPL`,
         "numberOfItems": allPosts.length,
         "itemListElement": allPosts.map((post, index) => ({
           "@type": "ListItem",
           "position": index + 1,
           "item": {
             "@type": "BlogPosting",
-            "@id": `https://yoursite.com/blog/${post.slug}#article`,
+            "@id": `https://www.cinutedigital.com/blog/${post.slug}#article`,
             "headline": post.title,
             "description": post.description,
             "image": post.featuredImage,
-            "url": `https://yoursite.com/blog/${post.slug}`,
+            "url": `https://www.cinutedigital.com/blog/${post.slug}`,
             "datePublished": new Date(post.publishDate).toISOString(),
             "dateModified": post.lastModified 
               ? new Date(post.lastModified).toISOString()
@@ -142,52 +110,34 @@ export default function AllPostsPage() {
             },
             "publisher": {
               "@type": "Organization",
-              "name": "Your Company"
+              "name": "CDPL - Cinute Digital Pvt. Ltd.",
+              "logo": {
+                "@type": "ImageObject",
+                "url": "https://www.cinutedigital.com/logo.png",
+                "width": 250,
+                "height": 60
+              }
             },
             "articleSection": post.category,
-            "keywords": post.tags.join(', ')
+            "keywords": post.tags.join(', '),
+            "inLanguage": "en-IN"
           }
         }))
-      },
-      // BreadcrumbList Schema
-      {
-        "@type": "BreadcrumbList",
-        "@id": "https://yoursite.com/blog/all-posts#breadcrumb",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Home",
-            "item": "https://yoursite.com"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Blog",
-            "item": "https://yoursite.com/blog"
-          },
-          {
-            "@type": "ListItem",
-            "position": 3,
-            "name": "All Posts",
-            "item": "https://yoursite.com/blog/all-posts"
-          }
-        ]
       },
       // WebPage Schema
       {
         "@type": "WebPage",
-        "@id": "https://yoursite.com/blog/all-posts",
-        "url": "https://yoursite.com/blog/all-posts",
-        "name": "All Blog Posts",
-        "description": "Complete collection of expert articles on software development and testing",
+        "@id": "https://www.cinutedigital.com/blog/all-posts",
+        "url": "https://www.cinutedigital.com/blog/all-posts",
+        "name": "All Blog Posts - CDPL",
+        "description": "Complete collection of expert articles on software development and testing from CDPL",
         "isPartOf": {
-          "@id": "https://yoursite.com/#website"
+          "@id": "https://www.cinutedigital.com/#website"
         },
         "breadcrumb": {
-          "@id": "https://yoursite.com/blog/all-posts#breadcrumb"
+          "@id": "https://www.cinutedigital.com/blog/all-posts#breadcrumb"
         },
-        "inLanguage": "en-US"
+        "inLanguage": "en-IN"
       }
     ]
   };
@@ -202,6 +152,11 @@ export default function AllPostsPage() {
 
       {/* Semantic HTML Structure */}
       <div itemScope itemType="https://schema.org/CollectionPage">
+        {/* Hidden metadata for schema.org */}
+        <meta itemProp="name" content="All Blog Posts - CDPL" />
+        <meta itemProp="description" content={`Collection of ${allPosts.length} expert articles from CDPL`} />
+        <meta itemProp="url" content="https://www.cinutedigital.com/blog/all-posts" />
+
         {/* Category Menu */}
         <nav aria-label="Blog categories">
           <BlogCategoryMenu />
@@ -212,13 +167,13 @@ export default function AllPostsPage() {
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center max-w-4xl mx-auto">
               <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-                All Blog Posts - Expert Software Development & Testing Resources
+                All Blog Posts - Expert Software Development & Testing Resources from CDPL
               </h1>
               <p className="text-xl text-gray-700 mb-4 leading-relaxed">
-                Discover our comprehensive collection of {allPosts.length}+ expert articles covering software testing, web development, artificial intelligence, data science, and modern development practices. Our in-depth guides and tutorials help developers, testers, and tech professionals stay ahead in the rapidly evolving technology landscape.
+                Discover CDPL&apos;s comprehensive collection of {allPosts.length}+ expert articles covering software testing, web development, artificial intelligence, data science, and modern development practices. Our in-depth guides and tutorials help developers, testers, and tech professionals stay ahead in the rapidly evolving technology landscape.
               </p>
               <p className="text-lg text-gray-600 leading-relaxed">
-                Whether you&apos;re looking to master test automation, learn the latest web frameworks, dive into machine learning, or optimize your DevOps workflow, our curated content provides actionable insights and best practices from industry experts. Browse by category below or use the search feature to find exactly what you need.
+                Whether you&apos;re looking to master test automation, learn the latest web frameworks, dive into machine learning, or optimize your DevOps workflow, our curated content provides actionable insights and best practices from CDPL industry experts. Browse by category below or use the search feature to find exactly what you need.
               </p>
               
               {/* Stats Section for SEO */}
@@ -272,85 +227,96 @@ export default function AllPostsPage() {
           </div>
         </section>
 
-        {/* All Posts Grid */}
-        <main className="py-12 bg-gray-50" role="main">
+        {/* Main Content - All Posts Grouped by Category */}
+        <main className="bg-gray-50 py-12" role="main">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Introduction Text for SEO */}
-            <div className="mb-12 prose prose-lg max-w-none">
-              <p className="text-gray-700 leading-relaxed">
-                Our blog covers a wide range of topics essential for modern software development and quality assurance. From beginner-friendly tutorials to advanced technical deep-dives, each article is crafted by experienced professionals who share real-world insights and practical solutions. Explore articles on test automation frameworks, CI/CD pipelines, React and Next.js development, Python and JavaScript programming, machine learning algorithms, data analysis techniques, cloud infrastructure, and much more.
-              </p>
-            </div>
-
-            {/* Posts by Category */}
             {postsByCategory.map(({ category, posts }) => (
               <section key={category.id} className="mb-16">
-                <div className="flex items-center justify-between mb-6">
+                {/* Category Header */}
+                <div className="flex items-center justify-between mb-8">
                   <div>
-                    <h2 className="text-3xl font-bold text-gray-900 mb-2">{category.name}</h2>
+                    <h2 className="text-3xl font-bold text-gray-900 mb-2">
+                      {category.name}
+                    </h2>
                     <p className="text-gray-600">{category.description}</p>
                   </div>
                   <Link
                     href={`/blog/category/${category.slug}`}
-                    className="text-purple-600 hover:text-purple-700 font-medium flex items-center gap-2 whitespace-nowrap"
+                    className="flex items-center gap-2 text-purple-600 hover:text-purple-700 font-medium transition-colors"
                   >
-                    View All <ArrowRight className="w-4 h-4" />
+                    View All
+                    <ArrowRight className="w-4 h-4" />
                   </Link>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                {/* Posts Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                   {posts.map(post => (
                     <article
-                      key={post.id}
-                      className="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 group"
+                      key={post.slug}
+                      className="bg-white rounded-xl shadow-sm hover:shadow-md transition-shadow overflow-hidden group"
                       itemScope
                       itemType="https://schema.org/BlogPosting"
                     >
-                      <Link href={`/blog/${post.slug}`} className="block">
-                        <div className="relative h-48 bg-gray-200">
-                          <Image
-                            src={post.featuredImage}
-                            alt={`${post.title} - Featured Image`}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                          />
-                          <div className={`absolute top-4 left-4 px-3 py-1 ${category.color.bg} ${category.color.text} rounded-full text-xs font-semibold`}>
-                            {post.category}
-                          </div>
-                        </div>
-
-                        <div className="p-6">
-                          <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-purple-600 transition-colors line-clamp-2" itemProp="headline">
-                            {post.title}
-                          </h3>
-                          <p className="text-gray-600 mb-4 line-clamp-3 leading-relaxed" itemProp="description">
-                            {post.description}
-                          </p>
-
-                          <div className="flex items-center justify-between text-sm text-gray-500 pt-4 border-t border-gray-100">
-                            <div className="flex items-center gap-4">
-                              <time className="flex items-center gap-1" dateTime={post.publishDate} itemProp="datePublished">
-                                <Calendar className="w-4 h-4" />
-                                {new Date(post.publishDate).toLocaleDateString('en-US', { 
-                                  month: 'short', 
-                                  day: 'numeric',
-                                  year: 'numeric'
-                                })}
-                              </time>
-                              <span className="flex items-center gap-1">
-                                <Clock className="w-4 h-4" />
-                                {post.readTime}
-                              </span>
-                            </div>
-                          </div>
-
-                          <div className="flex items-center gap-2 mt-4">
-                            <User className="w-4 h-4 text-gray-400" />
-                            <span className="text-sm text-gray-600" itemProp="author">{post.author}</span>
-                          </div>
-                        </div>
+                      {/* Featured Image */}
+                      <Link href={`/blog/${post.slug}`} className="block relative h-48 overflow-hidden">
+                        <Image
+                          src={post.featuredImage}
+                          alt={post.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-300"
+                          itemProp="image"
+                        />
+                        {/* Category Badge */}
+                        <span className={`absolute top-4 left-4 px-3 py-1 ${category.color.bg} ${category.color.text} rounded-full text-xs font-medium`}>
+                          {category.name}
+                        </span>
                       </Link>
+
+                      {/* Post Content */}
+                      <div className="p-6">
+                        {/* Meta Information */}
+                        <div className="flex items-center gap-4 text-sm text-gray-500 mb-3">
+                          <span className="flex items-center gap-1">
+                            <Calendar className="w-4 h-4" />
+                            <time dateTime={post.publishDate} itemProp="datePublished">
+                              {new Date(post.publishDate).toLocaleDateString('en-IN', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                              })}
+                            </time>
+                          </span>
+                          <span className="flex items-center gap-1">
+                            <Clock className="w-4 h-4" />
+                            {post.readTime}
+                          </span>
+                        </div>
+
+                        {/* Title */}
+                        <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors" itemProp="headline">
+                          <Link href={`/blog/${post.slug}`}>
+                            {post.title}
+                          </Link>
+                        </h3>
+
+                        {/* Description */}
+                        <p className="text-gray-600 mb-4 line-clamp-2" itemProp="description">
+                          {post.description}
+                        </p>
+
+                        {/* Author */}
+                        <div className="flex items-center gap-2 text-sm text-gray-500">
+                          <User className="w-4 h-4" />
+                          <span itemProp="author" itemScope itemType="https://schema.org/Person">
+                            <span itemProp="name">{post.author}</span>
+                          </span>
+                        </div>
+
+                        {/* Hidden metadata */}
+                        <meta itemProp="url" content={`https://www.cinutedigital.com/blog/${post.slug}`} />
+                        <meta itemProp="publisher" content="CDPL - Cinute Digital Pvt. Ltd." />
+                      </div>
                     </article>
                   ))}
                 </div>
@@ -358,43 +324,7 @@ export default function AllPostsPage() {
             ))}
           </div>
         </main>
-
-        {/* Additional SEO Content Section */}
-        <aside className="bg-white py-16" role="complementary">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="prose prose-lg max-w-none">
-              <h2 className="text-3xl font-bold text-gray-900 mb-6">Why Read Our Blog?</h2>
-              <div className="grid md:grid-cols-2 gap-8 mb-8">
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">Expert Insights</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Our articles are written by experienced software engineers, QA professionals, and tech leaders who bring real-world expertise and practical knowledge to every topic. Learn from professionals who have solved the challenges you&apos;re facing.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">Practical Tutorials</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Every article includes actionable advice, code examples, and step-by-step guides that you can implement immediately. We focus on practical solutions that work in production environments.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">Latest Technologies</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    Stay current with the rapidly evolving tech landscape. We cover the latest frameworks, tools, and best practices in software development, testing, AI, and data science.
-                  </p>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-3">Comprehensive Coverage</h3>
-                  <p className="text-gray-700 leading-relaxed">
-                    From beginner tutorials to advanced technical deep-dives, our blog covers topics across the entire software development lifecycle, ensuring there&apos;s valuable content for every skill level.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </aside>
       </div>
     </>
   );
 }
-

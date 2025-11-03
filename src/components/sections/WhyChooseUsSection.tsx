@@ -106,7 +106,7 @@ const WhyChooseUsSection = () => {
     {
       icon: <HeartHandshake className="w-8 h-8" />,
       title: "Strong Alumni Network",
-      description: "Join a community of 10,000+ successful alumni working in top companies across the globe.",
+      description: "Join a community of 5,000+ successful alumni working in top companies across the globe.",
       color: "from-rose-500 to-rose-600",
       bgColor: "bg-rose-50",
     },
@@ -165,7 +165,7 @@ const WhyChooseUsSection = () => {
             </span>
           </h2>
           <p className="text-lg text-gray-600">
-            We don&apos;t just teach courses—we transform careers. Here&apos;s why thousands of 
+            We don&apos;t just teach courses—we transform careers. Here&apos;s why thousands of
             students trust us with their professional growth.
           </p>
         </div>
@@ -188,7 +188,7 @@ const WhyChooseUsSection = () => {
               Ready to Transform Your Career?
             </h3>
             <p className="text-lg text-white/90 mb-8">
-              Join thousands of successful students who have already accelerated their careers 
+              Join thousands of successful students who have already accelerated their careers
               with our industry-leading training programs.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">

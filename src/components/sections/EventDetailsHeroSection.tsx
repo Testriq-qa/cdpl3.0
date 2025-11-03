@@ -25,7 +25,7 @@ export default function EventDetailsHeroSection({ event }: Props) {
         <div className="absolute left-1/2 top-[-6rem] h-[30rem] w-[60rem] -translate-x-1/2 rounded-full blur-3xl opacity-30 bg-[radial-gradient(circle_at_center,theme(colors.indigo.200)_0,transparent_60%)]" />
       </div>
 
-      {/* Subtle sweep lines (kept) */}
+      {/* Subtle sweep lines */}
       <div className="pointer-events-none absolute inset-0 -z-10">
         <svg className="absolute left-0 top-0 h-full w-full">
           <defs>
@@ -38,7 +38,12 @@ export default function EventDetailsHeroSection({ event }: Props) {
           {[0, 90, 180, 270].map((y, i) => (
             <g key={i} transform={`translate(0, ${y})`}>
               <rect x="-45%" y="0" width="90%" height="1.5" fill="url(#event-line)">
-                <animate attributeName="x" values="-45%;65%;-45%" dur={`${14 + i * 2}s`} repeatCount="indefinite" />
+                <animate
+                  attributeName="x"
+                  values="-45%;65%;-45%"
+                  dur={`${14 + i * 2}s`}
+                  repeatCount="indefinite"
+                />
               </rect>
             </g>
           ))}
@@ -47,40 +52,61 @@ export default function EventDetailsHeroSection({ event }: Props) {
 
       {/* Container */}
       <div className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        {/* Breadcrumbs (keep/remove as you like) */}
+        {/* Breadcrumbs */}
         <nav aria-label="Breadcrumb" className="mb-3">
           <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li><Link href="/" className="hover:text-slate-700">Home</Link></li>
-            <li aria-hidden className="text-slate-400">›</li>
-            <li><Link href="/events/past-events" className="font-medium text-slate-700 hover:text-slate-900">Events</Link></li>
-            <li aria-hidden className="text-slate-400">›</li>
+            <li>
+              <Link href="/" className="hover:text-slate-700">
+                Home
+              </Link>
+            </li>
+            <li aria-hidden className="text-slate-400">
+              ›
+            </li>
+            <li>
+              <Link
+                href="/events/past-events"
+                className="font-medium text-slate-700 hover:text-slate-900"
+              >
+                Events
+              </Link>
+            </li>
+            <li aria-hidden className="text-slate-400">
+              ›
+            </li>
             <li className="truncate max-w-[45ch] text-slate-700">{event.slug}</li>
           </ol>
         </nav>
 
         {/* Category pill */}
         <div className="inline-flex items-center gap-2 rounded-full border border-black/10 bg-white/70 px-3 py-1 text-xs font-semibold shadow-sm backdrop-blur">
-          <span className={["inline-block h-2 w-2 rounded-full", event.categoryColor?.startsWith("bg-") ? event.categoryColor : "bg-orange-500"].join(" ")} />
+          <span
+            className={[
+              "inline-block h-2 w-2 rounded-full",
+              event.categoryColor?.startsWith("bg-") ? event.categoryColor : "bg-orange-500",
+            ].join(" ")}
+          />
           <span className="uppercase tracking-wide">{event.category}</span>
         </div>
 
         {/* Title + optional subtitle */}
-        <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">{event.title}</h1>
+        <h1 className="mt-4 text-4xl font-extrabold tracking-tight sm:text-5xl">
+          {event.title}
+        </h1>
         {event.subtitle ? (
           <p className="mt-2 text-lg font-semibold" style={{ color: "var(--color-brand, #ff8c00)" }}>
             {event.subtitle}
           </p>
         ) : null}
 
-        {/* Hero image (heroImageUrl OR fallback only) */}
+        {/* Hero image — fixed 400px tall */}
         <div className="mt-8 overflow-hidden rounded-2xl border border-black/10 bg-gradient-to-br from-orange-50 to-sky-50 shadow-sm">
-          {/* Bigger on mobile: taller aspect + min-heights, then refine on larger screens */}
-          <div className="relative w-full aspect-[4/5] sm:aspect-[16/9] lg:aspect-[16/7] min-h-[340px] sm:min-h-[380px]">
+          <div className="relative w-full h-[400px]">
             <Image
               src={imgSrc}
               alt={`${event.title} cover image`}
               fill
-              sizes="(max-width: 640px) 100vw, (max-width: 1280px) 90vw, 1280px"
+              sizes="100vw"
               className="object-cover"
               priority
               onError={() => {

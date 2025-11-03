@@ -1,4 +1,4 @@
-import type { Metadata } from 'next';
+import { Metadata } from 'next';
 import { BlogCategoryMenu } from '@/components/blog';
 import BlogSidebarCategory from '@/components/blog/BlogSidebarCategory';
 import { getCategoryBySlug, getPostsByCategory, getAllCategories } from '@/data/BlogPostData';
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     if (!category) {
         return {
-            title: 'Category Not Found | Your Company Blog',
+            title: 'Category Not Found | CDPL Tech Blog',
             description: 'The requested category could not be found. Browse all categories to discover expert articles on technology and software development.',
             robots: {
                 index: false,
@@ -39,8 +39,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     return {
         // Primary Meta Tags - Enhanced
-        title: `${category.name} Articles & Tutorials - Expert Insights | Your Company Blog`,
-        description: `${category.description} Explore ${posts.length}+ in-depth articles, tutorials, and best practices on ${category.name.toLowerCase()}. Learn from industry experts and stay updated with the latest trends.`,
+        title: `${category.name} Articles & Tutorials - Expert Insights | CDPL Blog`,
+        description: `${category.description} Explore ${posts.length}+ in-depth articles, tutorials, and best practices on ${category.name.toLowerCase()}. Learn from CDPL industry experts and stay updated with the latest trends.`,
         
         // Keywords - Category-specific
         keywords: [
@@ -52,15 +52,16 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             `${category.name} guides`,
             `learn ${category.name}`,
             `${category.name} tips`,
+            'CDPL blog',
             'tech blog',
             'programming tutorials',
             'software development',
         ].join(', '),
         
         // Author Information
-        authors: [{ name: 'Tech Experts Team', url: 'https://yourwebsite.com/about' }],
-        creator: 'Your Company',
-        publisher: 'Your Company',
+        authors: [{ name: 'CDPL Tech Experts Team', url: 'https://www.cinutedigital.com/our-team' }],
+        creator: 'CDPL - Cinute Digital Pvt. Ltd.',
+        publisher: 'CDPL - Cinute Digital Pvt. Ltd.',
         
         // Format Detection
         formatDetection: {
@@ -70,22 +71,22 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         },
         
         // Base URL
-        metadataBase: new URL('https://yourwebsite.com'),
+        metadataBase: new URL('https://www.cinutedigital.com'),
         
         // Canonical URL
         alternates: {
             canonical: `/blog/category/${category.slug}`,
             languages: {
-                'en-US': `/blog/category/${category.slug}`,
+                'en-IN': `/blog/category/${category.slug}`,
             },
         },
         
         // Open Graph - Enhanced
         openGraph: {
-            title: `${category.name} - Expert Articles, Tutorials & Best Practices`,
+            title: `${category.name} - Expert Articles, Tutorials & Best Practices | CDPL`,
             description: `${category.description} ${posts.length}+ articles to help you master ${category.name.toLowerCase()}.`,
-            url: `https://yourwebsite.com/blog/category/${category.slug}`,
-            siteName: 'Your Company Tech Blog',
+            url: `https://www.cinutedigital.com/blog/category/${category.slug}`,
+            siteName: 'CDPL Tech Blog',
             images: [
                 {
                     url: latestPost?.featuredImage || '/blog/og-image.jpg',
@@ -95,18 +96,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                     type: 'image/jpeg',
                 },
             ],
-            locale: 'en_US',
+            locale: 'en_IN',
             type: 'website',
         },
         
         // Twitter Card - Enhanced
         twitter: {
             card: 'summary_large_image',
-            title: `${category.name} - Expert Articles & Tutorials`,
+            title: `${category.name} - Expert Articles & Tutorials | CDPL`,
             description: `${category.description} ${posts.length}+ articles available.`,
             images: [latestPost?.featuredImage || '/blog/og-image.jpg'],
-            creator: '@yourcompany',
-            site: '@yourcompany',
+            creator: '@cinutedigital',
+            site: '@cinutedigital',
         },
         
         // Robots Configuration
@@ -151,12 +152,12 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
             // CollectionPage Schema - Enhanced
             {
                 '@type': 'CollectionPage',
-                '@id': `https://yourwebsite.com/blog/category/${category.slug}#collectionpage`,
-                url: `https://yourwebsite.com/blog/category/${category.slug}`,
-                name: `${category.name} Articles`,
+                '@id': `https://www.cinutedigital.com/blog/category/${category.slug}#collectionpage`,
+                url: `https://www.cinutedigital.com/blog/category/${category.slug}`,
+                name: `${category.name} Articles - CDPL Blog`,
                 description: category.description,
                 isPartOf: {
-                    '@id': 'https://yourwebsite.com/blog#blog'
+                    '@id': 'https://www.cinutedigital.com/blog#blog'
                 },
                 about: {
                     '@type': 'Thing',
@@ -164,13 +165,14 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                     description: category.description
                 },
                 mainEntity: {
-                    '@id': `https://yourwebsite.com/blog/category/${category.slug}#itemlist`
-                }
+                    '@id': `https://www.cinutedigital.com/blog/category/${category.slug}#itemlist`
+                },
+                inLanguage: 'en-IN'
             },
             // ItemList Schema - All Posts in Category
             {
                 '@type': 'ItemList',
-                '@id': `https://yourwebsite.com/blog/category/${category.slug}#itemlist`,
+                '@id': `https://www.cinutedigital.com/blog/category/${category.slug}#itemlist`,
                 name: `${category.name} Articles`,
                 description: `Collection of ${posts.length} articles about ${category.name}`,
                 numberOfItems: posts.length,
@@ -179,7 +181,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                     position: index + 1,
                     item: {
                         '@type': 'BlogPosting',
-                        '@id': `https://yourwebsite.com/blog/${post.slug}#article`,
+                        '@id': `https://www.cinutedigital.com/blog/${post.slug}#article`,
                         headline: post.title,
                         description: post.description,
                         image: post.featuredImage,
@@ -193,63 +195,70 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                         },
                         publisher: {
                             '@type': 'Organization',
-                            name: 'Your Company'
+                            name: 'CDPL - Cinute Digital Pvt. Ltd.',
+                            logo: {
+                                '@type': 'ImageObject',
+                                url: 'https://www.cinutedigital.com/logo.png',
+                                width: 250,
+                                height: 60
+                            }
                         },
-                        url: `https://yourwebsite.com/blog/${post.slug}`,
-                        mainEntityOfPage: `https://yourwebsite.com/blog/${post.slug}`,
+                        url: `https://www.cinutedigital.com/blog/${post.slug}`,
+                        mainEntityOfPage: `https://www.cinutedigital.com/blog/${post.slug}`,
                         articleSection: category.name,
-                        keywords: post.tags.join(', ')
+                        keywords: post.tags.join(', '),
+                        inLanguage: 'en-IN'
                     },
                 })),
             },
             // BreadcrumbList Schema
             {
                 '@type': 'BreadcrumbList',
-                '@id': `https://yourwebsite.com/blog/category/${category.slug}#breadcrumb`,
+                '@id': `https://www.cinutedigital.com/blog/category/${category.slug}#breadcrumb`,
                 itemListElement: [
                     {
                         '@type': 'ListItem',
                         position: 1,
                         name: 'Home',
-                        item: 'https://yourwebsite.com'
+                        item: 'https://www.cinutedigital.com'
                     },
                     {
                         '@type': 'ListItem',
                         position: 2,
                         name: 'Blog',
-                        item: 'https://yourwebsite.com/blog'
+                        item: 'https://www.cinutedigital.com/blog'
                     },
                     {
                         '@type': 'ListItem',
                         position: 3,
                         name: 'Categories',
-                        item: 'https://yourwebsite.com/blog/categories'
+                        item: 'https://www.cinutedigital.com/blog/categories'
                     },
                     {
                         '@type': 'ListItem',
                         position: 4,
                         name: category.name,
-                        item: `https://yourwebsite.com/blog/category/${category.slug}`
+                        item: `https://www.cinutedigital.com/blog/category/${category.slug}`
                     }
                 ]
             },
             // WebPage Schema
             {
                 '@type': 'WebPage',
-                '@id': `https://yourwebsite.com/blog/category/${category.slug}`,
-                url: `https://yourwebsite.com/blog/category/${category.slug}`,
-                name: `${category.name} Articles`,
+                '@id': `https://www.cinutedigital.com/blog/category/${category.slug}`,
+                url: `https://www.cinutedigital.com/blog/category/${category.slug}`,
+                name: `${category.name} Articles - CDPL Blog`,
                 description: category.description,
                 isPartOf: {
-                    '@id': 'https://yourwebsite.com/#website'
+                    '@id': 'https://www.cinutedigital.com/#website'
                 },
                 breadcrumb: {
-                    '@id': `https://yourwebsite.com/blog/category/${category.slug}#breadcrumb`
+                    '@id': `https://www.cinutedigital.com/blog/category/${category.slug}#breadcrumb`
                 },
-                inLanguage: 'en-US',
+                inLanguage: 'en-IN',
                 potentialAction: {
                     '@type': 'ReadAction',
-                    target: `https://yourwebsite.com/blog/category/${category.slug}`
+                    target: `https://www.cinutedigital.com/blog/category/${category.slug}`
                 }
             }
         ]
@@ -269,6 +278,11 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
                 itemType="https://schema.org/CollectionPage"
                 className="category-page"
             >
+                {/* Hidden metadata for schema.org */}
+                <meta itemProp="name" content={`${category.name} Articles - CDPL Blog`} />
+                <meta itemProp="description" content={category.description} />
+                <meta itemProp="url" content={`https://www.cinutedigital.com/blog/category/${category.slug}`} />
+
                 {/* Category Navigation Menu */}
                 <nav aria-label="Blog categories">
                     <BlogCategoryMenu />
@@ -281,7 +295,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
 
                 {/* SEO-friendly H1 - Hidden visually but available for SEO */}
                 <h1 className="sr-only">
-                    {category.name} Articles and Tutorials - Expert Insights and Best Practices
+                    {category.name} Articles and Tutorials - Expert Insights and Best Practices from CDPL
                 </h1>
 
                 {/* Main Content Area */}
@@ -305,4 +319,3 @@ export default async function CategoryPage({ params }: { params: Promise<{ slug:
         </>
     );
 }
-

@@ -84,7 +84,7 @@ export default function LocationsCTASection({
               </div>
 
               <p className="mx-auto mt-5 max-w-2xl text-[15.5px] sm:text-[17px] leading-7 text-slate-700">
-                Join 500+ learners transforming their careers in their hometowns. Flexible modes,
+                Join 5000+ learners transforming their careers in their hometowns. Flexible modes,
                 mentor support, and placement guidance included.
               </p>
 
@@ -104,7 +104,7 @@ export default function LocationsCTASection({
                 >
                   <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-teal-600 opacity-95 [background-size:220%_100%] group-hover:animate-[gradient-move_3s_linear_infinite]" />
                   <span className="absolute inset-0 rounded-xl ring-1 ring-white/25" />
-                  <span className="relative z-10">Contact Us — 33% off</span>
+                  <span className="relative z-10">Contact Us — 20% off</span>
                   <ArrowRight className="relative z-10 h-5 w-5" />
                 </Link>
 
@@ -130,7 +130,7 @@ export default function LocationsCTASection({
               <div className="mt-6 flex flex-col items-center justify-center gap-2 text-sm text-slate-700 sm:flex-row sm:gap-4">
                 <div className="inline-flex items-center gap-2">
                   <ShieldCheck className="h-4 w-4 text-slate-800" />
-                  95% placement assistance
+                  100% placement assistance
                 </div>
                 <span className="hidden sm:inline text-slate-300">•</span>
                 <div>No-cost EMI available</div>

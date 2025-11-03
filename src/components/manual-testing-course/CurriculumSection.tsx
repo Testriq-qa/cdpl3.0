@@ -109,11 +109,11 @@ const MODULES: Module[] = [
 ];
 
 /* ---------- Color Mapping System ---------- */
-const COLOR_MAP: Record<Accent, { 
-    iconBg: string; 
-    cardBg: string; 
-    borderColor: string; 
-    accentBorder: string 
+const COLOR_MAP: Record<Accent, {
+    iconBg: string;
+    cardBg: string;
+    borderColor: string;
+    accentBorder: string
 }> = {
     indigo: {
         iconBg: "bg-indigo-600",
@@ -176,14 +176,14 @@ function AccentBar({ accent }: { accent: Accent }) {
 }
 
 function IconFor(title: string, accent: Accent) {
-    const IconComponent = 
+    const IconComponent =
         /fundamentals/i.test(title) ? BookOpen :
-        /design/i.test(title) ? Layers :
-        /cases/i.test(title) ? NotebookPen :
-        /defect/i.test(title) ? Bug :
-        /types|environments/i.test(title) ? FlaskConical :
-        /projects|ISTQB/i.test(title) ? Trophy :
-        Sparkles;
+            /design/i.test(title) ? Layers :
+                /cases/i.test(title) ? NotebookPen :
+                    /defect/i.test(title) ? Bug :
+                        /types|environments/i.test(title) ? FlaskConical :
+                            /projects|ISTQB/i.test(title) ? Trophy :
+                                Sparkles;
 
     return (
         <div className={`${COLOR_MAP[accent].iconBg} p-2.5 rounded-lg`}>
@@ -195,7 +195,7 @@ function IconFor(title: string, accent: Accent) {
 /* ---------- Module Card ---------- */
 function CurriculumCard({ mod }: { mod: Module }) {
     const colors = COLOR_MAP[mod.accent];
-    
+
     return (
         <article
             className={`group mx-auto relative rounded-2xl ${colors.cardBg} ring-1 ring-inset ${colors.borderColor} shadow-sm hover:shadow-md transition-shadow border-l-4 ${colors.accentBorder}`}
@@ -315,7 +315,7 @@ export default function CurriculumSection() {
                     <div className="mt-8 grid grid-cols-2 sm:grid-cols-4 gap-4">
                         <Stat icon={<ShieldCheck className="h-4 w-4 text-blue-800" />} label="ISTQB-Aligned" value="Yes" />
                         <Stat icon={<Clock className="h-4 w-4 text-red-800" />} label="Duration" value="12 Weeks" />
-                        <Stat icon={<Target className="h-4 w-4 text-purple-800" />} label="Capstone Projects" value="5" />
+                        <Stat icon={<Target className="h-4 w-4 text-purple-800" />} label="Capstone Projects" value="90+" />
                         <Stat icon={<Brain className="h-4 w-4 text-green-800" />} label="Interview Prep" value="Included" />
                     </div>
                 </div>

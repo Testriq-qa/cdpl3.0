@@ -82,10 +82,10 @@ export default function LeadershipSpotlight({ }: Props) {
             {/* Stats Grid */}
             <div className="mb-16 grid gap-4 sm:grid-cols-3">
                 <StatCard
-                    icon={<Users2 className="text-blue-800 w-10 h-10"/>}
+                    icon={<Users2 className="text-blue-800 w-10 h-10" />}
                     value={
                         <span className="bg-gradient-to-r from-sky-600 to-indigo-600 bg-clip-text text-transparent">
-                            10k+
+                            5k+
                         </span>
                     }
                     label="Learners mentored"
@@ -93,10 +93,10 @@ export default function LeadershipSpotlight({ }: Props) {
                 />
 
                 <StatCard
-                    icon={<ShieldCheck className="text-emerald-800 w-10 h-10"/>}
+                    icon={<ShieldCheck className="text-emerald-800 w-10 h-10" />}
                     value={
                         <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                            75+
+                            50+
                         </span>
                     }
                     label="Hiring partner touchpoints"
@@ -104,7 +104,7 @@ export default function LeadershipSpotlight({ }: Props) {
                 />
 
                 <StatCard
-                    icon={<GraduationCap className="text-lime-800 w-10 h-10"/>}
+                    icon={<GraduationCap className="text-lime-800 w-10 h-10" />}
                     value={
                         <span className="text-lime-600">
                             94%
@@ -141,9 +141,9 @@ function StatCard({
     return (
         <div className="group relative overflow-hidden rounded-2xl border border-slate-200 bg-gradient-to-br from-white to-slate-50 p-6 shadow-sm transition-all duration-300 hover:shadow-lg">
             <div className="flex items-start gap-4">
-               <div>
-                {icon}
-               </div>
+                <div>
+                    {icon}
+                </div>
                 <div className="flex-1">
                     <p className="text-3xl font-bold text-slate-900">{value}</p>
                     <p className="mt-1 font-semibold text-slate-800">{label}</p>

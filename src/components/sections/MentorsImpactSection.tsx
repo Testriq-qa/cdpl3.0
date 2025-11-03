@@ -4,63 +4,33 @@ import { useMemo, useRef, useState, useEffect } from "react";
 import Script from "next/script";
 
 /**
- * MentorsImpactSection — CDPL clean gradient (light-only)
- * Update: Reworked ONLY the numeric (metrics) card backgrounds to be neatly blended,
- * modern conic+radial tints with subtle noise. No chalky whites, just soft color.
+ * MentorsImpactSection — refined spacing:
+ * - Reduced left padding for right-side content
+ * - Added space between stats (metrics) and cards
+ * - Avatar still overlaps neatly
  */
 
-type MentorCard = {
-  name: string;
-  role: string;
-  company: string;
-  domain: string;
-  rating: number;
-  sessions: number;
-  tags: string[];
-  img: string;
-  keywords: string;
-};
-
 const CDPL_ORANGE = "#ff8c00";
-const CDPL_ORANGE_DEEP = "#ff6a00";
 const CDPL_PEACH = "#ffd19e";
 const CDPL_GLOW =
   "radial-gradient(closest-side, rgba(255,140,0,.26), rgba(255,140,0,0) 70%)";
-const GRADIENT_BRAND = `linear-gradient(90deg, ${CDPL_ORANGE_DEEP} 0%, ${CDPL_ORANGE} 55%, ${CDPL_PEACH} 100%)`;
 const GRADIENT_OUTLINE = `linear-gradient(90deg, ${CDPL_ORANGE}35 0%, ${CDPL_PEACH}45 100%)`;
-
-/** Metric number colors */
-const METRIC_NUMBER_COLORS = ["#ff8c00", "#2563eb", "#10b981", "#7c3aed"];
-
-/** Subtle SVG noise (for natural paper-like blend) */
 const NOISE =
   "url('data:image/svg+xml;utf8,<svg xmlns=\"http://www.w3.org/2000/svg\" opacity=\"0.08\" width=\"80\" height=\"80\" viewBox=\"0 0 80 80\"><filter id=\"n\"><feTurbulence type=\"fractalNoise\" baseFrequency=\"0.9\" numOctaves=\"2\" stitchTiles=\"stitch\"/></filter><rect width=\"100%\" height=\"100%\" filter=\"url(%23n)\"/></svg>')";
 
-/**
- * NEW — METRIC card backgrounds:
- * - conic-gradient gives a premium “sweep” highlight
- * - radial-gradient adds a soft corner glow
- * - noise layer ties it together
- * - No plain white overlays, all color-driven.
- */
 const METRIC_CARD_BACKGROUNDS = [
-  // ORANGE
   {
     border: "border-orange-200",
     ring: "shadow-[inset_0_0_0_1px_rgba(255,140,0,0.16)]",
     style: {
       backgroundImage: [
-        // conic sweep highlight (peach → orange)
         "conic-gradient(from 220deg at 25% 0%, rgba(255,212,170,0.65), rgba(255,166,77,0.35) 35%, rgba(255,212,170,0.65) 65%, rgba(255,166,77,0.35))",
-        // corner glow
         "radial-gradient(90% 80% at 100% 0%, rgba(255,176,102,0.45) 0%, rgba(255,176,102,0) 60%)",
-        // texture
         NOISE,
       ].join(","),
       backgroundBlendMode: "screen, soft-light, multiply",
     } as React.CSSProperties,
   },
-  // SKY
   {
     border: "border-sky-200",
     ring: "shadow-[inset_0_0_0_1px_rgba(2,132,199,0.16)]",
@@ -73,7 +43,6 @@ const METRIC_CARD_BACKGROUNDS = [
       backgroundBlendMode: "screen, soft-light, multiply",
     } as React.CSSProperties,
   },
-  // EMERALD
   {
     border: "border-emerald-200",
     ring: "shadow-[inset_0_0_0_1px_rgba(16,185,129,0.16)]",
@@ -86,7 +55,6 @@ const METRIC_CARD_BACKGROUNDS = [
       backgroundBlendMode: "screen, soft-light, multiply",
     } as React.CSSProperties,
   },
-  // VIOLET
   {
     border: "border-violet-200",
     ring: "shadow-[inset_0_0_0_1px_rgba(139,92,246,0.16)]",
@@ -106,7 +74,7 @@ const IMG_TWEAKS: MentorCardTweak = {
   "Dnyaneshwar Bhabad": "object-[50%_30%] scale-[1.06]",
 };
 
-const MENTORS: MentorCard[] = [
+const MENTORS = [
   {
     name: "Pravin Mhaske",
     role: "Data Science Manager",
@@ -210,22 +178,6 @@ export default function MentorsImpactSection() {
     return MENTORS.filter((m) => !d || m.domain.toLowerCase() === d);
   }, [domain]);
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "CDPL Mentors — Industry Experts for Career Growth",
-    itemListElement: MENTORS.map((m, i) => ({
-      "@type": "ListItem",
-      position: i + 1,
-      item: {
-        "@type": "Person",
-        name: m.name,
-        jobTitle: m.role,
-        affiliation: m.company,
-        knowsAbout: [...m.tags, m.domain],
-      },
-    })),
-  };
 
   return (
     <section
@@ -246,13 +198,9 @@ export default function MentorsImpactSection() {
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 pt-6 pb-12 sm:pt-8 sm:pb-16">
         {/* Header */}
-        <header className="mb-6 sm:mb-8">
+        <header className="mb-5 sm:mb-6">
           <div className="flex flex-wrap items-center gap-2">
-            {[
-              "Top-rated Industry Experts",
-              "1:1 Live Mentorship",
-              "Career-Focused Guidance",
-            ].map((b) => (
+            {["Top-rated Industry Experts", "1:1 Live Mentorship", "Career-Focused Guidance"].map((b) => (
               <span
                 key={b}
                 className="rounded-full border border-zinc-200 bg-white px-3 py-1.5 text-xs font-semibold tracking-wide text-zinc-700 shadow-sm"
@@ -262,22 +210,16 @@ export default function MentorsImpactSection() {
             ))}
           </div>
 
-          <h2
-            id="mentors-impact-title"
-            className="mt-3 text-3xl sm:text-4xl font-extrabold leading-tight"
-          >
+          <h2 id="mentors-impact-title" className="mt-3 text-3xl sm:text-4xl font-extrabold leading-tight">
             Learn Faster with{" "}
-            <span className="drop-shadow-sm text-[var(--color-brand,#ff8c00)]">
-              CDPL World-Class Mentors
-            </span>
+            <span className="drop-shadow-sm text-[var(--color-brand,#ff8c00)]">CDPL World-Class Mentors</span>
           </h2>
 
           <p className="mt-2 max-w-3xl text-[15px] sm:text-base text-zinc-800">
             Accelerate your career with <strong>outcome-driven mentorship</strong> from leaders at Google, Microsoft,
             Amazon, and high-growth startups. Master <strong>Data Science</strong>, <strong>Machine Learning</strong>,{" "}
-            <strong>Software Testing</strong> and{" "}
-            <strong>Product Management</strong> through live projects, interview prep, and portfolio reviews designed
-            for <strong>job placement</strong> and <strong>promotions</strong>.
+            <strong>Software Testing</strong> and <strong>Product Management</strong> through live projects, interview
+            prep, and portfolio reviews designed for <strong>job placement</strong> and <strong>promotions</strong>.
           </p>
 
           {/* Domain filter */}
@@ -302,23 +244,18 @@ export default function MentorsImpactSection() {
                 ))}
               </select>
 
-              <FancySelect
-                value={domain}
-                onChange={setDomain}
-                options={["All domains", ...DOMAINS]}
-                className="w-full"
-              />
+              <FancySelect value={domain} onChange={setDomain} options={["All domains", ...DOMAINS]} className="w-full" />
             </label>
           </div>
         </header>
 
-        {/* Metrics — NEW neatly blended backgrounds */}
+        {/* Metrics */}
         <div className="mb-6 grid gap-3 sm:grid-cols-4">
           {[
             { num: "2,400+", label: "1:1 Sessions / month" },
             { num: "96%", label: "Interview-ready in 8 weeks" },
             { num: "4.9/5", label: "Average mentor rating" },
-            { num: "150+", label: "Hiring partners" },
+            { num: "50+", label: "Hiring partners" },
           ].map((m, i) => {
             const bg = METRIC_CARD_BACKGROUNDS[i % METRIC_CARD_BACKGROUNDS.length];
             return (
@@ -327,7 +264,6 @@ export default function MentorsImpactSection() {
                 className={`relative overflow-hidden rounded-2xl border p-4 text-center shadow-sm ${bg.border} ${bg.ring}`}
                 style={bg.style}
               >
-                {/* tiny soft sheen arc for premium feel */}
                 <div
                   aria-hidden
                   className="pointer-events-none absolute inset-0 rounded-2xl"
@@ -335,33 +271,27 @@ export default function MentorsImpactSection() {
                     background:
                       "conic-gradient(from 140deg at 0% 0%, rgba(255,255,255,0.6), transparent 20%, transparent 80%, rgba(255,255,255,0.35))",
                     opacity: 0.25,
-                    WebkitMask:
-                      "radial-gradient(120% 80% at 0% 0%, black 45%, transparent 70%)",
+                    WebkitMask: "radial-gradient(120% 80% at 0% 0%, black 45%, transparent 70%)",
                     mask: "radial-gradient(120% 80% at 0% 0%, black 45%, transparent 70%)",
                   }}
                 />
-
-                <div
-                  className="text-xl font-extrabold tracking-wide"
-                  style={{ color: METRIC_NUMBER_COLORS[i % METRIC_NUMBER_COLORS.length] }}
-                >
-                  {m.num}
-                </div>
+                <div className="text-xl font-extrabold tracking-wide text-orange-500">{m.num}</div>
                 <div className="mt-1 text-xs text-zinc-800">{m.label}</div>
               </div>
             );
           })}
         </div>
 
-        {/* Mentor Cards — tinted gradients + noise */}
-        <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+        {/* Cards — extra space above, reduced left padding for content */}
+        <div className="mt-8 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-3">
           {filtered.map((m, idx) => {
             const tweak = IMG_TWEAKS[m.name] || "";
             const hue = [28, 210, 162, 262, 34, 196, 142][idx % 7];
+
             return (
               <article
                 key={m.name}
-                className="relative rounded-3xl border border-zinc-200 p-5 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
+                className="relative rounded-3xl border border-zinc-200 p-5 pt-7 pr-6 pb-6 shadow-sm transition hover:-translate-y-0.5 hover:shadow-md"
                 aria-label={`${m.name} — ${m.role}, ${m.company}`}
                 style={{
                   backgroundImage: [
@@ -371,92 +301,52 @@ export default function MentorsImpactSection() {
                   backgroundBlendMode: "soft-light, multiply",
                 }}
               >
-                {/* inner glow ring */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute -inset-px rounded-3xl opacity-38"
-                  style={{ backgroundImage: GRADIENT_OUTLINE }}
-                />
-                {/* faint grid mask */}
-                <div
-                  aria-hidden
-                  className="pointer-events-none absolute inset-0 rounded-3xl"
-                  style={{
-                    backgroundImage:
-                      "linear-gradient(rgba(0,0,0,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.05) 1px, transparent 1px)",
-                    backgroundSize: "12px 12px",
-                    opacity: 0.26,
-                    mixBlendMode: "overlay",
-                    WebkitMask:
-                      "radial-gradient(160% 110% at 0% 0%, black 38%, transparent 72%)",
-                    mask: "radial-gradient(160% 110% at 0% 0%, black 38%, transparent 72%)",
-                  }}
-                />
+                <div aria-hidden className="pointer-events-none absolute -inset-px rounded-3xl opacity-38" style={{ backgroundImage: GRADIENT_OUTLINE }} />
 
-                <div className="flex items-start gap-4 relative">
-                  {/* Avatar rim */}
-                  <div
-                    className="h-[88px] w-[88px] shrink-0 rounded-2xl p-[3px]"
-                    style={{ backgroundImage: GRADIENT_BRAND }}
-                  >
+                {/* Avatar overlapping */}
+                <div className="absolute -top-3 -left-3">
+                  <div className="h-[108px] w-[108px] rounded-2xl bg-zinc-100 shadow-lg ring-1 ring-black/5 overflow-hidden">
                     {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src={m.img}
                       alt={`Mentor portrait — ${m.domain} ${m.company}`}
-                      width={88}
-                      height={88}
+                      width={108}
+                      height={108}
                       loading="lazy"
-                      className={`block h-full w-full rounded-[14px] object-cover ring-1 ring-black/5 ${tweak}`}
+                      className={`block h-full w-full object-cover ${tweak}`}
                     />
                   </div>
+                </div>
 
-                  <div className="min-w-0">
-                    <h3 className="truncate text-[16px] font-extrabold leading-tight">{m.name}</h3>
-                    <p className="mt-1 text-[13px] text-zinc-700">
-                      {m.role} · {m.company}
-                    </p>
-                    <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-semibold text-zinc-700">
+                {/* Reduced left padding for right-side content */}
+                <div className="min-w-0 pl-24 md:pl-24">
+                  <h3 className="truncate text-[16px] font-extrabold leading-tight">{m.name}</h3>
+                  <p className="mt-1 text-[13px] text-zinc-700 line-clamp-2">
+                    {m.role} · {m.company}
+                  </p>
+
+                  <div className="mt-2 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-white/90 backdrop-blur px-2.5 py-1 text-[11px] font-semibold text-zinc-700">
+                    <span className="inline-block h-2 w-2 rounded-full" style={{ background: CDPL_ORANGE }} aria-hidden="true" />
+                    {m.domain}
+                  </div>
+
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {m.tags.slice(0, 4).map((t) => (
                       <span
-                        className="inline-block h-2 w-2 rounded-full"
-                        style={{ background: CDPL_ORANGE }}
-                        aria-hidden="true"
-                      />
-                      {m.domain}
-                    </div>
+                        key={t}
+                        className="rounded-full border border-zinc-200 bg-white/90 backdrop-blur px-2 py-1 text-[11px] text-zinc-700"
+                      >
+                        {t}
+                      </span>
+                    ))}
                   </div>
                 </div>
 
-                <div className="mt-4 flex flex-wrap gap-1.5 relative">
-                  {m.tags.map((t) => (
-                    <span
-                      key={t}
-                      className="rounded-full border border-zinc-200 bg-white/90 backdrop-blur px-2 py-1 text-[11px] text-zinc-700"
-                    >
-                      {t}
-                    </span>
-                  ))}
-                </div>
-
-                <div className="mt-4 grid grid-cols-3 gap-2 text-center relative">
-                  <div className="rounded-xl border border-zinc-200 bg-white/90 backdrop-blur px-3 py-2">
-                    <div className="text-[12px] font-extrabold">★ {m.rating.toFixed(1)}</div>
-                    <div className="mt-0.5 text-[11px] text-zinc-600">Avg Rating</div>
-                  </div>
-                  <div className="rounded-xl border border-zinc-200 bg-white/90 backdrop-blur px-3 py-2">
-                    <div className="text-[12px] font-extrabold">
-                      {m.sessions.toLocaleString()}+
-                    </div>
-                    <div className="mt-0.5 text-[11px] text-zinc-600">Sessions</div>
-                  </div>
-                  <div className="rounded-xl border border-zinc-200 bg-white/90 backdrop-blur px-3 py-2">
-                    <div className="text-[12px] font-extrabold">Job-ready</div>
-                    <div className="mt-0.5 text-[11px] text-zinc-600">Curriculum</div>
-                  </div>
-                </div>
-
-                <p className="mt-3 text-[11px] text-zinc-600 relative">
-                  Includes roadmap planning, project reviews, and mock interviews. Ideal for career transitions and promotions.
-                </p>
+                {/* Keep heights even to avoid weird holes */}
+                <style jsx>{`
+                  article { min-height: 220px; }
+                  @media (min-width: 768px) { article { min-height: 230px; } }
+                `}</style>
               </article>
             );
           })}
@@ -464,7 +354,7 @@ export default function MentorsImpactSection() {
 
         <div className="mt-8 flex snap-x gap-3 overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden">
           {[
-            "Trusted by 50,000+ learners",
+            "Trusted by 5,000+ learners",
             "Outcome-driven mentorship",
             "Placement support & referrals",
             "Live projects & code reviews",
@@ -489,13 +379,23 @@ export default function MentorsImpactSection() {
       </div>
 
       <Script id="mentors-jsonld" type="application/ld+json">
-        {JSON.stringify(jsonLd)}
+        {JSON.stringify({
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "CDPL Mentors — Industry Experts for Career Growth",
+          itemListElement: MENTORS.map((m, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Person",
+              name: m.name,
+              jobTitle: m.role,
+              affiliation: m.company,
+              knowsAbout: [...m.tags, m.domain],
+            },
+          })),
+        })}
       </Script>
-
-      <div className="sr-only">
-        CDPL mentors provide live 1:1 mentorship, portfolio reviews, mock interviews, and job-focused upskilling for
-        Data Science, AI, Full-Stack, DevOps, Product Management, and UX. Learn with real projects and accelerate placements.
-      </div>
     </section>
   );
 }
@@ -612,18 +512,12 @@ function FancySelect({
                 tabIndex={0}
                 onKeyDown={(e) => onItemKey(e, i)}
                 onClick={() => choose(opt)}
-                className={`mx-1 flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition hover:bg-[rgba(255,140,0,.08)] ${
-                  active ? "bg-[rgba(255,140,0,.12)] font-semibold text-zinc-900" : "text-zinc-800"
-                }`}
+                className={`mx-1 flex cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-sm transition hover:bg-[rgba(255,140,0,.08)] ${active ? "bg-[rgba(255,140,0,.12)] font-semibold text-zinc-900" : "text-zinc-800"
+                  }`}
               >
                 <span className="truncate">{opt}</span>
                 {active && (
-                  <svg
-                    className="ml-3 h-4 w-4 text-[var(--color-brand,#ff8c00)]"
-                    viewBox="0 0 20 20"
-                    fill="currentColor"
-                    aria-hidden="true"
-                  >
+                  <svg className="ml-3 h-4 w-4 text-[var(--color-brand,#ff8c00)]" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
                     <path
                       fillRule="evenodd"
                       d="M16.704 5.29a1 1 0 010 1.415l-7.01 7.01a1 1 0 01-1.414 0L3.296 8.72a1 1 0 011.414-1.415l3.154 3.155 6.303-6.303a1 1 0 011.537.133z"

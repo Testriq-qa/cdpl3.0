@@ -129,7 +129,7 @@ export default function MentorHeroSection() {
             </p>
 
             <div className="mt-6 flex flex-wrap items-center justify-center gap-3 text-sm text-slate-700 lg:justify-start">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">200+ real projects</span>
+              <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">50+ real projects</span>
               <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">100+ datasets</span>
               <span className="inline-flex items-center gap-2 rounded-full bg-white px-3 py-1 ring-1 ring-slate-200">Interview prep + mock rounds</span>
             </div>

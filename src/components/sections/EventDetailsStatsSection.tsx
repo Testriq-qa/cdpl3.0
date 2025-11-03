@@ -21,8 +21,8 @@ export default function EventDetailsStatsSection({
   const wrap = fullWidth ? "max-w-none px-0" : "max-w-7xl px-4 sm:px-6 lg:px-8";
 
   return (
-    <section className="w-full bg-gradient-to-br from-neutral-50 to-white text-neutral-900">
-      <div className={`mx-auto ${wrap} py-10`}>
+    <section className="w-full mb-0 text-neutral-900">
+      <div className={`mx-auto ${wrap}`}>
         <div className="grid gap-4 md:grid-cols-4">
           <Stat label="Participants" value={attendees} suffix="+" tint="orange" />
           <Stat label="Sessions" value={sessions} tint="sky" />
@@ -71,8 +71,8 @@ function Stat({
     tint === "orange"
       ? "from-orange-50 to-amber-50"
       : tint === "sky"
-      ? "from-sky-50 to-cyan-50"
-      : "from-violet-50 to-fuchsia-50";
+        ? "from-sky-50 to-cyan-50"
+        : "from-violet-50 to-fuchsia-50";
 
   return (
     <div

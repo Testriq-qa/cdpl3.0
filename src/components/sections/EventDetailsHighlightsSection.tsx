@@ -1,4 +1,5 @@
 import type { PastEvent } from "@/data/eventsData";
+import { CircleDot } from "lucide-react";
 
 type Props = { event: PastEvent; fullWidth?: boolean };
 
@@ -35,7 +36,7 @@ export default function EventDetailsHighlightsSection({ event, fullWidth = false
 
       <div className={`relative mx-auto ${wrap} py-10`}>
         <div className="relative overflow-hidden rounded-2xl border border-black/10 bg-white shadow-sm">
-          <div className="relative p-6 md:p-8">
+          <div className="relative py-6 px-3 md:p-8">
             <h2 className="text-2xl font-bold tracking-tight">Content & Session Highlights</h2>
 
             <div className="mt-6 grid gap-6 md:grid-cols-2">
@@ -45,13 +46,11 @@ export default function EventDetailsHighlightsSection({ event, fullWidth = false
                   <div
                     key={s.title + idx}
                     className="group relative rounded-2xl p-[2px] transition-transform duration-300 will-change-transform hover:-translate-y-0.5"
-                    style={{
-                      backgroundImage: `linear-gradient(135deg, ${a.from}, ${a.to})`,
-                    }}
+                    style={{ backgroundImage: `linear-gradient(135deg, ${a.from}, ${a.to})` }}
                   >
-                    {/* inner card – no blur/mask, matching radius */}
+                    {/* inner card */}
                     <div className="rounded-[1rem] bg-white p-5 shadow-sm ring-1 ring-black/5">
-                      {/* light grid INSIDE only (very faint) */}
+                      {/* faint grid inside only */}
                       <div
                         aria-hidden
                         className="pointer-events-none absolute inset-0 rounded-[1rem] opacity-[0.04]"
@@ -62,31 +61,33 @@ export default function EventDetailsHighlightsSection({ event, fullWidth = false
                         }}
                       />
 
-                      <div className="relative flex items-start gap-3">
+                      {/* HEADER + LIST in one padded column; icon sits in the gutter */}
+                      <div className="relative">
+                        {/* icon in gutter (2.25rem) */}
                         <span
                           aria-hidden
-                          className="inline-grid size-9 place-items-center rounded-lg bg-white shadow-sm ring-1 ring-black/5"
+                          className="absolute left-0 top-0 inline-grid size-9 place-items-center rounded-lg bg-white shadow-sm ring-1 ring-black/5"
                           style={{ boxShadow: `0 0 0 3px ${a.from}1A` }}
                         >
-                          <span
-                            className="block size-3 rounded-full"
-                            style={{ background: `linear-gradient(135deg, ${a.from}, ${a.to})` }}
-                          />
+                          <CircleDot className="size-5" style={{ color: a.from }} strokeWidth={2.5} />
                         </span>
 
-                        <div className="min-w-0 flex-1">
+                        {/* text column (title + list) */}
+                        <div className="pl-12 text-left">
                           <h3 className="text-lg font-semibold tracking-tight" style={{ color: a.ink }}>
                             {s.title}
                           </h3>
-                          <ul className="mt-3 grid gap-2 text-[15px] text-neutral-800">
+
+                          <ul className="mt-3 space-y-2 text-[15px] text-neutral-800">
                             {s.points?.map((p: string, i: number) => (
-                              <li key={p + i} className="flex items-start gap-2">
+                              <li key={p + i} className="relative pl-[2px]">
+                                {/* bullet moved slightly right toward text */}
                                 <span
                                   aria-hidden
-                                  className="mt-1.5 inline-block size-2 rounded-full"
+                                  className="absolute -left-[1.35rem] top-2 inline-block h-2 w-2 rounded-full"
                                   style={{ background: `linear-gradient(135deg, ${a.from}, ${a.to})` }}
                                 />
-                                <span>{p}</span>
+                                {p}
                               </li>
                             ))}
                           </ul>
@@ -119,11 +120,13 @@ export default function EventDetailsHighlightsSection({ event, fullWidth = false
                       {event.specialSession.speaker}
                     </p>
                     <p className="mt-2 text-sm text-neutral-800">{event.specialSession.topic}</p>
-                    <ul className="mt-3 grid gap-2 text-[15px] text-neutral-800">
+
+                    <ul className="mt-3 space-y-2 text-[15px] text-neutral-800 pl-12 text-left relative">
+                      <span aria-hidden className="absolute left-0 top-0 inline-block size-9 rounded-lg opacity-0" />
                       {event.specialSession.highlights?.map((h: string, i: number) => (
-                        <li key={h + i} className="flex items-start gap-2">
-                          <span className="mt-0.5 text-emerald-600">✓</span>
-                          <span>{h}</span>
+                        <li key={h + i} className="relative pl-[2px]">
+                          <span className="absolute -left-[1.35rem] top-[7px] inline-block h-2 w-2 rounded-full bg-emerald-500" />
+                          {h}
                         </li>
                       ))}
                     </ul>
