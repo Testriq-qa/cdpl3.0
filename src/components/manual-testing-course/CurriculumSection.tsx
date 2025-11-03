@@ -304,7 +304,7 @@ export default function CurriculumSection() {
                 {/* Header */}
                 <div className="text-center mb-12 md:mb-16">
                     <h2 className="text-4xl font-bold text-gray-900 mb-4">
-                        12-Week Curriculum: <span className="bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent">Manual Testing</span> & <span className="text-brand">ISTQB</span> Prep
+                        12-Week Curriculum: <span className="text-blue-700">Manual Testing & ISTQB Prep</span>
                     </h2>
                     <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                         Industry-ready, project-based learning—covering QA fundamentals, test design, defect lifecycle,

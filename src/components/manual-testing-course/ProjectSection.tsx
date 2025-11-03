@@ -274,7 +274,7 @@ export default function ProjectsSection(): JSX.Element {
                         id="projects-heading"
                         className="text-4xl font-bold tracking-tight text-gray-900"
                     >
-                        Real-World <span className="text-green-800">Projects</span>
+                        Real-World <span className="text-blue-700">Projects</span>
                     </h2>
                     <p className="mx-auto mt-3 max-w-3xl text-lg text-gray-600">
                         Build a <strong>job-winning QA portfolio</strong> with hands-on, instructor-reviewed

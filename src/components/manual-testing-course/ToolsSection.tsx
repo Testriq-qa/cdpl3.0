@@ -301,7 +301,7 @@ const ToolsSection: FC = () => {
                 {/* Headline */}
                 <div className="text-center mb-12 md:mb-16">
                     <h2 id="tools-heading" className="text-4xl font-bold text-gray-900 tracking-tight">
-                        Tools You’ll Master in Our <span className="text-sky-800">QA Certification Course</span>
+                        Tools You’ll Master in Our <span className="text-blue-700">QA Certification Course</span>
                     </h2>
                     <p className="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                         Learn industry‑standard <strong>software testing tools</strong> used by top product teams — from

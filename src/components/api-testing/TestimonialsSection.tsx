@@ -99,7 +99,7 @@ export default function TestimonialsSection() {
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <h2 className="text-4xl text-slate-900 text-center font-bold mb-4">
-                    Success <span className='text-brand'>Stories</span>
+                    Success <span className='text-ST'>Stories</span>
                 </h2>
 
                 {/* SEO-supportive intro line */}

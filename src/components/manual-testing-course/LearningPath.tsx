@@ -124,7 +124,7 @@ export default function LearningPath() {
             <Sparkles className="w-4 h-4" aria-hidden="true" /> Structured, job-ready QA curriculum
           </span>
           <h2 id="learning-path-title" className="mt-6 text-4xl font-bold text-gray-900">
-            Your <span className="text-red-800">12-Week</span> Learning Path
+            Your <span className="text-blue-700">12-Week</span> Learning Path
           </h2>
           <p className="mt-3 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
             Become a <strong>job-ready Manual QA Tester</strong> with industry-standard

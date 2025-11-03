@@ -183,7 +183,7 @@ export default function CareerSection() {
             </span>
           </div>
           <h2 className="mt-6 text-4xl md:text-5xl font-bold text-gray-900">
-            <span className="text-sky-700">Career</span> & <span className="text-brand">Salary</span> Outcomes
+            <span className="text-blue-700">Career & Salary</span> Outcomes
           </h2>
           <p className="mt-3 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
             Land high-growth <strong>QA Engineer</strong> and{" "}

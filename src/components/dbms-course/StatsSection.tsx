@@ -53,7 +53,7 @@ export default function StatsSection() {
         {/* Heading + intro */}
         <header className="mx-auto mb-8 max-w-3xl text-center">
           <h2 id="stats-heading" className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            Real-World <span className="text-[#00758F]">MySQL</span> Metrics for <span className='text-brand'>Careers & Training</span>
+            Real-World <span className="text-ST">MySQL</span> Metrics for <span className='text-ST'>Careers & Training</span>
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
             Explore the demand for <strong>MySQL</strong> and <strong>SQL</strong> skills in India—job openings, fresher salary,

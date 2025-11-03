@@ -57,19 +57,19 @@ export default function WhoShouldEnroll() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="text-center"
         >
-          <p className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700">
+          <p className="mx-auto mb-6 inline-flex items-center gap-2 shadow-md rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700">
             <BadgeCheck className="h-4 w-4 text-emerald-600" />
             Beginner-friendly • Mentor-led • Job-focused
           </p>
 
           <h2
             id="enroll-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Who Should <span className="text-[#00758F]">Join</span>?
+            Who Should <span className="text-ST">Join</span>?
           </h2>
 
-          <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
+          <p className="mt-6 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             No prior ETL experience needed. If you want to work with <strong>data quality</strong>,{' '}
             <strong>data warehouses</strong>, and <strong>analytics pipelines</strong>, this program is for you.
           </p>
