@@ -53,28 +53,28 @@ export const statesData: State[] = [
                         "lat": 19.0759837,
                         "lng": 72.8776559,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-mumbai"
+                        "link": "/software-testing-course-in-mumbai"
                     },
                     {
                         "name": "Mumbai",
                         "lat": 19.0759837,
                         "lng": 72.8776559,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-mumbai"
+                        "link": "/data-science-ai-ml-bi-course-in-mumbai"
                     },
                     {
                         "name": "Mumbai",
                         "lat": 19.0759837,
                         "lng": 72.8776559,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-mumbai"
+                        "link": "/digital-marketing-course-in-mumbai"
                     },
                     {
                         "name": "Mumbai",
                         "lat": 19.0759837,
                         "lng": 72.8776559,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mumbai"
+                        "link": "/programming-courses-in-mumbai"
                     }
                 ]
             },
@@ -87,28 +87,28 @@ export const statesData: State[] = [
                         "lat": 18.5204303,
                         "lng": 73.8567437,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-pune"
+                        "link": "/software-testing-course-in-pune"
                     },
                     {
                         "name": "Pune",
                         "lat": 18.5204303,
                         "lng": 73.8567437,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-pune"
+                        "link": "/data-science-ai-ml-bi-course-in-pune"
                     },
                     {
                         "name": "Pune",
                         "lat": 18.5204303,
                         "lng": 73.8567437,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-pune"
+                        "link": "/digital-marketing-course-in-pune"
                     },
                     {
                         "name": "Pune",
                         "lat": 18.5204303,
                         "lng": 73.8567437,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-pune"
+                        "link": "/programming-courses-in-pune"
                     }
                 ]
             },
@@ -121,7 +121,7 @@ export const statesData: State[] = [
                         "lat": 20.9374238,
                         "lng": 77.7795513,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-amravati"
+                        "link": "/software-testing-course-in-amravati"
                     }
                 ]
             },
@@ -134,14 +134,14 @@ export const statesData: State[] = [
                         "lat": 19.8761653,
                         "lng": 75.3433139,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-aurangabad"
+                        "link": "/software-testing-course-in-aurangabad"
                     },
                     {
                         "name": "Aurangabad",
                         "lat": 19.8761653,
                         "lng": 75.3433139,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-aurangabad"
+                        "link": "/programming-courses-in-aurangabad"
                     }
                 ]
             },
@@ -154,28 +154,28 @@ export const statesData: State[] = [
                         "lat": 21.1458004,
                         "lng": 79.0881546,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-nagpur"
+                        "link": "/software-testing-course-in-nagpur"
                     },
                     {
                         "name": "Nagpur",
                         "lat": 21.1458004,
                         "lng": 79.0881546,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-nagpur"
+                        "link": "/data-science-ai-ml-bi-course-in-nagpur"
                     },
                     {
                         "name": "Nagpur",
                         "lat": 21.1458004,
                         "lng": 79.0881546,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-nagpur"
+                        "link": "/digital-marketing-course-in-nagpur"
                     },
                     {
                         "name": "Nagpur",
                         "lat": 21.1458004,
                         "lng": 79.0881546,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-nagpur"
+                        "link": "/programming-courses-in-nagpur"
                     }
                 ]
             },
@@ -188,1869 +188,1869 @@ export const statesData: State[] = [
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-virar"
+                        "link": "/software-testing-course-in-virar"
                     },
                     {
                         "name": "Nallasopara",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-nallasopara"
+                        "link": "/software-testing-course-in-nallasopara"
                     },
                     {
                         "name": "Vasai Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-vasai-road"
+                        "link": "/software-testing-course-in-vasai-road"
                     },
                     {
                         "name": "Naigaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-naigaon"
+                        "link": "/software-testing-course-in-naigaon"
                     },
                     {
                         "name": "Bhayandar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-bhayandar"
+                        "link": "/software-testing-course-in-bhayandar"
                     },
                     {
                         "name": "Mira Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-mira-road"
+                        "link": "/software-testing-course-in-mira-road"
                     },
                     {
                         "name": "Dahisar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-dahisar"
+                        "link": "/software-testing-course-in-dahisar"
                     },
                     {
                         "name": "Borivali",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-borivali"
+                        "link": "/software-testing-course-in-borivali"
                     },
                     {
                         "name": "Kandivali",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-kandivali"
+                        "link": "/software-testing-course-in-kandivali"
                     },
                     {
                         "name": "Malad",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-malad"
+                        "link": "/software-testing-course-in-malad"
                     },
                     {
                         "name": "Goregaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-goregaon"
+                        "link": "/software-testing-course-in-goregaon"
                     },
                     {
                         "name": "Ram Mandir",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-ram-mandir"
+                        "link": "/software-testing-course-in-ram-mandir"
                     },
                     {
                         "name": "Jogeshwari",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-jogeshwari"
+                        "link": "/software-testing-course-in-jogeshwari"
                     },
                     {
                         "name": "Andheri",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-andheri"
+                        "link": "/software-testing-course-in-andheri"
                     },
                     {
                         "name": "Vile Parle",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-vile-parle"
+                        "link": "/software-testing-course-in-vile-parle"
                     },
                     {
                         "name": "Santacruz",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-santacruz"
+                        "link": "/software-testing-course-in-santacruz"
                     },
                     {
                         "name": "Khar Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-khar-road"
+                        "link": "/software-testing-course-in-khar-road"
                     },
                     {
                         "name": "Bandra",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-bandra"
+                        "link": "/software-testing-course-in-bandra"
                     },
                     {
                         "name": "Mahim",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-mahim"
+                        "link": "/software-testing-course-in-mahim"
                     },
                     {
                         "name": "Matunga Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-matunga-road"
+                        "link": "/software-testing-course-in-matunga-road"
                     },
                     {
                         "name": "Dadar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-dadar"
+                        "link": "/software-testing-course-in-dadar"
                     },
                     {
                         "name": "Prabhadevi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-prabhadevi"
+                        "link": "/software-testing-course-in-prabhadevi"
                     },
                     {
                         "name": "Lower Parel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-lower-parel"
+                        "link": "/software-testing-course-in-lower-parel"
                     },
                     {
                         "name": "Mahalaxmi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-mahalaxmi"
+                        "link": "/software-testing-course-in-mahalaxmi"
                     },
                     {
                         "name": "Mumbai Central",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-mumbai-central"
+                        "link": "/software-testing-course-in-mumbai-central"
                     },
                     {
                         "name": "Grant Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-grant-road"
+                        "link": "/software-testing-course-in-grant-road"
                     },
                     {
                         "name": "Charni Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-charni-road"
+                        "link": "/software-testing-course-in-charni-road"
                     },
                     {
                         "name": "Marine Lines",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-marine-lines"
+                        "link": "/software-testing-course-in-marine-lines"
                     },
                     {
                         "name": "Churchgate",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-churchgate"
+                        "link": "/software-testing-course-in-churchgate"
                     },
                     {
                         "name": "CSMT",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-csmt"
+                        "link": "/software-testing-course-in-csmt"
                     },
                     {
                         "name": "Masjid",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-masjid"
+                        "link": "/software-testing-course-in-masjid"
                     },
                     {
                         "name": "Sandhurst Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-sandhurst-road"
+                        "link": "/software-testing-course-in-sandhurst-road"
                     },
                     {
                         "name": "Byculla",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-byculla"
+                        "link": "/software-testing-course-in-byculla"
                     },
                     {
                         "name": "Chinchpokli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-chinchpokli"
+                        "link": "/software-testing-course-in-chinchpokli"
                     },
                     {
                         "name": "Parel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-parel"
+                        "link": "/software-testing-course-in-parel"
                     },
                     {
                         "name": "Matunga",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-matunga"
+                        "link": "/software-testing-course-in-matunga"
                     },
                     {
                         "name": "Sion",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-sion"
+                        "link": "/software-testing-course-in-sion"
                     },
                     {
                         "name": "Kurla",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-kurla"
+                        "link": "/software-testing-course-in-kurla"
                     },
                     {
                         "name": "Wadala Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-wadala-road"
+                        "link": "/software-testing-course-in-wadala-road"
                     },
                     {
                         "name": "Chembur",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-chembur"
+                        "link": "/software-testing-course-in-chembur"
                     },
                     {
                         "name": "Vashi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-vashi"
+                        "link": "/software-testing-course-in-vashi"
                     },
                     {
                         "name": "Nerul",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-nerul"
+                        "link": "/software-testing-course-in-nerul"
                     },
                     {
                         "name": "Seawoods-Darave",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-seawoods-darave"
+                        "link": "/software-testing-course-in-seawoods-darave"
                     },
                     {
                         "name": "CBD Belapur",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-cbd-belapur"
+                        "link": "/software-testing-course-in-cbd-belapur"
                     },
                     {
                         "name": "Panvel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-panvel"
+                        "link": "/software-testing-course-in-panvel"
                     },
                     {
                         "name": "Bandra",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-bandra"
+                        "link": "/data-science-ai-ml-bi-course-in-bandra"
                     },
                     {
                         "name": "Virar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-virar"
+                        "link": "/data-science-ai-ml-bi-course-in-virar"
                     },
                     {
                         "name": "Nalasopara",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-nalasopara"
+                        "link": "/data-science-ai-ml-bi-course-in-nalasopara"
                     },
                     {
                         "name": "Vasai Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-vasai-road"
+                        "link": "/data-science-ai-ml-bi-course-in-vasai-road"
                     },
                     {
                         "name": "Naigaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-naigaon"
+                        "link": "/data-science-ai-ml-bi-course-in-naigaon"
                     },
                     {
                         "name": "Bhayandar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-bhayandar"
+                        "link": "/data-science-ai-ml-bi-course-in-bhayandar"
                     },
                     {
                         "name": "Mira Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-mira-road"
+                        "link": "/data-science-ai-ml-bi-course-in-mira-road"
                     },
                     {
                         "name": "Dahisar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-dahisar"
+                        "link": "/data-science-ai-ml-bi-course-in-dahisar"
                     },
                     {
                         "name": "Borivali",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-borivali"
+                        "link": "/data-science-ai-ml-bi-course-in-borivali"
                     },
                     {
                         "name": "Kandivali",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kandivali"
+                        "link": "/data-science-ai-ml-bi-course-in-kandivali"
                     },
                     {
                         "name": "Malad",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-malad"
+                        "link": "/data-science-ai-ml-bi-course-in-malad"
                     },
                     {
                         "name": "Goregaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-goregaon"
+                        "link": "/data-science-ai-ml-bi-course-in-goregaon"
                     },
                     {
                         "name": "Ram Mandir",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-ram-mandir"
+                        "link": "/data-science-ai-ml-bi-course-in-ram-mandir"
                     },
                     {
                         "name": "Jogeshwari",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-jogeshwari"
+                        "link": "/data-science-ai-ml-bi-course-in-jogeshwari"
                     },
                     {
                         "name": "Andheri",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-andheri"
+                        "link": "/data-science-ai-ml-bi-course-in-andheri"
                     },
                     {
                         "name": "Vile Parle",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-vile-parle"
+                        "link": "/data-science-ai-ml-bi-course-in-vile-parle"
                     },
                     {
                         "name": "Santacruz",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-santacruz"
+                        "link": "/data-science-ai-ml-bi-course-in-santacruz"
                     },
                     {
                         "name": "Khar Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-khar-road"
+                        "link": "/data-science-ai-ml-bi-course-in-khar-road"
                     },
                     {
                         "name": "Mahim Junction",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-mahim-junction"
+                        "link": "/data-science-ai-ml-bi-course-in-mahim-junction"
                     },
                     {
                         "name": "Matunga Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-matunga-road"
+                        "link": "/data-science-ai-ml-bi-course-in-matunga-road"
                     },
                     {
                         "name": "Dadar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-dadar"
+                        "link": "/data-science-ai-ml-bi-course-in-dadar"
                     },
                     {
                         "name": "Prabhadevi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-prabhadevi"
+                        "link": "/data-science-ai-ml-bi-course-in-prabhadevi"
                     },
                     {
                         "name": "Lower Parel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-lower-parel"
+                        "link": "/data-science-ai-ml-bi-course-in-lower-parel"
                     },
                     {
                         "name": "Mahalaxmi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-mahalaxmi"
+                        "link": "/data-science-ai-ml-bi-course-in-mahalaxmi"
                     },
                     {
                         "name": "Mumbai Central",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-mumbai-central"
+                        "link": "/data-science-ai-ml-bi-course-in-mumbai-central"
                     },
                     {
                         "name": "Grant Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-grant-road"
+                        "link": "/data-science-ai-ml-bi-course-in-grant-road"
                     },
                     {
                         "name": "Charni Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-charni-road"
+                        "link": "/data-science-ai-ml-bi-course-in-charni-road"
                     },
                     {
                         "name": "Marine Lines",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-marine-lines"
+                        "link": "/data-science-ai-ml-bi-course-in-marine-lines"
                     },
                     {
                         "name": "Churchgate",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-churchgate"
+                        "link": "/data-science-ai-ml-bi-course-in-churchgate"
                     },
                     {
                         "name": "Mumbai CST",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-mumbai-cst"
+                        "link": "/data-science-ai-ml-bi-course-in-mumbai-cst"
                     },
                     {
                         "name": "Masjid",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-masjid"
+                        "link": "/data-science-ai-ml-bi-course-in-masjid"
                     },
                     {
                         "name": "Sandhurst Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-sandhurst-road"
+                        "link": "/data-science-ai-ml-bi-course-in-sandhurst-road"
                     },
                     {
                         "name": "Dockyard Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-dockyard-road"
+                        "link": "/data-science-ai-ml-bi-course-in-dockyard-road"
                     },
                     {
                         "name": "Reay Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-reay-road"
+                        "link": "/data-science-ai-ml-bi-course-in-reay-road"
                     },
                     {
                         "name": "Cotton Green",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-cotton-green"
+                        "link": "/data-science-ai-ml-bi-course-in-cotton-green"
                     },
                     {
                         "name": "Sewri",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-sewri"
+                        "link": "/data-science-ai-ml-bi-course-in-sewri"
                     },
                     {
                         "name": "Wadala Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-wadala-road"
+                        "link": "/data-science-ai-ml-bi-course-in-wadala-road"
                     },
                     {
                         "name": "King's Circle",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kings-circle"
+                        "link": "/data-science-ai-ml-bi-course-in-kings-circle"
                     },
                     {
                         "name": "Vashi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-vashi"
+                        "link": "/data-science-ai-ml-bi-course-in-vashi"
                     },
                     {
                         "name": "Sanpada",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-sanpada"
+                        "link": "/data-science-ai-ml-bi-course-in-sanpada"
                     },
                     {
                         "name": "Turbhe",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-turbhe"
+                        "link": "/data-science-ai-ml-bi-course-in-turbhe"
                     },
                     {
                         "name": "Kopar Khairane",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kopar-khairane"
+                        "link": "/data-science-ai-ml-bi-course-in-kopar-khairane"
                     },
                     {
                         "name": "Ghansoli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-ghansoli"
+                        "link": "/data-science-ai-ml-bi-course-in-ghansoli"
                     },
                     {
                         "name": "Rabale",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-rabale"
+                        "link": "/data-science-ai-ml-bi-course-in-rabale"
                     },
                     {
                         "name": "Airoli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-airoli"
+                        "link": "/data-science-ai-ml-bi-course-in-airoli"
                     },
                     {
                         "name": "Juinagar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-juinagar"
+                        "link": "/data-science-ai-ml-bi-course-in-juinagar"
                     },
                     {
                         "name": "Kharghar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kharghar"
+                        "link": "/data-science-ai-ml-bi-course-in-kharghar"
                     },
                     {
                         "name": "Mansarovar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-mansarovar"
+                        "link": "/data-science-ai-ml-bi-course-in-mansarovar"
                     },
                     {
                         "name": "Khandeshwar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-khandeshwar"
+                        "link": "/data-science-ai-ml-bi-course-in-khandeshwar"
                     },
                     {
                         "name": "Nerul",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-nerul"
+                        "link": "/data-science-ai-ml-bi-course-in-nerul"
                     },
                     {
                         "name": "Panvel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-panvel"
+                        "link": "/data-science-ai-ml-bi-course-in-panvel"
                     },
                     {
                         "name": "CSMT",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-csmt"
+                        "link": "/data-science-ai-ml-bi-course-in-csmt"
                     },
                     {
                         "name": "Byculla",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-byculla"
+                        "link": "/data-science-ai-ml-bi-course-in-byculla"
                     },
                     {
                         "name": "Chinchpokli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-chinchpokli"
+                        "link": "/data-science-ai-ml-bi-course-in-chinchpokli"
                     },
                     {
                         "name": "Currey Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-currey-road"
+                        "link": "/data-science-ai-ml-bi-course-in-currey-road"
                     },
                     {
                         "name": "Parel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-parel"
+                        "link": "/data-science-ai-ml-bi-course-in-parel"
                     },
                     {
                         "name": "Kurla",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kurla"
+                        "link": "/data-science-ai-ml-bi-course-in-kurla"
                     },
                     {
                         "name": "Vidyavihar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-vidyavihar"
+                        "link": "/data-science-ai-ml-bi-course-in-vidyavihar"
                     },
                     {
                         "name": "Ghatkopar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-ghatkopar"
+                        "link": "/data-science-ai-ml-bi-course-in-ghatkopar"
                     },
                     {
                         "name": "Vikhroli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-vikhroli"
+                        "link": "/data-science-ai-ml-bi-course-in-vikhroli"
                     },
                     {
                         "name": "Kanjurmarg",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kanjurmarg"
+                        "link": "/data-science-ai-ml-bi-course-in-kanjurmarg"
                     },
                     {
                         "name": "Bhandup",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-bhandup"
+                        "link": "/data-science-ai-ml-bi-course-in-bhandup"
                     },
                     {
                         "name": "Nahur",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-nahur"
+                        "link": "/data-science-ai-ml-bi-course-in-nahur"
                     },
                     {
                         "name": "Mulund",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-mulund"
+                        "link": "/data-science-ai-ml-bi-course-in-mulund"
                     },
                     {
                         "name": "Thane",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-thane"
+                        "link": "/data-science-ai-ml-bi-course-in-thane"
                     },
                     {
                         "name": "Kalva",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kalva"
+                        "link": "/data-science-ai-ml-bi-course-in-kalva"
                     },
                     {
                         "name": "Mumbra",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-mumbra"
+                        "link": "/data-science-ai-ml-bi-course-in-mumbra"
                     },
                     {
                         "name": "Diva",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-diva"
+                        "link": "/data-science-ai-ml-bi-course-in-diva"
                     },
                     {
                         "name": "Dombivli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-dombivli"
+                        "link": "/data-science-ai-ml-bi-course-in-dombivli"
                     },
                     {
                         "name": "Kalyan",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kalyan"
+                        "link": "/data-science-ai-ml-bi-course-in-kalyan"
                     },
                     {
                         "name": "Churchgate",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-churchgate"
+                        "link": "/digital-marketing-course-in-churchgate"
                     },
                     {
                         "name": "Marine Lines",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-marine-lines"
+                        "link": "/digital-marketing-course-in-marine-lines"
                     },
                     {
                         "name": "Charni Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-charni-road"
+                        "link": "/digital-marketing-course-in-charni-road"
                     },
                     {
                         "name": "Grant Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-grant-road"
+                        "link": "/digital-marketing-course-in-grant-road"
                     },
                     {
                         "name": "Mumbai Central",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-mumbai-central"
+                        "link": "/digital-marketing-course-in-mumbai-central"
                     },
                     {
                         "name": "Dadar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-dadar"
+                        "link": "/digital-marketing-course-in-dadar"
                     },
                     {
                         "name": "Matunga Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-matunga-road"
+                        "link": "/digital-marketing-course-in-matunga-road"
                     },
                     {
                         "name": "Mahim Jn",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-mahim-jn"
+                        "link": "/digital-marketing-course-in-mahim-jn"
                     },
                     {
                         "name": "Bandra",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-bandra"
+                        "link": "/digital-marketing-course-in-bandra"
                     },
                     {
                         "name": "Khar Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-khar-road"
+                        "link": "/digital-marketing-course-in-khar-road"
                     },
                     {
                         "name": "Santacruz",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-santacruz"
+                        "link": "/digital-marketing-course-in-santacruz"
                     },
                     {
                         "name": "Vile Parle",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-vile-parle"
+                        "link": "/digital-marketing-course-in-vile-parle"
                     },
                     {
                         "name": "Andheri",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-andheri"
+                        "link": "/digital-marketing-course-in-andheri"
                     },
                     {
                         "name": "Jogeshwari",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-jogeshwari"
+                        "link": "/digital-marketing-course-in-jogeshwari"
                     },
                     {
                         "name": "Ram Mandir",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-ram-mandir"
+                        "link": "/digital-marketing-course-in-ram-mandir"
                     },
                     {
                         "name": "Goregaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-goregaon"
+                        "link": "/digital-marketing-course-in-goregaon"
                     },
                     {
                         "name": "Malad",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-malad"
+                        "link": "/digital-marketing-course-in-malad"
                     },
                     {
                         "name": "Kandivali",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kandivali"
+                        "link": "/digital-marketing-course-in-kandivali"
                     },
                     {
                         "name": "Borivali",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-borivali"
+                        "link": "/digital-marketing-course-in-borivali"
                     },
                     {
                         "name": "Dahisar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-dahisar"
+                        "link": "/digital-marketing-course-in-dahisar"
                     },
                     {
                         "name": "Mira Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-mira-road"
+                        "link": "/digital-marketing-course-in-mira-road"
                     },
                     {
                         "name": "Bhayandar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-bhayandar"
+                        "link": "/digital-marketing-course-in-bhayandar"
                     },
                     {
                         "name": "Naigaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-naigaon"
+                        "link": "/digital-marketing-course-in-naigaon"
                     },
                     {
                         "name": "Vasai Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-vasai-road"
+                        "link": "/digital-marketing-course-in-vasai-road"
                     },
                     {
                         "name": "Nalasopara",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-nalasopara"
+                        "link": "/digital-marketing-course-in-nalasopara"
                     },
                     {
                         "name": "Virar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-virar"
+                        "link": "/digital-marketing-course-in-virar"
                     },
                     {
                         "name": "Vaitarna",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-vaitarna"
+                        "link": "/digital-marketing-course-in-vaitarna"
                     },
                     {
                         "name": "Saphale",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-saphale"
+                        "link": "/digital-marketing-course-in-saphale"
                     },
                     {
                         "name": "Kelve Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kelve-road"
+                        "link": "/digital-marketing-course-in-kelve-road"
                     },
                     {
                         "name": "Palghar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-palghar"
+                        "link": "/digital-marketing-course-in-palghar"
                     },
                     {
                         "name": "Umroli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-umroli"
+                        "link": "/digital-marketing-course-in-umroli"
                     },
                     {
                         "name": "Boisar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-boisar"
+                        "link": "/digital-marketing-course-in-boisar"
                     },
                     {
                         "name": "Vangaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-vangaon"
+                        "link": "/digital-marketing-course-in-vangaon"
                     },
                     {
                         "name": "Dahanu Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-dahanu-road"
+                        "link": "/digital-marketing-course-in-dahanu-road"
                     },
                     {
                         "name": "Chhatrapati Shivaji Maharaj Terminus (CSMT)",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-csmt"
+                        "link": "/digital-marketing-course-in-csmt"
                     },
                     {
                         "name": "Masjid",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-masjid"
+                        "link": "/digital-marketing-course-in-masjid"
                     },
                     {
                         "name": "Sandhurst Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-sandhurst-road"
+                        "link": "/digital-marketing-course-in-sandhurst-road"
                     },
                     {
                         "name": "Byculla",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-byculla"
+                        "link": "/digital-marketing-course-in-byculla"
                     },
                     {
                         "name": "Chinchpokli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-chinchpokli"
+                        "link": "/digital-marketing-course-in-chinchpokli"
                     },
                     {
                         "name": "Currey Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-currey-road"
+                        "link": "/digital-marketing-course-in-currey-road"
                     },
                     {
                         "name": "Parel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-parel"
+                        "link": "/digital-marketing-course-in-parel"
                     },
                     {
                         "name": "Matunga",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-matunga"
+                        "link": "/digital-marketing-course-in-matunga"
                     },
                     {
                         "name": "Sion",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-sion"
+                        "link": "/digital-marketing-course-in-sion"
                     },
                     {
                         "name": "Kurla",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kurla"
+                        "link": "/digital-marketing-course-in-kurla"
                     },
                     {
                         "name": "Vidyavihar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-vidyavihar"
+                        "link": "/digital-marketing-course-in-vidyavihar"
                     },
                     {
                         "name": "Ghatkopar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-ghatkopar"
+                        "link": "/digital-marketing-course-in-ghatkopar"
                     },
                     {
                         "name": "Vikhroli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-vikhroli"
+                        "link": "/digital-marketing-course-in-vikhroli"
                     },
                     {
                         "name": "Kanjur Marg",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kanjur-marg"
+                        "link": "/digital-marketing-course-in-kanjur-marg"
                     },
                     {
                         "name": "Bhandup",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-bhandup"
+                        "link": "/digital-marketing-course-in-bhandup"
                     },
                     {
                         "name": "Nahur",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-nahur"
+                        "link": "/digital-marketing-course-in-nahur"
                     },
                     {
                         "name": "Mulund",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-mulund"
+                        "link": "/digital-marketing-course-in-mulund"
                     },
                     {
                         "name": "Thane",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-thane"
+                        "link": "/digital-marketing-course-in-thane"
                     },
                     {
                         "name": "Kalva",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kalva"
+                        "link": "/digital-marketing-course-in-kalva"
                     },
                     {
                         "name": "Mumbra",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-mumbra"
+                        "link": "/digital-marketing-course-in-mumbra"
                     },
                     {
                         "name": "Diva Junction",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-diva-junction"
+                        "link": "/digital-marketing-course-in-diva-junction"
                     },
                     {
                         "name": "Kopar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kopar"
+                        "link": "/digital-marketing-course-in-kopar"
                     },
                     {
                         "name": "Dombivli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-dombivli"
+                        "link": "/digital-marketing-course-in-dombivli"
                     },
                     {
                         "name": "Thakurli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-thakurli"
+                        "link": "/digital-marketing-course-in-thakurli"
                     },
                     {
                         "name": "Kalyan Junction",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kalyan-junction"
+                        "link": "/digital-marketing-course-in-kalyan-junction"
                     },
                     {
                         "name": "Dockyard Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-dockyard-road"
+                        "link": "/digital-marketing-course-in-dockyard-road"
                     },
                     {
                         "name": "King\u2019s Circle",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kings-circle"
+                        "link": "/digital-marketing-course-in-kings-circle"
                     },
                     {
                         "name": "Reay Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-reay-road"
+                        "link": "/digital-marketing-course-in-reay-road"
                     },
                     {
                         "name": "Cotton Green",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-cotton-green"
+                        "link": "/digital-marketing-course-in-cotton-green"
                     },
                     {
                         "name": "Sewri",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-sewri"
+                        "link": "/digital-marketing-course-in-sewri"
                     },
                     {
                         "name": "Wadala Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-wadala-road"
+                        "link": "/digital-marketing-course-in-wadala-road"
                     },
                     {
                         "name": "Vashi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-vashi"
+                        "link": "/digital-marketing-course-in-vashi"
                     },
                     {
                         "name": "Sanpada",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-sanpada"
+                        "link": "/digital-marketing-course-in-sanpada"
                     },
                     {
                         "name": "Juinagar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-juinagar"
+                        "link": "/digital-marketing-course-in-juinagar"
                     },
                     {
                         "name": "Nerul",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-nerul"
+                        "link": "/digital-marketing-course-in-nerul"
                     },
                     {
                         "name": "Seawoods\u2013Darave",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-seawoods-darave"
+                        "link": "/digital-marketing-course-in-seawoods-darave"
                     },
                     {
                         "name": "Belapur",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-belapur"
+                        "link": "/digital-marketing-course-in-belapur"
                     },
                     {
                         "name": "Kharghar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kharghar"
+                        "link": "/digital-marketing-course-in-kharghar"
                     },
                     {
                         "name": "Mansarovar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-mansarovar"
+                        "link": "/digital-marketing-course-in-mansarovar"
                     },
                     {
                         "name": "Khandeshwar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-khandeshwar"
+                        "link": "/digital-marketing-course-in-khandeshwar"
                     },
                     {
                         "name": "Panvel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-panvel"
+                        "link": "/digital-marketing-course-in-panvel"
                     },
                     {
                         "name": "Churchgate",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-churchgate"
+                        "link": "/programming-courses-in-churchgate"
                     },
                     {
                         "name": "Marine Lines",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-marine-lines"
+                        "link": "/programming-courses-in-marine-lines"
                     },
                     {
                         "name": "Charni Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-charni-road"
+                        "link": "/programming-courses-in-charni-road"
                     },
                     {
                         "name": "Grant Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-grant-road"
+                        "link": "/programming-courses-in-grant-road"
                     },
                     {
                         "name": "Mumbai Central",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mumbai-central"
+                        "link": "/programming-courses-in-mumbai-central"
                     },
                     {
                         "name": "Mahalaxmi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mahalaxmi"
+                        "link": "/programming-courses-in-mahalaxmi"
                     },
                     {
                         "name": "Lower Parel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-lower-parel"
+                        "link": "/programming-courses-in-lower-parel"
                     },
                     {
                         "name": "Prabhadevi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-prabhadevi"
+                        "link": "/programming-courses-in-prabhadevi"
                     },
                     {
                         "name": "Dadar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-dadar"
+                        "link": "/programming-courses-in-dadar"
                     },
                     {
                         "name": "Matunga Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-matunga-road"
+                        "link": "/programming-courses-in-matunga-road"
                     },
                     {
                         "name": "Mahim Jn",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mahim-jn"
+                        "link": "/programming-courses-in-mahim-jn"
                     },
                     {
                         "name": "Bandra",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-bandra"
+                        "link": "/programming-courses-in-bandra"
                     },
                     {
                         "name": "Khar Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-khar-road"
+                        "link": "/programming-courses-in-khar-road"
                     },
                     {
                         "name": "Santacruz",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-santacruz"
+                        "link": "/programming-courses-in-santacruz"
                     },
                     {
                         "name": "Vile Parle",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-vile-parle"
+                        "link": "/programming-courses-in-vile-parle"
                     },
                     {
                         "name": "Andheri",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-andheri"
+                        "link": "/programming-courses-in-andheri"
                     },
                     {
                         "name": "Jogeshwari",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-jogeshwari"
+                        "link": "/programming-courses-in-jogeshwari"
                     },
                     {
                         "name": "Ram Mandir",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-ram-mandir"
+                        "link": "/programming-courses-in-ram-mandir"
                     },
                     {
                         "name": "Goregaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-goregaon"
+                        "link": "/programming-courses-in-goregaon"
                     },
                     {
                         "name": "Malad",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-malad"
+                        "link": "/programming-courses-in-malad"
                     },
                     {
                         "name": "Kandivali",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kandivali"
+                        "link": "/programming-courses-in-kandivali"
                     },
                     {
                         "name": "Borivali",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-borivali"
+                        "link": "/programming-courses-in-borivali"
                     },
                     {
                         "name": "Dahisar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-dahisar"
+                        "link": "/programming-courses-in-dahisar"
                     },
                     {
                         "name": "Mira Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mira-road"
+                        "link": "/programming-courses-in-mira-road"
                     },
                     {
                         "name": "Bhayandar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-bhayandar"
+                        "link": "/programming-courses-in-bhayandar"
                     },
                     {
                         "name": "Naigaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-naigaon"
+                        "link": "/programming-courses-in-naigaon"
                     },
                     {
                         "name": "Vasai Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-vasai-road"
+                        "link": "/programming-courses-in-vasai-road"
                     },
                     {
                         "name": "Nalasopara",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-nalasopara"
+                        "link": "/programming-courses-in-nalasopara"
                     },
                     {
                         "name": "Virar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-virar"
+                        "link": "/programming-courses-in-virar"
                     },
                     {
                         "name": "Vaitarna",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-vaitarna"
+                        "link": "/programming-courses-in-vaitarna"
                     },
                     {
                         "name": "Saphale",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-saphale"
+                        "link": "/programming-courses-in-saphale"
                     },
                     {
                         "name": "Kelve Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kelve-road"
+                        "link": "/programming-courses-in-kelve-road"
                     },
                     {
                         "name": "Palghar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-palghar"
+                        "link": "/programming-courses-in-palghar"
                     },
                     {
                         "name": "Umroli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-umroli"
+                        "link": "/programming-courses-in-umroli"
                     },
                     {
                         "name": "Boisar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-boisar"
+                        "link": "/programming-courses-in-boisar"
                     },
                     {
                         "name": "Vangaon",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-vangaon"
+                        "link": "/programming-courses-in-vangaon"
                     },
                     {
                         "name": "Dahanu Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-dahanu-road"
+                        "link": "/programming-courses-in-dahanu-road"
                     },
                     {
                         "name": "CSMT",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-csmt"
+                        "link": "/programming-courses-in-csmt"
                     },
                     {
                         "name": "Masjid",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-masjid"
+                        "link": "/programming-courses-in-masjid"
                     },
                     {
                         "name": "Sandhurst Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-sandhurst-road"
+                        "link": "/programming-courses-in-sandhurst-road"
                     },
                     {
                         "name": "Byculla",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-byculla"
+                        "link": "/programming-courses-in-byculla"
                     },
                     {
                         "name": "Chinchpokli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-chinchpokli"
+                        "link": "/programming-courses-in-chinchpokli"
                     },
                     {
                         "name": "Currey Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-currey-road"
+                        "link": "/programming-courses-in-currey-road"
                     },
                     {
                         "name": "Parel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-parel"
+                        "link": "/programming-courses-in-parel"
                     },
                     {
                         "name": "Matunga",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-matunga"
+                        "link": "/programming-courses-in-matunga"
                     },
                     {
                         "name": "Sion",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-sion"
+                        "link": "/programming-courses-in-sion"
                     },
                     {
                         "name": "Kurla",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kurla"
+                        "link": "/programming-courses-in-kurla"
                     },
                     {
                         "name": "Vidyavihar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-vidyavihar"
+                        "link": "/programming-courses-in-vidyavihar"
                     },
                     {
                         "name": "Ghatkopar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-ghatkopar"
+                        "link": "/programming-courses-in-ghatkopar"
                     },
                     {
                         "name": "Vikhroli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-vikhroli"
+                        "link": "/programming-courses-in-vikhroli"
                     },
                     {
                         "name": "Kanjur Marg",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kanjur-marg"
+                        "link": "/programming-courses-in-kanjur-marg"
                     },
                     {
                         "name": "Bhandup",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-bhandup"
+                        "link": "/programming-courses-in-bhandup"
                     },
                     {
                         "name": "Nahur",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-nahur"
+                        "link": "/programming-courses-in-nahur"
                     },
                     {
                         "name": "Mulund",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mulund"
+                        "link": "/programming-courses-in-mulund"
                     },
                     {
                         "name": "Thane",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-thane"
+                        "link": "/programming-courses-in-thane"
                     },
                     {
                         "name": "Kalva",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kalva"
+                        "link": "/programming-courses-in-kalva"
                     },
                     {
                         "name": "Mumbra",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mumbra"
+                        "link": "/programming-courses-in-mumbra"
                     },
                     {
                         "name": "Diva Junction",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-diva-junction"
+                        "link": "/programming-courses-in-diva-junction"
                     },
                     {
                         "name": "Kopar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kopar"
+                        "link": "/programming-courses-in-kopar"
                     },
                     {
                         "name": "Dombivli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-dombivli"
+                        "link": "/programming-courses-in-dombivli"
                     },
                     {
                         "name": "Thakurli",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-thakurli"
+                        "link": "/programming-courses-in-thakurli"
                     },
                     {
                         "name": "Kalyan Junction",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kalyan-junction"
+                        "link": "/programming-courses-in-kalyan-junction"
                     },
                     {
                         "name": "Dockyard Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-dockyard-road"
+                        "link": "/programming-courses-in-dockyard-road"
                     },
                     {
                         "name": "Reay Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-reay-road"
+                        "link": "/programming-courses-in-reay-road"
                     },
                     {
                         "name": "Cotton Green",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-cotton-green"
+                        "link": "/programming-courses-in-cotton-green"
                     },
                     {
                         "name": "Sewri",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-sewri"
+                        "link": "/programming-courses-in-sewri"
                     },
                     {
                         "name": "Wadala Road",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-wadala-road"
+                        "link": "/programming-courses-in-wadala-road"
                     },
                     {
                         "name": "Vashi",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-vashi"
+                        "link": "/programming-courses-in-vashi"
                     },
                     {
                         "name": "Sanpada",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-sanpada"
+                        "link": "/programming-courses-in-sanpada"
                     },
                     {
                         "name": "Juinagar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-juinagar"
+                        "link": "/programming-courses-in-juinagar"
                     },
                     {
                         "name": "Nerul",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-nerul"
+                        "link": "/programming-courses-in-nerul"
                     },
                     {
                         "name": "Seawoods\u2013Darave",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-seawoods-darave"
+                        "link": "/programming-courses-in-seawoods-darave"
                     },
                     {
                         "name": "CBD Belapur",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-cbd-belapur"
+                        "link": "/programming-courses-in-cbd-belapur"
                     },
                     {
                         "name": "Kharghar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kharghar"
+                        "link": "/programming-courses-in-kharghar"
                     },
                     {
                         "name": "Mansarovar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mansarovar"
+                        "link": "/programming-courses-in-mansarovar"
                     },
                     {
                         "name": "Khandeshwar",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-khandeshwar"
+                        "link": "/programming-courses-in-khandeshwar"
                     },
                     {
                         "name": "Panvel",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-panvel"
+                        "link": "/programming-courses-in-panvel"
                     }
                 ]
             }
@@ -2069,14 +2069,14 @@ export const statesData: State[] = [
                         "lat": 12.9715987,
                         "lng": 77.5945627,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-bengaluru"
+                        "link": "/software-testing-course-in-bengaluru"
                     },
                     {
                         "name": "Bengaluru",
                         "lat": 12.9715987,
                         "lng": 77.5945627,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-bengaluru"
+                        "link": "/digital-marketing-course-in-bengaluru"
                     }
                 ]
             },
@@ -2089,14 +2089,14 @@ export const statesData: State[] = [
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-bangalore"
+                        "link": "/data-science-ai-ml-bi-course-in-bangalore"
                     },
                     {
                         "name": "Bangalore",
                         "lat": 0.0,
                         "lng": 0.0,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-bangalore"
+                        "link": "/programming-courses-in-bangalore"
                     }
                 ]
             },
@@ -2109,14 +2109,14 @@ export const statesData: State[] = [
                         "lat": 12.9141417,
                         "lng": 74.8559568,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-mangalore"
+                        "link": "/digital-marketing-course-in-mangalore"
                     },
                     {
                         "name": "Mangalore",
                         "lat": 12.9141417,
                         "lng": 74.8559568,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mangalore"
+                        "link": "/programming-courses-in-mangalore"
                     }
                 ]
             },
@@ -2129,7 +2129,7 @@ export const statesData: State[] = [
                         "lat": 12.2958104,
                         "lng": 76.6393805,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-mysore"
+                        "link": "/programming-courses-in-mysore"
                     }
                 ]
             }
@@ -2148,28 +2148,28 @@ export const statesData: State[] = [
                         "lat": 28.6139391,
                         "lng": 77.2090212,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-delhi"
+                        "link": "/software-testing-course-in-delhi"
                     },
                     {
                         "name": "Delhi",
                         "lat": 28.6139391,
                         "lng": 77.2090212,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-delhi"
+                        "link": "/data-science-ai-ml-bi-course-in-delhi"
                     },
                     {
                         "name": "Delhi",
                         "lat": 28.6139391,
                         "lng": 77.2090212,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-delhi"
+                        "link": "/digital-marketing-course-in-delhi"
                     },
                     {
                         "name": "Delhi",
                         "lat": 28.6139391,
                         "lng": 77.2090212,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-delhi"
+                        "link": "/programming-courses-in-delhi"
                     }
                 ]
             }
@@ -2188,28 +2188,28 @@ export const statesData: State[] = [
                         "lat": 22.572646,
                         "lng": 88.363895,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-kolkata"
+                        "link": "/software-testing-course-in-kolkata"
                     },
                     {
                         "name": "Kolkata",
                         "lat": 22.572646,
                         "lng": 88.363895,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kolkata"
+                        "link": "/data-science-ai-ml-bi-course-in-kolkata"
                     },
                     {
                         "name": "Kolkata",
                         "lat": 22.572646,
                         "lng": 88.363895,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kolkata"
+                        "link": "/digital-marketing-course-in-kolkata"
                     },
                     {
                         "name": "Kolkata",
                         "lat": 22.572646,
                         "lng": 88.363895,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kolkata"
+                        "link": "/programming-courses-in-kolkata"
                     }
                 ]
             }
@@ -2228,28 +2228,28 @@ export const statesData: State[] = [
                         "lat": 13.0826802,
                         "lng": 80.2707184,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-chennai"
+                        "link": "/software-testing-course-in-chennai"
                     },
                     {
                         "name": "Chennai",
                         "lat": 13.0826802,
                         "lng": 80.2707184,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-chennai"
+                        "link": "/data-science-ai-ml-bi-course-in-chennai"
                     },
                     {
                         "name": "Chennai",
                         "lat": 13.0826802,
                         "lng": 80.2707184,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-chennai"
+                        "link": "/digital-marketing-course-in-chennai"
                     },
                     {
                         "name": "Chennai",
                         "lat": 13.0826802,
                         "lng": 80.2707184,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-chennai"
+                        "link": "/programming-courses-in-chennai"
                     }
                 ]
             },
@@ -2262,21 +2262,21 @@ export const statesData: State[] = [
                         "lat": 11.0168445,
                         "lng": 76.9558321,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-coimbatore"
+                        "link": "/data-science-ai-ml-bi-course-in-coimbatore"
                     },
                     {
                         "name": "Coimbatore",
                         "lat": 11.0168445,
                         "lng": 76.9558321,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-coimbatore"
+                        "link": "/digital-marketing-course-in-coimbatore"
                     },
                     {
                         "name": "Coimbatore",
                         "lat": 11.0168445,
                         "lng": 76.9558321,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-coimbatore"
+                        "link": "/programming-courses-in-coimbatore"
                     }
                 ]
             },
@@ -2289,14 +2289,14 @@ export const statesData: State[] = [
                         "lat": 9.9252007,
                         "lng": 78.1197754,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-madurai"
+                        "link": "/digital-marketing-course-in-madurai"
                     },
                     {
                         "name": "Madurai",
                         "lat": 9.9252007,
                         "lng": 78.1197754,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-madurai"
+                        "link": "/programming-courses-in-madurai"
                     }
                 ]
             }
@@ -2315,28 +2315,28 @@ export const statesData: State[] = [
                         "lat": 23.022505,
                         "lng": 72.5713621,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-ahmedabad"
+                        "link": "/software-testing-course-in-ahmedabad"
                     },
                     {
                         "name": "Ahmedabad",
                         "lat": 23.022505,
                         "lng": 72.5713621,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-ahmedabad"
+                        "link": "/data-science-ai-ml-bi-course-in-ahmedabad"
                     },
                     {
                         "name": "Ahmedabad",
                         "lat": 23.022505,
                         "lng": 72.5713621,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-ahmedabad"
+                        "link": "/digital-marketing-course-in-ahmedabad"
                     },
                     {
                         "name": "Ahmedabad",
                         "lat": 23.022505,
                         "lng": 72.5713621,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-ahmedabad"
+                        "link": "/programming-courses-in-ahmedabad"
                     }
                 ]
             },
@@ -2349,21 +2349,21 @@ export const statesData: State[] = [
                         "lat": 21.1702401,
                         "lng": 72.8310607,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-surat"
+                        "link": "/software-testing-course-in-surat"
                     },
                     {
                         "name": "Surat",
                         "lat": 21.1702401,
                         "lng": 72.8310607,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-surat"
+                        "link": "/data-science-ai-ml-bi-course-in-surat"
                     },
                     {
                         "name": "Surat",
                         "lat": 21.1702401,
                         "lng": 72.8310607,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-surat"
+                        "link": "/programming-courses-in-surat"
                     }
                 ]
             },
@@ -2376,28 +2376,28 @@ export const statesData: State[] = [
                         "lat": 22.3071588,
                         "lng": 73.1812187,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-vadodara"
+                        "link": "/software-testing-course-in-vadodara"
                     },
                     {
                         "name": "Vadodara",
                         "lat": 22.3071588,
                         "lng": 73.1812187,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-vadodara"
+                        "link": "/data-science-ai-ml-bi-course-in-vadodara"
                     },
                     {
                         "name": "Vadodara",
                         "lat": 22.3071588,
                         "lng": 73.1812187,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-vadodara"
+                        "link": "/digital-marketing-course-in-vadodara"
                     },
                     {
                         "name": "Vadodara",
                         "lat": 22.3071588,
                         "lng": 73.1812187,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-vadodara"
+                        "link": "/programming-courses-in-vadodara"
                     }
                 ]
             },
@@ -2410,14 +2410,14 @@ export const statesData: State[] = [
                         "lat": 22.3038945,
                         "lng": 70.8021599,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-rajkot"
+                        "link": "/digital-marketing-course-in-rajkot"
                     },
                     {
                         "name": "Rajkot",
                         "lat": 22.3038945,
                         "lng": 70.8021599,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-rajkot"
+                        "link": "/programming-courses-in-rajkot"
                     }
                 ]
             }
@@ -2436,28 +2436,28 @@ export const statesData: State[] = [
                         "lat": 26.9124336,
                         "lng": 75.7872709,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-jaipur"
+                        "link": "/software-testing-course-in-jaipur"
                     },
                     {
                         "name": "Jaipur",
                         "lat": 26.9124336,
                         "lng": 75.7872709,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-jaipur"
+                        "link": "/data-science-ai-ml-bi-course-in-jaipur"
                     },
                     {
                         "name": "Jaipur",
                         "lat": 26.9124336,
                         "lng": 75.7872709,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-jaipur"
+                        "link": "/digital-marketing-course-in-jaipur"
                     },
                     {
                         "name": "Jaipur",
                         "lat": 26.9124336,
                         "lng": 75.7872709,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-jaipur"
+                        "link": "/programming-courses-in-jaipur"
                     }
                 ]
             },
@@ -2470,7 +2470,7 @@ export const statesData: State[] = [
                         "lat": 26.4498954,
                         "lng": 74.6399163,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-ajmer"
+                        "link": "/software-testing-course-in-ajmer"
                     }
                 ]
             },
@@ -2483,21 +2483,21 @@ export const statesData: State[] = [
                         "lat": 26.2389469,
                         "lng": 73.0243094,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-jodhpur"
+                        "link": "/software-testing-course-in-jodhpur"
                     },
                     {
                         "name": "Jodhpur",
                         "lat": 26.2389469,
                         "lng": 73.0243094,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-jodhpur"
+                        "link": "/digital-marketing-course-in-jodhpur"
                     },
                     {
                         "name": "Jodhpur",
                         "lat": 26.2389469,
                         "lng": 73.0243094,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-jodhpur"
+                        "link": "/programming-courses-in-jodhpur"
                     }
                 ]
             }
@@ -2516,21 +2516,21 @@ export const statesData: State[] = [
                         "lat": 30.7399738,
                         "lng": 76.7567368,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-chandigarh"
+                        "link": "/software-testing-course-in-chandigarh"
                     },
                     {
                         "name": "Chandigarh",
                         "lat": 30.7399738,
                         "lng": 76.7567368,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-chandigarh"
+                        "link": "/data-science-ai-ml-bi-course-in-chandigarh"
                     },
                     {
                         "name": "Chandigarh",
                         "lat": 30.7399738,
                         "lng": 76.7567368,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-chandigarh"
+                        "link": "/programming-courses-in-chandigarh"
                     }
                 ]
             }
@@ -2549,7 +2549,7 @@ export const statesData: State[] = [
                         "lat": 23.831457,
                         "lng": 91.2867777,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-agartala"
+                        "link": "/software-testing-course-in-agartala"
                     }
                 ]
             }
@@ -2568,7 +2568,7 @@ export const statesData: State[] = [
                         "lat": 27.1766701,
                         "lng": 78.0080745,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-agra"
+                        "link": "/software-testing-course-in-agra"
                     }
                 ]
             },
@@ -2581,7 +2581,7 @@ export const statesData: State[] = [
                         "lat": 25.4358011,
                         "lng": 81.846311,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-allahabad"
+                        "link": "/software-testing-course-in-allahabad"
                     }
                 ]
             },
@@ -2594,21 +2594,21 @@ export const statesData: State[] = [
                         "lat": 26.8466937,
                         "lng": 80.946166,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-lucknow"
+                        "link": "/data-science-ai-ml-bi-course-in-lucknow"
                     },
                     {
                         "name": "Lucknow",
                         "lat": 26.8466937,
                         "lng": 80.946166,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-lucknow"
+                        "link": "/digital-marketing-course-in-lucknow"
                     },
                     {
                         "name": "Lucknow",
                         "lat": 26.8466937,
                         "lng": 80.946166,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-lucknow"
+                        "link": "/programming-courses-in-lucknow"
                     }
                 ]
             },
@@ -2621,7 +2621,7 @@ export const statesData: State[] = [
                         "lat": 25.3176452,
                         "lng": 82.9739144,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-varanasi"
+                        "link": "/data-science-ai-ml-bi-course-in-varanasi"
                     }
                 ]
             },
@@ -2634,7 +2634,7 @@ export const statesData: State[] = [
                         "lat": 26.447965,
                         "lng": 80.330572,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kanpur"
+                        "link": "/digital-marketing-course-in-kanpur"
                     }
                 ]
             }
@@ -2653,21 +2653,21 @@ export const statesData: State[] = [
                         "lat": 31.6339793,
                         "lng": 74.8722642,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-amritsar"
+                        "link": "/software-testing-course-in-amritsar"
                     },
                     {
                         "name": "Amritsar",
                         "lat": 31.6339793,
                         "lng": 74.8722642,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-amritsar"
+                        "link": "/digital-marketing-course-in-amritsar"
                     },
                     {
                         "name": "Amritsar",
                         "lat": 31.6339793,
                         "lng": 74.8722642,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-amritsar"
+                        "link": "/programming-courses-in-amritsar"
                     }
                 ]
             },
@@ -2680,7 +2680,7 @@ export const statesData: State[] = [
                         "lat": 30.7399738,
                         "lng": 76.7567368,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-chandigarh"
+                        "link": "/digital-marketing-course-in-chandigarh"
                     }
                 ]
             },
@@ -2693,14 +2693,14 @@ export const statesData: State[] = [
                         "lat": 30.900965,
                         "lng": 75.8572758,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-ludhiana"
+                        "link": "/digital-marketing-course-in-ludhiana"
                     },
                     {
                         "name": "Ludhiana",
                         "lat": 30.900965,
                         "lng": 75.8572758,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-ludhiana"
+                        "link": "/programming-courses-in-ludhiana"
                     }
                 ]
             }
@@ -2719,28 +2719,28 @@ export const statesData: State[] = [
                         "lat": 23.2599333,
                         "lng": 77.412615,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-bhopal"
+                        "link": "/software-testing-course-in-bhopal"
                     },
                     {
                         "name": "Bhopal",
                         "lat": 23.2599333,
                         "lng": 77.412615,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-bhopal"
+                        "link": "/data-science-ai-ml-bi-course-in-bhopal"
                     },
                     {
                         "name": "Bhopal",
                         "lat": 23.2599333,
                         "lng": 77.412615,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-bhopal"
+                        "link": "/digital-marketing-course-in-bhopal"
                     },
                     {
                         "name": "Bhopal",
                         "lat": 23.2599333,
                         "lng": 77.412615,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-bhopal"
+                        "link": "/programming-courses-in-bhopal"
                     }
                 ]
             },
@@ -2753,28 +2753,28 @@ export const statesData: State[] = [
                         "lat": 22.7195687,
                         "lng": 75.8577258,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-indore"
+                        "link": "/software-testing-course-in-indore"
                     },
                     {
                         "name": "Indore",
                         "lat": 22.7195687,
                         "lng": 75.8577258,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-indore"
+                        "link": "/data-science-ai-ml-bi-course-in-indore"
                     },
                     {
                         "name": "Indore",
                         "lat": 22.7195687,
                         "lng": 75.8577258,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-indore"
+                        "link": "/digital-marketing-course-in-indore"
                     },
                     {
                         "name": "Indore",
                         "lat": 22.7195687,
                         "lng": 75.8577258,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-indore"
+                        "link": "/programming-courses-in-indore"
                     }
                 ]
             }
@@ -2793,14 +2793,14 @@ export const statesData: State[] = [
                         "lat": 20.295515,
                         "lng": 85.824797,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-bhubaneswar"
+                        "link": "/software-testing-course-in-bhubaneswar"
                     },
                     {
                         "name": "Bhubaneswar",
                         "lat": 20.295515,
                         "lng": 85.824797,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-bhubaneswar"
+                        "link": "/programming-courses-in-bhubaneswar"
                     }
                 ]
             }
@@ -2819,14 +2819,14 @@ export const statesData: State[] = [
                         "lat": 30.3164945,
                         "lng": 78.0321918,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-dehradun"
+                        "link": "/software-testing-course-in-dehradun"
                     },
                     {
                         "name": "Dehradun",
                         "lat": 30.3164945,
                         "lng": 78.0321918,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-dehradun"
+                        "link": "/digital-marketing-course-in-dehradun"
                     }
                 ]
             }
@@ -2845,28 +2845,28 @@ export const statesData: State[] = [
                         "lat": 9.9312328,
                         "lng": 76.2673041,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-kochi"
+                        "link": "/software-testing-course-in-kochi"
                     },
                     {
                         "name": "Kochi",
                         "lat": 9.9312328,
                         "lng": 76.2673041,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-kochi"
+                        "link": "/data-science-ai-ml-bi-course-in-kochi"
                     },
                     {
                         "name": "Kochi",
                         "lat": 9.9312328,
                         "lng": 76.2673041,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-kochi"
+                        "link": "/digital-marketing-course-in-kochi"
                     },
                     {
                         "name": "Kochi",
                         "lat": 9.9312328,
                         "lng": 76.2673041,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-kochi"
+                        "link": "/programming-courses-in-kochi"
                     }
                 ]
             },
@@ -2879,21 +2879,21 @@ export const statesData: State[] = [
                         "lat": 8.5241391,
                         "lng": 76.9366376,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-thiruvananthapuram"
+                        "link": "/software-testing-course-in-thiruvananthapuram"
                     },
                     {
                         "name": "Thiruvananthapuram",
                         "lat": 8.5241391,
                         "lng": 76.9366376,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-thiruvananthapuram"
+                        "link": "/data-science-ai-ml-bi-course-in-thiruvananthapuram"
                     },
                     {
                         "name": "Thiruvananthapuram",
                         "lat": 8.5241391,
                         "lng": 76.9366376,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-thiruvananthapuram"
+                        "link": "/programming-courses-in-thiruvananthapuram"
                     }
                 ]
             }
@@ -2912,28 +2912,28 @@ export const statesData: State[] = [
                         "lat": 25.5940947,
                         "lng": 85.1375645,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-patna"
+                        "link": "/software-testing-course-in-patna"
                     },
                     {
                         "name": "Patna",
                         "lat": 25.5940947,
                         "lng": 85.1375645,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-patna"
+                        "link": "/data-science-ai-ml-bi-course-in-patna"
                     },
                     {
                         "name": "Patna",
                         "lat": 25.5940947,
                         "lng": 85.1375645,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-patna"
+                        "link": "/digital-marketing-course-in-patna"
                     },
                     {
                         "name": "Patna",
                         "lat": 25.5940947,
                         "lng": 85.1375645,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-patna"
+                        "link": "/programming-courses-in-patna"
                     }
                 ]
             }
@@ -2952,21 +2952,21 @@ export const statesData: State[] = [
                         "lat": 16.5061743,
                         "lng": 80.6480153,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-vijayawada"
+                        "link": "/software-testing-course-in-vijayawada"
                     },
                     {
                         "name": "Vijayawada",
                         "lat": 16.5061743,
                         "lng": 80.6480153,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-vijayawada"
+                        "link": "/digital-marketing-course-in-vijayawada"
                     },
                     {
                         "name": "Vijayawada",
                         "lat": 16.5061743,
                         "lng": 80.6480153,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-vijayawada"
+                        "link": "/programming-courses-in-vijayawada"
                     }
                 ]
             },
@@ -2979,28 +2979,28 @@ export const statesData: State[] = [
                         "lat": 17.6868159,
                         "lng": 83.2184815,
                         "courseType": "software-testing",
-                        "link": "/courses/software-testing-course-in-visakhapatnam"
+                        "link": "/software-testing-course-in-visakhapatnam"
                     },
                     {
                         "name": "Visakhapatnam",
                         "lat": 17.6868159,
                         "lng": 83.2184815,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-visakhapatnam"
+                        "link": "/data-science-ai-ml-bi-course-in-visakhapatnam"
                     },
                     {
                         "name": "Visakhapatnam",
                         "lat": 17.6868159,
                         "lng": 83.2184815,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-visakhapatnam"
+                        "link": "/digital-marketing-course-in-visakhapatnam"
                     },
                     {
                         "name": "Visakhapatnam",
                         "lat": 17.6868159,
                         "lng": 83.2184815,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-visakhapatnam"
+                        "link": "/programming-courses-in-visakhapatnam"
                     }
                 ]
             }
@@ -3019,21 +3019,21 @@ export const statesData: State[] = [
                         "lat": 17.384934,
                         "lng": 78.486616,
                         "courseType": "data-science",
-                        "link": "/courses/data-science-ai-ml-bi-course-in-hyderabad"
+                        "link": "/data-science-ai-ml-bi-course-in-hyderabad"
                     },
                     {
                         "name": "Hyderabad",
                         "lat": 17.384934,
                         "lng": 78.486616,
                         "courseType": "general",
-                        "link": "/courses/digital-marketing-course-in-hyderabad"
+                        "link": "/digital-marketing-course-in-hyderabad"
                     },
                     {
                         "name": "Hyderabad",
                         "lat": 17.384934,
                         "lng": 78.486616,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-hyderabad"
+                        "link": "/programming-courses-in-hyderabad"
                     }
                 ]
             }
@@ -3052,7 +3052,7 @@ export const statesData: State[] = [
                         "lat": 21.2513844,
                         "lng": 81.6296413,
                         "courseType": "programming",
-                        "link": "/courses/programming-courses-in-raipur"
+                        "link": "/programming-courses-in-raipur"
                     }
                 ]
             }

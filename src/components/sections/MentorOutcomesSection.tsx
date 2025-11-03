@@ -3,11 +3,10 @@
 import { useMemo, useState } from "react";
 
 /**
- * MentorOutcomesSection — polished / clean
- * - Soft ring, no dashed spinner
- * - Evenly spaced larger avatars, no external labels
- * - Balanced center card with neat spacing
- * - Tight but breathable section spacing
+ * MentorOutcomesSection — big avatars aligned to the ring center
+ * - Orbit positions use the exact same radius as the SVG ring (RING_R)
+ * - No elliptical offset, so centers sit precisely on the path
+ * - Avatars remain larger on desktop (h-20 lg:h-24)
  */
 
 type Case = {
@@ -26,17 +25,9 @@ const GRADIENT_BRAND =
   "linear-gradient(90deg, #ff8c00 0%, #ffb558 55%, #ffd19e 100%)";
 const GRADIENT_ACCENT = "linear-gradient(90deg,#e0f2ff 0%,#efe9ff 100%)";
 
-/** Updated filters per request */
 const DOMAINS = ["All", "QA", "Full-Stack", "Cloud & DevOps"];
-
-/** Anonymous fallback avatar */
 const ANONYMOUS = "/placement_images/anonymous_student.png";
 
-/**
- * Keep Jaynam Shah (has real image) — now QA
- * Add 1 QA person with real image (Shrikanth Suri — eClerx)
- * Avatars for Avdhut and Asifali set to anonymous image
- */
 const CASES: Case[] = [
   {
     name: "Jaynam Shah",
@@ -129,10 +120,11 @@ export default function MentorOutcomesSection() {
                   setTab(d);
                   setActiveIdx(0);
                 }}
-                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${active
-                  ? "border-zinc-300 text-zinc-900 shadow-sm"
-                  : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
-                  }`}
+                className={`rounded-full border px-3 py-1.5 text-sm font-semibold transition ${
+                  active
+                    ? "border-zinc-300 text-zinc-900 shadow-sm"
+                    : "border-zinc-200 text-zinc-600 hover:border-zinc-300"
+                }`}
                 style={active ? { backgroundImage: GRADIENT_BRAND } : {}}
                 aria-pressed={active}
               >
@@ -142,7 +134,7 @@ export default function MentorOutcomesSection() {
           })}
         </div>
 
-        {/* KPIs (each card now has a distinct, clean background) */}
+        {/* KPIs */}
         <div className="mb-8 grid gap-3 sm:grid-cols-4">
           {[
             {
@@ -219,88 +211,28 @@ export default function MentorOutcomesSection() {
 
 /* ============================ BrandMarquee ============================ */
 function BrandMarquee() {
-  // pause/resume on hover OR click
   const [paused, setPaused] = useState(false);
   const toggleClickPause = () => setPaused((p) => !p);
 
-  // source: 14 logos from your Elementor carousel
   const BRANDS = [
-    {
-      name: "Technoscripts",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006266.webp",
-    },
-    {
-      name: "JM-Financial",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006267.webp",
-    },
-    {
-      name: "Vistaar",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006278.webp",
-    },
-    {
-      name: "SP-Ultraflex",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006279.webp",
-    },
-    {
-      name: "Marqetrix",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006280.webp",
-    },
-    {
-      name: "Raw-Engineering",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006281.webp",
-    },
-    {
-      name: "Galentic",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006282.webp",
-    },
-    {
-      name: "Tech-Cryptors",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006283.webp",
-    },
-    {
-      name: "Axiom",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006284.webp",
-    },
-    {
-      name: "Medi-Venturz",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006285.webp",
-    },
-    {
-      name: "Aryan-Technologies",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006286.webp",
-    },
-    {
-      name: "Credility",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006287.webp",
-    },
-    {
-      name: "IDfy",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006289.webp",
-    },
-    {
-      name: "Testriq",
-      logo:
-        "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006290.webp",
-    },
+    { name: "Technoscripts", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006266.webp" },
+    { name: "JM-Financial", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006267.webp" },
+    { name: "Vistaar", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006278.webp" },
+    { name: "SP-Ultraflex", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006279.webp" },
+    { name: "Marqetrix", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006280.webp" },
+    { name: "Raw-Engineering", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006281.webp" },
+    { name: "Galentic", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006282.webp" },
+    { name: "Tech-Cryptors", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006283.webp" },
+    { name: "Axiom", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006284.webp" },
+    { name: "Medi-Venturz", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006285.webp" },
+    { name: "Aryan-Technologies", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006286.webp" },
+    { name: "Credility", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006287.webp" },
+    { name: "IDfy", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006289.webp" },
+    { name: "Testriq", logo: "https://cinutedigital.com/wp-content/uploads/2024/06/Group-1000006290.webp" },
   ];
 
-  // duplicate once for seamless loop
   const scrollingList = [...BRANDS, ...BRANDS];
 
-  // keyboard accessibility for pause on Enter/Space
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
@@ -329,14 +261,14 @@ function BrandMarquee() {
           {scrollingList.map((brand, i) => (
             <div
               key={brand.name + i}
-              className="flex min-w-52 max-w-60 flex-none items-center gap-3 rounded-2xl bg-white/80 px-4 py-2 shadow-sm ring-1 ring-zinc-200 backdrop-blur"
+              className="flex min-w-56 max-w-64 flex-none items-center gap-3 rounded-2xl bg-white/80 px-5 py-3 shadow-sm ring-1 ring-zinc-200 backdrop-blur"
               title={brand.name}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={brand.logo}
                 alt={`${brand.name} logo`}
-                className="h-7 w-7 flex-none rounded-md object-contain"
+                className="h-9 w-9 flex-none rounded-md object-contain"
                 loading="lazy"
               />
               <span className="block w-full truncate text-sm font-semibold text-zinc-800">
@@ -351,10 +283,8 @@ function BrandMarquee() {
         <div className="pointer-events-none absolute inset-y-0 right-0 w-10 bg-gradient-to-l from-orange-50/90 to-transparent" />
       </div>
 
-      {/* marquee styles */}
       <style jsx>{`
         .marquee-track {
-          /* Move LEFT -> RIGHT continuously */
           animation: marquee-ltr 28s linear infinite;
           will-change: transform;
         }
@@ -383,16 +313,17 @@ function Orbit({
 }) {
   const N = Math.max(1, cases.length);
 
-  // even distribution around a slightly smaller radius to reduce empty center
+  /** Use SAME radius for ring drawing and avatar centers */
+  const RING_R = 38.5; // matches the SVG circle r
+
   const positions = useMemo(() => {
-    const r = 40; // cleaner, closer circle
     const start = -90; // top
     return new Array(N).fill(0).map((_, i) => {
       const angle = start + (360 / N) * i;
       const rad = (angle * Math.PI) / 180;
       return {
-        cx: 50 + Math.cos(rad) * r,
-        cy: 50 + Math.sin(rad) * (r - 1.5),
+        cx: 50 + Math.cos(rad) * RING_R,
+        cy: 50 + Math.sin(rad) * RING_R, // no vertical compression
       };
     });
   }, [N]);
@@ -401,7 +332,7 @@ function Orbit({
 
   return (
     <div className="relative mx-auto grid w-full max-w-5xl place-items-center">
-      <div className="relative aspect-square w-full min-w-[280px] max-w-[680px]">
+      <div className="relative aspect-square w-full min-w-[280px] max-w-[720px]">
         {/* Soft ring */}
         <div className="absolute inset-0">
           <svg viewBox="0 0 100 100" className="h-full w-full" aria-hidden>
@@ -416,11 +347,11 @@ function Orbit({
                 <stop offset="1" stopColor="#ffe8cb" />
               </linearGradient>
             </defs>
-            <circle cx="50" cy="50" r="38.5" fill="url(#o-fill)" />
+            <circle cx="50" cy="50" r={RING_R} fill="url(#o-fill)" />
             <circle
               cx="50"
               cy="50"
-              r="38.5"
+              r={RING_R}
               fill="none"
               stroke="url(#o-stroke)"
               strokeWidth="0.8"
@@ -429,8 +360,8 @@ function Orbit({
         </div>
 
         {/* Center card */}
-        <div className="absolute left-1/2 top-1/2 w-[90%] max-w-[420px] -translate-x-1/2 -translate-y-1/2 sm:w-[66%]">
-          <div className="rounded-3xl border border-zinc-200 bg-white/95 p-4 shadow-[0_22px_50px_-30px_rgba(2,6,23,0.45)] backdrop-blur">
+        <div className="absolute left-1/2 top-1/2 w-[92%] max-w-[480px] -translate-x-1/2 -translate-y-1/2 sm:w-[72%]">
+          <div className="rounded-3xl border border-zinc-200 bg-white/95 p-5 shadow-[0_22px_50px_-30px_rgba(2,6,23,0.45)] backdrop-blur">
             {active ? (
               <>
                 <div className="flex items-center gap-3">
@@ -438,7 +369,7 @@ function Orbit({
                   <img
                     src={active.avatar}
                     alt={`${active.name} avatar`}
-                    className="h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm"
+                    className="h-14 w-14 sm:h-16 sm:w-16 rounded-full object-cover ring-2 ring-white shadow-sm"
                     loading="lazy"
                   />
                   <div>
@@ -480,8 +411,8 @@ function Orbit({
           </div>
         </div>
 
-        {/* MOBILE: small stacked avatars at bottom */}
-        <div className="absolute inset-x-0 bottom-[8%] flex items-end justify-center gap-1.5 sm:hidden">
+        {/* MOBILE: larger stacked avatars */}
+        <div className="absolute inset-x-0 bottom-[8%] flex items-end justify-center gap-2 sm:hidden">
           {cases.map((c, i) => {
             const isActive = i === activeIdx;
             return (
@@ -496,8 +427,9 @@ function Orbit({
                 <img
                   src={c.avatar}
                   alt=""
-                  className={`h-11 w-11 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${isActive ? "scale-105" : "scale-100"
-                    }`}
+                  className={`h-14 w-14 rounded-full object-cover ring-2 ring-white shadow-sm transition-transform ${
+                    isActive ? "scale-105" : "scale-100"
+                  }`}
                   loading="lazy"
                 />
               </button>
@@ -505,7 +437,7 @@ function Orbit({
           })}
         </div>
 
-        {/* DESKTOP: clean orbiting avatars (no labels) */}
+        {/* DESKTOP: orbiting avatars — centered on ring */}
         {cases.map((c, i) => {
           const { cx, cy } = positions[i];
           const isActive = i === activeIdx;
@@ -523,13 +455,14 @@ function Orbit({
               <img
                 src={c.avatar}
                 alt=""
-                className={`h-16 w-16 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${isActive ? "scale-[1.06]" : "scale-100"
-                  }`}
+                className={`h-20 w-20 lg:h-24 lg:w-24 rounded-full object-cover ring-2 ring-white shadow-md transition-transform ${
+                  isActive ? "scale-[1.06]" : "scale-100"
+                }`}
                 loading="lazy"
                 style={{
                   boxShadow: isActive
-                    ? "0 20px 38px -20px rgba(255,140,0,0.35)"
-                    : "0 16px 32px -22px rgba(2,6,23,0.35)",
+                    ? "0 24px 48px -22px rgba(255,140,0,0.35)"
+                    : "0 18px 36px -22px rgba(2,6,23,0.35)",
                 }}
               />
             </button>

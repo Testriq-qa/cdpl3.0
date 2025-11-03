@@ -269,7 +269,7 @@ export default function PlacementsPage() {
                 </section>
 
                 <section
-                    className="w-full pb-16 scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                    className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
                     data-scroll-target="placements-faq"
                 >
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -278,7 +278,7 @@ export default function PlacementsPage() {
                 </section>
 
                 <section
-                    className="w-full pb-24 scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                    className="w-full pb-8 scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
                     data-scroll-target="placements-newsletter"
                 >
                     <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
