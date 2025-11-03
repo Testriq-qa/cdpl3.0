@@ -58,7 +58,7 @@ export default function HeroManualTesting() {
             <div className="relative overflow-hidden">
 
                 {/* Breadcrumbs for SEO & UX */}
-                <nav aria-label="Breadcrumb" className="mb-6">
+                <nav aria-label="Breadcrumb" className="mb-4">
                     <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
                         {breadcrumbs.map((c, i) => (
                             <li key={i} className="flex items-center gap-2">
@@ -74,17 +74,17 @@ export default function HeroManualTesting() {
                     </ol>
                 </nav>
 
-                <div className="grid items-center gap-10 lg:gap-16 lg:grid-cols-[1.05fr_.95fr] grid-cols-1">
+                <div className="grid items-center gap-10 lg:gap-16 lg:grid-cols-12 grid-cols-1">
                     {/* LEFT */}
-                    <div className="lg:-mt-32 xl:-mt-40">
+                    <div className="lg:-mt-32 xl:-mt-58 lg:col-span-7">
                         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-0.5 md:py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
                             <Sparkles className="h-4 w-4 text-amber-500" />
                             <span>ISTQB Foundation Aligned • Job-Oriented</span>
                         </div>
 
                         <h1 id="manual-testing-hero" className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900">
-                            Best <span className="text-brand">Manual Testing Course</span>{" "}
-                            with <span className="whitespace-nowrap text-sky-700">100% Placement <br className="md:hidden" /> Support</span>
+                            Best <span className="text-blue-700">Manual Testing Course</span>{" "}
+                            with 100% Placement <br className="md:hidden" /> Support
                         </h1>
 
                         <p className="mt-4 max-w-2xl text-base sm:text-lg md:text-xl text-slate-600">
@@ -131,7 +131,7 @@ export default function HeroManualTesting() {
 
                                 <button
                                     type="submit"
-                                    className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-green-700 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+                                    className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
                                 >
                                     Get Call Back
                                     <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
@@ -172,7 +172,7 @@ export default function HeroManualTesting() {
                         <div className="mt-8 flex flex-col sm:flex-row gap-3">
                             <button
                                 onClick={() => setIsPopupOpen(true)}
-                                className="group inline-flex items-center justify-center rounded-xl bg-brand px-3 py-4 text-base font-bold text-white shadow-md transition-transform hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
+                                className="group inline-flex items-center justify-center rounded-xl bg-indigo-600 px-3 py-4 text-base font-bold text-white shadow-md transition-transform hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500"
                                 aria-label="Enroll in Manual Testing Course"
                             >
                                 Enroll Now
@@ -226,7 +226,7 @@ export default function HeroManualTesting() {
                     </div>
 
                     {/* RIGHT */}
-                    <div className="relative">
+                    <div className="relative lg:col-span-5">
                         <div className="rounded-3xl flex flex-col-reverse gap-5 border border-slate-200 bg-white p-6 shadow-xl md:p-8">
                             <div className="border border-slate-300 p-5 shadow-md shadow-purple-300 rounded-2xl">
                                 <div className="mb-6 flex items-center justify-between">
@@ -325,7 +325,7 @@ export default function HeroManualTesting() {
 
                                     <button
                                         type="submit"
-                                        className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-green-700 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
+                                        className="group mt-2 inline-flex w-full items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-green-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-indigo-600"
                                     >
                                         Get Call Back
                                         <ChevronRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-0.5" />
