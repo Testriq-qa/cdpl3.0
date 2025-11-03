@@ -1,6 +1,8 @@
 // components/sections/CtaSection.tsx
 // Server component — clean, modern CTA with subtle futuristic accents and SEO.
 
+import Link from "next/link";
+
 export default function CtaSection() {
   const seoKeywords =
     "enroll data science course, python machine learning certification, data analyst placement assistance, data science training india, job ready ml program, global certificates data science";
@@ -24,7 +26,7 @@ export default function CtaSection() {
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
             Ready to Launch Your{" "}
-            <span className="underline decoration-[.18rem] underline-offset-4 decoration-violet-400">
+            <span className="text-DS">
               Data Science Career
             </span>
             ?
@@ -66,7 +68,7 @@ export default function CtaSection() {
 
         {/* CTA Buttons */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
+          <Link
             href="tel:+917888383788"
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-violet-700 bg-violet-700 px-5 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.25)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-violet-300 sm:w-auto"
             aria-label="Call Cinute Digital to enroll in the Data Science course"
@@ -82,9 +84,9 @@ export default function CtaSection() {
               />
             </svg>
             Call: +91 788-83-83-788
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="mailto:contact@cinutedigital.com"
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-slate-900 bg-white px-5 py-3 text-base font-semibold text-slate-900 shadow-[0_2px_0_0_rgba(15,23,42,0.15)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300 sm:w-auto"
             aria-label="Email Cinute Digital to get the course brochure"
@@ -105,10 +107,10 @@ export default function CtaSection() {
               />
             </svg>
             Email Us
-          </a>
+          </Link>
 
-          <a
-            href="#apply"
+          <Link
+            href="contact-us"
             className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-600 bg-emerald-600 px-5 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.2)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-emerald-300 sm:w-auto"
             aria-label="Apply now for the Data Science program"
           >
@@ -122,7 +124,7 @@ export default function CtaSection() {
               />
             </svg>
             Apply Now
-          </a>
+          </Link>
         </div>
 
         {/* Micro trust note */}
@@ -136,12 +138,12 @@ export default function CtaSection() {
         {/* Contact meta */}
         <address className="mx-auto mt-6 max-w-3xl not-italic text-center text-xs text-slate-500">
           Prefer WhatsApp? Message us at{" "}
-          <a
+          <Link
             href="https://wa.me/917888383788"
             className="font-medium text-sky-700 underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-sky-300 rounded"
           >
             +91 788-83-83-788
-          </a>
+          </Link>
         </address>
       </div>
 

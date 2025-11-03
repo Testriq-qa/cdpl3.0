@@ -68,7 +68,7 @@ export default function CareerSection() {
             id="career-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Top Companies Hiring <span className="underline decoration-[.18rem] underline-offset-4 decoration-indigo-400">AI Professionals</span>
+            Top Companies Hiring <span className="text-DS">AI Professionals</span>
           </h2>
 
           {/* KPI headline */}

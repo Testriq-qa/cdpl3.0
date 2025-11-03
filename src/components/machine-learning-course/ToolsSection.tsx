@@ -3,6 +3,8 @@
 // Unique accent colors per tool (no repeats), minimal/non-distracting visuals.
 // Includes accessible keyboard focus states and JSON-LD (ItemList) for search engines.
 
+import Link from "next/link";
+
 type Tool = {
   name: string;
   desc: string;
@@ -132,8 +134,7 @@ export default function ToolsSection() {
         {/* Heading */}
         <header className="mx-auto max-w-3xl text-center">
           <h2 id="tools-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Tools & Technologies{" "}
-            <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">You&apos;ll Master</span>
+            <span className="text-DS">Tools & Technologies</span> You&apos;ll Master
           </h2>
           <p className="mt-3 text-base md:text-lg text-slate-700">{subtitle}</p>
           {/* Assist crawlers */}
@@ -188,20 +189,20 @@ export default function ToolsSection() {
 
         {/* CTA row */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
+          <Link
             href="#curriculum"
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Explore curriculum modules mapped to these tools"
           >
             See Modules Using These Tools
-          </a>
-          <a
-            href="#demo"
+          </Link>
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200"
             aria-label="Book a free demo to experience the toolchain"
           >
             Book a Free Demo
-          </a>
+          </Link>
         </div>
 
         {/* Footnote */}

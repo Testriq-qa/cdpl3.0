@@ -63,7 +63,7 @@ export default function WhyMasterProgram() {
             id="why-master-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Why This <span className="text-brand">Master Program</span>?
+            Why This <span className="text-ST">Master Program</span>?
           </h2>
           <p className="mt-3 text-sm sm:text-base leading-relaxed text-slate-600 max-w-3xl mx-auto">
             Become a <strong>complete QA engineer</strong>: build an <em>ISTQB-level foundation</em> and

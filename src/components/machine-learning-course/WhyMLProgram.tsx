@@ -61,7 +61,7 @@ export default function WhyMLProgram() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
         {/* Heading */}
         <h2 id="why-ml-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-          Advanced Data Science: <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">A Complete Overview</span>
+          Advanced Data Science: <span className="text-DS">A Complete Overview</span>
         </h2>
         <p className="mt-3 text-base md:text-lg text-slate-700 mx-auto max-w-4xl">
           {subtitle}
@@ -137,7 +137,7 @@ export default function WhyMLProgram() {
         {/* CTA row */}
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
           <a
-            href="#apply"
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Apply to the Machine Learning & Data Science program"
           >

@@ -136,7 +136,7 @@ export default function TestimonialsSection() {
             id="testimonials-heading"
             className="text-3xl md:text-4xl font-bold text-gray-900"
           >
-            Student Success <span className="text-brand">Stories</span> &amp; <span className="text-indigo-600">Reviews</span>
+            Student Success <span className="text-DS">Stories</span> &amp; <span className="text-DS">Reviews</span>
           </h2>
           <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-4xl mx-auto">
             Real feedback from graduates who advanced their careers in{" "}

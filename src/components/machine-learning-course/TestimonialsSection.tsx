@@ -96,7 +96,7 @@ export default function TestimonialsSection() {
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
             What Our{" "}
-            <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">
+            <span className="text-DS">
               Students Say
             </span>
           </h2>

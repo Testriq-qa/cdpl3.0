@@ -56,7 +56,7 @@ export default function ToolsSection() {
           className="text-center"
         >
           <h2 id="tools-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Tools You’ll Master
+            <span className='text-ST'>Tools</span> You’ll Master
           </h2>
           <p className="mx-auto mt-3 max-w-3xl text-sm sm:text-base text-slate-600">
             Industry-standard QA & automation stack used by top tech companies — designed for <strong>real projects</strong>, <strong>scalable frameworks</strong>, and <strong>CI/CD delivery</strong>.

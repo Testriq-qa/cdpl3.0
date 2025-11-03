@@ -59,7 +59,7 @@ export default function HeroSection() {
 
       <div className="mx-auto max-w-7xl px-4 pb-14 pt-10 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}
-        <nav aria-label="Breadcrumb" className="mb-6">
+        <nav aria-label="Breadcrumb" className="mb-8">
           <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
             {breadcrumbs.map((c, i) => (
               <li key={i} className="flex items-center gap-2">
@@ -98,9 +98,9 @@ export default function HeroSection() {
 
             <h1
               id="qa-hero"
-              className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
+              className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
             >
-              Advanced <span className='text-sky-700'>Manual</span> & <span className='text-brand'>Automation</span> Testing
+              Advanced <span className='text-ST'>Manual</span> & <span className='text-ST'>Automation Testing</span>
             </h1>
 
             {/* Mobile form below H1 */}

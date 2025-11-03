@@ -3,6 +3,8 @@
 // Accessible accordion (keyboard + screen readers), unique accents per item (no repeats),
 // and JSON-LD (FAQPage) for rich results. No dynamic Tailwind class generation.
 
+import Link from "next/link";
+
 type FAQ = {
   q: string;
   a: string;
@@ -80,7 +82,6 @@ const FAQS: FAQ[] = [
 ];
 
 export default function FaqSection() {
-  const heading = "Frequently Asked Questions";
   const subtitle =
     "All the essentials about our Deep Learning, NLP & Generative AI program—entry requirements, duration, tools, certification, and placements.";
   const keywords =
@@ -109,12 +110,8 @@ export default function FaqSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* Header */}
         <header className="mx-auto max-w-3xl text-center">
-          <h2 id="faq-heading" className="text-3xl md:text-5xl font-extrabold tracking-tight text-slate-900">
-            {heading.split("Frequently Asked ")[0]}
-            <span className="block md:inline">
-              Frequently Asked{" "}
-              <span className="underline decoration-[.2rem] underline-offset-4 decoration-indigo-400">Questions</span>
-            </span>
+          <h2 id="faq-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-DS">
+            Frequently Asked Questions
           </h2>
           <p className="mt-3 text-base md:text-lg text-slate-700">{subtitle}</p>
           {/* SEO assist */}
@@ -159,20 +156,19 @@ export default function FaqSection() {
 
         {/* CTA below FAQs */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row">
-          <a
-            href="#contact"
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Still have questions? Contact admissions"
           >
             Still have questions? Contact us
-          </a>
-          <a
-            href="#syllabus"
+          </Link>
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-indigo-200"
             aria-label="Download detailed syllabus"
           >
             Download Detailed Syllabus (PDF)
-          </a>
+          </button>
         </div>
       </div>
 

@@ -101,7 +101,7 @@ export default function CareerRoadmapSection() {
             id="career-roadmap-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Your <span className="text-brand">Data Science</span> Career Roadmap
+            Your <span className="text-DS">Data Science</span> Career Roadmap
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             Follow these <strong>4 proven steps</strong> to move from learner to{" "}
