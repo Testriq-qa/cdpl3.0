@@ -60,8 +60,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 
     if (!post) {
         return {
-            title: 'Post Not Found | Your Company Blog',
-            description: 'The requested blog post could not be found. Browse our latest articles on technology, web development, and software engineering.',
+            title: 'Post Not Found | CDPL Tech Blog',
+            description: 'The requested blog post could not be found. Browse our latest articles on software testing, web development, AI/ML, and DevOps.',
             robots: {
                 index: false,
                 follow: true,
@@ -86,7 +86,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             url: author.social?.website || author.social?.linkedin 
         }] : undefined,
         creator: author?.name,
-        publisher: 'Your Company',
+        publisher: 'CDPL - Cinute Digital Pvt. Ltd.',
         
         // Format Detection
         formatDetection: {
@@ -96,13 +96,13 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         },
         
         // Base URL
-        metadataBase: new URL('https://yourwebsite.com'),
+        metadataBase: new URL('https://www.cinutedigital.com'),
         
         // Canonical URL
         alternates: {
             canonical: post.seo.canonical || `/blog/${post.slug}`,
             languages: {
-                'en-US': `/blog/${post.slug}`,
+                'en-IN': `/blog/${post.slug}`,
             },
         },
         
@@ -110,8 +110,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
         openGraph: {
             title: post.seo.metaTitle,
             description: post.seo.metaDescription,
-            url: `https://yourwebsite.com/blog/${post.slug}`,
-            siteName: 'Your Company Tech Blog',
+            url: `https://www.cinutedigital.com/blog/${post.slug}`,
+            siteName: 'CDPL Tech Blog',
             images: [
                 {
                     url: post.seo.ogImage || post.featuredImage,
@@ -121,7 +121,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
                     type: 'image/jpeg',
                 },
             ],
-            locale: 'en_US',
+            locale: 'en_IN',
             type: 'article',
             publishedTime,
             modifiedTime,
@@ -138,7 +138,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
             description: post.seo.metaDescription,
             images: [post.seo.ogImage || post.featuredImage],
             creator: author?.social?.twitter,
-            site: '@yourcompany',
+            site: '@cinutedigital',
         },
         
         // Robots Configuration
@@ -188,7 +188,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             // Article Schema - Enhanced
             {
                 '@type': 'Article',
-                '@id': `https://yourwebsite.com/blog/${post.slug}#article`,
+                '@id': `https://www.cinutedigital.com/blog/${post.slug}#article`,
                 headline: post.title,
                 alternativeHeadline: post.description,
                 description: post.description,
@@ -205,7 +205,7 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                     : new Date(post.publishDate).toISOString(),
                 author: author ? {
                     '@type': 'Person',
-                    '@id': `https://yourwebsite.com/authors/${author.id}#person`,
+                    '@id': `https://www.cinutedigital.com/authors/${author.id}#person`,
                     name: author.name,
                     description: author.bio,
                     url: author.social?.website || author.social?.linkedin,
@@ -219,34 +219,34 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 } : undefined,
                 publisher: {
                     '@type': 'Organization',
-                    '@id': 'https://yourwebsite.com/#organization',
-                    name: 'Your Company',
+                    '@id': 'https://www.cinutedigital.com/#organization',
+                    name: 'CDPL - Cinute Digital Pvt. Ltd.',
                     logo: {
                         '@type': 'ImageObject',
-                        url: 'https://yourwebsite.com/logo.png',
-                        width: 600,
+                        url: 'https://www.cinutedigital.com/logo.png',
+                        width: 250,
                         height: 60
                     },
                     sameAs: [
-                        'https://twitter.com/yourcompany',
-                        'https://linkedin.com/company/yourcompany'
+                        'https://twitter.com/cinutedigital',
+                        'https://linkedin.com/company/cinute-digital'
                     ]
                 },
                 mainEntityOfPage: {
                     '@type': 'WebPage',
-                    '@id': `https://yourwebsite.com/blog/${post.slug}`,
+                    '@id': `https://www.cinutedigital.com/blog/${post.slug}`,
                 },
                 keywords: post.tags.join(', '),
                 articleSection: category?.name,
                 articleBody: post.excerpt,
                 wordCount: estimatedWordCount,
                 timeRequired: `PT${post.readTime}`,
-                inLanguage: 'en-US',
+                inLanguage: 'en-IN',
                 isAccessibleForFree: true,
                 isPartOf: {
                     '@type': 'Blog',
-                    '@id': 'https://yourwebsite.com/blog#blog',
-                    name: 'Your Company Tech Blog'
+                    '@id': 'https://www.cinutedigital.com/blog#blog',
+                    name: 'CDPL Tech Blog'
                 },
                 about: {
                     '@type': 'Thing',
@@ -257,55 +257,55 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
             // BreadcrumbList Schema
             {
                 '@type': 'BreadcrumbList',
-                '@id': `https://yourwebsite.com/blog/${post.slug}#breadcrumb`,
+                '@id': `https://www.cinutedigital.com/blog/${post.slug}#breadcrumb`,
                 itemListElement: [
                     {
                         '@type': 'ListItem',
                         position: 1,
                         name: 'Home',
-                        item: 'https://yourwebsite.com'
+                        item: 'https://www.cinutedigital.com'
                     },
                     {
                         '@type': 'ListItem',
                         position: 2,
                         name: 'Blog',
-                        item: 'https://yourwebsite.com/blog'
+                        item: 'https://www.cinutedigital.com/blog'
                     },
                     {
                         '@type': 'ListItem',
                         position: 3,
                         name: category?.name || 'Category',
-                        item: `https://yourwebsite.com/blog/category/${category?.slug}`
+                        item: `https://www.cinutedigital.com/blog/category/${category?.slug}`
                     },
                     {
                         '@type': 'ListItem',
                         position: 4,
                         name: post.title,
-                        item: `https://yourwebsite.com/blog/${post.slug}`
+                        item: `https://www.cinutedigital.com/blog/${post.slug}`
                     }
                 ]
             },
             // WebPage Schema
             {
                 '@type': 'WebPage',
-                '@id': `https://yourwebsite.com/blog/${post.slug}`,
-                url: `https://yourwebsite.com/blog/${post.slug}`,
+                '@id': `https://www.cinutedigital.com/blog/${post.slug}`,
+                url: `https://www.cinutedigital.com/blog/${post.slug}`,
                 name: post.title,
                 description: post.description,
                 isPartOf: {
-                    '@id': 'https://yourwebsite.com/#website'
+                    '@id': 'https://www.cinutedigital.com/#website'
                 },
                 primaryImageOfPage: {
-                    '@id': `https://yourwebsite.com/blog/${post.slug}#primaryimage`
+                    '@id': `https://www.cinutedigital.com/blog/${post.slug}#primaryimage`
                 },
                 datePublished: new Date(post.publishDate).toISOString(),
                 dateModified: post.lastModified
                     ? new Date(post.lastModified).toISOString()
                     : new Date(post.publishDate).toISOString(),
                 breadcrumb: {
-                    '@id': `https://yourwebsite.com/blog/${post.slug}#breadcrumb`
+                    '@id': `https://www.cinutedigital.com/blog/${post.slug}#breadcrumb`
                 },
-                inLanguage: 'en-US'
+                inLanguage: 'en-IN'
             }
         ]
     };
@@ -314,13 +314,13 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
     if (relatedPosts.length > 0) {
         jsonLd['@graph'].push({
             '@type': 'ItemList',
-            '@id': `https://yourwebsite.com/blog/${post.slug}#relatedposts`,
+            '@id': `https://www.cinutedigital.com/blog/${post.slug}#relatedposts`,
             name: 'Related Articles',
             itemListElement: relatedPosts.map((relatedPost, index) => ({
                 '@type': 'ListItem',
                 position: index + 1,
                 name: relatedPost.title,
-                item: `https://yourwebsite.com/blog/${relatedPost.slug}`
+                item: `https://www.cinutedigital.com/blog/${relatedPost.slug}`
             }))
         });
     }
@@ -339,6 +339,15 @@ export default async function BlogPostPage({ params }: { params: Promise<{ slug:
                 itemType="https://schema.org/Article"
                 className="blog-post-page"
             >
+                {/* Hidden metadata for schema.org */}
+                <meta itemProp="headline" content={post.title} />
+                <meta itemProp="description" content={post.description} />
+                <meta itemProp="datePublished" content={new Date(post.publishDate).toISOString()} />
+                {post.lastModified && (
+                    <meta itemProp="dateModified" content={new Date(post.lastModified).toISOString()} />
+                )}
+                <meta itemProp="wordCount" content={String(estimatedWordCount)} />
+
                 {/* Category Navigation Menu */}
                 <nav aria-label="Blog categories">
                     <BlogCategoryMenu />

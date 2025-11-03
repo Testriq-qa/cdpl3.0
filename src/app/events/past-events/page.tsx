@@ -12,7 +12,7 @@ import type {
 import type { FeaturedEvent } from "@/components/sections/EventsPastEventsFeaturedEventsSliderSection";
 
 // ============================================================================
-// SEO METADATA - Optimized for Past Events Page
+// SEO METADATA - Enhanced for Past Events Page
 // ============================================================================
 export const metadata: Metadata = generateSEO({
   title: "Past Events - Workshops, Webinars & Training Sessions | CDPL",
@@ -28,6 +28,11 @@ export const metadata: Metadata = generateSEO({
     "industry conferences",
     "CDPL events gallery",
     "training highlights",
+    "tech events India",
+    "developer workshops",
+    "QA training events",
+    "cloud computing workshops",
+    "DevOps training sessions",
   ],
   url: "/events/past-events",
   image: "/og-images/og-image-events.webp",
@@ -194,6 +199,8 @@ export default function PastEventsPage() {
           name: event.title,
           description: event.subtitle || event.purpose,
           startDate: event.date,
+          eventStatus: "https://schema.org/EventScheduled",
+          eventAttendanceMode: "https://schema.org/OfflineEventAttendanceMode",
           location: {
             "@type": "Place",
             name: event.location,
@@ -225,6 +232,7 @@ export default function PastEventsPage() {
       name: event.title,
       description: event.subtitle || event.purpose,
       startDate: event.date,
+      eventStatus: "https://schema.org/EventScheduled",
       location: {
         "@type": "Place",
         name: event.location,
@@ -234,6 +242,47 @@ export default function PastEventsPage() {
         name: "CDPL - Cinute Digital",
       },
     })),
+  };
+
+  // FAQ Schema - NEW!
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": "https://www.cinutedigital.com/events/past-events#faq",
+    mainEntity: [
+      {
+        "@type": "Question",
+        name: "What types of events does CDPL organize?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "CDPL organizes various events including corporate training workshops, technical webinars, hands-on training sessions, industry conferences, and developer meetups covering Software Testing, Data Science, AI/ML, Automation, Cloud Computing, and DevOps.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Can I attend CDPL events online?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "Yes, CDPL offers both online and offline events. Many of our webinars and training sessions are available online, while workshops and corporate training can be conducted both onsite and remotely.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "How can I register for upcoming CDPL events?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "You can register for upcoming CDPL events through our events page or by contacting our team directly. We announce new events through our website, social media, and email newsletters.",
+        },
+      },
+      {
+        "@type": "Question",
+        name: "Are CDPL events free or paid?",
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: "CDPL offers both free and paid events. Webinars and community meetups are often free, while comprehensive training workshops and certification programs are paid events with certificates of completion.",
+        },
+      },
+    ],
   };
 
   return (
@@ -250,6 +299,10 @@ export default function PastEventsPage() {
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
       />
 
       {/* Main Content - Semantic HTML Structure */}
