@@ -120,6 +120,26 @@ export default function FaqSection() {
   const keywords =
     "Java course FAQ, Spring Boot FAQ, Java certification, placement assistance, Java developer tools, microservices training questions";
 
+  // Helper: turn a ReactNode (JSX) into a plain string for JSON-LD
+  function renderToPlainText(node: React.ReactNode): string {
+    if (typeof node === "string") return node;
+    if (typeof node === "number") return String(node);
+    if (node === null || node === undefined) return "";
+
+    if (React.isValidElement(node)) {
+      // Safely extract children from props
+      const props = node.props as { children?: React.ReactNode };
+      const children = React.Children.toArray(props.children);
+      return children.map(renderToPlainText).join("");
+    }
+
+    if (Array.isArray(node)) {
+      return node.map(renderToPlainText).join("");
+    }
+
+    return "";
+  }
+
   return (
     <section
       id="faq"
@@ -238,13 +258,7 @@ export default function FaqSection() {
               name: f.q,
               acceptedAnswer: {
                 "@type": "Answer",
-                text:
-                  typeof f.a === "string"
-                    ? f.a
-                    : // basic serialization for ReactNode content
-                      (React.Children.map(f.a as any, (c: any) =>
-                        typeof c === "string" ? c : c?.props?.children || ""
-                      ) || []).join(" "),
+                text: renderToPlainText(f.a),
               },
             })),
             keywords: keywords,
