@@ -139,7 +139,7 @@ export default function InstructorSection() {
         <div className="text-center mb-14">
           <Badge text="Mentor-Led Learning" accent="indigo" />
           <h2 className="mt-4 text-3xl md:text-4xl font-bold text-slate-900">
-            Learn from <span className="text-indigo-800">Industry Leaders</span>
+            Learn from <span className="text-blue-700">Industry Leaders</span>
           </h2>
           <p className="mt-3 text-lg md:text-xl text-slate-600 max-w-3xl mx-auto">
             ISTQB-certified <strong>QA expert</strong> with <strong>15+ years</strong> in Fortune 500 teams.
@@ -217,9 +217,9 @@ export default function InstructorSection() {
             <div className="space-y-6">
               {/* Stats */}
               <div className="grid justify-center md:grid-cols-2 gap-4">
-                <Stat label="Students Trained" value="3,000+" sublabel="Across 12 countries" accent="indigo" />
-                <Stat label="Placement Rate" value="95%" sublabel="Interview prep + referrals" accent="emerald" />
-                <Stat label="Avg. Salary Hike" value="2.1×" sublabel="After course completion" accent="amber" />
+                <Stat label="Students Trained" value="5,000+" sublabel="Across 12 countries" accent="indigo" />
+                <Stat label="Placement Rate" value="92%" sublabel="Interview prep + referrals" accent="emerald" />
+                <Stat label="Avg. Salary Hike" value="1.5×" sublabel="After course completion" accent="amber" />
                 <Stat label="Industry Projects" value="10+" sublabel="E-com • BFSI • HealthTech" accent="cyan" />
               </div>
 

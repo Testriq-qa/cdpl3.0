@@ -57,7 +57,7 @@ export default function CareerSection() {
                         25% CAGR • 1,01,000+ Openings • India
                     </p>
                     <h2 id="career-heading" className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-                        Launch Your <span className="text-brand">API Testing</span> Career
+                        Launch Your <span className="text-ST">API Testing</span> Career
                     </h2>
                     <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
                         Average fresher salary: <strong>₹4–8 LPA</strong>. Build job-ready skills in <strong>Postman</strong>, <strong>REST/GraphQL</strong>,{' '}

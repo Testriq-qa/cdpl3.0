@@ -60,12 +60,12 @@ export default function ToolsSection() {
           transition={{ duration: 0.5, ease: 'easeOut' }}
           className="text-center mb-10 sm:mb-14"
         >
-          <p className="mx-auto mb-3 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700">
+          <p className="mx-auto mb-3 inline-flex items-center shadow-md gap-2 rounded-full border border-slate-200 bg-white px-3 py-1.5 text-xs font-medium text-slate-700">
             <BadgeCheck className="h-4 w-4 text-emerald-600" />
             Enterprise-grade stack • Job-ready workflows
           </p>
-          <h2 id="tools-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-            Tools You’ll <span className="text-[#00758F]">Master</span>
+          <h2 id="tools-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+            <span className='text-ST'>Tools</span> You’ll Master
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             Learn the <strong>ETL & orchestration</strong> platforms used across data teams—hands-on, project-driven, and hiring manager approved.

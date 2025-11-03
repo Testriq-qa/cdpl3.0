@@ -39,7 +39,7 @@ export default function FaqSection() {
             </div>
 
             <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-                <h2 className="text-4xl bg-gradient-to-r from-sky-600 via-blue-700 to-green-600 bg-clip-text text-transparent text-center font-bold mb-4">
+                <h2 className="text-4xl text-ST text-center font-bold mb-4">
                     Frequently Asked Questions
                 </h2>
 

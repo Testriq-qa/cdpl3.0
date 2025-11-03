@@ -57,7 +57,7 @@ export default function CtaSection() {
           </p>
 
           <h2 id="cta-heading" className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-            Start Your <span className="text-brand">API Testing</span> Career Today
+            Start Your <span className="text-ST">API Testing</span> Career Today
           </h2>
 
           <p className="mt-3 text-sm sm:text-base text-slate-600">

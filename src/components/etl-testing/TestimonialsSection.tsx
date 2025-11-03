@@ -55,19 +55,19 @@ export default function TestimonialsSection() {
 
                 {/* mini trust badge */}
                 <p className="mx-auto mt-2 mb-4 max-w-2xl text-center text-xs sm:text-sm text-slate-600">
-                    <span className="inline-flex items-center gap-1 rounded-full border border-slate-200 bg-white px-2.5 py-1">
+                    <span className="inline-flex items-center gap-1 shadow-md rounded-full border border-slate-200 bg-white px-2.5 py-1">
                         <BadgeCheck className="h-4 w-4 text-emerald-600" />
                         Verified student feedback • Outcomes-based learning
                     </span>
                 </p>
 
-                <h2 className="text-3xl md:text-4xl text-slate-900 text-center font-bold mb-4">
+                <h2 className="text-3xl md:text-4xl text-ST text-center font-bold mb-4">
                     Success Stories
                 </h2>
 
 
 
-                <div className="grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-3">
+                <div className="mt-10 grid grid-cols-1 gap-5 sm:gap-6 md:grid-cols-3">
                     {testimonials.map((t, i) => {
                         const a = accents[i % accents.length];
                         return (

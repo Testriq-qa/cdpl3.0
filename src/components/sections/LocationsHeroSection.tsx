@@ -120,7 +120,7 @@ export default function LocationsHeroSection() {
             </p>
 
             <div className="mt-6 flex flex-wrap items-center sm:justify-start lg:justify-start gap-3 text-sm text-slate-700">
-              <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 ring-1 ring-slate-200">40+ cities</span>
+              <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 ring-1 ring-slate-200">50+ cities</span>
               <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 ring-1 ring-slate-200">Pan-India placements</span>
               <span className="inline-flex items-center gap-2 rounded-full bg-white/90 px-3 py-1 ring-1 ring-slate-200">Local mentor support</span>
             </div>

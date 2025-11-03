@@ -55,7 +55,7 @@ export default function ToolsSection() {
                         Enterprise-grade • DBA approved
                     </p>
                     <h2 id="tools-heading" className="text-3xl sm:text-4xl font-bold tracking-tight text-slate-900">
-                        Tools You’ll <span className="text-[#00758F]">Master</span>
+                        <span className='text-ST'>Tools</span> You’ll Master
                     </h2>
                     <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
                         Hands-on with <strong>MySQL Workbench</strong>, <strong>DBeaver</strong>, <strong>phpMyAdmin</strong>,{' '}

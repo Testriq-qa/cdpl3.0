@@ -24,7 +24,7 @@ export default function LocationsBenefitsSection({
 }) {
   const benefits: Benefit[] = [
     { icon: Globe2, title: "Nationwide Reach", desc: "Courses in 50+ cities across 5 states." },
-    { icon: Briefcase, title: "95% Placement", desc: "Job assistance in local tech hubs." },
+    { icon: Briefcase, title: "92% Placement", desc: "Job assistance in local tech hubs." },
     { icon: Layers, title: "Flexible Modes", desc: "Online, offline, hybrid learning options." },
     { icon: Smartphone, title: "Mobile-First", desc: "Access materials anytime, anywhere." },
   ];

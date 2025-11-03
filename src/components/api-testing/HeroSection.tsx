@@ -113,24 +113,10 @@ export default function HeroSection() {
                         {/* H1 */}
                         <h1
                             id="api-testing-hero"
-                            className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
+                            className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
                         >
-                            Master{" "}
-                            <span className="text-brand">
-                                API Testing
-                            </span>{" "}
-                            with{" "}
-                            <span className="text-[#ff6a00]">
-                                Postman
-                            </span>
-                            ,{" "}
-                            <span className="text-green-800">
-                                REST
-                            </span>{" "}
-                            &{" "}
-                            <span className="text-blue-800">
-                                GraphQL
-                            </span>
+                            Master <span className='text-ST'>API Testing with Postman, REST & GraphQL</span>
+
                         </h1>
 
 

@@ -4,10 +4,10 @@ import { motion } from 'framer-motion';
 type Stat = { value: string; label: string; delay?: number; color: string; border: string; text: string };
 
 const stats: Stat[] = [
-  { value: '1,01,000+', label: 'API Testing Jobs in India', delay: 0.1, color: 'bg-sky-50',    border: 'border-sky-200',    text: 'text-sky-800' },
-  { value: '₹4–8 LPA',   label: 'Fresher Salary Range',    delay: 0.2, color: 'bg-amber-50',  border: 'border-amber-200',  text: 'text-amber-800' },
-  { value: '25% CAGR',   label: 'Market Growth (2020–30)', delay: 0.3, color: 'bg-emerald-50',border: 'border-emerald-200',text: 'text-emerald-800' },
-  { value: '15 Hours',   label: 'Intensive Training',       delay: 0.4, color: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-800' },
+  { value: '1,01,000+', label: 'API Testing Jobs in India', delay: 0.1, color: 'bg-sky-50', border: 'border-sky-200', text: 'text-sky-800' },
+  { value: '₹4–8 LPA', label: 'Fresher Salary Range', delay: 0.2, color: 'bg-amber-50', border: 'border-amber-200', text: 'text-amber-800' },
+  { value: '25% CAGR', label: 'Market Growth (2020–30)', delay: 0.3, color: 'bg-emerald-50', border: 'border-emerald-200', text: 'text-emerald-800' },
+  { value: '15 Hours', label: 'Intensive Training', delay: 0.4, color: 'bg-violet-50', border: 'border-violet-200', text: 'text-violet-800' },
 ];
 
 export default function StatsSection() {
@@ -44,7 +44,7 @@ export default function StatsSection() {
         {/* Heading */}
         <header className="mx-auto mb-8 max-w-3xl text-center">
           <h2 id="stats-heading" className="text-2xl font-bold tracking-tight text-slate-900 sm:text-3xl">
-            Real-World Outcomes: <span className='text-brand'>API Testing</span> <span className='bg-gradient-to-r from-sky-500 via-blue-600 to-green-500 bg-clip-text text-transparent'>Careers & Training Impact</span>
+            Real-World Outcomes: <span className='text-ST'>API Testing</span> Careers & Training Impact
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
             Discover key metrics that matter for <strong>API Testing</strong> careers in India—job openings, fresher salary ranges,

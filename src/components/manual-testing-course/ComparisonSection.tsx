@@ -153,7 +153,7 @@ export default function ComparisonSection({
         {/* Heading */}
         <div className="text-center mb-12">
           <h2 id="comparison-heading" className="text-4xl font-bold text-gray-900 mb-4">
-            Compare Our Job-Ready <span className="text-indigo-700">Manual Testing Course</span> vs. <span className="text-brand">Typical Programs</span>
+            Compare Our Job-Ready <span className="text-blue-700">Manual Testing Course vs. Typical Programs</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-600 max-w-4xl mx-auto">
             Transparent comparison to help you choose the best <strong>QA training with placement support</strong>, live

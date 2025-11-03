@@ -17,9 +17,9 @@ import Image from "next/image";
 const BRAND = "#ff8c00";
 
 const stats = [
-  { label: "Expert Mentors", value: "15+", note: "QA, Automation, Data" },
-  { label: "Learners Mentored", value: "1,000+", note: "Career outcomes" },
-  { label: "Hiring Partners", value: "20+", note: "Industry referrals" },
+  { label: "Expert Mentors", value: "60+", note: "QA, Automation, Data" },
+  { label: "Learners Mentored", value: "5000+", note: "Career outcomes" },
+  { label: "Hiring Partners", value: "50+", note: "Industry referrals" },
 ];
 
 const breadcrumbs = [
@@ -214,7 +214,7 @@ export default function TeamHero() {
             <div className="mt-7 inline-flex items-center gap-2 rounded-full border border-orange-200 bg-orange-50 px-3 py-1 text-sm text-orange-800">
               <GraduationCap className="h-4 w-4" />
               <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-blue-600">
-                1,000+
+                5,000+
               </span>{" "}
               learners mentored ·{" "}
               <span className="font-bold text-transparent bg-clip-text bg-gradient-to-r from-green-600 to-emerald-600">

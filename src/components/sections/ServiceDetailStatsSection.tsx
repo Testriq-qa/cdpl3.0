@@ -112,10 +112,10 @@ export default function ServiceDetailStatsSection({ service }: { service: Servic
   const { ref, visible } = useOnScreen<HTMLDivElement>();
 
   const stats: StatItem[] = service.stats ?? [
-    { label: 'Learners Trained', value: 12000 },
+    { label: 'Learners Trained', value: 5000 },
     { label: 'Average Rating', value: 4.8, suffix: '/5' },
     { label: 'Placement Success', value: 92, suffix: '%' },
-    { label: 'Hiring Partners', value: 150 },
+    { label: 'Hiring Partners', value: 50 },
   ];
 
   return (

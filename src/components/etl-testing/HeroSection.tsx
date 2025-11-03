@@ -123,11 +123,9 @@ export default function HeroSection() {
                         {/* H1 */}
                         <h1
                             id="etl-hero"
-                            className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
+                            className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
                         >
-                            ETL Testing using{' '}
-                            <span className="text-[#00758F]">SQL</span> &{' '}
-                            <span className="text-amber-700">Enterprise Tools</span>
+                            <span className='text-ST'>ETL Testing</span> using SQL & Enterprise Tools
                         </h1>
 
                         {/* Mobile form under H1 */}

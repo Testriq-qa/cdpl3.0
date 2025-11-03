@@ -1,3 +1,17 @@
+export const CDPL_ORG = {
+  name: "Cinute Digital Pvt. Ltd. (CDPL)",
+  logo: "/cdpl-logo.png",
+  description:
+    "Cinute Digital Pvt. Ltd. (CDPL) is a premier software training institute based in Mira Road, Mumbai. Specializing in Manual and Automation Software Testing, Data Science, and Digital Marketing, CDPL offers both online and on-premise courses designed to bridge the gap between academic education and industry demands. Their curriculum is crafted by industry experts, ensuring students acquire practical skills applicable across various sectors. CDPL’s commitment to quality education is evident through their state-of-the-art training center, which provides hands-on experience with live projects. The institute also offers dedicated placement assistance, helping students secure positions in multinational corporations. With a focus on empowering students and fostering a collaborative learning environment, CDPL stands out as a leader in IT training and certification.",
+} as const;
+
+// Optional: a small base object you can spread into every event
+const CDPL_BASE = {
+  organization: CDPL_ORG.name,
+  organizerLogoUrl: CDPL_ORG.logo,
+  organizerDetails: CDPL_ORG.description,
+} as const;
+
 export interface PastEvent {
   id: string;
   slug: string;
@@ -30,20 +44,32 @@ export interface PastEvent {
 
   gallery?: string[];          // For Image Gallery section
   organizerDetails?: string;   // Extra organizer info (optional)
-  venue?: string;              // Venue name (falls back to `location`)
-  venueAddress?: string;       // Address (optional)
-  mapUrl?: string;
+
+  venueTitle?: string;
+
+  /** Primary venue image (logo/photo) */
+  venueImageUrl?: string;
+
+  /** Free-form venue description */
+  venueDescription?: string;
+
+  /** Optional: per-event fallback image if the primary is missing */
+  venueFallbackImageUrl?: string;
+
+  venueAddress?: string;
+
 }
 
 export const pastEvents: PastEvent[] = [
   {
     id: "1",
+    ...CDPL_BASE,
     slug: "ai-conference-nagindas-khandwala",
     title: "National Conference on Applications of AI",
     subtitle: "Promises, Perils, and Sustainability",
     date: "February 14, 2025",
     location: "MKES Trust Nagindas Khandwala College, Mumbai",
-    organization: "Nagindas Khandwala College",
+    // organization: "Nagindas Khandwala College",
     attendees: 110,
     category: "AI & Machine Learning",
     categoryColor: "bg-purple-500",
@@ -109,12 +135,13 @@ export const pastEvents: PastEvent[] = [
   },
   {
     id: "2",
+    ...CDPL_BASE,
     slug: "software-testing-workshop-bangalore",
     title: "Software Testing Workshop",
     subtitle: "Manual & Automation Testing Masterclass",
     date: "January 20, 2025",
     location: "Corporate Training Center, Bangalore",
-    organization: "Tech Corp India",
+    // organization: "Tech Corp India",
     attendees: 85,
     category: "Software Testing",
     categoryColor: "bg-green-500",
@@ -175,12 +202,13 @@ export const pastEvents: PastEvent[] = [
   },
   {
     id: "3",
+    ...CDPL_BASE,
     slug: "data-science-bootcamp-iit-delhi",
     title: "Data Science & Analytics Bootcamp",
     subtitle: "From Data to Insights",
     date: "December 15, 2024",
     location: "IIT Delhi",
-    organization: "Indian Institute of Technology, Delhi",
+    // organization: "Indian Institute of Technology, Delhi",
     attendees: 150,
     category: "Data Science",
     categoryColor: "bg-blue-500",
@@ -242,12 +270,13 @@ export const pastEvents: PastEvent[] = [
   },
   {
     id: "4",
+    ...CDPL_BASE,
     slug: "faculty-development-mumbai-university",
     title: "Faculty Development Program",
     subtitle: "Modern Teaching Methodologies",
     date: "November 10, 2024",
     location: "Mumbai University",
-    organization: "University of Mumbai",
+    // organization: "University of Mumbai",
     attendees: 75,
     category: "Academic Training",
     categoryColor: "bg-orange-500",
@@ -308,12 +337,13 @@ export const pastEvents: PastEvent[] = [
   },
   {
     id: "5",
+    ...CDPL_BASE,
     slug: "fullstack-workshop-infosys-pune",
     title: "Full Stack Development Workshop",
     subtitle: "MERN Stack Intensive Training",
     date: "October 25, 2024",
     location: "Pune IT Park",
-    organization: "Infosys Limited",
+    // organization: "Infosys Limited",
     attendees: 120,
     category: "Web Development",
     categoryColor: "bg-cyan-500",
@@ -374,12 +404,13 @@ export const pastEvents: PastEvent[] = [
   },
   {
     id: "6",
+    ...CDPL_BASE,
     slug: "industrial-visit-tata-motors",
     title: "Industrial Visit & Training",
     subtitle: "Manufacturing Excellence Tour",
     date: "September 18, 2024",
     location: "Tata Motors Plant, Pune",
-    organization: "Engineering College, Nashik",
+    // organization: "Engineering College, Nashik",
     attendees: 60,
     category: "Industrial Training",
     categoryColor: "bg-teal-500",
@@ -443,15 +474,21 @@ export const pastEvents: PastEvent[] = [
       "/events/industrial-visit-tata-motors/2.jpg",
       "/events/industrial-visit-tata-motors/3.jpg",
     ],
+    venueTitle: "Viva Institute of Technology",
+    venueFallbackImageUrl: "/cdpl-logo.png",
+    venueImageUrl: "/venues/viva-institute-of-technology",
+    venueDescription: "VIVA Institute of Technology, established in 2009 and located in Virar, Maharashtra, is an engineering college affiliated with the University of Mumbai. It offers undergraduate and postgraduate programs in various engineering fields and is approved by AICTE and DTE, Maharashtra. The institute focuses on providing quality education with a modern campus, well-equipped laboratories, a computerized library, and a strong emphasis on industry-ready skills through its placement and training cell and Innovation and Incubation Centre",
+    venueAddress: "Shirgaon, Virar"
   },
   {
     id: "7",
+    ...CDPL_BASE,
     slug: "train-the-trainer-program-corporate",
     title: "Train-the-Trainer Program",
     subtitle: "Building Internal Training Capability",
     date: "August 5, 2024",
     location: "Mumbai Corporate Hub",
-    organization: "Multinational IT Corporation",
+    // organization: "Multinational IT Corporation",
     attendees: 45,
     category: "Corporate Training",
     categoryColor: "bg-pink-500",
@@ -512,12 +549,13 @@ export const pastEvents: PastEvent[] = [
   },
   {
     id: "8",
+    ...CDPL_BASE,
     slug: "sttp-iot-applications",
     title: "STTP on IoT Applications",
     subtitle: "Internet of Things in Smart Systems",
     date: "July 12, 2024",
     location: "VIT Pune",
-    organization: "Vishwakarma Institute of Technology",
+    // organization: "Vishwakarma Institute of Technology",
     attendees: 95,
     category: "Technology",
     categoryColor: "bg-indigo-500",

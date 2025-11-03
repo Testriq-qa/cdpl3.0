@@ -56,10 +56,8 @@ export default function StatsSection() {
             id="etl-stats-heading"
             className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl"
           >
-            Real-World Outcomes: <span className="text-[#00758F]">ETL Testing</span>{' '}
-            <span className="bg-clip-text text-transparent bg-gradient-to-r from-sky-500 via-blue-600 to-emerald-500">
-              Careers & Training Impact
-            </span>
+            Real-World Outcomes: <span className='text-ST'>ETL Testing</span> Careers & Training Impact
+            
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
             Explore key metrics that matter for <strong>ETL Testing</strong> in India—job

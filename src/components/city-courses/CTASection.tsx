@@ -90,7 +90,7 @@ const CTASection: React.FC<CTASectionProps> = ({ data }) => {
             >
               <Zap className="h-4 w-4 fill-amber-500 text-amber-500" />
               <span className="text-xs font-semibold text-amber-900">
-                Limited Time: 33% Discount Available!
+                Limited Time: 20% Discount Available!
               </span>
             </motion.div>
 

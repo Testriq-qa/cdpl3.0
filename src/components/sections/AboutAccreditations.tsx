@@ -64,7 +64,7 @@ export default function AboutAccreditations() {
     { label: "Learner satisfaction", value: "98%", color: "blue-500", bgColor: "bg-blue-50" },
     { label: "Avg. completion rate", value: "91%", color: "green-500", bgColor: "bg-green-50" },
     { label: "Hiring partners", value: "50+", color: "red-500", bgColor: "bg-red-50" },
-    { label: "Capstone projects", value: "200+", color: "purple-500", bgColor: "bg-purple-50" },
+    { label: "Capstone projects", value: "90+", color: "purple-500", bgColor: "bg-purple-50" },
   ];
 
   return (

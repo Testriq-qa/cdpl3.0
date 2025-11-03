@@ -80,7 +80,7 @@ export default function WhyApiTesting() {
           </p>
 
           <h2 id="why-heading" className="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
-            Why Master <span className="text-brand">API Testing</span> in 2025?
+            Why Master <span className="text-ST">API Testing</span> in 2025?
           </h2>
 
           <p className="mx-auto mt-4 max-w-3xl text-sm leading-relaxed text-slate-600 sm:text-base">
