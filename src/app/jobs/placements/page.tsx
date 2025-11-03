@@ -8,7 +8,7 @@ import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 // SEO METADATA - Enhanced for Placements Page
 // ============================================================================
 export const metadata: Metadata = generateSEO({
-    title: "Student Placements - Real Hiring Outcomes & Success Stories | CDPL",
+    title: "Student Placements & Success Stories|Real Hiring Outcomes|CDPL",
     description: "Explore CDPL student placements across top companies like TCS, Infosys, Wipro, Accenture, and startups. See roles, packages (3-12 LPA), locations, partner companies, and success stories driven by our product-led, mentor-first training in QA, Data Science, Full-Stack, and DevOps.",
     keywords: [
         "CDPL placements",
@@ -26,7 +26,7 @@ export const metadata: Metadata = generateSEO({
         "placement assistance",
     ],
     url: "/jobs/placements",
-    image: "/og/placements-1536x1024.jpg",
+    image: "/og-images/our-placements-image.webp",
     imageAlt: "CDPL Student Placements & Hiring Partners",
 });
 

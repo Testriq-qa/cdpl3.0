@@ -30,7 +30,7 @@ export const metadata: Metadata = generateSEO({
     "training highlights",
   ],
   url: "/events/past-events",
-  image: "/og-image-events.jpg",
+  image: "/og-images/og-image-events.webp",
   imageAlt: "CDPL Past Events - Workshops, Webinars & Training Sessions",
 });
 

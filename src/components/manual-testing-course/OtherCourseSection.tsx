@@ -15,8 +15,8 @@ import {
   BarChart3,
   Smartphone,
   ArrowRight,
-  Link,
 } from "lucide-react";
+import Link from "next/link";
 
 type Course = {
   slug: string;
@@ -225,7 +225,7 @@ const CourseCard = ({ course }: { course: Course }) => {
         <Link
           href={`/courses/${course.slug}`}
           className={cx(
-            "inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2 text-sm font-semibold text-white",
+            "inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2 text-md font-semibold text-white",
             a.buttonBg,
             "focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
           )}
