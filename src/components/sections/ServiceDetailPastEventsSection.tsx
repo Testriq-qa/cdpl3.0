@@ -6,8 +6,8 @@ import type { ServiceEvent } from '@/types/service';
 
 export default function ServiceDetailPastEventsSection({ events }: { events: ServiceEvent[] }) {
     return (
-        <section className="w-full py-12 md:py-16">
-            <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
+        <section className="w-full">
+            <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
                 <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-3">Past Events & Programs</h2>
                 <p className="text-lg text-gray-600 mb-8">
                     See how we’ve successfully delivered this service to organizations like yours.

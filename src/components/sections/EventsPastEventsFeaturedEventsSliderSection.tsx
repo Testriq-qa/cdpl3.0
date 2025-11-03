@@ -50,7 +50,7 @@ const FALLBACK = { badgeBg: "bg-slate-700", btnBg: "bg-slate-700", text: "text-s
 export default function EventsPastEventsFeaturedEventsSliderSection({
   events,
   autoplayMs = 4500,
-  cardHClass = "h-[480px]", // fixed to match normal card visual height
+  cardHClass = "h-[480px]",
 }: {
   events: FeaturedEvent[];
   autoplayMs?: number;
@@ -188,8 +188,8 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
                         {event.featured && (
                           <>
                             <span className="sr-only">Featured</span>
-                            <div className="absolute inset-x-0 top-0 h-[3px] bg-[#FF8C00] shadow-[0_0_6px_rgba(255,140,0,0.5)] z-20" />
-                            <div className="absolute right-3 top-3 z-20">
+                            <div className="absolute inset-x-0 top-0 h-[3px] bg-[#FF8C00] shadow-[0_0_6px_rgba(255,140,0,0.5)] z-10" />
+                            <div className="absolute right-3 top-3 z-10">
                               <span className="inline-flex items-center gap-1 rounded-full bg-[#FF8C00] px-3 py-1 text-[11px] font-black uppercase tracking-wide text-white shadow-md ring-1 ring-white/60">
                                 <Crown className="h-3.5 w-3.5" />
                                 Featured
@@ -198,12 +198,12 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
                           </>
                         )}
 
-                        {/* Header (extra top padding on small screens to avoid tag overlap) */}
+                        {/* Header */}
                         <div className="relative h-48 bg-gradient-to-br from-purple-100 to-blue-100 pt-10 md:pt-0">
                           <div className="absolute inset-0 flex items-center justify-center">
                             <Calendar className="h-16 w-16 text-purple-300" />
                           </div>
-                          <div className="absolute left-3 top-3 z-20">
+                          <div className="absolute left-3 top-3 z-10">
                             <span className={`${cs.badgeBg} text-white px-3 py-1 rounded-full text-xs font-semibold shadow-md`}>
                               {event.category}
                             </span>
@@ -260,20 +260,20 @@ export default function EventsPastEventsFeaturedEventsSliderSection({
         </div>
       </div>
 
-      {/* Desktop/tablet arrows (overlay, centered vertically) */}
+      {/* Desktop/tablet arrows — half-outside, don't cover cards */}
       {base.length > 1 && (
-        <div className="hidden md:block">
+        <div className="pointer-events-none hidden md:block">
           <button
             onClick={prev}
             aria-label="Previous slide"
-            className="group absolute left-3 top-1/2 z-20 -translate-y-1/2 rounded-2xl border border-white/60 bg-white/60 p-3 shadow-xl backdrop-blur-sm transition hover:bg-white/80"
+            className="pointer-events-auto absolute left-0 top-1/2 z-10 -translate-y-1/2 -translate-x-1/2 rounded-2xl border border-white/70 bg-white/70 p-3 shadow-lg backdrop-blur-sm transition hover:bg-white"
           >
             <ChevronLeft className="h-6 w-6 text-gray-800 transition-transform group-active:scale-90" />
           </button>
           <button
             onClick={next}
             aria-label="Next slide"
-            className="group absolute right-3 top-1/2 z-20 -translate-y-1/2 rounded-2xl border border-white/60 bg-white/60 p-3 shadow-xl backdrop-blur-sm transition hover:bg-white/80"
+            className="pointer-events-auto absolute right-0 top-1/2 z-10 -translate-y-1/2 translate-x-1/2 rounded-2xl border border-white/70 bg-white/70 p-3 shadow-lg backdrop-blur-sm transition hover:bg-white"
           >
             <ChevronRight className="h-6 w-6 text-gray-800 transition-transform group-active:scale-90" />
           </button>

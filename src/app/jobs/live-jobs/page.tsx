@@ -16,7 +16,7 @@ function SectionLoader({ label = "Loading..." }: { label?: string }) {
 export const metadata: Metadata = {
   title: "Live Jobs & Placement Alerts | Cinute Digital Pvt. Ltd (CDPL)",
   description:
-    "Verified live jobs and walk-in drives curated by CDPL. QA, Automation, Data, and Engineering roles across India.",
+    "Verified live jobs and walk-in drives curated by CDPL. QA, Automation, Data, and Engineering roles across India with internships, fresher support, and interview prep guidance",
   alternates: { canonical: "https://cinutedigital.com/jobs/live-jobs" },
   openGraph: {
     title: "Live Jobs & Placement Alerts | CDPL",

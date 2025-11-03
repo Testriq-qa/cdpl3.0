@@ -4,46 +4,100 @@ import { CheckCircle, Target, Award } from 'lucide-react';
 import type { ServiceClient } from '@/types/service';
 
 export default function ServiceDetailFeaturesBenefitsSection({ service }: { service: ServiceClient }) {
-    const color = service.color || 'from-sky-500 to-indigo-600';
-    return (
-        <section className="w-full py-12 md:py-16">
-            <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12">
-                <div className="grid lg:grid-cols-2 gap-8">
-                    <div className="bg-white rounded-3xl shadow-xl p-8 ring-1 ring-black/5">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className={`w-12 h-12 bg-gradient-to-r ${color} rounded-xl flex items-center justify-center`}>
-                                <Target className="w-6 h-6 text-white" />
-                            </div>
-                            <h2 className="text-3xl font-bold text-gray-900">Key Features</h2>
-                        </div>
-                        <ul className="space-y-3">
-                            {service.features.map((feature, index) => (
-                                <li key={`${feature}-${index}`} className="flex items-start gap-3">
-                                    <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-1" />
-                                    <span className="text-gray-700">{feature}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
+  // Calm brand accents (feel free to tweak)
+  const FEATURE_ACCENT = 'sky';     // tailwind color name
+  const BENEFIT_ACCENT = 'indigo';  // tailwind color name
 
-                    <div className="bg-white rounded-3xl shadow-xl p-8 ring-1 ring-black/5">
-                        <div className="flex items-center gap-3 mb-6">
-                            <div className={`w-12 h-12 bg-gradient-to-r ${color} rounded-xl flex items-center justify-center`}>
-                                <Award className="w-6 h-6 text-white" />
-                            </div>
-                            <h2 className="text-3xl font-bold text-gray-900">Benefits</h2>
-                        </div>
-                        <ul className="space-y-3">
-                            {service.benefits.map((benefit, index) => (
-                                <li key={`${benefit}-${index}`} className="flex items-start gap-3">
-                                    <CheckCircle className="w-5 h-5 text-blue-500 flex-shrink-0 mt-1" />
-                                    <span className="text-gray-700">{benefit}</span>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </section>
-    );
+  return (
+    <section className="w-full" aria-labelledby="features-benefits">
+      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+        {/* Section cue: single hairline, no gradient */}
+        <div aria-hidden className="mb-8 h-[3px] w-28 rounded-full bg-slate-900/10" />
+
+        <div id="features-benefits" className="grid lg:grid-cols-2 gap-6 md:gap-8">
+          {/* ---------- FEATURES ---------- */}
+          <article
+            className="rounded-2xl bg-white ring-1 ring-slate-200 p-7 md:p-8"
+            aria-label="Key Features"
+          >
+            <header className="flex items-center gap-3 mb-6">
+              <div
+                className={[
+                  'size-12 rounded-xl flex items-center justify-center',
+                  `bg-${FEATURE_ACCENT}-50 ring-1 ring-${FEATURE_ACCENT}-200`,
+                ].join(' ')}
+              >
+                <Target className={`size-6 text-${FEATURE_ACCENT}-700`} />
+              </div>
+              {/* Title colored to FEATURES accent */}
+              <h2 className={`text-2xl md:text-3xl font-semibold tracking-tight text-${FEATURE_ACCENT}-800`}>
+                Key Features
+              </h2>
+            </header>
+
+            <ul className="divide-y divide-slate-100">
+              {service.features.map((feature, index) => (
+                <li key={`${feature}-${index}`} className="py-3 first:pt-0 last:pb-0">
+                  <div className="flex items-start gap-3.5">
+                    <span
+                      className={[
+                        'mt-0.5 inline-flex items-center justify-center rounded-full',
+                        'ring-1',
+                        `bg-${FEATURE_ACCENT}-50 ring-${FEATURE_ACCENT}-200 text-${FEATURE_ACCENT}-700`,
+                        'size-6',
+                      ].join(' ')}
+                    >
+                      <CheckCircle className="size-3.5" />
+                    </span>
+                    <span className="text-slate-700 leading-relaxed">{feature}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </article>
+
+          {/* ---------- BENEFITS ---------- */}
+          <article
+            className="rounded-2xl bg-white ring-1 ring-slate-200 p-7 md:p-8"
+            aria-label="Benefits"
+          >
+            <header className="flex items-center gap-3 mb-6">
+              <div
+                className={[
+                  'size-12 rounded-xl flex items-center justify-center',
+                  `bg-${BENEFIT_ACCENT}-50 ring-1 ring-${BENEFIT_ACCENT}-200`,
+                ].join(' ')}
+              >
+                <Award className={`size-6 text-${BENEFIT_ACCENT}-700`} />
+              </div>
+              {/* Title colored to BENEFITS accent */}
+              <h2 className={`text-2xl md:text-3xl font-semibold tracking-tight text-${BENEFIT_ACCENT}-800`}>
+                Benefits
+              </h2>
+            </header>
+
+            <ul className="divide-y divide-slate-100">
+              {service.benefits.map((benefit, index) => (
+                <li key={`${benefit}-${index}`} className="py-3 first:pt-0 last:pb-0">
+                  <div className="flex items-start gap-3.5">
+                    <span
+                      className={[
+                        'mt-0.5 inline-flex items-center justify-center rounded-full',
+                        'ring-1',
+                        `bg-${BENEFIT_ACCENT}-50 ring-${BENEFIT_ACCENT}-200 text-${BENEFIT_ACCENT}-700`,
+                        'size-6',
+                      ].join(' ')}
+                    >
+                      <CheckCircle className="size-3.5" />
+                    </span>
+                    <span className="text-slate-700 leading-relaxed">{benefit}</span>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+  );
 }

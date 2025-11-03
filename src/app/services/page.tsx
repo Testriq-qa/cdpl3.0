@@ -7,7 +7,7 @@ import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 // SEO METADATA - Optimized for Services Page
 // ============================================================================
 export const metadata: Metadata = generateSEO({
-  title: "Our Services - Corporate Training, Consulting & Custom Solutions | CDPL",
+  title: "Our Services | Training, Consulting & Custom Solutions – CDPL",
   description: "CDPL offers comprehensive corporate training, software testing consulting, custom automation solutions, and technical workshops for enterprises. Upskill your team with industry-expert trainers in Software Testing, Data Science, AI/ML, and DevOps.",
   keywords: [
     "CDPL services",
@@ -25,7 +25,7 @@ export const metadata: Metadata = generateSEO({
     "team upskilling",
   ],
   url: "/services",
-  image: "/og-image-services.jpg",
+  image: "/og-images/og-image-services.webp",
   imageAlt: "CDPL Services - Corporate Training, Consulting & Custom Solutions",
 });
 
