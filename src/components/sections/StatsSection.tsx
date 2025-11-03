@@ -63,7 +63,7 @@ const StatCard = ({ icon, value, suffix = "", label, description, color }: StatC
     >
       {/* Decorative gradient background */}
       <div className={`absolute inset-0 bg-gradient-to-br ${color} opacity-0 group-hover:opacity-5 rounded-2xl transition-opacity duration-500`}></div>
-      
+
       <div className="relative z-10">
         {/* Icon */}
         <div className={`inline-flex items-center justify-center w-14 h-14 rounded-xl bg-gradient-to-br ${color} mb-4 group-hover:scale-110 transition-transform duration-500`}>
@@ -97,7 +97,7 @@ const StatsSection = () => {
   const stats: StatCardProps[] = [
     {
       icon: <Users className="w-7 h-7" />,
-      value: 10000,
+      value: 5000,
       suffix: "+",
       label: "Students Trained",
       description: "Across all our programs",
@@ -105,7 +105,7 @@ const StatsSection = () => {
     },
     {
       icon: <Building2 className="w-7 h-7" />,
-      value: 500,
+      value: 50,
       suffix: "+",
       label: "Hiring Partners",
       description: "Top companies worldwide",
@@ -121,7 +121,7 @@ const StatsSection = () => {
     },
     {
       icon: <Award className="w-7 h-7" />,
-      value: 95,
+      value: 92,
       suffix: "%",
       label: "Placement Rate",
       description: "Within 6 months of completion",
@@ -169,7 +169,7 @@ const StatsSection = () => {
             </span>
           </h2>
           <p className="text-lg text-gray-600">
-            Our commitment to excellence is reflected in the success of our students 
+            Our commitment to excellence is reflected in the success of our students
             and the trust placed in us by leading companies worldwide.
           </p>
         </div>

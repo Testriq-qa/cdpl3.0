@@ -134,9 +134,9 @@ export default function LearningPath() {
 
           {/* Snapshot KPIs */}
           <div className="mt-8 grid grid-cols-2 md:grid-cols-4 gap-3">
-            <Snapshot metric="Live Projects" value="2" />
+            <Snapshot metric="Live Projects" value="5" />
             <Snapshot metric="Practice Questions" value="300+" />
-            <Snapshot metric="Interview Drills" value="20+" />
+            <Snapshot metric="Interview Drills" value="10+" />
             <Snapshot metric="Placement Support" value="Yes" />
           </div>
         </div>

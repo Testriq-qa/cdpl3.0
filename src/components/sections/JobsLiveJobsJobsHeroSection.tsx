@@ -6,18 +6,7 @@ import Link from "next/link";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { useMemo } from "react";
 
-type CDPLHeroProps = {
-  title?: string;
-  subtitle?: string;
-  primaryCtaText?: string;
-  primaryHref?: string;
-  secondaryCtaText?: string;
-  secondaryHref?: string;
-};
-
-export default function JobsLiveJobsJobsHeroSection({
-  subtitle = "Verified nearby roles across QA Automation, Data Science, Full-Stack, and DevOps, posted by CDPL so students can apply faster.",
-}: CDPLHeroProps) {
+export default function JobsLiveJobsJobsHeroSection() {
   const jsonLd = useMemo(
     () => ({
       "@context": "https://schema.org",
@@ -78,8 +67,11 @@ export default function JobsLiveJobsJobsHeroSection({
               transition={{ duration: 0.5, delay: 0.05, ease: [0.22, 1, 0.36, 1] }}
               className="mt-4 py-1 text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-slate-900 leading-[1.2]"
             >
-              <span className="text-[#ff8c00]">Jobs &amp; Internships we post</span>{" "}
-              <span style={{ color: "#0069A8" }}>to help CDPL students get placed</span>
+              <span style={{ color: "rgb(0, 105, 168)" }}>
+                Helping CDPL learners land the right opportunities
+              </span>{" "}
+              <span>&ndash; </span>
+              <span style={{ color: "#ff8c00" }}>faster.</span>
             </motion.h1>
 
             {/* Hero content — 18px at md, identical to About */}
@@ -89,7 +81,8 @@ export default function JobsLiveJobsJobsHeroSection({
               transition={{ duration: 0.5, delay: 0.12, ease: [0.22, 1, 0.36, 1] }}
               className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg"
             >
-              {subtitle}
+              Explore verified roles in QA Automation, Data Science, Full Stack Development, and DevOps,
+              curated specially for CDPL students.
             </motion.p>
 
             <motion.p
@@ -98,8 +91,9 @@ export default function JobsLiveJobsJobsHeroSection({
               transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
               className="mt-4 max-w-2xl text-[15px] leading-7 text-slate-700 sm:text-base md:text-lg"
             >
-              CDPL connects learners with industry mentors, hiring partners, and nearby openings/offering
-              job alerts, resume help, and interview preparation for faster placements across India.
+              Through our network of industry mentors, hiring partners, and local job listings, CDPL supports
+              you with personalized job alerts, resume guidance, and interview preparation to accelerate your
+              career growth across India.
             </motion.p>
 
             <motion.div

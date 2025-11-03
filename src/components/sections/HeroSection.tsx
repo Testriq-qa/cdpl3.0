@@ -57,7 +57,7 @@ const HeroSection = () => {
                 </span>
               </h1>
               <p className="text-lg sm:text-xl text-gray-600 leading-relaxed">
-                Master Software Testing, Data Science, AI/ML, and Full Stack Development 
+                Master Software Testing, Data Science, AI/ML, and Full Stack Development
                 through expert-led classroom and online live training programs.
               </p>
             </div>
@@ -114,7 +114,7 @@ const HeroSection = () => {
                   ))}
                 </div>
                 <div className="text-sm">
-                  <div className="font-semibold text-gray-900">10,000+</div>
+                  <div className="font-semibold text-gray-900">5,000+</div>
                   <div className="text-gray-600">Students Trained</div>
                 </div>
               </div>

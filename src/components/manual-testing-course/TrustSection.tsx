@@ -122,7 +122,7 @@ export default function TrustSection() {
                     />
                     <StatCard
                         icon={Briefcase}
-                        value="95%"
+                        value="92%"
                         label="Placement Rate"
                         caption="Dedicated Career Services & referrals"
                         accent="emerald"
@@ -136,7 +136,7 @@ export default function TrustSection() {
                     />
                     <StatCard
                         icon={Building2}
-                        value="120+"
+                        value="50+"
                         label="Hiring Companies"
                         caption="Top MNCs & high‑growth startups"
                         accent="violet"

@@ -341,7 +341,7 @@ export default function FaqSection() {
 
         {/* Stats Row */}
         <div className="mb-10 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
-          <StatCard icon={<Clock className="h-5 w-5" />} label="Evening Cohorts" value="7–9 PM IST" bgColor={DARK_COLORS[6]} />
+          <StatCard icon={<Clock className="h-5 w-5" />} label="Evening Cohorts" value="24X7 PM IST" bgColor={DARK_COLORS[6]} />
           <StatCard icon={<Video className="h-5 w-5" />} label="Learning Access" value="Lifetime" bgColor={DARK_COLORS[7]} />
           <StatCard icon={<Headphones className="h-5 w-5" />} label="Doubt Support" value="1:1 & Forums" bgColor={DARK_COLORS[8]} />
         </div>
