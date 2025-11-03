@@ -29,7 +29,7 @@ const ACTDCertificationProgressFaqSection = dynamic(
 
 /* ---------- SEO ---------- */
 export const metadata: Metadata = generateSEO({
-  title: "ACTD Certification Training - Agile, Cloud & Test-Driven Development | CDPL",
+  title: "ACTD Certification: Agile, Cloud & Test-Driven Development | CDPL",
   description:
     "Master Agile methodologies, Cloud technologies, and Test-Driven Development with CDPL's ACTD certification program. Comprehensive training with hands-on projects, industry mentors, and recognized certification.",
   keywords: [
