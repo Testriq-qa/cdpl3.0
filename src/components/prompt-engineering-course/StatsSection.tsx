@@ -130,7 +130,7 @@ export default function StatsSection() {
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
             Why{" "}
-            <span className="underline decoration-[.18rem] underline-offset-4 decoration-emerald-400">
+            <span className="text-DS">
               Prompt Engineering with Gen AI
             </span>
             ?

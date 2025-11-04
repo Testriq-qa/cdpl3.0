@@ -129,7 +129,7 @@ export default function StatsSection() {
             id="ada-stats-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Why <span className="underline decoration-[.18rem] underline-offset-4 decoration-orange-400">Advanced Data Analytics</span>?
+            Why <span className="text-DS">Advanced Data Analytics</span>?
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             Data analytics drives <strong>profitability, forecasting, and decisions</strong> in 2025. Join our mentor-led{" "}

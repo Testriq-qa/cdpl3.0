@@ -99,7 +99,7 @@ export default function ToolsSection() {
       <div className="container mx-auto px-4">
         <header className="text-center max-w-4xl mx-auto">
           <h2 id="tools-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Tools & Technologies <span className="text-orange-600">You Will Learn</span>
+            <span className='text-green-700'>Tools</span> & <span className='text-green-700'>Technologies</span> You Will Learn
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600">
             Practice on a modern <strong>AI + SEO + Ads</strong> stack — from <strong>ChatGPT</strong> ideation and{' '}

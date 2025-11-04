@@ -1,6 +1,8 @@
 // components/sections/ProjectsSection.tsx
 // Server component – no client JS required
 
+import Link from "next/link";
+
 type Project = { title: string; blurb?: string };
 
 const projects: Project[] = [
@@ -133,18 +135,17 @@ export default function ProjectsSection() {
 
                 {/* CTA row */}
                 <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
-                    <a
-                        href="#contact"
+                    <button
                         className="rounded-xl border border-orange-500 bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-200"
                     >
                         See Sample Portfolios
-                    </a>
-                    <a
-                        href="#demo"
+                    </button>
+                    <Link
+                        href="contact-us"
                         className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
                     >
                         Book a Free Demo
-                    </a>
+                    </Link>
                 </div>
             </div>
 

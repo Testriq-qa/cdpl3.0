@@ -27,7 +27,7 @@ import { DownloadFormModal } from "../DownloadForm";
 
 const breadcrumbs = [
     { label: "Home", href: "/" },
-    { label: "software-testing" },
+    { label: "software-testing", href: "#" },
     { label: "Manual Testing", href: "/about-us" },
 ]
 
@@ -63,12 +63,12 @@ export default function HeroManualTesting() {
                         {breadcrumbs.map((c, i) => (
                             <li key={i} className="flex items-center gap-2">
                                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                                <a
+                                <Link
                                     href={c.href}
                                     className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
                                 >
                                     {c.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ol>
@@ -76,7 +76,7 @@ export default function HeroManualTesting() {
 
                 <div className="grid items-center gap-10 lg:gap-16 lg:grid-cols-12 grid-cols-1">
                     {/* LEFT */}
-                    <div className="lg:-mt-32 xl:-mt-58 lg:col-span-7">
+                    <div className="lg:-mt-80 xl:-mt-72 lg:col-span-7">
                         <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-slate-200 bg-white px-3 py-0.5 md:py-1.5 text-xs font-semibold text-slate-700 shadow-sm">
                             <Sparkles className="h-4 w-4 text-amber-500" />
                             <span>ISTQB Foundation Aligned • Job-Oriented</span>
@@ -138,11 +138,11 @@ export default function HeroManualTesting() {
                                 </button>
                                 <p className="mt-2 text-center text-xs text-slate-500">
                                     By submitting, you agree to our{" "}
-                                    <Link href="/terms" className="underline underline-offset-2 text-slate-700">
+                                    <Link href="/terms-of-service" className="underline underline-offset-2 text-slate-700">
                                         Terms
                                     </Link>{" "}
                                     and{" "}
-                                    <Link href="/privacy" className="underline underline-offset-2 text-slate-700">
+                                    <Link href="/privacy-policy" className="underline underline-offset-2 text-slate-700">
                                         Privacy Policy
                                     </Link>.
                                 </p>
@@ -188,14 +188,13 @@ export default function HeroManualTesting() {
                                 Download Syllabus (PDF)
                             </button>
 
-                            <Link
-                                href="#demo"
+                            <button
                                 className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-sky-700 px-3 py-4 text-base font-semibold text-white shadow-sm transition hover:bg-sky-800 hover:scale-[1.02] focus:outline-none focus-visible:ring-2 focus-visible:ring-emerald-600 sm:ml-1"
                                 aria-label="Book a free demo class"
                             >
                                 <PlayCircle className="mr-2 h-5 w-5" />
                                 Free Demo Class
-                            </Link>
+                            </button>
                         </div>
 
                         {/* Feature bullets */}
@@ -332,11 +331,11 @@ export default function HeroManualTesting() {
                                     </button>
                                     <p className="mt-2 text-center text-xs text-slate-500">
                                         By submitting, you agree to our{" "}
-                                        <Link href="/terms" className="underline underline-offset-2 text-slate-700">
+                                        <Link href="/terms-of-service" className="underline underline-offset-2 text-slate-700">
                                             Terms
                                         </Link>{" "}
                                         and{" "}
-                                        <Link href="/privacy" className="underline underline-offset-2 text-slate-700">
+                                        <Link href="/privacy-policy" className="underline underline-offset-2 text-slate-700">
                                             Privacy Policy
                                         </Link>.
                                     </p>

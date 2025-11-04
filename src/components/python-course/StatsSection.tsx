@@ -87,7 +87,7 @@ export default function StatsSection() {
             id="python-stats-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Python Stats - <span className="text-teal-600">Clear & Impactful</span>
+            Python Stats - <span className="text-FS">Clear & Impactful</span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600">
             See why Python leads in <strong>careers, salaries</strong>, and{" "}

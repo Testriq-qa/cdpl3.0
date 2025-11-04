@@ -1,6 +1,8 @@
 // components/sections/FaqSection.tsx
 // Server component — sleek, slightly futuristic, responsive, SEO-friendly FAQ.
 
+import Link from "next/link";
+
 type FAQ = { q: string; a: string; accent: string; chip: string };
 
 const faqs: FAQ[] = [
@@ -72,9 +74,9 @@ export default function FaqSection() {
         <header className="text-center">
           <h2
             id="faq-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-FS"
           >
-            Frequently Asked <span className="text-teal-600">Questions</span>
+            Frequently Asked Questions
           </h2>
           <p className="mx-auto mt-3 max-w-2xl text-sm sm:text-base text-slate-600">
             Everything you need to know about the program —{" "}
@@ -142,9 +144,9 @@ export default function FaqSection() {
         {/* Extra SEO/help text */}
         <p className="mt-8 text-center text-sm sm:text-base text-slate-600">
           Still have questions?{" "}
-          <a href="#contact" className="font-semibold text-teal-700 underline-offset-4 hover:underline">
+          <Link href="contact-us" className="font-semibold text-FS underline-offset-4 hover:underline">
             Talk to a program advisor
-          </a>{" "}
+          </Link>{" "}
           for a personalized walkthrough.
         </p>
       </div>

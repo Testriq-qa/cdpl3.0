@@ -160,8 +160,7 @@ export default function ToolsSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mx-auto max-w-3xl text-center">
           <h2 id="tools-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Tools & Technologies{" "}
-            <span className="underline decoration-[.18rem] underline-offset-4 decoration-purple-400">You’ll Master</span>
+            <span className="text-DS">Tools</span> & <span className="text-DS">Technologies</span> You’ll Master
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             The industry-trusted stack for <strong>Data Science</strong>, <strong>Machine Learning</strong>, and{" "}

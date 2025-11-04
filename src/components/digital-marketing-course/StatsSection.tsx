@@ -49,7 +49,7 @@ export default function StatsSection() {
             id="dm-stats-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Why Is <span className="text-brand">Digital Marketing</span> a Smart Career Choice?
+            Why Is <span className="text-green-700">Digital Marketing</span> a Smart Career Choice?
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-700">
             The field evolves fast—<strong>grow with the latest AI, analytics, and performance skills</strong>.

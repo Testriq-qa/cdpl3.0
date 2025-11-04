@@ -1,6 +1,8 @@
 // components/sections/CtaSection.tsx
 // Sleek, responsive, slightly futuristic CTA (no heavy gradients, unique accents, SEO-ready).
 
+import Link from "next/link";
+
 export default function CtaSection() {
   const title = "Become a Top 1% Java Developer";
   const subtitle =
@@ -29,7 +31,7 @@ export default function CtaSection() {
               className="text-3xl sm:text-4xl font-extrabold tracking-tight text-slate-900"
             >
               {`Become a `}
-              <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">
+              <span className="text-FS">
                 Top 1% Java Developer
               </span>
             </h2>
@@ -60,7 +62,7 @@ export default function CtaSection() {
 
           {/* CTA buttons */}
           <div className="mt-6 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <a
+            <Link
               href="tel:+917888383788"
               className="inline-flex w-full items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300 sm:w-auto"
               aria-label="Call admissions at +91 788-83-83-788"
@@ -69,9 +71,9 @@ export default function CtaSection() {
               <svg className="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
                 <path d="M2.003 5.884c-.053-1.09.79-2.01 1.88-2.064l1.78-.086a1 1 0 01.995.86l.223 1.564a1 1 0 01-.63 1.07l-1.052.42a12.042 12.042 0 006.516 6.516l.42-1.052a1 1 0 011.07-.63l1.564.223a1 1 0 01.86.995l-.086 1.78a1.875 1.875 0 01-2.064 1.88A15.997 15.997 0 012.003 5.884z" />
               </svg>
-            </a>
+            </Link>
 
-            <a
+            <Link
               href="https://www.cinutedigital.com"
               className="inline-flex w-full items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200 sm:w-auto"
               aria-label="Visit Cinute Digital website"
@@ -82,7 +84,7 @@ export default function CtaSection() {
               <svg className="ml-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
                 <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H7a1 1 0 110-2h7.585l-2.292-2.293a1 1 0 010-1.414z" />
               </svg>
-            </a>
+            </Link>
           </div>
 
           {/* Safety/assurance note */}

@@ -86,7 +86,7 @@ export default function WhyMasterProgram() {
             id="why-master-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Your Path to the <span className="text-brand">Top&nbsp;1% Digital Marketer</span>
+            Your Path to the <span className="text-green-700">Top&nbsp;1% Digital Marketer</span>
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-700">
             A mentor-led, AI-powered program that blends{' '}

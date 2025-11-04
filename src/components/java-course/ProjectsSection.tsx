@@ -15,6 +15,7 @@ import {
   Briefcase,
   ChevronRight,
 } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 type Project = {
@@ -138,7 +139,7 @@ export default function ProjectsSection() {
             id="projects-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
           >
-            50+ <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">Enterprise Projects</span>
+            50+ <span className="text-FS">Enterprise Projects</span>
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-700">
             {subtitle}
@@ -213,14 +214,14 @@ export default function ProjectsSection() {
                 <span className={["text-xs font-semibold", p.text].join(" ")}>
                   Real-world, portfolio-ready
                 </span>
-                <a
-                  href={`#project-${i + 1}`}
+                <Link
+                  href="contact-us"
                   className="inline-flex items-center text-sm font-semibold text-gray-900 hover:opacity-80"
                   aria-label={`See more about ${p.title}`}
                 >
                   See details
                   <ChevronRight className="ml-1 h-4 w-4" />
-                </a>
+                </Link>
               </div>
             </article>
           ))}
@@ -241,18 +242,17 @@ export default function ProjectsSection() {
 
         {/* Actions */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <a
-            href="#portfolio"
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             View Sample Portfolios
-          </a>
-          <a
-            href="#repos"
+          </button>
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Explore Git Repos
-          </a>
+          </Link>
         </div>
       </div>
 
