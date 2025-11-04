@@ -316,8 +316,8 @@ const Footer = () => {
                   Our Team
                 </Link>
 
-                <Link href="/testimonials" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Testimonials
+                <Link href="/reviews" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Reviews
                 </Link>
 
                 <Link href="/cdpl-affiliate-program" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">

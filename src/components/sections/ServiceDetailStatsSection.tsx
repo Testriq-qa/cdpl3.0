@@ -120,7 +120,7 @@ export default function ServiceDetailStatsSection({ service }: { service: Servic
 
   return (
     <section ref={ref} className="w-full">
-      <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-7xl px-4 py-5 sm:px-6 lg:px-8">
         {/* section cue */}
         <div aria-hidden="true" className="mb-6 h-1 w-24 rounded-full bg-[#0ea5e9]" />
 
