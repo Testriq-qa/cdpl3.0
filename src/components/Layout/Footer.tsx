@@ -44,35 +44,31 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-orange-400">Data Science, AI - ML &amp; BI Courses</h3>
             <ul>
               <li className='flex flex-col space-y-2'>
-                <Link href="/courses/data-science-master" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/ai-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Comprehensive Data Science and AI - Master Program
                 </Link>
 
-                <Link href="/courses/data-analysis-bi" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Data Analysis with BI &amp; Big Data Engineering
-                </Link>
-
-                <Link href="/courses/ml-python" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/machine-learning-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Machine Learning and Data Science with Python
                 </Link>
 
-                <Link href="/courses/deep-learning-nlp" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/generative-ai-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Deep Learning, NLP and Generative AI
                 </Link>
 
-                <Link href="/courses/business-analyst" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
-                  Advanced Business Analyst
+                <Link href="/data-analytics" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  Advanced Data Analytics
                 </Link>
 
-                <Link href="/courses/big-data" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/data-engineering-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Big Data Engineering
                 </Link>
 
-                <Link href="/courses/prompt-engineering" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/prompt-engineering-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Prompt Engineering with Gen AI
                 </Link>
 
-                <Link href="/courses/advanced-data-science" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/data-science-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Data Science &amp; Machine Learning Masterclass
                 </Link>
               </li>
@@ -112,27 +108,31 @@ const Footer = () => {
             <h3 className="text-lg font-semibold text-orange-400">Software Testing Courses</h3>
             <ul>
               <li className='flex flex-col space-y-2'>
-                <Link href="/courses/manual-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/manual-testing-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Manual Software Testing
                 </Link>
 
-                <Link href="/courses/api-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/api-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   API Testing
                 </Link>
 
-                <Link href="/courses/database-management" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/dbms-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Database Management System
                 </Link>
 
-                <Link href="/courses/advanced-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/etl-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  ETL Testing
+                </Link>
+
+                <Link href="/advance-software-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Software Testing
                 </Link>
 
-                <Link href="/courses/advanced-automation" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/automation-testing-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Automation Testing
                 </Link>
 
-                <Link href="/courses/manual-automation" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                <Link href="/advance-manual-automation-testing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                   Advanced Manual and Automation Testing
                 </Link>
               </li>
@@ -143,7 +143,7 @@ const Footer = () => {
               <h3 className="text-lg font-semibold text-orange-400">Digital Marketing</h3>
               <ul>
                 <li className='flex flex-col space-y-2'>
-                  <Link href="/courses/digital-marketing" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  <Link href="/digital-marketing-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     Digital Marketing &amp; Analytics
                   </Link>
                 </li>
@@ -155,11 +155,11 @@ const Footer = () => {
               <h3 className="text-lg font-semibold text-orange-400">Programming Languages</h3>
               <ul>
                 <li className='flex flex-col space-y-2'>
-                  <Link href="/courses/python" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  <Link href="/python-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     Python Programming
                   </Link>
 
-                  <Link href="/courses/java" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
+                  <Link href="/java-course" className="text-gray-300 hover:text-orange-300 hover:translate-x-2 transition-all duration-300 ease-in-out text-sm">
                     Java Programming
                   </Link>
                 </li>

@@ -71,7 +71,7 @@ export function ContactMethodsSection() {
       title: "Book 1:1 Counseling",
       desc: "Personalized guidance on career paths, job roles, and the best course fit for your goals.",
       cta: "Book a Free Slot",
-      href: "#book",
+      href: "https://calendar.app.google/14RAvFHwRASBBfyc9",
       icon: <FaCalendar className="h-9 w-9 text-indigo-700" />,
       badges: ["15-min session", "Mentor advice"],
       aria: "Book a free counseling session",
