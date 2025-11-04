@@ -1,6 +1,7 @@
 'use client';
 import { CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 type Module = { title: string; topics: string[] };
 
@@ -48,7 +49,7 @@ export default function CurriculumSection() {
 
             <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <h2 className="text-3xl md:text-4xl text-slate-900 text-center font-bold mb-4">
-                    Elite Automation Testing Curriculum
+                    Elite <span className='text-ST'>Automation Testing</span> Curriculum
                 </h2>
 
                 {/* Intro copy for SEO */}
@@ -115,24 +116,22 @@ export default function CurriculumSection() {
 
                 {/* Bottom mini-CTAs (non-repeating colors) */}
                 <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-                    <a
-                        href="#demo"
+                    <Link
+                        href="contact-us"
                         className="inline-flex items-center justify-center rounded-xl bg-sky-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-sky-800 focus:outline-none focus:ring-4 focus:ring-sky-200"
                     >
                         Book a Free Demo
-                    </a>
-                    <a
-                        href="#contact"
+                    </Link>
+                    <button
                         className="inline-flex items-center justify-center rounded-xl border-2 border-emerald-700 bg-white px-4 py-2 text-sm font-semibold text-emerald-800 shadow-sm transition hover:bg-emerald-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
                     >
                         Get Syllabus PDF
-                    </a>
-                    <a
-                        href="#projects"
+                    </button>
+                    <button
                         className="inline-flex items-center justify-center rounded-xl border-2 border-violet-700 bg-white px-4 py-2 text-sm font-semibold text-violet-800 shadow-sm transition hover:bg-violet-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-violet-200"
                     >
                         View Capstone
-                    </a>
+                    </button>
                 </div>
             </div>
 

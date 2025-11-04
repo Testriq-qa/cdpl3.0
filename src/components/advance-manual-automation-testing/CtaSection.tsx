@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Award, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
 
 export default function CtaSection() {
   const jsonLd = {
@@ -51,22 +52,22 @@ export default function CtaSection() {
 
           {/* Primary Actions */}
           <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:gap-4">
-            <a
+            <Link
               href="tel:+917888383788"
               aria-label="Call +91 788-83-83-788"
               className="group inline-flex items-center justify-center gap-2 rounded-xl bg-white px-6 py-3 font-semibold text-slate-900 shadow-sm transition hover:shadow-md focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-cyan-300"
             >
               <Phone className="h-5 w-5 text-cyan-700 transition group-hover:scale-110" />
               Call: +91 788-83-83-788
-            </a>
-            <a
+            </Link>
+            <Link
               href="mailto:contact@cinutedigital.com"
               aria-label="Email contact@cinutedigital.com"
               className="inline-flex items-center justify-center gap-2 rounded-xl border border-white/20 bg-white/10 px-6 py-3 font-semibold text-white backdrop-blur-sm transition hover:bg-white/15 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-violet-300"
             >
               <Mail className="h-5 w-5" />
               Email Us
-            </a>
+            </Link>
           </div>
 
           {/* Trust bullets with distinct accent colors (no repeating) */}

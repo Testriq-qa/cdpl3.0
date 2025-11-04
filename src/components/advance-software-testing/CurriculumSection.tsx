@@ -1,5 +1,6 @@
 'use client';
 import { CheckCircle, Clock, Award, Layers } from 'lucide-react';
+import Link from 'next/link';
 
 
 type Module = { title: string; topics: string[] };
@@ -134,18 +135,17 @@ export default function CurriculumSection() {
 
                 {/* Inline CTA (optional anchors on the same page) */}
                 <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-                    <a
-                        href="#demo"
+                    <Link
+                        href="contact-us"
                         className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
                     >
                         Book a Free Demo
-                    </a>
-                    <a
-                        href="#contact"
+                    </Link>
+                    <button
                         className="inline-flex items-center justify-center rounded-xl border-2 border-emerald-600 bg-white px-5 py-2.5 text-sm font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
                     >
                         Download Syllabus PDF
-                    </a>
+                    </button>
                 </div>
             </div>
 

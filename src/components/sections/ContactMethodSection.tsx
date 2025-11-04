@@ -1,4 +1,8 @@
 import Link from "next/link";
+import { FaWhatsappSquare } from "react-icons/fa";
+import { FaSquarePhone } from "react-icons/fa6";
+import { IoMdMailUnread } from "react-icons/io";
+
 import {
   MessageCircle, Phone, Mail, BriefcaseBusiness, FileText, Calendar,
   GraduationCap, Wallet, MapPin,
@@ -23,7 +27,7 @@ export function ContactMethodsSection() {
       cta: "Chat on WhatsApp",
       href: "https://wa.me/9152929342",
       internal: false,
-      icon: <MessageCircle className="h-5 w-5 text-sky-600" />,
+      icon: <FaWhatsappSquare className="h-13 w-13 text-green-600" />,
       badges: ["Fastest response", "Live advisor"],
       aria: "Chat with Cinute Digital on WhatsApp",
     },
@@ -33,7 +37,7 @@ export function ContactMethodsSection() {
       cta: "Call Admissions",
       href: "tel:+91 788-83-83-788",
       internal: false,
-      icon: <Phone className="h-5 w-5 text-indigo-600" />,
+      icon: <FaSquarePhone className="h-13 w-13 text-indigo-600" />,
       badges: ["9am–8pm IST", "Priority support"],
       aria: "Call Cinute Digital Admissions Helpline",
     },
@@ -43,7 +47,7 @@ export function ContactMethodsSection() {
       cta: "Send Email",
       href: "mailto:contact@cinutedigital.com",
       internal: false,
-      icon: <Mail className="h-5 w-5 text-violet-600" />,
+      icon: <IoMdMailUnread className="h-16 w-16 text-violet-600" />,
       badges: ["24h response", "Trackable"],
       aria: "Email Cinute Digital Admissions",
     },

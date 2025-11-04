@@ -59,9 +59,9 @@ export default function WhyAutomation() {
         >
           <h2
             id="why-automation-heading"
-            className="text-[22px] sm:text-3xl md:text-5xl font-bold tracking-tight text-slate-900"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Why Master <span className="text-brand">Automation</span> in 2025?
+            Why Master <span className="text-ST">Automation</span> in 2025?
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Automation Testing and <strong>SDET</strong> skills accelerate delivery, improve reliability,
