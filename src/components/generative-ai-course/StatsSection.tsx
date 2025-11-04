@@ -129,11 +129,7 @@ export default function StatsSection() {
             id="ai-stats-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Why{" "}
-            <span className="underline decoration-[.18rem] underline-offset-4 decoration-indigo-400">
-              Deep Learning, NLP & Generative AI
-            </span>
-            ?
+            Why <span className="text-DS">Deep Learning</span>, <span className="text-DS">NLP</span> & <span className="text-DS">Generative AI</span>?
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             AI is transforming industries—be at the forefront with CDPL’s{" "}

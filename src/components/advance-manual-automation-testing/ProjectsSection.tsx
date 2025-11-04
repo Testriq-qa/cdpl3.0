@@ -106,9 +106,9 @@ export default function ProjectsSection() {
         <header className="text-center">
           <h2
             id="projects-heading"
-            className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Build Your <span className="text-brand">QA Portfolio</span>
+            Build Your <span className="text-ST">QA Portfolio</span>
           </h2>
           <p className="mx-auto mt-3 max-w-3xl text-sm sm:text-base text-slate-600">
             Real applications, real defects, <strong>production-like data</strong>, and{' '}

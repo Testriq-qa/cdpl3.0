@@ -113,7 +113,7 @@ export default function CurriculumSection() {
             id="curriculum-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            5-Core <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">Curriculum Modules</span>
+            5-Core <span className="text-DS">Curriculum Modules</span>
           </h2>
           <p className="mt-3 text-base md:text-lg text-slate-700">{subtitle}</p>
           {/* SEO keywords for crawlers (hidden) */}
@@ -206,7 +206,7 @@ export default function CurriculumSection() {
             Download Detailed Syllabus (PDF)
           </a>
           <a
-            href="#apply"
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200"
             aria-label="Apply for the ML & Data Science program"
           >

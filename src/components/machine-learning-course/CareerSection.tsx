@@ -3,6 +3,8 @@
 // Unique accent colors per logo card (no repeats), minimal/non-distracting visuals.
 // Includes accessible labels, keyboard focus states, and JSON-LD for rich results.
 
+import Link from "next/link";
+
 type Company = {
   name: string;
   logo: string;
@@ -105,7 +107,7 @@ export default function CareerSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center">
         {/* Heading */}
         <h2 id="career-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-          Top Companies Hiring <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">Data Science Professionals</span>
+          Top Companies Hiring <span className="text-DS">Data Science Professionals</span>
         </h2>
 
         {/* KPI / subtitle strip */}
@@ -128,10 +130,7 @@ export default function CareerSection() {
         >
           {COMPANIES.map((c) => (
             <li key={c.name} className="min-w-0">
-              <a
-                href={c.href || "#"}
-                target="_blank"
-                rel="noopener noreferrer"
+              <div
                 aria-label={c.name}
                 className={[
                   "group block rounded-2xl border p-4 shadow-sm transition-all duration-200 backdrop-blur",
@@ -151,7 +150,7 @@ export default function CareerSection() {
                 />
                 {/* label */}
                 <p className={["mt-3 text-xs font-semibold", c.accent.text].join(" ")}>{c.name}</p>
-              </a>
+              </div>
             </li>
           ))}
         </ul>
@@ -167,20 +166,19 @@ export default function CareerSection() {
 
         {/* CTA row */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href="#apply"
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Apply for data science roles via our placement cell"
           >
             Apply for Placement Assistance
-          </a>
-          <a
-            href="#syllabus"
+          </Link>
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200"
             aria-label="Download the syllabus to see job-ready skills"
           >
             Download Job-Ready Syllabus (PDF)
-          </a>
+          </button>
         </div>
 
         {/* Footnote */}

@@ -49,7 +49,7 @@ export default function FaqSection() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="text-center"
         >
-          <h2 className="text-3xl md:text-4xl text-center text-slate-900 font-bold mb-4">
+          <h2 className="text-3xl md:text-4xl text-center text-ST font-bold mb-4">
             Frequently Asked Questions
           </h2>
 

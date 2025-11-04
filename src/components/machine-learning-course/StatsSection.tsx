@@ -101,11 +101,7 @@ export default function StatsSection() {
             id="ml-stats-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Why Invest in{" "}
-            <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">
-              Machine Learning & Data Science
-            </span>
-            ?
+            Why Invest in <span className="text-DS">Machine Learning</span> & <span className="text-DS">Data Science</span>?
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             {subtitle}

@@ -123,7 +123,7 @@ export default function CareerSection(): JSX.Element {
           className="text-center"
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            High-Paying QA Careers
+            High-Paying <span className='text-ST'>QA Careers</span>
           </h2>
           <p className="mt-5 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             <strong>4,00,000+ open roles</strong> across India • Typical salary band <strong>₹5–20 LPA</strong>.
