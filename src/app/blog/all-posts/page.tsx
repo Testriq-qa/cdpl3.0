@@ -10,7 +10,7 @@ import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 // SEO METADATA - ENHANCED
 // ============================================================================
 export const metadata: Metadata = generateSEO({
-  title: "All Blog Posts | 100+ Software Testing & Development Resources - CDPL",
+  title: "All Blog Posts | 100+ Software Testing & Dev Resources | CDPL",
   description: "Explore CDPL's complete collection of 100+ expert articles on software testing, data science, web development, AI & machine learning, DevOps, and more. In-depth tutorials, best practices, and actionable insights from industry professionals. Updated weekly with fresh content.",
   keywords: [
     "CDPL blog",

@@ -40,7 +40,7 @@ const LocationsCTASection = dynamic(
 // ENHANCED METADATA FOR SEO
 // ============================================================================
 export const metadata: Metadata = generateSEO({
-  title: "Locations We Serve | Software Testing & Programming Courses in India & UAE - CDPL",
+  title: "CDPL | Locations - Software Testing & Programming in India & UAE",
   description:
     "Explore CDPL training centers across India and the UAE. Find the nearest software testing, programming, and QA courses in Maharashtra, Karnataka, Delhi NCR, Dubai, Abu Dhabi, and more. 50+ cities served.",
   keywords: [

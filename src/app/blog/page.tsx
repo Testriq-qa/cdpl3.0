@@ -41,7 +41,7 @@ export const metadata: Metadata = generateSEO({
         'full stack development',
     ],
     url: '/blog',
-    image: '/blog/og-image.jpg',
+    image: '/og-images/og-blog-image.webp',
     imageAlt: 'CDPL Tech Blog - Expert Articles and Tutorials on Modern Technology',
 });
 
