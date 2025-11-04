@@ -51,12 +51,12 @@ export default function AboutHeroSection() {
                     {breadcrumbs.map((c, i) => (
                         <li key={i} className="flex items-center gap-2">
                             {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                            <a
+                            <Link
                                 href={c.href}
                                 className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
                             >
                                 {c.label}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ol>
@@ -118,14 +118,13 @@ export default function AboutHeroSection() {
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.24 }}
                         className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
                     >
-                        <Link
-                            href="/courses"
+                        <button
                             className="inline-flex w-full items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 sm:w-auto"
                         >
                             Explore Courses <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                        </Link>
+                        </button>
                         <Link
-                            href="/contact-us"
+                            href="contact-us"
                             className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
                         >
                             Talk to an Advisor
@@ -153,7 +152,7 @@ export default function AboutHeroSection() {
                         <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 text-slate-800 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
                             <ShieldCheck className="h-4 w-4 text-purple-700" aria-hidden="true" />
                             <span className="font-semibold text-purple-700">Placement Assistance</span>
-                        </div>                        
+                        </div>
                     </motion.div>
                 </div>
 
