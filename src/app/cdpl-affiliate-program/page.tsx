@@ -5,7 +5,7 @@ import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
 // ---------- SEO ----------
 export const metadata: Metadata = generateSEO({
-  title: "CDPL Affiliate Program - Earn Commission Promoting Training & Services",
+  title: "Affiliate Program: Earn Commissions on Training & Services | CDPL",
   description:
     "Join the CDPL Affiliate Program and earn recurring commissions by promoting world-class IT training, certification courses, events, and services. Get transparent tracking, fast payouts, and dedicated support. Start earning 15-25% commission today!",
   keywords: [
