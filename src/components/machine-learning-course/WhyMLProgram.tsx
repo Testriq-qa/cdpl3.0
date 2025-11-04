@@ -2,6 +2,8 @@
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Unique accent colors per chip (no repeats), minimal/non-distracting visuals.
 
+import Link from "next/link";
+
 export default function WhyMLProgram() {
   const subtitle =
     "A mentor-led, job-ready journey through Python, Data Visualization, Statistics & Probability, and Machine Learning — built around hands-on labs and real portfolio projects.";
@@ -136,20 +138,19 @@ export default function WhyMLProgram() {
 
         {/* CTA row */}
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
+          <Link
             href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Apply to the Machine Learning & Data Science program"
           >
             Apply Now
-          </a>
-          <a
-            href="#syllabus"
+          </Link>
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-purple-200"
             aria-label="Download the full program syllabus"
           >
             Download Syllabus (PDF)
-          </a>
+          </button>
         </div>
 
         {/* Footnote for expectations */}

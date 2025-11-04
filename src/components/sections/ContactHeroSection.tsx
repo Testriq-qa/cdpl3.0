@@ -53,7 +53,7 @@ export function ContactHeroSection() {
   ]
 
   return (
-    <section className="relative isolate overflow-hidden bg-white">
+    <section className="relative isolate overflow-hidden bg-white" id="contact-hero">
       {/* themed blobs ABOVE the white background */}
       <div
         aria-hidden
