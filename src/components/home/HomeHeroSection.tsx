@@ -184,10 +184,10 @@ const HomeHeroSection: React.FC = () => {
   const fadeUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] }
+    transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const }
   };
 
-  const easeBezier = [0.25, 0.1, 0.25, 1.0];
+  const easeBezier: [number, number, number, number] = [0.25, 0.1, 0.25, 1.0];
 
   return (
     <>
@@ -307,7 +307,7 @@ const HomeHeroSection: React.FC = () => {
               <motion.h1
                 id="home-heading"
                 {...fadeUp}
-                transition={{ ...(fadeUp.transition as Transition), delay: 0.06 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.06 }}
                 className="mt-4 py-1 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl"
               >
                 Transform Your Career with{' '}
@@ -317,7 +317,7 @@ const HomeHeroSection: React.FC = () => {
               {/* Enhanced Subheadline */}
               <motion.p
                 {...fadeUp}
-                transition={{ ...(fadeUp.transition as Transition), delay: 0.12 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.12 }}
                 className="mt-5 text-[15px] sm:text-base md:text-lg leading-7 text-slate-700"
               >
                 Master Software Testing, Data Science, AI/ML, and Full Stack Development through expert-led 
@@ -327,7 +327,7 @@ const HomeHeroSection: React.FC = () => {
               {/* Trust Indicators - 3 Cards */}
               <motion.div
                 {...fadeUp}
-                transition={{ ...(fadeUp.transition as Transition), delay: 0.18 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.18 }}
                 className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4"
               >
                 {/* Card 1 - Students Placed */}
@@ -367,7 +367,7 @@ const HomeHeroSection: React.FC = () => {
               {/* Key Features - 6 Benefits */}
               <motion.div
                 {...fadeUp}
-                transition={{ ...(fadeUp.transition as Transition), delay: 0.24 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.24 }}
                 className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3"
               >
                 {[
@@ -388,7 +388,7 @@ const HomeHeroSection: React.FC = () => {
               {/* Urgency Message */}
               <motion.div
                 {...fadeUp}
-                transition={{ ...(fadeUp.transition as Transition), delay: 0.3 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.3 }}
                 className="mt-7 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-orange-500 rounded-lg"
               >
                 <div className="flex items-start gap-3">
@@ -408,7 +408,7 @@ const HomeHeroSection: React.FC = () => {
               {/* CTA Buttons */}
               <motion.div
                 {...fadeUp}
-                transition={{ ...(fadeUp.transition as Transition), delay: 0.36 }}
+                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.36 }}
                 className="mt-7 flex flex-col sm:flex-row gap-4"
               >
                 {/* Primary CTA - Download Brochure */}
@@ -444,7 +444,7 @@ const HomeHeroSection: React.FC = () => {
             <motion.div
               initial={{ opacity: 0, scale: 0.985 }}
               animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.55, ease: easeBezier }}
+              transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1.0] as const }}
               className="order-2 lg:order-2 lg:col-span-4"
             >
               <div className="sticky top-4 max-w-sm ml-auto">
