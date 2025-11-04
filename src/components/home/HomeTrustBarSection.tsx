@@ -1,5 +1,3 @@
-'use client';
-
 import React from 'react';
 import { motion } from 'framer-motion';
 import Image from 'next/image';
@@ -7,21 +5,29 @@ import Image from 'next/image';
 /**
  * HomeTrustBarSection - Partner Logos & Certifications
  * 
- * Shows hiring partners and trust badges
- * Matches CDPL design with company logos from placements page
+ * Shows hiring partners and trust badges.
+ * Updated to display company logos for a better visual trust bar.
  */
 export default function HomeTrustBarSection() {
   // Actual hiring partners from CDPL
+  // The names are used to construct the image path: /partners/{name-in-lowercase-and-kebab-case}.png
   const partners = [
     'testriq',
     'Axiom',
-    'CREDILITY',
+    'aryanTechnologies.png',
     'marqetrix',
-    'Raw Engineering',
-    'Tech Mahindra',
+    'RawEngineering',
+    'TechMahindra',
     'Accenture',
     'eClerx',
+    'Capgemini', // Added a couple more for a richer display
+    'TCS',
   ];
+
+  const getLogoPath = (partnerName: string) => {
+    // Convert partner name to lowercase and replace spaces with hyphens for the file path
+    return `/partners/${partnerName.toLowerCase().replace(/\s/g, '-')}.png`;
+  };
 
   return (
     <section className="py-12 bg-gray-50 border-y border-gray-200">
@@ -39,7 +45,7 @@ export default function HomeTrustBarSection() {
         </motion.div>
 
         {/* Partner Logos Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-8 gap-6 mb-8">
+        <div className="grid grid-cols-3 md:grid-cols-5 lg:grid-cols-10 gap-4 mb-8 items-center justify-center">
           {partners.map((partner, index) => (
             <motion.div
               key={index}
@@ -48,20 +54,18 @@ export default function HomeTrustBarSection() {
               viewport={{ once: true }}
               transition={{ delay: index * 0.05 }}
               whileHover={{ scale: 1.05 }}
-              className="bg-white rounded-lg shadow-sm border border-gray-200 p-4 flex items-center justify-center h-20 grayscale hover:grayscale-0 transition-all duration-300"
+              className="flex items-center justify-center h-16 p-2" // Reduced padding and height
             >
-              <div className="text-gray-700 font-semibold text-sm text-center">
-                {partner}
-              </div>
-              {/* Replace with actual logo images:
               <Image 
-                src={`/partners/${partner.toLowerCase().replace(' ', '-')}.png`} 
-                alt={partner}
-                width={100}
+                src={getLogoPath(partner)}
+                alt={`${partner} Logo`}
+                width={120} // Increased width for better visibility
                 height={40}
-                className="object-contain"
+                className="object-contain w-full h-full grayscale hover:grayscale-0 transition-all duration-300"
+                // Added sizes and priority for better Next.js Image optimization and SEO
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                priority={index < 5} // Prioritize loading for the first few logos
               />
-              */}
             </motion.div>
           ))}
         </div>

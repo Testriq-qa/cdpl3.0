@@ -308,7 +308,7 @@ const HomeHeroSection: React.FC = () => {
                 id="home-heading"
                 {...fadeUp}
                 transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.06 }}
-                className="mt-4 py-1 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl md:text-5xl lg:text-6xl"
+                className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
               >
                 Transform Your Career with{' '}
                 <span className="block mt-2">Industry-Ready Skills</span>
