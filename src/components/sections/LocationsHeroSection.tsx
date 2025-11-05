@@ -1,23 +1,9 @@
 "use client";
 
-import dynamic from "next/dynamic";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getFlatLocations, statesData } from "@/data/cities/citiesData";
 import { Home } from "lucide-react";
-
-/* --------------------------------------------------------------
-   Dynamic import of the map – **ssr:false** so Leaflet never runs
-   on the server.  The loading component is passed in the options
-   object, **not** as `<dynamic.loading>`.
-   -------------------------------------------------------------- */
-const InteractiveMapSection = dynamic(
-  () => import("./LocationsInteractiveMapSection"),
-  {
-    ssr: false,
-    loading: () => <MapPlaceholder height={420} />,
-  }
-);
 
 /* --------------------------------------------------------------
    SSR-safe responsive height hook
@@ -36,22 +22,6 @@ function useResponsiveMapHeight() {
   }, []);
 
   return height;
-}
-
-/* --------------------------------------------------------------
-   Placeholder rendered on the server (initial height 420 px)
-   -------------------------------------------------------------- */
-function MapPlaceholder({ height }: { height: number }) {
-  return (
-    <div
-      className="w-full overflow-hidden rounded-2xl bg-transparent ring-0 shadow-none"
-      style={{ height }}
-    >
-      <div className="flex h-full w-full items-center justify-center bg-slate-50/70 backdrop-blur-sm">
-        <p className="text-sm text-gray-600">Loading map…</p>
-      </div>
-    </div>
-  );
 }
 
 /* --------------------------------------------------------------
@@ -80,8 +50,7 @@ export default function LocationsHeroSection() {
         <svg className="absolute left-0 top-0 h-full w-full" aria-hidden />
       </div>
 
-      <div className="relative z-10 mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
-        {/* breadcrumb */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 pb-10 pt-0 sm:px-6 lg:px-8">
         {/* breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-3">
           <ol className="flex items-center gap-2 text-sm text-slate-500">
@@ -98,16 +67,16 @@ export default function LocationsHeroSection() {
           </ol>
         </nav>
 
-
         <div className="grid grid-cols-1 items-start gap-8 sm:gap-10 lg:grid-cols-2">
           {/* LEFT – copy */}
           <div className="order-1 lg:order-1 text-center sm:text-left">
             <p className="w-fit mb-4 flex items-center gap-2 rounded-full border border-slate-200/70 bg-white/70 px-3 py-1 text-xs font-medium text-slate-600 backdrop-blur text-left">
-              <span className="hidden h-2 w-2 rounded-full sm:inline-block" style={{ backgroundColor: "var(--color-brand, #ff8c00)" }} />
+              <span
+                className="hidden h-2 w-2 rounded-full sm:inline-block"
+                style={{ backgroundColor: "var(--color-brand, #ff8c00)" }}
+              />
               India-wide presence
             </p>
-
-
 
             <h1 className="text-3xl font-extrabold leading-tight tracking-tight sm:text-4xl lg:text-5xl text-[#0069A8] text-left">
               Explore our <span style={{ color: "var(--color-brand, #ff8c00)" }}>locations</span> across India
@@ -141,24 +110,29 @@ export default function LocationsHeroSection() {
                 Find your nearest center
               </Link>
             </div>
-
           </div>
 
-          {/* RIGHT – map */}
+          {/* RIGHT – static image instead of map */}
           <div className="order-2 lg:order-2 relative mt-4 flex items-start justify-center sm:mt-6 lg:justify-end lg:mt-0 -translate-y-0 sm:-translate-y-1 lg:-translate-y-8 xl:-translate-y-10">
             <div aria-hidden className="pointer-events-none absolute -inset-x-4 -inset-y-6 sm:-inset-x-6 sm:-inset-y-8 rounded-[2rem] bg-gradient-to-b from-indigo-100/40 to-white/0 blur-xl" />
             <div className="relative z-20 w-full max-w-full sm:max-w-[32rem] lg:max-w-[40rem]">
-              <InteractiveMapSection
-                locations={getFlatLocations(statesData)}
-                variant="bare"
-                constrained={false}
-                className="overflow-hidden rounded-2xl !bg-transparent !ring-0 !shadow-none"
-                height={mapHeight}
-              />
+              <div
+                className="overflow-hidden rounded-2xl !bg-transparent !ring-0 !shadow-none relative"
+                style={{ height: mapHeight }}
+              >
+                <Image
+                  src="/locations/earth.png"
+                  alt="Earth illustration showing India and UAE"
+                  fill
+                  className="object-contain"
+                  sizes="(min-width: 1024px) 640px, (min-width: 640px) 512px, 100vw"
+                  priority
+                />
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </section >
+    </section>
   );
 }
