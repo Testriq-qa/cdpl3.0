@@ -1,5 +1,6 @@
 'use client';
 import { CheckCircle } from 'lucide-react';
+import Link from 'next/link';
 
 type Module = { title: string; topics: string[] };
 
@@ -105,18 +106,17 @@ export default function CurriculumSection() {
 
         {/* CTAs */}
         <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="#demo"
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl bg-indigo-700 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-800 focus:outline-none focus:ring-4 focus:ring-indigo-200"
           >
             Book a Free Demo
-          </a>
-          <a
-            href="#contact"
+          </Link>
+          <button
             className="inline-flex items-center justify-center rounded-xl border-2 border-green-700 bg-white px-4 py-2 text-sm font-semibold text-green-800 shadow-sm transition hover:bg-green-700 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Get Syllabus PDF
-          </a>
+          </button>
         </div>
       </div>
 

@@ -80,7 +80,7 @@ export default function WhyMasterProgram() {
         <div className="absolute inset-x-0 bottom-0 mx-auto h-px max-w-7xl bg-slate-100" />
       </div>
 
-      <div className="container mx-auto max-w-7xl px-4">
+      <div className="container mx-auto max-w-7xl px-4 xl:px-10">
         <header className="mx-auto max-w-3xl text-center">
           <h2
             id="why-master-heading"

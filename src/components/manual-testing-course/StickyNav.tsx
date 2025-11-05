@@ -1,6 +1,6 @@
 'use client';
 
-import { sections } from '@/components/manual-testing-course/StickyNavData';
+import { sections } from '@/components/StickyNavData';
 import React, { useEffect, useRef, useState } from 'react';
 
 export default function StickyNav() {

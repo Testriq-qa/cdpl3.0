@@ -48,7 +48,6 @@ export default function AboutFacultyStrip({
   heading = (<>Learn from <span className="text-brand">Mentors</span> </>),
   subheading = (<>10+ years average experience across <strong>Software Testing</strong>, <strong>Automation</strong>, <strong>Data Science</strong> & <strong>AI/ML</strong>.</>),
   primaryCtaHref = "/mentors",
-  secondaryCtaHref = "/become-a-mentor",
 }: Props) {
   const jsonLd = {
     "@context": "https://schema.org",

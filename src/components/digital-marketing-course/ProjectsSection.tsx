@@ -62,7 +62,7 @@ export default function ProjectsSection() {
                 <div className="absolute inset-0 [background:radial-gradient(600px_240px_at_50%_0%,rgba(15,23,42,0.04),transparent_60%)]" />
             </div>
 
-            <div className="mx-auto max-w-7xl px-4">
+            <div className="mx-auto max-w-7xl px-4 xl:px-10">
                 <header className="text-center">
                     <h2 id="projects-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
                         Hands-On <span className="text-green-700">Projects</span> You’ll Work On

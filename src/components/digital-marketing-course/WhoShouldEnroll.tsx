@@ -117,7 +117,7 @@ export default function WhoShouldEnrollSection() {
                 <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(59,130,246,0.10),transparent_60%)]" />
             </div>
 
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto max-w-7xl px-4 xl:px-10">
                 {/* Heading and micro-badges */}
                 <header className="text-center max-w-4xl mx-auto">
                     <h2

@@ -5,11 +5,6 @@ import { IoMdMailUnread } from "react-icons/io";
 import { RiPresentationLine } from "react-icons/ri";
 import { IoBookSharp } from "react-icons/io5";
 
-import {
-  MessageCircle, Phone, Mail, BriefcaseBusiness, FileText, Calendar,
-  GraduationCap, Wallet, MapPin,
-} from "lucide-react";
-
 type Card = {
   title: string;
   desc: string;

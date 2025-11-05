@@ -9,6 +9,7 @@ import WhoShouldEnroll from '@/components/dbms-course/WhoShouldEnroll';
 import ToolsSection from '@/components/dbms-course/ToolsSection';
 import FaqSection from '@/components/dbms-course/FaqSection';
 import CtaSection from '@/components/dbms-course/CtaSection';
+import StickyNav from '@/components/StickyNav2/StickyNav2';
 
 export const metadata = {
   title: "MySQL Database Course | 100% Job Placement | 20-Hour Training",
@@ -20,16 +21,22 @@ export default function Home() {
   return (
     <>
       <HeroSection />
-      <StatsSection />
-      <WhyMysqlSection />
-      <CurriculumSection />
-      <ProjectsSection />
-      <TestimonialsSection />
-      <CareerSection />
-      <WhoShouldEnroll />
-      <ToolsSection />
-      <FaqSection />
-      <CtaSection />
+
+      {/* Sticky nav must appear right after hero */}
+      <div className="hidden md:block sticky top-0 z-20">
+        <StickyNav />
+      </div>
+
+      <section id='program-stats'><StatsSection /></section>
+      <section id='why-master-program'><WhyMysqlSection /></section>
+      <section id='curriculum'><CurriculumSection /></section>
+      <section id='projects'><ProjectsSection /></section>
+      <section id='testimonials'><TestimonialsSection /></section>
+      <section id='career'><CareerSection /></section>
+      <section id='who-should-enroll'><WhoShouldEnroll /></section>
+      <section id='tools'><ToolsSection /></section>
+      <section id='faqs'><FaqSection /></section>
+      <section id='contact'><CtaSection /></section>
     </>
   );
 }
