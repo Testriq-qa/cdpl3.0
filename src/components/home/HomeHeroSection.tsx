@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { motion, Transition } from 'framer-motion';
+import { motion} from 'framer-motion';
 import {
   Award,
   TrendingUp,
@@ -15,7 +15,6 @@ import {
   Play,
   User,
   Mail,
-  Phone,
   Home
 } from 'lucide-react';
 
@@ -186,8 +185,6 @@ const HomeHeroSection: React.FC = () => {
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const }
   };
-
-  const easeBezier: [number, number, number, number] = [0.25, 0.1, 0.25, 1.0];
 
   return (
     <>

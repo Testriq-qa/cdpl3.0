@@ -4,6 +4,16 @@ import React, { useEffect, useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { Users, Award, Briefcase, GraduationCap } from 'lucide-react';
 
+// Define proper types instead of 'any'
+interface StatItem {
+  icon: React.ComponentType<{ className?: string }>;
+  end: number;
+  suffix: string;
+  label: string;
+  color: string;
+  index: number;
+}
+
 /**
  * HomeStatsSection - Animated Counters
  * 
@@ -96,10 +106,10 @@ export default function HomeStatsSection() {
 }
 
 // Animated Counter Component
-function StatCard({ icon: Icon, end, suffix, label, color, index }: any) {
+function StatCard({ icon: Icon, end, suffix, label, color, index }: StatItem) {
   const [count, setCount] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -111,16 +121,17 @@ function StatCard({ icon: Icon, end, suffix, label, color, index }: any) {
       { threshold: 0.3 }
     );
 
-    if (ref.current) {
-      observer.observe(ref.current);
+    const currentRef = ref.current;
+    if (currentRef) {
+      observer.observe(currentRef);
     }
 
     return () => {
-      if (ref.current) {
-        observer.unobserve(ref.current);
+      if (currentRef) {
+        observer.unobserve(currentRef);
       }
     };
-  }, []);
+  }, []); // Empty deps — runs once
 
   useEffect(() => {
     if (!isVisible) return;
@@ -140,7 +151,7 @@ function StatCard({ icon: Icon, end, suffix, label, color, index }: any) {
     };
 
     requestAnimationFrame(animate);
-  }, [isVisible, end]);
+  }, [isVisible, end]); // Dependencies are correct
 
   return (
     <motion.div

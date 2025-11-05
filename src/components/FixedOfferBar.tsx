@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { X, Sparkles } from 'lucide-react';
+import { X, Sparkles, Link } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /**
@@ -68,7 +68,7 @@ export default function FixedOfferBar() {
 
               {/* CTA Button */}
               <div className="flex-shrink-0">
-                <a
+                <Link
                   href="/courses"
                   className="inline-flex items-center gap-2 rounded-lg bg-white px-4 py-2 text-sm font-bold text-orange-600 shadow-md transition hover:bg-orange-50 hover:shadow-lg"
                 >
@@ -76,7 +76,7 @@ export default function FixedOfferBar() {
                   <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                   </svg>
-                </a>
+                </Link>
               </div>
 
               {/* Close Button */}

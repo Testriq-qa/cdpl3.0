@@ -74,7 +74,10 @@ export default function HomeValuePropositionSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: index * 0.1 }}
-              whileHover={{ y: -5, shadow: '2xl' }}
+              whileHover={{ 
+                y: -5, 
+                boxShadow: '0 25px 50px -12px rgba(0, 0, 0, 0.25)' 
+              }}
               className="bg-white rounded-2xl p-8 shadow-lg border border-gray-100 hover:border-orange-200 transition-all duration-300"
             >
               {/* Icon */}
@@ -125,7 +128,7 @@ export default function HomeValuePropositionSection() {
                   ['Flexible Batch Timings', true, false],
                 ].map(([feature, cdpl, others], index) => (
                   <tr key={index} className="border-b border-gray-200 hover:bg-white/50 transition-colors">
-                    <td className="py-4 px-4 font-medium text-gray-800">{feature as string}</td>
+                    <td className="py-4 px-4 font-medium text-gray-800">{feature}</td>
                     <td className="text-center py-4 px-4">
                       {cdpl ? (
                         <span className="inline-flex items-center justify-center w-8 h-8 bg-green-100 rounded-full">

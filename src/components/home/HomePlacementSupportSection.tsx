@@ -2,8 +2,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { FileCheck, Users2, Briefcase, TrendingUp, CheckCircle2 } from 'lucide-react';
-import Image from 'next/image';
+import { FileCheck, Users2, Briefcase, TrendingUp } from 'lucide-react';
 
 /**
  * HomePlacementSupportSection - Job Assistance
