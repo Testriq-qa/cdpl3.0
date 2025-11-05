@@ -84,7 +84,7 @@ export default function ServiceDetailHeroSection({ service }: { service: Service
 
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         {/* Breadcrumbs */}
-        <nav aria-label="Breadcrumb" className="mb-4 pt-2 sm:mb-5 sm:pt-4 md:mb-6 md:pt-8">
+        <nav aria-label="Breadcrumb" className="mb-4 sm:mb-5 md:mb-6">
           <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
             {breadcrumbs.map((c, i) => (
               <li key={c.href} className="flex items-center gap-2">

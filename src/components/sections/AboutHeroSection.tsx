@@ -174,20 +174,6 @@ export default function AboutHeroSection() {
                         className="object-contain"
                         priority
                     />
-                    {/* Softer overlay in dark so it doesn't glow to edges */}
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/50 via-transparent to-white/60 dark:from-white/15 dark:to-white/20" />
-                    {/* Floating stat pill */}
-                    <div className="absolute bottom-0 left-0 md:bottom-4 md:left-4 flex flex-col md:flex-row items-center md:gap-3 rounded-2xl border border-slate-200 bg-white/90 p-0 px-1 md:px-4 md:py-2 text-slate-900 shadow-md backdrop-blur dark:border-slate-200/70 dark:bg-white/90">
-                        <div className="flex -space-x-2">
-                            {[1, 2, 3].map((i) => (
-                                <span key={i} className="h-6 w-6 rounded-full border border-white/80 bg-slate-200" />
-                            ))}
-                        </div>
-                        <div className="text-[11px] leading-tight sm:text-xs">
-                            <p className="font-semibold">Hiring Partners Onboard</p>
-                            <p className="text-slate-600">Top tech companies & startups</p>
-                        </div>
-                    </div>
                 </motion.div>
             </div>
 

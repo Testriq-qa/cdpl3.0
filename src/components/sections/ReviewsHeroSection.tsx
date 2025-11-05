@@ -1,75 +1,75 @@
-// ./src/components/sections/TestimonialHeroSection.tsx
+// /src/components/sections/TestimonialHeroSection.tsx
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
 import Script from "next/script";
 import { Star } from "lucide-react";
+import { useMemo } from "react";
 import type { CSSProperties } from "react";
 
-/* Students only */
-const REVIEWS = [
-  { id: "qa1", name: "Neha R.", role: "Software Test Engineer", quote: "Critiques were sharp yet kind. Automation + CI gave me the confidence to ship faster.", avatar: "/testimonial_images/testimonial.jpeg", rating: 4.9 },
-  { id: "dm1", name: "Aarav S.", role: "Digital Marketing Specialist", quote: "Practical playbooks and analytics mindset. Campaigns improved within weeks.", avatar: "/testimonial_images/testimonial.jpeg", rating: 5 },
-  { id: "ds1", name: "Zara K.", role: "Data Scientist", quote: "Great balance of product thinking and ML rigor. Loved the review cadence.", avatar: "/testimonial_images/testimonial.jpeg", rating: 4.8 },
-];
+import { getFeaturedReviews, avatarFor } from "@/data/reviews/reviewsData";
+import SafeAvatar from "@/components/sections/SafeAvatar";
 
 const BRAND_ORANGE = "rgb(255, 140, 0)";
 const BRAND_BLUE = "#0069A8";
+const QUOTE_MAX = 260;
 
-/** Allow CSS custom property on style without using `any` */
 type CSSVars = CSSProperties & { ["--color-brand"]?: string };
 
 export default function TestimonialHeroSection() {
   const prefersReduced = useReducedMotion();
 
-  const jsonLd = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    name: "CDPL Student Ratings & Reviews",
-    itemListElement: REVIEWS.map((r, i) => ({
-      "@type": "Review",
-      position: i + 1,
-      author: { "@type": "Person", name: r.name },
-      reviewBody: r.quote,
-      reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
-      itemReviewed: { "@type": "Course", name: "CDPL Programs" },
-    })),
-  };
+  const REVIEWS = useMemo(
+    () =>
+      getFeaturedReviews(8)
+        .filter((r) => (r.quote ?? "").trim().length <= QUOTE_MAX)
+        .slice(0, 3)
+        .map((r) => ({
+          id: r.id,
+          name: r.name,
+          role: r.role,
+          quote: r.quote,
+          rating: r.rating,
+          avatar: avatarFor(r.name),
+        })),
+    []
+  );
 
-  const sectionStyle: CSSVars = { "--color-brand": BRAND_ORANGE };
+  const jsonLd = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "ItemList",
+      name: "CDPL Student Ratings & Reviews",
+      itemListElement: REVIEWS.map((r, i) => ({
+        "@type": "Review",
+        position: i + 1,
+        author: { "@type": "Person", name: r.name },
+        reviewBody: r.quote,
+        reviewRating: { "@type": "Rating", ratingValue: r.rating, bestRating: 5 },
+        itemReviewed: { "@type": "Course", name: "CDPL Programs" },
+      })),
+    }),
+    [REVIEWS]
+  );
+
+  const sectionStyle: CSSVars = useMemo(() => ({ "--color-brand": BRAND_ORANGE }), []);
 
   return (
-    <section
-      className="relative overflow-hidden bg-white"
-      aria-label="Student ratings and reviews"
-      style={sectionStyle}
-    >
-      <Script
-        id="cdpl-students-hero-jsonld"
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
-      />
+    <section className="relative overflow-hidden bg-white" aria-label="Student ratings and reviews" style={sectionStyle}>
+      <Script id="cdpl-students-hero-jsonld" type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      {/* tighter top padding */}
       <div className="max-w-7xl mx-auto px-4 pb-8 sm:px-6 lg:px-8 pt-8">
-        {/* Breadcrumbs for SEO & UX (Home > Testimonials) */}
+        {/* Breadcrumb */}
         <nav aria-label="Breadcrumb" className="mb-3">
           <ol className="flex items-center gap-2 text-sm text-slate-500">
-            <li>
-              <Link href="/" className="hover:text-slate-700">Home</Link>
-            </li>
+            <li><Link href="/" className="hover:text-slate-700">Home</Link></li>
             <li aria-hidden="true" className="text-slate-400">/</li>
-            <li>
-              <Link href="/testimonials" className="font-medium text-slate-700 hover:text-slate-900">
-                Testimonials
-              </Link>
-            </li>
+            <li><Link href="/reviews" className="font-medium text-slate-700 hover:text-slate-900">Reviews</Link></li>
           </ol>
         </nav>
 
-        {/* title + deck (kept tight) */}
+        {/* Heading */}
         <div className="text-center">
           <p className="text-xs font-semibold uppercase tracking-wider text-neutral-500">Rating &amp; Reviews</p>
           <h1 className="mt-2 text-3xl font-extrabold tracking-tight sm:text-5xl">
@@ -88,18 +88,18 @@ export default function TestimonialHeroSection() {
           <div className="pointer-events-none absolute left-1/2 top-6 h-56 w-[560px] -translate-x-1/2 rounded-full bg-[var(--color-brand)]/12 blur-3xl" />
           <div className="relative mx-auto h-[380px] w-full max-w-[420px] sm:h-[420px]">
             <div className="absolute left-1/2 top-8 z-10 -translate-x-1/2">
-              <TiltCard review={REVIEWS[0]} color="dark" float={!prefersReduced} className="-rotate-6" />
+              {REVIEWS[0] && <TiltCard review={REVIEWS[0]} color="dark" float={!prefersReduced} className="-rotate-6" />}
             </div>
             <div className="absolute left-1/2 top-0 z-20 -translate-x-1/2">
-              <TiltCard review={REVIEWS[1]} color="brandSoft" float={!prefersReduced} className="-rotate-2" />
+              {REVIEWS[1] && <TiltCard review={REVIEWS[1]} color="brandSoft" float={!prefersReduced} className="-rotate-2" />}
             </div>
             <div className="absolute left-1/2 top-[76px] z-30 -translate-x-1/2 sm:top-[88px]">
-              <TiltCard review={REVIEWS[2]} color="light" float={!prefersReduced} className="rotate-6" />
+              {REVIEWS[2] && <TiltCard review={REVIEWS[2]} color="light" float={!prefersReduced} className="rotate-6" />}
             </div>
           </div>
 
-          {/* CTA — move UP even more on small screens */}
-          <div className="-mt-14 sm:-mt-12 md:-mt-10 flex justify-center">
+          {/* CTA — consistent spacing on small screens */}
+          <div className="mt-6 sm:mt-8 md:mt-0 flex justify-center">
             <Link
               href="#all-reviews"
               className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
@@ -113,13 +113,13 @@ export default function TestimonialHeroSection() {
         <div className="relative mx-auto mt-10 hidden min-h:[420px] max-w-[1120px] lg:block">
           <div className="pointer-events-none absolute left-1/2 top-4 h-64 w-[680px] -translate-x-1/2 rounded-full bg-[var(--color-brand)]/12 blur-3xl" />
           <div className="relative mx-auto mt-4 flex w-full max-w-[980px] items-center justify-center gap-10">
-            <TiltCard review={REVIEWS[0]} color="dark" float={!prefersReduced} className="-translate-y-1 rotate-[-10deg]" />
-            <TiltCard review={REVIEWS[1]} color="brandSoft" float={!prefersReduced} className="translate-y-1 rotate-[-4deg]" />
-            <TiltCard review={REVIEWS[2]} color="light" float={!prefersReduced} className="-translate-y-2 rotate-[7deg]" />
+            {REVIEWS[0] && <TiltCard review={REVIEWS[0]} color="dark" float={!prefersReduced} className="-translate-y-1 rotate-[-10deg]" />}
+            {REVIEWS[1] && <TiltCard review={REVIEWS[1]} color="brandSoft" float={!prefersReduced} className="translate-y-1 rotate-[-4deg]" />}
+            {REVIEWS[2] && <TiltCard review={REVIEWS[2]} color="light" float={!prefersReduced} className="-translate-y-2 rotate-[7deg]" />}
           </div>
 
-          {/* CTA — move DOWN even more on large screens */}
-          <div className="mt-32 xl:mt-40 2xl:mt-28 flex justify-center">
+          {/* CTA — normalized spacing on large screens */}
+          <div className="mt-12 flex justify-center">
             <Link
               href="#all-reviews"
               className="inline-flex items-center justify-center rounded-full bg-[var(--color-brand)] px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-[1px] hover:shadow-md focus:outline-none focus:ring-2 focus:ring-[var(--color-brand)]/40"
@@ -135,6 +135,7 @@ export default function TestimonialHeroSection() {
 
 /* ----- tilted card ----- */
 type TiltColor = "dark" | "light" | "brandSoft" | "brandPop";
+
 function TiltCard({
   review,
   className = "",
@@ -151,6 +152,7 @@ function TiltCard({
   const palette: Record<TiltColor, { bg: string; text: string; star: string; ring?: string }> = {
     dark: { bg: "bg-neutral-900", text: "text-white", star: "text-[var(--color-brand)]" },
     light: { bg: "bg-white", text: "text-neutral-900", star: "text-[var(--color-brand)]", ring: "ring-1 ring-neutral-200" },
+    // translucent brand tint (causes bleed-through behind); we’ll veil the CONTENT only on mobile
     brandSoft: { bg: "bg-[rgba(255,140,0,.12)]", text: "text-neutral-900", star: "text-[var(--color-brand)]", ring: "ring-1 ring-[var(--color-brand)]/20" },
     brandPop: { bg: "bg-[#F5FFE6]", text: "text-neutral-900", star: "text-[var(--color-brand)]", ring: "ring-1 ring-lime-300/60" },
   };
@@ -169,17 +171,25 @@ function TiltCard({
         className,
       ].join(" ")}
     >
-      <div className="space-y-4 p-5">
-        <div className="flex items-center gap-1">
-          {Array.from({ length: 5 }).map((_, i) => (
-            <Star key={i} className={`h-4 w-4 ${p.star}`} fill="currentColor" />
-          ))}
+      {/* 
+        Mobile-only content veil:
+        Adds an opaque layer BEHIND the card content (not the whole card), so you don’t see the card underneath.
+        On lg+ the veil is disabled to preserve original look.
+      */}
+      <div className="relative p-5 space-y-4">
+        <div className="absolute inset-0 rounded-2xl bg-white lg:bg-transparent" aria-hidden />
+        <div className="relative">
+          <div className="flex items-center gap-1">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <Star key={i} className={`h-4 w-4 ${p.star}`} fill="currentColor" />
+            ))}
+          </div>
         </div>
-        <p className="text-sm leading-relaxed opacity-95">“{review.quote}”</p>
-        <div className="mt-4 flex items-center gap-3">
-          <span className="relative h-8 w-8 overflow-hidden rounded-full ring-2 ring-white/70">
-            <Image src={review.avatar} alt={`${review.name} avatar`} fill className="object-cover" />
-          </span>
+
+        <p className="relative text-sm leading-relaxed opacity-95">“{review.quote}”</p>
+
+        <div className="relative mt-4 flex items-center gap-3">
+          <SafeAvatar name={review.name} sizes="32px" ring />
           <div className="min-w-0">
             <p className="truncate text-sm font-semibold">{review.name}</p>
             <p className="truncate text-xs opacity-70">{review.role}</p>
