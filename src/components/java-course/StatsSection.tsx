@@ -12,6 +12,7 @@ import {
   Globe,
   Banknote,
 } from "lucide-react";
+import Link from "next/link";
 
 type Stat = {
   value: string;
@@ -109,8 +110,8 @@ export default function StatsSection() {
             id="java-stats-heading"
             className="text-3xl font-bold tracking-tight text-gray-900 md:text-4xl"
           >
-            Why <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">Java</span>{" "}
-            is the <span className="text-brand">#1</span> Enterprise Language
+            Why <span className="text-FS">Java</span>{" "}
+            is the <span className="text-FS">#1</span> Enterprise Language
           </h2>
           <p className="mx-auto mt-6 max-w-5xl text-base leading-relaxed text-gray-700 md:text-lg">
             {description}
@@ -190,18 +191,18 @@ export default function StatsSection() {
 
         {/* CTA (optional, lightweight) */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <a
-            href="#curriculum"
+          <Link
+            href="#java-curriculum"
             className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Explore Java Curriculum
-          </a>
-          <a
-            href="#contact"
+          </Link>
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Talk to a Mentor
-          </a>
+          </Link>
         </div>
       </div>
 

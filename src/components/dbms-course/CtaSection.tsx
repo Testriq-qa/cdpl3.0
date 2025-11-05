@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Award, CheckCircle, BadgeCheck } from 'lucide-react';
+import Link from 'next/link';
 
 export default function CtaSection() {
   // SEO: ContactPoint structured data
@@ -65,23 +66,23 @@ export default function CtaSection() {
 
           {/* CTA buttons */}
           <div className="mt-8 flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
-            <a
+            <Link
               href="tel:+917888383788"
               aria-label="Call Think and Do Institute at +91 788-83-83-788"
               className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm sm:text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
             >
               <Phone className="mr-2 h-5 w-5" />
               Call: +91 788-83-83-788
-            </a>
+            </Link>
 
-            <a
+            <Link
               href="mailto:contact@cinutedigital.com"
               aria-label="Email Think and Do Institute at contact@cinutedigital.com"
               className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-7 py-3 text-sm sm:text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
             >
               <Mail className="mr-2 h-5 w-5" />
               Email Us
-            </a>
+            </Link>
           </div>
 
           {/* Key assurances row (distinct, non-repeating colors; no heavy gradients) */}

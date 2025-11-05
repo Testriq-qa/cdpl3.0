@@ -149,7 +149,7 @@ export default function ToolsSection() {
             id="tools-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Tools You’ll <span className="text-teal-600">Master</span>
+            <span className="text-FS">Tools</span> You’ll Master
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             Learn a{" "}

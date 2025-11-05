@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Award, CheckCircle } from 'lucide-react';
+import Link from 'next/link';
 
 export default function CtaSection() {
   // Structured data (helps rankings for contact/offer queries)
@@ -61,28 +62,27 @@ export default function CtaSection() {
 
           {/* Primary actions */}
           <div className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row">
-            <a
+            <Link
               href="tel:+917888383788"
               aria-label="Call admission helpdesk"
               className="inline-flex items-center justify-center rounded-xl border border-cyan-600 bg-cyan-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-cyan-700 focus:outline-none focus:ring-4 focus:ring-cyan-200"
             >
               <Phone className="mr-2 h-5 w-5" />
               Call: +91 788-83-83-788
-            </a>
-            <a
+            </Link>
+            <Link
               href="mailto:contact@cinutedigital.com"
               aria-label="Email admission team"
               className="inline-flex items-center justify-center rounded-xl border-2 border-indigo-600 bg-white px-6 py-3 text-base font-semibold text-indigo-700 shadow-sm transition hover:bg-indigo-50 focus:outline-none focus:ring-4 focus:ring-indigo-200"
             >
               <Mail className="mr-2 h-5 w-5" />
               Email Us
-            </a>
-            <a
-              href="#demo"
+            </Link>
+            <button
               className="inline-flex items-center justify-center rounded-xl border-2 border-emerald-600 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
             >
               Book Free Demo
-            </a>
+            </button>
           </div>
         </motion.div>
 

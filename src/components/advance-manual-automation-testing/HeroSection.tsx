@@ -12,6 +12,7 @@ import {
 import { motion } from 'framer-motion';
 import IconCard from '../ui/IconCard';
 import LeadForm from '../CourseLeadForm';
+import Link from 'next/link';
 
 
 /** ===========================
@@ -28,7 +29,7 @@ const features = [
 export default function HeroSection() {
   const breadcrumbs = [
     { label: 'Home', href: '/' },
-    { label: 'Software Testing' },
+    { label: 'Software Testing', href: "#" },
     { label: 'Manual + Automation Testing', href: '#hero' },
   ];
 
@@ -64,12 +65,12 @@ export default function HeroSection() {
             {breadcrumbs.map((c, i) => (
               <li key={i} className="flex items-center gap-2">
                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                <a
+                <Link
                   href={c.href}
                   className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? 'font-semibold text-slate-900' : ''}`}
                 >
                   {c.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ol>
@@ -120,28 +121,26 @@ export default function HeroSection() {
 
             {/* CTAs */}
             <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-              <a
-                href="#contact"
+              <button
                 className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
                 aria-label="Enroll now in Manual + Automation Testing program"
               >
                 Enroll Now
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
+              </button>
+              <Link
                 href="#curriculum"
                 className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-800 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
                 aria-label="View detailed curriculum"
               >
                 View Curriculum
-              </a>
-              <a
-                href="#demo"
+              </Link>
+              <button
                 className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-800 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
                 aria-label="Book a free demo session"
               >
                 Free Demo
-              </a>
+              </button>
             </div>
 
             {/* Quick highlights (distinct colors) */}

@@ -15,6 +15,7 @@ import {
   Settings2,
   ChevronRight,
 } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 type Role = {
@@ -120,7 +121,7 @@ export default function CareerSection() {
             id="career-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
           >
-            500K+ <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">Java Jobs</span> in India
+            500K+ <span className="text-FS">Java Jobs</span> in India
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-700">
             {subtitle}
@@ -177,7 +178,8 @@ export default function CareerSection() {
                   Hire-ready skills
                 </p>
               </div>
-              <span
+              <Link
+                href="contact-us"
                 className={[
                   "ml-auto hidden rounded-md bg-white px-2 py-1 text-[10px] text-slate-900 font-semibold ring-1 ring-black/5 sm:inline-flex",
                   r.text.replace("text-", ""),
@@ -185,7 +187,7 @@ export default function CareerSection() {
                 aria-hidden="true"
               >
                 Apply
-              </span>
+              </Link>
             </article>
           ))}
         </div>
@@ -205,19 +207,18 @@ export default function CareerSection() {
 
         {/* Actions */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <a
-            href="#open-roles"
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Browse Open Roles
             <ChevronRight className="ml-1 h-4 w-4" />
-          </a>
-          <a
-            href="#resume"
+          </Link>
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Download Resume Template
-          </a>
+          </button>
         </div>
       </div>
 

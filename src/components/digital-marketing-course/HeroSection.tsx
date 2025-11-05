@@ -16,6 +16,7 @@ import {
 import { motion } from 'framer-motion';
 import IconCard from '@/components/ui/IconCard';
 import LeadForm from '../CourseLeadForm';
+import Link from 'next/link';
 
 /** -----------------------------
  * Feature tiles (distinct colors, no repeats)
@@ -71,7 +72,7 @@ export default function HeroSection() {
 
   const breadcrumbs = [
     { label: 'Home', href: '/' },
-    { label: 'Marketing Programs' },
+    { label: 'Marketing Programs', href: "#" },
     { label: 'AI Digital Marketing', href: '/ai-digital-marketing' },
   ];
 
@@ -90,12 +91,12 @@ export default function HeroSection() {
             {breadcrumbs.map((c, i) => (
               <li key={i} className="flex items-center gap-2">
                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                <a
+                <Link
                   href={c.href}
                   className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? 'font-semibold text-slate-900' : ''}`}
                 >
                   {c.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ol>
@@ -130,10 +131,10 @@ export default function HeroSection() {
             {/* H1 */}
             <h1
               id="dm-hero"
-              className="text-3xl font-bold md:leading-14 xl:leading-18 text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
+              className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
             >
-              <span className="text-brand">Digital Marketing</span> &{' '}
-              <span className="text-sky-700">Analytics</span> Master Program
+              <span className="text-green-700">Digital Marketing</span> &{' '}
+              <span className="text-green-700">Analytics</span> Master Program
             </h1>
 
             {/* Mobile form just below H1 */}
@@ -154,28 +155,26 @@ export default function HeroSection() {
 
             {/* CTAs */}
             <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-              <a
-                href="#contact"
+              <button
                 className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
                 aria-label="Enroll now in AI Digital Marketing course"
               >
                 Enroll Now
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-              </a>
-              <a
+              </button>
+              <Link
                 href="#curriculum"
                 className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
                 aria-label="View full AI Digital Marketing curriculum"
               >
                 View Curriculum
-              </a>
-              <a
-                href="#demo"
+              </Link>
+              <button
                 className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
                 aria-label="Book a free demo for AI Digital Marketing"
               >
                 Free Demo
-              </a>
+              </button>
             </div>
 
             {/* Quick highlights */}

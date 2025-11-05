@@ -1,4 +1,5 @@
 // components/ComparisonSection.tsx
+import Link from "next/link";
 import * as React from "react";
 
 type Badge = { label: string; colorClasses: string };
@@ -115,8 +116,6 @@ const Dot = ({ className = "bg-indigo-600" }: { className?: string }) => (
 );
 
 export default function ComparisonSection({
-  enrollHref = "#enroll",
-  curriculumHref = "#curriculum",
   providerName = "Your Ed-Tech Institute",
   showSchema = true,
   className = "",
@@ -254,18 +253,17 @@ export default function ComparisonSection({
                 ))}
               </ul>
               <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
-                <a
-                  href={enrollHref}
+                <button
                   className="inline-flex justify-center rounded-xl bg-indigo-600 px-5 py-3 text-white font-semibold hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
                 >
                   Enroll Now — Become a QA Tester
-                </a>
-                <a
-                  href={curriculumHref}
+                </button>
+                <Link
+                  href="#curriculum"
                   className="inline-flex justify-center rounded-xl border border-indigo-200 px-5 py-3 text-indigo-700 font-semibold hover:bg-white focus:outline-none focus:ring-4 focus:ring-indigo-100"
                 >
                   View Curriculum
-                </a>
+                </Link>
               </div>
               <p className="mt-3 text-sm text-gray-600">
                 Keywords:{" "}
@@ -291,12 +289,11 @@ export default function ComparisonSection({
                 ))}
               </ul>
               <div className="mt-6">
-                <a
-                  href="#testimonials"
+                <button
                   className="inline-flex justify-center rounded-xl border border-gray-300 px-5 py-3 text-gray-800 font-semibold hover:bg-white focus:outline-none focus:ring-4 focus:ring-gray-100"
                 >
                   Read Student Outcomes
-                </a>
+                </button>
               </div>
             </div>
           </div>

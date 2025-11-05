@@ -50,8 +50,8 @@ export default function ToolsSection() {
           transition={{ duration: 0.5 }}
           className="text-center"
         >
-          <h2 id="tools-heading" className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-slate-900">
-            Tools You’ll <span className="text-brand">Master</span>
+          <h2 id="tools-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
+             <span className="text-ST">Tools </span> You&apos;ll Master
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Master a <strong>production-ready automation stack</strong> across UI, API, performance and CI/CD.

@@ -1,6 +1,8 @@
 // components/sections/CtaSection.tsx
 // Server component — sleek, slightly futuristic, accessible, fully responsive.
 
+import Link from "next/link";
+
 export default function CtaSection() {
     // SEO JSON-LD (Action/Offer-style CTA)
     const jsonLd = {
@@ -45,7 +47,7 @@ export default function CtaSection() {
                         id="cta-heading"
                         className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
                     >
-                        Ready to become a <span className="text-orange-600">Top&nbsp;1% Digital Marketer</span>?
+                        Ready to become a <span className="text-green-700">Top&nbsp;1% Digital Marketer</span>?
                     </h2>
                     <p className="mt-3 text-sm sm:text-base text-slate-600">
                         Enroll now for <strong>job-ready, AI-powered</strong> training with{' '}
@@ -80,7 +82,7 @@ export default function CtaSection() {
 
                     {/* buttons */}
                     <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
-                        <a
+                        <Link
                             href="tel:+917888383788"
                             className="group inline-flex w-full items-center justify-center rounded-xl border border-orange-600 bg-orange-600 px-4 py-3 text-base font-semibold text-white transition hover:bg-orange-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-orange-200 sm:w-auto"
                             aria-label="Call Cinute Digital to enroll"
@@ -94,15 +96,15 @@ export default function CtaSection() {
                             >
                                 <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
                             </svg>
-                        </a>
+                        </Link>
 
-                        <a
+                        <Link
                             href="mailto:contact@cinutedigital.com"
                             className="inline-flex w-full items-center justify-center rounded-xl border border-indigo-300 bg-white px-6 py-3 text-base font-semibold text-indigo-700 shadow-sm transition hover:bg-indigo-50 focus:outline-none focus:ring-4 focus:ring-indigo-200 sm:w-auto"
                             aria-label="Email Cinute Digital"
                         >
                             Email Us
-                        </a>
+                        </Link>
                     </div>
 
                     {/* location + micro copy */}

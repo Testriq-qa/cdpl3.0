@@ -1,6 +1,7 @@
 'use client';
 import { Briefcase, Building2, ArrowRight } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const ROLES = [
   'SDET',
@@ -165,14 +166,14 @@ export default function CareerSection() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="mt-12 text-center"
         >
-          <a
-            href="#contact"
+          <Link
+            href="contact-us"
             className="inline-flex items-center gap-2 rounded-xl border border-[#00758F] bg-[#00758F] px-7 py-3 text-base font-semibold text-white shadow-sm transition hover:bg-[#016a82] focus:outline-none focus:ring-4 focus:ring-cyan-200"
             aria-label="Become SDET in 30 Days"
           >
             Become SDET in 30 Days
             <ArrowRight className="h-5 w-5" />
-          </a>
+          </Link>
           <p className="mt-3 text-xs text-slate-500">
             Mentor-led, project-based training with resume building and mock interviews.
           </p>

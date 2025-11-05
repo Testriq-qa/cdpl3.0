@@ -16,6 +16,7 @@ import {
     Rocket,
     BookOpen,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function WhyDSProgram() {
     // SEO: Course schema
@@ -165,7 +166,7 @@ export default function WhyDSProgram() {
                         className="text-3xl md:text-4xl max-w-4xl font-bold tracking-tight text-gray-900"
                     >
                         Advanced Data Science &amp; Machine Learning{" "}
-                        <span className="text-indigo-600">Masterclass — Complete Overview</span>
+                        <span className="text-DS">Masterclass - Complete Overview</span>
                     </h1>
                     <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
                         Go end-to-end from <strong>data processing</strong> to{" "}
@@ -258,15 +259,15 @@ export default function WhyDSProgram() {
                         </dl>
 
                         <div className="mt-6 border-t border-gray-200 pt-6">
-                            <a
-                                href="#apply"
+                            <Link
+                                href="contact-us"
                                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
                            bg-slate-900 text-white hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
                                 aria-label="Apply now for the Advanced Data Science & ML Masterclass"
                             >
                                 Apply Now
                                 <Rocket className="w-4 h-4" />
-                            </a>
+                            </Link>
                             <p className="mt-3 text-xs text-gray-600">
                                 Get the full syllabus and a readiness checklist to personalize your learning path.
                             </p>

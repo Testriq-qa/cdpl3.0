@@ -1,15 +1,16 @@
 import Link from "next/link";
-import {
-  MessageCircle, Phone, Mail, BriefcaseBusiness, FileText, Calendar,
-  GraduationCap, Wallet, MapPin,
-} from "lucide-react";
+import { FaWhatsappSquare, FaCalendar, FaCaretSquareUp } from "react-icons/fa";
+import { FaSquarePhone, FaGoogleScholar, FaMapLocationDot } from "react-icons/fa6";
+import { IoMdMailUnread } from "react-icons/io";
+import { RiPresentationLine } from "react-icons/ri";
+import { IoBookSharp } from "react-icons/io5";
+
 
 type Card = {
   title: string;
   desc: string;
   cta: string;
   href: string;
-  internal?: boolean;
   icon: React.ReactNode;
   badges?: string[];
   aria?: string;
@@ -22,8 +23,7 @@ export function ContactMethodsSection() {
       desc: "Quick answers on courses, fees, syllabus & career guidance. Get help from our admissions team instantly.",
       cta: "Chat on WhatsApp",
       href: "https://wa.me/9152929342",
-      internal: false,
-      icon: <MessageCircle className="h-5 w-5 text-sky-600" />,
+      icon: <FaWhatsappSquare className="h-13 w-13 text-green-600" />,
       badges: ["Fastest response", "Live advisor"],
       aria: "Chat with Cinute Digital on WhatsApp",
     },
@@ -32,8 +32,7 @@ export function ContactMethodsSection() {
       desc: "Talk to an academic counselor about eligibility, batch schedules, and application deadlines.",
       cta: "Call Admissions",
       href: "tel:+91 788-83-83-788",
-      internal: false,
-      icon: <Phone className="h-5 w-5 text-indigo-600" />,
+      icon: <FaSquarePhone className="h-13 w-13 text-indigo-600" />,
       badges: ["9am–8pm IST", "Priority support"],
       aria: "Call Cinute Digital Admissions Helpline",
     },
@@ -42,8 +41,7 @@ export function ContactMethodsSection() {
       desc: "Detailed queries about fees, placements, or documentation? Our team replies within 24 hours.",
       cta: "Send Email",
       href: "mailto:contact@cinutedigital.com",
-      internal: false,
-      icon: <Mail className="h-5 w-5 text-violet-600" />,
+      icon: <IoMdMailUnread className="h-13 w-13 text-violet-600" />,
       badges: ["24h response", "Trackable"],
       aria: "Email Cinute Digital Admissions",
     },
@@ -52,8 +50,7 @@ export function ContactMethodsSection() {
       desc: "Upskill your team in Software Testing, Data Science, AI & Full-Stack. Tailored curriculum & labs.",
       cta: "Enquire for Teams",
       href: "/corporate-training",
-      internal: true,
-      icon: <BriefcaseBusiness className="h-5 w-5 text-slate-700" />,
+      icon: <RiPresentationLine className="h-10 w-10 p-1 rounded-lg text-white bg-blue-950" />,
       badges: ["Custom syllabus", "Hands-on labs"],
       aria: "Corporate training enquiry",
     },
@@ -62,8 +59,7 @@ export function ContactMethodsSection() {
       desc: "Download program curriculum PDFs for Software Testing, Data Science & AI, Full-Stack Development.",
       cta: "Get Curriculum PDF",
       href: "/pdf/dummy-pdf_2.pdf",
-      internal: true,
-      icon: <FileText className="h-5 w-5 text-sky-700" />,
+      icon: <IoBookSharp className="h-10 w-10 text-red-700" />,
       badges: ["Updated", "Detailed topics"],
       aria: "Download course syllabus PDF",
     },
@@ -71,9 +67,8 @@ export function ContactMethodsSection() {
       title: "Book 1:1 Counseling",
       desc: "Personalized guidance on career paths, job roles, and the best course fit for your goals.",
       cta: "Book a Free Slot",
-      href: "#book",
-      internal: true,
-      icon: <Calendar className="h-5 w-5 text-indigo-700" />,
+      href: "https://calendar.app.google/14RAvFHwRASBBfyc9",
+      icon: <FaCalendar className="h-9 w-9 text-indigo-700" />,
       badges: ["15-min session", "Mentor advice"],
       aria: "Book a free counseling session",
     },
@@ -81,9 +76,8 @@ export function ContactMethodsSection() {
       title: "Scholarships & EMI",
       desc: "Check eligibility for scholarships and flexible EMI options with finance partners.",
       cta: "Explore Financing",
-      href: "/scholarships",
-      internal: true,
-      icon: <Wallet className="h-5 w-5 text-emerald-700" />,
+      href: "#contact-hero",
+      icon: <FaGoogleScholar className="h-9 w-9 text-emerald-700" />,
       badges: ["0-cost EMI*", "Limited seats"],
       aria: "Explore scholarships and EMI options",
     },
@@ -92,8 +86,7 @@ export function ContactMethodsSection() {
       desc: "Resume reviews, mock interviews, and hiring drives with our partner companies.",
       cta: "Talk to Placement",
       href: "tel:+91 788-83-83-788",
-      internal: false, // Changed to false since it's a tel: link
-      icon: <GraduationCap className="h-5 w-5 text-fuchsia-700" />,
+      icon: <FaCaretSquareUp className="h-10 w-10 text-fuchsia-700" />,
       badges: ["Job-ready", "Career support"],
       aria: "Connect with Cinute Digital Placement Cell",
     },
@@ -102,8 +95,7 @@ export function ContactMethodsSection() {
       desc: "Meet faculty at our Mumbai (MiraRoad) center. Experience classrooms, labs & learning environment.",
       cta: "Open in Maps",
       href: "https://www.google.com/maps/place/Cinute+Digital+Pvt.+Ltd.+A+Premier+Software+Training+Institute+(CDPL)/@19.29342,72.8685471,17z/data=!3m1!4b1!4m6!3m5!1s0x3be7b1af2b2c5fed:0x7104f80b9fec8b9d!8m2!3d19.293415!4d72.871122!16s%2Fg%2F11t5q_mt87?entry=ttu&g_ep=EgoyMDI1MTAyMi4wIKXMDSoASAFQAw%3D%3D",
-      internal: false,
-      icon: <MapPin className="h-5 w-5 text-rose-700" />,
+      icon: <FaMapLocationDot className="h-10 w-10 text-rose-700" />,
       badges: ["Guided tour", "By appointment"],
       aria: "Open Cinute Digital location in Google Maps",
     },
@@ -122,7 +114,7 @@ export function ContactMethodsSection() {
       <div className="max-w-7xl mx-auto px-6 md:px-8 lg:px-12 py-12">
         <div className="mx-auto max-w-5xl text-center">
           <h2 className="text-4xl font-extrabold tracking-tight text-slate-900">
-            Talk to <span className="text-brand">Cinute Digital</span> — India’s Leading Ed-Tech Institute
+            Talk to <span className="text-brand">Cinute Digital</span> - India’s Leading Ed-Tech Institute
           </h2>
           <p className="mt-5 text-lg text-slate-600">
             Get admissions support, course syllabus, <strong>job-ready training</strong> advice,{" "}
@@ -132,25 +124,18 @@ export function ContactMethodsSection() {
 
         <div className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {cards.map((item) => {
-            const CardShell = item.internal ? Link : "a";
-            const props = item.internal
-              ? { href: item.href }
-              : { href: item.href, target: "_blank", rel: "noopener noreferrer" };
 
             return (
-              <CardShell
+              <article
                 key={item.title}
-                {...props}
+
                 className="group relative overflow-hidden rounded-3xl border border-slate-100 bg-white p-6 shadow-md transition hover:shadow-xl block"
                 aria-label={item.aria}
               >
-                <div
-                  aria-hidden
-                  className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-3xl"
-                />
-                <div className="absolute inset-0 rounded-3xl ring-1 ring-transparent transition group-hover:ring-sky-200/60" />
+                <div aria-hidden className="absolute -right-10 -top-10 h-32 w-32 rounded-full bg-gradient-to-br from-sky-400/15 to-indigo-400/10 blur-3xl pointer-events-none" />
+                <div className="absolute inset-0 rounded-3xl ring-1 ring-transparent transition group-hover:ring-sky-200/60 pointer-events-none" />
                 <div className="flex items-start justify-between gap-4">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
+                  <div className="inline-flex items-center justify-center rounded-xl">
                     {item.icon}
                   </div>
                   {item.badges && (
@@ -170,10 +155,15 @@ export function ContactMethodsSection() {
                 <h3 className="mt-4 text-xl font-bold text-slate-900">{item.title}</h3>
                 <p className="mt-2 text-md leading-6 text-slate-700">{item.desc}</p>
 
-                <span className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-sky-700 hover:text-sky-800">
+                <Link
+                  href={item.href}
+                  className="mt-5 inline-flex items-center gap-2 text-sm font-medium text-sky-700 hover:text-sky-800"
+                  aria-label={item.aria}
+                >
                   {item.cta} <span aria-hidden>→</span>
-                </span>
-              </CardShell>
+                </Link>
+
+              </article>
             );
           })}
         </div>
