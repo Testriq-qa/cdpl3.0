@@ -1,6 +1,7 @@
 'use client';
 import { useState } from 'react';
 import { ChevronDown, HelpCircle, ShieldCheck, Clock, Award } from 'lucide-react';
+import Link from 'next/link';
 
 type Faq = { q: string; a: string };
 
@@ -117,7 +118,7 @@ export default function FaqSection() {
 
         {/* Contact hint */}
         <p className="mt-6 text-center text-xs sm:text-sm text-slate-600">
-          Still have questions? <a href="#contact" className="font-semibold text-sky-700 hover:underline">Talk to an advisor</a>.
+          Still have questions? <Link href="contact-us" className="font-semibold text-sky-700 hover:underline">Talk to an advisor</Link>.
         </p>
       </div>
 

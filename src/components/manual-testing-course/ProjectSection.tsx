@@ -11,6 +11,7 @@ import {
     Network,
     GraduationCap,
 } from "lucide-react";
+import Link from "next/link";
 import type { JSX } from "react";
 
 
@@ -115,13 +116,13 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
             </div>
 
             <div className="flex items-center justify-between">
-                <a
+                <Link
                     href={project.href ?? "#apply"}
                     className="rounded-lg border border-gray-200 bg-white px-3.5 py-2 text-sm font-semibold text-gray-900 transition hover:bg-gray-100"
                     aria-label={`View ${project.title} project details`}
                 >
                     View Details
-                </a>
+                </Link>
                 <button
                     type="button"
                     className="rounded-lg px-3.5 py-2 text-sm font-semibold text-white transition"

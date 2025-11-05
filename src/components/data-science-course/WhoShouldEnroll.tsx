@@ -106,7 +106,7 @@ export default function WhoShouldEnroll() {
             id="who-should-enroll-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
           >
-            Who is this <span className="text-indigo-600">course for</span>
+            Who is this <span className="text-DS">course for</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base md:text-lg text-gray-700">
             Whether you’re starting out or leveling up, this masterclass maps directly to{" "}

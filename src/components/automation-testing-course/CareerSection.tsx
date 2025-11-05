@@ -1,6 +1,7 @@
 'use client';
 import { Briefcase, Building2, ArrowRight, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 type Role = { label: string; bg: string; text: string; border: string };
 type Company = { label: string; bg: string; text: string; border: string };
@@ -69,7 +70,7 @@ export default function CareerSection() {
           className="text-center"
         >
           <h2 id="career-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Elite <span className="text-brand">SDET Careers</span>
+            Elite <span className="text-ST">SDET Careers</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             <strong>3,00,000+ automation jobs</strong> across India | Typical salary for skilled SDETs:{' '}
@@ -170,15 +171,15 @@ export default function CareerSection() {
           transition={{ duration: 0.45, ease: 'easeOut' }}
           className="mt-10 text-center"
         >
-          <a
-            href="#contact"
+          <Link
+            href="contact-us"
             className="inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm sm:text-base font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
             aria-label="Talk to a mentor and join the program"
           >
             <Sparkles className="h-5 w-5" />
             Join the Top 1%
             <ArrowRight className="h-5 w-5" />
-          </a>
+          </Link>
           <p className="mt-3 text-xs text-slate-500">
             Speak to a mentor about roadmap, interview prep, and portfolio projects.
           </p>

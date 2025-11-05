@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { Phone, Mail, MapPin, Clock, Award, CheckCircle, BadgeCheck } from 'lucide-react';
+import Link from 'next/link';
 
 export default function CtaSection() {
   // SEO: ContactPoint JSON-LD
@@ -67,32 +68,31 @@ export default function CtaSection() {
 
           {/* actions */}
           <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center sm:justify-center">
-            <a
+            <Link
               href="tel:+917888383788"
               className="group inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm sm:text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
               aria-label="Call admissions"
             >
               <Phone className="mr-2 h-5 w-5" />
               Call Admissions
-            </a>
+            </Link>
 
-            <a
+            <Link
               href="mailto:contact@cinutedigital.com"
               className="inline-flex items-center justify-center rounded-xl border-2 border-emerald-600 bg-white px-7 py-3 text-sm sm:text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
               aria-label="Email admissions"
             >
               <Mail className="mr-2 h-5 w-5" />
               Email Us
-            </a>
+            </Link>
 
-            <a
-              href="#demo"
+            <button
               className="inline-flex items-center justify-center rounded-xl border-2 border-amber-600 bg-white px-7 py-3 text-sm sm:text-base font-semibold text-amber-800 shadow-sm transition hover:bg-amber-50 focus:outline-none focus:ring-4 focus:ring-amber-200"
               aria-label="Book a free demo session"
             >
               <Clock className="mr-2 h-5 w-5" />
               Book Free Demo
-            </a>
+            </button>
           </div>
 
           {/* key highlights */}

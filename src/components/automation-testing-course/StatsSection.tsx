@@ -56,7 +56,7 @@ export default function StatsSection() {
             id="automation-stats-heading"
             className="text-3xl font-bold tracking-tight text-slate-900 md:text-4xl"
           >
-            Outcomes that Matter for <span className="text-brand">SDET</span> Careers
+            Outcomes that Matter for <span className="text-ST">SDET</span> Careers
           </h2>
           <p className="mt-3 text-sm leading-relaxed text-slate-600 sm:text-base">
             See the demand, pay range, market growth, and training effort for

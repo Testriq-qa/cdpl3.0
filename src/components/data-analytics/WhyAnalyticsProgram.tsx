@@ -14,6 +14,7 @@ import {
     Layers,
     ClipboardList,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function WhyAnalyticsProgram() {
     // SEO: Course schema
@@ -156,7 +157,7 @@ export default function WhyAnalyticsProgram() {
                         id="why-analytics-heading"
                         className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
                     >
-                        Advanced Data Analytics - <span className="text-indigo-600">A Complete Overview</span>
+                        Advanced Data Analytics - <span className="text-DS">A Complete Overview</span>
                     </h1>
                     <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
                         Learn to <strong>analyze complex datasets</strong>, build{" "}
@@ -252,15 +253,15 @@ export default function WhyAnalyticsProgram() {
                         </dl>
 
                         <div className="mt-6 border-t border-gray-200 pt-6">
-                            <a
-                                href="#apply"
+                            <Link
+                                href="contact-us"
                                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
                            bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 aria-label="Apply now for Advanced Data Analytics Hero Program"
                             >
                                 Apply Now
                                 <BadgeCheck className="w-4 h-4" />
-                            </a>
+                            </Link>
                             <p className="mt-3 text-xs text-gray-600">
                                 Get the full syllabus and a skill-gap checklist to personalize your learning path.
                             </p>

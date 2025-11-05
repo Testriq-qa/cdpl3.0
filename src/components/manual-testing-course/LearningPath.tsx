@@ -201,13 +201,13 @@ export default function LearningPath() {
                     <Clock className="w-4 h-4" aria-hidden="true" />
                     <span>{p.title.split("•")[1]?.trim() ?? "Weeks"}</span>
                   </div>
-                  <a
-                    href="#apply"
+                  <Link
+                    href="contact-us"
                     className={`inline-flex items-center gap-2 text-sm font-medium text-white hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg px-3 py-2 ${p.accent === "cyan" ? "bg-cyan-600 focus:ring-cyan-500" : p.accent === "indigo" ? "bg-indigo-600 focus:ring-indigo-500" : p.accent === "emerald" ? "bg-emerald-600 focus:ring-emerald-500" : "bg-rose-600 focus:ring-rose-500"}`}
                     aria-label={`Explore ${p.title}`}
                   >
                     Explore <Target className="w-4 h-4" aria-hidden="true" />
-                  </a>
+                  </Link>
                 </div>
               </li>
             );
@@ -273,19 +273,18 @@ export default function LearningPath() {
               <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-0.5" /> Test Cases, Test Data, Bug Reports</li>
               <li className="flex gap-2"><CheckCircle2 className="w-4 h-4 mt-0.5" /> Capstone project with repository</li>
             </ul>
-            <a
-              href="#download-syllabus"
+            <button
               className="mt-4 inline-flex items-center gap-2 text-sm font-medium bg-blue-800 text-white hover:bg-emerald-900 transition focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2 rounded-lg px-3 py-2 border border-emerald-200"
             >
               Download Syllabus
-            </a>
+            </button>
           </div>
         </div>
 
         {/* Soft CTA */}
         <div className="mt-10 text-center">
           <Link
-            href="#apply"
+            href="contact-us"
             className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-red-800 px-6 py-3 text-base font-semibold text-white hover:bg-red-700 transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-cyan-500 focus:ring-offset-2"
           >
             Start Your QA Journey <ArrowRightTiny />

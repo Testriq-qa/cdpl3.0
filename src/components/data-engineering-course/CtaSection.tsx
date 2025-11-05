@@ -1,6 +1,8 @@
 // components/sections/CtaSection.tsx
 "use client";
 
+import Link from "next/link";
+
 export default function CtaSection() {
   const jsonLd = {
     "@context": "https://schema.org",
@@ -42,7 +44,7 @@ export default function CtaSection() {
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
             Ready to Become a{" "}
-            <span className="rounded-lg underline decoration-teal-600 underline-offset-4">
+            <span className="text-DS">
               Big Data Engineer
             </span>
             ?
@@ -66,29 +68,28 @@ export default function CtaSection() {
 
         {/* CTAs — varied button colors */}
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
+          <Link
             href="tel:+917888383788"
             className="inline-flex items-center justify-center rounded-xl bg-emerald-600 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(16,185,129,0.5)] transition hover:bg-emerald-700 focus:outline-none focus:ring-4 focus:ring-emerald-300"
             aria-label="Call admissions at +91 7888383788"
           >
             Call: +91 788-83-83-788
-          </a>
+          </Link>
 
-          <a
+          <Link
             href="mailto:contact@cinutedigital.com"
             className="inline-flex items-center justify-center rounded-xl bg-indigo-600 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(79,70,229,0.45)] transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-300"
             aria-label="Email admissions at contact@cinutedigital.com"
           >
             Email Us
-          </a>
+          </Link>
 
-          <a
-            href="#syllabus"
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Download the Big Data Engineering syllabus"
           >
             Download Syllabus
-          </a>
+          </button>
         </div>
 
         <p className="mt-3 text-xs sm:text-sm text-slate-600">

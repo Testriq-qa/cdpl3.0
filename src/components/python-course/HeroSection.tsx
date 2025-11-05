@@ -17,6 +17,7 @@ import {
 } from "lucide-react";
 import IconCard from "@/components/ui/IconCard";
 import LeadForm from "../CourseLeadForm";
+import Link from "next/link";
 
 const features = [
     {
@@ -67,7 +68,7 @@ export default function HeroSection() {
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
-        { label: "Programming" },
+        { label: "Programming", href: "#" },
         { label: "Python Master Program", href: "/python-program" },
     ];
 
@@ -86,12 +87,12 @@ export default function HeroSection() {
                         {breadcrumbs.map((c, i) => (
                             <li key={i} className="flex items-center gap-2">
                                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                                <a
+                                <Link
                                     href={c.href}
                                     className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? 'font-semibold text-slate-900' : ''}`}
                                 >
                                     {c.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ol>
@@ -119,9 +120,9 @@ export default function HeroSection() {
                         {/* H1 + subcopy */}
                         <h1
                             id="python-hero"
-                            className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
+                            className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
                         >
-                            Master Program in <span className="text-teal-700">Python Programming</span>
+                            Master Program in <span className="text-FS">Python Programming</span>
                         </h1>
 
                         {/* Mobile form just under H1 (like API-Testing) */}
@@ -143,28 +144,27 @@ export default function HeroSection() {
 
                         {/* CTAs (same structure) */}
                         <div className="mt-7 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-                            <a
-                                href="#contact"
+                            <button
                                 className="group inline-flex items-center justify-center rounded-xl border border-teal-600 bg-teal-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-teal-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-teal-200"
                                 aria-label="Enroll now in Python program"
                             >
                                 Enroll Now
                                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
-                            </a>
-                            <a
+                            </button>
+                            <Link
                                 href="#curriculum"
                                 className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
                                 aria-label="View full Python curriculum"
                             >
                                 View Curriculum
-                            </a>
-                            <a
+                            </Link>
+                            <Link
                                 href="https://www.cinutedigital.com"
                                 className="inline-flex items-center justify-center rounded-xl border border-rose-300 bg-white px-6 py-3 text-base font-semibold text-rose-700 shadow-sm transition hover:bg-rose-50 focus:outline-none focus:ring-4 focus:ring-rose-200"
                                 aria-label="Visit Cinute Digital website"
                             >
                                 Visit Website
-                            </a>
+                            </Link>
                         </div>
 
                         {/* Highlights (two columns on sm+, distinct dot colors) */}
@@ -205,24 +205,24 @@ export default function HeroSection() {
                             <LeadForm variant="elevated" />
                             {/* Quick contact chips, distinct colors (no repeats) */}
                             <div className="mt-4 grid grid-cols-1 gap-2 text-sm">
-                                <a
+                                <Link
                                     href="tel:+917888383788"
                                     className="inline-flex items-center justify-center rounded-lg border border-emerald-200 bg-emerald-50 px-3 py-2 font-semibold text-emerald-800 hover:bg-emerald-100"
                                 >
                                     +91 788-83-83-788
-                                </a>
-                                <a
+                                </Link>
+                                <Link
                                     href="tel:+918488988984"
                                     className="inline-flex items-center justify-center rounded-lg border border-sky-200 bg-sky-50 px-3 py-2 font-semibold text-sky-800 hover:bg-sky-100"
                                 >
                                     +91 84-889-889-84
-                                </a>
-                                <a
+                                </Link>
+                                <Link
                                     href="tel:+918062785870"
                                     className="inline-flex items-center justify-center rounded-lg border border-violet-200 bg-violet-50 px-3 py-2 font-semibold text-violet-800 hover:bg-violet-100"
                                 >
                                     +91 806-27-85-870
-                                </a>
+                                </Link>
                             </div>
                         </div>
                     </aside>

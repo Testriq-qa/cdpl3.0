@@ -106,7 +106,7 @@ export default function WhoShouldEnroll() {
             id="enroll-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Who is this <span className="text-teal-600">Python course</span> for?
+            Who is this <span className="text-FS">Python course</span> for?
           </h2>
 
           {/* micro badges */}

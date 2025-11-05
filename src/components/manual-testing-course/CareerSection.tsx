@@ -15,6 +15,7 @@ import {
   PhoneIcon,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 /* ---------- Local, strongly-typed UI primitives ---------- */
 type JobRoleProps = { role: string; salary: string; keywords?: string[] };
@@ -331,18 +332,17 @@ export default function CareerSection() {
 
           {/* CTA */}
           <div className="mt-10 flex flex-col sm:flex-row items-center justify-center gap-3">
-            <a
-              href="#apply"
+            <Link
+              href="contact-us"
               className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-5 py-3 text-white font-semibold hover:bg-indigo-700"
             >
               Get Free Career Session <ArrowRight className="ml-2 h-4 w-4" />
-            </a>
-            <a
-              href="#syllabus"
+            </Link>
+            <button
               className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-gray-900 font-semibold hover:bg-gray-50"
             >
               Download Syllabus
-            </a>
+            </button>
           </div>
         </div>
 

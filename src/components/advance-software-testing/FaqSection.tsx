@@ -2,6 +2,7 @@
 import { useState, type KeyboardEvent } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 
 type Faq = {
   q: string;
@@ -68,8 +69,8 @@ export default function FaqSection() {
 
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl md:text-4xl text-ST text-center font-bold mb-4">
-        Frequently Asked Questions
-      </h2>
+          Frequently Asked Questions
+        </h2>
 
         {/* Accessibility hint for screen readers */}
         <p className="sr-only">
@@ -139,18 +140,17 @@ export default function FaqSection() {
 
         {/* Supportive CTA row (optional anchors) */}
         <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="#contact"
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-indigo-700 focus:outline-none focus:ring-4 focus:ring-indigo-200"
           >
             Talk to a Mentor
-          </a>
-          <a
-            href="#curriculum"
+          </Link>
+          <button
             className="inline-flex items-center justify-center rounded-xl border-2 border-emerald-600 bg-white px-4 py-2 text-sm font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-600 hover:text-white focus:outline-none focus:ring-4 focus:ring-emerald-200"
           >
             Download Syllabus
-          </a>
+          </button>
         </div>
       </div>
 

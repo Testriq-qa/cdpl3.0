@@ -1,6 +1,8 @@
 // components/sections/FaqSection.tsx
 // Server component — clean, modern, responsive FAQ with subtle futuristic accents + SEO (Big Data edition).
 
+import Link from "next/link";
+
 type Faq = {
   q: string;
   a: string;
@@ -102,12 +104,10 @@ export default function FaqSection() {
         <header className="mx-auto max-w-3xl text-center">
           <h2
             id="faq-heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-DS"
           >
-            Frequently Asked{" "}
-            <span className="underline decoration-[.18rem] underline-offset-4 decoration-teal-400">
-              Questions
-            </span>
+            Frequently Asked Questions
+            
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             Everything about our <strong>Big Data Engineering</strong> program—curriculum,
@@ -182,12 +182,12 @@ export default function FaqSection() {
         <div className="mx-auto mt-8 max-w-4xl rounded-2xl border border-slate-200 bg-white p-6 text-center shadow-sm">
           <p className="text-sm text-slate-700">
             Still have questions?{" "}
-            <a
-              href="#contact"
+            <Link
+              href="contact-us"
               className="font-semibold text-sky-700 underline-offset-2 hover:underline focus:outline-none focus:ring-2 focus:ring-sky-300 rounded"
             >
               Talk to an advisor
-            </a>{" "}
+            </Link>{" "}
             for a personalized walkthrough of the curriculum and outcomes.
           </p>
         </div>

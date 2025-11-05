@@ -17,6 +17,7 @@ import {
   Send,
   ChevronRight,
 } from "lucide-react";
+import Link from "next/link";
 
 type Tool = {
   name: string;
@@ -139,7 +140,7 @@ export default function ToolsSection() {
             id="tools-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
           >
-            Tools You’ll <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">Master</span>
+            <span className="text-FS">Tools</span> You’ll Master
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-700">
             {subtitle}
@@ -213,19 +214,18 @@ export default function ToolsSection() {
 
         {/* Actions */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <a
-            href="#toolkit"
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Download Setup Guide
             <ChevronRight className="ml-1 h-4 w-4" />
-          </a>
-          <a
-            href="#labs"
+          </button>
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Explore Tool Labs
-          </a>
+          </Link>
         </div>
       </div>
 

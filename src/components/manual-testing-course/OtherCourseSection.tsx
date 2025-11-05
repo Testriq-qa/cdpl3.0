@@ -222,8 +222,7 @@ const CourseCard = ({ course }: { course: Course }) => {
 
       {/* Removed Price Section */}
       <div className="mt-auto">
-        <Link
-          href={`/courses/${course.slug}`}
+        <button
           className={cx(
             "inline-flex w-full items-center justify-center gap-2 rounded-xl px-4 py-2 text-md font-semibold text-white",
             a.buttonBg,
@@ -233,7 +232,7 @@ const CourseCard = ({ course }: { course: Course }) => {
         >
           View Syllabus
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
-        </Link>
+        </button>
       </div>
     </article>
   );
@@ -340,7 +339,7 @@ export default function OtherCoursesSection() {
             Talk to a mentor for a personalized **career roadmap** based on your experience and goals.
           </p>
           <Link
-            href="/counselling"
+            href="contact-us"
             className="mt-4 inline-flex items-center gap-2 rounded-xl bg-neutral-900 px-5 py-3 text-sm font-semibold text-white hover:bg-neutral-800 focus:outline-none focus-visible:ring-2 focus-visible:ring-neutral-700 focus-visible:ring-offset-2"
           >
             Get Free Counselling
