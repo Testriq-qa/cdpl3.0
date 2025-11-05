@@ -70,7 +70,7 @@ export default function TestimonialsSection() {
         <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(600px_120px_at_50%_0%,rgba(59,130,246,0.08),transparent_60%)]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-4 xl:px-10">
         <header className="text-center">
           <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
             What Our <span className="text-green-700">Students Say</span>

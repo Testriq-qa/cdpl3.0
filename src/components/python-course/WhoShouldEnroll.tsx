@@ -99,7 +99,7 @@ export default function WhoShouldEnroll() {
         <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(20,184,166,0.12),transparent_60%)]" />
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container max-w-7xl mx-auto px-4 xl:px-10">
         {/* Heading */}
         <header className="text-center max-w-4xl mx-auto">
           <h2

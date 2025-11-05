@@ -5,7 +5,6 @@ import { IoMdMailUnread } from "react-icons/io";
 import { RiPresentationLine } from "react-icons/ri";
 import { IoBookSharp } from "react-icons/io5";
 
-
 type Card = {
   title: string;
   desc: string;

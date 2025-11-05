@@ -13,6 +13,8 @@ import ToolsSection from "@/components/data-analytics/ToolsSection";
 import FaqSection from "@/components/data-analytics/FaqSection";
 import CtaSection from "@/components/data-analytics/CtaSection";
 import CareerRoadmapSection from "@/components/data-analytics/CareerRoadmapSection";
+import StickyNav3 from "@/components/StickyNav2/StickyNav3";
+
 
 const AdvancedDataAnalyticsPage: NextPage = () => {
   return (
@@ -24,17 +26,23 @@ const AdvancedDataAnalyticsPage: NextPage = () => {
       </Head>
 
       <HeroSection />
-      <StatsSection />
-      <WhyAnalyticsProgram />
-      <CurriculumSection />
-      <ProjectsSection />
-      <TestimonialsSection />
-      <CareerSection />
-      <WhoShouldEnroll />
-      <ToolsSection />
-      <CareerRoadmapSection />
-      <FaqSection />
-      <CtaSection />
+      
+            {/* Sticky nav must appear right after hero */}
+            <div className="hidden md:block sticky top-0 z-20">
+              <StickyNav3 />
+            </div>
+            
+            <section id='program-stats'><StatsSection /></section>
+            <section id='why-master-program'><WhyAnalyticsProgram /></section>
+            <section id='curriculum'><CurriculumSection /></section>
+            <section id='projects'><ProjectsSection /></section>
+            <section id='testimonials'><TestimonialsSection /></section>
+            <section id='career'><CareerSection /></section>
+            <section id='who-should-enroll'><WhoShouldEnroll /></section>
+            <section id='tools'><ToolsSection /></section>
+            <section id='roadmap'><CareerRoadmapSection /></section>
+            <section id='faqs'><FaqSection /></section>
+            <section id='contact'><CtaSection /></section>
     </>
   );
 };

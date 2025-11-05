@@ -77,7 +77,7 @@ export default function CurriculumSection() {
         <div className="absolute inset-x-0 bottom-0 h-px bg-slate-200" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-4 xl:px-6">
         <header className="text-center">
           <h2
             id="curriculum-heading"

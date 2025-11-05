@@ -96,7 +96,7 @@ export default function ToolsSection() {
         <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(760px_150px_at_50%_0%,rgba(251,146,60,0.12),transparent_60%)]" />
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto max-w-7xl px-4 xl:p-10">
         <header className="text-center max-w-4xl mx-auto">
           <h2 id="tools-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
             <span className='text-green-700'>Tools</span> & <span className='text-green-700'>Technologies</span> You Will Learn
