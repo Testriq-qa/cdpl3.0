@@ -77,7 +77,7 @@ export default function TestimonialsSection() {
                 ))}
               </div>
 
-              <p className="text-gray-700 italic mb-4">"{t.text}"</p>
+              <p className="text-gray-700 italic mb-4">&quot;{t.text}&quot;</p>
 
               <div className="flex justify-between items-center">
                 <span className="text-2xl font-bold text-green-600">{t.salary}</span>

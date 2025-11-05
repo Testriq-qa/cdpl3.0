@@ -1,7 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
 import { Check, Zap } from 'lucide-react';
-import Image from 'next/image';
 
 const tools = [
   { name: "Google Ads Editor", level: "Pro", color: "from-blue-500 to-blue-600" },

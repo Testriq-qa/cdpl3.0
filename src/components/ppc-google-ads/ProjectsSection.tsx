@@ -1,6 +1,6 @@
 'use client';
 import { motion } from 'framer-motion';
-import { ExternalLink, Trophy, Target, TrendingUp } from 'lucide-react';
+import {Trophy, Target, TrendingUp } from 'lucide-react';
 import Image from 'next/image';
 
 const projects = [
