@@ -287,7 +287,7 @@ const HomeHeroSection: React.FC = () => {
           <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
             
             {/* Left Content - 8 columns (66.67% width) */}
-            <div className="order-1 lg:order-1 lg:col-span-8">
+            <div className="order-1 lg:order-1 lg:col-span-7">
               
               {/* Top Badge */}
               <motion.div
@@ -308,7 +308,7 @@ const HomeHeroSection: React.FC = () => {
                 className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
               >
                 Transform Your Career with{' '}
-                <span className="block mt-2">Industry-Ready Skills</span>
+                <span className="block mt-2 text-brand">Industry-Ready Skills</span>
               </motion.h1>
 
               {/* Enhanced Subheadline */}
@@ -423,7 +423,7 @@ const HomeHeroSection: React.FC = () => {
                   className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
                 >
                   <Eye className="h-5 w-5" />
-                  View Placement Success Stories
+                  View Placement Stories
                 </Link>
 
                 {/* Tertiary CTA - Watch CDPL */}
@@ -442,7 +442,7 @@ const HomeHeroSection: React.FC = () => {
               initial={{ opacity: 0, scale: 0.985 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1.0] as const }}
-              className="order-2 lg:order-2 lg:col-span-4"
+              className="order-2 lg:order-2 lg:col-span-5"
             >
               <div className="sticky top-4 max-w-sm ml-auto">
                 <div className="bg-white/92 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-8">
@@ -482,11 +482,11 @@ const HomeHeroSection: React.FC = () => {
                   )}
 
                   {/* Form */}
-                  <form onSubmit={handleSubmit} className="space-y-6">
+                  <form onSubmit={handleSubmit} className="space-y-4">
                     
                     {/* Full Name Input - TestRiq Style */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
                         Full Name *
                       </label>
                       <div className="relative">
@@ -512,7 +512,7 @@ const HomeHeroSection: React.FC = () => {
 
                     {/* Email Input - TestRiq Style */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
                         Email Address *
                       </label>
                       <div className="relative">
@@ -538,7 +538,7 @@ const HomeHeroSection: React.FC = () => {
 
                     {/* Phone Input - TestRiq Style with react-phone-number-input */}
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-gray-700 mb-1">
                         Mobile Number *
                       </label>
                       <div className="relative">
