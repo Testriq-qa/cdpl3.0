@@ -14,6 +14,7 @@ import {
     Rocket,
     Keyboard,
 } from "lucide-react";
+import Link from "next/link";
 
 export default function WhyPromptGenProgram() {
     // SEO: Course schema (rich results)
@@ -149,7 +150,7 @@ export default function WhyPromptGenProgram() {
                         className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
                     >
                         Prompt Engineering with Gen&nbsp;AI —{" "}
-                        <span className="text-indigo-600">A Complete Overview</span>
+                        <span className="text-DS">A Complete Overview</span>
                     </h1>
                     <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
                         Learn to <strong>design prompts that perform</strong> across models and use-cases.
@@ -241,15 +242,15 @@ export default function WhyPromptGenProgram() {
                         </dl>
 
                         <div className="mt-6 border-t border-gray-200 pt-6">
-                            <a
-                                href="#apply"
+                            <Link
+                                href="contact-us"
                                 className="inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-3 text-sm font-semibold shadow-sm
                            bg-indigo-600 text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                                 aria-label="Apply now for Prompt Engineering with Gen AI"
                             >
                                 Apply Now
                                 <Rocket className="w-4 h-4" />
-                            </a>
+                            </Link>
                             <p className="mt-3 text-xs text-gray-600">
                                 You’ll receive the full syllabus and a readiness checklist to personalize your path.
                             </p>

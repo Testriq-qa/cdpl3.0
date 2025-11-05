@@ -17,7 +17,7 @@ import {
   Download,
 } from "lucide-react";
 import { DownloadFormButton } from "@/components/DownloadForm";
-
+import Link from "next/link";
 
 interface CourseOverviewSectionProps {
   data: CourseData;
@@ -35,6 +35,7 @@ interface Module {
   trending?: boolean;
   offerEndsAt?: string | Date;
   topics?: string[];
+  link: string;
 }
 
 const iconMap: Record<string, React.ReactNode> = {
@@ -94,11 +95,11 @@ const ModuleCard: React.FC<{
     features: string[];
     trending?: boolean;
     offerEndsAt?: Date | null;
+    link: string;
   };
   variant: Variant;
   itemVariants: Variants;
 }> = ({ nowMs, category, variant, itemVariants }) => {
-
   const fallbackDeadlineRef = React.useRef<Date | null>(null);
   if (!category.offerEndsAt && !fallbackDeadlineRef.current) {
     fallbackDeadlineRef.current = new Date(Date.now() + 48 * 3600 * 1000);
@@ -240,12 +241,14 @@ const ModuleCard: React.FC<{
           </div>
 
           <div className="pt-4 space-y-3 mt-auto">
-            <button
+            <Link
+              href={category.link}
+              aria-label={category.title}
               className={`flex items-center justify-center gap-2 w-full ${variant.button} text-white font-semibold py-3 rounded-xl hover:shadow-lg transform hover:-translate-y-1 transition-all duration-300`}
             >
               <span>View Course Details</span>
               <ArrowRight className="w-4 h-4" />
-            </button>
+            </Link>
 
             <DownloadFormButton
               courseTitle={category.title}
@@ -264,7 +267,6 @@ const ModuleCard: React.FC<{
             />
           </div>
         </div>
-
 
         <div className="absolute inset-0 bg-gradient-to-br from-black/0 to-black/0 group-hover:from-black/0 group-hover:to-black/0 transition-all duration-500 pointer-events-none" />
       </motion.article>
@@ -363,7 +365,9 @@ const CourseOverviewSection: React.FC<CourseOverviewSectionProps> = ({ data }) =
                   : (mod.topics ?? []).slice(0, 4),
               trending: !!mod.trending,
               offerEndsAt: mod.offerEndsAt ? new Date(mod.offerEndsAt) : null,
-            };
+              // ✅ FIX: ensure `link` is present to satisfy ModuleCard props
+              link: mod.link ?? "#",
+            } as const;
 
             return (
               <ModuleCard

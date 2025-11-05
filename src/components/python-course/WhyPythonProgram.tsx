@@ -50,7 +50,7 @@ export default function WhyPythonProgram() {
         {/* Heading */}
         <header className="text-center max-w-4xl mx-auto">
           <h2 id="why-python-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Your Gateway to the <span className="text-teal-600">Top&nbsp;1% Python Developer</span>
+            Your Gateway to the <span className="text-FS">Top&nbsp;1% Python Developer</span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600">
             An <strong>80-hour</strong>, mentor-led, <strong>project-driven</strong> Python program that blends{" "}

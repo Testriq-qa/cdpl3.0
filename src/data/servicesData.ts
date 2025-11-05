@@ -715,72 +715,152 @@ export const trainingServices: TrainingService[] = [
       "Post-placement support"
     ],
   },
+  /** --------------------------
+   *  UPDATED / NEW ENTRIES
+   * -------------------------- */
   {
     id: "11",
-    slug: "corporate-training-bmc",
+    slug: "corporate-training",
     icon: Building2,
-    title: "Corporate Training (BMC)",
-    tagline: "Customized corporate training solutions for Brihanmumbai Municipal Corporation and government organizations",
-    shortDescription: "Specialized training programs designed for government employees and municipal corporation staff to enhance digital skills and efficiency.",
-    fullDescription: "Our Corporate Training for BMC and government organizations focuses on digital transformation, e-governance, and modern technology adoption. We design programs specifically for government employees, considering their unique work environment, processes, and requirements. Training covers digital literacy, government software systems, data management, cybersecurity, and citizen service improvement. Programs are delivered in accessible formats with practical, job-relevant content.",
-    color: "from-amber-500 to-orange-600",
+    title: "Corporate Training",
+    tagline: "Customized corporate training solutions to upskill teams and drive business outcomes",
+    shortDescription: "Role-based, project-driven upskilling programs for engineering, data, QA, product, and leadership teams—aligned to your tech stack and KPIs.",
+    fullDescription: "Our Corporate Training programs help organizations accelerate capability building across product engineering, QA automation, data & analytics, DevOps, cloud, and leadership. We design role-based learning paths mapped to business objectives and your technology stack. Cohorts learn through expert-led sessions, hands-on labs, code reviews, and capstone projects that translate directly to on-the-job performance. Programs are delivered on-site or virtually, with flexible schedules for distributed teams.",
+    color: "from-blue-600 to-cyan-600",
     features: [
-      "Government-focused curriculum",
-      "Digital transformation training",
-      "E-governance systems",
-      "Data management and security",
-      "Citizen service improvement",
-      "Flexible scheduling for government staff"
+      "Needs analysis & role-based learning paths",
+      "Live expert sessions + hands-on labs",
+      "Real-world capstone projects",
+      "Blended delivery (onsite/virtual)",
+      "Manager dashboards & progress tracking",
+      "Certification preparation (where applicable)"
     ],
     benefits: [
-      "Improved digital efficiency",
-      "Better citizen services",
-      "Modern technology adoption",
-      "Enhanced data security",
-      "Process optimization",
-      "Employee skill development"
+      "Faster technology adoption",
+      "Improved team productivity & quality",
+      "Standardized best practices",
+      "Higher retention through growth paths",
+      "Measurable skill uplift",
+      "Clear ROI via project outcomes"
     ],
     whoShouldAttend: [
-      "BMC employees",
-      "Government officials",
+      "Software engineers, SDETs, QA",
+      "Data engineers, analysts, scientists",
+      "DevOps, cloud & platform teams",
+      "Product managers & tech leads",
+      "People managers & new leaders",
+      "New hires and lateral joiners"
+    ],
+    deliveryFormats: [
+      {
+        format: "Workshops",
+        duration: "1-2 days",
+        description: "Focused, hands-on skill acceleration"
+      },
+      {
+        format: "Bootcamps",
+        duration: "3-5 days",
+        description: "Intensive training with labs & reviews"
+      },
+      {
+        format: "Learning Paths",
+        duration: "6-12 weeks",
+        description: "Role-based cohorts with capstone"
+      },
+      {
+        format: "Onsite / Virtual",
+        duration: "Flexible",
+        description: "Blended, timezone-friendly schedules"
+      }
+    ],
+    outcomes: [
+      "Measurable skill uplift by role",
+      "Production-ready assets & playbooks",
+      "Adoption of engineering best practices",
+      "Certified team members (optional)",
+      "Internal mentor bench creation",
+      "Reusable learning content library"
+    ],
+    methodology: [
+      "Discovery & stakeholder interviews",
+      "Curriculum design mapped to KPIs",
+      "Cohort-based delivery with labs",
+      "Code reviews & feedback loops",
+      "Capstone aligned to business use-cases",
+      "Reporting & impact measurement"
+    ],
+  },
+  {
+    id: "12",
+    slug: "government-public-sector-training",
+    icon: Building2,
+    title: "Government & Public Sector Training (BMC)",
+    tagline: "Digital transformation, e-governance, data security, and citizen-first service delivery for public institutions",
+    shortDescription: "Specialized upskilling for municipalities (including BMC), departments, and public sector units—covering e-governance systems, digital literacy, data management, and cybersecurity.",
+    fullDescription: "Our Government & Public Sector Training programs are tailored for municipal corporations, state departments, and public agencies. This includes dedicated offerings for the Brihanmumbai Municipal Corporation (BMC). We design practical, job-relevant curricula that improve adoption of e-governance systems, strengthen digital literacy, enhance data management and cybersecurity, and streamline citizen service delivery. Content respects government processes, multilingual needs, accessibility, and audit/compliance requirements, ensuring sustainable transformation.",
+    color: "from-amber-500 to-orange-600",
+    features: [
+      "Government-focused curriculum & use-cases",
+      "Process & policy mapping to training",
+      "e-Governance systems proficiency",
+      "Data management, privacy & cybersecurity",
+      "Citizen service workflows & SLAs",
+      "Multilingual & accessibility-aware delivery"
+    ],
+    benefits: [
+      "Improved operational efficiency",
+      "Better citizen service outcomes",
+      "Higher digital adoption rates",
+      "Stronger compliance & audit readiness",
+      "Secure data handling practices",
+      "Skilled, confident public staff"
+    ],
+    whoShouldAttend: [
+      "BMC employees and departments",
       "Municipal corporation staff",
-      "Public sector employees",
-      "Administrative personnel",
-      "IT staff in government"
+      "Department & district officials",
+      "Clerical & administrative personnel",
+      "Government IT cells & operators",
+      "Program officers & field teams",
+      "Public service delivery units"
     ],
     deliveryFormats: [
       {
         format: "Weekend Batches",
         duration: "8-12 weeks",
-        description: "Convenient for working professionals"
+        description: "Ideal for working government staff"
       },
       {
         format: "Intensive Workshops",
         duration: "3-5 days",
-        description: "Focused skill building"
+        description: "Focused upskilling on priority topics"
       },
       {
         format: "On-Site Training",
         duration: "Variable",
-        description: "Training at government offices"
+        description: "Delivered at government offices"
+      },
+      {
+        format: "Train-the-Department",
+        duration: "4-8 weeks",
+        description: "Create internal champions for scale"
       }
     ],
     outcomes: [
-      "Digital literacy",
-      "E-governance proficiency",
-      "Improved work efficiency",
-      "Better citizen service delivery",
-      "Data security awareness",
-      "Technology adoption"
+      "Digital literacy & system proficiency",
+      "Enhanced citizen service SLAs",
+      "Improved data hygiene & security",
+      "Compliance with policies & audits",
+      "Departmental champions for change",
+      "Sustained modernization momentum"
     ],
     methodology: [
       "Needs assessment with departments",
-      "Customized curriculum design",
-      "Practical, job-relevant training",
-      "Hands-on practice sessions",
-      "Department-specific examples",
-      "Post-training support",
-      "Impact measurement"
+      "Customized curriculum & scenarios",
+      "Hands-on practice in sandbox systems",
+      "On-the-job labs & helpdesk support",
+      "Periodic assessment & certifications",
+      "Impact measurement & reporting"
     ],
   },
 ];

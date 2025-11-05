@@ -14,6 +14,7 @@ import {
   ShieldCheck,
   ChevronDown,
 } from "lucide-react";
+import Link from "next/link";
 
 type QA = {
   q: string;
@@ -157,12 +158,9 @@ export default function FaqSection() {
         <header className="text-center">
           <h2
             id="faq-heading"
-            className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
+            className="text-3xl md:text-4xl font-bold tracking-tight text-FS"
           >
-            {title.split(" ").slice(0, 2).join(" ")}{" "}
-            <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">
-              {title.split(" ").slice(2).join(" ")}
-            </span>
+            Frequently Asked Questions
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-700">
             {subtitle}
@@ -231,18 +229,17 @@ export default function FaqSection() {
 
         {/* CTA */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <a
-            href="#contact"
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
           >
             Still have questions? Talk to a Mentor
-          </a>
-          <a
-            href="#syllabus"
+          </Link>
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
           >
             Download Full Syllabus (PDF)
-          </a>
+          </button>
         </div>
       </div>
 

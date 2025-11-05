@@ -1,6 +1,7 @@
 'use client';
 import { Phone, Mail, MapPin, Clock, Award, CheckCircle } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 export default function CtaSection() {
   const jsonLd = {
@@ -75,22 +76,22 @@ export default function CtaSection() {
           transition={{ delay: 0.05, duration: 0.45 }}
           className="mt-6 flex flex-col items-stretch justify-center gap-3 sm:flex-row"
         >
-          <a
+          <Link
             href="tel:+917888383788"
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-cyan-600 bg-cyan-600 px-6 py-3 text-base font-semibold text-white shadow-sm transition hover:scale-[1.01] hover:bg-cyan-700 focus:outline-none focus:ring-4 focus:ring-cyan-200"
             aria-label="Call admissions for enrollment"
           >
             <Phone className="h-5 w-5" />
             Call Admissions: +91 788-83-83-788
-          </a>
-          <a
+          </Link>
+          <Link
             href="mailto:contact@cinutedigital.com"
             className="inline-flex items-center justify-center gap-2 rounded-xl border border-slate-300 bg-white px-6 py-3 text-base font-semibold text-slate-800 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
             aria-label="Email us your questions"
           >
             <Mail className="h-5 w-5" />
             Email Your Questions
-          </a>
+          </Link>
         </motion.div>
 
         {/* Trust / highlight strip (distinct colors, no heavy gradients) */}
@@ -141,13 +142,13 @@ export default function CtaSection() {
 
         {/* Soft footer CTA */}
         <div className="mt-8">
-          <a
+          <Link
             href="#curriculum"
             className="inline-flex items-center justify-center rounded-xl border border-indigo-300 bg-white px-5 py-2.5 text-sm font-semibold text-indigo-800 shadow-sm transition hover:bg-indigo-50 focus:outline-none focus:ring-4 focus:ring-indigo-200"
             aria-label="View curriculum and modules"
           >
             View Curriculum & Modules
-          </a>
+          </Link>
         </div>
       </div>
 

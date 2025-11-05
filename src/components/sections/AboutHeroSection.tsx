@@ -51,12 +51,12 @@ export default function AboutHeroSection() {
                     {breadcrumbs.map((c, i) => (
                         <li key={i} className="flex items-center gap-2">
                             {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                            <a
+                            <Link
                                 href={c.href}
                                 className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
                             >
                                 {c.label}
-                            </a>
+                            </Link>
                         </li>
                     ))}
                 </ol>
@@ -118,14 +118,13 @@ export default function AboutHeroSection() {
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.24 }}
                         className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
                     >
-                        <Link
-                            href="/courses"
+                        <button
                             className="inline-flex w-full items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 sm:w-auto"
                         >
                             Explore Courses <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                        </Link>
+                        </button>
                         <Link
-                            href="/contact-us"
+                            href="contact-us"
                             className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
                         >
                             Talk to an Advisor
@@ -153,7 +152,7 @@ export default function AboutHeroSection() {
                         <div className="inline-flex items-center gap-1.5 rounded-xl border border-slate-200 bg-white/85 px-3 py-2 text-slate-800 shadow-sm dark:border-slate-200/60 dark:bg-white/85">
                             <ShieldCheck className="h-4 w-4 text-purple-700" aria-hidden="true" />
                             <span className="font-semibold text-purple-700">Placement Assistance</span>
-                        </div>                        
+                        </div>
                     </motion.div>
                 </div>
 
@@ -175,20 +174,6 @@ export default function AboutHeroSection() {
                         className="object-contain"
                         priority
                     />
-                    {/* Softer overlay in dark so it doesn't glow to edges */}
-                    <div className="pointer-events-none absolute inset-0 bg-gradient-to-tr from-white/50 via-transparent to-white/60 dark:from-white/15 dark:to-white/20" />
-                    {/* Floating stat pill */}
-                    <div className="absolute bottom-0 left-0 md:bottom-4 md:left-4 flex flex-col md:flex-row items-center md:gap-3 rounded-2xl border border-slate-200 bg-white/90 p-0 px-1 md:px-4 md:py-2 text-slate-900 shadow-md backdrop-blur dark:border-slate-200/70 dark:bg-white/90">
-                        <div className="flex -space-x-2">
-                            {[1, 2, 3].map((i) => (
-                                <span key={i} className="h-6 w-6 rounded-full border border-white/80 bg-slate-200" />
-                            ))}
-                        </div>
-                        <div className="text-[11px] leading-tight sm:text-xs">
-                            <p className="font-semibold">Hiring Partners Onboard</p>
-                            <p className="text-slate-600">Top tech companies & startups</p>
-                        </div>
-                    </div>
                 </motion.div>
             </div>
 

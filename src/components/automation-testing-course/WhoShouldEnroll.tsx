@@ -61,7 +61,7 @@ export default function WhoShouldEnroll() {
             id="who-should-enroll-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Who Should <span className="text-brand">Join</span>?
+            Who Should <span className="text-ST">Join</span>?
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Perfect for <strong>manual testers</strong>, <strong>freshers</strong>,{' '}

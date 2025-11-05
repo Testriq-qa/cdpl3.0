@@ -109,7 +109,7 @@ export default function WhoShouldEnroll() {
             id="wse-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Who Is This <span className="underline decoration-[.18rem] underline-offset-4 decoration-emerald-400">Course For</span>
+            Who Is This <span className="text-DS">Course For</span>
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             Master <strong>Prompt Engineering</strong> to produce reliable, on-spec outputs for{" "}

@@ -1,6 +1,7 @@
 'use client';
 import { motion } from 'framer-motion';
 import { Briefcase, Building2, ArrowRight, BadgeCheck } from 'lucide-react';
+import Link from 'next/link';
 
 const roles = [
     'Database Administrator',
@@ -167,14 +168,14 @@ export default function CareerSection() {
                     transition={{ duration: 0.45, ease: 'easeOut' }}
                     className="mt-10 sm:mt-12 text-center"
                 >
-                    <a
-                        href="#contact"
+                    <Link
+                        href="contact-us"
                         className="inline-flex items-center gap-2 rounded-xl border border-indigo-600 bg-indigo-600 px-7 py-3 text-sm sm:text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
                         aria-label="Get placed with MySQL skills"
                     >
                         Get Placement Support
                         <ArrowRight className="h-5 w-5" />
-                    </a>
+                    </Link>
                 </motion.div>
             </div>
 

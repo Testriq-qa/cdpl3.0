@@ -3,6 +3,7 @@
 
 import type React from "react";
 import { Phone, Mail, FileText, MessageCircle } from "lucide-react";
+import Link from "next/link";
 
 type IconType = React.ComponentType<React.SVGProps<SVGSVGElement>>;
 
@@ -24,7 +25,7 @@ function ActionButton({
   aria: string;
 }) {
   return (
-    <a
+    <Link
       href={href}
       aria-label={aria}
       className={[
@@ -50,7 +51,7 @@ function ActionButton({
       >
         →
       </span>
-    </a>
+    </Link>
   );
 }
 
@@ -101,7 +102,7 @@ export default function CtaSection() {
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
             Ready to Master{" "}
-            <span className="underline decoration-[.2rem] underline-offset-4 decoration-purple-400">
+            <span className="text-DS">
               Data Science & ML
             </span>
             ?
