@@ -16,8 +16,8 @@ export default function HomeTrustBarSection() {
     'Axiom',
     'idfy',
     'maxwell',
-    'RawEngineering',
-    'TechMahindra',
+    'rawengineering',
+    'techmahindra',
     'Accenture',
     'eClerx',
     'vistaar', // Added a couple more for a richer display
