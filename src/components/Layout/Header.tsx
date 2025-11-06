@@ -61,6 +61,18 @@ const courseCategories = [
           },
         ],
       },
+      {
+        name: "Python Programming",
+        slug: "python-course",
+        description: "Master containerization and orchestration technologies.",
+        governingBodies: [{ name: "Python Programming", logo: "/header_images/Python_Programming.png" }],
+      },
+      {
+        name: "Java Programming",
+        slug: "java-course",
+        description: "Automate CI/CD pipelines with Jenkins.",
+        governingBodies: [{ name: "Java Programming", logo: "/header_images/Java_Programming.png" }],
+      },
     ],
   },
   {
@@ -166,26 +178,15 @@ const courseCategories = [
       // },
     ],
   },
-  {
-    id: "web-development",
-    name: "Web Development",
-    description: "Develop skills to manage projects efficiently and effectively.",
-    governingBodies: [{ name: "Web Development", logo: "/header_images/webdev_banner.png" }],
-    courses: [
-      {
-        name: "Python Programming",
-        slug: "python-course",
-        description: "Master containerization and orchestration technologies.",
-        governingBodies: [{ name: "Python Programming", logo: "/header_images/Python_Programming.png" }],
-      },
-      {
-        name: "Java Programming",
-        slug: "java-course",
-        description: "Automate CI/CD pipelines with Jenkins.",
-        governingBodies: [{ name: "Java Programming", logo: "/header_images/Java_Programming.png" }],
-      },
-    ],
-  },
+  // {
+  //   id: "web-development",
+  //   name: "Web Development",
+  //   description: "Develop skills to manage projects efficiently and effectively.",
+  //   governingBodies: [{ name: "Web Development", logo: "/header_images/webdev_banner.png" }],
+  //   courses: [
+
+  //   ],
+  // },
 
   {
     id: "digital-marketing",
