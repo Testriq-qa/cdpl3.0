@@ -6,13 +6,10 @@ import dynamic from 'next/dynamic';
 // Import home page components with proper naming
 const HomeHeroSection = dynamic(() => import('@/components/home/HomeHeroSection'), { ssr: true });
 const HomeTrustBarSection = dynamic(() => import('@/components/home/HomeTrustBarSection'), { ssr: true });
-const HomeValuePropositionSection = dynamic(() => import('@/components/home/HomeValuePropositionSection'), { ssr: true });
 const HomeFeaturedCoursesSection = dynamic(() => import('@/components/home/HomeFeaturedCoursesSection'), { ssr: true });
-const HomeSuccessStoriesSection = dynamic(() => import('@/components/home/HomeSuccessStoriesSection'), { ssr: true });
 const HomeLearningExperienceSection = dynamic(() => import('@/components/home/HomeLearningExperienceSection'), { ssr: true });
 const HomePlacementSupportSection = dynamic(() => import('@/components/home/HomePlacementSupportSection'), { ssr: true });
-const HomeStatsSection = dynamic(() => import('@/components/home/HomeStatsSection'), { ssr: true });
-const HomeCourseCategoriesSection = dynamic(() => import('@/components/home/HomeCourseCategoriesSection'), { ssr: true });
+const PlacementsCompanyWallSection = dynamic(() => import("@/components/sections/PlacementsCompanyWallSection"),{ ssr: true});
 const HomeWhyChooseSection = dynamic(() => import('@/components/home/HomeWhyChooseSection'), { ssr: true });
 const HomeLatestBlogSection = dynamic(() => import('@/components/home/HomeLatestBlogSection'), { ssr: true });
 const HomeFAQSection = dynamic(() => import('@/components/home/HomeFAQSection'), { ssr: true });
@@ -39,27 +36,24 @@ export default function HomePage(): React.ReactElement {
       {/* 2. Trust Bar - Partner Logos & Certifications */}
       <HomeTrustBarSection />
       
-      {/* 3. Value Proposition - What Makes CDPL Different */}
-      <HomeValuePropositionSection />
-      
-      {/* 4. Featured Courses - Interactive Course Cards */}
+      {/* 3. Featured Courses - Interactive Course Cards */}
       <HomeFeaturedCoursesSection />
       
-      {/* 5. Success Stories - Alumni Testimonials */}
-      <HomeSuccessStoriesSection />
       
       {/* 6. Learning Experience - How We Train */}
       <HomeLearningExperienceSection />
       
       {/* 7. Placement Support - Job Assistance */}
       <HomePlacementSupportSection />
-      
-      {/* 8. Stats & Achievements - Animated Counters */}
-      <HomeStatsSection />
-      
-      {/* 9. Course Categories - Visual Grid */}
-      <HomeCourseCategoriesSection />
-      
+      <section
+                    className="w-full scroll-mt-[96px] md:scroll-mt-[104px] lg:scroll-mt-[112px]"
+                    data-scroll-target="placements-partners"
+                >
+                    <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                        <PlacementsCompanyWallSection />
+                    </div>
+                </section>
+
       {/* 10. Why Choose CDPL - Unique Benefits */}
       <HomeWhyChooseSection />
       

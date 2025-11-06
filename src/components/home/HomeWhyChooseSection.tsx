@@ -55,7 +55,7 @@ export default function HomeWhyChooseSection() {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-6 lg:py-10 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -112,46 +112,7 @@ export default function HomeWhyChooseSection() {
         </div>
 
         {/* Comparison Highlight */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="bg-gradient-to-r from-orange-500 to-orange-600 rounded-3xl p-8 md:p-12 text-white shadow-2xl"
-        >
-          <div className="grid md:grid-cols-2 gap-8 items-center">
-            {/* Left - Content */}
-            <div>
-              <h3 className="text-2xl sm:text-3xl font-bold mb-4">
-                Still Comparing? Here&apos;s What Sets Us Apart
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  'Live classes, not pre-recorded videos',
-                  'Industry experts, not just trainers',
-                  'Real projects, not just theory',
-                  'Guaranteed interviews, not just promises',
-                  'Lifetime support, not just course duration',
-                ].map((point, index) => (
-                  <li key={index} className="flex items-start gap-3">
-                    <CheckCircle2 className="w-6 h-6 flex-shrink-0 mt-0.5" />
-                    <span className="text-lg">{point}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Right - CTA */}
-            <div className="text-center md:text-right">
-              <div className="inline-block bg-white rounded-2xl p-8 shadow-xl">
-                <div className="text-orange-600 text-5xl font-bold mb-2">5000+</div>
-                <div className="text-gray-800 font-semibold mb-4">Students Trust Us</div>
-                <button className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300 w-full">
-                  Join Them Today
-                </button>
-              </div>
-            </div>
-          </div>
-        </motion.div>
+     
       </div>
     </section>
   );

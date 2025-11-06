@@ -64,21 +64,6 @@ const MobileFeatureList: React.FC = () => (
       </div>
     </div>
 
-    {/* Urgency Message */}
-    <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-orange-500 rounded-lg">
-      <div className="flex items-start gap-3">
-        <TrendingUp className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
-        <div>
-          <div className="text-sm font-semibold text-orange-900">
-            🔥 Limited Seats Available!
-          </div>
-          <div className="text-xs text-orange-700 mt-1">
-            Only 12 seats left in our next batch starting December 15th.
-            Enroll now to secure your spot and get ₹5,000 early bird discount!
-          </div>
-        </div>
-      </div>
-    </div>
 
     {/* CTA Buttons */}
     <div className="flex flex-col sm:flex-row gap-4">
@@ -380,25 +365,6 @@ const HomeHeroSection: React.FC = () => {
         ))}
       </motion.div>
 
-      {/* Urgency Message */}
-      <motion.div
-        {...fadeUp}
-        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.3 }}
-        className="mt-7 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-orange-500 rounded-lg"
-      >
-        <div className="flex items-start gap-3">
-          <TrendingUp className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
-          <div>
-            <div className="text-sm font-semibold text-orange-900">
-              🔥 Limited Seats Available!
-            </div>
-            <div className="text-xs text-orange-700 mt-1">
-              Only 12 seats left in our next batch starting December 15th.
-              Enroll now to secure your spot and get ₹5,000 early bird discount!
-            </div>
-          </div>
-        </div>
-      </motion.div>
 
       {/* CTA Buttons */}
       <motion.div
@@ -654,7 +620,7 @@ const HomeHeroSection: React.FC = () => {
         }
       `}</style>
 
-      <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 lg:py-10 py-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 lg:py-4 py-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Animated gradient orbs */}
@@ -707,7 +673,7 @@ const HomeHeroSection: React.FC = () => {
             <motion.p
               {...fadeUp}
               transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.12 }}
-              className="mt-1 text-[15px] sm:text-base leading-7 text-slate-700"
+              className="mt-1 mb-1.5 text-[15px] sm:text-base leading-7 text-slate-700"
             >
               Master Software Testing, Data Science, AI/ML, and Full Stack Development through expert-led
               classroom and online live training programs.

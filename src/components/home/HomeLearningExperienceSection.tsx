@@ -51,7 +51,7 @@ export default function HomeLearningExperienceSection() {
   ];
 
   return (
-    <section className="py-20 bg-white">
+    <section className="py-6 lg:py-10 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
@@ -64,7 +64,7 @@ export default function HomeLearningExperienceSection() {
             Learning Experience
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            How We Make You <span className="text-orange-600">Job-Ready</span>
+            How We Make You <span className="text-brand">Job-Ready</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Our proven methodology combines live training, hands-on projects, and expert mentorship to ensure you&apos;re ready for the industry from day one.
@@ -102,51 +102,6 @@ export default function HomeLearningExperienceSection() {
           ))}
         </div>
 
-        {/* Learning Process */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-20"
-        >
-          <h3 className="text-2xl sm:text-3xl font-bold text-center text-gray-900 mb-12">
-            Your Learning Journey
-          </h3>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {[
-              { step: '01', title: 'Enroll & Onboard', description: 'Choose your course and get access to learning portal' },
-              { step: '02', title: 'Learn & Practice', description: 'Attend live classes and work on hands-on projects' },
-              { step: '03', title: 'Build Portfolio', description: 'Create job-ready projects and get certified' },
-              { step: '04', title: 'Get Placed', description: 'Interview preparation and guaranteed placements' },
-            ].map((phase, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.15 }}
-                className="relative"
-              >
-                {/* Connector Line */}
-                {index < 3 && (
-                  <div className="hidden md:block absolute top-12 left-full w-full h-0.5 bg-gradient-to-r from-orange-500 to-orange-300 -z-10"></div>
-                )}
-
-                {/* Step Number */}
-                <div className="w-24 h-24 bg-gradient-to-br from-orange-500 to-orange-600 rounded-full flex items-center justify-center mx-auto mb-6 shadow-lg">
-                  <span className="text-3xl font-bold text-white">{phase.step}</span>
-                </div>
-
-                {/* Content */}
-                <div className="text-center">
-                  <h4 className="text-xl font-bold text-gray-900 mb-2">{phase.title}</h4>
-                  <p className="text-gray-600">{phase.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
       </div>
     </section>
   );

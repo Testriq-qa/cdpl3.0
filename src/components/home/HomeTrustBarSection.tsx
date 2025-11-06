@@ -30,7 +30,7 @@ export default function HomeTrustBarSection() {
   };
 
   return (
-    <section className="py-4 bg-gray-50 border-y border-gray-200">
+    <section className="mt-4 py-4 bg-gray-50 border-y border-gray-200">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div
