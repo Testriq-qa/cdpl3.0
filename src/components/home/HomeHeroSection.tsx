@@ -1,5 +1,3 @@
-"use client";
-
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { motion} from 'framer-motion';
@@ -22,6 +20,92 @@ import {
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { isValidPhoneNumber } from 'libphonenumber-js';
+
+// Component for the list of features/stats (for mobile)
+const MobileFeatureList: React.FC = () => (
+  <div className="mt-7 space-y-4">
+    {/* List of features/stats */}
+    <div className="grid grid-cols-2 gap-3 text-sm text-slate-700">
+      <div className="flex items-center gap-2">
+        <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
+        <span className="font-semibold">5,000+ Students Placed</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <Star className="h-4 w-4 text-orange-500 fill-orange-500 flex-shrink-0" />
+        <span className="font-semibold">4.9/5 Student Rating</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <Award className="h-4 w-4 text-indigo-600 flex-shrink-0" />
+        <span className="font-semibold">15+ Years Industry Experience</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
+        <span className="font-semibold">100% Live Interactive Classes</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
+        <span className="font-semibold">90+ Real-World Projects</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
+        <span className="font-semibold">ISTQB & Industry Certifications</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
+        <span className="font-semibold">100% Job Support with Interview Guarantee</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
+        <span className="font-semibold">Flexible Weekend & Weekday Batches</span>
+      </div>
+      <div className="flex items-center gap-2">
+        <CheckCircle2 className="h-4 w-4 text-green-600 flex-shrink-0" />
+        <span className="font-semibold">Lifetime Access to Course Materials</span>
+      </div>
+    </div>
+
+    {/* Urgency Message */}
+    <div className="p-4 bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-orange-500 rounded-lg">
+      <div className="flex items-start gap-3">
+        <TrendingUp className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
+        <div>
+          <div className="text-sm font-semibold text-orange-900">
+            🔥 Limited Seats Available!
+          </div>
+          <div className="text-xs text-orange-700 mt-1">
+            Only 12 seats left in our next batch starting December 15th.
+            Enroll now to secure your spot and get ₹5,000 early bird discount!
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {/* CTA Buttons */}
+    <div className="flex flex-col sm:flex-row gap-4">
+      <Link
+        href="/brochure"
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+      >
+        <Download className="h-5 w-5" />
+        Download Brochure
+      </Link>
+      <Link
+        href="/jobs/placements"
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+      >
+        <Eye className="h-5 w-5" />
+        View Placement Stories
+      </Link>
+      <Link
+        href="#video"
+        className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 w-full sm:w-auto"
+      >
+        <Play className="h-5 w-5" />
+        Watch CDPL
+      </Link>
+    </div>
+  </div>
+);
 
 const HomeHeroSection: React.FC = () => {
   // Form state
@@ -186,6 +270,337 @@ const HomeHeroSection: React.FC = () => {
     transition: { duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const }
   };
 
+  // The original Breadcrumb component
+  const Breadcrumb = (
+    <nav aria-label="Breadcrumb" className="lg:mb-6 mb-2">
+      <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
+        <li className="flex items-center gap-2">
+          <Home className="h-4 w-4" />
+          <Link href="/" className="hover:text-indigo-700 font-semibold text-slate-900 transition-colors">
+            Home
+          </Link>
+        </li>
+      </ol>
+    </nav>
+  );
+
+  // The original Hero Content block (Left side of the grid)
+  const DesktopHeroContent = (
+    <>
+      {/* Top Badge */}
+      <motion.div
+        {...fadeUp}
+        className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 rounded-full px-4 py-2 mb-5"
+      >
+        <Sparkles className="h-3.5 w-3.5 text-indigo-500" aria-hidden="true" />
+        <span className="text-[11px] sm:text-xs font-semibold text-indigo-700">
+          🏆 India&apos;s #1 Software Testing & Data Science Training Institute
+        </span>
+      </motion.div>
+
+      {/* Main Headline - Updated Copy */}
+      <motion.h1
+        id="home-heading"
+        {...fadeUp}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.06 }}
+        className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
+      >
+        Transform Your Career with{' '}
+        <span className="block lg:mt-2 md:mt-2 mt-1 text-brand">Industry-Ready Skills</span>
+      </motion.h1>
+
+      {/* Enhanced Subheadline */}
+      <motion.p
+        {...fadeUp}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.12 }}
+        className="mt-5 text-[15px] sm:text-base md:text-lg leading-7 text-slate-700"
+      >
+        Master Software Testing, Data Science, AI/ML, and Full Stack Development through expert-led
+        classroom and online live training programs.
+      </motion.p>
+
+      {/* Trust Indicators - 3 Cards */}
+      <motion.div
+        {...fadeUp}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.18 }}
+        className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4"
+      >
+        {/* Card 1 - Students Placed */}
+        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
+            <Users className="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <div className="text-xl font-bold text-slate-900">5,000+</div>
+            <div className="text-xs text-slate-600">Students Placed</div>
+          </div>
+        </div>
+
+        {/* Card 2 - Rating */}
+        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center">
+            <Star className="h-5 w-5 text-white fill-white" />
+          </div>
+          <div>
+            <div className="text-xl font-bold text-slate-900">4.9/5</div>
+            <div className="text-xs text-slate-600">Student Rating</div>
+          </div>
+        </div>
+
+        {/* Card 3 - Experience */}
+        <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
+          <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
+            <Award className="h-5 w-5 text-white" />
+          </div>
+          <div>
+            <div className="text-xl font-bold text-slate-900">15+ Years</div>
+            <div className="text-xs text-slate-600">Industry Experience</div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* Key Features - 6 Benefits */}
+      <motion.div
+        {...fadeUp}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.24 }}
+        className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3"
+      >
+        {[
+          { icon: CheckCircle2, text: '100% Live Interactive Classes', color: 'text-green-600' },
+          { icon: CheckCircle2, text: '90+ Real-World Projects', color: 'text-blue-600' },
+          { icon: CheckCircle2, text: 'ISTQB & Industry Certifications', color: 'text-purple-600' },
+          { icon: CheckCircle2, text: '100% Job Support with Interview Guarantee', color: 'text-indigo-600' },
+          { icon: CheckCircle2, text: 'Flexible Weekend & Weekday Batches', color: 'text-orange-600' },
+          { icon: CheckCircle2, text: 'Lifetime Access to Course Materials', color: 'text-teal-600' },
+        ].map((feature, index) => (
+          <div key={index} className="flex items-start gap-2">
+            <feature.icon className={`h-5 w-5 ${feature.color} flex-shrink-0 mt-0.5`} />
+            <span className="text-sm text-slate-700">{feature.text}</span>
+          </div>
+        ))}
+      </motion.div>
+
+      {/* Urgency Message */}
+      <motion.div
+        {...fadeUp}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.3 }}
+        className="mt-7 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-orange-500 rounded-lg"
+      >
+        <div className="flex items-start gap-3">
+          <TrendingUp className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
+          <div>
+            <div className="text-sm font-semibold text-orange-900">
+              🔥 Limited Seats Available!
+            </div>
+            <div className="text-xs text-orange-700 mt-1">
+              Only 12 seats left in our next batch starting December 15th.
+              Enroll now to secure your spot and get ₹5,000 early bird discount!
+            </div>
+          </div>
+        </div>
+      </motion.div>
+
+      {/* CTA Buttons */}
+      <motion.div
+        {...fadeUp}
+        transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.36 }}
+        className="mt-7 flex flex-col sm:flex-row gap-4"
+      >
+        {/* Primary CTA - Download Brochure */}
+        <Link
+          href="/brochure"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+        >
+          <Download className="h-5 w-5" />
+          Download Brochure
+        </Link>
+
+        {/* Secondary CTA - View Placement Success Stories */}
+        <Link
+          href="/jobs/placements"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+        >
+          <Eye className="h-5 w-5" />
+          View Placement Stories
+        </Link>
+
+        {/* Tertiary CTA - Watch CDPL */}
+        <Link
+          href="#video"
+          className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
+        >
+          <Play className="h-5 w-5" />
+          Watch CDPL
+        </Link>
+      </motion.div>
+    </>
+  );
+
+  // The original Lead Form block (Right side of the grid)
+  const LeadForm = (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.985 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1.0] as const }}
+      className="order-2 lg:order-2 lg:col-span-5"
+    >
+      <div className="sticky top-4 max-w-sm ml-auto">
+        <div className="bg-white/92 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-8">
+          {/* Form Header - Catchy and Actionable */}
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-xl font-bold text-slate-900">
+                Talk to an Advisor
+              </h3>
+              <div className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full">
+                <span className="text-xs font-bold text-white">FREE</span>
+              </div>
+            </div>
+            <p className="text-sm font-semibold text-orange-600">
+              Get FREE Demo Class Instantly!
+            </p>
+            <p className="text-xs text-slate-600 mt-1">
+              Fill the form below and start learning today
+            </p>
+          </div>
+
+          {/* Success Message */}
+          {isSubmitted && (
+            <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
+              <div className="flex items-center gap-2">
+                <CheckCircle2 className="h-5 w-5 text-green-600" />
+                <div>
+                  <div className="text-sm font-semibold text-green-900">
+                    Thank You!
+                  </div>
+                  <div className="text-xs text-green-700">
+                    We&apos;ll contact you within 2 hours.
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Form */}
+          <form onSubmit={handleSubmit} className="space-y-4">
+
+            {/* Full Name Input - TestRiq Style */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Full Name *
+              </label>
+              <div className="relative">
+                <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <input
+                  type="text"
+                  name="fullName"
+                  value={formData.fullName}
+                  onChange={handleInputChange}
+                  onBlur={() => validateFullName(formData.fullName)}
+                  required
+                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
+                    fullNameError ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="Enter your full name"
+                  style={{ color: '#1e293b' }}
+                />
+              </div>
+              {fullNameError && (
+                <p className="text-red-500 text-xs mt-1">{fullNameError}</p>
+              )}
+            </div>
+
+            {/* Email Input - TestRiq Style */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Email Address *
+              </label>
+              <div className="relative">
+                <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleInputChange}
+                  onBlur={() => validateEmail(formData.email)}
+                  required
+                  className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
+                    emailError ? 'border-red-500' : 'border-gray-300'
+                  }`}
+                  placeholder="Enter your email address"
+                  style={{ color: '#1e293b' }}
+                />
+              </div>
+              {emailError && (
+                <p className="text-red-500 text-xs mt-1">{emailError}</p>
+              )}
+            </div>
+
+            {/* Phone Input - TestRiq Style with react-phone-number-input */}
+            <div>
+              <label className="block text-sm font-medium text-gray-700 mb-1">
+                Mobile Number *
+              </label>
+              <div className="relative">
+                <PhoneInput
+                  international
+                  defaultCountry="IN"
+                  value={formData.phone}
+                  onChange={handlePhoneChange}
+                  onBlur={() => validatePhoneNumber(formData.phone)}
+                  className={`phone-input-container ${
+                    phoneError ? 'border-red-500' : ''
+                  }`}
+                  placeholder="Enter phone number"
+                />
+              </div>
+              {phoneError && (
+                <p className="text-red-500 text-xs mt-1">{phoneError}</p>
+              )}
+            </div>
+
+            {/* Submit Button */}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="w-full py-3 px-6 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
+            >
+              {isSubmitting ? (
+                <>
+                  <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
+                  Submitting...
+                </>
+              ) : (
+                <>
+                  <TrendingUp className="h-5 w-5" />
+                  Get Started Now
+                </>
+              )}
+            </button>
+
+            {/* Trust Badges */}
+            <div className="pt-4 border-t border-slate-200">
+              <div className="flex items-center justify-center gap-4 text-xs text-slate-600">
+                <div className="flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+                  <span>Instant Access</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+                  <span>No Spam</span>
+                </div>
+                <div className="flex items-center gap-1">
+                  <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
+                  <span>100% Secure</span>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </motion.div>
+  );
+
   return (
     <>
       {/* Custom CSS for phone input */}
@@ -239,7 +654,7 @@ const HomeHeroSection: React.FC = () => {
         }
       `}</style>
 
-      <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 py-10 px-4 sm:px-6 lg:px-8 overflow-hidden">
+      <section className="relative bg-gradient-to-br from-slate-50 via-white to-blue-50 lg:py-10 py-4 px-4 sm:px-6 lg:px-8 overflow-hidden">
         {/* Background decorative elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           {/* Animated gradient orbs */}
@@ -271,334 +686,56 @@ const HomeHeroSection: React.FC = () => {
 
         {/* Main Container */}
         <div className="relative max-w-7xl mx-auto">
-          {/* Breadcrumb */}
-          <nav aria-label="Breadcrumb" className="mb-6">
-            <ol className="flex flex-wrap items-center gap-2 text-sm text-slate-600">
-              <li className="flex items-center gap-2">
-                <Home className="h-4 w-4" />
-                <Link href="/" className="hover:text-indigo-700 font-semibold text-slate-900 transition-colors">
-                  Home
-                </Link>
-              </li>
-            </ol>
-          </nav>
+          
+          {/* --- Mobile Layout (lg:hidden) --- */}
+          <div className="lg:hidden">
+            {/* 1. Breadcrumb */}
+            {Breadcrumb}
 
-          {/* Grid Layout - 8 columns left, 4 columns right */}
-          <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
-            
-            {/* Left Content - 8 columns (66.67% width) */}
-            <div className="order-1 lg:order-1 lg:col-span-7">
-              
-              {/* Top Badge */}
-              <motion.div
-                {...fadeUp}
-                className="inline-flex items-center gap-2 bg-gradient-to-r from-indigo-50 to-blue-50 border border-indigo-200 rounded-full px-4 py-2 mb-5"
-              >
-                <Sparkles className="h-3.5 w-3.5 text-indigo-500" aria-hidden="true" />
-                <span className="text-[11px] sm:text-xs font-semibold text-indigo-700">
-                  🏆 India&apos;s #1 Software Testing & Data Science Training Institute
-                </span>
-              </motion.div>
-
-              {/* Main Headline - Updated Copy */}
-              <motion.h1
-                id="home-heading"
-                {...fadeUp}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.06 }}
-                className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
-              >
-                Transform Your Career with{' '}
-                <span className="block mt-2 text-brand">Industry-Ready Skills</span>
-              </motion.h1>
-
-              {/* Enhanced Subheadline */}
-              <motion.p
-                {...fadeUp}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.12 }}
-                className="mt-5 text-[15px] sm:text-base md:text-lg leading-7 text-slate-700"
-              >
-                Master Software Testing, Data Science, AI/ML, and Full Stack Development through expert-led 
-                classroom and online live training programs.
-              </motion.p>
-
-              {/* Trust Indicators - 3 Cards */}
-              <motion.div
-                {...fadeUp}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.18 }}
-                className="mt-7 grid grid-cols-1 sm:grid-cols-3 gap-4"
-              >
-                {/* Card 1 - Students Placed */}
-                <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-green-500 to-emerald-600 rounded-lg flex items-center justify-center">
-                    <Users className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-xl font-bold text-slate-900">5,000+</div>
-                    <div className="text-xs text-slate-600">Students Placed</div>
-                  </div>
-                </div>
-
-                {/* Card 2 - Rating */}
-                <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-amber-500 to-orange-600 rounded-lg flex items-center justify-center">
-                    <Star className="h-5 w-5 text-white fill-white" />
-                  </div>
-                  <div>
-                    <div className="text-xl font-bold text-slate-900">4.9/5</div>
-                    <div className="text-xs text-slate-600">Student Rating</div>
-                  </div>
-                </div>
-
-                {/* Card 3 - Experience */}
-                <div className="flex items-center gap-3 p-4 bg-white/80 backdrop-blur-sm rounded-xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow">
-                  <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-lg flex items-center justify-center">
-                    <Award className="h-5 w-5 text-white" />
-                  </div>
-                  <div>
-                    <div className="text-xl font-bold text-slate-900">15+ Years</div>
-                    <div className="text-xs text-slate-600">Industry Experience</div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* Key Features - 6 Benefits */}
-              <motion.div
-                {...fadeUp}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.24 }}
-                className="mt-7 grid grid-cols-1 sm:grid-cols-2 gap-3"
-              >
-                {[
-                  { icon: CheckCircle2, text: '100% Live Interactive Classes', color: 'text-green-600' },
-                  { icon: CheckCircle2, text: '90+ Real-World Projects', color: 'text-blue-600' },
-                  { icon: CheckCircle2, text: 'ISTQB & Industry Certifications', color: 'text-purple-600' },
-                  { icon: CheckCircle2, text: '100% Job Support with Interview Guarantee', color: 'text-indigo-600' },
-                  { icon: CheckCircle2, text: 'Flexible Weekend & Weekday Batches', color: 'text-orange-600' },
-                  { icon: CheckCircle2, text: 'Lifetime Access to Course Materials', color: 'text-teal-600' },
-                ].map((feature, index) => (
-                  <div key={index} className="flex items-start gap-2">
-                    <feature.icon className={`h-5 w-5 ${feature.color} flex-shrink-0 mt-0.5`} />
-                    <span className="text-sm text-slate-700">{feature.text}</span>
-                  </div>
-                ))}
-              </motion.div>
-
-              {/* Urgency Message */}
-              <motion.div
-                {...fadeUp}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.3 }}
-                className="mt-7 p-4 bg-gradient-to-r from-amber-50 to-orange-50 border-l-4 border-orange-500 rounded-lg"
-              >
-                <div className="flex items-start gap-3">
-                  <TrendingUp className="h-5 w-5 text-orange-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <div className="text-sm font-semibold text-orange-900">
-                      🔥 Limited Seats Available!
-                    </div>
-                    <div className="text-xs text-orange-700 mt-1">
-                      Only 12 seats left in our next batch starting December 15th. 
-                      Enroll now to secure your spot and get ₹5,000 early bird discount!
-                    </div>
-                  </div>
-                </div>
-              </motion.div>
-
-              {/* CTA Buttons */}
-              <motion.div
-                {...fadeUp}
-                transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.36 }}
-                className="mt-7 flex flex-col sm:flex-row gap-4"
-              >
-                {/* Primary CTA - Download Brochure */}
-                <Link
-                  href="/brochure"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-                >
-                  <Download className="h-5 w-5" />
-                  Download Brochure
-                </Link>
-
-                {/* Secondary CTA - View Placement Success Stories */}
-                <Link
-                  href="/jobs/placements"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-                >
-                  <Eye className="h-5 w-5" />
-                  View Placement Stories
-                </Link>
-
-                {/* Tertiary CTA - Watch CDPL */}
-                <Link
-                  href="#video"
-                  className="inline-flex items-center justify-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-purple-700 text-white text-sm sm:text-base font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300"
-                >
-                  <Play className="h-5 w-5" />
-                  Watch CDPL
-                </Link>
-              </motion.div>
-            </div>
-
-            {/* Right Form - 4 columns (33.33% width) */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.985 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.55, ease: [0.25, 0.1, 0.25, 1.0] as const }}
-              className="order-2 lg:order-2 lg:col-span-5"
+            {/* 2. Headline */}
+            <motion.h1
+              id="home-heading-mobile"
+              {...fadeUp}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.06 }}
+              className="mt-2 py-1 text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl"
             >
-              <div className="sticky top-4 max-w-sm ml-auto">
-                <div className="bg-white/92 backdrop-blur-xl rounded-2xl shadow-2xl border border-slate-200 p-6 sm:p-8">
-                  {/* Form Header - Catchy and Actionable */}
-                  <div className="mb-6">
-                    <div className="flex items-center justify-between mb-2">
-                      <h3 className="text-xl font-bold text-slate-900">
-                        Talk to an Advisor
-                      </h3>
-                      <div className="flex items-center gap-1 px-3 py-1 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full">
-                        <span className="text-xs font-bold text-white">FREE</span>
-                      </div>
-                    </div>
-                    <p className="text-sm font-semibold text-orange-600">
-                      Get FREE Demo Class Instantly!
-                    </p>
-                    <p className="text-xs text-slate-600 mt-1">
-                      Fill the form below and start learning today
-                    </p>
-                  </div>
+              Transform Your Career with{' '}
+              <span className="block mt-1 text-brand">Industry-Ready Skills</span>
+            </motion.h1>
 
-                  {/* Success Message */}
-                  {isSubmitted && (
-                    <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                      <div className="flex items-center gap-2">
-                        <CheckCircle2 className="h-5 w-5 text-green-600" />
-                        <div>
-                          <div className="text-sm font-semibold text-green-900">
-                            Thank You!
-                          </div>
-                          <div className="text-xs text-green-700">
-                            We&apos;ll contact you within 2 hours.
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  )}
+            {/* 3. Description */}
+            <motion.p
+              {...fadeUp}
+              transition={{ duration: 0.5, ease: [0.25, 0.1, 0.25, 1.0] as const, delay: 0.12 }}
+              className="mt-1 text-[15px] sm:text-base leading-7 text-slate-700"
+            >
+              Master Software Testing, Data Science, AI/ML, and Full Stack Development through expert-led
+              classroom and online live training programs.
+            </motion.p>
 
-                  {/* Form */}
-                  <form onSubmit={handleSubmit} className="space-y-4">
-                    
-                    {/* Full Name Input - TestRiq Style */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Full Name *
-                      </label>
-                      <div className="relative">
-                        <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                        <input
-                          type="text"
-                          name="fullName"
-                          value={formData.fullName}
-                          onChange={handleInputChange}
-                          onBlur={() => validateFullName(formData.fullName)}
-                          required
-                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                            fullNameError ? 'border-red-500' : 'border-gray-300'
-                          }`}
-                          placeholder="Enter your full name"
-                          style={{ color: '#1e293b' }}
-                        />
-                      </div>
-                      {fullNameError && (
-                        <p className="text-red-500 text-xs mt-1">{fullNameError}</p>
-                      )}
-                    </div>
+            {/* 4. Form Card */}
+            {LeadForm}
 
-                    {/* Email Input - TestRiq Style */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Email Address *
-                      </label>
-                      <div className="relative">
-                        <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                        <input
-                          type="email"
-                          name="email"
-                          value={formData.email}
-                          onChange={handleInputChange}
-                          onBlur={() => validateEmail(formData.email)}
-                          required
-                          className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-[#ff8c00] focus:outline-none transition-all duration-300 ${
-                            emailError ? 'border-red-500' : 'border-gray-300'
-                          }`}
-                          placeholder="Enter your email address"
-                          style={{ color: '#1e293b' }}
-                        />
-                      </div>
-                      {emailError && (
-                        <p className="text-red-500 text-xs mt-1">{emailError}</p>
-                      )}
-                    </div>
+            {/* 5. Mobile Feature List (The long list of stats/CTAs) */}
+            <MobileFeatureList />
+          </div>
 
-                    {/* Phone Input - TestRiq Style with react-phone-number-input */}
-                    <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-1">
-                        Mobile Number *
-                      </label>
-                      <div className="relative">
-                        <PhoneInput
-                          international
-                          defaultCountry="IN"
-                          value={formData.phone}
-                          onChange={handlePhoneChange}
-                          onBlur={() => validatePhoneNumber(formData.phone)}
-                          className={`phone-input-container ${
-                            phoneError ? 'border-red-500' : ''
-                          }`}
-                          placeholder="Enter phone number"
-                        />
-                      </div>
-                      {phoneError && (
-                        <p className="text-red-500 text-xs mt-1">{phoneError}</p>
-                      )}
-                    </div>
+          {/* --- Desktop/Laptop Layout (hidden lg:block) --- */}
+          <div className="hidden lg:block">
+            {/* 1. Breadcrumb */}
+            {Breadcrumb}
 
-                    {/* Submit Button */}
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-3 px-6 bg-gradient-to-r from-[#ff8c00] to-[#ff6b00] text-white font-semibold rounded-lg shadow-lg hover:shadow-xl hover:scale-105 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                    >
-                      {isSubmitting ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                          Submitting...
-                        </>
-                      ) : (
-                        <>
-                          <TrendingUp className="h-5 w-5" />
-                          Get Started Now
-                        </>
-                      )}
-                    </button>
-
-                    {/* Trust Badges */}
-                    <div className="pt-4 border-t border-slate-200">
-                      <div className="flex items-center justify-center gap-4 text-xs text-slate-600">
-                        <div className="flex items-center gap-1">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
-                          <span>Instant Access</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
-                          <span>No Spam</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <CheckCircle2 className="h-3.5 w-3.5 text-green-600" />
-                          <span>100% Secure</span>
-                        </div>
-                      </div>
-                    </div>
-                  </form>
-                </div>
+            {/* 2. Grid Layout - 8 columns left, 4 columns right */}
+            <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-12">
+              
+              {/* Left Content - 8 columns (66.67% width) */}
+              <div className="order-1 lg:order-1 lg:col-span-7">
+                {DesktopHeroContent}
               </div>
-            </motion.div>
+
+              {/* Right Form - 4 columns (33.33% width) */}
+              {LeadForm}
+            </div>
           </div>
         </div>
       </section>
