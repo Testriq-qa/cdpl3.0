@@ -14,14 +14,14 @@ export default function HomeTrustBarSection() {
   const partners = [
     'testriq',
     'Axiom',
-    'aryanTechnologies.png',
-    'marqetrix',
+    'idfy',
+    'maxwell',
     'RawEngineering',
     'TechMahindra',
     'Accenture',
     'eClerx',
-    'Capgemini', // Added a couple more for a richer display
-    'TCS',
+    'vistaar', // Added a couple more for a richer display
+    'jm_financial',
   ];
 
   const getLogoPath = (partnerName: string) => {

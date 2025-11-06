@@ -30,7 +30,8 @@ const BlogCategoryMenu = () => {
     { id: "software-testing", name: "Software Testing", slug: "software-testing" },
     { id: "data-science", name: "Data Science", slug: "data-science" },
     { id: "web-development", name: "Web Development", slug: "web-development" },
-    { id: "ai-ml", name: "AI & Machine Learning", slug: "ai-ml" },
+    { id: "ai", name: "Artificial Intelligence", slug: "artificial-intelligence" },
+    { id: "digital-marketing", name: "Digital Marketing", slug: "digital-marketing" },
   ];
 
   // Real-time search functionality
