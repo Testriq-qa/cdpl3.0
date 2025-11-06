@@ -154,7 +154,7 @@ export const AUTHORS: Record<string, Author> = {
   "jayesh-mistry": {
     id: "jayesh-mistry",
     name: "Jayesh Mistry",
-    bio: "A passionate and detail-oriented frontend developer with a strong knowledge in Web Development and strong foundation in HTML, CSS, JavaScript, and React.js.",
+    bio: "A passionate and detail-oriented frontend developer with a strong knowledge in Web Development and strong foundation in HTML, CSS, JavaScript, React.js and Next.js.",
     avatar: "/blog/authors/jayesh-mistry.png",
     role: "Frontend Developer",
     social: {
@@ -383,7 +383,8 @@ export const BLOG_POSTS: BlogPost[] = [
       canonical: "/blog/mastering-automated-software-testing-2025"
     }
   },
-  {
+
+    {
     id: "14",
     slug: "what-is-software-testing",
     title: "What Is Software Testing? Types, Levels, and Examples",
@@ -790,13 +791,144 @@ export const BLOG_POSTS: BlogPost[] = [
       ogImage: "/blog/featured/overfitting-vs-underfitting-og.jpg",
       canonical: "/blog/overfitting-vs-underfitting-with-pictures"
     }
+  },
+
+  {
+    id: "23",
+    slug: "nextjs-15-seo-guide-react-server-components-2025",
+    title: "Next.js 15 SEO Guide: Master React Server Components in 2025",
+    description: "A practical, up-to-date SEO playbook for Next.js 15. Learn how React Server Components, the App Router, streaming, caching, ISR, and Edge rendering impact search performance in 2025.",
+    excerpt: "Ship lightning-fast, indexable Next.js 15 apps. From React Server Components to ISR and Edge rendering, this 2025 guide shows you how to rank higher and load faster.",
+    featuredImage: "/blog/featured/nextjs15-seo-guide.png",
+    category: "Web Development",
+    categoryId: "web-development",
+    author: "Jayesh Mistry",
+    authorId: "jayesh-mistry",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "14 min read",
+    tags: [
+      "Next.js 15",
+      "React Server Components",
+      "Next.js SEO",
+      "Core Web Vitals",
+      "App Router",
+      "ISR",
+      "Edge Rendering",
+      "2025"
+    ],
+    featured: true,
+    contentFile: "nextjs-15-seo-guide-react-server-components-2025",
+    seo: {
+      metaTitle: "Next.js 15 SEO Guide (2025): Master React Server Components, ISR & Edge",
+      metaDescription: "Learn high-impact Next.js 15 SEO: React Server Components, App Router, streaming, ISR, Edge rendering, metadata, sitemaps, and Core Web Vitals optimization for 2025.",
+      keywords: [
+        "next.js seo",
+        "nextjs 15",
+        "react server components",
+        "nextjs app router",
+        "core web vitals",
+        "nextjs isr",
+        "nextjs sitemap",
+        "edge rendering",
+        "nextjs metadata"
+      ],
+      ogImage: "/blog/featured/nextjs15-seo-guide-og.jpg",
+      canonical: "/blog/nextjs-15-seo-guide-react-server-components-2025"
+    }
+  },
+  {
+    id: "24",
+    slug: "ai-for-frontend-developers-llms-generate-code-tests-docs-2025",
+    title: "AI for Front-End Developers: Using LLMs to Generate Code, Tests & Docs",
+    description:
+      "A hands-on 2025 playbook for front-end engineers to use LLMs to scaffold React/Next.js components, write TypeScript, generate unit/e2e tests, create Storybook and MDX docs, and wire everything into CI with safety and quality controls.",
+    excerpt:
+      "Turn AI into a force multiplier for your UI stack. Learn prompt patterns, guardrails, test-first workflows, Storybook automation, and CI integration to ship reliable, documented React and Next.js features faster.",
+    featuredImage: "/blog/featured/ai-frontend-dev.png",
+    category: "Web Development",
+    categoryId: "web-development",
+    author: "Jayesh Mistry",
+    authorId: "jayesh-mistry",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "14 min read",
+    tags: [
+      "LLM",
+      "Front-End",
+      "React",
+      "Next.js",
+      "TypeScript",
+      "Jest",
+      "Playwright",
+      "Storybook",
+      "MDX"
+    ],
+    featured: true,
+    contentFile: "ai-for-frontend-developers-llms-generate-code-tests-docs",
+    seo: {
+      metaTitle:
+        "AI for Front-End Developers (2025): Generate React/Next.js Code, Tests & Docs with LLMs",
+      metaDescription:
+        "A practical guide for using LLMs in front-end development: React/Next.js scaffolding, TypeScript patterns, Jest/Playwright tests, Storybook & MDX docs, prompts, and CI guardrails.",
+      keywords: [
+        "ai for front-end developers",
+        "llm code generation react",
+        "nextjs ai workflow",
+        "generate unit tests jest",
+        "playwright e2e testing",
+        "storybook docs mdx automation",
+        "typescript best practices ai"
+      ],
+      ogImage: "/blog/featured/ai-frontend-dev-og.jpg",
+      canonical: "/blog/ai-for-frontend-developers-llms-generate-code-tests-docs-2025"
+    }
+  },
+  {
+  id: "25",
+  slug: "migrating-gatsby-cra-to-nextjs-15-step-by-step",
+  title: "Static to Dynamic: Migrating Gatsby/CRA to Next.js 15 (Step-by-Step)",
+  description:
+    "A practical 2025 migration guide for teams moving from Gatsby or Create React App to Next.js 15. Learn App Router, React Server Components, ISR, edge rendering, Metadata API, routing, SEO, images, and CI/CD.",
+  excerpt:
+    "Ship faster with React Server Components, App Router, and ISR. This step-by-step playbook shows how to migrate from Gatsby or CRA to Next.js 15 without losing SEO, performance, or developer velocity.",
+  featuredImage: "/blog/featured/migrate-gatsby-cra-to-next15.png",
+  category: "Web Development",
+  categoryId: "web-development",
+  author: "Jayesh Mistry",
+  authorId: "jayesh-mistry",
+  publishDate: "2025-11-06",
+  lastModified: "2025-11-06",
+  readTime: "14 min read",
+  tags: [
+    "Next.js 15",
+    "Migration",
+    "Gatsby",
+    "Create React App",
+    "React Server Components",
+    "ISR",
+    "SEO"
+  ],
+  featured: true,
+  contentFile: "migrating-gatsby-cra-to-nextjs-15-step-by-step",
+  seo: {
+    metaTitle:
+      "Migrate Gatsby/CRA to Next.js 15 (2025): Step-by-Step Guide to App Router, RSC, ISR & SEO",
+    metaDescription:
+      "Definitive 2025 guide to migrate from Gatsby or Create React App to Next.js 15. Covers App Router, React Server Components, ISR, edge rendering, routing, images, fonts, SEO (Metadata API), and CI/CD.",
+    keywords: [
+      "migrate gatsby to nextjs",
+      "migrate cra to nextjs",
+      "next.js 15 app router",
+      "react server components migration",
+      "nextjs isr migration",
+      "nextjs seo metadata api",
+      "gatsby to nextjs guide"
+    ],
+    ogImage: "/blog/featured/migrate-gatsby-cra-to-next15-og.jpg",
+    canonical: "/blog/migrating-gatsby-cra-to-nextjs-15-step-by-step"
   }
-
-
-
-
-
-
+}
 
 
 
