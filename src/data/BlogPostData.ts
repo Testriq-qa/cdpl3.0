@@ -171,7 +171,17 @@ export const AUTHORS: Record<string, Author> = {
       linkedin: "https://www.linkedin.com/in/sushma-pal-a1557b1b1/"
     }
   },
-  
+  "adnan-khan": {
+    id: "adnan-khan",
+    name: "Adnan Khan",
+    bio: "Full Stack JavaScript Developer who designs and ships end-to-end web apps. I use React/Next.js + Node.js/NestJS with TypeScript, building secure, scalable, high-performance systems with modern DevOps, testing, and cloud-native tooling.",
+    avatar: "/blog/authors/adnan-khan.png",
+    role: "Full Stack JavaScript Developer",
+    social: {
+      linkedin: "https://www.linkedin.com/in/adnan--khan/"
+    }
+  },
+
 };
 
 // ============================================================================
@@ -307,7 +317,7 @@ export const CATEGORIES: Record<string, Category> = {
 
 export const BLOG_POSTS: BlogPost[] = [
 
-{
+  {
     id: "13",
     slug: "top-data-science-trends-2025-guide",
     title: "Top Data Science Trends 2025: AI, Automation, and Ethical Insights",
@@ -373,7 +383,149 @@ export const BLOG_POSTS: BlogPost[] = [
       canonical: "/blog/mastering-automated-software-testing-2025"
     }
   },
-  
+  {
+    id: "14",
+    slug: "what-is-software-testing",
+    title: "What Is Software Testing? Types, Levels, and Examples",
+    description: "A practical introduction to software testing for product teams at CDPL. Learn key testing types, testing levels across the SDLC, and real-world examples with tools and tips.",
+    excerpt: "New to QA or refreshing fundamentals? Learn software testing basics, explore functional and non-functional types, understand testing levels from unit to UAT, and see simple examples you can apply today.",
+    featuredImage: "/blog/featured/software-testing-basics.png",
+    category: "Software Testing",
+    categoryId: "software-testing",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "12 min read",
+    tags: [
+      "Software Testing",
+      "Testing Types",
+      "Testing Levels",
+      "Unit Testing",
+      "Integration Testing",
+      "System Testing",
+      "UAT",
+      "Manual vs Automation",
+      "Test Strategy",
+      "Quality Assurance"
+    ],
+    featured: true,
+    contentFile: "what-is-software-testing-types-levels-examples",
+    seo: {
+      metaTitle: "What Is Software Testing? Types, Levels, and Examples | CDPL Cinute Digital",
+      metaDescription: "Complete software testing guide for CDPL learners and partners. Understand testing types, testing levels, best practices, pitfalls, examples, and tools to build reliable releases.",
+      keywords: [
+        "what is software testing",
+        "software testing guide",
+        "types of testing",
+        "levels of testing",
+        "unit testing",
+        "integration testing",
+        "system testing",
+        "user acceptance testing",
+        "qa best practices",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/software-testing-basics-og.jpg",
+      canonical: "/blog/what-is-software-testing-types-levels-examples"
+    }
+  },
+  {
+    id: "15",
+    slug: "manual-testing-test-scenarios-cases-suites",
+    title: "Manual Testing 101: Test Scenarios, Test Cases, and Test Suites",
+    description: "Learn manual testing fundamentals for CDPL learners and partner teams. Write clear test scenarios, actionable test cases, and maintainable test suites with examples and templates.",
+    excerpt: "Start manual testing the right way. Understand scenarios vs cases vs suites, write steps that catch real defects, link to requirements, and organize suites that scale with CI and releases.",
+    featuredImage: "/blog/featured/manual-testing-101.png",
+    category: "Software Testing",
+    categoryId: "software-testing",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "11 min read",
+    tags: [
+      "Manual Testing",
+      "Test Scenarios",
+      "Test Cases",
+      "Test Suites",
+      "Test Design",
+      "Traceability",
+      "Exploratory Testing",
+      "Bug Reporting",
+      "QA Best Practices",
+      "CDPL Cinute Digital"
+    ],
+    featured: true,
+    contentFile: "manual-testing-101-test-scenarios-cases-suites",
+    seo: {
+      metaTitle: "Manual Testing 101: Test Scenarios, Test Cases, and Test Suites | CDPL Cinute Digital",
+      metaDescription: "Step by step manual testing guide by CDPL. Learn to design test scenarios, write high quality test cases, structure test suites, and track coverage with templates and examples.",
+      keywords: [
+        "manual testing",
+        "test scenarios",
+        "test cases",
+        "test suites",
+        "manual testing guide",
+        "test case template",
+        "traceability matrix",
+        "bug reporting",
+        "qa best practices",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/manual-testing-101-og.jpg",
+      canonical: "/blog/manual-testing-test-scenarios-cases-suites"
+    }
+  },
+  {
+    id: "16",
+    slug: "how-to-write-test-cases",
+    title: "How to Write Test Cases: Step-by-Step Template and Examples",
+    description: "A practical how to for CDPL learners and partner teams. Use a simple template, see good vs bad examples, and write test cases that are clear, repeatable, and traceable.",
+    excerpt: "Learn the anatomy of a great test case, compare good vs bad examples, grab a free template, avoid common mistakes, and apply QA tips for real projects at Cinute Digital Pvt Ltd.",
+    featuredImage: "/blog/featured/how-to-write-test-cases.png",
+    category: "Software Testing",
+    categoryId: "software-testing",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "10 min read",
+    tags: [
+      "how to write test cases",
+      "test case template",
+      "sample test cases",
+      "manual testing",
+      "QA best practices",
+      "traceability",
+      "login test cases",
+      "checkout test cases",
+      "CDPL Cinute Digital"
+    ],
+    featured: true,
+    contentFile: "how-to-write-test-cases-template-examples",
+    seo: {
+      metaTitle: "How to Write Test Cases: Step-by-Step Template + Examples",
+      metaDescription: "A simple template for clear, repeatable test cases plus samples for login and checkout flows.",
+      keywords: [
+        "how to write test cases",
+        "test case template",
+        "sample test cases",
+        "manual testing",
+        "qa best practices",
+        "login test cases",
+        "checkout test cases",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/how-to-write-test-cases-og.jpg",
+      canonical: "/blog/how-to-write-test-cases"
+    }
+  },
+
+
+
+
+
 ];
 
 // ============================================================================
@@ -381,7 +533,7 @@ export const BLOG_POSTS: BlogPost[] = [
 // ============================================================================
 
 export const getAllPosts = (): BlogPost[] => {
-  return BLOG_POSTS.sort((a, b) => 
+  return BLOG_POSTS.sort((a, b) =>
     new Date(b.publishDate).getTime() - new Date(a.publishDate).getTime()
   );
 };
