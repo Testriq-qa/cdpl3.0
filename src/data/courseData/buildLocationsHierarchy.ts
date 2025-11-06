@@ -83,7 +83,8 @@ function getCourseType(slug: string): string | undefined {
   if (lower.includes("data-science") || lower.includes("ai-ml-bi")) return "data-science";
   if (lower.includes("software-testing")) return "software-testing";
   if (lower.includes("digital-marketing") || lower.includes("general")) return "digital-marketing";
-  if (lower.includes("programming") || lower.includes("development")) return "programming";
+  // Changed: map new "web-development" slug, and keep legacy "programming" slugs compatible
+  if (lower.includes("web-development") || lower.includes("programming")) return "web-development";
   return undefined;
 }
 

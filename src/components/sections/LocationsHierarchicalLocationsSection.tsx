@@ -44,8 +44,15 @@ const COURSE_CONFIG: Record<
     icon: <Target className="w-3.5 h-3.5" />,
     color: "bg-purple-100 text-purple-700 ring-purple-300",
   },
+  // Updated key to match new course type emitted by data: "web-development"
+  "web-development": {
+    label: "Web Development",
+    icon: <Code className="w-3.5 h-3.5" />,
+    color: "bg-orange-100 text-orange-700 ring-orange-300",
+  },
+  // (Optional) Backward-compat alias for any legacy data still using "programming"
   programming: {
-    label: "Programming",
+    label: "Web Development",
     icon: <Code className="w-3.5 h-3.5" />,
     color: "bg-orange-100 text-orange-700 ring-orange-300",
   },
