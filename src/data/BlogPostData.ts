@@ -171,6 +171,16 @@ export const AUTHORS: Record<string, Author> = {
       linkedin: "https://www.linkedin.com/in/sushma-pal-a1557b1b1/"
     }
   },
+  "adnan-khan": {
+    id: "adnan-khan",
+    name: "Adnan Khan",
+    bio: "Full Stack JavaScript Developer who designs and ships end-to-end web apps. I use React/Next.js + Node.js/NestJS with TypeScript, building secure, scalable, high-performance systems with modern DevOps, testing, and cloud-native tooling.",
+    avatar: "/blog/authors/adnan-khan.png",
+    role: "Full Stack JavaScript Developer",
+    social: {
+      linkedin: "https://www.linkedin.com/in/adnan--khan/"
+    }
+  },
 
 };
 
@@ -371,6 +381,415 @@ export const BLOG_POSTS: BlogPost[] = [
       ],
       ogImage: "/blog/featured/automated-software-testing-2025.jpg",
       canonical: "/blog/mastering-automated-software-testing-2025"
+    }
+  },
+
+    {
+    id: "14",
+    slug: "what-is-software-testing",
+    title: "What Is Software Testing? Types, Levels, and Examples",
+    description: "A practical introduction to software testing for product teams at CDPL. Learn key testing types, testing levels across the SDLC, and real-world examples with tools and tips.",
+    excerpt: "New to QA or refreshing fundamentals? Learn software testing basics, explore functional and non-functional types, understand testing levels from unit to UAT, and see simple examples you can apply today.",
+    featuredImage: "/blog/featured/software-testing-basics.png",
+    category: "Software Testing",
+    categoryId: "software-testing",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "12 min read",
+    tags: [
+      "Software Testing",
+      "Testing Types",
+      "Testing Levels",
+      "Unit Testing",
+      "Integration Testing",
+      "System Testing",
+      "UAT",
+      "Manual vs Automation",
+      "Test Strategy",
+      "Quality Assurance"
+    ],
+    featured: true,
+    contentFile: "what-is-software-testing-types-levels-examples",
+    seo: {
+      metaTitle: "What Is Software Testing? Types, Levels, and Examples | CDPL Cinute Digital",
+      metaDescription: "Complete software testing guide for CDPL learners and partners. Understand testing types, testing levels, best practices, pitfalls, examples, and tools to build reliable releases.",
+      keywords: [
+        "what is software testing",
+        "software testing guide",
+        "types of testing",
+        "levels of testing",
+        "unit testing",
+        "integration testing",
+        "system testing",
+        "user acceptance testing",
+        "qa best practices",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/software-testing-basics-og.jpg",
+      canonical: "/blog/what-is-software-testing-types-levels-examples"
+    }
+  },
+  {
+    id: "15",
+    slug: "manual-testing-test-scenarios-cases-suites",
+    title: "Manual Testing 101: Test Scenarios, Test Cases, and Test Suites",
+    description: "Learn manual testing fundamentals for CDPL learners and partner teams. Write clear test scenarios, actionable test cases, and maintainable test suites with examples and templates.",
+    excerpt: "Start manual testing the right way. Understand scenarios vs cases vs suites, write steps that catch real defects, link to requirements, and organize suites that scale with CI and releases.",
+    featuredImage: "/blog/featured/manual-testing-101.png",
+    category: "Software Testing",
+    categoryId: "software-testing",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "11 min read",
+    tags: [
+      "Manual Testing",
+      "Test Scenarios",
+      "Test Cases",
+      "Test Suites",
+      "Test Design",
+      "Traceability",
+      "Exploratory Testing",
+      "Bug Reporting",
+      "QA Best Practices",
+      "CDPL Cinute Digital"
+    ],
+    featured: true,
+    contentFile: "manual-testing-101-test-scenarios-cases-suites",
+    seo: {
+      metaTitle: "Manual Testing 101: Test Scenarios, Test Cases, and Test Suites | CDPL Cinute Digital",
+      metaDescription: "Step by step manual testing guide by CDPL. Learn to design test scenarios, write high quality test cases, structure test suites, and track coverage with templates and examples.",
+      keywords: [
+        "manual testing",
+        "test scenarios",
+        "test cases",
+        "test suites",
+        "manual testing guide",
+        "test case template",
+        "traceability matrix",
+        "bug reporting",
+        "qa best practices",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/manual-testing-101-og.jpg",
+      canonical: "/blog/manual-testing-test-scenarios-cases-suites"
+    }
+  },
+  {
+    id: "16",
+    slug: "how-to-write-test-cases",
+    title: "How to Write Test Cases: Step-by-Step Template and Examples",
+    description: "A practical how to for CDPL learners and partner teams. Use a simple template, see good vs bad examples, and write test cases that are clear, repeatable, and traceable.",
+    excerpt: "Learn the anatomy of a great test case, compare good vs bad examples, grab a free template, avoid common mistakes, and apply QA tips for real projects at Cinute Digital Pvt Ltd.",
+    featuredImage: "/blog/featured/how-to-write-test-cases.png",
+    category: "Software Testing",
+    categoryId: "software-testing",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "10 min read",
+    tags: [
+      "how to write test cases",
+      "test case template",
+      "sample test cases",
+      "manual testing",
+      "QA best practices",
+      "traceability",
+      "login test cases",
+      "checkout test cases",
+      "CDPL Cinute Digital"
+    ],
+    featured: true,
+    contentFile: "how-to-write-test-cases",
+    seo: {
+      metaTitle: "How to Write Test Cases: Step-by-Step Template + Examples",
+      metaDescription: "A simple template for clear, repeatable test cases plus samples for login and checkout flows.",
+      keywords: [
+        "how to write test cases",
+        "test case template",
+        "sample test cases",
+        "manual testing",
+        "qa best practices",
+        "login test cases",
+        "checkout test cases",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/how-to-write-test-cases-og.jpg",
+      canonical: "/blog/how-to-write-test-cases"
+    }
+  },
+  {
+    id: "17",
+    slug: "what-is-data-science",
+    title: "What Is Data Science? Definition, Examples, Skills, and Career Paths",
+    description: "A beginner friendly guide by CDPL that explains what data science is, how it works, real world examples, key skills, and career paths with tools to get started.",
+    excerpt: "Learn what data science means, how data becomes decisions, the core workflow, popular tools, real examples, and how to start a career with a simple learning plan.",
+    featuredImage: "/blog/featured/what-is-data-science.png",
+    category: "Data Science",
+    categoryId: "data-science",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "10 min read",
+    tags: [
+      "what is data science",
+      "data science definition",
+      "data science examples",
+      "data science skills",
+      "data science tools",
+      "machine learning basics",
+      "career paths in data science",
+      "CDPL Cinute Digital"
+    ],
+    featured: true,
+    contentFile: "what-is-data-science",
+    seo: {
+      metaTitle: "What Is Data Science? Definition, Examples, Skills, and Career Paths",
+      metaDescription: "Understand data science with a clear definition, workflow, tools, real examples, key skills, and career paths. A CDPL guide for learners and partner teams.",
+      keywords: [
+        "what is data science",
+        "data science definition",
+        "data science examples",
+        "data science skills",
+        "data science workflow",
+        "data science tools",
+        "machine learning basics",
+        "data science career",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/what-is-data-science-og.jpg",
+      canonical: "/blog/what-is-data-science"
+    }
+  },
+  {
+    id: "18",
+    slug: "data-science-vs-machine-learning-vs-artificial-intelligence",
+    title: "Data Science vs Machine Learning vs AI: The Clear Difference",
+    description: "Understand the difference between data science, machine learning, and artificial intelligence with simple definitions, examples, skills, and tools. A CDPL guide for learners and partner teams.",
+    excerpt: "Confused between data science, machine learning, and AI? This guide gives clear definitions, shows where they overlap, explains skills and tools for each, and includes examples you can relate to.",
+    featuredImage: "/blog/featured/ds-vs-ml-vs-ai.png",
+    category: "Data Science",
+    categoryId: "data-science",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "12 min read",
+    tags: [
+      "data science vs machine learning vs ai",
+      "difference between data science and machine learning and ai",
+      "data science",
+      "machine learning",
+      "artificial intelligence",
+      "ml vs ai",
+      "skills and tools",
+      "CDPL Cinute Digital"
+    ],
+    featured: true,
+    contentFile: "data-science-vs-machine-learning-vs-artificial-intelligence",
+    seo: {
+      metaTitle: "Data Science vs Machine Learning vs AI: The Clear Difference",
+      metaDescription: "Clear definitions and differences between data science, machine learning, and artificial intelligence. See overlaps, examples, skills, and tools with a CDPL study path.",
+      keywords: [
+        "data science vs machine learning vs ai",
+        "difference between data science and machine learning and ai",
+        "what is data science",
+        "what is machine learning",
+        "what is artificial intelligence",
+        "ml vs ai",
+        "data science skills",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/ds-vs-ml-vs-ai-og.jpg",
+      canonical: "/blog/data-science-vs-machine-learning-vs-artificial-intelligence"
+    }
+  },
+  {
+    id: "19",
+    slug: "30-must-know-functions-with-real-datasets",
+    title: "Pandas Tutorial: 30 Must-Know Functions With Real Datasets",
+    description: "Learn 30 essential Pandas functions with copy paste examples on real datasets. A CDPL focused tutorial for analysts, data scientists, and students.",
+    excerpt: "Master the 80 20 of Pandas. From read_csv and merge to groupby, pivot_table, apply, and time series tricks, each function includes a short example on realistic data.",
+    featuredImage: "/blog/featured/pandas-30-functions.png",
+    category: "Data Science",
+    categoryId: "data-science",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "15 min read",
+    tags: [
+      "pandas tutorial",
+      "pandas functions",
+      "python data analysis",
+      "real datasets",
+      "data science",
+      "data wrangling",
+      "pandas cheat sheet",
+      "CDPL Cinute Digital"
+    ],
+    featured: true,
+    contentFile: "30-must-know-functions-with-real-datasets",
+    seo: {
+      metaTitle: "Pandas Tutorial: 30 Must-Know Functions With Real Datasets",
+      metaDescription: "A practical Pandas tutorial by CDPL with 30 essential functions and realistic datasets. Learn read_csv, merge, groupby, pivot_table, apply, datetime, and more.",
+      keywords: [
+        "pandas tutorial",
+        "pandas functions",
+        "pandas cheat sheet",
+        "python data analysis",
+        "pandas examples",
+        "groupby in pandas",
+        "merge in pandas",
+        "pivot table pandas",
+        "data cleaning pandas",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/pandas-30-functions-og.jpg",
+      canonical: "/blog/30-must-know-functions-with-real-datasets"
+    }
+  },
+  {
+    id: "20",
+    slug: "what-is-artificial-intelligence",
+    title: "What Is Artificial Intelligence? Types, Examples, and Use Cases",
+    description: "Beginner friendly AI guide by CDPL. Learn what artificial intelligence is, key types, real examples, and industry use cases with skills and tools to get started.",
+    excerpt: "What is artificial intelligence? This CDPL guide explains AI in simple terms, covers types like symbolic, machine learning, deep learning, and generative AI, and shares practical examples and high value use cases.",
+    featuredImage: "/blog/featured/what-is-artificial-intelligence.png",
+    category: "Artificial Intelligence",
+    categoryId: "ai",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "12 min read",
+    tags: [
+      "what is artificial intelligence",
+      "types of artificial intelligence",
+      "ai examples",
+      "ai use cases",
+      "machine learning vs ai",
+      "generative ai",
+      "deep learning",
+      "nlp",
+      "computer vision",
+      "cdpl cinute digital"
+    ],
+    featured: true,
+    contentFile: "what-is-artificial-intelligence",
+    seo: {
+      metaTitle: "What Is Artificial Intelligence? Types, Examples, and Use Cases | CDPL Cinute Digital",
+      metaDescription: "Clear AI guide for beginners. Understand what artificial intelligence is, types of AI (symbolic, machine learning, deep learning, generative), real examples, and industry use cases with a CDPL learning path.",
+      keywords: [
+        "what is artificial intelligence",
+        "types of artificial intelligence",
+        "ai examples",
+        "ai use cases",
+        "machine learning vs ai",
+        "generative ai",
+        "deep learning",
+        "natural language processing",
+        "computer vision",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/what-is-artificial-intelligence-og.jpg",
+      canonical: "/blog/what-is-artificial-intelligence"
+    }
+  },
+  {
+    id: "21",
+    slug: "ai-agents-101-tools-memory-and-planning",
+    title: "AI Agents 101: Tools, Memory, and Planning",
+    description: "Beginner friendly guide to AI agents by CDPL. Learn how agent tools, memory, and planning work together to automate tasks safely and reliably.",
+    excerpt: "New to AI agents? This CDPL guide explains what agents are, how they use tools and memory, popular planning strategies like ReAct, and how to evaluate and ship useful agent workflows.",
+    featuredImage: "/blog/featured/ai-agents-101.png",
+    category: "Artificial Intelligence",
+    categoryId: "ai",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "13 min read",
+    tags: [
+      "ai agents",
+      "agent tools",
+      "agent memory",
+      "agent planning",
+      "react prompting",
+      "rag",
+      "function calling",
+      "workflow automation",
+      "cdpl cinute digital"
+    ],
+    featured: true,
+    contentFile: "ai-agents-101-tools-memory-and-planning",
+    seo: {
+      metaTitle: "AI Agents 101: Tools, Memory, and Planning | CDPL Cinute Digital",
+      metaDescription: "Learn AI agents from the ground up. Understand tools and function calling, short term and long term memory, planning strategies like ReAct, safety, and evaluation with runnable code samples.",
+      keywords: [
+        "ai agents",
+        "what is an ai agent",
+        "agent tools",
+        "agent memory",
+        "agent planning",
+        "react prompting",
+        "rag for agents",
+        "function calling",
+        "workflow automation",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/ai-agents-101-og.jpg",
+      canonical: "/blog/ai-agents-101-tools-memory-and-planning"
+    }
+  },
+  {
+    id: "22",
+    slug: "overfitting-vs-underfitting-with-pictures",
+    title: "Overfitting vs Underfitting with Pictures",
+    description: "A clear, picture first guide by CDPL that explains overfitting and underfitting, bias variance trade off, detection methods, and practical fixes with scikit learn examples.",
+    excerpt: "See what overfitting and underfitting look like with simple charts. Learn the bias variance trade off, how to detect issues with learning curves and validation, and how to fix them with regularization and better data.",
+    featuredImage: "/blog/featured/overfitting-vs-underfitting.png",
+    category: "Artificial Intelligence",
+    categoryId: "ai",
+    author: "Adnan Khan",
+    authorId: "adnan-khan",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "9 min read",
+    tags: [
+      "overfitting",
+      "underfitting",
+      "bias variance trade off",
+      "machine learning basics",
+      "model generalization",
+      "learning curves",
+      "regularization",
+      "scikit learn",
+      "cdpl cinute digital"
+    ],
+    featured: true,
+    contentFile: "overfitting-vs-underfitting-with-pictures",
+    seo: {
+      metaTitle: "Overfitting vs Underfitting with Pictures | CDPL Cinute Digital",
+      metaDescription: "Understand overfitting and underfitting visually. Learn bias variance trade off, how to detect problems with validation and learning curves, and how to fix them using regularization and better data.",
+      keywords: [
+        "overfitting vs underfitting",
+        "bias variance trade off",
+        "what is overfitting",
+        "what is underfitting",
+        "learning curves",
+        "regularization",
+        "scikit learn examples",
+        "model generalization",
+        "cdpl cinute digital"
+      ],
+      ogImage: "/blog/featured/overfitting-vs-underfitting-og.jpg",
+      canonical: "/blog/overfitting-vs-underfitting-with-pictures"
     }
   },
 
