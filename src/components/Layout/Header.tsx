@@ -61,11 +61,23 @@ const courseCategories = [
           },
         ],
       },
+      {
+        name: "Python Programming",
+        slug: "python-course",
+        description: "Master containerization and orchestration technologies.",
+        governingBodies: [{ name: "Python Programming", logo: "/header_images/Python_Programming.png" }],
+      },
+      {
+        name: "Java Programming",
+        slug: "java-course",
+        description: "Automate CI/CD pipelines with Jenkins.",
+        governingBodies: [{ name: "Java Programming", logo: "/header_images/Java_Programming.png" }],
+      },
     ],
   },
   {
     id: "data-science",
-    name: "Data Science, AI - ML & BI Courses",
+    name: "Data Science",
     description: "Prepare for job interviews with practical skills and confidence.",
     governingBodies: [{ name: "Data Science, AI - ML & BI Courses", logo: "/header_images/DataScience_AI_ML_BI.png" }],
     courses: [
@@ -129,6 +141,54 @@ const courseCategories = [
     ],
   },
   {
+    id: "business-intelligence",
+    name: "Business Intelligence (BI)",
+    description: "Develop skills to manage projects efficiently and effectively.",
+    governingBodies: [{ name: "Business Intelligence (BI)", logo: "/header_images/bi_course_banner.png" }],
+    courses: [
+      // {
+      //   name: "Digital Marketing and Analytics - Master Program",
+      //   slug: "digital-marketing-course",
+      //   description: "Earn the globally recognized PMP certification.",
+      //   governingBodies: [
+      //     {
+      //       name: "Digital Marketing and Analytics - Master Program",
+      //       logo: "/header_images/Digital_Marketing_Analytics.png",
+      //     },
+      //   ],
+      // },
+    ],
+  },
+  {
+    id: "artificial-intelligence",
+    name: "Artificial Intelligence (AI)",
+    description: "Develop skills to manage projects efficiently and effectively.",
+    governingBodies: [{ name: "Artificial Intelligence (AI)", logo: "/header_images/ai_course_banner.png" }],
+    courses: [
+      // {
+      //   name: "Digital Marketing and Analytics - Master Program",
+      //   slug: "digital-marketing-course",
+      //   description: "Earn the globally recognized PMP certification.",
+      //   governingBodies: [
+      //     {
+      //       name: "Digital Marketing and Analytics - Master Program",
+      //       logo: "/header_images/Digital_Marketing_Analytics.png",
+      //     },
+      //   ],
+      // },
+    ],
+  },
+  // {
+  //   id: "web-development",
+  //   name: "Web Development",
+  //   description: "Develop skills to manage projects efficiently and effectively.",
+  //   governingBodies: [{ name: "Web Development", logo: "/header_images/webdev_banner.png" }],
+  //   courses: [
+
+  //   ],
+  // },
+
+  {
     id: "digital-marketing",
     name: "Digital Marketing",
     description: "Develop skills to manage projects efficiently and effectively.",
@@ -144,26 +204,6 @@ const courseCategories = [
             logo: "/header_images/Digital_Marketing_Analytics.png",
           },
         ],
-      },
-    ],
-  },
-  {
-    id: "programming-courses",
-    name: "Programming Courses",
-    description: "Streamline software development and operations with DevOps practices.",
-    governingBodies: [{ name: "Programming Courses", logo: "/header_images/Programming.png" }],
-    courses: [
-      {
-        name: "Python Programming",
-        slug: "python-course",
-        description: "Master containerization and orchestration technologies.",
-        governingBodies: [{ name: "Python Programming", logo: "/header_images/Python_Programming.png" }],
-      },
-      {
-        name: "Java Programming",
-        slug: "java-course",
-        description: "Automate CI/CD pipelines with Jenkins.",
-        governingBodies: [{ name: "Java Programming", logo: "/header_images/Java_Programming.png" }],
       },
     ],
   },

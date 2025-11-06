@@ -189,10 +189,10 @@ export const AUTHORS: Record<string, Author> = {
 // ============================================================================
 
 export const CATEGORIES: Record<string, Category> = {
-  "ai-ml": {
-    id: "ai-ml",
-    name: "AI & Machine Learning",
-    slug: "ai-ml",
+  "ai": {
+    id: "ai",
+    name: "Artificial Intelligence",
+    slug: "artificial-intelligence",
     description: "Explore the latest in artificial intelligence and machine learning technologies",
     color: {
       bg: "bg-purple-100",
