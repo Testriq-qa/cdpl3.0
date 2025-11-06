@@ -226,21 +226,25 @@ const HomeHeroSection: React.FC = () => {
         });
 
         if (response.ok) {
-          console.log('Form submitted successfully');
+          // Success: API returned 200
+          console.log('Form submitted successfully, emails sent.');
           setIsSubmitted(true);
-          setTimeout(() => setIsSubmitted(false), 5000);
-
-          // Reset form
+          // Reset form after successful submission
           setFormData({
             fullName: '',
             email: '',
             phone: ''
           });
+          // The success message will stay for 5 seconds as per the original logic (lines 230-231)
         } else {
-          alert('Form submission failed. Please try again.');
+          // Error: API returned non-200 status
+          const errorData = await response.json();
+          console.error('Form submission failed:', errorData.message);
+          alert(`Submission failed: ${errorData.message || 'An unknown error occurred.'}`);
         }
       } catch (error) {
-        console.error('Network error:', error);
+        // Network or other unexpected error
+        console.error('Network error during form submission:', error);
         alert('Network error. Please check your connection and try again.');
       } finally {
         setIsSubmitting(false);

@@ -1,110 +1,13 @@
 'use client';
 
-import React, { useState, useCallback } from 'react';
-import PhoneInput from 'react-phone-number-input';
+import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, Phone, Mail, MapPin, User } from 'lucide-react';
+import { CheckCircle2, Phone, Mail, MapPin } from 'lucide-react';
+import ContactForm from '@/components/ContactForm'; // Import the new reusable form component
 
-/**
- * HomeFinalCTASection - Strong Call to Action
- * 
- * Final conversion section with lead form
- * Enhanced with a light, modern, and visually appealing UI/UX.
- */
 export default function HomeFinalCTASection() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-  });
-
-  const [errors, setErrors] = useState({
-    name: '',
-    email: '',
-    phone: '',
-  });
-
-  const [isSubmitting, setIsSubmitting] = useState(false);
-
-  // Validation functions from HomeHeroSection
-  const validateFullName = useCallback((name: string) => {
-    if (!name.trim()) {
-      setErrors(prev => ({ ...prev, name: 'Full Name is required' }));
-      return false;
-    }
-    setErrors(prev => ({ ...prev, name: '' }));
-    return true;
-  }, []);
-
-  const validateEmail = useCallback((email: string) => {
-    if (!email.trim()) {
-      setErrors(prev => ({ ...prev, email: 'Email is required' }));
-      return false;
-    } else if (!/\S+@\S+\.\S+/.test(email)) {
-      setErrors(prev => ({ ...prev, email: 'Email address is invalid' }));
-      return false;
-    }
-    setErrors(prev => ({ ...prev, email: '' }));
-    return true;
-  }, []);
-
-  const validatePhoneNumber = useCallback((phone: string) => {
-    if (!phone) {
-      setErrors(prev => ({ ...prev, phone: 'Mobile Number is required' }));
-      return false;
-    } else if (phone.length < 10 || phone.length > 15) {
-      setErrors(prev => ({ ...prev, phone: 'Mobile Number is invalid' }));
-      return false;
-    } else if (/(.)\1{3}/.test(phone) || /(123|234|345|456|567|678|789|890|098|987|876|765|654|543|432|321|210)/.test(phone)) {
-      setErrors(prev => ({ ...prev, phone: 'Mobile Number cannot contain repeating or sequential digits' }));
-      return false;
-    }
-    setErrors(prev => ({ ...prev, phone: '' }));
-    return true;
-  }, []);
-
-  const validateForm = useCallback(() => {
-    const isNameValid = validateFullName(formData.name);
-    const isEmailValid = validateEmail(formData.email);
-    const isPhoneValid = validatePhoneNumber(formData.phone);
-    return isNameValid && isEmailValid && isPhoneValid;
-  }, [formData, validateFullName, validateEmail, validatePhoneNumber]);
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault();
-    if (!validateForm()) {
-      return;
-    }
-
-    setIsSubmitting(true);
-    
-    // TODO: Implement actual form submission
-    console.log('Form submitted:', formData);
-    
-    setTimeout(() => {
-      setIsSubmitting(false);
-      alert('Thank you! Our team will contact you within 24 hours.');
-      setFormData({ name: '', email: '', phone: '' });
-    }, 1500);
-  };
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({
-      ...formData,
-      [e.target.name]: e.target.value,
-    });
-  };
-
-  const handlePhoneChange = (value: string | undefined) => {
-    setFormData(prev => ({
-      ...prev,
-      phone: value || '',
-    }));
-  };
-
   return (
     <section className="relative py-12 lg:py-20 bg-white overflow-hidden">
-      {/* Decorative Background - Light and Subtle */}
       <div className="absolute inset-0 opacity-50" style={{ zIndex: 0 }}>
         <div className="absolute top-0 left-0 w-96 h-96 bg-indigo-100 rounded-full filter blur-3xl animate-blob"></div>
         <div className="absolute bottom-0 right-0 w-96 h-96 bg-orange-100 rounded-full filter blur-3xl animate-blob animation-delay-4000"></div>
@@ -112,7 +15,6 @@ export default function HomeFinalCTASection() {
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -127,7 +29,6 @@ export default function HomeFinalCTASection() {
               Join 5000+ students who have successfully launched their careers in Software Testing, Data Science, and AI/ML with CDPL&apos;s industry-ready training.
             </p>
 
-            {/* Benefits - Enhanced UI */}
             <div className="space-y-4 mb-8">
               {[
                 'Start learning within 48 hours',
@@ -151,7 +52,6 @@ export default function HomeFinalCTASection() {
               ))}
             </div>
 
-            {/* Contact Info - Enhanced UI */}
             <motion.div 
               className="space-y-3 pt-8 border-t border-gray-200"
               initial={{ opacity: 0 }}
@@ -177,7 +77,6 @@ export default function HomeFinalCTASection() {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Lead Form - Enhanced UI */}
           <motion.div
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
@@ -186,130 +85,16 @@ export default function HomeFinalCTASection() {
             className="relative"
           >
             <div className="bg-white/80 backdrop-blur-md rounded-3xl shadow-2xl border border-gray-100 p-8 md:p-10 transform hover:shadow-3xl transition-shadow duration-300">
-              {/* Form Header */}
-              <div className="text-center mb-8">
-                <h3 className="text-3xl font-bold text-gray-900 mb-2">
-                  Get Started Today
-                </h3>
-                <p className="text-gray-600">
-                  Fill the form below and our team will contact you within 24 hours
-                </p>
-              </div>
-
-              {/* Form */}
-              <form onSubmit={handleSubmit} className="space-y-5">
-                {/* Full Name Input - TestRiq Style */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Full Name *
-                  </label>
-                  <div className="relative">
-                    <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <input
-                      type="text"
-                      name="name"
-                      value={formData.name}
-                      onChange={handleChange}
-                      onBlur={() => validateFullName(formData.name)}
-                      required
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${
-                        errors.name ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder="Enter your full name"
-                      style={{ color: '#1e293b' }}
-                    />
-                  </div>
-                  {errors.name && (
-                    <p className="text-red-500 text-xs mt-1">{errors.name}</p>
-                  )}
-                </div>
-
-                {/* Email Input - TestRiq Style */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Email Address *
-                  </label>
-                  <div className="relative">
-                    <Mail className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-                    <input
-                      type="email"
-                      name="email"
-                      value={formData.email}
-                      onChange={handleChange}
-                      onBlur={() => validateEmail(formData.email)}
-                      required
-                      className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${
-                        errors.email ? 'border-red-500' : 'border-gray-300'
-                      }`}
-                      placeholder="Enter your email address"
-                      style={{ color: '#1e293b' }}
-                    />
-                  </div>
-                  {errors.email && (
-                    <p className="text-red-500 text-xs mt-1">{errors.email}</p>
-                  )}
-                </div>
-
-                {/* Phone Input - TestRiq Style with react-phone-number-input */}
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
-                    Mobile Number *
-                  </label>
-                  <div className="relative">
-                    <PhoneInput
-                      international
-                      defaultCountry="IN"
-                      value={formData.phone}
-                      onChange={handlePhoneChange}
-                      onBlur={() => validatePhoneNumber(formData.phone)}
-                      className={`phone-input-container ${
-                        errors.phone ? 'border-red-500' : ''
-                      }`}
-                      placeholder="Enter phone number"
-                    />
-                  </div>
-                  {errors.phone && (
-                    <p className="text-red-500 text-xs mt-1">{errors.phone}</p>
-                  )}
-                </div>
-
-                <button
-                  type="submit"
-                  disabled={isSubmitting}
-                  className="w-full py-4 bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2"
-                >
-                  {isSubmitting ? (
-                    <>
-                      <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                      <span>Submitting...</span>
-                    </>
-                  ) : (
-                    <>
-                  <span>Get Started Now</span>
-                  <ArrowRight className="w-5 h-5" />
-                    </>
-                  )}
-                </button>
-
-              </form>
-
-              {/* Trust Indicators - Enhanced UI */}
-              <div className="mt-6 pt-6 border-t border-gray-200">
-                <div className="flex items-center justify-center gap-6 text-sm text-gray-600">
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600" />
-                    <span>100% Privacy</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600" />
-                    <span>No Spam</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <CheckCircle2 className="w-4 h-4 text-green-600" />
-                    <span>Quick Response</span>
-                  </div>
-                </div>
-              </div>
+              {/* Use the reusable ContactForm component */}
+              <ContactForm 
+                submitButtonText="Get Started Now"
+                headerText="Get Started Today"
+                subHeaderText="Fill the form below and our team will contact you within 24 hours"
+                successSubHeaderText="Thank you for your interest."
+                successBodyText="Your details have been successfully submitted. A dedicated career advisor will contact you shortly to discuss your career goals."
+                successButtonText="Submit Another Inquiry"
+                submitButtonClasses="bg-gradient-to-r from-indigo-600 to-blue-600 hover:from-indigo-700 hover:to-blue-700"
+              />
             </div>
           </motion.div>
         </div>

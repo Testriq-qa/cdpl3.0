@@ -60,7 +60,7 @@ export default function HomePlacementSupportSection() {
   ];
 
   return (
-    <section className="py-12 lg:py-20 bg-white">
+    <section className="py-6 lg:py-10 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <motion.div

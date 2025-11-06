@@ -7,9 +7,62 @@ import { CheckCircle2, Award, Users, Briefcase, Clock, Globe, HeadphonesIcon, Tr
 /**
  * HomeWhyChooseSection - Unique Benefits
  * 
- * Highlights why students should choose CDPL
- * CDPL brand with 8 key benefits
+ * Highlights why students should choose CDPL with enhanced UI/UX,
+ * multiple engaging colors, and proper responsiveness.
  */
+
+// Define a color palette for the cards
+const colorPalette = [
+  {
+    bg: 'bg-gradient-to-br from-orange-500 to-orange-600',
+    text: 'text-orange-600',
+    ring: 'ring-orange-500',
+    hoverBorder: 'hover:border-orange-300',
+  },
+  {
+    bg: 'bg-gradient-to-br from-blue-500 to-blue-600',
+    text: 'text-blue-600',
+    ring: 'ring-blue-500',
+    hoverBorder: 'hover:border-blue-300',
+  },
+  {
+    bg: 'bg-gradient-to-br from-green-500 to-green-600',
+    text: 'text-green-600',
+    ring: 'ring-green-500',
+    hoverBorder: 'hover:border-green-300',
+  },
+  {
+    bg: 'bg-gradient-to-br from-purple-500 to-purple-600',
+    text: 'text-purple-600',
+    ring: 'ring-purple-500',
+    hoverBorder: 'hover:border-purple-300',
+  },
+  {
+    bg: 'bg-gradient-to-br from-red-500 to-red-600',
+    text: 'text-red-600',
+    ring: 'ring-red-500',
+    hoverBorder: 'hover:border-red-300',
+  },
+  {
+    bg: 'bg-gradient-to-br from-yellow-500 to-yellow-600',
+    text: 'text-yellow-600',
+    ring: 'ring-yellow-500',
+    hoverBorder: 'hover:border-yellow-300',
+  },
+  {
+    bg: 'bg-gradient-to-br from-pink-500 to-pink-600',
+    text: 'text-pink-600',
+    ring: 'ring-pink-500',
+    hoverBorder: 'hover:border-pink-300',
+  },
+  {
+    bg: 'bg-gradient-to-br from-cyan-500 to-cyan-600',
+    text: 'text-cyan-600',
+    ring: 'ring-cyan-500',
+    hoverBorder: 'hover:border-cyan-300',
+  },
+];
+
 export default function HomeWhyChooseSection() {
   const benefits = [
     {
@@ -49,70 +102,85 @@ export default function HomeWhyChooseSection() {
     },
     {
       icon: CheckCircle2,
-      title: 'Certification Included',
-      description: 'Get globally recognized certifications like ISTQB, AWS, and course completion certificates.',
+      title: 'Globally Recognized Certification',
+      description: 'Get certifications like ISTQB, AWS, and course completion certificates to boost your global career prospects.',
     },
   ];
 
   return (
-    <section className="py-6 lg:py-10 bg-white">
+    <section className=" py-6 lg:py-10 bg-gray-50" aria-labelledby="why-choose-cdpl-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header - Enhanced for SEO and Impact */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">
-            Why Choose CDPL
+          <span className="inline-block px-4 py-1 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold tracking-wider mb-3">
+            Your Career Advantage
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            8 Reasons to <span className="text-orange-600">Join</span> CDPL
+          <h2 id="why-choose-cdpl-heading" className="text-4xl sm:text-5xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+            Why <span className="text-orange-600">Choose CDPL</span> for Your Future?
           </h2>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            We&apos;re not just another training institute. Here&apos;s what makes Cinute Digital the best choice for your career transformation.
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto font-light">
+            We are committed to transforming your career with a unique blend of expert-led training, personalized support, and guaranteed placement assistance.
           </p>
         </motion.div>
 
-        {/* Benefits Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 mb-16">
-          {benefits.map((benefit, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              whileHover={{ y: -5 }}
-              className="relative group"
-            >
-              {/* Card */}
-              <div className="bg-gradient-to-br from-gray-50 to-white rounded-2xl p-6 shadow-lg border border-gray-100 hover:border-orange-200 hover:shadow-xl transition-all duration-300 h-full">
-                {/* Icon */}
-                <div className="w-14 h-14 bg-gradient-to-br from-orange-500 to-orange-600 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
-                  <benefit.icon className="w-7 h-7 text-white" />
-                </div>
+        {/* Benefits Grid - Improved Responsiveness and Visuals */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          {benefits.map((benefit, index) => {
+            const color = colorPalette[index % colorPalette.length];
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, scale: 0.9 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ delay: index * 0.08, duration: 0.5 }}
+                className="group"
+              >
+                {/* Card */}
+                <div className={`
+                  bg-white rounded-3xl p-6 shadow-xl 
+                  border-2 border-transparent ${color.hoverBorder} 
+                  transition-all duration-500 ease-in-out 
+                  hover:shadow-2xl hover:-translate-y-2 h-full
+                  flex flex-col
+                `}>
+                  {/* Icon Container */}
+                  <div className={`
+                    w-16 h-16 ${color.bg} rounded-xl 
+                    flex items-center justify-center mb-4 
+                    shadow-lg transition-transform duration-500
+                    group-hover:rotate-6
+                  `}>
+                    <benefit.icon className="w-8 h-8 text-white" strokeWidth={2.5} />
+                  </div>
 
-                {/* Content */}
-                <h3 className="text-lg font-bold text-gray-900 mb-2">
-                  {benefit.title}
-                </h3>
-                <p className="text-sm text-gray-600 leading-relaxed">
-                  {benefit.description}
-                </p>
-
-                {/* Checkmark */}
-                <div className="absolute top-4 right-4 w-6 h-6 bg-green-100 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <CheckCircle2 className="w-4 h-4 text-green-600" />
+                  {/* Content */}
+                  <h3 className={`text-xl font-bold text-gray-900 mb-2 ${color.text}`}>
+                    {benefit.title}
+                  </h3>
+                  <p className="text-base text-gray-600 leading-relaxed flex-grow">
+                    {benefit.description}
+                  </p>
+                  
+                  {/* Visual Accent on Hover */}
+                  <div className={`
+                    mt-4 text-sm font-semibold 
+                    opacity-0 group-hover:opacity-100 
+                    transition-opacity duration-300
+                    ${color.text}
+                  `}>
+                  
+                  </div>
                 </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
-
-        {/* Comparison Highlight */}
-     
       </div>
     </section>
   );

@@ -2,14 +2,81 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, HelpCircle } from 'lucide-react';
+import { ChevronDown, MessageSquare, Zap } from 'lucide-react';
 
 /**
  * HomeFAQSection - Common Questions
  * 
- * Accordion-style FAQ section
- * CDPL brand with smooth animations
+ * Enhanced Accordion-style FAQ section with a modern, two-column layout,
+ * improved UI/UX, and better responsiveness.
  */
+
+// Custom Accordion Item Component for cleaner code
+const FAQItem = ({ faq, index, openIndex, toggleFAQ }: {
+  faq: { question: string; answer: string };
+  index: number;
+  openIndex: number | null;
+  toggleFAQ: (index: number) => void;
+}) => {
+  const isOpen = openIndex === index;
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ delay: index * 0.05, duration: 0.4 }}
+      className="bg-white rounded-xl shadow-lg border border-gray-100 overflow-hidden transition-all duration-300 hover:shadow-xl"
+    >
+      {/* Question Button */}
+      <button
+        onClick={() => toggleFAQ(index)}
+        className={`w-full px-6 py-5 flex items-center justify-between text-left transition-colors duration-300 ${
+          isOpen ? 'bg-orange-50' : 'hover:bg-gray-50'
+        }`}
+        aria-expanded={isOpen}
+        aria-controls={`faq-content-${index}`}
+      >
+        <div className="flex items-center gap-4 flex-1">
+          <h3 className={`text-lg font-semibold pr-4 transition-colors duration-300 ${
+            isOpen ? 'text-brand' : 'text-gray-900'
+          }`}>
+            {faq.question}
+          </h3>
+        </div>
+        <ChevronDown
+          className={`w-6 h-6 text-gray-500 flex-shrink-0 transition-transform duration-330 ${
+            isOpen ? 'transform rotate-180 text-brand' : ''
+          }`}
+        />
+      </button>
+
+      {/* Answer Content */}
+      <AnimatePresence initial={false}>
+        {isOpen && (
+          <motion.div
+            key="content"
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: 'auto', opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.3, ease: [0.4, 0, 0.2, 1] }}
+            className="overflow-hidden"
+            id={`faq-content-${index}`}
+            role="region"
+            aria-labelledby={`faq-heading-${index}`}
+          >
+            <div className="px-6 pb-6 pt-0">
+              <p className="text-base text-gray-600 leading-relaxed border-t pt-4 mt-2">
+                {faq.answer}
+              </p>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </motion.div>
+  );
+};
+
 export default function HomeFAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(0);
 
@@ -52,103 +119,61 @@ export default function HomeFAQSection() {
     setOpenIndex(openIndex === index ? null : index);
   };
 
+  // Split FAQs into two columns for desktop view
+  const half = Math.ceil(faqs.length / 2);
+  const firstHalf = faqs.slice(0, half);
+  const secondHalf = faqs.slice(half);
+
   return (
-    <section className="py-6 lg:py-10 bg-white">
+    <section className="py-6 lg:py-10 bg-gray-50" aria-labelledby="faq-heading">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Section Header */}
+        {/* Section Header - Enhanced for SEO and Impact */}
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
+          initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          viewport={{ once: true, amount: 0.2 }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">
-            FAQ
+          <span className="inline-block px-4 py-1 bg-green-100 text-green-700 rounded-full text-sm font-semibold tracking-wider mb-3">
+            Quick Answers
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            Frequently Asked <span className="text-orange-600">Questions</span>
+          <h2 id="faq-heading" className="text-4xl sm:text-5xl lg:text-5xl font-extrabold text-gray-900 mb-4 leading-tight">
+            Frequently Asked <span className="text-brand">Questions</span>
           </h2>
-          <p className="text-lg text-gray-600">
-            Got questions? We&apos;ve got answers. Find everything you need to know about our courses and services.
+          <p className="text-xl text-gray-600 max-w-4xl mx-auto font-light">
+            Find everything you need to know about our courses, placements, and training methodology.
           </p>
         </motion.div>
 
-        {/* FAQ Accordion */}
-        <div className="space-y-4">
-          {faqs.map((faq, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.05 }}
-              className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden"
-            >
-              {/* Question */}
-              <button
-                onClick={() => toggleFAQ(index)}
-                className="w-full px-6 py-5 flex items-center justify-between text-left hover:bg-gray-50 transition-colors duration-200"
-              >
-                <div className="flex items-center gap-4 flex-1">
-                  <div className={`w-10 h-10 rounded-full flex items-center justify-center flex-shrink-0 transition-colors duration-300 ${
-                    openIndex === index
-                      ? 'bg-orange-600'
-                      : 'bg-orange-100'
-                  }`}>
-                    <HelpCircle className={`w-5 h-5 ${
-                      openIndex === index ? 'text-white' : 'text-orange-600'
-                    }`} />
-                  </div>
-                  <h3 className="text-lg font-bold text-gray-900 pr-4">
-                    {faq.question}
-                  </h3>
-                </div>
-                <ChevronDown
-                  className={`w-6 h-6 text-gray-500 flex-shrink-0 transition-transform duration-300 ${
-                    openIndex === index ? 'transform rotate-180' : ''
-                  }`}
-                />
-              </button>
+        {/* FAQ Accordion - Two-Column Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12">
+          {/* First Column */}
+          <div className="space-y-4">
+            {firstHalf.map((faq, index) => (
+              <FAQItem
+                key={index}
+                faq={faq}
+                index={index}
+                openIndex={openIndex}
+                toggleFAQ={toggleFAQ}
+              />
+            ))}
+          </div>
 
-              {/* Answer */}
-              <AnimatePresence>
-                {openIndex === index && (
-                  <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
-                  >
-                    <div className="px-6 pb-5 pl-20">
-                      <p className="text-gray-600 leading-relaxed">
-                        {faq.answer}
-                      </p>
-                    </div>
-                  </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+          {/* Second Column */}
+          <div className="space-y-4">
+            {secondHalf.map((faq, index) => (
+              <FAQItem
+                key={index + half} // Ensure unique key and index for the second half
+                faq={faq}
+                index={index + half}
+                openIndex={openIndex}
+                toggleFAQ={toggleFAQ}
+              />
+            ))}
+          </div>
         </div>
 
-        {/* Still Have Questions CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="mt-12 text-center bg-gradient-to-br from-orange-50 to-blue-50 rounded-2xl p-8 border border-orange-100"
-        >
-          <h3 className="text-2xl font-bold text-gray-900 mb-3">
-            Still have questions?
-          </h3>
-          <p className="text-gray-600 mb-6">
-            Our team is here to help. Get in touch and we&apos;ll answer all your queries.
-          </p>
-          <button className="px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300">
-            Talk to an Advisor
-          </button>
-        </motion.div>
       </div>
     </section>
   );

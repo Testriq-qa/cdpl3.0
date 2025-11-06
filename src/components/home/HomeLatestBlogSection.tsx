@@ -26,7 +26,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number }> = ({ post, index }) 
       <Link href={`/blog/${post.slug}`}>
         <div className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden hover:shadow-2xl transition-all duration-300 h-full flex flex-col">
           {/* Featured Image */}
-          <div className="relative h-48 bg-gradient-to-br from-orange-400 to-orange-600 overflow-hidden">
+          <div className="relative h-48 bg-gradient-to-br from-indigo-300 to-indigo-600 overflow-hidden">
             {/* Using Next/Image with the featuredImage from the data source */}
             <Image
               src={post.featuredImage}
@@ -37,7 +37,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number }> = ({ post, index }) 
             
             {/* Category Badge */}
             <div className="absolute top-4 left-4">
-              <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-orange-600 text-xs font-bold rounded-full">
+              <span className="px-3 py-1 bg-white/90 backdrop-blur-sm text-indigo-600 text-xs font-bold rounded-full">
                 {post.category}
               </span>
             </div>
@@ -46,7 +46,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number }> = ({ post, index }) 
           {/* Content */}
           <div className="p-6 flex-1 flex flex-col">
             {/* Title */}
-            <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-orange-600 transition-colors duration-300">
+            <h3 className="text-xl font-bold text-gray-900 mb-3 line-clamp-2 group-hover:text-indigo-600 transition-colors duration-300">
               {post.title}
             </h3>
 
@@ -73,7 +73,7 @@ const BlogCard: React.FC<{ post: BlogPost; index: number }> = ({ post, index }) 
                 <Calendar className="w-4 h-4" />
                 <span>{formattedDate}</span>
               </div>
-              <div className="flex items-center gap-1 text-orange-600 font-semibold group-hover:gap-2 transition-all duration-300">
+              <div className="flex items-center gap-1 text-indigo-600 font-semibold group-hover:gap-2 transition-all duration-300">
                 <span>Read More</span>
                 <ArrowRight className="w-4 h-4" />
               </div>
@@ -111,11 +111,11 @@ export default function HomeLatestBlogSection() {
           viewport={{ once: true }}
           className="text-center mb-16"
         >
-          <span className="inline-block px-4 py-2 bg-orange-100 text-orange-700 rounded-full text-sm font-semibold mb-4">
+          <span className="inline-block px-4 py-2 bg-indigo-100 text-indigo-600 rounded-full text-sm font-semibold mb-4">
             Latest Insights
           </span>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4">
-            From Our <span className="text-orange-600">Blog</span>
+            From Our <span className="text-indigo-600">Blog</span>
           </h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
             Stay updated with the latest trends, tutorials, and insights in software testing, data science, and technology.
@@ -138,7 +138,7 @@ export default function HomeLatestBlogSection() {
         >
           <Link
             href="/blog" // Link to the main blog page
-            className="inline-flex items-center gap-2 px-8 py-4 bg-orange-600 hover:bg-orange-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-xl shadow-lg hover:shadow-xl transform hover:-translate-y-1 transition-all duration-300"
           >
             <span>View All Articles</span>
             <ArrowRight className="w-5 h-5" />
