@@ -90,14 +90,14 @@ const FAQSection: React.FC<FAQSectionProps> = ({ data = mockData }) => {
               Questions & Answers
             </span>
           </motion.div>
-          
+
           <motion.h2
             className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-4 leading-tight"
             variants={itemVariants}
           >
             {faqsContent.title}
           </motion.h2>
-          
+
           <motion.p
             className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto"
             variants={itemVariants}
@@ -115,8 +115,8 @@ const FAQSection: React.FC<FAQSectionProps> = ({ data = mockData }) => {
           viewport={{ once: true, margin: "-50px" }}
         >
           {faqsContent.faqs.map((faq, index) => (
-            <motion.div 
-              key={index} 
+            <motion.div
+              key={index}
               variants={itemVariants}
               className="group"
             >
@@ -195,30 +195,32 @@ const FAQSection: React.FC<FAQSectionProps> = ({ data = mockData }) => {
             {/* Decorative Elements */}
             <div className="absolute top-0 right-0 w-40 h-40 bg-white/10 rounded-full -mr-20 -mt-20 blur-2xl"></div>
             <div className="absolute bottom-0 left-0 w-40 h-40 bg-white/10 rounded-full -ml-20 -mb-20 blur-2xl"></div>
-            
+
             <div className="relative z-10">
               <div className="inline-flex items-center justify-center w-16 h-16 bg-white/20 backdrop-blur-sm rounded-2xl mb-6">
                 <MessageCircle className="w-8 h-8 text-white" />
               </div>
-              
+
               <h3 className="text-2xl md:text-3xl font-bold text-white mb-3">
                 Still have questions?
               </h3>
-              
+
               <p className="text-emerald-50 text-base md:text-lg mb-8 max-w-2xl mx-auto">
                 Can&apos;t find the answer you&apos;re looking for? Our dedicated support team is ready to assist you.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/contact-us" className="group px-8 py-4 bg-white text-emerald-600 font-semibold rounded-xl hover:bg-emerald-50 transition-all duration-300 shadow-lg hover:shadow-xl hover:scale-105 flex items-center justify-center gap-2">
                   <MessageCircle className="w-5 h-5 group-hover:rotate-12 transition-transform" />
                   <span>Contact Support</span>
                 </Link>
-                
-                <button className="group px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2">
+
+                <Link
+                  href="https://calendar.app.google/14RAvFHwRASBBfyc9"
+                  className="group px-8 py-4 bg-white/10 backdrop-blur-sm border-2 border-white/30 text-white font-semibold rounded-xl hover:bg-white/20 transition-all duration-300 flex items-center justify-center gap-2">
                   <Calendar className="w-5 h-5 group-hover:scale-110 transition-transform" />
                   <span>Schedule a Call</span>
-                </button>
+                </Link>
               </div>
             </div>
           </div>

@@ -289,6 +289,18 @@ export const CATEGORIES: Record<string, Category> = {
       text: "text-rose-700",
     },
   },
+
+  "business-intelligence": {
+    id: "business-intelligence",
+    name: "Business Intelligence (BI)",
+    slug: "business-intelligence",
+    description: "Data warehousing, ETL, dashboards, and analytics for smarter decision-making",
+    color: {
+      bg: "bg-indigo-100",
+      text: "text-indigo-700",
+    },
+  },
+
   // "career-tips": {
   //   id: "career-tips",
   //   name: "Career Tips",
@@ -384,13 +396,13 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
 
-    {
+  {
     id: "3",
     slug: "what-is-software-testing",
     title: "What Is Software Testing? Types, Levels, and Examples",
     description: "A practical introduction to software testing for product teams at CDPL. Learn key testing types, testing levels across the SDLC, and real-world examples with tools and tips.",
     excerpt: "New to QA or refreshing fundamentals? Learn software testing basics, explore functional and non-functional types, understand testing levels from unit to UAT, and see simple examples you can apply today.",
-    featuredImage: "/blog/featured/software-testing-basics.png",
+    featuredImage: "/blog/featured/what-is-software-testing.png",
     category: "Software Testing",
     categoryId: "software-testing",
     author: "Adnan Khan",
@@ -885,50 +897,361 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-  id: "14",
-  slug: "migrating-gatsby-cra-to-nextjs-15-step-by-step",
-  title: "Static to Dynamic: Migrating Gatsby/CRA to Next.js 15 (Step-by-Step)",
-  description:
-    "A practical 2025 migration guide for teams moving from Gatsby or Create React App to Next.js 15. Learn App Router, React Server Components, ISR, edge rendering, Metadata API, routing, SEO, images, and CI/CD.",
-  excerpt:
-    "Ship faster with React Server Components, App Router, and ISR. This step-by-step playbook shows how to migrate from Gatsby or CRA to Next.js 15 without losing SEO, performance, or developer velocity.",
-  featuredImage: "/blog/featured/migrate-gatsby-cra-to-next15.png",
-  category: "Web Development",
-  categoryId: "web-development",
-  author: "Jayesh Mistry",
-  authorId: "jayesh-mistry",
-  publishDate: "2025-11-06",
-  lastModified: "2025-11-06",
-  readTime: "14 min read",
-  tags: [
-    "Next.js 15",
-    "Migration",
-    "Gatsby",
-    "Create React App",
-    "React Server Components",
-    "ISR",
-    "SEO"
-  ],
-  featured: true,
-  contentFile: "migrating-gatsby-cra-to-nextjs-15-step-by-step",
-  seo: {
-    metaTitle:
-      "Migrate Gatsby/CRA to Next.js 15 (2025): Step-by-Step Guide to App Router, RSC, ISR & SEO",
-    metaDescription:
-      "Definitive 2025 guide to migrate from Gatsby or Create React App to Next.js 15. Covers App Router, React Server Components, ISR, edge rendering, routing, images, fonts, SEO (Metadata API), and CI/CD.",
-    keywords: [
-      "migrate gatsby to nextjs",
-      "migrate cra to nextjs",
-      "next.js 15 app router",
-      "react server components migration",
-      "nextjs isr migration",
-      "nextjs seo metadata api",
-      "gatsby to nextjs guide"
+    id: "14",
+    slug: "migrating-gatsby-cra-to-nextjs-15-step-by-step",
+    title: "Static to Dynamic: Migrating Gatsby/CRA to Next.js 15 (Step-by-Step)",
+    description:
+      "A practical 2025 migration guide for teams moving from Gatsby or Create React App to Next.js 15. Learn App Router, React Server Components, ISR, edge rendering, Metadata API, routing, SEO, images, and CI/CD.",
+    excerpt:
+      "Ship faster with React Server Components, App Router, and ISR. This step-by-step playbook shows how to migrate from Gatsby or CRA to Next.js 15 without losing SEO, performance, or developer velocity.",
+    featuredImage: "/blog/featured/migrate-gatsby-cra-to-next15.png",
+    category: "Web Development",
+    categoryId: "web-development",
+    author: "Jayesh Mistry",
+    authorId: "jayesh-mistry",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "14 min read",
+    tags: [
+      "Next.js 15",
+      "Migration",
+      "Gatsby",
+      "Create React App",
+      "React Server Components",
+      "ISR",
+      "SEO"
     ],
-    ogImage: "/blog/featured/migrate-gatsby-cra-to-next15-og.jpg",
-    canonical: "/blog/migrating-gatsby-cra-to-nextjs-15-step-by-step"
+    featured: true,
+    contentFile: "migrating-gatsby-cra-to-nextjs-15-step-by-step",
+    seo: {
+      metaTitle:
+        "Migrate Gatsby/CRA to Next.js 15 (2025): Step-by-Step Guide to App Router, RSC, ISR & SEO",
+      metaDescription:
+        "Definitive 2025 guide to migrate from Gatsby or Create React App to Next.js 15. Covers App Router, React Server Components, ISR, edge rendering, routing, images, fonts, SEO (Metadata API), and CI/CD.",
+      keywords: [
+        "migrate gatsby to nextjs",
+        "migrate cra to nextjs",
+        "next.js 15 app router",
+        "react server components migration",
+        "nextjs isr migration",
+        "nextjs seo metadata api",
+        "gatsby to nextjs guide"
+      ],
+      ogImage: "/blog/featured/migrate-gatsby-cra-to-next15-og.jpg",
+      canonical: "/blog/migrating-gatsby-cra-to-nextjs-15-step-by-step"
+    }
+  },
+  {
+    id: "15",
+    slug: "2025-digital-marketing-strategy-proven-frameworks-grow-traffic-revenue",
+    title: "2025 Digital Marketing Strategy: Proven Frameworks to Grow Traffic & Revenue",
+    description:
+      "A step-by-step 2025 digital marketing playbook covering SEO, content strategy, paid media, email automation, CRO, and attribution. Use proven frameworks to scale qualified traffic, leads, and revenue with first-party data and GA4.",
+    excerpt:
+      "Build a high-ROI digital marketing engine for 2025. Learn ICP research, topical authority SEO, programmatic content, PPC mix, lifecycle email, CRO experimentation, and GA4 attribution—organized into a 90-day roadmap.",
+    featuredImage: "/blog/featured/2025-digital-marketing-strategy.png",
+    category: "Digital Marketing",
+    categoryId: "digital-marketing",
+    author: "Sushma Pal",
+    authorId: "sushma-pal",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "14 min read",
+    tags: [
+      "Digital Marketing",
+      "SEO Strategy",
+      "Content Marketing",
+      "PPC",
+      "CRO",
+      "Email Marketing",
+      "GA4",
+      "First-Party Data",
+      "Demand Generation",
+      "ABM"
+    ],
+    featured: true,
+    contentFile: "2025-digital-marketing-strategy-proven-frameworks-grow-traffic-revenue",
+    seo: {
+      metaTitle:
+        "2025 Digital Marketing Strategy: SEO, Content, PPC, Email & CRO Frameworks",
+      metaDescription:
+        "Create a winning 2025 digital marketing strategy. Master SEO (topical authority, programmatic content), PPC mix, lifecycle email, CRO, and GA4 attribution to grow traffic and revenue.",
+      keywords: [
+        "digital marketing strategy 2025",
+        "seo strategy 2025",
+        "content marketing plan",
+        "programmatic seo",
+        "ppc strategy google ads",
+        "email marketing automation",
+        "conversion rate optimization cro",
+        "ga4 attribution",
+        "first-party data strategy",
+        "demand generation framework"
+      ],
+      ogImage: "/blog/featured/2025-digital-marketing-strategy-og.jpg",
+      canonical: "/blog/2025-digital-marketing-strategy-proven-frameworks-grow-traffic-revenue"
+    }
+  },
+  {
+    id: "16",
+    slug: "linkedin-lead-generation-personal-branding-dm-funnels-that-scale",
+    title: "LinkedIn Lead Generation: Personal Branding and DM Funnels That Scale",
+    description:
+      "A 2025 playbook for LinkedIn lead generation. Build a magnetic personal brand, design ethical DM funnels, and scale outreach with Sales Navigator, content pillars, CTAs, and conversion metrics.",
+    excerpt:
+      "Turn LinkedIn into a predictable pipeline engine. Learn personal branding, content frameworks, DM funnels, Sales Navigator targeting, offer design, and KPI tracking to grow qualified B2B leads.",
+    featuredImage: "/blog/featured/linkedin-lead-gen-2025.png",
+    category: "Digital Marketing",
+    categoryId: "digital-marketing",
+    author: "Sushma Pal",
+    authorId: "sushma-pal",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "14 min read",
+    tags: [
+      "LinkedIn Lead Generation",
+      "Personal Branding",
+      "Social Selling",
+      "Sales Navigator",
+      "Outbound",
+      "Content Marketing",
+      "B2B Marketing",
+      "DM Strategy",
+      "Appointment Setting"
+    ],
+    featured: true,
+    contentFile: "linkedin-lead-generation-personal-branding-dm-funnels-that-scale",
+    seo: {
+      metaTitle:
+        "LinkedIn Lead Generation (2025): Personal Branding & DM Funnels That Scale",
+      metaDescription:
+        "Master LinkedIn lead generation in 2025. Build a personal brand, create high-converting DM funnels, use Sales Navigator targeting, and track reply & booking rates for predictable B2B pipeline.",
+      keywords: [
+        "linkedin lead generation",
+        "linkedin personal branding",
+        "linkedin dm strategy",
+        "sales navigator targeting",
+        "social selling framework",
+        "b2b appointment setting",
+        "linkedin outreach templates",
+        "linkedin content strategy",
+        "inbound leads linkedin",
+        "linkedin messages that convert"
+      ],
+      ogImage: "/blog/featured/linkedin-lead-gen-2025-og.jpg",
+      canonical: "/blog/linkedin-lead-generation-personal-branding-dm-funnels-that-scale"
+    }
+  },
+  {
+    id: "17",
+    slug: "ai-in-digital-marketing-prompting-content-ops-personalization-at-scale",
+    title: "AI in Digital Marketing: Prompting, Content Ops, and Personalization at Scale",
+    description:
+      "A 2025 playbook for using AI in digital marketing: prompt engineering, content operations, and 1:1 personalization that scales across SEO, ads, email, and lifecycle—without sacrificing brand safety.",
+    excerpt:
+      "Turn AI into real pipeline. Learn prompt patterns, editorial workflows, human-in-the-loop QA, AI-driven personalization, and GA4/CRM attribution to grow qualified traffic, leads, and revenue.",
+    featuredImage: "/blog/featured/ai-digital-marketing-2025.png",
+    category: "Digital Marketing",
+    categoryId: "digital-marketing",
+    author: "Sushma Pal",
+    authorId: "sushma-pal",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "14 min read",
+    tags: [
+      "AI in Digital Marketing",
+      "Prompt Engineering",
+      "Content Operations",
+      "Personalization",
+      "Programmatic SEO",
+      "Marketing Automation",
+      "GA4",
+      "First-Party Data",
+      "Email Marketing",
+      "CRO"
+    ],
+    featured: true,
+    contentFile: "ai-in-digital-marketing-prompting-content-ops-personalization-at-scale",
+    seo: {
+      metaTitle:
+        "AI in Digital Marketing (2025): Prompting, Content Ops & Personalization at Scale",
+      metaDescription:
+        "Master AI for digital marketing: prompt engineering, programmatic SEO, content ops, and 1:1 personalization across ads, email, and web. Includes QA guardrails, GA4 attribution, and a 90-day roadmap.",
+      keywords: [
+        "ai in digital marketing",
+        "prompt engineering marketing",
+        "content operations workflow",
+        "programmatic seo",
+        "marketing personalization at scale",
+        "email marketing automation",
+        "ga4 attribution",
+        "first-party data strategy",
+        "marketing ai tools 2025",
+        "generative ai content marketing"
+      ],
+      ogImage: "/blog/featured/ai-digital-marketing-2025-og.jpg",
+      canonical: "/blog/ai-in-digital-marketing-prompting-content-ops-personalization-at-scale"
+    }
+  },
+  {
+    id: "18",
+    slug: "power-bi-vs-tableau-vs-looker-which-bi-tool-wins-2025",
+    title: "Power BI vs Tableau vs Looker (Google Cloud): Which BI Tool Wins in 2025?",
+    description:
+      "An unbiased 2025 comparison of Power BI, Tableau, and Looker (Google Cloud). Evaluate pricing, performance, governance, embedded analytics, AI features, and best-fit scenarios for enterprises and startups.",
+    excerpt:
+      "Power BI vs Tableau vs Looker in 2025: side-by-side comparison of features, pricing, performance, governance, AI, and use cases—so you can choose the right BI platform for growth.",
+    featuredImage: "/blog/featured/bi-tools-2025.png",
+    category: "Business Intelligence",
+    categoryId: "business-intelligence",
+    author: "Ashish Shetty",
+    authorId: "ashish-shetty",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "14 min read",
+    tags: [
+      "Power BI",
+      "Tableau",
+      "Looker",
+      "Google Cloud",
+      "Business Intelligence",
+      "Data Visualization",
+      "Embedded Analytics",
+      "Self-Service BI",
+      "Data Governance",
+      "Analytics Engineering"
+    ],
+    featured: true,
+    contentFile: "power-bi-vs-tableau-vs-looker-which-bi-tool-wins-2025",
+    seo: {
+      metaTitle:
+        "Power BI vs Tableau vs Looker (2025): Pricing, Features, and Best BI Tool",
+      metaDescription:
+        "Compare Power BI, Tableau, and Looker (Google Cloud) for 2025. See pricing, AI features, data modeling, governance, embedded analytics, and which BI tool is best for your team.",
+      keywords: [
+        "power bi vs tableau",
+        "tableau vs looker",
+        "power bi vs looker",
+        "best bi tools 2025",
+        "business intelligence comparison",
+        "power bi pricing",
+        "tableau pricing",
+        "looker pricing",
+        "embedded analytics",
+        "self-service bi"
+      ],
+      ogImage: "/blog/featured/bi-tools-2025-og.jpg",
+      canonical: "/blog/power-bi-vs-tableau-vs-looker-which-bi-tool-wins-2025"
+    }
+  },
+  {
+    id: "19",
+    slug: "sql-for-bi-analysts-queries-window-functions-performance-tuning",
+    title: "SQL for BI Analysts: Queries, Window Functions, and Performance Tuning",
+    description:
+      "A practical 2025 guide to SQL for BI analysts: SELECT patterns, joins, aggregations, window functions (ROW_NUMBER, RANK, LAG/LEAD), CTEs, and performance tuning with indexes, partitions, and EXPLAIN.",
+    excerpt:
+      "Level up your BI SQL. Learn high-impact query patterns, master window functions, and tune performance with indexes, partitions, and caching—plus ready-to-use snippets for dashboards and ad-hoc analysis.",
+    featuredImage: "/blog/featured/sql-for-bi-analysts-2025.png",
+    category: "Business Intelligence",
+    categoryId: "business-intelligence",
+    author: "Ashish Shetty",
+    authorId: "ashish-shetty",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "14 min read",
+    tags: [
+      "SQL",
+      "Business Intelligence",
+      "Window Functions",
+      "Performance Tuning",
+      "Analytics Engineering",
+      "Data Warehousing",
+      "ETL/ELT",
+      "PostgreSQL",
+      "BigQuery",
+      "Snowflake"
+    ],
+    featured: true,
+    contentFile: "sql-for-bi-analysts-queries-window-functions-performance-tuning",
+    seo: {
+      metaTitle:
+        "SQL for BI Analysts (2025): Queries, Window Functions & Performance Tuning",
+      metaDescription:
+        "Master SQL for BI in 2025. Learn high-impact query patterns, window functions (ROW_NUMBER, RANK, LAG/LEAD), CTEs, and performance tuning with indexes, partitions, and EXPLAIN for faster dashboards.",
+      keywords: [
+        "sql for bi analysts",
+        "window functions sql",
+        "sql performance tuning",
+        "row_number rank dense_rank",
+        "lag lead rolling average",
+        "sql joins and aggregates",
+        "ctes and materialized views",
+        "bigquery partition clustering",
+        "snowflake performance best practices",
+        "postgresql indexing explain analyze"
+      ],
+      ogImage: "/blog/featured/sql-for-bi-analysts-2025-og.jpg",
+      canonical: "/blog/sql-for-bi-analysts-queries-window-functions-performance-tuning"
+    }
+  },
+  {
+    id: "20",
+    slug: "drill-through-bookmarks-buttons-ux-patterns-pro-dashboards",
+    title: "Drill-Through, Bookmarks, and Buttons: UX Patterns for Pro Dashboards",
+    description:
+      "A 2025 UX guide to build high-converting dashboards using drill-through, bookmarks, and buttons. Includes patterns for Power BI, Tableau, and Looker, with navigation, context, and accessibility best practices.",
+    excerpt:
+      "Design dashboards users love. Learn actionable UX patterns for drill-through, bookmarks, and buttons—optimize task flows, preserve context, and speed insights across Power BI, Tableau, and Looker.",
+    featuredImage: "/blog/featured/ux-pro-dashboards-2025.png",
+    category: "Business Intelligence",
+    categoryId: "business-intelligence",
+    author: "Ashish Shetty",
+    authorId: "ashish-shetty",
+    publishDate: "2025-11-06",
+    lastModified: "2025-11-06",
+    readTime: "14 min read",
+    tags: [
+      "Dashboard UX",
+      "Power BI",
+      "Tableau",
+      "Looker",
+      "Drill-Through",
+      "Bookmarks",
+      "Buttons",
+      "Interaction Design",
+      "Self-Service BI",
+      "Product Analytics"
+    ],
+    featured: true,
+    contentFile: "drill-through-bookmarks-buttons-ux-patterns-pro-dashboards",
+    seo: {
+      metaTitle:
+        "Dashboard UX (2025): Drill-Through, Bookmarks & Buttons for Power BI, Tableau, Looker",
+      metaDescription:
+        "Master dashboard UX in 2025. Use drill-through, bookmarks, and buttons to build fast, intuitive Power BI, Tableau, and Looker experiences that increase adoption and time-to-insight.",
+      keywords: [
+        "dashboard ux patterns",
+        "power bi bookmarks",
+        "power bi drill through",
+        "tableau navigation buttons",
+        "looker drill fields",
+        "bi dashboard design 2025",
+        "self-service analytics ux",
+        "embedded analytics navigation",
+        "data storytelling dashboards",
+        "business intelligence best practices"
+      ],
+      ogImage: "/blog/featured/ux-pro-dashboards-2025-og.jpg",
+      canonical: "/blog/drill-through-bookmarks-buttons-ux-patterns-pro-dashboards"
+    }
   }
-}
+
+
+
+
+
+
 
 
 

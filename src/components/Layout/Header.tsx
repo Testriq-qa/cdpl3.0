@@ -1,77 +1,118 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Menu, X, ChevronDown, ChevronRight, Award, Globe } from "lucide-react";
+import { Menu, X, ChevronDown, ChevronRight, Globe } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
+/* ----------------------- Types ----------------------- */
+type LogoItem = { name: string; logo: string };
+type Course = {
+  name: string;
+  description: string;
+  slug?: string;
+  rightColumnImages?: LogoItem[];
+};
+type Category = {
+  id: string;
+  name: string;
+  description: string;
+  rightColumnImages?: LogoItem[];
+  courses: Course[];
+};
+
 /* ----------------------- Course Data ----------------------- */
-const courseCategories = [
+const courseCategories: Category[] = [
   {
     id: "software-testing-courses",
     name: "Software Testing Courses",
     description:
       "Master Agile methodologies and Scrum frameworks to enhance team collaboration and project delivery.",
-    governingBodies: [{ name: "Software Testing Courses", logo: "/header_images/Sotware_Testing.png" }],
+    rightColumnImages: [
+      { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+      { name: "Advanced Automation Testing", logo: "/aaa.png" },
+    ],
     courses: [
       {
         name: "Manual Software Testing",
         slug: "manual-testing-course",
         description: "Learn to facilitate Scrum teams and drive Agile projects effectively.",
-        governingBodies: [{ name: "Manual Testing", logo: "/header_images/Manual-Testing.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "API Testing using POSTMAN and RestAPIs",
         slug: "api-testing",
         description: "Master product backlog management and stakeholder collaboration.",
-        governingBodies: [{ name: "API Testing", logo: "/header_images/API_POSTMAN.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Database Management System using MySQL",
         slug: "dbms-course",
         description: "Gain advanced Scrum knowledge to lead high-performing teams.",
-        governingBodies: [{ name: "Database Management", logo: "/header_images/Database_Management_MySQL.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "ETL Testing Course",
         slug: "etl-testing",
         description: "Learn to lead Agile transformations using the SAFe framework.",
-        governingBodies: [{ name: "ETL Testing", logo: "/header_images/ETL_Testing.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Advanced Software Testing",
         slug: "advance-software-testing",
         description: "Facilitate SAFe practices for scaled Agile environments.",
-        governingBodies: [{ name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Advanced Automation Testing",
         slug: "automation-testing-course",
         description: "Drive product vision and delivery in SAFe settings.",
-        governingBodies: [{ name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Advanced Manual and Automation Testing - Master Program",
         slug: "advance-manual-automation-testing",
         description: "Blend Agile principles with PMI project management standards.",
-        governingBodies: [
-          {
-            name: "Advanced Manual and Automation Testing - Master Program",
-            logo: "/header_images/Advanced Manual and Automation Testing - Master Program.png",
-          },
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
       {
         name: "Python Programming",
         slug: "python-course",
         description: "Master containerization and orchestration technologies.",
-        governingBodies: [{ name: "Python Programming", logo: "/header_images/Python_Programming.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Java Programming",
         slug: "java-course",
         description: "Automate CI/CD pipelines with Jenkins.",
-        governingBodies: [{ name: "Java Programming", logo: "/header_images/Java_Programming.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
     ],
   },
@@ -79,63 +120,81 @@ const courseCategories = [
     id: "data-science",
     name: "Data Science",
     description: "Prepare for job interviews with practical skills and confidence.",
-    governingBodies: [{ name: "Data Science, AI - ML & BI Courses", logo: "/header_images/DataScience_AI_ML_BI.png" }],
+    rightColumnImages: [
+      { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+      { name: "Advanced Automation Testing", logo: "/aaa.png" },
+    ],
     courses: [
       {
         name: "Machine Learning and Data Science with Python - Hero Program",
         slug: "machine-learning-course",
         description: "Build strategies to ace behavioral and technical interviews.",
-        governingBodies: [
-          {
-            name: "Machine Learning and Data Science with Python - Hero Program",
-            logo: "/header_images/ML_and_DS_with_Python.png",
-          },
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
       {
         name: "Deep Learning, NLP and GenerativeAI",
         slug: "generative-ai-course",
         description: "Practice real-world interview scenarios with feedback.",
-        governingBodies: [{ name: "Deep Learning, NLP and GenerativeAI", logo: "/header_images/DeepLearning_and_NLP.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Advanced Data Analytics - Hero Program",
         slug: "data-analytics",
         description: "Craft a standout resume to impress recruiters.",
-        governingBodies: [{ name: "Advanced Data Analytics - Hero Program", logo: "/header_images/Advance_Data_Analytics.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Big Data Engineering",
         slug: "data-engineering-course",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [{ name: "Big Data Engineering", logo: "/header_images/Big_Data_Engineering.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Prompt Engineering with Generative AI",
         slug: "prompt-engineering-course",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [{ name: "Prompt Engineering with Generative AI", logo: "/header_images/Prompt_Engineering_Gen_AI.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Advanced Data Science and Machine Learning Masterclass",
         slug: "data-science-course",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [{ name: "Advanced Data Science and Machine Learning Masterclass", logo: "/header_images/Advance_DS_and_ML.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Comprehensive Data Science and AI - Master Program",
         slug: "ai-course",
         description: "Master coding challenges and technical questions.",
-        governingBodies: [{ name: "Comprehensive Data Science and AI - Master Program", logo: "/header_images/Comprehensive_DS_and_AI.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Data Analysis with BI & Big Data Engineering Master Program",
+        // no slug here (and that's OK)
         description: "Master coding challenges and technical questions.",
-        governingBodies: [
-          {
-            name: "Data Analysis with BI & Big Data Engineering Master Program",
-            logo: "/header_images/Data_Analysis_Big_Data_Engineering.png",
-          },
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
     ],
@@ -144,65 +203,35 @@ const courseCategories = [
     id: "business-intelligence",
     name: "Business Intelligence (BI)",
     description: "Develop skills to manage projects efficiently and effectively.",
-    governingBodies: [{ name: "Business Intelligence (BI)", logo: "/header_images/bi_course_banner.png" }],
-    courses: [
-      // {
-      //   name: "Digital Marketing and Analytics - Master Program",
-      //   slug: "digital-marketing-course",
-      //   description: "Earn the globally recognized PMP certification.",
-      //   governingBodies: [
-      //     {
-      //       name: "Digital Marketing and Analytics - Master Program",
-      //       logo: "/header_images/Digital_Marketing_Analytics.png",
-      //     },
-      //   ],
-      // },
-    ],
+    rightColumnImages: [
+      { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+      { name: "Advanced Automation Testing", logo: "/aaa.png" },
+    ], courses: [],
   },
   {
     id: "artificial-intelligence",
     name: "Artificial Intelligence (AI)",
     description: "Develop skills to manage projects efficiently and effectively.",
-    governingBodies: [{ name: "Artificial Intelligence (AI)", logo: "/header_images/ai_course_banner.png" }],
-    courses: [
-      // {
-      //   name: "Digital Marketing and Analytics - Master Program",
-      //   slug: "digital-marketing-course",
-      //   description: "Earn the globally recognized PMP certification.",
-      //   governingBodies: [
-      //     {
-      //       name: "Digital Marketing and Analytics - Master Program",
-      //       logo: "/header_images/Digital_Marketing_Analytics.png",
-      //     },
-      //   ],
-      // },
-    ],
+    rightColumnImages: [
+      { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+      { name: "Advanced Automation Testing", logo: "/aaa.png" },
+    ], courses: [],
   },
-  // {
-  //   id: "web-development",
-  //   name: "Web Development",
-  //   description: "Develop skills to manage projects efficiently and effectively.",
-  //   governingBodies: [{ name: "Web Development", logo: "/header_images/webdev_banner.png" }],
-  //   courses: [
-
-  //   ],
-  // },
-
   {
     id: "digital-marketing",
     name: "Digital Marketing",
     description: "Develop skills to manage projects efficiently and effectively.",
-    governingBodies: [{ name: "Digital Marketing", logo: "/header_images/Digital_Marketing.png" }],
-    courses: [
+    rightColumnImages: [
+      { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+      { name: "Advanced Automation Testing", logo: "/aaa.png" },
+    ], courses: [
       {
         name: "Digital Marketing and Analytics - Master Program",
         slug: "digital-marketing-course",
         description: "Earn the globally recognized PMP certification.",
-        governingBodies: [
-          {
-            name: "Digital Marketing and Analytics - Master Program",
-            logo: "/header_images/Digital_Marketing_Analytics.png",
-          },
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
     ],
@@ -211,33 +240,40 @@ const courseCategories = [
     id: "aaa-accredited",
     name: "AAA Accredited Courses",
     description: "Unlock insights from data with advanced analytics and machine learning.",
-    governingBodies: [{ name: "AAA Accredited Courses", logo: "/header_images/AAA_Accredited.png" }],
-    courses: [
+    rightColumnImages: [
+      { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+      { name: "Advanced Automation Testing", logo: "/aaa.png" },
+    ], courses: [
       {
         name: "Advanced Software Testing",
         description: "Analyze data to drive business decisions.",
-        governingBodies: [{ name: "Advanced Software Testing", logo: "/header_images/Advance_Software_Testing.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Advanced Automation Testing",
         description: "Build predictive models with machine learning techniques.",
-        governingBodies: [{ name: "Advanced Automation Testing", logo: "/header_images/Advance_Automation_Testing.png" }],
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
+        ],
       },
       {
         name: "Advanced Data Science and Machine Learning - Masterclass",
         description: "Use Python for data analysis and visualization.",
-        governingBodies: [
-          { name: "Advanced Data Science and Machine Learning - Masterclass", logo: "/header_images/Advance_DS_and_ML.png" },
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
       {
         name: "Data Analysis with BI & Big Data Engineering - Master Program",
         description: "Create interactive data visualizations with Power BI.",
-        governingBodies: [
-          {
-            name: "Data Analysis with BI & Big Data Engineering - Master Program",
-            logo: "/header_images/Data_Analysis_Big_Data_Engineering.png",
-          },
+        rightColumnImages: [
+          { name: "Advanced Software Testing", logo: "/cdpl-logo.png" },
+          { name: "Advanced Automation Testing", logo: "/aaa.png" },
         ],
       },
     ],
@@ -250,7 +286,7 @@ const Header = () => {
 
   // Mega menu state (layout unchanged)
   const [isMegaMenuOpen, setIsMegaMenuOpen] = useState(false);
-  const [selectedCategory, setSelectedCategory] = useState(courseCategories[0].id);
+  const [selectedCategory, setSelectedCategory] = useState<string>(courseCategories[0].id);
   const [hoveredCourse, setHoveredCourse] = useState<string | null>(null);
   const [hoveredCategory, setHoveredCategory] = useState<string | null>(null);
 
@@ -329,12 +365,7 @@ const Header = () => {
       ) {
         setIsAboutOpen(false);
       }
-      // Close mega if click is outside the full mega wrapper
-      if (
-        isMegaMenuOpen &&
-        megaMenuRef.current &&
-        !megaMenuRef.current.contains(t)
-      ) {
+      if (isMegaMenuOpen && megaMenuRef.current && !megaMenuRef.current.contains(t)) {
         closeMega();
       }
     };
@@ -372,18 +403,19 @@ const Header = () => {
   };
 
   // Derived
-  const selectedCategoryData = courseCategories.find((cat) => cat.id === selectedCategory);
+  const selectedCategoryData = courseCategories.find((cat) => cat.id === selectedCategory)!;
   const hoveredCourseData = selectedCategoryData?.courses.find((c) => c.name === hoveredCourse);
-  const displayGoverningBodies =
-    hoveredCourse ? hoveredCourseData?.governingBodies || [] : selectedCategoryData?.governingBodies || [];
-  const displayDescription = hoveredCourse ? hoveredCourseData?.description : selectedCategoryData?.description;
 
-  // Two images on right; duplicate first if only one
-  const rightColumnBodies = (() => {
-    const arr = displayGoverningBodies?.slice(0, 2) || [];
-    if (arr.length === 1) arr.push(arr[0]);
-    return arr.slice(0, 2);
+  // Prefer explicit rightColumnImages, else fall back to first two governingBodies
+  const rightColumnBodies: LogoItem[] = (() => {
+    const src = hoveredCourse
+      ? hoveredCourseData?.rightColumnImages ?? hoveredCourseData?.rightColumnImages ?? []
+      : selectedCategoryData?.rightColumnImages ?? selectedCategoryData?.rightColumnImages ?? [];
+    return (src || []).slice(0, 2);
   })();
+
+  const displayDescription =
+    hoveredCourse ? hoveredCourseData?.description : selectedCategoryData?.description;
 
   return (
     <header className="bg-white shadow-lg sticky top-0 z-50">
@@ -416,7 +448,7 @@ const Header = () => {
                 <ChevronDown className="ml-1 h-4 w-4" />
               </button>
 
-              {/* Mega Menu Wrapper (layout unchanged) */}
+              {/* Mega Menu Wrapper */}
               {isMegaMenuOpen && (
                 <div
                   id="mega-menu"
@@ -469,29 +501,51 @@ const Header = () => {
                         <div className="col-span-12 sm:col-span-4 lg:col-span-5 pr-0 sm:pr-4">
                           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3 sm:mb-4">Courses</h3>
                           <div className="grid grid-cols-1 gap-1 max-h-[420px] overflow-y-auto pr-2">
-                            {selectedCategoryData?.courses.map((course, index) => (
-                              <a
-                                key={index}
-                                href={course.slug}
-                                onMouseEnter={() => setHoveredCourse(course.name)}
-                                className={`flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${hoveredCourse === course.name ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
-                                  }`}
-                              >
-                                <div className="flex-shrink-0 mt-1">
-                                  <div
-                                    className={`w-2 h-2 rounded-full transition-transform ${hoveredCourse === course.name ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
-                                      }`}
-                                  />
+                            {selectedCategoryData?.courses.map((course, index) => {
+                              const isHovered = hoveredCourse === course.name;
+                              const href = course.slug ? `/${course.slug}` : undefined;
+                              const itemClasses = `flex items-start px-3 py-2 rounded-lg transition-all duration-200 group ${isHovered ? "bg-blue-50 text-blue-700" : "text-gray-700 hover:bg-blue-50 hover:text-blue-700"
+                                }`;
+
+                              const inner = (
+                                <>
+                                  <div className="flex-shrink-0 mt-1">
+                                    <div
+                                      className={`w-2 h-2 rounded-full transition-transform ${isHovered ? "bg-blue-700 scale-125" : "bg-blue-600 group-hover:scale-125"
+                                        }`}
+                                    />
+                                  </div>
+                                  <div className="ml-3">
+                                    <p className="font-medium text-sm">{course.name}</p>
+                                  </div>
+                                </>
+                              );
+
+                              return href ? (
+                                <Link
+                                  key={index}
+                                  href={href}
+                                  onMouseEnter={() => setHoveredCourse(course.name)}
+                                  className={itemClasses}
+                                >
+                                  {inner}
+                                </Link>
+                              ) : (
+                                <div
+                                  key={index}
+                                  onMouseEnter={() => setHoveredCourse(course.name)}
+                                  className={itemClasses}
+                                  role="button"
+                                  tabIndex={0}
+                                >
+                                  {inner}
                                 </div>
-                                <div className="ml-3">
-                                  <p className="font-medium text-sm">{course.name}</p>
-                                </div>
-                              </a>
-                            ))}
+                              );
+                            })}
                           </div>
                         </div>
 
-                        {/* Column 3: Two stacked images */}
+                        {/* Column 3: Two stacked images (distinct slots) */}
                         <div className="col-span-12 sm:col-span-4 lg:col-span-4 bg-gradient-to-br from-blue-50 to-purple-50 rounded-xl p-4">
                           <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wider mb-3">
                             {hoveredCourse || hoveredCategory ? "Certifications" : "Governing Bodies"}
@@ -505,29 +559,30 @@ const Header = () => {
                           </p>
 
                           <div className="grid grid-rows-2 gap-4">
-                            {rightColumnBodies.length > 0 ? (
-                              rightColumnBodies.map((body, index) => (
+                            {[0, 1].map((i) => {
+                              const body = rightColumnBodies[i];
+                              return (
                                 <div
-                                  key={`${body.name}-${index}`}
+                                  key={i + (body?.name || "placeholder")}
                                   className="bg-white rounded-lg p-4 hover:shadow-md transition-all duration-200 flex items-center justify-center h-32"
                                 >
-                                  <Image
-                                    src={body.logo}
-                                    alt={body.name}
-                                    className="object-contain h-full w-auto rounded-md"
-                                    width={400}
-                                    height={128}
-                                  />
+                                  {body ? (
+                                    <Image
+                                      src={body.logo}
+                                      alt={body.name}
+                                      className="object-contain h-full w-auto rounded-md"
+                                      width={400}
+                                      height={128}
+                                      priority={false}
+                                    />
+                                  ) : (
+                                    <div className="flex items-center justify-center h-full w-full text-gray-300 text-xs">
+                                      Image slot
+                                    </div>
+                                  )}
                                 </div>
-                              ))
-                            ) : (
-                              <div className="row-span-2 flex flex-col items-center justify-center text-center py-8">
-                                <Award className="h-10 w-10 text-gray-300 mb-2" />
-                                <p className="text-xs text-gray-400">
-                                  Hover over categories or courses to see their certifications
-                                </p>
-                              </div>
-                            )}
+                              );
+                            })}
                           </div>
 
                           <p className="text-xs text-gray-600 mt-4 mb-4">
@@ -756,16 +811,26 @@ const Header = () => {
 
                           {isOpen && (
                             <div id={`mobile-category-${category.id}`} className="pl-4 space-y-1">
-                              {category.courses.map((course, idx) => (
-                                <a
-                                  key={idx}
-                                  href={course.slug}
-                                  className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
-                                  onClick={toggleMenu}
-                                >
-                                  • {course.name}
-                                </a>
-                              ))}
+                              {category.courses.map((course, idx) => {
+                                const href = course.slug ? `/${course.slug}` : undefined;
+                                return href ? (
+                                  <Link
+                                    key={idx}
+                                    href={href}
+                                    className="block px-4 py-2 text-sm text-gray-600 hover:text-blue-600 hover:bg-white rounded-lg transition-colors"
+                                    onClick={toggleMenu}
+                                  >
+                                    • {course.name}
+                                  </Link>
+                                ) : (
+                                  <div
+                                    key={idx}
+                                    className="block px-4 py-2 text-sm text-gray-600 rounded-lg"
+                                  >
+                                    • {course.name}
+                                  </div>
+                                );
+                              })}
                             </div>
                           )}
                         </div>

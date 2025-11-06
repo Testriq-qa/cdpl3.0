@@ -3,6 +3,7 @@
 
 import { useMemo, useState } from "react";
 import { CheckCircle2, Clock, BookOpen, Target, Sparkles, ChevronDown, Download, ShieldCheck, Code2, NotebookPen, FlaskConical, Bug, Layers, Trophy, Brain, Pin } from "lucide-react";
+import Link from "next/link";
 
 /* ---------- Token: small color map so cards feel lively but not loud ---------- */
 const ACCENTS = ["indigo", "cyan", "emerald", "amber", "rose", "violet"] as const;
@@ -351,14 +352,13 @@ export default function CurriculumSection() {
                             <option>Weeks 11–12</option>
                         </select>
 
-                        <a
-                            href="/manual-testing-syllabus.pdf"
+                        <button
                             className="inline-flex items-center gap-2 rounded-xl border border-gray-300 bg-white px-4 py-3 text-sm font-semibold text-gray-900 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                             aria-label="Download detailed syllabus PDF"
                         >
                             <Download className="h-4 w-4" />
                             Download Syllabus
-                        </a>
+                        </button>
                     </div>
                 </div>
 
@@ -379,13 +379,13 @@ export default function CurriculumSection() {
                                 and <strong>ISTQB-aligned</strong> fundamentals—optimized for roles like <em>Manual QA Engineer</em>, <em>Test Analyst</em>, and <em>QA Associate</em>.
                             </p>
                         </div>
-                        <a
-                            href="#apply"
+                        <Link
+                            href="contact-us"
                             className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-3 text-sm font-semibold text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500"
                         >
                             <Code2 className="h-4 w-4" />
                             Apply Now
-                        </a>
+                        </Link>
                     </div>
                 </div>
             </div>

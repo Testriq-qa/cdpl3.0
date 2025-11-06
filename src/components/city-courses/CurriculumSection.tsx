@@ -37,9 +37,9 @@ const panelVariants: Variants = {
 
 /** ---- Match tab colors to CourseOverview VARIANTS order ---- */
 type Variant = {
-  header: string;
-  button: string;
-  hoverBorder: string;
+  header: string;      // ACTIVE background class (gradient)
+  button: string;      // (kept for your future buttons)
+  hoverBorder: string; // subtle hover border tint for INACTIVE tabs
 };
 
 const VARIANTS: Variant[] = [
@@ -130,11 +130,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
             <div
               role="tablist"
               aria-label="Curriculum tracks"
-              className="
-                flex flex-wrap justify-center
-                gap-2 sm:gap-3
-                w-full
-              "
+              className="flex flex-wrap justify-center gap-2 sm:gap-3 w-full"
             >
               {tracks.map((t: Track, i: number) => {
                 const active = i === activeTrack;
@@ -152,18 +148,18 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
                     className={[
                       // sizing & layout
                       "flex items-center text-center justify-center",
-                      // mobile: compact with truncation, tablet+: full width
                       "sm:flex-none flex-1 min-w-[100px] sm:min-w-[140px] max-w-[150px] sm:max-w-none",
-                      "px-2 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all",
-                      // gradient background
-                      variant.header,
-                      "border border-transparent shadow-sm",
-                      // state styles
+                      "px-2 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-semibold transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-slate-300",
+                      // ACTIVE: keep your gradient; INACTIVE: simple pill
                       active
-                        ? "opacity-100 ring-2 ring-white/40"
-                        : "opacity-85 hover:opacity-100 hover:shadow-md",
-                      // text glow
-                      "[text-shadow:0_1px_0_rgba(0,0,0,0.25)]",
+                        ? [
+                          variant.header,
+                          "border border-transparent shadow-sm opacity-100 ring-2 ring-white/40 [text-shadow:0_1px_0_rgba(0,0,0,0.25)]",
+                        ].join(" ")
+                        : [
+                          "bg-white text-slate-700 border border-slate-200 hover:bg-slate-50 hover:shadow-sm",
+                          variant.hoverBorder,
+                        ].join(" "),
                     ].join(" ")}
                   >
                     <span className="sm:whitespace-normal truncate">{t.title}</span>
@@ -175,10 +171,7 @@ const CurriculumSection: React.FC<CurriculumSectionProps> = ({ data }) => {
 
           {/* Quick meta */}
           {current && (
-            <motion.div
-              variants={itemVariants}
-              className="mt-4 text-center text-sm text-slate-600"
-            >
+            <motion.div variants={itemVariants} className="mt-4 text-center text-sm text-slate-600">
               <span className="rounded-full bg-slate-50 border border-slate-200 px-3 py-1">
                 {totalWeeks} {totalWeeks === 1 ? "Module" : "Modules"}
               </span>

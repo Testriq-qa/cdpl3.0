@@ -1,7 +1,6 @@
 "use client";
 
-import { CheckCircle2, Users, Building2, BookOpenCheck, ShieldCheck, Sparkles, Video, Clock, Award, ThumbsUp, Quote } from "lucide-react";
-import Image from "next/image";
+import { CheckCircle2, Users, Building2, BookOpenCheck, ShieldCheck, Sparkles, Clock, Award, ThumbsUp, Quote } from "lucide-react";
 import Link from "next/link";
 import { useMemo } from "react";
 
@@ -194,14 +193,7 @@ export default function InstructorSection() {
               {/* CTA */}
               <div className="mt-8 flex flex-wrap items-center gap-3">
                 <Link
-                  href="#apply"
-                  className="inline-flex items-center justify-center rounded-xl bg-slate-900 px-5 py-3 text-white text-sm font-semibold hover:bg-slate-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-400"
-                  aria-label="Apply now for the instructor-led QA program"
-                >
-                  Apply Now
-                </Link>
-                <Link
-                  href="#demo-class"
+                  href="contact-us"
                   className="inline-flex items-center justify-center rounded-xl px-5 py-3 text-sm font-semibold ring-1 ring-slate-300 text-slate-800 hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-300"
                 >
                   Book a Free Demo
@@ -224,7 +216,7 @@ export default function InstructorSection() {
               </div>
 
               {/* Short Intro Video (placeholder thumbnail) */}
-              <div className="relative overflow-hidden rounded-2xl ring-1 ring-slate-200 bg-slate-50">
+              {/* <div className="relative overflow-hidden rounded-2xl ring-1 ring-slate-200 bg-slate-50">
                 <button
                   type="button"
                   className="group w-full text-left"
@@ -247,10 +239,10 @@ export default function InstructorSection() {
                     </span>
                   </div>
                 </button>
-              </div>
+              </div> */}
 
               {/* Certifications / Logos */}
-              <div className="rounded-2xl bg-white ring-1 ring-slate-200 p-4">
+              {/* <div className="rounded-2xl bg-white ring-1 ring-slate-200 p-4">
                 <p className="text-xs font-semibold text-slate-500 uppercase tracking-wide mb-3">
                   Certifications & Associations
                 </p>
@@ -261,7 +253,7 @@ export default function InstructorSection() {
                   <Logo src="/logos/postman.svg" alt="Postman API Expert" />
                   <Logo src="/logos/selenium.svg" alt="Selenium Automation" />
                 </div>
-              </div>
+              </div> */}
 
               {/* Reviews */}
               <div className="grid sm:grid-cols-2 gap-4">
@@ -305,20 +297,5 @@ export default function InstructorSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-/* ==================== Tiny Logo Component ==================== */
-function Logo({ src, alt }: { src: string; alt: string }) {
-  return (
-    <span className="relative h-7 w-24">
-      <Image
-        src={src}
-        alt={alt}
-        fill
-        className="object-contain"
-        sizes="96px"
-      />
-    </span>
   );
 }

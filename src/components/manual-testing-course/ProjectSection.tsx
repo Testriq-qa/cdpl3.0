@@ -117,22 +117,13 @@ const ProjectCard = ({ project }: ProjectCardProps) => {
 
             <div className="flex items-center justify-between">
                 <Link
-                    href={project.href ?? "#apply"}
-                    className="rounded-lg border border-gray-200 bg-white px-3.5 py-2 text-sm font-semibold text-gray-900 transition hover:bg-gray-100"
-                    aria-label={`View ${project.title} project details`}
-                >
-                    View Details
-                </Link>
-                <button
-                    type="button"
+                    href="contact-us"
                     className="rounded-lg px-3.5 py-2 text-sm font-semibold text-white transition"
                     style={{ backgroundColor: "var(--btn-color, #111827)" }}
-                    onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.95")}
-                    onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
                     aria-label={`Start ${project.title} project`}
                 >
                     Start Project
-                </button>
+                </Link>
             </div>
             <meta itemProp="educationalUse" content="Practical, Portfolio, Job-Ready" />
         </article>

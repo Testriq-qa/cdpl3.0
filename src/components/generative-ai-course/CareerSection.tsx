@@ -1,8 +1,6 @@
 // components/sections/CareerSection.tsx
 // Server component — clean, modern hiring brands section with subtle futuristic accents + SEO.
 
-import Image from "next/image";
-
 type Brand = {
   name: string;
   src: string;
@@ -135,7 +133,7 @@ export default function CareerSection() {
               >
                 {/* top accent bar */}
                 <div className="absolute left-0 right-0 top-0 h-1 rounded-t-2xl bg-white/70" aria-hidden />
-                <div className="flex h-16 sm:h-20 items-center justify-center">
+                {/* <div className="flex h-16 sm:h-20 items-center justify-center">
                   <Image
                     src={b.src}
                     alt={b.alt}
@@ -144,7 +142,7 @@ export default function CareerSection() {
                     className="max-h-10 sm:max-h-12 w-auto object-contain opacity-90 transition group-hover:opacity-100"
                     loading="lazy"
                   />
-                </div>
+                </div> */}
                 <div className="mt-3 text-xs font-semibold tracking-wide text-slate-600">
                   Trusted Employer • <span className={acc.text}>{b.name}</span>
                 </div>

@@ -2,7 +2,7 @@
 
 import { motion, type Transition } from "framer-motion";
 import Image from "next/image";
-import { Sparkles, Star, ShieldCheck, ArrowRight, Check, Play, Home, ChevronRight } from "lucide-react";
+import { Sparkles, Star, ShieldCheck, ArrowRight, Check, Home, ChevronRight } from "lucide-react";
 import Link from "next/link";
 
 const gradientText =
@@ -118,25 +118,26 @@ export default function AboutHeroSection() {
                         transition={{ ...(fadeUp.transition as Transition), delay: 0.24 }}
                         className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center"
                     >
-                        <button
+                        <Link
+                            href='courses'
                             className="inline-flex w-full items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-900/10 transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2 sm:w-auto"
                         >
                             Explore Courses <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
-                        </button>
+                        </Link>
                         <Link
                             href="contact-us"
                             className="inline-flex w-full items-center justify-center rounded-2xl border border-slate-300 bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
                         >
                             Talk to an Advisor
                         </Link>
-                        <button
+                        {/* <button
                             type="button"
                             className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl border border-slate-200 bg-white/90 px-4 py-2.5 text-sm font-medium text-slate-900 shadow-sm transition hover:bg-white focus:outline-none focus:ring-2 focus:ring-slate-200 focus:ring-offset-2 dark:border-slate-200/70 dark:bg-white/90 sm:w-auto"
                             aria-label="Watch 60-second overview video"
                         >
                             <Play className="h-4 w-4 transition group-hover:scale-110" aria-hidden="true" />
                             60-sec Overview
-                        </button>
+                        </button> */}
                     </motion.div>
 
                     <motion.div

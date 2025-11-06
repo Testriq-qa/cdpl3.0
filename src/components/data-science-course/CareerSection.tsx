@@ -139,13 +139,13 @@ export default function CareerSection() {
                   c.accent.ring,
                 ].join(" ")}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                
+                {/* <Image
                   src={c.logo}
                   alt={c.alt}
                   className="mx-auto h-10 w-auto select-none grayscale opacity-80 transition-all duration-200 group-hover:grayscale-0 group-hover:opacity-100"
                   loading="lazy"
-                />
+                /> */}
                 <p className={["mt-3 text-xs font-semibold", c.accent.text].join(" ")}>{c.name}</p>
               </button>
             </li>

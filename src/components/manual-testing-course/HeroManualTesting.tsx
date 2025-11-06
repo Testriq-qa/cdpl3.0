@@ -47,7 +47,7 @@ export default function HeroManualTesting() {
 
 
     return (
-        <section className="relative mx-auto max-w-full xl:max-w-7xl px-4 py-10 sm:px-6 lg:px-8 md:py-12 bg-white" aria-labelledby="manual-testing-hero">
+        <section className="relative py-10 md:py-12 bg-white" aria-labelledby="manual-testing-hero">
             {/* Background (no color gradients) */}
             <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10">
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_1px_1px,#e5e7eb_1px,transparent_1px)] [background-size:26px_26px]" />
@@ -55,7 +55,7 @@ export default function HeroManualTesting() {
                 <div className="absolute bottom-12 right-6 h-28 w-28 rounded-2xl bg-emerald-50 border border-emerald-100 shadow-sm" />
             </div>
 
-            <div className="relative overflow-hidden">
+            <div className="relative overflow-hidden mx-auto max-w-full xl:max-w-7xl px-4  sm:px-6 lg:px-8">
 
                 {/* Breadcrumbs for SEO & UX */}
                 <nav aria-label="Breadcrumb" className="mb-4">

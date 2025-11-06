@@ -1,6 +1,7 @@
 'use client';
-import { Briefcase, ArrowRight, Building2, TrendingUp, BadgeCheck, Link } from 'lucide-react';
+import { Briefcase, ArrowRight, Building2, TrendingUp, BadgeCheck } from 'lucide-react';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const roles = [
     'API Tester', 'QA Engineer', 'Automation Tester', 'Security Tester',
