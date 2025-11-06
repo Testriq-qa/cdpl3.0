@@ -318,7 +318,7 @@ export const CATEGORIES: Record<string, Category> = {
 export const BLOG_POSTS: BlogPost[] = [
 
   {
-    id: "13",
+    id: "1",
     slug: "top-data-science-trends-2025-guide",
     title: "Top Data Science Trends 2025: AI, Automation, and Ethical Insights",
     description: "Explore the top data science trends shaping 2025, from generative AI and automated ML to ethical practices and edge computing. A complete guide for professionals and businesses.",
@@ -351,7 +351,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "12",
+    id: "2",
     slug: "mastering-automated-software-testing-2025",
     title: "Mastering Automated Software Testing: The Complete 2025 Guide",
     description: "A comprehensive guide to automated software testing covering fundamentals, best practices, advanced techniques, tools, real-world examples, and future trends in 2025.",
@@ -385,7 +385,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
 
     {
-    id: "14",
+    id: "3",
     slug: "what-is-software-testing",
     title: "What Is Software Testing? Types, Levels, and Examples",
     description: "A practical introduction to software testing for product teams at CDPL. Learn key testing types, testing levels across the SDLC, and real-world examples with tools and tips.",
@@ -432,7 +432,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "15",
+    id: "4",
     slug: "manual-testing-test-scenarios-cases-suites",
     title: "Manual Testing 101: Test Scenarios, Test Cases, and Test Suites",
     description: "Learn manual testing fundamentals for CDPL learners and partner teams. Write clear test scenarios, actionable test cases, and maintainable test suites with examples and templates.",
@@ -479,7 +479,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "16",
+    id: "5",
     slug: "how-to-write-test-cases",
     title: "How to Write Test Cases: Step-by-Step Template and Examples",
     description: "A practical how to for CDPL learners and partner teams. Use a simple template, see good vs bad examples, and write test cases that are clear, repeatable, and traceable.",
@@ -523,7 +523,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "17",
+    id: "6",
     slug: "what-is-data-science",
     title: "What Is Data Science? Definition, Examples, Skills, and Career Paths",
     description: "A beginner friendly guide by CDPL that explains what data science is, how it works, real world examples, key skills, and career paths with tools to get started.",
@@ -567,7 +567,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "18",
+    id: "7",
     slug: "data-science-vs-machine-learning-vs-artificial-intelligence",
     title: "Data Science vs Machine Learning vs AI: The Clear Difference",
     description: "Understand the difference between data science, machine learning, and artificial intelligence with simple definitions, examples, skills, and tools. A CDPL guide for learners and partner teams.",
@@ -610,7 +610,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "19",
+    id: "8",
     slug: "30-must-know-functions-with-real-datasets",
     title: "Pandas Tutorial: 30 Must-Know Functions With Real Datasets",
     description: "Learn 30 essential Pandas functions with copy paste examples on real datasets. A CDPL focused tutorial for analysts, data scientists, and students.",
@@ -655,7 +655,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "20",
+    id: "9",
     slug: "what-is-artificial-intelligence",
     title: "What Is Artificial Intelligence? Types, Examples, and Use Cases",
     description: "Beginner friendly AI guide by CDPL. Learn what artificial intelligence is, key types, real examples, and industry use cases with skills and tools to get started.",
@@ -702,7 +702,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "21",
+    id: "10",
     slug: "ai-agents-101-tools-memory-and-planning",
     title: "AI Agents 101: Tools, Memory, and Planning",
     description: "Beginner friendly guide to AI agents by CDPL. Learn how agent tools, memory, and planning work together to automate tasks safely and reliably.",
@@ -748,7 +748,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "22",
+    id: "11",
     slug: "overfitting-vs-underfitting-with-pictures",
     title: "Overfitting vs Underfitting with Pictures",
     description: "A clear, picture first guide by CDPL that explains overfitting and underfitting, bias variance trade off, detection methods, and practical fixes with scikit learn examples.",
@@ -794,7 +794,7 @@ export const BLOG_POSTS: BlogPost[] = [
   },
 
   {
-    id: "23",
+    id: "12",
     slug: "nextjs-15-seo-guide-react-server-components-2025",
     title: "Next.js 15 SEO Guide: Master React Server Components in 2025",
     description: "A practical, up-to-date SEO playbook for Next.js 15. Learn how React Server Components, the App Router, streaming, caching, ISR, and Edge rendering impact search performance in 2025.",
@@ -838,7 +838,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-    id: "24",
+    id: "13",
     slug: "ai-for-frontend-developers-llms-generate-code-tests-docs-2025",
     title: "AI for Front-End Developers: Using LLMs to Generate Code, Tests & Docs",
     description:
@@ -885,7 +885,7 @@ export const BLOG_POSTS: BlogPost[] = [
     }
   },
   {
-  id: "25",
+  id: "14",
   slug: "migrating-gatsby-cra-to-nextjs-15-step-by-step",
   title: "Static to Dynamic: Migrating Gatsby/CRA to Next.js 15 (Step-by-Step)",
   description:
