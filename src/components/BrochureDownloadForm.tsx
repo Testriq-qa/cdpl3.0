@@ -1,24 +1,31 @@
 'use client';
 
 import React, { useState, useCallback } from 'react';
+import PhoneInput from 'react-phone-number-input';
+import 'react-phone-number-input/style.css';
+import { isValidPhoneNumber } from 'libphonenumber-js';
 import { motion } from 'framer-motion';
-import { ArrowRight, CheckCircle2, User, Mail, Phone, Download } from 'lucide-react';
+import { CheckCircle2, User, Mail, Download } from 'lucide-react';
 
 interface BrochureDownloadFormProps {
   onClose: () => void;
 }
 
 const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) => {
+  // Timer state for auto-closing the success message
+  const [timer, setTimer] = useState<NodeJS.Timeout | null>(null);
   const [formData, setFormData] = useState({
     fullName: '',
     email: '',
     phone: '',
+    countryCode: 'IN',
   });
 
   const [errors, setErrors] = useState({
     fullName: '',
     email: '',
     phone: '',
+    countryCode: 'IN',
   });
 
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -46,10 +53,37 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
     return true;
   }, []);
 
-  const validatePhoneNumber = useCallback((phone: string) => {
-    // Basic check for 10-15 digits
-    if (!/^\d{10,15}$/.test(phone.replace(/\D/g, ''))) {
-      setErrors(prev => ({ ...prev, phone: 'Mobile Number must be 10-15 digits' }));
+    const validatePhoneNumber = useCallback((phone: string | undefined) => {
+    if (!phone) {
+      setErrors(prev => ({ ...prev, phone: 'Mobile Number is required.' }));
+      return false;
+    }
+    if (!isValidPhoneNumber(phone)) {
+      setErrors(prev => ({ ...prev, phone: 'Invalid phone number format.' }));
+      return false;
+    }
+    const digits = phone.replace(/\D/g, '');
+    if (/^(\d)\1+$/.test(digits)) {
+      setErrors(prev => ({ ...prev, phone: 'Phone number cannot consist of repeating digits.' }));
+      return false;
+    }
+    const isSequential = (num: string) => {
+      for (let i = 0; i < num.length - 2; i++) {
+        const n1 = parseInt(num[i]);
+        const n2 = parseInt(num[i + 1]);
+        const n3 = parseInt(num[i + 2]);
+        if ((n2 === n1 + 1 && n3 === n2 + 1) || (n2 === n1 - 1 && n3 === n2 - 1)) {
+          return true;
+        }
+      }
+      return false;
+    };
+    if (isSequential(digits)) {
+      setErrors(prev => ({ ...prev, phone: 'Phone number cannot consist of sequential digits.' }));
+      return false;
+    }
+    if (/^0+$/.test(digits)) {
+      setErrors(prev => ({ ...prev, phone: 'Phone number cannot be all zeros.' }));
       return false;
     }
     setErrors(prev => ({ ...prev, phone: '' }));
@@ -64,13 +98,14 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
   }, [formData, validateFullName, validateEmail, validatePhoneNumber]);
 
   // --- Handlers ---
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value,
-    }));
-    // Validation runs only on blur or submit
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handlePhoneChange = (phone: string | undefined) => {
+    setFormData(prev => ({ ...prev, phone: phone || '' }));
+    if (phone) validatePhoneNumber(phone);
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -94,11 +129,10 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
       if (response.ok) {
         console.log('Brochure request submitted successfully, emails sent.');
         setIsSubmitted(true);
-        setFormData({
-          fullName: '',
-          email: '',
-          phone: ''
-        });
+        const newTimer = setTimeout(() => {
+          onClose();
+        }, 5000);
+        setTimer(newTimer);
       } else {
         const errorData = await response.json();
         console.error('Form submission failed:', errorData.message);
@@ -113,6 +147,11 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
   };
 
   // --- Sub-Components ---
+    const handleClose = () => {
+    if (timer) clearTimeout(timer);
+    onClose();
+  };
+
   const SuccessMessage = () => (
     <motion.div
       initial={{ opacity: 0, y: 20 }}
@@ -125,14 +164,14 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
         Brochure Sent!
       </h3>
       <p className="text-lg text-gray-600 mb-6">
-        The download link has been sent to your email address. Please check your inbox (and spam folder).
+        The download link has been sent to your email address. This window will close automatically in 5 seconds.
       </p>
       <button
-        onClick={onClose}
+        onClick={handleClose}
         className="inline-flex items-center px-6 py-3 bg-indigo-600 hover:bg-indigo-700 text-white font-bold rounded-lg shadow-lg transition-all duration-300"
       >
         <Download className="w-5 h-5 mr-2" />
-        Close & Check Email
+        Close Now
       </button>
     </motion.div>
   );
@@ -189,22 +228,19 @@ const BrochureDownloadForm: React.FC<BrochureDownloadFormProps> = ({ onClose }) 
         )}
       </div>
 
-      {/* Phone Input */}
+      {/* Phone Input with Country Code */}
       <div>
         <div className="relative">
-          <Phone className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-4 h-4" />
-          <input
-            type="tel"
-            name="phone"
+          <PhoneInput
+            international
+            defaultCountry="IN"
             value={formData.phone}
-            onChange={handleChange}
+            onChange={handlePhoneChange}
             onBlur={() => validatePhoneNumber(formData.phone)}
-            required
-            className={`w-full pl-10 pr-4 py-3 border rounded-lg focus:ring-2 focus:ring-orange-500 focus:outline-none transition-all duration-300 ${
-              errors.phone ? 'border-red-500' : 'border-gray-300'
+            className={`phone-input-container ${
+              errors.phone ? 'border-red-500' : ''
             }`}
             placeholder="Mobile Number *"
-            style={{ color: '#1e293b' }}
           />
         </div>
         {errors.phone && (

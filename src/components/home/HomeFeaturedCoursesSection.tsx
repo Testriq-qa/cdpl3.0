@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion, Variants } from 'framer-motion';
-import { Clock, Users, Award, ArrowRight, Star, Zap, Download, BookOpen, Gauge, Shield, Smartphone, CheckCircle, Cpu, BarChart3, Code, TrendingUp } from 'lucide-react';
+import { Clock, Users, ArrowRight, Star, Zap, Download, BookOpen, Gauge, Shield, Smartphone, CheckCircle, Cpu, BarChart3, Code, TrendingUp } from 'lucide-react';
 import { DownloadFormButton } from '@/components/DownloadForm';
 import Link from 'next/link';
 

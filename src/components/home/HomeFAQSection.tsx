@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown, MessageSquare, Zap } from 'lucide-react';
+import { ChevronDown } from 'lucide-react';
 
 /**
  * HomeFAQSection - Common Questions
