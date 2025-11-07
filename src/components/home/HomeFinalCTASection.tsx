@@ -216,7 +216,7 @@ export default function HomeFinalCTASection() {
                   Get Started Today
                 </h3>
                 <p className="text-gray-600">
-                  Fill the form below and our team will contact you within 24 hours
+                  Fill the form below and our team will contact you within 24 hours.
                 </p>
               </div>
 
