@@ -21,7 +21,8 @@ import Script from "next/script";
 import Image from "next/image";
 import Link from "next/link";
 import { EnrollPopup, type EnrollFormData } from "@/components/EnrollForms";
-import { DownloadFormModal } from "../DownloadForm";
+import Modal from "@/components/Modal";
+import BrochureDownloadForm from "@/components/BrochureDownloadForm";
 
 
 
@@ -352,14 +353,13 @@ export default function HeroManualTesting() {
                     onSubmit={handleEnrollSubmit}
                 />
 
-                <DownloadFormModal
+                <Modal
                     isOpen={isDownloadOpen}
                     onClose={() => setIsDownloadOpen(false)}
-                    onSubmit={() => {
-                        console.log("Download form submitted:");
-                        // trigger your download or API call here
-                    }}
-                />
+                    title="Download Manual Testing Syllabus"
+                >
+                    <BrochureDownloadForm onClose={() => setIsDownloadOpen(false)} />
+                </Modal>
 
 
                 {/* SEO helper text */}
