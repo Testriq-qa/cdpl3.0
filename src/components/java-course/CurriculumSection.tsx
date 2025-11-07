@@ -17,6 +17,7 @@ import {
   Briefcase,
   ChevronRight,
 } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 type Module = {
@@ -163,7 +164,7 @@ export default function CurriculumSection() {
             id="curriculum-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-gray-900"
           >
-            10-Module <span className="underline decoration-[.2rem] decoration-purple-400 underline-offset-4">Java Curriculum</span>
+            10-Module <span className="text-FS">Java Curriculum</span>
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-gray-700">
             {subtitle}
@@ -245,14 +246,14 @@ export default function CurriculumSection() {
                   <span className={["text-xs font-semibold", m.text].join(" ")}>
                     Outcome-Focused
                   </span>
-                  <a
-                    href={`#module-${m.num}`}
+                  <Link
+                    href="contact-us"
                     className="inline-flex items-center text-sm font-semibold text-gray-900 hover:opacity-80"
                     aria-label={`See topics in Module ${m.num}`}
                   >
                     See topics
                     <ChevronRight className="ml-1 h-4 w-4" />
-                  </a>
+                  </Link>
                 </div>
               </article>
 
@@ -287,20 +288,19 @@ export default function CurriculumSection() {
 
         {/* Actions */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row sm:gap-4">
-          <a
-            href="#apply"
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-gray-200 bg-gray-900 px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:opacity-95"
             aria-label="Apply to the Java curriculum"
           >
             Apply Now
-          </a>
-          <a
-            href="#syllabus"
+          </Link>
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-gray-300 bg-white px-5 py-3 text-sm font-semibold text-gray-900 shadow-sm transition hover:bg-gray-50"
             aria-label="Download full Java syllabus PDF"
           >
             Download Syllabus (PDF)
-          </a>
+          </button>
         </div>
       </div>
 

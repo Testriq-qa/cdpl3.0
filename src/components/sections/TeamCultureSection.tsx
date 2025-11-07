@@ -284,7 +284,7 @@ export default function TeamCultureSection() {
               Talk to a mentor <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
             <Link
-              href="/programs"
+              href="/courses"
               className="flex items-center rounded-xl border-2 bg-white p-3 text-slate-900 transition-all ease-in-out"
               style={{
                 borderColor: BRAND,

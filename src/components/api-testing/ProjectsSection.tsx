@@ -2,6 +2,7 @@
 import { Shield, Database, Smartphone, CheckCircle, Github } from 'lucide-react';
 import { motion } from 'framer-motion';
 import { JSX } from 'react';
+import Link from 'next/link';
 
 type Project = {
   icon: JSX.Element;
@@ -155,8 +156,7 @@ export default function ProjectsSection() {
 
                 {/* card footer actions */}
                 <div className="mt-6 flex flex-wrap items-center gap-3">
-                  <a
-                    href="#contact"
+                  <button
                     className={[
                       'inline-flex items-center justify-center rounded-xl border bg-white px-4 py-2 text-sm font-semibold shadow-sm transition hover:bg-slate-50 focus:outline-none',
                       p.border,
@@ -165,9 +165,9 @@ export default function ProjectsSection() {
                     aria-label={`Request syllabus for ${p.title}`}
                   >
                     Project Syllabus
-                  </a>
-                  <a
-                    href="#github"
+                  </button>
+                  <Link
+                    href="contact-us"
                     className={[
                       'inline-flex items-center justify-center gap-2 rounded-xl border bg-white px-4 py-2 text-sm font-semibold shadow-sm transition hover:bg-slate-50 focus:outline-none',
                       p.border,
@@ -177,7 +177,7 @@ export default function ProjectsSection() {
                   >
                     <Github className="h-4 w-4" />
                     GitHub Sample
-                  </a>
+                  </Link>
                 </div>
               </div>
             </motion.article>

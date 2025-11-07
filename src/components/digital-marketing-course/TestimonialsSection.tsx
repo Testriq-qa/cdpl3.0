@@ -1,6 +1,8 @@
 // components/sections/TestimonialsSection.tsx
 // Server component (no client-side JS) – sleek, responsive, slightly futuristic
 
+import Link from "next/link";
+
 type Testimonial = {
   name: string;
   text: string;
@@ -9,18 +11,18 @@ type Testimonial = {
 };
 
 const testimonials: Testimonial[] = [
-  { name: 'Kishore Jha',   role: 'Digital Marketing Analyst', rating: 5, text: 'This course is designed in an efficient and effective manner. The instructor is excellent and under his guidance I was able to learn a lot of new things.' },
-  { name: 'Ragini Kumari', role: 'Performance Marketer',       rating: 5, text: 'Best training institute for learning. It has the best skilled faculty in my experience and they have placed me in a good company.' },
-  { name: 'Faiz Khan',     role: 'SEO Specialist',             rating: 5, text: 'Everything about this course is great! From the comprehensive content to the engaging delivery, it’s been an enlightening journey.' },
-  { name: 'Dakshali Merya',role: 'Content Strategist',         rating: 5, text: 'The instructor is highly skilled and the concepts are well comprehended.' },
+  { name: 'Kishore Jha', role: 'Digital Marketing Analyst', rating: 5, text: 'This course is designed in an efficient and effective manner. The instructor is excellent and under his guidance I was able to learn a lot of new things.' },
+  { name: 'Ragini Kumari', role: 'Performance Marketer', rating: 5, text: 'Best training institute for learning. It has the best skilled faculty in my experience and they have placed me in a good company.' },
+  { name: 'Faiz Khan', role: 'SEO Specialist', rating: 5, text: 'Everything about this course is great! From the comprehensive content to the engaging delivery, it’s been an enlightening journey.' },
+  { name: 'Dakshali Merya', role: 'Content Strategist', rating: 5, text: 'The instructor is highly skilled and the concepts are well comprehended.' },
 ];
 
 // Distinct soft accents per card (no repeated colors in a row; no loud gradients)
 const ACCENTS = [
-  { ring: 'ring-sky-300',     chip: 'bg-sky-50 text-sky-800 border-sky-200',         dot: 'bg-sky-500' },
+  { ring: 'ring-sky-300', chip: 'bg-sky-50 text-sky-800 border-sky-200', dot: 'bg-sky-500' },
   { ring: 'ring-emerald-300', chip: 'bg-emerald-50 text-emerald-800 border-emerald-200', dot: 'bg-emerald-500' },
-  { ring: 'ring-amber-300',   chip: 'bg-amber-50 text-amber-900 border-amber-200',   dot: 'bg-amber-500' },
-  { ring: 'ring-violet-300',  chip: 'bg-violet-50 text-violet-800 border-violet-200', dot: 'bg-violet-500' },
+  { ring: 'ring-amber-300', chip: 'bg-amber-50 text-amber-900 border-amber-200', dot: 'bg-amber-500' },
+  { ring: 'ring-violet-300', chip: 'bg-violet-50 text-violet-800 border-violet-200', dot: 'bg-violet-500' },
 ];
 
 function initials(name: string) {
@@ -68,10 +70,10 @@ export default function TestimonialsSection() {
         <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(600px_120px_at_50%_0%,rgba(59,130,246,0.08),transparent_60%)]" />
       </div>
 
-      <div className="mx-auto max-w-7xl px-4">
+      <div className="mx-auto max-w-7xl px-4 xl:px-10">
         <header className="text-center">
           <h2 id="testimonials-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            What Our <span className="text-brand">Students Say</span>
+            What Our <span className="text-green-700">Students Say</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Real experiences from learners who leveled up their careers with <strong>job-ready marketing skills</strong>,
@@ -115,18 +117,17 @@ export default function TestimonialsSection() {
 
         {/* CTA */}
         <div className="mt-8 sm:mt-10 flex flex-wrap items-center justify-center gap-3">
-          <a
-            href="#contact"
+          <button
             className="rounded-xl border border-orange-500 bg-orange-500 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-orange-600 focus:outline-none focus:ring-4 focus:ring-orange-200"
           >
             Join the next cohort
-          </a>
-          <a
-            href="#demo"
+          </button>
+          <Link
+            href="contact-us"
             className="rounded-xl border border-slate-300 bg-white px-5 py-2.5 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-slate-200"
           >
             Book a free demo
-          </a>
+          </Link>
         </div>
       </div>
 

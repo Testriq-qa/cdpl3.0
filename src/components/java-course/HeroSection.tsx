@@ -2,6 +2,7 @@
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Assumes you have a client LeadForm at "../CourseLeadForm"
 
+import Link from "next/link";
 import LeadForm from "../CourseLeadForm";
 import { ChevronRight, Home } from "lucide-react";
 
@@ -20,7 +21,7 @@ export default function HeroSection() {
 
     const breadcrumbs = [
         { label: "Home", href: "/" },
-        { label: "Programming" },
+        { label: "Programming", href: "#" },
         { label: "Java Master Program", href: "/java-course" },
     ];
 
@@ -40,12 +41,12 @@ export default function HeroSection() {
                         {breadcrumbs.map((c, i) => (
                             <li key={i} className="flex items-center gap-2">
                                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                                <a
+                                <Link
                                     href={c.href}
                                     className={`hover:text-indigo-700 ${i === breadcrumbs.length - 1 ? 'font-semibold text-slate-900' : ''}`}
                                 >
                                     {c.label}
-                                </a>
+                                </Link>
                             </li>
                         ))}
                     </ol>
@@ -64,9 +65,9 @@ export default function HeroSection() {
 
                         <h1
                             id="java-hero"
-                            className="text-3xl font-bold leading-tight text-slate-900 sm:text-4xl md:text-5xl xl:text-6xl"
+                            className="mt-3 md:mt-0 text-3xl md:text-4xl xl:text-5xl font-extrabold leading-tight tracking-tight text-slate-900"
                         >
-                            Master Program in <span className="text-purple-700">Java Programming</span>
+                            Master Program in <span className="text-FS">Java Programming</span>
                         </h1>
 
                         {/* Mobile form directly under headline */}
@@ -85,8 +86,7 @@ export default function HeroSection() {
 
                         {/* CTAs */}
                         <div className="mt-6 flex flex-col items-stretch gap-3 sm:flex-row sm:items-center">
-                            <a
-                                href="#contact"
+                            <button
                                 className="inline-flex items-center justify-center rounded-xl border border-indigo-600 bg-indigo-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-indigo-700 hover:scale-[1.01] focus:outline-none focus:ring-4 focus:ring-indigo-200"
                                 aria-label="Enroll now in Java course"
                             >
@@ -94,21 +94,20 @@ export default function HeroSection() {
                                 <svg className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
                                     <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
                                 </svg>
-                            </a>
-                            <a
-                                href="#curriculum"
+                            </button>
+                            <Link
+                                href="#java-curriculum"
                                 className="inline-flex items-center justify-center rounded-xl border border-sky-300 bg-white px-6 py-3 text-base font-semibold text-sky-700 shadow-sm transition hover:bg-sky-50 focus:outline-none focus:ring-4 focus:ring-sky-200"
                                 aria-label="View full Java curriculum"
                             >
                                 View Curriculum
-                            </a>
-                            <a
-                                href="#demo"
+                            </Link>
+                            <button
                                 className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
                                 aria-label="Book a free demo for Java"
                             >
                                 Free Demo
-                            </a>
+                            </button>
                         </div>
 
                         {/* Quick highlights (distinct accent colors) */}
@@ -169,9 +168,9 @@ export default function HeroSection() {
                         <span className="text-yellow-600">★★★★★</span>
                         <span>#1 Mumbai’s Premium Training Institute</span>
                     </div>
-                    <a href="https://www.cinutedigital.com" className="mt-3 block text-sm text-sky-700 hover:underline">
+                    <Link href="https://www.cinutedigital.com" className="mt-3 block text-sm text-sky-700 hover:underline">
                         www.cinutedigital.com
-                    </a>
+                    </Link>
                 </div>
             </div>
 

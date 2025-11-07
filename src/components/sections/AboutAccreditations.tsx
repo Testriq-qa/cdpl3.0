@@ -205,7 +205,7 @@ export default function AboutAccreditations() {
           </p>
           <div className="flex flex-wrap items-center justify-center gap-3 mt-5">
             <Link
-              href="/certifications"
+              href="/cdpl-certificate-validation"
               className="inline-flex items-center justify-center rounded-xl bg-brand px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:shadow-md hover:translate-y-1 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-400"
             >
               Browse Certifications

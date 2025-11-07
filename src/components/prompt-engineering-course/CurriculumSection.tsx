@@ -2,6 +2,8 @@
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Unique accent colors per module (no repeats). Explicit top-bar classes (kept by Tailwind).
 
+import Link from "next/link";
+
 type Module = {
   num: string;
   title: string;
@@ -79,7 +81,7 @@ export default function CurriculumSection() {
         {/* Header */}
         <header className="mx-auto max-w-3xl text-center">
           <h2 id="curriculum-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            5-Module <span className="underline decoration-[.2rem] underline-offset-4 decoration-green-400">Curriculum</span>
+            5-Module <span className="text-DS">Curriculum</span>
           </h2>
           <p className="mt-3 text-base md:text-lg text-slate-700">{subtitle}</p>
           {/* Hidden SEO keywords */}
@@ -162,20 +164,19 @@ export default function CurriculumSection() {
 
         {/* CTA row */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 text-center sm:flex-row">
-          <a
-            href="#syllabus"
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Download the detailed Generative AI syllabus"
           >
             Download Detailed Syllabus (PDF)
-          </a>
-          <a
-            href="#apply"
+          </button>
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-green-200"
             aria-label="Apply for the Generative AI program"
           >
             Apply Now
-          </a>
+          </Link>
         </div>
 
         {/* Footnote */}

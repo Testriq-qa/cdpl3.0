@@ -149,7 +149,7 @@ export default function ServiceDetailAboutSection({ service }: { service: Servic
       </div>
 
       {/* ==== Content ==== */}
-      <div className="relative mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
+      <div className="relative mx-auto max-w-7xl px-4 pb-5 pt-10 sm:px-6 lg:px-8">
         {/* Title row with slim accent rail */}
         <div className="mb-6 flex items-center gap-3">
           <span

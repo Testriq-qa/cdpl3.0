@@ -91,7 +91,7 @@ export default function ProjectsSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mx-auto max-w-3xl text-center">
           <h2 id="projects-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Real-World <span className="underline decoration-[.18rem] underline-offset-4 decoration-emerald-400">Prompt Projects</span>
+            Real-World <span className="text-DS">Prompt Projects</span>
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             Create <strong>AI-powered applications</strong> the right way: robust <strong>prompt patterns</strong>,{" "}

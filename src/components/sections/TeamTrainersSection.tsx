@@ -142,9 +142,10 @@ export default function TeamTrainersSection({
                   src={t.avatar}
                   alt={`${t.name}, ${t.role}`}
                   width={160}
-                  height={100}
+                  height={160}
+                  sizes="160px"
+                  quality={90}
                   className="object-cover"
-                  sizes="64px"
                 />
               </div>
               <div className="min-w-0 flex-1">
@@ -183,7 +184,7 @@ export default function TeamTrainersSection({
               {t.specialties.slice(0, 5).map((sp) => (
                 <span
                   key={sp}
-                  className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 text-[14px] font-medium text-slate-700 ring-1 ring-inset ring-slate-200"
+                  className="inline-flex items-center gap-1 rounded-full bg-white px-2 py-0.5 text[14px] font-medium text-slate-700 ring-1 ring-inset ring-slate-200"
                 >
                   <Check className="h-3.5 w-3.5" style={{ color: BRAND }} />
                   {sp}

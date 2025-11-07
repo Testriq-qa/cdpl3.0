@@ -72,12 +72,33 @@ const HeroSection: React.FC<HeroSectionProps> = ({ data }) => {
             {crumbs.map((c, i) => (
               <li key={i} className="flex items-center gap-2">
                 {i === 0 ? <Home className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
-                <a
-                  href={c.href}
-                  className={`hover:text-indigo-700 ${i === crumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
-                >
-                  {c.label}
-                </a>
+
+                {i === 1 ? (
+                  // 2nd item: non-clickable
+                  <span
+                    className={`cursor-default ${i === crumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                    aria-current={i === crumbs.length - 1 ? "page" : undefined}
+                  >
+                    {c.label}
+                  </span>
+                ) : c.href ? (
+                  // Other items: clickable (use Next.js Link)
+                  <Link
+                    href={c.href}
+                    className={`hover:text-indigo-700 ${i === crumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                    aria-current={i === crumbs.length - 1 ? "page" : undefined}
+                  >
+                    {c.label}
+                  </Link>
+                ) : (
+                  // Fallback if no href
+                  <span
+                    className={`${i === crumbs.length - 1 ? "font-semibold text-slate-900" : ""}`}
+                    aria-current={i === crumbs.length - 1 ? "page" : undefined}
+                  >
+                    {c.label}
+                  </span>
+                )}
               </li>
             ))}
           </ol>

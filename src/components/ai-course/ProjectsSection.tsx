@@ -92,7 +92,7 @@ export default function ProjectsSection() {
       <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <header className="mx-auto max-w-3xl text-center">
           <h2 id="projects-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Real-World <span className="underline decoration-[.18rem] underline-offset-4 decoration-indigo-400">DS & AI Projects</span>
+            Real-World <span className="text-DS">DS & AI Projects</span>
           </h2>
           <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             Build <strong>production-grade AI systems</strong> and <strong>data pipelines</strong> with clear{" "}

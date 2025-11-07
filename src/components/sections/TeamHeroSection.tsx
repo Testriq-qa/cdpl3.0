@@ -10,9 +10,9 @@ import {
   Check,
   Home,
   ChevronRight,
-  Link,
 } from "lucide-react";
 import Image from "next/image";
+import Link from "next/link";
 
 const BRAND = "#ff8c00";
 
@@ -235,15 +235,14 @@ export default function TeamHero() {
                 >
                   Explore Mentors <ArrowRight className="ml-2 h-4 w-4" />
                 </Link>
-                <Link
-                  href="/become-a-mentor"
+                {/* <button
                   className="inline-flex items-center justify-center rounded-2xl border bg-white px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm transition hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-slate-200"
                   style={{ borderColor: brand }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = brand)}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = "white")}
                 >
                   Become a Mentor
-                </Link>
+                </button> */}
               </div>
 
               <div className="flex mt-5 md:mt-0 items-center gap-1 text-sm text-slate-600">

@@ -13,6 +13,7 @@ import ToolsSection from "@/components/prompt-engineering-course/ToolsSection";
 import FaqSection from "@/components/prompt-engineering-course/FaqSection";
 import CtaSection from "@/components/prompt-engineering-course/CtaSection";
 import CareerRoadmapSection from "@/components/prompt-engineering-course/CareerRoadmapSection";
+import StickyNav3 from "@/components/StickyNav2/StickyNav3";
 
 const PromptGenPage: NextPage = () => {
   return (
@@ -24,17 +25,23 @@ const PromptGenPage: NextPage = () => {
       </Head>
 
       <HeroSection />
-      <StatsSection />
-      <WhyPromptGenProgram />
-      <CurriculumSection />
-      <ProjectsSection />
-      <TestimonialsSection />
-      <CareerSection />
-      <WhoShouldEnroll />
-      <ToolsSection />
-      <CareerRoadmapSection />
-      <FaqSection />
-      <CtaSection />
+
+      {/* Sticky nav must appear right after hero */}
+      <div className="hidden md:block sticky top-0 z-20">
+        <StickyNav3 />
+      </div>
+
+      <section id='program-stats'><StatsSection /></section>
+      <section id='why-master-program'><WhyPromptGenProgram /></section>
+      <section id='curriculum'><CurriculumSection /></section>
+      <section id='projects'><ProjectsSection /></section>
+      <section id='testimonials'><TestimonialsSection /></section>
+      <section id='career'><CareerSection /></section>
+      <section id='who-should-enroll'><WhoShouldEnroll /></section>
+      <section id='tools'><ToolsSection /></section>
+      <section id='roadmap'><CareerRoadmapSection /></section>
+      <section id='faqs'><FaqSection /></section>
+      <section id='contact'><CtaSection /></section>
     </>
   );
 };

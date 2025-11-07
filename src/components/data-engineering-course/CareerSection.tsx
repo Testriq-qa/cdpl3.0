@@ -2,6 +2,8 @@
 // Server component — sleek, SEO-optimized, slightly futuristic, fully responsive.
 // Unique accent colors per logo card (no repeats). Accessible labels & JSON-LD.
 
+import Link from "next/link";
+
 type Company = {
   name: string;
   logo: string;
@@ -102,7 +104,7 @@ export default function CareerSection() {
         {/* Heading */}
         <h2 id="careers-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
           Top Companies Hiring{" "}
-          <span className="underline decoration-[.2rem] underline-offset-4 decoration-teal-400">Big Data Engineers</span>
+          <span className="text-DS">Big Data Engineers</span>
         </h2>
 
         {/* KPI / subtitle strip */}
@@ -125,28 +127,26 @@ export default function CareerSection() {
         >
           {COMPANIES.map((c) => (
             <li key={c.name} className="min-w-0">
-              <a
-                href={c.href || "#"}
-                target="_blank"
+              <button
                 rel="noopener noreferrer"
                 aria-label={c.name}
                 className={[
-                  "group block rounded-2xl border p-4 shadow-sm transition-all duration-200 backdrop-blur",
+                  "group block w-full rounded-2xl border p-4 shadow-sm transition-all duration-200 backdrop-blur",
                   "hover:-translate-y-0.5 hover:shadow-md focus:outline-none focus:-translate-y-0.5",
                   c.accent.bg,
                   c.accent.border,
                   c.accent.ring,
                 ].join(" ")}
               >
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                
+                {/* <Image
                   src={c.logo}
                   alt={c.alt}
                   className="mx-auto h-10 w-auto select-none grayscale opacity-80 transition-all duration-200 group-hover:grayscale-0 group-hover:opacity-100"
                   loading="lazy"
-                />
+                /> */}
                 <p className={["mt-3 text-xs font-semibold", c.accent.text].join(" ")}>{c.name}</p>
-              </a>
+              </button>
             </li>
           ))}
         </ul>
@@ -162,20 +162,19 @@ export default function CareerSection() {
 
         {/* CTA row */}
         <div className="mx-auto mt-8 flex max-w-3xl flex-col items-center justify-center gap-3 sm:flex-row">
-          <a
-            href="#apply"
+          <Link
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:-translate-y-0.5 hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Apply for placement assistance in Big Data roles"
           >
             Apply for Placement Assistance
-          </a>
-          <a
-            href="#syllabus"
+          </Link>
+          <button
             className="inline-flex items-center justify-center rounded-xl border border-slate-300 bg-white px-6 py-3 text-sm font-semibold text-slate-900 shadow-sm transition hover:bg-slate-50 focus:outline-none focus:ring-4 focus:ring-teal-200"
             aria-label="Download the job-ready Big Data Engineering syllabus"
           >
             Download Job-Ready Syllabus (PDF)
-          </a>
+          </button>
         </div>
 
         {/* Footnote */}

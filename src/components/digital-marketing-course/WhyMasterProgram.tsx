@@ -80,13 +80,13 @@ export default function WhyMasterProgram() {
         <div className="absolute inset-x-0 bottom-0 mx-auto h-px max-w-7xl bg-slate-100" />
       </div>
 
-      <div className="container mx-auto max-w-7xl px-4">
+      <div className="container mx-auto max-w-7xl px-4 xl:px-10">
         <header className="mx-auto max-w-3xl text-center">
           <h2
             id="why-master-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Your Path to the <span className="text-brand">Top&nbsp;1% Digital Marketer</span>
+            Your Path to the <span className="text-green-700">Top&nbsp;1% Digital Marketer</span>
           </h2>
           <p className="mt-3 text-base sm:text-lg text-slate-700">
             A mentor-led, AI-powered program that blends{' '}

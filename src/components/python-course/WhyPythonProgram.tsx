@@ -46,11 +46,11 @@ export default function WhyPythonProgram() {
         <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(20,184,166,0.10),transparent_60%)]" />
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container max-w-7xl mx-auto px-4 xl:px-10">
         {/* Heading */}
         <header className="text-center max-w-4xl mx-auto">
           <h2 id="why-python-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Your Gateway to the <span className="text-teal-600">Top&nbsp;1% Python Developer</span>
+            Your Gateway to the <span className="text-FS">Top&nbsp;1% Python Developer</span>
           </h2>
           <p className="mt-4 text-sm sm:text-base text-slate-600">
             An <strong>80-hour</strong>, mentor-led, <strong>project-driven</strong> Python program that blends{" "}

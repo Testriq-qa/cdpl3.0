@@ -83,7 +83,7 @@ export default function FaqSection() {
             </div>
 
             <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-                <h2 className="text-3xl md:text-4xl text-center text-slate-900 font-bold mb-4">
+                <h2 className="text-3xl md:text-4xl text-center text-ST font-bold mb-4">
                     Frequently Asked Questions
                 </h2>
 

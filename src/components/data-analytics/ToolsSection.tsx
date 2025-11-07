@@ -14,6 +14,7 @@ import {
   Cpu,
   Rocket,
 } from "lucide-react"; // note: Python isn't in lucide; we’ll reuse icons meaningfully
+import Link from "next/link";
 
 type Tool = {
   name: string;
@@ -69,7 +70,7 @@ export default function ToolsSection() {
             id="tools-heading"
             className="text-3xl md:text-4xl font-bold text-gray-900"
           >
-            Tools &amp; Technologies <span className="text-orange-600">You’ll Master</span>
+            <span className="text-DS">Tools</span> & <span className="text-DS">Technologies</span> You’ll Master
           </h2>
           <p className="mt-4 text-base sm:text-lg md:text-xl text-gray-700 max-w-3xl mx-auto">
             Build real, job-ready skills across{" "}
@@ -157,14 +158,14 @@ function ToolCard({ tool }: { tool: Tool }) {
       </p>
 
       <div className="mt-3">
-        <a
-          href="#apply"
+        <Link
+          href="contact-us"
           className="inline-flex items-center gap-1 rounded-lg border border-slate-900 bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white shadow-[0_1px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-300"
           aria-label={`Learn ${tool.name} in the Advanced Data Analytics program`}
         >
           Learn with Projects
           <Rocket className="h-3.5 w-3.5" />
-        </a>
+        </Link>
       </div>
     </article>
   );

@@ -143,13 +143,13 @@ export default function ToolsSection() {
         <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(13,148,136,0.12),transparent_60%)]" />
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container max-w-7xl mx-auto px-4 xl:px-10">
         <header className="text-center max-w-3xl mx-auto">
           <h2
             id="tools-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Tools You’ll <span className="text-teal-600">Master</span>
+            <span className="text-FS">Tools</span> You’ll Master
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             Learn a{" "}

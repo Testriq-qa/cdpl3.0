@@ -129,7 +129,7 @@ export default function StatsSection() {
             id="bde-stats-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Why <span className="underline decoration-[.18rem] underline-offset-4 decoration-teal-400">Big Data Engineering</span>?
+            Why <span className="text-DS">Big Data Engineering</span>?
           </h2>
         <p className="mt-4 text-base md:text-lg leading-relaxed text-slate-700">
             Unlock the power of massive datasets with CDPL’s <strong>Hero Program</strong>. Build production-grade{" "}

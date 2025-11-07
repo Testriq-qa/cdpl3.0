@@ -1,6 +1,8 @@
 // components/sections/CareerRoadmapSection.tsx
 // Server component — sleek, slightly futuristic, responsive, and SEO-friendly.
 
+import Link from "next/link";
+
 type Step = {
   n: number;
   title: string;
@@ -91,13 +93,13 @@ export default function CareerRoadmapSection() {
         <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(20,184,166,0.10),transparent_60%)]" />
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container max-w-7xl mx-auto px-4 xl:px-10">
         <header className="text-center max-w-3xl mx-auto">
           <h2
             id="career-roadmap-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Your <span className="text-teal-600">Python Career Roadmap</span>
+            Your <span className="text-FS">Python Career Roadmap</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             Follow these <strong>4 proven steps</strong> to move from learner to
@@ -188,8 +190,8 @@ export default function CareerRoadmapSection() {
 
         {/* CTA */}
         <div className="mt-12 text-center">
-          <a
-            href="#contact"
+          <Link
+            href="contact-us"
             className="inline-flex items-center gap-2 rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Get personalized roadmap guidance"
           >
@@ -197,7 +199,7 @@ export default function CareerRoadmapSection() {
             <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
               <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
             </svg>
-          </a>
+          </Link>
           <p className="mt-3 text-xs sm:text-sm text-slate-600">
             Learn from anywhere. <span className="font-semibold text-slate-800">Your journey to a Python career starts here.</span>
           </p>

@@ -225,14 +225,14 @@ export default function AboutWhyJoinUs() {
         {/* Bottom CTA */}
         <div className="mt-7 flex flex-wrap items-center justify-center gap-3">
           <Link
-            href="/courses"
+            href="courses"
             className="inline-flex items-center justify-center rounded-2xl bg-brand px-5 py-3 text-sm font-semibold text-white shadow-sm shadow-slate-900/10 transition hover:-translate-y-px hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-slate-900 focus:ring-offset-2"
           >
             Explore Courses
             <ArrowRight className="ml-2 h-4 w-4" aria-hidden="true" />
           </Link>
           <Link
-            href="/contact-us"
+            href="contact-us"
             className="inline-flex items-center justify-center rounded-2xl bg-white/90 px-5 py-3 text-sm font-semibold text-slate-900 shadow-sm ring-1 ring-brand transition hover:bg-brand hover:text-white focus:outline-none focus:ring-2 focus:ring-slate-300 focus:ring-offset-2"
           >
             Talk to an Advisor

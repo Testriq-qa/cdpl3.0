@@ -8,26 +8,26 @@ type Module = {
 };
 
 const MODULES: Module[] = [
-  { num: "01", title: "Python Fundamentals & Syntax",       outcome: "Write clean, efficient Python code from scratch." },
-  { num: "02", title: "Data Structures & Algorithms",       outcome: "Master lists, dicts, OOP, and DSA in Python." },
-  { num: "03", title: "Web Development with Django",        outcome: "Build full-stack web apps with Django & REST." },
-  { num: "04", title: "Data Science with Pandas & NumPy",   outcome: "Analyze real-world datasets and generate insights." },
+  { num: "01", title: "Python Fundamentals & Syntax", outcome: "Write clean, efficient Python code from scratch." },
+  { num: "02", title: "Data Structures & Algorithms", outcome: "Master lists, dicts, OOP, and DSA in Python." },
+  { num: "03", title: "Web Development with Django", outcome: "Build full-stack web apps with Django & REST." },
+  { num: "04", title: "Data Science with Pandas & NumPy", outcome: "Analyze real-world datasets and generate insights." },
   { num: "05", title: "Machine Learning with scikit-learn", outcome: "Train and evaluate ML models end-to-end." },
-  { num: "06", title: "Automation & Scripting",             outcome: "Automate repetitive tasks and workflows." },
-  { num: "07", title: "API & Web Scraping",                 outcome: "Extract, clean, and persist data from APIs & websites." },
-  { num: "08", title: "Database & SQL with Python",         outcome: "Integrate Python with MySQL/PostgreSQL securely." },
-  { num: "09", title: "Deployment & DevOps",                outcome: "Containerize & deploy apps (Docker, CI/CD)." },
-  { num: "10", title: "Capstone Project & Portfolio",       outcome: "Build 3 industry-grade projects employers value." },
+  { num: "06", title: "Automation & Scripting", outcome: "Automate repetitive tasks and workflows." },
+  { num: "07", title: "API & Web Scraping", outcome: "Extract, clean, and persist data from APIs & websites." },
+  { num: "08", title: "Database & SQL with Python", outcome: "Integrate Python with MySQL/PostgreSQL securely." },
+  { num: "09", title: "Deployment & DevOps", outcome: "Containerize & deploy apps (Docker, CI/CD)." },
+  { num: "10", title: "Capstone Project & Portfolio", outcome: "Build 3 industry-grade projects employers value." },
 ];
 
 // Distinct soft accents (cycled without repeating back-to-back)
 const ACCENTS = [
-  { line: "bg-sky-300/70",    chip: "bg-sky-50 text-sky-800 border-sky-200",       ring: "focus:ring-sky-300" },
-  { line: "bg-emerald-300/70",chip: "bg-emerald-50 text-emerald-800 border-emerald-200", ring: "focus:ring-emerald-300" },
-  { line: "bg-amber-300/70",  chip: "bg-amber-50 text-amber-900 border-amber-200", ring: "focus:ring-amber-300" },
-  { line: "bg-violet-300/70", chip: "bg-violet-50 text-violet-800 border-violet-200",   ring: "focus:ring-violet-300" },
-  { line: "bg-rose-300/70",   chip: "bg-rose-50 text-rose-800 border-rose-200",     ring: "focus:ring-rose-300" },
-  { line: "bg-indigo-300/70", chip: "bg-indigo-50 text-indigo-800 border-indigo-200",   ring: "focus:ring-indigo-300" },
+  { line: "bg-sky-300/70", chip: "bg-sky-50 text-sky-800 border-sky-200", ring: "focus:ring-sky-300" },
+  { line: "bg-emerald-300/70", chip: "bg-emerald-50 text-emerald-800 border-emerald-200", ring: "focus:ring-emerald-300" },
+  { line: "bg-amber-300/70", chip: "bg-amber-50 text-amber-900 border-amber-200", ring: "focus:ring-amber-300" },
+  { line: "bg-violet-300/70", chip: "bg-violet-50 text-violet-800 border-violet-200", ring: "focus:ring-violet-300" },
+  { line: "bg-rose-300/70", chip: "bg-rose-50 text-rose-800 border-rose-200", ring: "focus:ring-rose-300" },
+  { line: "bg-indigo-300/70", chip: "bg-indigo-50 text-indigo-800 border-indigo-200", ring: "focus:ring-indigo-300" },
 ];
 
 export default function CurriculumSection() {
@@ -60,11 +60,11 @@ export default function CurriculumSection() {
         <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(20,184,166,0.10),transparent_60%)]" />
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container max-w-7xl mx-auto px-4 xl:px-10">
         {/* Heading */}
         <header className="text-center max-w-4xl mx-auto">
           <h2 id="curriculum-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            10-Module <span className="text-teal-600">Python Curriculum</span>
+            10-Module <span className="text-FS">Python Curriculum</span>
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             A carefully sequenced, <strong>project-driven</strong> roadmap from basics to deployment — built for
@@ -131,8 +131,7 @@ export default function CurriculumSection() {
 
         {/* CTA */}
         <div className="mt-10 text-center">
-          <a
-            href="#curriculum-details"
+          <button
             className="inline-flex items-center gap-2 rounded-xl border border-slate-900 bg-slate-900 px-4 md:px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Download detailed Python curriculum"
           >
@@ -140,7 +139,7 @@ export default function CurriculumSection() {
             <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
               <path d="M3 4.5A1.5 1.5 0 014.5 3h11A1.5 1.5 0 0117 4.5v11a1.5 1.5 0 01-1.5 1.5h-11A1.5 1.5 0 013 15.5v-11zm5 2a1 1 0 00-1 1v2H5.707a1 1 0 00-.707 1.707l4.293 4.293a1 1 0 001.414 0l4.293-4.293A1 1 0 0014.293 10H13V7.5a1 1 0 00-1-1H8z" />
             </svg>
-          </a>
+          </button>
           <p className="mt-3 text-xs sm:text-sm text-slate-600">
             Includes topics, outcomes, tools, and project checklist.
           </p>

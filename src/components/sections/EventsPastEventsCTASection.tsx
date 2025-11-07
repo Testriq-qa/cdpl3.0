@@ -2,7 +2,8 @@
 "use client";
 
 import { PropsWithChildren } from "react";
-import { Check, Building2, Sparkles, ArrowRight, Link } from "lucide-react";
+import { Check, Building2, Sparkles, ArrowRight } from "lucide-react";
+import Link from "next/link";
 
 type Bullet = { label: string; sub?: string };
 

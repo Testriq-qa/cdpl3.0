@@ -11,6 +11,7 @@ import {
     Sparkles,
     LineChart,
 } from 'lucide-react';
+import Link from 'next/link';
 
 type Audience = {
     title: string;
@@ -116,14 +117,14 @@ export default function WhoShouldEnrollSection() {
                 <div className="absolute inset-x-0 top-0 h-[120px] bg-[radial-gradient(700px_140px_at_50%_0%,rgba(59,130,246,0.10),transparent_60%)]" />
             </div>
 
-            <div className="container mx-auto px-4">
+            <div className="container mx-auto max-w-7xl px-4 xl:px-10">
                 {/* Heading and micro-badges */}
                 <header className="text-center max-w-4xl mx-auto">
                     <h2
                         id="who-heading"
                         className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
                     >
-                        Who Should <span className="text-orange-600">Enroll</span>?
+                        Who Should <span className="text-green-700">Enroll</span>?
                     </h2>
                     <p className="mt-4 text-sm sm:text-base text-slate-600">
                         Beginner-friendly yet <strong>career-accelerating</strong>. Ideal for{' '}
@@ -242,8 +243,8 @@ function PersonaCard({
             </div>
 
             {/* CTA */}
-            <a
-                href="#contact"
+            <Link
+                href="contact-us"
                 className={[
                     'mt-5 inline-flex items-center justify-center rounded-lg border px-3 py-2 text-sm font-semibold transition',
                     'border-slate-900 bg-slate-900 text-white hover:translate-y-[-1px] hover:shadow',
@@ -251,7 +252,7 @@ function PersonaCard({
                 aria-label={`Talk to advisor about ${title}`}
             >
                 I fit this profile
-            </a>
+            </Link>
         </article>
     );
 }

@@ -1,8 +1,6 @@
-// src/app/locations-we-serve/page.tsx
 import dynamic from "next/dynamic";
 import type { Metadata } from "next";
 
-import LocationsClientMapSection from "@/components/sections/LocationsClientMapSection";
 import { buildLocationsHierarchy } from "@/data/courseData/buildLocationsHierarchy";
 import { generateSEO, generateBreadcrumbSchema } from "@/lib/seo";
 
@@ -13,8 +11,6 @@ import type { CourseData } from "@/types/courseData";
 import { courseData } from "@/types/courseData";
 
 /* -------------------------------- Loaders -------------------------------- */
-
-
 
 /* -------------------------- Dynamic (client) sections -------------------------- */
 
@@ -32,6 +28,12 @@ const LocationsBenefitsSection = dynamic(
 
 const LocationsCTASection = dynamic(
   () => import("@/components/sections/LocationsCTASection")
+);
+
+// NEW: Services section (replaces the client map section)
+const LocationsServicesSection = dynamic(
+  () => import("@/components/sections/LocationsServicesSection"),
+  { ssr: true }
 );
 
 /* --------------------------------- Metadata --------------------------------- */
@@ -74,9 +76,7 @@ function normalizeCourses(
   raw: CourseData[] | Record<string, CourseData> | undefined | null
 ): CourseData[] {
   if (!raw) return [];
-  // If already an array, return as-is
   if (Array.isArray(raw)) return raw;
-  // If it's a record keyed by slug/id, take values
   if (typeof raw === "object") return Object.values(raw);
   return [];
 }
@@ -93,7 +93,7 @@ export default function LocationsWeServePage() {
   // Extract unique locations for structured data
   const uniqueStates = new Set<string>();
   const uniqueCities = new Set<string>();
-  
+
   courses.forEach(course => {
     if (course.state) uniqueStates.add(course.state);
     if (course.location) uniqueCities.add(course.location);
@@ -227,7 +227,7 @@ export default function LocationsWeServePage() {
       />
 
       {/* Semantic HTML Structure */}
-      <div 
+      <div
         className="min-h-screen w-full bg-gradient-to-br from-slate-50 to-blue-50 transition-colors duration-300"
         itemScope
         itemType="https://schema.org/WebPage"
@@ -241,25 +241,31 @@ export default function LocationsWeServePage() {
           CDPL Locations We Serve - Software Testing & Programming Courses in India & UAE
         </h1>
 
-        <LocationsHeroSection />
+        {/* Page content */}
+        <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+          <div className="pt-6 sm:pt-8">
+            <LocationsHeroSection />
+          </div>
 
-        <section className="w-full mt-10" aria-label="Training Locations by Country and State">
-          {/* Pass the derived Country[] so both India and UAE render as top-level cards */}
-          <HierarchicalLocationsSection data={countriesData} />
+          <section className="w-full mt-8 sm:mt-10" aria-label="Training Locations by Country and State">
+            <HierarchicalLocationsSection data={countriesData} />
+          </section>
+        </div>
+
+        {/* Services already has its own internal container; keep outside wrapper minimal */}
+        <section className="w-full mt-8 sm:mt-12" aria-label="Services We Provide">
+          <LocationsServicesSection />
         </section>
 
-        {/* Client-side interactive map */}
-        <section aria-label="Interactive Location Map">
-          <LocationsClientMapSection />
-        </section>
+        <div className="mx-auto max-w-7xl px-3 sm:px-6 lg:px-8">
+          <section className="w-full mt-8 sm:mt-12" aria-label="Benefits of Our Locations">
+            <LocationsBenefitsSection />
+          </section>
 
-        <section className="w-full mt-10" aria-label="Benefits of Our Locations">
-          <LocationsBenefitsSection />
-        </section>
-
-        <section className="w-full mt-10" aria-label="Contact Us">
-          <LocationsCTASection />
-        </section>
+          <section className="w-full mt-8 sm:mt-12 mb-10 sm:mb-16" aria-label="Contact Us">
+            <LocationsCTASection />
+          </section>
+        </div>
       </div>
     </>
   );

@@ -1,6 +1,8 @@
 // components/sections/FaqSection.tsx
 // Server component — sleek, slightly futuristic, accessible, fully responsive.
 
+import Link from "next/link";
+
 type Faq = { q: string; a: string; accent: { ring: string; border: string; chip: string } };
 
 const FAQS: Faq[] = [
@@ -56,8 +58,8 @@ export default function FaqSection() {
       <div className="container mx-auto px-4 max-w-3xl">
         {/* Heading */}
         <header className="text-center">
-          <h2 id="faq-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Frequently Asked <span className="text-orange-600">Questions</span>
+          <h2 id="faq-heading" className="text-3xl md:text-4xl font-bold tracking-tight text-green-700">
+            Frequently Asked Questions
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             Everything you need to know about the program — certifications, placements, projects, and schedules.
@@ -117,20 +119,20 @@ export default function FaqSection() {
         </ul>
 
         {/* Soft CTA */}
-        <div className="mt-10 text-center">
-          <a
-            href="#contact"
-            className="inline-flex items-center gap-2 rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
+        <div className="flex flex-col mt-10 justify-center items-center text-center">
+          <Link
+            href="contact-us"
+            className="inline-flex w-fit items-center gap-2 rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Still have questions? Talk to an advisor"
           >
             Still have questions? Talk to an advisor
             <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor" aria-hidden>
               <path d="M12.293 4.293a1 1 0 011.414 0l4 4a1 1 0 01.083 1.32l-.083.094-4 4a1 1 0 01-1.497-1.32l.083-.094L14.585 10H3a1 1 0 01-.117-1.993L3 8h11.585l-2.292-2.293a1 1 0 010-1.414z" />
             </svg>
-          </a>
-          <p className="mt-3 text-xs sm:text-sm text-slate-600">
+          </Link>
+          <Link href="mailto:contact@cinutedigital.com" className="mt-3 text-xs sm:text-sm text-slate-600">
             Or write to us at <span className="font-medium text-slate-800">contact@cinutedigital.com</span>
-          </p>
+          </Link>
         </div>
       </div>
 

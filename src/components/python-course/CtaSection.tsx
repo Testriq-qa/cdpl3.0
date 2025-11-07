@@ -1,6 +1,8 @@
 // components/sections/CtaSection.tsx
 // Server component — sleek, slightly futuristic CTA. Fully responsive, SEO-friendly.
 
+import Link from "next/link";
+
 export default function CtaSection() {
   // SEO: org + contact hints for rich results
   const jsonLd = {
@@ -44,7 +46,7 @@ export default function CtaSection() {
             id="cta-heading"
             className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
           >
-            Start Your <span className="text-teal-600 underline underline-offset-4">Python Journey</span> Today
+            Start Your <span className="text-FS">Python Journey</span> Today
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600">
             Enroll now in the <strong>80-hour, mentor-led</strong> program with{" "}
@@ -68,20 +70,20 @@ export default function CtaSection() {
 
         {/* CTA buttons — distinct, simple colors */}
         <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
-          <a
+          <Link
             href="tel:+917888383788"
             className="inline-flex items-center justify-center rounded-xl border border-slate-900 bg-slate-900 px-6 py-3 text-base font-semibold text-white shadow-[0_2px_0_0_rgba(15,23,42,0.3)] transition hover:translate-y-[-1px] hover:shadow-lg focus:outline-none focus:ring-4 focus:ring-slate-300"
             aria-label="Call CDPL admissions"
           >
             Call Admissions: +91 788-83-83-788
-          </a>
-          <a
+          </Link>
+          <Link
             href="mailto:contact@cinutedigital.com"
             className="inline-flex items-center justify-center rounded-xl border border-emerald-300 bg-white px-6 py-3 text-base font-semibold text-emerald-700 shadow-sm transition hover:bg-emerald-50 focus:outline-none focus:ring-4 focus:ring-emerald-200"
             aria-label="Email CDPL"
           >
             Email Us
-          </a>
+          </Link>
           
         </div>
 

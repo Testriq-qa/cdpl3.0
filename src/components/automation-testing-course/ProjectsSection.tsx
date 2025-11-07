@@ -121,7 +121,7 @@ export default function ProjectsSection() {
           className="text-center"
         >
           <h2 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900">
-            Build <span className="text-brand">Elite</span> SDET Projects
+            Build Elite <span className="text-ST">SDET Projects</span> 
           </h2>
           <p className="mt-3 text-sm sm:text-base text-slate-600 max-w-3xl mx-auto">
             Ship <strong>production-grade automation frameworks</strong> with <em>AI self-healing</em>,{' '}

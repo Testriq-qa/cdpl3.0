@@ -92,19 +92,23 @@ export default function LocationsCTASection({
               <div className="mt-7 flex flex-col items-stretch sm:items-center justify-center gap-3 sm:flex-row sm:gap-4">
                 <Link
                   href="/contact-us"
+                  aria-label="Contact us to get 20% off"
                   className={[
-                    "group relative inline-flex items-center justify-center gap-2",
+                    "group relative inline-flex items-center justify-center gap-2.5",
+                    "overflow-hidden", // clip gradient edges neatly on mobile
                     "rounded-xl px-5 py-3 sm:px-7 sm:py-3.5",
-                    "font-semibold text-white",
+                    "min-h-[48px]", // stable tap target on small screens
+                    "font-semibold text-white text-[15px] sm:text-base leading-none",
                     "w-full sm:w-auto",
                     "touch-manipulation",
-                    "transition-transform duration-150 hover:-translate-y-0.5",
+                    "transition-transform duration-150 hover:-translate-y-0.5 active:translate-y-[1px]",
                     "focus:outline-none focus-visible:ring-4 focus-visible:ring-cyan-400/40",
+                    "shadow-lg",
                   ].join(" ")}
                 >
                   <span className="absolute inset-0 rounded-xl bg-gradient-to-r from-blue-600 via-sky-600 to-teal-600 opacity-95 [background-size:220%_100%] group-hover:animate-[gradient-move_3s_linear_infinite]" />
                   <span className="absolute inset-0 rounded-xl ring-1 ring-white/25" />
-                  <span className="relative z-10">Contact Us — 20% off</span>
+                  <span className="relative z-10 whitespace-nowrap">Contact Us — 20% off</span>
                   <ArrowRight className="relative z-10 h-5 w-5" />
                 </Link>
 
@@ -114,13 +118,15 @@ export default function LocationsCTASection({
                     "relative inline-flex items-center justify-center gap-2",
                     "rounded-xl bg-white",
                     "px-5 py-3 sm:px-7 sm:py-3.5",
+                    "min-h-[48px]",
                     "font-semibold text-slate-900 ring-1 ring-slate-300",
-                    "transition-all hover:-translate-y-0.5 hover:bg-white/95",
+                    "transition-all hover:-translate-y-0.5 hover:bg-white/95 active:translate-y-[1px]",
                     "focus:outline-none focus-visible:ring-4 focus-visible:ring-indigo-400/30",
                     "w-full sm:w-auto",
+                    "shadow-sm",
                   ].join(" ")}
                 >
-                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600">
+                  <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-600 to-violet-600 whitespace-nowrap">
                     View all locations
                   </span>
                 </Link>

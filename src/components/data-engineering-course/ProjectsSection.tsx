@@ -126,7 +126,7 @@ export default function ProjectsSection() {
                         className="text-3xl md:text-4xl font-bold tracking-tight text-slate-900"
                     >
                         Real-World{" "}
-                        <span className="underline decoration-[.18rem] underline-offset-4 decoration-teal-400">
+                        <span className="text-DS">
                             Big Data Projects
                         </span>
                     </h2>
