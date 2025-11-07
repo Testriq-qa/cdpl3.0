@@ -1,31 +1,27 @@
-import * as fs from 'fs';
+import * as fs from 'fs/promises';
 import * as path from 'path';
 
+// Define the base directory for email templates
+const templatesDir = path.join(process.cwd(), 'src', 'lib', 'email-templates');
+
 /**
- * Reads an HTML email template and replaces placeholders with actual data.
- * @param templateName The name of the template file (e.g., 'admin-notification.html')
- * @param data An object containing key-value pairs for replacement (e.g., { fullName: 'John Doe' })
+ * Reads an HTML email template and replaces placeholders with provided data.
+ * @param templateName The name of the template file (e.g., 'user-confirmation.html').
+ * @param data An object containing key-value pairs for replacement (e.g., { fullName: 'John Doe' }).
  * @returns The templated HTML string.
  */
-export function getEmailTemplate(templateName: string, data: Record<string, string>): string {
-  const templatePath = path.join(process.cwd(), 'src', 'lib', 'email-templates', templateName);
-  
-  try {
-    let html = fs.readFileSync(templatePath, 'utf8');
+export async function getTemplatedEmail(templateName: string, data: Record<string, string>): Promise<string> {
+  const filePath = path.join(templatesDir, templateName);
+  let html = await fs.readFile(filePath, 'utf-8');
 
-    // Replace all placeholders in the HTML content
-    for (const key in data) {
-      const regex = new RegExp(`{{${key}}}`, 'g');
-      html = html.replace(regex, data[key]);
-    }
-
-    // Replace year placeholder
-    html = html.replace(/{{year}}/g, new Date().getFullYear().toString());
-
-    return html;
-  } catch (error) {
-    console.error(`Error reading email template ${templateName}:`, error);
-    // Fallback to a simple text if template reading fails
-    return `<h1>Error: Could not load email template.</h1><p>Data: ${JSON.stringify(data)}</p>`;
+  // Replace placeholders in the HTML content
+  for (const [key, value] of Object.entries(data)) {
+    const regex = new RegExp(`{{${key}}}`, 'g');
+    html = html.replace(regex, value);
   }
+
+  // Replace current year placeholder
+  html = html.replace(/{{currentYear}}/g, new Date().getFullYear().toString());
+
+  return html;
 }
