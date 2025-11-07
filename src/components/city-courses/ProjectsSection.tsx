@@ -3,6 +3,7 @@
 import React from "react";
 import { easeOut, motion } from "framer-motion";
 import { Code2, Briefcase, Award, Zap } from "lucide-react";
+import Link from "next/link";
 
 interface Project {
   name: string;
@@ -161,14 +162,13 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ data }) => {
                     </div>
 
                     {/* CTA */}
-                    <motion.button
+                    <Link
+                      href="contact-us"
                       className="w-full mt-4 px-6 py-3 bg-gradient-to-r from-cyan-500 to-indigo-600 text-white font-semibold rounded-xl hover:shadow-lg hover:shadow-cyan-500/30 transition-all duration-300 flex items-center justify-center gap-2 group/btn"
-                      whileHover={{ y: -2 }}
-                      whileTap={{ scale: 0.98 }}
                     >
                       Explore Project
                       <span className="group-hover/btn:translate-x-1 transition-transform duration-200">→</span>
-                    </motion.button>
+                    </Link>
                   </div>
                 </div>
               </motion.div>

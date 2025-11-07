@@ -80,7 +80,7 @@ export default function TeamCTASection() {
             {/* CTAs */}
             <div className="mt-6 flex flex-wrap gap-3">
               <Link
-                href="/services"
+                href="courses"
                 className="inline-flex items-center justify-center rounded-2xl bg-[--brand] px-4 py-2 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:shadow-md active:translate-y-0"
                 style={{ backgroundColor: "var(--brand)" }}
                 aria-label="Explore programs and view curriculum"

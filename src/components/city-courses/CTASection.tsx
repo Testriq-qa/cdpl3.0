@@ -155,12 +155,12 @@ const CTASection: React.FC<CTASectionProps> = ({ data }) => {
                 onClose={() => setIsPopupOpen(false)}
                 onSubmit={handleEnrollSubmit}
               />
-              <a
-                href="#demo"
+              <Link
+                href="contact-us"
                 className="inline-flex items-center justify-center rounded-lg border border-slate-300 bg-white px-8 py-3.5 font-semibold text-slate-800 shadow-sm transition hover:border-slate-400 hover:shadow-md"
               >
                 Get Free Demo
-              </a>
+              </Link>
             </motion.div>
 
             {/* Contact Info Cards */}
@@ -192,12 +192,12 @@ const CTASection: React.FC<CTASectionProps> = ({ data }) => {
                 <p className="text-xs font-semibold uppercase tracking-wider text-slate-500">
                   Email
                 </p>
-                <a
+                <Link
                   href={`mailto:${ctaContent.contactInfo.email}`}
                   className="mt-1 block text-sm font-semibold text-slate-900 transition group-hover:text-indigo-600"
                 >
                   {ctaContent.contactInfo.email}
-                </a>
+                </Link>
               </div>
 
               {/* Location */}

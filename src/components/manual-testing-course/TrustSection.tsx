@@ -1,6 +1,5 @@
 
 import { Users2, Star, Building2, Briefcase, Award, ShieldCheck, Clock, BookOpenCheck } from "lucide-react";
-import Image from "next/image";
 import React from "react";
 
 /*
@@ -63,15 +62,6 @@ function StatCard({
     );
 }
 
-// Partner/Badge chip
-function TrustBadge({ src, alt, label }: { src: string; alt: string; label: string }) {
-    return (
-        <div className="flex items-center gap-2 rounded-xl border border-gray-200 bg-white px-3 py-2 shadow-sm">
-            <Image src={src} alt={alt} width={22} height={22} className="rounded" />
-            <span className="text-xs font-medium text-gray-700">{label}</span>
-        </div>
-    );
-}
 
 export default function TrustSection() {
     const jsonLd = {
@@ -158,14 +148,14 @@ export default function TrustSection() {
                 </div>
 
                 {/* Trust badges / partner strip */}
-                <div className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+                {/* <div className="mt-10 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
                     <TrustBadge src="/logos/google.png" alt="Google Reviews" label="4.8 ★ Google Reviews" />
                     <TrustBadge src="/logos/nasscom.png" alt="NASSCOM" label="NASSCOM aligned" />
                     <TrustBadge src="/logos/iso.png" alt="ISO" label="ISO 9001:2015" />
                     <TrustBadge src="/logos/aws.png" alt="AWS" label="AWS Academy Content" />
                     <TrustBadge src="/logos/atlassian.png" alt="Atlassian" label="Jira for Agile" />
                     <TrustBadge src="/logos/microsoft.png" alt="Microsoft" label="MS Learn integrated" />
-                </div>
+                </div> */}
 
                 {/* Social proof blurb */}
                 <div className="mt-8 grid gap-4 sm:grid-cols-2">
